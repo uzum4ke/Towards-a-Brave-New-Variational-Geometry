@@ -1,0 +1,3384 @@
+\chapter{Hermitian Perfect Objects and Homotopy-Symmetric Poincar\'e Structures}
+\label{chap:hermitian-poincare}
+
+\section{Purpose and standing conventions}
+\label{sec:hermitian-poincare-purpose}
+
+This chapter begins with the rigid stable symmetric monoidal categories and
+coherent dualities constructed in
+\Ref{chap:perfect-rigid-enrichment}. Thus, for a commutative algebra object
+\[
+    A\in\CAlg(\V),
+\]
+and for a relative presheaf
+\[
+    X\in\PSh(\Aff),
+\]
+we have coherent perfect dualities
+\[
+    D_A=(-)^\vee
+    \colon
+    \Perf(A)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Perf(A)
+\]
+and
+\[
+    D_X=(-)^\vee
+    \colon
+    \Perf(X)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Perf(X).
+\]
+
+The purpose of the chapter is to study coherent homotopy-fixed points of
+these dualities and to identify them with the nondegenerate objects of the
+homotopy-symmetric Poincar\'e functors
+\[
+    \mathcal Q_A^{\mathrm s}(M)
+    :=
+    \mathbb B_A(M,M)^{hC_2}
+\]
+and
+\[
+    \mathcal Q_X^{\mathrm s}(M)
+    :=
+    \mathbb B_X(M,M)^{hC_2}.
+\]
+The represented bilinear functors are
+\[
+    \mathbb B_A(M,N)
+    \simeq
+    \map_{\Perf(A)}(M,N^\vee)
+\]
+and
+\[
+    \mathbb B_X(M,N)
+    \simeq
+    \map_{\Perf(X)}(M,N^\vee).
+\]
+
+No involution on
+\[
+    \V,
+    \qquad
+    A,
+    \qquad\text{or}\qquad
+    \Aff_{\V}
+\]
+is assumed. A Hermitian structure in this chapter means a coherent
+homotopy-fixed-point structure for the canonical rigid duality whose
+underlying map is an equivalence
+\[
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee.
+\]
+It satisfies biduality symmetry together with all higher
+\[
+    C_2
+\]
+-coherences. No semilinear conjugation or positivity condition is included.
+
+The chapter proceeds from coherent fixed points and their induced dagger,
+through cross-effects and polarization, to represented Poincar\'e
+structures. It then proves that the homotopy-symmetric refinement of any
+coherent perfect duality has Poincar\'e objects precisely its coherent fixed
+points, applies this theorem to perfect modules and perfect objects on
+relative stacks, and establishes pullback and base-change functoriality.
+
+The categorical, mapping-space, coherence, universe, and sheaf conventions
+of
+\Ref{chap:relative-ag-monoidal-syntax}
+and
+\Ref{chap:perfect-rigid-enrichment}
+remain in force.
+
+\begin{convention}
+\label{conv:equivalence-mapping-space}
+For objects
+\[
+    X,Y\in\mathcal C,
+\]
+write
+\[
+    \Map^\simeq_{\mathcal C}(X,Y)
+    \subseteq
+    \Map_{\mathcal C}(X,Y)
+\]
+for the union of those connected components represented by equivalences.
+Equivalently,
+\[
+    \Map^\simeq_{\mathcal C}(X,Y)
+    =
+    \Map_{\mathcal C^\simeq}(X,Y),
+\]
+where
+\[
+    \mathcal C^\simeq
+\]
+is the maximal $\infty$-groupoid of
+\[
+    \mathcal C.
+\]
+\end{convention}
+
+
+\begin{convention}[Higher coherence in the Hermitian and Poincar\'e layers]
+\label{conv:rigid-poincare-higher-coherence}
+In addition to
+\Ref{conv:higher-coherence},
+involutivity, cross-effect symmetry, polarization, homotopy-fixed-point,
+and Poincar\'e data are always understood together with all required
+coherent higher homotopies.
+
+Whenever such data are suppressed from the notation, their existence is
+supplied by a symmetric-bilinear, homotopy-fixed-point, or
+Goodwillie-excisive construction, by a universal property with contractible
+choice space, or by an explicitly cited coherence theorem.
+\end{convention}
+
+\begin{convention}[Double-duality notation]
+\label{conv:double-duality-notation}
+Let
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \mathcal C
+\]
+be a contravariant functor, and let
+\[
+    D^{\op}
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal C^{\op}
+\]
+be its opposite functor.
+
+We use
+\[
+    D^2
+\]
+as an abbreviation for the correctly typed covariant composite
+\[
+    D D^{\op}
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal C.
+\]
+Thus
+\[
+    D^2X
+    :=
+    D D^{\op}(X).
+\]
+
+More generally, if
+\[
+    D_{\mathcal Q}
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \mathcal C
+\]
+is the functor representing the cross-effect of a quadratic functor, then
+\[
+    D_{\mathcal Q}^2
+    :=
+    D_{\mathcal Q}D_{\mathcal Q}^{\op}.
+\]
+
+All occurrences of iterated contravariant duality in this chapter are
+interpreted using this convention.
+\end{convention}
+
+\section{Hermitian perfect modules and the induced dagger}
+\label{sec:hermitian-perfect-modules}
+
+The coherent perfect duality of
+\Ref{prop:canonical-perfect-duality}
+induces a covariant
+\[
+    C_2
+\]
+-action on the maximal $\infty$-groupoid
+\[
+    \Perf(A)^\simeq.
+\]
+It sends an object
+\[
+    M
+\]
+to
+\[
+    M^\vee,
+\]
+and an equivalence
+\[
+    f
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    N
+\]
+to
+\[
+    (f^{-1})^\vee
+    \colon
+    M^\vee
+    \xrightarrow{\;\simeq\;}
+    N^\vee.
+\]
+
+
+\subsection{Hermitian perfect modules}
+
+\begin{definition}[Hermitian perfect module]
+\label{def:hermitian-perfect-module}
+A \emph{nondegenerate Hermitian structure} on
+\[
+    M\in\Perf(A)
+\]
+is a coherent homotopy-fixed-point structure for the duality action on
+\[
+    \Perf(A)^\simeq.
+\]
+
+Its underlying equivalence is a map
+\[
+    h_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee
+\]
+whose first fixed-point coherence is
+\[
+    h_M^\vee
+    \circ
+    \operatorname{bid}_M
+    \simeq
+    h_M.
+\]
+A \emph{Hermitian perfect module} is a pair
+\[
+    (M,h_M)
+\]
+equipped with this coherent fixed-point structure.
+\end{definition}
+
+\begin{remark}
+\label{rem:hermitian-no-conjugation}
+The adjective Hermitian refers here to coherent symmetric self-duality in
+the rigid category
+\[
+    \Perf(A).
+\]
+Over a field with no chosen conjugation, this produces symmetric bilinear
+rather than sesquilinear forms.
+
+The terminology of this chapter reserves the phrase
+\emph{Hermitian perfect module} for a nondegenerate coherently symmetric
+self-duality. In the broader Poincar\'e-$\infty$-categorical terminology,
+an arbitrary point of a quadratic functor is also called a Hermitian form,
+while the adjective Poincar\'e records nondegeneracy.
+\end{remark}
+
+
+\subsection{The induced dagger}
+
+\begin{proposition}[Adjoint of a morphism]
+\label{prop:dagger-on-perfect-modules}
+Let
+\[
+    (M,h_M)
+    \qquad\text{and}\qquad
+    (N,h_N)
+\]
+be Hermitian perfect modules. For
+\[
+    f
+    \colon
+    M
+    \longrightarrow
+    N,
+\]
+define
+\[
+    f^\dagger
+    :=
+    h_M^{-1}
+    \circ
+    f^\vee
+    \circ
+    h_N
+    \colon
+    N
+    \longrightarrow
+    M.
+\]
+Then
+\[
+    (g\circ f)^\dagger
+    \simeq
+    f^\dagger\circ g^\dagger,
+\]
+\[
+    (f^\dagger)^\dagger
+    \simeq
+    f,
+\]
+and
+\[
+    \id_M^\dagger
+    \simeq
+    \id_M.
+\]
+\end{proposition}
+
+\begin{proof}
+Contravariance of dualization gives
+\[
+    (g\circ f)^\vee
+    \simeq
+    f^\vee\circ g^\vee,
+\]
+which proves the first identity. The identity morphism is immediate.
+
+For involutivity, the Hermitian condition implies
+\[
+    h_M^\vee
+    \simeq
+    h_M
+    \circ
+    \operatorname{bid}_M^{-1},
+\]
+and therefore
+\[
+    (h_M^{-1})^\vee
+    \simeq
+    \operatorname{bid}_M
+    \circ
+    h_M^{-1}.
+\]
+Thus
+\[
+\begin{aligned}
+    (f^\dagger)^\dagger
+    &=
+    h_N^{-1}
+    \circ
+    (f^\dagger)^\vee
+    \circ
+    h_M
+    \\
+    &\simeq
+    h_N^{-1}
+    \circ
+    h_N^\vee
+    \circ
+    f^{\vee\vee}
+    \circ
+    (h_M^{-1})^\vee
+    \circ
+    h_M
+    \\
+    &\simeq
+    \operatorname{bid}_N^{-1}
+    \circ
+    f^{\vee\vee}
+    \circ
+    \operatorname{bid}_M.
+\end{aligned}
+\]
+Naturality of biduality gives
+\[
+    f^{\vee\vee}
+    \circ
+    \operatorname{bid}_M
+    \simeq
+    \operatorname{bid}_N
+    \circ
+    f.
+\]
+Hence
+\[
+    (f^\dagger)^\dagger
+    \simeq
+    f.
+\]
+\end{proof}
+
+\section{Quadratic functors, cross-effects, and polarization}
+\label{sec:quadratic-cross-effects-polarization}
+
+\begin{definition}[Cross-effect and polarization]
+\label{def:cross-effect-and-polarization}
+Let
+\[
+    \mathcal C
+\]
+be a stable $\infty$-category, and let
+\[
+    \mathcal Q
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \Sp
+\]
+be a reduced functor.
+
+Its second cross-effect is
+\[
+    \mathbb B_{\mathcal Q}(X,Y)
+    :=
+    \fib
+    \left(
+        \mathcal Q(X\oplus Y)
+        \longrightarrow
+        \mathcal Q(X)\oplus\mathcal Q(Y)
+    \right),
+\]
+where the two components are induced contravariantly by the canonical
+inclusions
+\[
+    i_1
+    \colon
+    X
+    \longrightarrow
+    X\oplus Y,
+\]
+and
+\[
+    i_2
+    \colon
+    Y
+    \longrightarrow
+    X\oplus Y.
+\]
+
+Equivalently,
+\[
+    \mathbb B_{\mathcal Q}(X,Y)
+\]
+is characterized by the pullback square
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+    \mathbb B_{\mathcal Q}(X,Y)
+        \arrow[r]
+        \arrow[d]
+        \arrow[dr, phantom, very near start, "\lrcorner"]
+    &
+    \mathcal Q(X\oplus Y)
+        \arrow[d, "{(\mathcal Q(i_1),\mathcal Q(i_2))}"]
+    \\
+    0
+        \arrow[r]
+    &
+    \mathcal Q(X)\oplus\mathcal Q(Y).
+\end{tikzcd}
+\]
+
+The symmetry
+\[
+    X\oplus Y
+    \xrightarrow{\;\simeq\;}
+    Y\oplus X
+\]
+canonically refines the cross-effect to a symmetric bifunctor. Thus there
+is a coherent natural equivalence
+\[
+    \mathbb B_{\mathcal Q}(X,Y)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B_{\mathcal Q}(Y,X)
+\]
+whose iterated transposition is coherently equivalent to the identity.
+
+Consequently, the diagonal functor
+\[
+    X
+    \longmapsto
+    \mathbb B_{\mathcal Q}(X,X)
+\]
+is canonically a
+\[
+    C_2
+\]
+-object of
+\[
+    \Fun(\mathcal C^{\op},\Sp).
+\]
+
+The equivariant cross-effect construction supplies canonical natural
+transformations
+\[
+    \mathbb B_{\mathcal Q}(X,X)_{hC_2}
+    \longrightarrow
+    \mathcal Q(X)
+    \xrightarrow{\;\pol_X^{hC_2}\;}
+    \mathbb B_{\mathcal Q}(X,X)^{hC_2}.
+\]
+See
+\cite[Lemmas~1.1.9--1.1.10]{CalmesDottoHarpazEtAl}.
+
+The second transformation is called the
+\textbf{homotopy-fixed-point-valued polarization map}.
+
+Its composite with the forgetful morphism
+\[
+    \mathbb B_{\mathcal Q}(X,X)^{hC_2}
+    \longrightarrow
+    \mathbb B_{\mathcal Q}(X,X)
+\]
+is the underlying polarization
+\[
+    \pol_X
+    \colon
+    \mathcal Q(X)
+    \longrightarrow
+    \mathbb B_{\mathcal Q}(X,X).
+\]
+
+The underlying polarization admits the following explicit description.
+Let
+\[
+    \nabla
+    \colon
+    X\oplus X
+    \longrightarrow
+    X
+\]
+be the fold map, and let
+\[
+    p_1,p_2
+    \colon
+    X\oplus X
+    \longrightarrow
+    X
+\]
+be the two projections.
+
+The additive structure on the mapping spectrum
+\[
+    \map_{\Sp}
+    \bigl(
+        \mathcal Q(X),
+        \mathcal Q(X\oplus X)
+    \bigr)
+\]
+defines a morphism
+\[
+\begin{aligned}
+    a_X
+    &:=
+    \mathcal Q(\nabla)
+    -
+    \mathcal Q(p_1)
+    -
+    \mathcal Q(p_2)
+    \\
+    &\colon
+    \mathcal Q(X)
+    \longrightarrow
+    \mathcal Q(X\oplus X).
+\end{aligned}
+\]
+
+We verify that the composite of $a_X$ with each of the two maps defining
+the cross-effect is canonically nullhomotopic.
+
+Contravariance gives
+\[
+\begin{aligned}
+    \mathcal Q(i_1)\circ a_X
+    &=
+    \mathcal Q(\nabla\circ i_1)
+    -
+    \mathcal Q(p_1\circ i_1)
+    -
+    \mathcal Q(p_2\circ i_1)
+    \\
+    &=
+    \id_{\mathcal Q(X)}
+    -
+    \id_{\mathcal Q(X)}
+    -
+    \mathcal Q(0_{X,X}),
+\end{aligned}
+\]
+where
+\[
+    0_{X,X}
+    \colon
+    X
+    \longrightarrow
+    X
+\]
+is the zero endomorphism.
+
+The zero endomorphism factors through the zero object:
+\[
+    X
+    \longrightarrow
+    0
+    \longrightarrow
+    X.
+\]
+By contravariance,
+\[
+    \mathcal Q(0_{X,X})
+    \colon
+    \mathcal Q(X)
+    \longrightarrow
+    \mathcal Q(X)
+\]
+therefore factors through
+\[
+    \mathcal Q(0).
+\]
+Since $\mathcal Q$ is reduced,
+\[
+    \mathcal Q(0)
+    \simeq
+    0,
+\]
+so
+\[
+    \mathcal Q(0_{X,X})
+\]
+is canonically nullhomotopic. The first two terms cancel through the
+additive structure on the mapping spectrum. Hence
+\[
+    \mathcal Q(i_1)\circ a_X
+    \simeq
+    0.
+\]
+
+The same argument gives
+\[
+    \mathcal Q(i_2)\circ a_X
+    \simeq
+    0.
+\]
+
+Together, these nullhomotopies determine a coherent nullhomotopy of
+\[
+\begin{aligned}
+    \mathcal Q(X)
+    &\xrightarrow{a_X}
+    \mathcal Q(X\oplus X)
+    \\
+    &\xrightarrow{
+        (\mathcal Q(i_1),\mathcal Q(i_2))
+    }
+    \mathcal Q(X)\oplus\mathcal Q(X).
+\end{aligned}
+\]
+
+The universal property of the defining pullback square for
+\[
+    \mathbb B_{\mathcal Q}(X,X)
+\]
+therefore gives a morphism
+\[
+    \pol_X
+    \colon
+    \mathcal Q(X)
+    \longrightarrow
+    \mathbb B_{\mathcal Q}(X,X)
+\]
+whose composite with
+\[
+    \mathbb B_{\mathcal Q}(X,X)
+    \longrightarrow
+    \mathcal Q(X\oplus X)
+\]
+is
+\[
+    a_X.
+\]
+
+By
+\cite[Lemma~1.1.10]{CalmesDottoHarpazEtAl},
+this underlying polarization canonically refines, together with all
+coherent equivariance data, to the homotopy-fixed-point-valued
+polarization
+\[
+    \pol_X^{hC_2}
+    \colon
+    \mathcal Q(X)
+    \longrightarrow
+    \mathbb B_{\mathcal Q}(X,X)^{hC_2}.
+\]
+
+The preceding fold-map calculation identifies the composite
+\[
+    \mathcal Q(X)
+    \xrightarrow{\pol_X^{hC_2}}
+    \mathbb B_{\mathcal Q}(X,X)^{hC_2}
+    \longrightarrow
+    \mathbb B_{\mathcal Q}(X,X)
+\]
+with the factorization of
+\[
+    \mathcal Q(\nabla)
+    -
+    \mathcal Q(p_1)
+    -
+    \mathcal Q(p_2)
+\]
+through the second cross-effect.
+\end{definition}
+
+\section{Diagonals of biexact functors}
+\label{sec:diagonal-biexact-functors}
+
+\begin{lemma}[Diagonal of a biexact functor]
+\label{lem:diagonal-biexact-two-excisive}
+Let
+\[
+    \mathcal C
+    \qquad\text{and}\qquad
+    \mathcal D
+\]
+be stable $\infty$-categories, and let
+\[
+    B
+    \colon
+    \mathcal C\times\mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be exact separately in each variable. Then the diagonal functor
+\[
+    G(X)
+    :=
+    B(X,X)
+\]
+is reduced and
+\[
+    2
+\]
+-excisive.
+\end{lemma}
+
+\begin{proof}
+Exactness in either variable implies
+\[
+    B(0,X)
+    \simeq
+    0
+    \simeq
+    B(X,0).
+\]
+Hence
+\[
+    G(0)
+    =
+    B(0,0)
+    \simeq
+    0,
+\]
+so
+\[
+    G
+\]
+is reduced.
+
+Since
+\[
+    B
+\]
+is exact separately in each variable, it is
+\[
+    1
+\]
+-excisive separately in each variable. The multivariable diagonal theorem
+for Goodwillie excision implies that the diagonal of a
+\[
+    (d_1,d_2)
+\]
+-excisive two-variable functor is
+\[
+    (d_1+d_2)
+\]
+-excisive. Applying it with
+\[
+    d_1=d_2=1
+\]
+shows that
+\[
+    G(X)=B(X,X)
+\]
+is
+\[
+    2
+\]
+-excisive.
+\end{proof}
+
+
+\section{Represented cross-effects and Poincar\'e structures}
+\label{sec:represented-cross-effects-poincare}
+
+\subsection{Canonical biduality from a represented cross-effect}
+
+\begin{proposition}[Canonical biduality from a represented cross-effect]
+\label{prop:canonical-biduality-from-cross-effect}
+Let
+\[
+    \mathcal Q
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \Sp
+\]
+be reduced and
+\[
+    2
+\]
+-excisive. Suppose that its symmetric cross-effect is right represented by
+a functor
+\[
+    D_{\mathcal Q}
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \mathcal C,
+\]
+in the sense that there are natural equivalences
+\[
+    \mathbb B_{\mathcal Q}(X,Y)
+    \simeq
+    \map_{\mathcal C}
+    \bigl(
+        X,
+        D_{\mathcal Q}Y
+    \bigr).
+\]
+
+Then
+\[
+    D_{\mathcal Q}
+\]
+is exact, and the involutive symmetry of the cross-effect determines an
+adjunction
+\[
+    D_{\mathcal Q}^{\op}
+    \colon
+    \mathcal C
+    \rightleftarrows
+    \mathcal C^{\op}
+    \colon
+    D_{\mathcal Q}.
+\]
+Its unit is a canonical natural transformation
+\[
+    \operatorname{bid}
+    \colon
+    \id_{\mathcal C}
+    \longrightarrow
+    D_{\mathcal Q}D_{\mathcal Q}^{\op},
+\]
+or equivalently,
+\[
+    \operatorname{bid}_X
+    \colon
+    X
+    \longrightarrow
+    D_{\mathcal Q}^{2}X.
+\]
+
+Moreover, the following conditions are equivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item every
+    \[
+        \operatorname{bid}_X
+    \]
+    is an equivalence;
+
+    \item the adjunction
+    \[
+        D_{\mathcal Q}^{\op}
+        \dashv
+        D_{\mathcal Q}
+    \]
+    is an adjoint equivalence;
+
+    \item
+    \[
+        D_{\mathcal Q}
+        \colon
+        \mathcal C^{\op}
+        \longrightarrow
+        \mathcal C
+    \]
+    is an equivalence.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+    \mathcal Q
+\]
+is reduced and
+\[
+    2
+\]
+-excisive, its cross-effect
+\[
+    \mathbb B_{\mathcal Q}
+\]
+is exact separately in each variable. For every
+\[
+    X\in\mathcal C,
+\]
+the functor
+\[
+    Y
+    \longmapsto
+    \map_{\mathcal C}
+    \bigl(
+        X,
+        D_{\mathcal Q}Y
+    \bigr)
+\]
+is therefore exact. The stable Yoneda embedding is exact and conservative,
+so
+\[
+    D_{\mathcal Q}
+\]
+is exact.
+
+Write
+\[
+    \theta_{X,Y}
+    \colon
+    \map_{\mathcal C}
+    \bigl(
+        X,
+        D_{\mathcal Q}Y
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \map_{\mathcal C}
+    \bigl(
+        Y,
+        D_{\mathcal Q}X
+    \bigr)
+\]
+for the equivalence induced by the symmetry of the cross-effect. Its
+coherence gives
+\[
+    \theta_{Y,X}
+    \circ
+    \theta_{X,Y}
+    \simeq
+    \id.
+\]
+
+For
+\[
+    X\in\mathcal C
+\]
+and
+\[
+    Y\in\mathcal C^{\op},
+\]
+one has
+\[
+\begin{aligned}
+    \map_{\mathcal C^{\op}}
+    \bigl(
+        D_{\mathcal Q}^{\op}X,
+        Y
+    \bigr)
+    &=
+    \map_{\mathcal C}
+    \bigl(
+        Y,
+        D_{\mathcal Q}X
+    \bigr)
+    \\
+    &\simeq
+    \map_{\mathcal C}
+    \bigl(
+        X,
+        D_{\mathcal Q}Y
+    \bigr).
+\end{aligned}
+\]
+Thus
+\[
+    D_{\mathcal Q}^{\op}
+    \dashv
+    D_{\mathcal Q}.
+\]
+
+The unit
+\[
+    \operatorname{bid}_X
+    \colon
+    X
+    \longrightarrow
+    D_{\mathcal Q}^2X
+\]
+is characterized by
+\[
+    \theta_{X,D_{\mathcal Q}X}
+    \bigl(
+        \operatorname{bid}_X
+    \bigr)
+    \simeq
+    \id_{D_{\mathcal Q}X}.
+\]
+Since
+\[
+    \theta_{X,D_{\mathcal Q}X}^{-1}
+    \simeq
+    \theta_{D_{\mathcal Q}X,X},
+\]
+one has
+\[
+    \operatorname{bid}_X
+    =
+    \theta_{D_{\mathcal Q}X,X}
+    \bigl(
+        \id_{D_{\mathcal Q}X}
+    \bigr).
+\]
+
+Let
+\[
+    \epsilon_X
+    \colon
+    D_{\mathcal Q}^{\op}D_{\mathcal Q}X
+    \longrightarrow
+    X
+\]
+be the counit in
+\[
+    \mathcal C^{\op}.
+\]
+Its opposite is a morphism
+\[
+    \epsilon_X^{\op}
+    \colon
+    X
+    \longrightarrow
+    D_{\mathcal Q}^2X
+\]
+in
+\[
+    \mathcal C.
+\]
+The counit is characterized by
+\[
+    \theta_{X,D_{\mathcal Q}X}
+    \bigl(
+        \epsilon_X^{\op}
+    \bigr)
+    \simeq
+    \id_{D_{\mathcal Q}X}.
+\]
+Hence
+\[
+    \epsilon_X^{\op}
+    =
+    \theta_{D_{\mathcal Q}X,X}
+    \bigl(
+        \id_{D_{\mathcal Q}X}
+    \bigr)
+    =
+    \operatorname{bid}_X.
+\]
+
+Therefore the unit is an equivalence at every object if and only if the
+counit is an equivalence at every object. This is equivalent to the
+adjunction being an adjoint equivalence, and therefore to
+\[
+    D_{\mathcal Q}
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \mathcal C
+\]
+being an equivalence.
+\end{proof}
+
+
+\subsection{Poincar\'e structures and Poincar\'e objects}
+
+\begin{definition}[Poincar\'e structure]
+\label{def:quadratic-poincare-structure}
+Let
+\[
+    \mathcal C
+\]
+be a stable $\infty$-category. A \emph{Poincar\'e structure} on
+\[
+    \mathcal C
+\]
+is a reduced
+\[
+    2
+\]
+-excisive functor
+\[
+    \mathcal Q
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \Sp
+\]
+such that:
+\begin{enumerate}[label=(\roman*)]
+    \item the cross-effect
+    \[
+        \mathbb B_{\mathcal Q}(X,Y)
+        =
+        \fib
+        \left(
+            \mathcal Q(X\oplus Y)
+            \longrightarrow
+            \mathcal Q(X)\oplus\mathcal Q(Y)
+        \right)
+    \]
+    is right represented by an exact functor
+    \[
+        D_{\mathcal Q}
+        \colon
+        \mathcal C^{\op}
+        \longrightarrow
+        \mathcal C;
+    \]
+
+    \item the canonical biduality transformation of
+    \Ref{prop:canonical-biduality-from-cross-effect},
+    \[
+        \operatorname{bid}_X
+        \colon
+        X
+        \longrightarrow
+        D_{\mathcal Q}^{2}X,
+    \]
+    is an equivalence for every
+    \[
+        X\in\mathcal C.
+    \]
+\end{enumerate}
+
+For
+\[
+    q\in\Omega^\infty\mathcal Q(X),
+\]
+define
+\[
+    q^\sharp
+    \colon
+    X
+    \longrightarrow
+    D_{\mathcal Q}X
+\]
+to be the morphism corresponding, under
+\[
+    \Omega^\infty
+    \mathbb B_{\mathcal Q}(X,X)
+    \simeq
+    \Map_{\mathcal C}
+    \bigl(
+        X,
+        D_{\mathcal Q}X
+    \bigr),
+\]
+to the underlying polarized class
+\[
+    \pol_X(q)
+    \in
+    \Omega^\infty
+    \mathbb B_{\mathcal Q}(X,X).
+\]
+
+A \emph{Poincar\'e object} is a pair
+\[
+    (X,q)
+\]
+with
+\[
+    q\in\Omega^\infty\mathcal Q(X)
+\]
+such that
+\[
+    q^\sharp
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    D_{\mathcal Q}X
+\]
+is an equivalence.
+\end{definition}
+
+
+\subsection{Spaces of forms and Poincar\'e objects}
+
+\begin{definition}[Spaces of forms and Poincar\'e objects]
+\label{def:spaces-of-poincare-objects}
+Let
+\[
+    \mathcal Q
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \Sp
+\]
+be a Poincar\'e structure.
+
+Let
+\[
+    \operatorname{He}(\mathcal C,\mathcal Q)
+    \longrightarrow
+    \mathcal C
+\]
+be the right fibration classified by
+\[
+    \Omega^\infty\mathcal Q
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \mathcal S.
+\]
+Thus an object is a pair
+\[
+    (X,q),
+    \qquad
+    q\in\Omega^\infty\mathcal Q(X).
+\]
+
+For a morphism
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y,
+\]
+a morphism from
+\[
+    (X,q_X)
+\]
+to
+\[
+    (Y,q_Y)
+\]
+lying over
+\[
+    f
+\]
+is represented by a path
+\[
+    q_X
+    \simeq
+    \mathcal Q(f)(q_Y)
+\]
+in
+\[
+    \Omega^\infty\mathcal Q(X),
+\]
+together with the higher coherent data encoded by the right fibration.
+
+Define the \emph{space of forms} by
+\[
+    \operatorname{Fm}(\mathcal C,\mathcal Q)
+    :=
+    \operatorname{He}(\mathcal C,\mathcal Q)^\simeq.
+\]
+
+The \emph{space of Poincar\'e objects}
+\[
+    \operatorname{Pn}(\mathcal C,\mathcal Q)
+    \subseteq
+    \operatorname{Fm}(\mathcal C,\mathcal Q)
+\]
+is the full $\infty$-subgroupoid spanned by the pairs
+\[
+    (X,q)
+\]
+for which
+\[
+    q^\sharp
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    D_{\mathcal Q}X
+\]
+is an equivalence.
+\end{definition}
+
+
+\subsection{Perfect cross-effects and quadratic terminology}
+
+\begin{remark}[Comparison with perfect bilinear cross-effects]
+\label{rem:poincare-perfect-bilinear-cross-effect}
+The preceding definition is equivalent to the usual requirement that the
+symmetric bilinear cross-effect
+\[
+    \mathbb B_{\mathcal Q}
+\]
+be perfect.
+
+Indeed, right representability produces the self-adjunction
+\[
+    D_{\mathcal Q}^{\op}
+    \dashv
+    D_{\mathcal Q},
+\]
+and invertibility of the canonical biduality transformation makes this
+adjunction an adjoint equivalence. Thus
+\[
+    D_{\mathcal Q}
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C
+\]
+is the perfect duality represented by the cross-effect.
+\end{remark}
+
+\begin{remark}[Goodwillie-quadratic versus homotopy-quadratic]
+\label{rem:goodwillie-quadratic-terminology}
+The condition that
+\[
+    \mathcal Q
+\]
+is reduced and
+\[
+    2
+\]
+-excisive is frequently described by saying that
+\[
+    \mathcal Q
+\]
+is quadratic in the Goodwillie sense. This should not be confused with the
+specific homotopy-quadratic refinement
+\[
+    \mathcal Q^{\mathrm q}(X)
+    =
+    \mathbb B(X,X)_{hC_2}.
+\]
+\end{remark}
+
+
+\section{The homotopy-symmetric refinement of a coherent duality}
+\label{sec:homotopy-symmetric-refinement-general}
+
+Let
+\[
+    \mathcal C
+\]
+be a stable $\infty$-category equipped with an exact coherent perfect
+duality. The following proposition constructs the canonical
+homotopy-symmetric refinement and identifies its Poincar\'e objects before
+any specialization to module or quasi-coherent categories.
+
+\begin{proposition}[Hermitian objects as Poincar\'e objects]
+\label{prop:hermitian-as-poincare}
+Let
+\[
+    \mathcal C
+\]
+be a stable $\infty$-category equipped with an exact coherent perfect
+duality
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C
+\]
+and biduality
+\[
+    \operatorname{bid}_X
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    D^2X.
+\]
+Define
+\[
+    \mathbb B(X,Y)
+    :=
+    \map_{\mathcal C}(X,DY),
+\]
+with transposition
+\[
+    \mathbb B(X,Y)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B(Y,X)
+\]
+sending
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    DY
+\]
+to
+\[
+    Y
+    \xrightarrow{\operatorname{bid}_Y}
+    D^2Y
+    \xrightarrow{D(f)}
+    DX.
+\]
+Define
+\[
+    \mathcal Q^{\mathrm s}(X)
+    :=
+    \mathbb B(X,X)^{hC_2}.
+\]
+
+Then:
+\begin{enumerate}[label=(\roman*)]
+    \item
+    \[
+        \mathcal Q^{\mathrm s}
+    \]
+    is reduced and
+    \[
+        2
+    \]
+    -excisive;
+
+    \item its cross-effect is canonically equivalent to
+    \[
+        \mathbb B:
+    \]
+    \[
+        \mathbb B_{\mathcal Q^{\mathrm s}}(X,Y)
+        \simeq
+        \mathbb B(X,Y);
+    \]
+
+    \item under the equivalence
+    \[
+        \mathbb B_{\mathcal Q^{\mathrm s}}(X,X)
+        \simeq
+        \mathbb B(X,X),
+    \]
+    the homotopy-fixed-point-valued polarization map identifies with the
+    identity
+    \[
+        \mathbb B(X,X)^{hC_2}
+        \longrightarrow
+        \mathbb B(X,X)^{hC_2}.
+    \]
+    Consequently, its underlying polarization identifies with the
+    forgetful map
+    \[
+        \mathbb B(X,X)^{hC_2}
+        \longrightarrow
+        \mathbb B(X,X);
+    \]
+
+    \item there is a canonical equivalence
+    \[
+        \operatorname{Pn}
+        \bigl(
+            \mathcal C,
+            \mathcal Q^{\mathrm s}
+        \bigr)
+        \xrightarrow{\;\simeq\;}
+        \bigl(
+            \mathcal C^\simeq
+        \bigr)^{hC_2}.
+    \]
+\end{enumerate}
+
+Equivalently, the
+\[
+    \mathcal Q^{\mathrm s}
+\]
+-Poincar\'e objects are precisely the coherently symmetric equivalences
+\[
+    h
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    DX.
+\]
+\end{proposition}
+\begin{proof}
+Because
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \longrightarrow
+    \mathcal C
+\]
+is exact, the functor
+\[
+    \mathbb B
+    \colon
+    \mathcal C^{\op}\times\mathcal C^{\op}
+    \longrightarrow
+    \Sp
+\]
+is exact separately in each variable.
+
+Apply
+\Ref{lem:diagonal-biexact-two-excisive}
+to the stable $\infty$-category
+\[
+    \mathcal C^{\op}
+\]
+and the biexact functor
+\[
+    \mathbb B
+    \colon
+    \mathcal C^{\op}\times\mathcal C^{\op}
+    \longrightarrow
+    \Sp.
+\]
+It follows that the diagonal
+\[
+    X
+    \longmapsto
+    \mathbb B(X,X)
+\]
+is reduced and $2$-excisive.
+
+The coherent transposition equips this diagonal with a
+\[
+    C_2
+\]
+-action. Limits in
+\[
+    \Sp^{BC_2}
+\]
+are created in
+\[
+    \Sp.
+\]
+Consequently the equivariant diagonal is again $2$-excisive as an
+\[
+    \Sp^{BC_2}
+\]
+-valued functor.
+
+Homotopy fixed points are computed by the limit functor
+\[
+    (-)^{hC_2}
+    \colon
+    \Sp^{BC_2}
+    \longrightarrow
+    \Sp.
+\]
+Since limits preserve cartesian cubes, it follows that
+\[
+    \mathcal Q^{\mathrm s}(X)
+    =
+    \mathbb B(X,X)^{hC_2}
+\]
+is reduced and $2$-excisive.
+
+We next compute its cross-effect. Bilinearity gives a natural
+decomposition
+\[
+\begin{aligned}
+    \mathbb B(X\oplus Y,X\oplus Y)
+    \simeq{}&
+    \mathbb B(X,X)
+    \oplus
+    \mathbb B(X,Y)
+    \\
+    &\oplus
+    \mathbb B(Y,X)
+    \oplus
+    \mathbb B(Y,Y).
+\end{aligned}
+\]
+The $C_2$-action preserves the two diagonal summands and exchanges the two
+off-diagonal summands through transposition. Since homotopy fixed points
+preserve fibres,
+\[
+\begin{aligned}
+    \mathbb B_{\mathcal Q^{\mathrm s}}(X,Y)
+    &\simeq
+    \left(
+        \mathbb B(X,Y)
+        \oplus
+        \mathbb B(Y,X)
+    \right)^{hC_2}.
+\end{aligned}
+\]
+
+Using the transposition equivalence
+\[
+    \mathbb B(X,Y)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B(Y,X),
+\]
+the off-diagonal $C_2$-spectrum is canonically equivalent to
+\[
+    \operatorname{Coind}_{1}^{C_2}
+    \mathbb B(X,Y).
+\]
+Homotopy fixed points of a coinduced spectrum recover the original
+spectrum. Hence
+\[
+    \left(
+        \mathbb B(X,Y)
+        \oplus
+        \mathbb B(Y,X)
+    \right)^{hC_2}
+    \simeq
+    \mathbb B(X,Y).
+\]
+This equivalence is natural in $X$ and $Y$ and is compatible with
+transposition. Thus there is an equivalence of symmetric bilinear
+functors
+\[
+    \mathbb B_{\mathcal Q^{\mathrm s}}
+    \xrightarrow{\;\simeq\;}
+    \mathbb B.
+\]
+
+We now identify the homotopy-fixed-point-valued polarization.
+
+By
+\cite[Corollary~1.3.6]{CalmesDottoHarpazEtAl},
+the symmetric cross-effect functor
+\[
+    \mathbb B_{(-)}
+    \colon
+    \Fun^{\mathrm q}(\mathcal C)
+    \longrightarrow
+    \Fun^{\mathrm s}(\mathcal C)
+\]
+admits a fully faithful right adjoint
+\[
+    \mathbb B
+    \longmapsto
+    \mathcal Q_{\mathbb B}^{\mathrm s},
+    \qquad
+    \mathcal Q_{\mathbb B}^{\mathrm s}(X)
+    :=
+    \mathbb B(X,X)^{hC_2}.
+\]
+The unit of this adjunction at a reduced quadratic functor $\mathcal Q$ is
+the homotopy-fixed-point-valued polarization
+\[
+    \mathcal Q(X)
+    \longrightarrow
+    \mathbb B_{\mathcal Q}(X,X)^{hC_2}.
+\]
+
+For
+\[
+    \mathcal Q^{\mathrm s}
+    =
+    \mathcal Q_{\mathbb B}^{\mathrm s},
+\]
+the counit of the adjunction is the cross-effect equivalence
+\[
+    \mathbb B_{\mathcal Q^{\mathrm s}}
+    \xrightarrow{\;\simeq\;}
+    \mathbb B
+\]
+constructed above. Under this equivalence, the triangle identity for the
+adjunction identifies the unit at
+\[
+    \mathcal Q_{\mathbb B}^{\mathrm s}
+\]
+with the identity transformation
+\[
+    \mathbb B(X,X)^{hC_2}
+    \longrightarrow
+    \mathbb B(X,X)^{hC_2}.
+\]
+Therefore the homotopy-fixed-point-valued polarization of
+\[
+    \mathcal Q^{\mathrm s}
+\]
+identifies with the identity.
+
+After forgetting the homotopy-fixed-point structure, the underlying
+polarization identifies with the forgetful morphism
+\[
+    \mathbb B(X,X)^{hC_2}
+    \longrightarrow
+    \mathbb B(X,X).
+\]
+
+It remains to identify the Poincaré objects.
+
+Since
+\[
+    \Omega^\infty
+    \colon
+    \Sp
+    \longrightarrow
+    \mathcal S
+\]
+is a right adjoint, it preserves limits. Hence there is a canonical
+equivalence
+\[
+    \Omega^\infty
+    \left(
+        \mathbb B(X,X)^{hC_2}
+    \right)
+    \simeq
+    \left(
+        \Omega^\infty\mathbb B(X,X)
+    \right)^{hC_2}.
+\]
+
+Using
+\[
+    \mathbb B(X,X)
+    =
+    \map_{\mathcal C}(X,DX),
+\]
+a point
+\[
+    q
+    \in
+    \Omega^\infty\mathcal Q^{\mathrm s}(X)
+\]
+therefore consists of a morphism
+\[
+    q^\sharp
+    \colon
+    X
+    \longrightarrow
+    DX
+\]
+together with a coherent homotopy-fixed-point structure for
+transposition. Its first fixed-point coherence is
+\[
+    D(q^\sharp)
+    \circ
+    \operatorname{bid}_X
+    \simeq
+    q^\sharp.
+\]
+
+The pair
+\[
+    (X,q)
+\]
+is a Poincaré object precisely when
+\[
+    q^\sharp
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    DX
+\]
+is an equivalence.
+
+The coherent duality determines a covariant $C_2$-action on
+\[
+    \mathcal C^\simeq
+\]
+which sends an object $X$ to $DX$ and sends an equivalence
+\[
+    f
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    Y
+\]
+to
+\[
+    D(f^{-1})
+    \colon
+    DX
+    \xrightarrow{\;\simeq\;}
+    DY.
+\]
+A homotopy-fixed-point object for this action is therefore an object $X$
+equipped with an equivalence
+\[
+    h
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    DX
+\]
+and coherent fixed-point data. Its first cocycle condition is
+\[
+    D(h)
+    \circ
+    \operatorname{bid}_X
+    \simeq
+    h.
+\]
+
+The correspondence also agrees on equivalences. Let
+\[
+    (X,q_X)
+    \qquad\text{and}\qquad
+    (Y,q_Y)
+\]
+be Poincaré objects. An equivalence
+\[
+    f
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    Y
+\]
+preserves the Poincaré forms precisely when
+\[
+    q_X
+    \simeq
+    \mathcal Q^{\mathrm s}(f)(q_Y).
+\]
+After forgetting the homotopy-fixed-point structures, this condition is
+\[
+    q_X^\sharp
+    \simeq
+    D(f)
+    \circ
+    q_Y^\sharp
+    \circ
+    f.
+\]
+
+On the other hand, the condition that $f$ be an equivalence between the
+corresponding homotopy-fixed-point objects is
+\[
+    q_Y^\sharp
+    \circ
+    f
+    \simeq
+    D(f^{-1})
+    \circ
+    q_X^\sharp.
+\]
+Applying $D(f)$ identifies this condition with
+\[
+    q_X^\sharp
+    \simeq
+    D(f)
+    \circ
+    q_Y^\sharp
+    \circ
+    f.
+\]
+
+Finally,
+\cite[Proposition~2.2.11]{CalmesDottoHarpazEtAl}
+identifies the full coherent homotopy types and supplies a canonical
+equivalence of $\infty$-groupoids
+\[
+    \operatorname{Pn}
+    \bigl(
+        \mathcal C,
+        \mathcal Q^{\mathrm s}
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \bigl(
+        \mathcal C^\simeq
+    \bigr)^{hC_2}.
+\]
+\end{proof}
+
+
+\section{The canonical homotopy-symmetric Poincar\'e structure on perfect objects}
+\label{sec:canonical-homotopy-symmetric-poincare}
+
+\subsection{The affine bilinear pairing and its transposition}
+
+Retain the notation
+\[
+    \mathcal C_A
+    :=
+    \Perf(A),
+    \qquad
+    D_A
+    :=
+    (-)^\vee.
+\]
+
+Under
+\Ref{prop:canonical-bilinear-symmetry-representability},
+the canonical bilinear functor may equally be written
+\[
+    \mathbb B_A(M,N)
+    \simeq
+    \map_{\Perf(A)}
+    \bigl(
+        M,
+        N^\vee
+    \bigr).
+\]
+
+\begin{proposition}[Symmetry of the bilinear mapping spectrum]
+\label{prop:bilinear-mapping-spectrum-symmetry}
+There is a natural coherent symmetry equivalence
+\[
+    \sigma_{M,N}
+    \colon
+    \mathbb B_A(M,N)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B_A(N,M)
+\]
+which, under the represented description, sends a morphism
+\[
+    q
+    \colon
+    M
+    \longrightarrow
+    N^\vee
+\]
+to
+\[
+    \sigma_{M,N}(q)
+    :=
+    q^\vee
+    \circ
+    \operatorname{bid}_N
+    \colon
+    N
+    \longrightarrow
+    M^\vee.
+\]
+The composite
+\[
+    \sigma_{N,M}
+    \circ
+    \sigma_{M,N}
+\]
+is canonically equivalent to the identity, together with all higher
+\[
+    C_2
+\]
+-coherences.
+\end{proposition}
+
+\begin{proof}
+The formula was established in the proof of
+\Ref{prop:canonical-perfect-duality}.
+For
+\[
+    q
+    \colon
+    M
+    \longrightarrow
+    N^\vee,
+\]
+one has
+\[
+\begin{aligned}
+    \sigma_{N,M}
+    \sigma_{M,N}(q)
+    &=
+    \bigl(
+        q^\vee
+        \operatorname{bid}_N
+    \bigr)^\vee
+    \operatorname{bid}_M
+    \\
+    &\simeq
+    \operatorname{bid}_N^\vee
+    \circ
+    q^{\vee\vee}
+    \circ
+    \operatorname{bid}_M
+    \\
+    &\simeq
+    \operatorname{bid}_N^\vee
+    \circ
+    \operatorname{bid}_{N^\vee}
+    \circ
+    q
+    \\
+    &\simeq
+    q.
+\end{aligned}
+\]
+The third line is naturality of biduality, and the final line is the first
+nontrivial coherence of the coherent perfect duality.
+
+The higher coherences are inherited from the coherent symmetry of
+\[
+    \mathbb B_A.
+\]
+\end{proof}
+
+On the diagonal, the symmetry defines a coherent
+\[
+    C_2
+\]
+-action on
+\[
+    \mathbb B_A(M,M)
+    =
+    \map_{\Perf(A)}(M,M^\vee).
+\]
+The nontrivial element acts by transposition:
+\[
+    \tau_M(q)
+    :=
+    q^\vee
+    \circ
+    \operatorname{bid}_M.
+\]
+
+
+\subsection{The affine homotopy-symmetric functor and its cross-effect}
+
+\begin{definition}[Homotopy-symmetric Poincar\'e functor]
+\label{def:homotopy-symmetric-poincare-functor}
+Define
+\[
+    \mathcal Q_A^{\mathrm s}(M)
+    :=
+    \mathbb B_A(M,M)^{hC_2}.
+\]
+
+For a morphism
+\[
+    f
+    \colon
+    M
+    \longrightarrow
+    N,
+\]
+define
+\[
+    f^*
+    \colon
+    \mathbb B_A(N,N)
+    \longrightarrow
+    \mathbb B_A(M,M)
+\]
+by
+\[
+    f^*(q)
+    :=
+    f^\vee
+    \circ
+    q
+    \circ
+    f.
+\]
+The induced map on homotopy fixed points is denoted
+\[
+    \mathcal Q_A^{\mathrm s}(f)
+    \colon
+    \mathcal Q_A^{\mathrm s}(N)
+    \longrightarrow
+    \mathcal Q_A^{\mathrm s}(M).
+\]
+\end{definition}
+
+\begin{lemma}[Equivariance of pullback]
+\label{lem:poincare-pullback-equivariant}
+For every morphism
+\[
+    f
+    \colon
+    M
+    \longrightarrow
+    N,
+\]
+the map
+\[
+    f^*
+    \colon
+    \mathbb B_A(N,N)
+    \longrightarrow
+    \mathbb B_A(M,M)
+\]
+is
+\[
+    C_2
+\]
+-equivariant.
+\end{lemma}
+
+\begin{proof}
+For
+\[
+    q
+    \colon
+    N
+    \longrightarrow
+    N^\vee,
+\]
+one has
+\[
+\begin{aligned}
+    \tau_M(f^*q)
+    &=
+    \bigl(
+        f^\vee
+        q
+        f
+    \bigr)^\vee
+    \operatorname{bid}_M
+    \\
+    &\simeq
+    f^\vee
+    q^\vee
+    f^{\vee\vee}
+    \operatorname{bid}_M
+    \\
+    &\simeq
+    f^\vee
+    q^\vee
+    \operatorname{bid}_N
+    f
+    \\
+    &=
+    f^*(\tau_Nq).
+\end{aligned}
+\]
+The third line is naturality of biduality. The equality is compatible with
+the full coherent
+\[
+    C_2
+\]
+-actions because all structure maps arise from the coherent perfect
+duality.
+\end{proof}
+
+Consequently,
+\[
+    \mathcal Q_A^{\mathrm s}
+    \colon
+    \Perf(A)^{\op}
+    \longrightarrow
+    \Sp
+\]
+is a well-defined functor.
+
+\begin{proposition}[Cross-effect of the homotopy-symmetric functor]
+\label{prop:homotopy-symmetric-cross-effect}
+The functor
+\[
+    \mathcal Q_A^{\mathrm s}
+\]
+is reduced and
+\[
+    2
+\]
+-excisive. Its symmetric bilinear cross-effect is naturally equivalent to
+\[
+    \mathbb B_A:
+\]
+\[
+    \operatorname{cr}_2
+    \mathcal Q_A^{\mathrm s}(M,N)
+    \simeq
+    \mathbb B_A(M,N).
+\]
+\end{proposition}
+
+\begin{proof}
+The functor is reduced because
+\[
+    \mathbb B_A(0,0)
+    \simeq
+    0.
+\]
+
+Apply
+\Ref{lem:diagonal-biexact-two-excisive}
+with
+\[
+    \mathcal C
+    =
+    \Perf(A)^{\op},
+    \qquad
+    \mathcal D
+    =
+    \Sp,
+    \qquad
+    B
+    =
+    \mathbb B_A.
+\]
+The underlying spectrum-valued diagonal
+\[
+    M
+    \longmapsto
+    \mathbb B_A(M,M)
+\]
+is
+\[
+    2
+\]
+-excisive. Since limits in
+\[
+    \Sp^{BC_2}
+\]
+are created in
+\[
+    \Sp,
+\]
+its coherent
+\[
+    C_2
+\]
+-equivariant refinement is likewise
+\[
+    2
+\]
+-excisive as an
+\[
+    \Sp^{BC_2}
+\]
+-valued functor.
+
+Homotopy fixed points are computed by a limit
+\[
+    (-)^{hC_2}
+    \colon
+    \Sp^{BC_2}
+    \longrightarrow
+    \Sp.
+\]
+Limits preserve cartesian cubes. Hence
+\[
+    \mathcal Q_A^{\mathrm s}(M)
+    =
+    \mathbb B_A(M,M)^{hC_2}
+\]
+is
+\[
+    2
+\]
+-excisive.
+
+For the cross-effect, bilinearity gives a natural decomposition
+\[
+\begin{aligned}
+    \mathbb B_A(M\oplus N,M\oplus N)
+    \simeq{}&
+    \mathbb B_A(M,M)
+    \oplus
+    \mathbb B_A(M,N)
+    \\
+    &\oplus
+    \mathbb B_A(N,M)
+    \oplus
+    \mathbb B_A(N,N).
+\end{aligned}
+\]
+The
+\[
+    C_2
+\]
+-action preserves the two diagonal terms and exchanges the two
+off-diagonal terms through
+\[
+    \sigma_{M,N}
+    \colon
+    \mathbb B_A(M,N)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B_A(N,M).
+\]
+
+The cross-effect is the fibre of
+\[
+    \mathcal Q_A^{\mathrm s}(M\oplus N)
+    \longrightarrow
+    \mathcal Q_A^{\mathrm s}(M)
+    \oplus
+    \mathcal Q_A^{\mathrm s}(N).
+\]
+Since homotopy fixed points preserve fibres,
+\[
+\begin{aligned}
+    \operatorname{cr}_2
+    \mathcal Q_A^{\mathrm s}(M,N)
+    &\simeq
+    \bigl(
+        \mathbb B_A(M,N)
+        \oplus
+        \mathbb B_A(N,M)
+    \bigr)^{hC_2}.
+\end{aligned}
+\]
+Using
+\[
+    \sigma_{M,N},
+\]
+the off-diagonal
+\[
+    C_2
+\]
+-spectrum is canonically equivalent to
+\[
+    \operatorname{Coind}_{1}^{C_2}
+    \mathbb B_A(M,N).
+\]
+The homotopy fixed points of a coinduced spectrum recover the original
+spectrum. Therefore
+\[
+    \bigl(
+        \mathbb B_A(M,N)
+        \oplus
+        \mathbb B_A(N,M)
+    \bigr)^{hC_2}
+    \simeq
+    \mathbb B_A(M,N).
+\]
+The construction is compatible with the symmetry interchanging
+\[
+    M
+    \qquad\text{and}\qquad
+    N,
+\]
+so this is an equivalence of symmetric bilinear functors.
+\end{proof}
+
+
+\subsection{Perfect modules}
+
+\begin{corollary}[The canonical Poincar\'e structure on perfect modules]
+\label{cor:canonical-poincare-perfect-modules}
+The functor
+\[
+    \mathcal Q_A^{\mathrm s}
+    \colon
+    \Perf(A)^{\op}
+    \longrightarrow
+    \Sp
+\]
+is a Poincar\'e structure on
+\[
+    \Perf(A).
+\]
+Its represented cross-effect is
+\[
+    \mathbb B_A(M,N)
+    \simeq
+    \map_{\Perf(A)}(M,D_A N),
+\]
+and the representing duality is the canonical coherent rigid duality
+\[
+    D_A
+    =
+    (-)^\vee.
+\]
+
+There is a canonical equivalence
+\[
+    \operatorname{Pn}
+    \bigl(
+        \Perf(A),
+        \mathcal Q_A^{\mathrm s}
+    \bigr)
+    \simeq
+    \bigl(
+        \Perf(A)^\simeq
+    \bigr)^{hC_2}.
+\]
+Hence its objects are precisely the Hermitian perfect modules of
+\Ref{def:hermitian-perfect-module}.
+\end{corollary}
+
+\begin{proof}
+By
+\Ref{prop:homotopy-symmetric-cross-effect},
+the functor
+\[
+    \mathcal Q_A^{\mathrm s}
+\]
+is reduced and
+\[
+    2
+\]
+-excisive, with symmetric cross-effect
+\[
+    \mathbb B_A.
+\]
+By
+\Ref{prop:canonical-bilinear-symmetry-representability},
+\[
+    \mathbb B_A(M,N)
+    \simeq
+    \map_{\Perf(A)}(M,D_A N).
+\]
+By
+\Ref{prop:canonical-perfect-duality},
+\[
+    D_A
+\]
+is an exact coherent contravariant equivalence. The conclusion follows
+from
+\Ref{prop:hermitian-as-poincare}.
+\end{proof}
+
+
+\subsection{Perfect objects over a presheaf}
+
+\begin{proposition}[Canonical Poincar\'e structure on perfect objects over a presheaf]
+\label{prop:canonical-poincare-perfect-presheaves}
+Let
+\[
+    X\in\PSh(\Aff),
+\]
+and let
+\[
+    \mathbf 1_X
+\]
+denote the tensor unit of
+\[
+    \Perf(X).
+\]
+Define
+\[
+    \mathbb B_X
+    \colon
+    \Perf(X)^{\op}
+    \times
+    \Perf(X)^{\op}
+    \longrightarrow
+    \Sp
+\]
+by
+\[
+    \mathbb B_X(M,N)
+    :=
+    \map_{\Perf(X)}
+    \bigl(
+        M\otimes N,
+        \mathbf 1_X
+    \bigr).
+\]
+
+Then
+\[
+    \mathbb B_X
+\]
+is exact separately in each variable and carries a canonical coherent
+symmetry
+\[
+    \mathbb B_X(M,N)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B_X(N,M).
+\]
+It is right-represented by the canonical rigid duality
+\[
+    D_X
+    :=
+    (-)^\vee
+    \colon
+    \Perf(X)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Perf(X),
+\]
+through natural equivalences
+\[
+    \mathbb B_X(M,N)
+    \simeq
+    \map_{\Perf(X)}
+    \bigl(
+        M,
+        N^\vee
+    \bigr).
+\]
+
+Define
+\[
+    \mathcal Q_X^{\mathrm s}(M)
+    :=
+    \mathbb B_X(M,M)^{hC_2},
+\]
+where the
+\[
+    C_2
+\]
+-action is induced by the coherent symmetry of
+\[
+    \mathbb B_X.
+\]
+Then
+\[
+    \mathcal Q_X^{\mathrm s}
+    \colon
+    \Perf(X)^{\op}
+    \longrightarrow
+    \Sp
+\]
+is a Poincar\'e structure on
+\[
+    \Perf(X).
+\]
+Its symmetric bilinear cross-effect is naturally equivalent to
+\[
+    \mathbb B_X,
+\]
+and its representing duality is
+\[
+    D_X=(-)^\vee.
+\]
+
+There is a canonical equivalence
+\[
+    \operatorname{Pn}
+    \bigl(
+        \Perf(X),
+        \mathcal Q_X^{\mathrm s}
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \bigl(
+        \Perf(X)^\simeq
+    \bigr)^{hC_2}.
+\]
+Thus the
+\[
+    \mathcal Q_X^{\mathrm s}
+\]
+-Poincar\'e objects are precisely the coherently symmetric equivalences
+\[
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee.
+\]
+
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:perfect-stable-monoidal},
+the category
+\[
+    \Perf(X)
+\]
+is a stable idempotent-complete rigid symmetric monoidal
+$\infty$-category whose tensor product is exact separately in each
+variable.
+
+Tensoring is exact separately in each variable, and mapping into the
+tensor unit
+\[
+    \mathbf 1_X
+\]
+is exact contravariantly. Hence
+\[
+    \mathbb B_X
+\]
+is exact separately in each variable.
+
+The braiding
+\[
+    N\otimes M
+    \xrightarrow{\;\simeq\;}
+    M\otimes N
+\]
+induces a natural equivalence
+\[
+    \mathbb B_X(M,N)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B_X(N,M).
+\]
+The symmetric monoidal coherence of the braiding supplies this equivalence
+with its coherent involutivity and all higher
+\[
+    C_2
+\]
+-compatibilities.
+
+Since every object of
+\[
+    \Perf(X)
+\]
+is dualizable, rigidity gives natural equivalences
+\[
+\begin{aligned}
+    \mathbb B_X(M,N)
+    &=
+    \map_{\Perf(X)}
+    \bigl(
+        M\otimes N,
+        \mathbf 1_X
+    \bigr)
+    \\
+    &\simeq
+    \map_{\Perf(X)}
+    \bigl(
+        M,
+        N^\vee
+    \bigr).
+\end{aligned}
+\]
+Thus
+\[
+    \mathbb B_X
+\]
+is right-represented by
+\[
+    D_X=(-)^\vee.
+\]
+
+The canonical biduality morphism
+\[
+    M
+    \longrightarrow
+    M^{\vee\vee}
+\]
+is an equivalence for every
+\[
+    M\in\Perf(X).
+\]
+Therefore
+\[
+    D_X
+    \colon
+    \Perf(X)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Perf(X)
+\]
+is an exact coherent perfect duality, and
+\[
+    \mathbb B_X
+\]
+is a perfect symmetric bilinear functor.
+
+Applying
+\Ref{prop:hermitian-as-poincare}
+to
+\[
+    \mathcal C=\Perf(X),
+    \qquad
+    D=D_X,
+\]
+shows that
+\[
+    \mathcal Q_X^{\mathrm s}(M)
+    =
+    \mathbb B_X(M,M)^{hC_2}
+\]
+is reduced and
+\[
+    2
+\]
+-excisive, that its cross-effect is naturally equivalent to
+\[
+    \mathbb B_X,
+\]
+and that it defines a Poincar\'e structure represented by
+\[
+    D_X.
+\]
+The same proposition supplies the canonical equivalence
+\[
+    \operatorname{Pn}
+    \bigl(
+        \Perf(X),
+        \mathcal Q_X^{\mathrm s}
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \bigl(
+        \Perf(X)^\simeq
+    \bigr)^{hC_2}.
+\]
+\end{proof}
+
+\section{Pullback of Hermitian and Poincar\'e objects}
+\label{sec:pullback-hermitian-poincare}
+
+\begin{proposition}[Functoriality of homotopy-symmetric Poincaré structures]
+\label{prop:functoriality-homotopy-symmetric-structures}
+Let
+\[
+    (\mathcal C,D_{\mathcal C})
+    \qquad\text{and}\qquad
+    (\mathcal D,D_{\mathcal D})
+\]
+be stable $\infty$-categories equipped with exact coherent perfect
+dualities. Let
+\[
+    F
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be an exact duality-preserving functor, with coherent natural equivalence
+\[
+    \chi_X
+    \colon
+    F(D_{\mathcal C}X)
+    \xrightarrow{\;\simeq\;}
+    D_{\mathcal D}F(X).
+\]
+
+For
+\[
+    X,Y\in\mathcal C,
+\]
+there is a natural morphism
+\[
+\begin{aligned}
+    \mathbb B_{\mathcal C}(X,Y)
+    &=
+    \map_{\mathcal C}
+    \bigl(
+        X,
+        D_{\mathcal C}Y
+    \bigr)
+    \\
+    &\longrightarrow
+    \map_{\mathcal D}
+    \bigl(
+        F(X),
+        D_{\mathcal D}F(Y)
+    \bigr)
+    =
+    \mathbb B_{\mathcal D}
+    \bigl(
+        F(X),
+        F(Y)
+    \bigr),
+\end{aligned}
+\]
+given by
+\[
+    q
+    \longmapsto
+    \chi_Y\circ F(q).
+\]
+These morphisms define a morphism of symmetric bilinear functors and are
+compatible with transposition.
+
+On the diagonal they induce a natural transformation
+\[
+    \mathcal Q_{\mathcal C}^{\mathrm s}
+    \longrightarrow
+    \mathcal Q_{\mathcal D}^{\mathrm s}
+    \circ
+    F^{\op}.
+\]
+
+Consequently, $F$ induces functors
+\[
+    \operatorname{He}
+    \bigl(
+        \mathcal C,
+        \mathcal Q_{\mathcal C}^{\mathrm s}
+    \bigr)
+    \longrightarrow
+    \operatorname{He}
+    \bigl(
+        \mathcal D,
+        \mathcal Q_{\mathcal D}^{\mathrm s}
+    \bigr),
+\]
+\[
+    \operatorname{Fm}
+    \bigl(
+        \mathcal C,
+        \mathcal Q_{\mathcal C}^{\mathrm s}
+    \bigr)
+    \longrightarrow
+    \operatorname{Fm}
+    \bigl(
+        \mathcal D,
+        \mathcal Q_{\mathcal D}^{\mathrm s}
+    \bigr),
+\]
+and
+\[
+    \operatorname{Pn}
+    \bigl(
+        \mathcal C,
+        \mathcal Q_{\mathcal C}^{\mathrm s}
+    \bigr)
+    \longrightarrow
+    \operatorname{Pn}
+    \bigl(
+        \mathcal D,
+        \mathcal Q_{\mathcal D}^{\mathrm s}
+    \bigr).
+\]
+
+For a Poincaré object
+\[
+    (X,q),
+\]
+the underlying adjoint of the transported form is
+\[
+    F(X)
+    \xrightarrow{F(q^\sharp)}
+    F(D_{\mathcal C}X)
+    \xrightarrow{\chi_X}
+    D_{\mathcal D}F(X).
+\]
+
+The resulting functors are coherently compatible with identities and
+composition of duality-preserving functors.
+\end{proposition}
+
+\begin{proof}
+Applying $F$ to morphisms gives natural maps
+\[
+\begin{aligned}
+    \map_{\mathcal C}
+    \bigl(
+        X,
+        D_{\mathcal C}Y
+    \bigr)
+    \longrightarrow
+    \map_{\mathcal D}
+    \bigl(
+        F(X),
+        F(D_{\mathcal C}Y)
+    \bigr).
+\end{aligned}
+\]
+Postcomposition with
+\[
+    \chi_Y
+    \colon
+    F(D_{\mathcal C}Y)
+    \xrightarrow{\;\simeq\;}
+    D_{\mathcal D}F(Y)
+\]
+gives the displayed morphism
+\[
+    \mathbb B_{\mathcal C}(X,Y)
+    \longrightarrow
+    \mathbb B_{\mathcal D}
+    \bigl(
+        F(X),
+        F(Y)
+    \bigr).
+\]
+
+The compatibility of $\chi$ with biduality implies that these maps commute
+with transposition. Explicitly, for
+\[
+    q
+    \colon
+    X
+    \longrightarrow
+    D_{\mathcal C}Y,
+\]
+the transposition of its image is canonically equivalent to the image of
+the transposition
+\[
+    D_{\mathcal C}(q)
+    \circ
+    \operatorname{bid}_Y
+    \colon
+    Y
+    \longrightarrow
+    D_{\mathcal C}X.
+\]
+The full coherent compatibility follows from the coherent
+duality-preserving structure on $F$.
+
+Hence the diagonal map
+\[
+    \mathbb B_{\mathcal C}(X,X)
+    \longrightarrow
+    \mathbb B_{\mathcal D}
+    \bigl(
+        F(X),
+        F(X)
+    \bigr)
+\]
+is $C_2$-equivariant. Passing to homotopy fixed points gives a natural
+transformation
+\[
+    \mathcal Q_{\mathcal C}^{\mathrm s}(X)
+    \longrightarrow
+    \mathcal Q_{\mathcal D}^{\mathrm s}(F(X)).
+\]
+Naturality in $X$ gives
+\[
+    \mathcal Q_{\mathcal C}^{\mathrm s}
+    \longrightarrow
+    \mathcal Q_{\mathcal D}^{\mathrm s}
+    \circ
+    F^{\op}.
+\]
+
+By unstraightening, this natural transformation induces a functor between
+the right fibrations of forms
+\[
+    \operatorname{He}
+    \bigl(
+        \mathcal C,
+        \mathcal Q_{\mathcal C}^{\mathrm s}
+    \bigr)
+    \longrightarrow
+    \operatorname{He}
+    \bigl(
+        \mathcal D,
+        \mathcal Q_{\mathcal D}^{\mathrm s}
+    \bigr).
+\]
+Passing to maximal $\infty$-groupoids gives the functor on spaces of
+forms.
+
+If
+\[
+    q^\sharp
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    D_{\mathcal C}X
+\]
+is an equivalence, then its transported adjoint is
+\[
+    F(X)
+    \xrightarrow{F(q^\sharp)}
+    F(D_{\mathcal C}X)
+    \xrightarrow{\chi_X}
+    D_{\mathcal D}F(X).
+\]
+Both factors are equivalences. Hence the transported form is
+nondegenerate, and the functor on spaces of forms restricts to the stated
+functor on spaces of Poincaré objects.
+
+The identity and composition coherences follow from the corresponding
+coherences of the duality comparisons.
+\end{proof}
+
+
+\begin{proposition}[Pullback of Hermitian and Poincaré perfect objects]
+\label{prop:pullback-hermitian-perfect-objects}
+Let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+be a morphism in
+\[
+    \PSh(\Aff).
+\]
+
+Pullback induces a natural transformation
+\[
+    \mathcal Q_Y^{\mathrm s}
+    \longrightarrow
+    \mathcal Q_X^{\mathrm s}
+    \circ
+    (p^*)^{\op}
+\]
+and consequently a functor
+\[
+    p^*
+    \colon
+    \operatorname{Pn}
+    \bigl(
+        \Perf(Y),
+        \mathcal Q_Y^{\mathrm s}
+    \bigr)
+    \longrightarrow
+    \operatorname{Pn}
+    \bigl(
+        \Perf(X),
+        \mathcal Q_X^{\mathrm s}
+    \bigr).
+\]
+
+For a Hermitian perfect object
+\[
+    (M,h_M)
+\]
+on $Y$, the underlying Hermitian equivalence on its pullback is
+\[
+\begin{aligned}
+    h_{p^*M}
+    \colon
+    p^*M
+    &\xrightarrow{p^*(h_M)}
+    p^*(M^\vee)
+    \\
+    &\xrightarrow{\chi_{p,M}}
+    \bigl(p^*M\bigr)^\vee,
+\end{aligned}
+\]
+where
+\[
+    \chi_{p,M}
+    \colon
+    p^*(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    \bigl(p^*M\bigr)^\vee
+\]
+is the canonical duality comparison.
+
+Under the equivalences
+\[
+    \operatorname{Pn}
+    \bigl(
+        \Perf(Y),
+        \mathcal Q_Y^{\mathrm s}
+    \bigr)
+    \simeq
+    \bigl(
+        \Perf(Y)^\simeq
+    \bigr)^{hC_2}
+\]
+and
+\[
+    \operatorname{Pn}
+    \bigl(
+        \Perf(X),
+        \mathcal Q_X^{\mathrm s}
+    \bigr)
+    \simeq
+    \bigl(
+        \Perf(X)^\simeq
+    \bigr)^{hC_2},
+\]
+this functor identifies with the functor on homotopy fixed points induced
+by
+\[
+    p^*
+    \colon
+    \Perf(Y)^\simeq
+    \longrightarrow
+    \Perf(X)^\simeq.
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{cor:pullback-perfect-duality},
+the functor
+\[
+    p^*
+    \colon
+    \Perf(Y)
+    \longrightarrow
+    \Perf(X)
+\]
+is an exact duality-preserving strong symmetric monoidal functor, with
+duality comparison
+\[
+    \chi_{p,M}
+    \colon
+    p^*(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    \bigl(p^*M\bigr)^\vee.
+\]
+
+Apply
+\Ref{prop:functoriality-homotopy-symmetric-structures}.
+It gives the natural transformation
+\[
+    \mathcal Q_Y^{\mathrm s}
+    \longrightarrow
+    \mathcal Q_X^{\mathrm s}
+    \circ
+    (p^*)^{\op}
+\]
+and the induced functor on spaces of Poincaré objects.
+
+For a Hermitian equivalence
+\[
+    h_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee,
+\]
+the transported adjoint is
+\[
+    p^*M
+    \xrightarrow{p^*(h_M)}
+    p^*(M^\vee)
+    \xrightarrow{\chi_{p,M}}
+    \bigl(p^*M\bigr)^\vee.
+\]
+The coherent duality-preserving structure on $p^*$ transports the complete
+homotopy-fixed-point datum, so this composite is the underlying map of a
+Hermitian structure on $p^*M$.
+
+The fixed-point description follows from the naturality of the
+equivalence of
+\Ref{prop:hermitian-as-poincare}
+with respect to duality-preserving exact functors.
+\end{proof}
+
+
+\begin{proposition}[Affine base change of Hermitian and Poincaré modules]
+\label{prop:base-change-hermitian-perfect-modules}
+Let
+\[
+    f
+    \colon
+    A
+    \longrightarrow
+    A'
+\]
+be a morphism in
+\[
+    \CAlg(\V),
+\]
+and let
+\[
+    F
+    :=
+    -\otimes_A A'
+    \colon
+    \Perf(A)
+    \longrightarrow
+    \Perf(A').
+\]
+
+No equivariance condition on the commutative base is required.
+
+Extension of scalars induces a natural transformation
+\[
+    \mathcal Q_A^{\mathrm s}
+    \longrightarrow
+    \mathcal Q_{A'}^{\mathrm s}
+    \circ
+    F^{\op}
+\]
+and a functor
+\[
+    F
+    \colon
+    \operatorname{Pn}
+    \bigl(
+        \Perf(A),
+        \mathcal Q_A^{\mathrm s}
+    \bigr)
+    \longrightarrow
+    \operatorname{Pn}
+    \bigl(
+        \Perf(A'),
+        \mathcal Q_{A'}^{\mathrm s}
+    \bigr).
+\]
+
+Write
+\[
+    \chi_M
+    \colon
+    F(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    F(M)^\vee
+\]
+for the canonical duality comparison. If
+\[
+    h_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee
+\]
+is a Hermitian structure, then the underlying Hermitian equivalence on
+the base-changed module is
+\[
+    h_{F(M)}
+    :=
+    \chi_M
+    \circ
+    F(h_M)
+    \colon
+    F(M)
+    \xrightarrow{\;\simeq\;}
+    F(M)^\vee.
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{cor:base-change-perfect-duality},
+extension of scalars
+\[
+    F
+    =
+    -\otimes_A A'
+    \colon
+    \Perf(A)
+    \longrightarrow
+    \Perf(A')
+\]
+is an exact duality-preserving strong symmetric monoidal functor.
+
+Apply
+\Ref{prop:functoriality-homotopy-symmetric-structures}.
+It supplies the natural transformation
+\[
+    \mathcal Q_A^{\mathrm s}
+    \longrightarrow
+    \mathcal Q_{A'}^{\mathrm s}
+    \circ
+    F^{\op}
+\]
+and the induced functor on spaces of Poincaré objects.
+
+For a Hermitian equivalence
+\[
+    h_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee,
+\]
+the transported adjoint is
+\[
+    F(M)
+    \xrightarrow{F(h_M)}
+    F(M^\vee)
+    \xrightarrow{\chi_M}
+    F(M)^\vee.
+\]
+The coherent compatibility of $\chi$ with biduality transports the entire
+homotopy-fixed-point datum of $h_M$. Hence this composite defines a
+Hermitian structure on
+\[
+    F(M)
+    =
+    M\otimes_A A'.
+\]
+\end{proof}
+\section{Alternative refinements and examples}
+\label{sec:examples-perfect-poincare}
+
+\subsection{Homotopy-symmetric and homotopy-quadratic refinements}
+
+\begin{remark}
+\label{rem:poincare-infinity-category}
+A stable category with coherent duality does not determine a unique
+Poincar\'e refinement. It canonically determines at least two
+distinguished refinements associated to the symmetric bilinear functor
+\[
+    \mathbb B_A:
+\]
+\[
+    \mathcal Q_A^{\mathrm s}(M)
+    =
+    \mathbb B_A(M,M)^{hC_2},
+\]
+the homotopy-symmetric refinement, and
+\[
+    \mathcal Q_A^{\mathrm q}(M)
+    =
+    \mathbb B_A(M,M)_{hC_2},
+\]
+the homotopy-quadratic refinement.
+
+Homotopy orbits are colimit-preserving and therefore exact on spectra.
+They preserve finite cartesian cubes. Hence
+\[
+    \mathcal Q_A^{\mathrm q}
+\]
+is again reduced and
+\[
+    2
+\]
+-excisive.
+
+Both refinements have symmetric bilinear cross-effect equivalent to
+\[
+    \mathbb B_A
+\]
+and therefore represent the same underlying coherent duality. Further
+intermediate, genuine, or enhanced refinements may require additional
+structure. See
+\cite{CalmesDottoHarpazEtAl}.
+\end{remark}
+
+
+\subsection{Examples}
+
+\begin{example}[Perfect complexes]
+\label{ex:perfect-complexes}
+Let
+\[
+    R
+\]
+be an $\EE_\infty$-ring spectrum, including the case
+\[
+    R=HR_0
+\]
+for an ordinary commutative ring
+\[
+    R_0,
+\]
+and take
+\[
+    \V
+    =
+    \Mod_R(\Sp).
+\]
+For a commutative
+\[
+    R
+\]
+-algebra
+\[
+    A,
+\]
+the category
+\[
+    \Perf(A)
+\]
+is the rigid stable category of perfect
+\[
+    A
+\]
+-modules. The canonical duality is
+\[
+    M^\vee
+    =
+    \HHom_A(M,A).
+\]
+A Hermitian perfect module in the sense of this chapter is a perfect
+module equipped with a coherent nondegenerate symmetric equivalence
+\[
+    M
+    \simeq
+    M^\vee.
+\]
+\end{example}
+
+\begin{example}[Complex perfect complexes]
+\label{ex:complex-perfect-complexes}
+Let
+\[
+    \V
+    =
+    \Mod_{H\mathbb C}(\Sp).
+\]
+Then
+\[
+    \Perf(H\mathbb C)
+\]
+is the stable $\infty$-category of perfect complexes of complex vector
+spaces, and
+\[
+    \HHom_{\mathbb C}(M,N)
+    \simeq
+    M^\vee\otimes_{\mathbb C}N.
+\]
+The Hermitian forms defined here are nondegenerate symmetric
+complex-bilinear self-dualities. They are not sesquilinear forms, since no
+complex conjugation has been introduced.
+\end{example}
+
+The rigid theory developed here is internal to symmetric monoidal module
+categories. The next chapter passes from individual perfect modules to
+associative algebra objects and from morphisms to bimodules. In that
+Morita-theoretic setting, dualizability is replaced by adjointability, and
+the canonical rigid duality is replaced by a coherent duality on a
+right-perfect Morita
+\[
+    (\infty,2)
+\]

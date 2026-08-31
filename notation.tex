@@ -1,0 +1,746 @@
+\chapter*{List of Notation}
+\addcontentsline{toc}{chapter}{List of Notation}
+\markboth{List of Notation}{List of Notation}
+
+% Publication-facing projection of the chapter-specific Canonical Notation Register.
+% Every head notation item displayed here is backed by a Public=yes entry there.
+% Public display may append registered type/signature information, and tightly
+% coupled entries may be merged, without changing their canonical meaning.
+
+\begingroup
+
+\footnotesize
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+
+\newcommand{\NotationRef}[1]{%
+  \hyperref[#1]{\ref*{#1}, p.~\pageref*{#1}}%
+}
+
+\newcommand{\NotationPair}[4]{%
+  #1 & \NotationRef{#2} & #3 & \NotationRef{#4}\\
+}
+
+\newcommand{\NotationSingle}[2]{%
+  #1 & \NotationRef{#2} & & \\
+}
+
+\newcommand{\NotationHeading}[1]{%
+  \addlinespace[0.35em]
+  \multicolumn{4}{@{}l@{}}{\textit{#1}}\\[-0.1em]
+}
+
+\begin{longtable}{
+@{}
+>{\raggedright\arraybackslash}p{0.315\textwidth}
+>{\raggedleft\arraybackslash}p{0.125\textwidth}
+@{\hspace{0.65em}\vrule width 0.45pt\hspace{0.65em}}
+>{\raggedright\arraybackslash}p{0.315\textwidth}
+>{\raggedleft\arraybackslash}p{0.125\textwidth}
+@{}
+}
+
+\toprule
+\textbf{Notation} & \textbf{Reference}
+&
+\textbf{Notation} & \textbf{Reference}
+\\
+\midrule
+\endfirsthead
+
+\multicolumn{4}{@{}l@{}}%
+{\footnotesize\itshape List of Notation, continued}\\[0.25em]
+\toprule
+\textbf{Notation} & \textbf{Reference}
+&
+\textbf{Notation} & \textbf{Reference}
+\\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{4}{r@{}}%
+{\footnotesize\itshape Continued on the following page}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+\NotationHeading{Ambient spectra and Postnikov notation}
+
+\NotationPair
+{\(\Sp,\ \Sp^\otimes\)}
+{prop:spectra-presentably-stable-monoidal}
+{\(\mathbb S\)}
+{prop:spectra-presentably-stable-monoidal}
+
+\NotationPair
+{\(\Map_{\mathcal C}(X,Y)\)}
+{conv:spectral-infinity-categorical}
+{\(\map_{\mathcal C}(X,Y)\)}
+{conv:spectral-infinity-categorical}
+
+\NotationPair
+{\(\HHom_{\Sp}(X,-)\)}
+{prop:spectra-closedness}
+{\(\Sp_{\geq n},\ \Sp_{\leq n}\)}
+{def:postnikov-t-structure}
+
+\NotationPair
+{\(\tau_{\geq n}^{\Sp},\ \tau_{\leq n}^{\Sp}\)}
+{def:postnikov-t-structure}
+{\(\Sp^\heartsuit\)}
+{def:discrete-spectrum}
+
+\NotationPair
+{\(H_{\mathrm{Ab}}:\operatorname{Ab}\xrightarrow{\simeq}\Sp^\heartsuit\)}
+{prop:eilenberg-mac-lane-heart}
+{\(\CAlg(\Pr^L_{\mathrm{st}})\)}
+{conv:spectral-monoidal-structures-on-categories}
+
+
+\NotationHeading{Connective commutative spectral algebra}
+
+\NotationPair
+{\(\CAlg(\Sp)\)}
+{def:commutative-ring-spectrum}
+{\(\operatorname{Sym}:\Sp\to\CAlg(\Sp)\)}
+{def:free-commutative-spectral-algebra}
+
+\NotationPair
+{\(\CAlg(\Sp)^{\mathrm{cn}}\)}
+{def:connective-e-infinity-ring}
+{\(\tau_{\geq0}^{\CAlg}\)}
+{prop:connective-calg-presentable}
+
+\NotationSingle
+{\(\pi_0\dashv H_{\mathrm{CRing}}\)}
+{prop:pi-zero-h-adjunction}
+
+
+\NotationHeading{Affine spectral geometry and modules}
+
+\NotationPair
+{\(\Aff_{\Sp}=(\CAlg(\Sp)^{\mathrm{cn}})^{\op}\)}
+{def:affine-spectral-scheme}
+{\(\Spec(A)\)}
+{def:affine-spectral-scheme}
+
+\NotationPair
+{\(\Spec(B)\times_{\Spec(A)}\Spec(C)\simeq\Spec(B\otimes_A C)\)}
+{prop:affine-spectral-fibre-products}
+{\(X_{\mathrm{cl}}=\Spec\pi_0(A)\)}
+{prop:zero-truncated-affine-reconstruction}
+
+\NotationPair
+{\(|X|=|\Spec\pi_0(A)|\)}
+{def:underlying-topological-space-affine-spectral}
+{\(\Mod_A\)}
+{def:module-spectrum-over-a}
+
+\NotationPair
+{\(-\otimes_A-\)}
+{con:spectral-relative-tensor-product}
+{\(\HHom_A(M,-)\)}
+{prop:module-spectra-closedness}
+
+\NotationPair
+{\(f^*=-\otimes_A B\dashv f_*\)}
+{def:spectral-extension-restriction-scalars}
+{\(\mathbf{Mod}_{\Sp}:\CAlg(\Sp)\to\CAlg(\Pr^L_{\mathrm{st}})\)}
+{prop:spectral-module-functoriality}
+
+\NotationPair
+{\(\CAlg(\Mod_A)\simeq\CAlg(\Sp)_{A/}\)}
+{prop:relative-commutative-spectral-algebras}
+{\((\Mod_A)_{\geq0},\ (\Mod_A)_{\leq0}\)}
+{def:module-postnikov-t-structure}
+
+\NotationPair
+{\(\Mod_A^\heartsuit\simeq\operatorname{Mod}_{\pi_0(A)}\)}
+{prop:heart-module-category}
+{\(\operatorname{Sym}_A\)}
+{def:finite-cell-spectral-algebra}
+
+
+\NotationHeading{Prestacks and quasi-coherent coefficients}
+
+\NotationPair
+{\(\PSh(\Aff_{\Sp})\)}
+{def:spectral-prestacks-affine-stage}
+{\(h_A\)}
+{def:spectral-functor-of-points}
+
+\NotationPair
+{\(h:\Aff_{\Sp}\hookrightarrow\PSh(\Aff_{\Sp})\)}
+{prop:spectral-yoneda-embedding}
+{\(\delta:\operatorname{AffSch}\hookrightarrow\Aff_{\Sp}\)}
+{prop:zero-truncated-affine-reconstruction}
+
+\NotationPair
+{\(\delta_!\dashv\delta^*\)}
+{thm:global-zero-truncated-reconstruction}
+{\(X_{\mathrm{cl}}=\delta^*X\)}
+{thm:global-zero-truncated-reconstruction}
+
+\NotationPair
+{\(\QCoh_{\mathrm{aff}}(\Spec A)=\Mod_A\)}
+{def:affine-spectral-qcoh}
+{\(\operatorname{AffPt}(X)\)}
+{def:affine-points-prestack}
+
+\NotationPair
+{\(\QCoh(X)=\varprojlim_{(\Spec A\to X)\in\operatorname{AffPt}(X)^{\op}}\Mod_A\)}
+{def:qcoh-spectral-prestack}
+{\(\mathcal O_X\)}
+{def:structure-sheaf-prestack}
+
+\NotationSingle
+{\(\Gamma(X,\mathcal F)=\map_{\QCoh(X)}(\mathcal O_X,\mathcal F)\)}
+{def:global-sections-qcoh}
+
+
+\NotationHeading{Spectral Zariski geometry and global schemes}
+
+\NotationPair
+{\(A[f^{-1}]\)}
+{con:spectral-localization}
+{\(D_A^{\mathrm{sp}}(f)=\Spec(A[f^{-1}])\)}
+{prop:principal-spectral-open}
+
+\NotationPair
+{\(\tau_{\mathrm{Zar}}\)}
+{def:spectral-zariski-topology}
+{\(\operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{def:spectral-zariski-stack}
+
+\NotationPair
+{\(a^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{con:spectral-zariski-sheafification}
+{\(\operatorname{Sch}^{\mathrm{sp}}\)}
+{def:spectral-scheme}
+
+\NotationPair
+{\(d=a^{\mathrm{sp}}_{\mathrm{Zar}}\circ\delta_!,\quad d\dashv\delta^*\)}
+{thm:global-zero-truncated-reconstruction}
+{\((-)^{\mathrm{disc}}:\operatorname{Sch}\hookrightarrow\operatorname{Sch}^{\mathrm{sp}}\)}
+{thm:global-zero-truncated-reconstruction}
+
+\NotationPair
+{\((-)_{\mathrm{cl}}:\operatorname{Sch}^{\mathrm{sp}}\to\operatorname{Sch}\)}
+{thm:global-zero-truncated-reconstruction}
+{\(i_X:X_{\mathrm{cl}}^{\mathrm{disc}}\to X\)}
+{cor:zero-truncation-counit-closed}
+
+\NotationSingle
+{\(|X|=|X_{\mathrm{cl}}|\)}
+{def:underlying-space-spectral-scheme}
+
+
+\NotationHeading{Global coefficients and relative affine geometry}
+
+\NotationPair
+{\(\operatorname{AffOp}(X)\)}
+{lem:qcoh-affine-open-basis}
+{\(\QCoh(X)_{\geq0},\ \QCoh(X)_{\leq0}\)}
+{thm:qcoh-spectral-scheme-t-structure}
+
+\NotationPair
+{\(\QCoh(X)^\heartsuit\simeq\operatorname{QCoh}_{\mathrm{ab}}(X_{\mathrm{cl}})\)}
+{thm:qcoh-spectral-scheme-t-structure}
+{\(\operatorname{QCAlg}(X)=\CAlg(\QCoh(X))\)}
+{def:quasi-coherent-commutative-algebra}
+
+\NotationPair
+{\(\operatorname{QCAlg}(X)^{\mathrm{cn}}\)}
+{def:quasi-coherent-commutative-algebra}
+{\(\Spec_X:\operatorname{QCAlg}(X)^{\mathrm{cn},\op}\to\operatorname{Sch}^{\mathrm{sp}}_{/X}\)}
+{thm:relative-spectrum-construction}
+
+
+\NotationHeading{Closed and linear geometry}
+
+\NotationPair
+{\(X\setminus Z\)}
+{thm:complement-closed-immersion}
+{\(\operatorname{Sym}_{\mathcal O_X}\)}
+{prop:relative-free-commutative-algebra}
+
+\NotationPair
+{\(\mathbb L_X(\mathcal E)=\Spec_X\operatorname{Sym}_{\mathcal O_X}(\mathcal E)\)}
+{def:linear-spectral-space}
+{\(\mathbf V_X(\mathcal E)=\mathbb L_X(\mathcal E^\vee)\)}
+{def:vector-bundle-dual-convention}
+
+\NotationPair
+{\(\mathbb A_X^n\)}
+{def:brave-new-affine-space}
+{\(\mathbb A_X^1\)}
+{def:brave-new-affine-space}
+
+\NotationPair
+{\(0,1:X\rightrightarrows\mathbb A_X^1\)}
+{con:zero-unit-sections-affine-line}
+{\(\mathbb G_{m,X}=\mathbb A_X^1\setminus0(X)\)}
+{def:spectral-multiplicative-group}
+
+\NotationPair
+{\(A\{t\}=\operatorname{Sym}_A(A)\)}
+{prop:spectral-multiplicative-group-structure}
+{\(R\{t\}=\operatorname{Sym}_{HR}(HR)\)}
+{prop:affine-line-genuinely-spectral}
+
+
+\NotationHeading{Tangent and cotangent differentiation}
+
+\NotationPair
+{\(L_{B/A},\quad L_B=L_{B/\mathbb S}\)}
+{conv:deformation-relative-notation}
+{\(L_{X/S},\quad L_X=L_{X/\Spec(\mathbb S)}\)}
+{conv:deformation-relative-notation}
+
+\NotationPair
+{\(\operatorname{Der}_A(B,M)\)}
+{def:spectral-derivation}
+{\(\operatorname{Der}_S(X;M)=\Map_{\QCoh(X)}(L_{X/S},M)\)}
+{def:global-derivation-term}
+
+\NotationPair
+{\(\mathcal C_{A//B}=(\mathcal C_{A/})_{/B}\)}
+{conv:deformation-under-over}
+{\(\operatorname{Stab}(\CAlg(\Sp)_{/B})\simeq\Mod_B\)}
+{thm:tangent-category-calg}
+
+\NotationPair
+{\(B\oplus M\)}
+{con:split-square-zero-algebra}
+{\(\epsilon_{B/A}:B\otimes_A\operatorname{cofib}(A\to B)\to L_{B/A}\)}
+{con:relative-hurewicz-morphism}
+
+
+\NotationHeading{Differential-linear coefficient fibres}
+
+\NotationPair
+{\(\mathcal L_X:=\QCoh(X)\)}
+{def:tangent-cocommutative-coalgebras}
+{\(\operatorname{CoCom}(\mathcal L_X)=\CAlg(\mathcal L_X^{\op})^{\op}\)}
+{def:tangent-cocommutative-coalgebras}
+
+\NotationPair
+{\(U_X:\operatorname{CoCom}(\mathcal L_X)\to\mathcal L_X,\quad U_X\dashv C_X\)}
+{thm:cofree-coalgebra-linear-exponential}
+{\(!_X=U_XC_X\)}
+{thm:cofree-coalgebra-linear-exponential}
+
+\NotationPair
+{\(\Delta_M:!_XM\to !_XM\otimes !_XM,\quad e_M:!_XM\to\mathcal O_X\)}
+{thm:cofree-coalgebra-linear-exponential}
+{\(\chi_{M,N}:!_X(M\oplus N)\xrightarrow{\simeq}!_XM\otimes !_XN,\quad
+  \chi_0:!_X0\xrightarrow{\simeq}\mathcal O_X\)}
+{prop:tangent-seely-equivalences}
+
+\NotationPair
+{\(P_X(M),\quad U_XP_X(M)\simeq\mathcal O_X\oplus M\)}
+{con:primitive-infinitesimal-coalgebra}
+{\(H^{\inf}_M:\mathcal O_X\oplus M\to !_X(\mathcal O_X\oplus M)\)}
+{con:tangent-infinitesimal-augmentation}
+
+\NotationPair
+{\(\eta_M:M\to !_XM\)}
+{con:tangent-codereliction}
+{\(\nabla_M:!_XM\otimes !_XM\to !_XM,\quad u_M:\mathcal O_X\to !_XM\)}
+{con:tangent-bialgebra-multiplication}
+
+\NotationPair
+{\(\widetilde{\mathsf d}_M:C_X(M)\times P_X(M)\to C_X(M)\)}
+{con:tangent-coalgebra-infinitesimal-translation}
+{\(\mathsf d_M:!_XM\otimes M\to !_XM,\quad Df=f\circ\mathsf d_M\)}
+{con:tangent-deriving-transformation}
+
+\NotationPair
+{\(\mathcal O_!(M)=\underline{\operatorname{Hom}}_B(!_BM,B)\)}
+{def:cofree-function-algebra}
+{\(j_M:\operatorname{Sym}_B(M^\vee)\to\mathcal O_!(M)\)}
+{def:cofree-function-algebra}
+
+\NotationSingle
+{\(\beta_{f,M}:f^*(!_XM)\to !_Y(f^*M)\)}
+{con:cofree-coalgebra-substitution-comparison}
+
+
+\NotationHeading{Structured and finite infinitesimal geometry}
+
+\NotationPair
+{\(B_\eta=B\times_{B\oplus M[1]}B,\quad q_\eta:B_\eta\to B\)}
+{con:structured-square-zero-extension}
+{\(\operatorname{SqZ}^{\mathrm{str}}_A(B;M)\)}
+{thm:structured-square-zero-classification}
+
+\NotationPair
+{\(X_\eta,\quad i_\eta:X\to X_\eta\)}
+{con:global-structured-infinitesimal-extension}
+{\(\operatorname{SqZ}^{\mathrm{str}}_S(X;M)\)}
+{def:structured-infinitesimal-extension-global}
+
+\NotationPair
+{\(\operatorname{Inf}^{\mathrm{fin}}_{\Sp}\)}
+{def:finite-spectral-infinitesimal-substitution}
+{\(\Aff_{\Sp}^{\inf}\subseteq\Fun(\Delta^1,\Aff_{\Sp})\)}
+{def:affine-finite-infinitesimal-category}
+
+\NotationPair
+{\(\operatorname{dom},\operatorname{cod}:\Aff_{\Sp}^{\inf}\to\Aff_{\Sp},\quad i(T)=\id_T\)}
+{def:affine-finite-infinitesimal-category}
+{\(\tau^{\inf}_{\mathrm{Zar}}\)}
+{prop:infinitesimal-zariski-pretopology}
+
+\NotationPair
+{\(\mathcal H_{\Sp}:=\operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{def:finite-infinitesimal-zariski-topos}
+{\(\mathcal H_{\inf}:=\operatorname{Stk}^{\mathrm{sp}}_{\inf,\mathrm{Zar}}\)}
+{def:finite-infinitesimal-zariski-topos}
+
+\NotationSingle
+{\(\operatorname{Inf}^{\mathrm{fin}}(X/S)\)}
+{def:relative-spectral-infinitesimal-site}
+
+
+\NotationHeading{Differential-cohesive endpoint semantics}
+
+\NotationPair
+{\(i_!\dashv i^*\dashv i_*\dashv i^!\)}
+{thm:infinitesimal-adjoint-string}
+{\(i_!=\operatorname{cod}^*,\quad i_*=\operatorname{dom}^*\)}
+{prop:first-three-infinitesimal-sheaf-adjoints}
+
+\NotationPair
+{\(\Re=i_!i^*,\quad \Im=i_*i^*,\quad \&=i_*i^!\)}
+{def:differential-cohesive-endpoint-constructions}
+{\(\Re\dashv\Im\dashv\&\)}
+{thm:endpoint-cohesive-triple}
+
+\NotationPair
+{\(\Im_B E=B\times_{\Im B}\Im E\)}
+{con:formal-etalification}
+{\(\Theta_f:i_!X\to\Im_{i_!S}(i_!X)\)}
+{con:formal-lifting-comparison}
+
+\NotationPair
+{\(T_{\inf}(X/S)=i_!X\times_{\Im_{i_!S}(i_!X)}i_!X\)}
+{def:first-infinitesimal-neighbour-relation}
+{\(T_{\inf}^{[\bullet]}(X/S)=\check C(\Theta_f)\)}
+{def:first-infinitesimal-neighbour-relation}
+
+\NotationPair
+{\(\mathbf h^{\inf}_j\)}
+{con:infinitesimal-yoneda-realization}
+{\(\Theta_f^{\mathrm{rep}}(j)\)}
+{con:represented-formal-lifting-comparison}
+
+\NotationSingle
+{\(D^{(1)}_{X/S},\quad i_1:X\to D^{(1)}_{X/S},\quad
+  h_0,h_1:D^{(1)}_{X/S}\rightrightarrows X\)}
+{con:first-diagonal-neighbourhood}
+
+
+\NotationHeading{First-order deformation and equation calculus}
+
+\NotationPair
+{\(\operatorname{Def}_{A'/A}(B)\)}
+{def:affine-deformation-square-zero}
+{\(\operatorname{Def}_{S'/S}(X)\)}
+{def:global-deformation-square-zero}
+
+\NotationPair
+{\(\operatorname{ob}(B/A')\)}
+{thm:affine-cotangent-obstruction}
+{\(\operatorname{ob}(X/S')\)}
+{thm:global-cotangent-obstruction}
+
+\NotationPair
+{\(N^*_{Z/X}=L_{Z/X}[-1]\)}
+{def:conormal-classifier}
+{\(N_{Z/X}=(N^*_{Z/X})^\vee\)}
+{def:quasi-smooth-closed-context}
+
+\NotationSingle
+{\(Z(s)\)}
+{con:derived-zero-locus}
+
+
+\NotationHeading{Stable endpoint semantics and BNV-type reconstruction}
+
+\NotationPair
+{\(\mathcal D_{\Sp}=\operatorname{Sp}((\mathcal H_{\Sp})_*)\)}
+{def:stable-native-infinitesimal-categories}
+{\(\mathcal D_{\inf}=\operatorname{Sp}((\mathcal H_{\inf})_*)\)}
+{def:stable-native-infinitesimal-categories}
+
+\NotationSingle
+{\(i_!^{\mathrm{st}}\dashv i^{*,\mathrm{st}}
+  \dashv i_*^{\mathrm{st}}\dashv i^{!,\mathrm{st}}\)}
+{thm:stable-bnv-adjoint-string}
+
+\NotationSingle
+{\(\Re^{\mathrm{st}}=i_!^{\mathrm{st}}i^{*,\mathrm{st}},\quad
+  \Im^{\mathrm{st}}=i_*^{\mathrm{st}}i^{*,\mathrm{st}},\quad
+  \&^{\mathrm{st}}=i_*^{\mathrm{st}}i^{!,\mathrm{st}}\)}
+{def:stable-differential-cohesive-modalities}
+
+\NotationPair
+{\(\mathcal A(E)=\fib(E\to\Im^{\mathrm{st}}E)\)}
+{def:stable-bnv-sectors}
+{\(\mathcal Z(E)=\cofib(\&^{\mathrm{st}}E\to E)\)}
+{def:stable-bnv-sectors}
+
+\NotationPair
+{\(\mathcal D_{\inf}^{\mathrm{BNV}}=\ker(i^{!,\mathrm{st}})\)}
+{def:stable-bnv-pure-cycle}
+{\(\chi_E:i^{!,\mathrm{st}}E\to i^{*,\mathrm{st}}E\)}
+{lem:stable-bnv-adjacent-mates}
+
+\NotationPair
+{\(\phi_E:i^{*,\mathrm{st}}E\to i^{*,\mathrm{st}}\mathcal Z(E)\)}
+{def:stable-bnv-sectors}
+{\(\mathcal T_{\inf}\)}
+{def:stable-bnv-characteristic-category}
+
+\NotationPair
+{\(\operatorname{Diff}(U,P,\phi)=P\times_{\Im^{\mathrm{st}}P}i_*^{\mathrm{st}}U\)}
+{con:stable-bnv-differential-function-object}
+{\(\widehat E^{\,n}(K)=\pi_{-n}\map_{\mathcal D_{\inf}}(K,E)\)}
+{cor:stable-bnv-differential-cohomology-pullback}
+
+\NotationSingle
+{\(E\simeq
+  \mathcal Z(E)
+  \times_{i_*^{\mathrm{st}}i^{*,\mathrm{st}}\mathcal Z(E)}
+  i_*^{\mathrm{st}}i^{*,\mathrm{st}}E\)}
+{thm:stable-bnv-reconstruction}
+
+
+\NotationHeading{Postnikov reconstruction and filtered formal order}
+
+\NotationPair
+{\(\widehat{\operatorname{adic}}(A\to B)\)}
+{def:canonical-adic-filtration}
+{\(A_B^\wedge=F^0\widehat{\operatorname{adic}}(A\to B)\)}
+{def:canonical-adic-filtration}
+
+
+\NotationHeading{Anchored cotangent and comonadic reconstruction}
+
+\NotationPair
+{\(\operatorname{AnchCot}^{\mathrm{sp}}_{B/R}
+  =(\Mod_B)_{L_{B/R}[-1]/}\)}
+{def:anchored-shifted-cotangent-category}
+{\(\operatorname{AnchCot}^{\mathrm{aperf}}_{B/R,\geq0}\)}
+{def:anchored-shifted-cotangent-category}
+
+\NotationPair
+{\(\operatorname{cot}_{B/R}(A)
+  =(L_{B/R}[-1]\to L_{B/A}[-1])\)}
+{def:cotangent-square-zero-functors}
+{\(\operatorname{sqz}_{B/R}(M,\alpha)=(B_\alpha\to B)\)}
+{def:cotangent-square-zero-functors}
+
+\NotationPair
+{\(\mathbb C^{\mathrm{sqz}}_{B/R}
+  =\operatorname{cot}_{B/R}\operatorname{sqz}_{B/R}\)}
+{def:cotangent-square-zero-comonad}
+{\(\operatorname{Coalg}_{\mathbb C^{\mathrm{sqz}}_{B/R}}
+  \bigl(\operatorname{AnchCot}^{\mathrm{aperf}}_{B/R,\geq0}\bigr)\)}
+{cor:cotangent-square-zero-coalgebra-classification}
+
+
+\NotationHeading{Artinian tests and formal-moduli semantics}
+
+\NotationPair
+{\(\operatorname{Art}^{\mathrm{sp}}_{B/R}\)}
+{def:spectral-artinian-extension}
+{\(\mathcal P^{\mathrm{Art},\mathrm{sp}}_{B/R}
+  =\Fun(\operatorname{Art}^{\mathrm{sp}}_{B/R},\mathcal S)\)}
+{def:artinian-semantics-category}
+
+\NotationPair
+{\(W^{\mathrm{Sch},\mathrm{Art}}_{B/R}\)}
+{def:artinian-schlessinger-generators}
+{\(\operatorname{FMP}^{\mathrm{sp}}_{B/R}\)}
+{def:spectral-formal-moduli-problem}
+
+
+\NotationHeading{Centre-free reconstruction semantics}
+
+\NotationPair
+{\(L^{\mathrm{Recon}}_S\dashv\iota_S\)}
+{thm:global-spectral-reconstruction-reflector}
+{\(\operatorname{Recon}_S=\iota_SL^{\mathrm{Recon}}_S\)}
+{def:reconstruction-localization-endofunctor}
+
+
+\NotationHeading{Centred tangent recovery and stable reconstruction}
+
+\NotationPair
+{\(\mathsf T^{\mathrm{cn}}_{Y/V,u}:
+  (\Mod_B)_{\geq0}\to\Sp\)}
+{prop:split-tangent-omega-spectrum}
+{\(\Mod_B^+=\bigcup_{r\in\mathbb Z}(\Mod_B)_{\geq r}\)}
+{def:eventually-connective-coefficients}
+
+\NotationPair
+{\(\mathsf T^{\mathrm{sp},+}_{Y/V,u}:\Mod_B^+\to\Sp\)}
+{thm:reconstruction-tangent-spectrum}
+{\(\mathsf T^{\mathrm{sp},+}_{U/Y;V}:\Mod_B^+\to\Sp\)}
+{def:relative-tangent-semantics-centre}
+
+\NotationPair
+{\(\mathcal D_{\Sp/S}
+  =\operatorname{Sp}\bigl(((\mathcal H_{\Sp})_{/S})_*\bigr)\)}
+{def:stable-reconstruction-categories}
+{\(\mathcal D^{\mathrm{Recon}}_{\Sp/S}
+  =\operatorname{Sp}\bigl(
+    (\bigl((\mathcal H_{\Sp})_{/S}\bigr)^{\mathrm{Recon}})_*
+  \bigr)\)}
+{def:stable-reconstruction-categories}
+
+\NotationPair
+{\(L^{\mathrm{Recon},\mathrm{st}}_S
+  \dashv\iota^{\mathrm{st}}_S\)}
+{thm:stable-reconstruction-localization}
+{\(\operatorname{Recon}^{\mathrm{st}}_S
+  =\iota^{\mathrm{st}}_SL^{\mathrm{Recon},\mathrm{st}}_S\)}
+{thm:stable-reconstruction-localization}
+
+
+\NotationHeading{Spectral de Rham reflection and effective descent}
+
+\NotationPair
+{\(L^{\mathrm{dR}}\dashv\iota^{\mathrm{dR}},\quad
+  \operatorname{dR}=\iota^{\mathrm{dR}}L^{\mathrm{dR}}\)}
+{thm:intrinsic-de-Rham-localization}
+{\(X_{\mathrm{dR}},\quad \eta_X^{\mathrm{dR}}:X\to X_{\mathrm{dR}}\)}
+{thm:intrinsic-de-Rham-localization}
+
+\NotationPair
+{\(X_{\mathrm{dR}/S}=S\times_{S_{\mathrm{dR}}}X_{\mathrm{dR}}\)}
+{thm:slice-de-Rham}
+{\(\operatorname{dR}_S\)}
+{thm:slice-de-Rham}
+
+\NotationPair
+{\(X\xrightarrow{e_{X/S}}Q_{X/S}
+  \xrightarrow{m_{X/S}}X_{\mathrm{dR}/S}\)}
+{prop:Q-base-change}
+{\(\mathcal R^{\mathrm{dR}}_{X/S,\bullet}
+  \simeq\check C_\bullet(e_{X/S})\)}
+{thm:relation-effective-presentation}
+
+\NotationSingle
+{\(\operatorname{Nbh}^{\mathrm{dR}}_{Z/S}(Y)
+  =Y\times_{Y_{\mathrm{dR}/S}}Z_{\mathrm{dR}/S}\)}
+{prop:de-Rham-neighbourhood-base-change}
+
+
+\NotationHeading{Stable de Rham scalar calculus}
+
+\NotationPair
+{\(\Sigma_f\dashv f^*\dashv\Pi_f\)}
+{thm:stable-dependent-adjoints}
+{\(\operatorname{Real}^{\mathrm{st}}_S:
+  \QCoh(S)\to\mathcal D_{\Sp/S}\)}
+{con:stable-realization-qcoh}
+
+\NotationPair
+{\(\mathcal O_S^{\mathrm{add}}
+  =\operatorname{Real}^{\mathrm{st}}_S(\mathcal O_S)\)}
+{prop:additive-scalar-base-change}
+{\(C^\bullet_{\mathrm{dR}}(X/S)\)}
+{thm:internal-function-cochains-expanded}
+
+\NotationPair
+{\(\mathrm{DR}_{X/S}
+  =\operatorname*{Tot}C^\bullet_{\mathrm{dR}}(X/S)\)}
+{thm:effective-DR-functions}
+{\(\mathrm{DR}^{\mathrm{full}}_{X/S}\)}
+{thm:effective-DR-functions}
+
+\NotationPair
+{\(\Omega^q_{\mathrm{dR}}(X/S)\)}
+{thm:complete-filtration}
+{\(d_{\mathrm{dR}}:
+  \Omega^q_{\mathrm{dR}}(X/S)\to
+  \Omega^{q+1}_{\mathrm{dR}}(X/S)\)}
+{thm:complete-filtrations-coherent-cochains}
+
+\NotationPair
+{\(\lambda^1_{X/S}:
+  \Omega^1_{\mathrm{dR}}(X/S)\to
+  \Pi_p\operatorname{Real}^{\mathrm{st}}_X(L_{X/S})\)}
+{thm:first-order-linearization}
+{\(\kappa:\operatorname{dR}\to\operatorname{Red}_{\mathrm{cl}}\)}
+{thm:de-Rham-to-reduced}
+
+
+\NotationHeading{Crystalline disks, jets, and intrinsic PDEs}
+
+\NotationPair
+{\(\mathsf{Disk}^{\mathrm{dR},\infty}_{X/S}
+  =e_{X/S}^*\Sigma_{e_{X/S}}\)}
+{thm:disk-jet-adjunction}
+{\(J^\infty_{X/S}
+  =e_{X/S}^*\Pi_{e_{X/S}}\)}
+{thm:jet-comonad}
+
+\NotationPair
+{\(\mathsf{Disk}^{\mathrm{dR},\infty}_{X/S}
+  \dashv J^\infty_{X/S}\)}
+{thm:disk-jet-adjunction}
+{\(\operatorname{PDE}^{\mathrm{fi}}_{X/S}
+  =(\mathcal H_{\Sp})_{/Q_{X/S}}\)}
+{thm:effective-jet-descent}
+
+\NotationPair
+{\(\mathbb F\dashv U_J\dashv\mathbb K\)}
+{thm:free-forgetful-cofree}
+{\(j^\infty\phi=J^\infty(\phi)\rho_X\)}
+{thm:holonomic-recognition}
+
+
+\NotationHeading{Differential operators, equations, and prolongation}
+
+\NotationPair
+{\(\operatorname{DiffOp}_{X/S}\simeq
+  \operatorname{coKl}(J^\infty_{X/S})\)}
+{prop:cokleisli}
+{\(\operatorname{Eqn}_{X/S}
+  =(\id_{(\mathcal H_{\Sp})_{/X}}\downarrow J^\infty_{X/S})\)}
+{con:equation-category}
+
+\NotationPair
+{\(\operatorname{Sol}(i)\)}
+{thm:parameterized-solutions}
+{\(\mathbf{Sol}_{X/S}(i)\)}
+{thm:parameterized-solutions}
+
+\NotationPair
+{\(\operatorname{FSol}_i(Z)\)}
+{thm:universal-formal-solution}
+{\(\operatorname{Prol}^{\mathrm{Cart}}(i),\quad
+  \operatorname{Prol}(i)\)}
+{thm:cartan-prolongation-adjunction}
+
+\NotationPair
+{\(c_i:\operatorname{Prol}(i)\to E\)}
+{thm:prolongation-complete-formal-solutions}
+{\(\rho_i:E\to J^\infty E\)}
+{thm:prolongation-complete-intrinsic-structure}
+
+\NotationSingle
+{\(J^{\infty,\mathrm{red,cl}}_{X/S}\)}
+{thm:reduced-jet-comparison}
+
+\end{longtable}
+
+\endgroup

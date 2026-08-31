@@ -1,0 +1,7809 @@
+\chapter{Hermitian Morita Theory and the Global Dagger}
+\label{chap:hermitian-morita-global-dagger}
+
+\section{Purpose and standing conventions}
+\label{sec:hermitian-morita-purpose}
+
+Fix
+\[
+    A\in\CAlg(\V),
+    \qquad
+    \mathcal W:=\Mod_A(\V).
+\]
+This chapter applies coherent homotopy-fixed-point constructions to the
+canonical Morita duality of
+\Ref{chap:right-perfect-morita-duality}.
+
+The object-level operation is passage to the opposite algebra,
+\[
+    B\longmapsto B^{\op},
+\]
+and the canonical weak duality on the right-perfect Morita
+$(\infty,2)$-category is
+\[
+    \mathbb D_A(M)
+    =
+    (M^R)^{\op}.
+\]
+A Hermitian associative algebra is a coherent fixed point of the
+opposite-algebra operation. Its algebra equivalence
+\[
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op}
+\]
+determines a regular Morita equivalence between the same endpoints.
+For fixed Hermitian endpoints, the canonical Morita duality therefore
+transports to a coherent contravariant duality of the corresponding
+right-perfect bimodule category.
+
+A unitary bimodule is a coherent fixed point of this transported
+duality. Its selected fixed-point equivalence identifies Hermitian action
+reversal with the Morita right adjoint. Conjugating the transported
+duality by these selected equivalences defines a dagger on every
+bimodule map.
+
+The chapter proceeds in two stages.
+
+First, it develops the local theory:
+\begin{enumerate}[label=(\roman*)]
+    \item Hermitian associative algebras and their regular Morita fixed
+    points;
+
+    \item Hermitian action reversal of bimodules;
+
+    \item transported Morita duality on fixed-endpoint hom categories;
+
+    \item unitary right-perfect bimodules;
+
+    \item object decoration and the local dagger.
+\end{enumerate}
+
+Second, the decorated hom categories and their coherent Morita
+composition functors are assembled into a Segal object in
+\[
+    \Cat_\infty.
+\]
+Applying the functorial completion convention of
+\Ref{chap:right-perfect-morita-duality}
+produces a global $(\infty,2)$-category
+\[
+    \Mor_A^{\mathrm{Herm,rperf}}
+\]
+equipped with a coherent dagger involution.
+
+The term \emph{Hermitian} continues to mean coherent
+homotopy-fixed-point data. No involution of the commutative base, no
+semilinear conjugation, and no positivity condition are imposed.
+
+The mapping-space, higher-coherence, variance, universe, and completion
+conventions of
+\Ref{chap:perfect-rigid-enrichment},
+\Ref{chap:hermitian-poincare},
+and
+\Ref{chap:right-perfect-morita-duality}
+remain in force.
+
+\begin{convention}[Hermitian and unitary fixed-point data]
+\label{conv:hermitian-morita-fixed-points}
+Every Hermitian or unitary object includes its complete coherent
+\[
+    C_2
+\]
+-homotopy-fixed-point structure.
+
+Displaying only the underlying equivalence and its first fixed-point
+equation does not truncate the structure. Transport of fixed-point data
+along equivalences, Morita composition, base change, object decoration,
+and completion is always performed by the corresponding equivariant,
+pseudofunctorial, or universal construction.
+\end{convention}
+
+\begin{convention}[Action reversal and dagger notation]
+\label{conv:hermitian-reversal-dagger-notation}
+For a bimodule
+\[
+    M\colon B\longrightarrow C,
+\]
+the notation
+\[
+    J_{B,C}(M)
+\]
+denotes Hermitian action reversal. It is a bimodule
+\[
+    J_{B,C}(M)\colon C\longrightarrow B.
+\]
+
+For every such bimodule, the canonical double-reversal equivalence is
+denoted
+\[
+    \epsilon^J_M
+    \colon
+    J_{C,B}J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M.
+\]
+
+The symbol
+\[
+    \dagger
+\]
+is reserved for the involution on bimodule maps induced by selected
+unitary structures.
+\end{convention}
+
+\begin{convention}[Meaning of the global dagger]
+\label{conv:global-dagger-meaning}
+A \emph{global dagger} in this chapter means a coherent weak duality
+involution
+\[
+    \dagger
+    \colon
+    \mathcal X^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X
+\]
+equipped with its specified coherent trivializations on the represented
+objects and represented $1$-morphisms.
+
+Thus the dagger reverses $2$-morphisms, while the selected Hermitian and
+unitary structures identify its action on represented objects and
+$1$-morphisms with the identity.
+\end{convention}
+
+\begin{convention}[Iterated duality notation]
+\label{conv:hermitian-morita-iterated-duality}
+For a coherent duality
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C,
+\]
+we write
+\[
+    D^2
+    :=
+    DD^{\op}
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal C.
+\]
+
+For a coherent $1$-op involution
+\[
+    O
+    \colon
+    \mathcal X^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X,
+\]
+we write
+\[
+    O^2
+    :=
+    OO^{\op}
+    \colon
+    \mathcal X
+    \longrightarrow
+    \mathcal X.
+\]
+
+For a coherent weak duality
+\[
+    D
+    \colon
+    \mathcal X^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X,
+\]
+we write
+\[
+    D^2
+    :=
+    DD^{\mathrm{co}}
+    \colon
+    \mathcal X
+    \longrightarrow
+    \mathcal X.
+\]
+
+The same convention is used for the induced dualities on mapping
+$\infty$-categories. Thus every occurrence of a square of a
+contravariant or $2$-contravariant duality denotes the correctly typed
+covariant composite.
+\end{convention}
+
+\section{Core actions of coherent dualities}
+\label{sec:core-actions-coherent-dualities}
+
+Two different core actions occur in this chapter.
+
+The opposite-algebra operation is covariant on algebra maps:
+\[
+    u
+    \colon
+    B
+    \longrightarrow
+    C
+    \qquad\longmapsto\qquad
+    u^{\op}
+    \colon
+    B^{\op}
+    \longrightarrow
+    C^{\op}.
+\]
+
+By contrast, a contravariant duality of an $\infty$-category reverses
+ordinary morphisms. Its induced action on the maximal
+$\infty$-groupoid uses inversion.
+
+\begin{lemma}[The core action of a coherent duality]
+\label{lem:core-action-coherent-duality}
+Let
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C
+\]
+be an $\infty$-category with coherent duality and biduality
+\[
+    \operatorname{bid}
+    \colon
+    \id_{\mathcal C}
+    \xRightarrow{\;\simeq\;}
+    DD^{\op}.
+\]
+
+There is a covariant coherent
+\[
+    C_2
+\]
+-action
+\[
+    \sigma_D
+    \colon
+    \mathcal C^\simeq
+    \longrightarrow
+    \mathcal C^\simeq
+\]
+defined on objects by
+\[
+    \sigma_D(X)=D(X)
+\]
+and on equivalences
+\[
+    f
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    Y
+\]
+by
+\[
+    \sigma_D(f)
+    :=
+    D(f^{-1})
+    \colon
+    D(X)
+    \xrightarrow{\;\simeq\;}
+    D(Y).
+\]
+
+A coherent fixed object has an underlying equivalence
+\[
+    s_X
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    D(X).
+\]
+Its first fixed-point equation may be written equivalently as
+\[
+    D(s_X^{-1})\circ s_X
+    \simeq
+    \operatorname{bid}_X
+\]
+or as
+\[
+    D(s_X)\circ\operatorname{bid}_X
+    \simeq
+    s_X.
+\]
+\end{lemma}
+
+\begin{proof}
+The action is the composite
+\[
+    \mathcal C^\simeq
+    \xrightarrow{\operatorname{inv}}
+    \bigl(
+        \mathcal C^{\op}
+    \bigr)^\simeq
+    \xrightarrow{D^\simeq}
+    \mathcal C^\simeq,
+\]
+where
+\[
+    \operatorname{inv}(f)=f^{-1}.
+\]
+
+Applying the action twice sends
+\[
+    X
+\]
+to
+\[
+    DD^{\op}(X)=D^2(X).
+\]
+The biduality equivalence
+\[
+    X
+    \xrightarrow{\;\simeq\;}
+    D^2(X)
+\]
+and its involutivity modification provide the first visible layers of
+the coherent
+\[
+    C_2
+\]
+-action. The remaining higher simplices are those of the coherent
+duality on
+\[
+    \mathcal C.
+\]
+
+For a fixed point
+\[
+    s_X
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    D(X),
+\]
+the ordinary cocycle equation is
+\[
+    \sigma_D(s_X)\circ s_X
+    \simeq
+    \operatorname{bid}_X.
+\]
+Since
+\[
+    \sigma_D(s_X)
+    =
+    D(s_X^{-1}),
+\]
+this is the first displayed equation.
+
+Applying
+\[
+    D(s_X)
+\]
+on the left and using
+\[
+    D(s_X)\circ D(s_X^{-1})
+    \simeq
+    \id_{D(X)}
+\]
+gives
+\[
+    D(s_X)\circ\operatorname{bid}_X
+    \simeq
+    s_X.
+\]
+The converse follows by composing with
+\[
+    D(s_X^{-1}).
+\]
+\end{proof}
+
+\begin{remark}
+\label{rem:weak-duality-object-core-action}
+For a weak duality
+\[
+    D
+    \colon
+    \mathcal X^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X
+\]
+of an $(\infty,2)$-category, the situation at the object level is
+different.
+
+The operation
+\[
+    (-)^{\mathrm{co}}
+\]
+does not reverse $1$-morphisms. Hence the induced action on the maximal
+$\infty$-groupoid of objects and equivalence $1$-morphisms sends
+\[
+    u
+    \colon
+    x
+    \xrightarrow{\;\simeq\;}
+    y
+\]
+directly to
+\[
+    D(u)
+    \colon
+    D(x)
+    \xrightarrow{\;\simeq\;}
+    D(y),
+\]
+without inserting
+\[
+    u^{-1}.
+\]
+\end{remark}
+
+\section{Hermitian associative algebras}
+\label{sec:hermitian-associative-algebras}
+
+Passage to the opposite algebra defines a coherent
+\[
+    C_2
+\]
+-action on
+\[
+    \Alg_A^\simeq.
+\]
+
+\begin{definition}[Hermitian associative algebra]
+\label{def:hermitian-associative-algebra}
+A \emph{Hermitian associative $A$-algebra} is a coherent homotopy fixed
+point for the involution
+\[
+    B
+    \longmapsto
+    B^{\op}
+\]
+on
+\[
+    \Alg_A^\simeq.
+\]
+
+Its underlying equivalence is an equivalence of associative
+$A$-algebras
+\[
+    \theta_B
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op}.
+\]
+Its first fixed-point coherence is
+\[
+    \theta_B^{\op}\circ\theta_B
+    \simeq
+    \operatorname{bid}^{\op}_B,
+\]
+where
+\[
+    \operatorname{bid}^{\op}_B
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op\op}
+\]
+is the canonical double-opposite equivalence.
+
+Under the standard identification
+\[
+    B^{\op\op}
+    \simeq
+    B,
+\]
+this is written
+\[
+    \theta_B^{\op}\circ\theta_B
+    \simeq
+    \id_B.
+\]
+\end{definition}
+
+\begin{definition}[The space of Hermitian associative algebras]
+\label{def:space-hermitian-associative-algebras}
+Define
+\[
+    \HermAlg_A
+    :=
+    \bigl(
+        \Alg_A^\simeq
+    \bigr)^{hC_2}.
+\]
+Thus
+\[
+    \HermAlg_A
+\]
+is the space of Hermitian associative $A$-algebras, Hermitian algebra
+equivalences, and all coherent higher equivalences between them.
+\end{definition}
+
+\begin{remark}[Anti-multiplicativity]
+\label{rem:opposite-essential-noncommutative}
+The map
+\[
+    \theta_B
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op}
+\]
+encodes anti-multiplicativity.
+
+If the operation is denoted symbolically by
+\[
+    x
+    \longmapsto
+    x^*,
+\]
+then
+\[
+    (xy)^*
+    =
+    y^*x^*.
+\]
+
+No involution of the commutative base is required. Since
+\[
+    A\in\CAlg(\V),
+\]
+there is a canonical equivalence
+\[
+    A^{\op}
+    \simeq
+    A.
+\]
+\end{remark}
+
+\subsection{Regular Morita equivalences}
+
+\begin{construction}[Regular bimodule of an algebra equivalence]
+\label{con:regular-bimodule-algebra-equivalence}
+Let
+\[
+    u
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    C
+\]
+be an equivalence of associative $A$-algebras.
+
+Define
+\[
+    U_u
+    :=
+    {}_B C_C
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+where the left $B$-action is induced by
+\[
+    u
+\]
+and the right $C$-action is multiplication.
+
+Its inverse regular Morita equivalence is denoted
+\[
+    U_u^{-1}
+    :=
+    U_{u^{-1}}
+    \colon
+    C
+    \longrightarrow
+    B.
+\]
+\end{construction}
+
+\begin{lemma}[Regular algebra equivalences are Morita equivalences]
+\label{lem:regular-algebra-equivalence-morita}
+For every algebra equivalence
+\[
+    u
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    C,
+\]
+the bimodule
+\[
+    U_u
+\]
+is a Morita equivalence.
+
+There are canonical equivalences
+\[
+    U_u\otimes_CU_u^{-1}
+    \xrightarrow{\;\simeq\;}
+    {}_B B_B
+\]
+and
+\[
+    U_u^{-1}\otimes_BU_u
+    \xrightarrow{\;\simeq\;}
+    {}_C C_C.
+\]
+
+The right adjoint of
+\[
+    U_u
+\]
+is canonically equivalent to
+\[
+    U_u^{-1}.
+\]
+\end{lemma}
+
+\begin{proof}
+The extension and restriction bimodules form an adjunction
+\[
+    {}_B C_C
+    \dashv
+    {}_C C_B.
+\]
+The unit is induced by
+\[
+    u
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+and the counit is multiplication
+\[
+    C\otimes_BC
+    \longrightarrow
+    C.
+\]
+
+Since
+\[
+    u
+\]
+is an equivalence of associative algebras, extension and restriction of
+scalars are inverse equivalences. Hence the unit and counit are
+equivalences.
+
+The restriction bimodule
+\[
+    {}_C C_B
+\]
+is canonically equivalent to the regular bimodule associated to
+\[
+    u^{-1}.
+\]
+Thus
+\[
+    U_u^R
+    \simeq
+    U_u^{-1}.
+\]
+\end{proof}
+
+\begin{proposition}[Equivariance of regular Morita equivalences]
+\label{prop:regular-morita-equivariance}
+The regular-bimodule construction defines a functor of spaces
+\[
+    \operatorname{Reg}_A
+    \colon
+    \Alg_A^\simeq
+    \longrightarrow
+    \bigl(
+        \Mor_A^{\mathrm{rperf}}
+    \bigr)^\simeq
+\]
+which is the identity on objects and sends an algebra equivalence
+\[
+    u
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    C
+\]
+to
+\[
+    U_u
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    C.
+\]
+
+There is a canonical coherent equivariance equivalence
+\[
+    \mathbb D_A(U_u)
+    \xrightarrow{\;\simeq\;}
+    U_{u^{\op}}.
+\]
+These comparisons are compatible with identity algebra maps,
+composition of algebra equivalences, double opposites, the biduality of
+\[
+    \mathbb D_A,
+\]
+and the complete coherent
+\[
+    C_2
+\]
+-structures.
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{lem:regular-algebra-equivalence-morita},
+the bimodule
+\[
+    U_u
+\]
+is right perfect and has right adjoint
+\[
+    U_u^R
+    \simeq
+    U_{u^{-1}}.
+\]
+Hence
+\[
+    \mathbb D_A(U_u)
+    =
+    (U_u^R)^{\op}
+    \simeq
+    (U_{u^{-1}})^{\op}.
+\]
+
+The action-reversed bimodule
+\[
+    (U_{u^{-1}})^{\op}
+\]
+is a
+\[
+    B^{\op}
+    \text{--}
+    C^{\op}
+\]
+-bimodule with underlying object
+\[
+    C.
+\]
+Its left
+\[
+    B^{\op}
+\]
+-action and right
+\[
+    C^{\op}
+\]
+-action are precisely the regular actions induced by
+\[
+    u^{\op}
+    \colon
+    B^{\op}
+    \xrightarrow{\;\simeq\;}
+    C^{\op}.
+\]
+Thus there is a canonical equivalence
+\[
+    \mathbb D_A(U_u)
+    \xrightarrow{\;\simeq\;}
+    U_{u^{\op}}.
+\]
+
+For composable algebra equivalences
+\[
+    B
+    \xrightarrow{u}
+    C
+    \xrightarrow{v}
+    D,
+\]
+multiplication induces the canonical regular-bimodule comparison
+\[
+    U_u\otimes_CU_v
+    \xrightarrow{\;\simeq\;}
+    U_{v\circ u}.
+\]
+Compatibility of the displayed equivariance equivalence with this
+comparison is the compatibility of right-adjoint formation and action
+reversal with Morita composition.
+
+The compatibility with identities, double opposites, biduality, and all
+higher
+\[
+    C_2
+\]
+-coherences is inherited from the coherent mate and action-reversal
+constructions of
+\Ref{chap:right-perfect-morita-duality}.
+\end{proof}
+
+\begin{construction}[The regular Morita fixed point]
+\label{con:regular-morita-fixed-point}
+Let
+\[
+    (B,\theta_B)
+\]
+be a Hermitian associative algebra.
+
+Define
+\[
+    \Theta_B
+    :=
+    U_{\theta_B}
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op}.
+\]
+Its inverse is
+\[
+    \Theta_B^{-1}
+    :=
+    U_{\theta_B^{-1}}
+    \colon
+    B^{\op}
+    \xrightarrow{\;\simeq\;}
+    B.
+\]
+
+By
+\Ref{prop:regular-morita-equivariance},
+the complete coherent fixed-point structure on
+\[
+    \theta_B
+\]
+transports to a complete coherent fixed-point structure on
+\[
+    \Theta_B
+\]
+for the object action of
+\[
+    \mathbb D_A.
+\]
+
+Its first fixed-point coherence is an invertible $2$-morphism
+\[
+    \mathbb D_A(\Theta_B)\circ\Theta_B
+    \xRightarrow{\;\simeq\;}
+    \operatorname{bid}^{\mathbb D}_B.
+\]
+In Morita tensor notation, this is
+\[
+    \Theta_B
+    \otimes_{B^{\op}}
+    \mathbb D_A(\Theta_B)
+    \xRightarrow{\;\simeq\;}
+    \operatorname{bid}^{\mathbb D}_B.
+\]
+
+The same datum also makes
+\[
+    \Theta_B
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    O_A(B)=B^{\op}
+\]
+a coherent fixed object for the action on the object core induced by the
+coherent $1$-op involution
+\[
+    O_A
+    \colon
+    \Mor_A^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A.
+\]
+Indeed, the core action of a $1$-op involution sends an equivalence
+\[
+    U
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    Y
+\]
+to
+\[
+    O_A(U^{-1})
+    \colon
+    O_A(X)
+    \xrightarrow{\;\simeq\;}
+    O_A(Y).
+\]
+Since
+\[
+    \Theta_B^R
+    \simeq
+    \Theta_B^{-1},
+\]
+one has
+\[
+    \mathbb D_A(\Theta_B)
+    =
+    O_A(\Theta_B^R)
+    \simeq
+    O_A(\Theta_B^{-1}).
+\]
+Thus the displayed fixed-point coherence is simultaneously the first
+fixed-point coherence for the $1$-op core action. The complete higher
+coherences agree because both structures are transported from the same
+coherent opposite-algebra fixed point
+\[
+    \theta_B.
+\]
+\end{construction}
+
+\begin{remark}[Algebraic and Morita fixed points]
+\label{rem:hermitian-homotopy-fixed-points}
+A Hermitian associative algebra is a coherent fixed object in the
+$\infty$-groupoid of associative algebras and algebra equivalences.
+
+The regular-bimodule construction sends it to a coherent fixed object of
+the right-perfect Morita category. A general fixed object of the Morita
+duality may instead be equipped only with a Morita equivalence
+\[
+    B
+    \simeq
+    B^{\op}.
+\]
+The present chapter retains the distinguished fixed objects arising from
+equivalences of associative algebras.
+\end{remark}
+
+\subsection{Hermitian endomorphism algebras}
+
+\begin{proposition}[Equivariance of the endomorphism-algebra construction]
+\label{prop:endomorphism-algebra-equivariance}
+The assignment
+\[
+    M
+    \longmapsto
+    \End_A(M)
+    :=
+    \Perf(A)(M,M)
+\]
+defines a functor
+\[
+    \mathsf{End}_A
+    \colon
+    \Perf(A)^\simeq
+    \longrightarrow
+    \Alg_A^\simeq.
+\]
+
+It is equivariant for the coherent perfect duality
+\[
+    M
+    \longmapsto
+    M^\vee
+\]
+on
+\[
+    \Perf(A)^\simeq
+\]
+and the opposite-algebra involution on
+\[
+    \Alg_A^\simeq.
+\]
+
+The equivariance comparison at
+\[
+    M
+\]
+is the algebra equivalence
+\[
+    \alpha_M
+    \colon
+    \End_A(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    \End_A(M)^{\op}
+\]
+given by
+\[
+    \alpha_M(g)
+    :=
+    \operatorname{bid}_M^{-1}
+    \circ
+    g^\vee
+    \circ
+    \operatorname{bid}_M.
+\]
+\end{proposition}
+
+\begin{proof}
+Enriched composition makes
+\[
+    \End_A(M)
+    =
+    \Perf(A)(M,M)
+\]
+an associative algebra object in
+\[
+    \Mod_A(\V).
+\]
+
+For an equivalence
+\[
+    u
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    N,
+\]
+define
+\[
+    \mathsf{End}_A(u)(f)
+    :=
+    u\circ f\circ u^{-1}.
+\]
+This is an equivalence of associative algebras. The coherent
+functoriality follows from coherent composition in the enriched
+category
+\[
+    \Perf(A).
+\]
+
+The enriched dualization construction of
+\Ref{chap:perfect-rigid-enrichment}
+gives a natural equivalence
+\[
+    d_{M,M}
+    \colon
+    \Perf(A)(M,M)
+    \xrightarrow{\;\simeq\;}
+    \Perf(A)(M^\vee,M^\vee)
+\]
+which reverses enriched composition. Equivalently, its inverse gives an
+algebra equivalence
+\[
+    \alpha_M
+    \colon
+    \End_A(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    \End_A(M)^{\op}.
+\]
+
+Unwinding enriched dualization gives
+\[
+    \alpha_M(g)
+    =
+    \operatorname{bid}_M^{-1}
+    \circ
+    g^\vee
+    \circ
+    \operatorname{bid}_M.
+\]
+
+Naturality of enriched dualization, compatibility with biduality, and
+the complete coherent
+\[
+    C_2
+\]
+-structure on perfect duality supply the full equivariance of
+\[
+    \mathsf{End}_A.
+\]
+\end{proof}
+
+\begin{proposition}[Hermitian endomorphism algebra]
+\label{prop:hermitian-endomorphism-algebra}
+Let
+\[
+    (M,h_M)
+\]
+be a Hermitian perfect $A$-module in the sense of
+\Ref{chap:hermitian-poincare}. Then
+\[
+    \End_A(M)
+    :=
+    \Perf(A)(M,M)
+    \simeq
+    M^\vee\otimes_AM
+\]
+is naturally a Hermitian associative $A$-algebra.
+
+Its underlying anti-involution is
+\[
+\begin{aligned}
+    \theta_{\End(M)}
+    \colon
+    \End_A(M)
+    &\xrightarrow{\;\simeq\;}
+    \End_A(M)^{\op},
+    \\
+    f
+    &\longmapsto
+    h_M^{-1}\circ f^\vee\circ h_M.
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{proof}
+Apply the equivariant functor
+\[
+    \mathsf{End}_A
+\]
+of
+\Ref{prop:endomorphism-algebra-equivariance}
+to the coherent fixed point
+\[
+    h_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee.
+\]
+The underlying algebra equivalence is
+\[
+\begin{aligned}
+    \theta_{\End(M)}
+    \colon
+    \End_A(M)
+    &\xrightarrow{\mathsf{End}_A(h_M)}
+    \End_A(M^\vee)
+    \\
+    &\xrightarrow{\alpha_M}
+    \End_A(M)^{\op}.
+\end{aligned}
+\]
+
+For
+\[
+    f
+    \colon
+    M
+    \longrightarrow
+    M,
+\]
+one has
+\[
+\begin{aligned}
+    \theta_{\End(M)}(f)
+    &=
+    \operatorname{bid}_M^{-1}
+    \circ
+    \bigl(
+        h_M\circ f\circ h_M^{-1}
+    \bigr)^\vee
+    \circ
+    \operatorname{bid}_M
+    \\
+    &\simeq
+    \operatorname{bid}_M^{-1}
+    \circ
+    (h_M^{-1})^\vee
+    \circ
+    f^\vee
+    \circ
+    h_M^\vee
+    \circ
+    \operatorname{bid}_M.
+\end{aligned}
+\]
+
+The Hermitian fixed-point equation
+\[
+    h_M^\vee\circ\operatorname{bid}_M
+    \simeq
+    h_M
+\]
+implies
+\[
+    \operatorname{bid}_M^{-1}
+    \circ
+    (h_M^{-1})^\vee
+    \simeq
+    h_M^{-1}.
+\]
+Therefore
+\[
+    \theta_{\End(M)}(f)
+    \simeq
+    h_M^{-1}\circ f^\vee\circ h_M.
+\]
+
+The complete coherent fixed-point structure is the image of the complete
+fixed-point structure of
+\[
+    h_M
+\]
+under the equivariant functor
+\[
+    \mathsf{End}_A.
+\]
+\end{proof}
+
+
+\begin{proposition}[Equivariant endomorphism Morita context]
+\label{prop:equivariant-endomorphism-morita-context}
+For
+\[
+    M\in\Perf(A),
+\]
+write
+\[
+    B_M
+    :=
+    \End_A(M)
+\]
+and let
+\[
+    E_M
+    :=
+    {}_{B_M}M_A
+    \colon
+    B_M
+    \longrightarrow
+    A
+\]
+be the evaluation bimodule.
+
+Let
+\[
+    \mathfrak E_A
+    :=
+    \int_{B\in\Alg_A^\simeq}
+    \operatorname{Hom}_{\Mor_A^{\mathrm{rperf}}}(B,A)^\simeq
+\]
+denote the space obtained by unstraightening the functor which sends an
+associative algebra
+\[
+    B
+\]
+to the maximal $\infty$-groupoid of right-perfect Morita morphisms
+\[
+    B
+    \longrightarrow
+    A
+\]
+and transports along algebra equivalences by regular Morita
+equivalences. Using the canonical Hermitian fixed point
+\[
+    A
+    \xrightarrow{\;\simeq\;}
+    A^{\op},
+\]
+canonical Morita duality induces a coherent
+\[
+    C_2
+\]
+-action on
+\[
+    \mathfrak E_A.
+\]
+
+The assignment
+\[
+    M
+    \longmapsto
+    (B_M,E_M)
+\]
+defines a functor of spaces
+\[
+    \mathsf{EndMor}_A
+    \colon
+    \Perf(A)^\simeq
+    \longrightarrow
+    \mathfrak E_A.
+\]
+For an equivalence
+\[
+    u
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    N,
+\]
+the endpoint component is conjugation
+\[
+    c_u
+    \colon
+    B_M
+    \xrightarrow{\;\simeq\;}
+    B_N,
+    \qquad
+    c_u(b)
+    :=
+    u\circ b\circ u^{-1},
+\]
+and the bimodule component is the map
+\[
+    u
+    \colon
+    {}_{B_M}M_A
+    \xrightarrow{\;\simeq\;}
+    U_{c_u}
+    \otimes_{B_N}
+    {}_{B_N}N_A.
+\]
+
+This functor is coherently equivariant for canonical perfect duality on
+\[
+    \Perf(A)^\simeq
+\]
+and canonical Morita duality on
+\[
+    \mathfrak E_A.
+\]
+Its endpoint comparison is
+\[
+    \alpha_M
+    \colon
+    B_{M^\vee}
+    \xrightarrow{\;\simeq\;}
+    B_M^{\op},
+    \qquad
+    \alpha_M(g)
+    =
+    \operatorname{bid}_M^{-1}
+    \circ
+    g^\vee
+    \circ
+    \operatorname{bid}_M.
+\]
+Its Morita-morphism comparison is an equivalence
+\[
+\begin{aligned}
+    \eta_M
+    \colon
+    E_{M^\vee}
+    &\xrightarrow{\;\simeq\;}
+    U_{\alpha_M}
+    \otimes_{B_M^{\op}}
+    \mathbb D_A(E_M).
+\end{aligned}
+\]
+After identifying both sides with the underlying object
+\[
+    M^\vee\in\mathcal W,
+\]
+the map
+\[
+    \eta_M
+\]
+is the identity.
+
+The comparisons
+\[
+    \alpha_M
+    \qquad\text{and}\qquad
+    \eta_M
+\]
+are compatible with equivalences of perfect modules, biduality,
+enriched composition, Morita right adjoints, and the complete coherent
+\[
+    C_2
+\]
+-structures.
+\end{proposition}
+
+\begin{proof}
+Since
+\[
+    M\in\Perf(A),
+\]
+the evaluation bimodule
+\[
+    E_M
+    \colon
+    B_M
+    \longrightarrow
+    A
+\]
+is right perfect. Its Morita right adjoint is
+\[
+    E_M^R
+    =
+    {}_AM^\vee_{B_M},
+\]
+where the right
+\[
+    B_M
+\]
+-action is precomposition:
+\[
+    \phi\cdot b
+    :=
+    \phi\circ b.
+\]
+Thus, after transport along the canonical equivalence
+\[
+    A^{\op}
+    \xrightarrow{\;\simeq\;}
+    A,
+\]
+one may regard
+\[
+    \mathbb D_A(E_M)
+    =
+    (E_M^R)^{\op}
+    \colon
+    B_M^{\op}
+    \longrightarrow
+    A
+\]
+as a Morita morphism with underlying object
+\[
+    M^\vee.
+\]
+
+For an equivalence
+\[
+    u
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    N,
+\]
+the identity
+\[
+    u(bm)
+    =
+    c_u(b)u(m)
+\]
+shows that
+\[
+    u
+\]
+is a bimodule equivalence after transport of the left endpoint along
+\[
+    c_u.
+\]
+Compatibility with identities and composition follows from coherent
+composition in the enriched category
+\[
+    \Perf(A).
+\]
+This constructs
+\[
+    \mathsf{EndMor}_A.
+\]
+
+The endpoint equivalence
+\[
+    \alpha_M
+    \colon
+    B_{M^\vee}
+    \xrightarrow{\;\simeq\;}
+    B_M^{\op}
+\]
+is the equivariance comparison of
+\Ref{prop:endomorphism-algebra-equivariance}.
+Transport
+\[
+    \mathbb D_A(E_M)
+\]
+along
+\[
+    \alpha_M.
+\]
+The resulting
+\[
+    B_{M^\vee}\text{--}A
+\]
+-bimodule is
+\[
+    U_{\alpha_M}
+    \otimes_{B_M^{\op}}
+    \mathbb D_A(E_M).
+\]
+Its underlying object is
+\[
+    M^\vee.
+\]
+Define
+\[
+    \eta_M
+\]
+to be the identity of this underlying object.
+
+It remains to verify its left
+\[
+    B_{M^\vee}
+\]
+-linearity. Let
+\[
+    g\in B_{M^\vee}.
+\]
+On the transported target, the action of
+\[
+    g
+\]
+is induced by precomposition with
+\[
+    \alpha_M(g)
+    =
+    \operatorname{bid}_M^{-1}
+    \circ
+    g^\vee
+    \circ
+    \operatorname{bid}_M.
+\]
+Precomposition by an endomorphism
+\[
+    a
+    \colon
+    M
+    \longrightarrow
+    M
+\]
+acts on
+\[
+    M^\vee
+\]
+by
+\[
+    a^\vee.
+\]
+The involutivity coherence of perfect duality gives
+\[
+    \alpha_M(g)^\vee
+    \simeq
+    g.
+\]
+Consequently the transported action of
+\[
+    g
+\]
+on the target is the ordinary evaluation action of
+\[
+    g
+\]
+on
+\[
+    M^\vee.
+\]
+Hence
+\[
+    \eta_M
+\]
+is an equivalence of
+\[
+    B_{M^\vee}\text{--}A
+\]
+-bimodules.
+
+The maps
+\[
+    d_{M,N}
+\]
+of enriched dualization assemble into an enriched contravariant
+equivalence, reverse enriched composition, and induce the coherent mate
+operation on parameterized morphisms. Therefore
+\[
+    \alpha_M
+\]
+and
+\[
+    \eta_M
+\]
+are natural in equivalences of perfect modules and compatible with the
+Morita units, counits, and mate correspondences. Compatibility with
+biduality and all higher
+\[
+    C_2
+\]
+-coherences is inherited from the coherent perfect duality and the
+coherent canonical Morita duality. Thus
+\[
+    \mathsf{EndMor}_A
+\]
+is coherently equivariant.
+\end{proof}
+
+\section{Fixed-endpoint transport of weak duality}
+\label{sec:fixed-endpoint-transport}
+
+The transported duality on a Morita hom category is an instance of a
+general construction for $(\infty,2)$-categories with weak duality.
+
+\begin{proposition}[Fixed-endpoint transport of weak duality]
+\label{prop:fixed-endpoint-transport}
+Let
+\[
+    \mathcal X
+\]
+be an $(\infty,2)$-category equipped with a coherent weak duality
+involution
+\[
+    D
+    \colon
+    \mathcal X^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X.
+\]
+Write
+\[
+    \operatorname{bid}^{D}
+    \colon
+    \id_{\mathcal X}
+    \xRightarrow{\;\simeq\;}
+    D^2
+\]
+for its biduality.
+
+Let
+\[
+    (x,\Theta_x)
+    \qquad\text{and}\qquad
+    (y,\Theta_y)
+\]
+be coherent fixed objects for the induced action on the maximal
+$\infty$-groupoid of objects and equivalence $1$-morphisms. Thus
+\[
+    \Theta_x
+    \colon
+    x
+    \xrightarrow{\;\simeq\;}
+    D(x),
+    \qquad
+    \Theta_y
+    \colon
+    y
+    \xrightarrow{\;\simeq\;}
+    D(y),
+\]
+and the first fixed-point coherences are
+\[
+    D(\Theta_x)\circ\Theta_x
+    \simeq
+    \operatorname{bid}^{D}_x,
+\]
+\[
+    D(\Theta_y)\circ\Theta_y
+    \simeq
+    \operatorname{bid}^{D}_y.
+\]
+
+Then the mapping $\infty$-category
+\[
+    \mathcal X(x,y)
+\]
+carries a canonical coherent duality
+\[
+    D_{x,y}
+    \colon
+    \mathcal X(x,y)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X(x,y).
+\]
+For a $1$-morphism
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y,
+\]
+it is
+\[
+    D_{x,y}(f)
+    :=
+    \Theta_y^{-1}
+    \circ
+    D(f)
+    \circ
+    \Theta_x.
+\]
+For a $2$-morphism
+\[
+    \alpha
+    \colon
+    f
+    \Longrightarrow
+    g,
+\]
+the corresponding morphism
+\[
+    \alpha^{\op}
+    \colon
+    g
+    \longrightarrow
+    f
+\]
+in
+\[
+    \mathcal X(x,y)^{\op}
+\]
+is sent to the whiskering of
+\[
+    D(\alpha^{\mathrm{co}})
+    \colon
+    D(g)
+    \Longrightarrow
+    D(f)
+\]
+with
+\[
+    \Theta_x
+    \qquad\text{and}\qquad
+    \Theta_y^{-1}.
+\]
+
+There is a coherent biduality equivalence
+\[
+    \operatorname{bid}^{x,y}
+    \colon
+    \id_{\mathcal X(x,y)}
+    \xRightarrow{\;\simeq\;}
+    D_{x,y}D_{x,y}^{\op}.
+\]
+Its inverse at
+\[
+    f
+\]
+is the canonical composite
+\[
+\begin{aligned}
+    D_{x,y}^2(f)
+    &\xrightarrow{\;\simeq\;}
+    \bigl(
+        \operatorname{bid}^{D}_y
+    \bigr)^{-1}
+    \circ
+    D^2(f)
+    \circ
+    \operatorname{bid}^{D}_x
+    \\
+    &\xrightarrow{\;\simeq\;}
+    f.
+\end{aligned}
+\]
+
+The construction is natural in equivalences of coherent fixed objects.
+After passage to maximal $\infty$-groupoids, the coherent duality induces
+the corresponding covariant coherent
+\[
+    C_2
+\]
+-action by inversion as in
+\Ref{lem:core-action-coherent-duality}.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    \mathcal X^\simeq
+\]
+denote the maximal $\infty$-groupoid of objects and equivalence
+$1$-morphisms of
+\[
+    \mathcal X.
+\]
+Composition with equivalence $1$-morphisms defines a functor
+\[
+    \underline{\Hom}_{\mathcal X}
+    \colon
+    (\mathcal X^\simeq)^{\op}
+    \times
+    \mathcal X^\simeq
+    \longrightarrow
+    \Cat_\infty,
+\]
+whose value at
+\[
+    (x,y)
+\]
+is
+\[
+    \mathcal X(x,y).
+\]
+For equivalences
+\[
+    u
+    \colon
+    x'
+    \xrightarrow{\;\simeq\;}
+    x,
+    \qquad
+    v
+    \colon
+    y
+    \xrightarrow{\;\simeq\;}
+    y',
+\]
+the induced transport is
+\[
+    f
+    \longmapsto
+    v\circ f\circ u.
+\]
+
+The weak duality
+\[
+    D
+    \colon
+    \mathcal X^{\mathrm{co}}
+    \longrightarrow
+    \mathcal X
+\]
+induces coherent semilinear equivalences
+\[
+    \mathcal X(x,y)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X(Dx,Dy).
+\]
+The biduality, involutivity modification, and higher
+\[
+    C_2
+\]
+-cocycle make these equivalences compatible with the induced action on
+the endpoint space
+\[
+    \mathcal X^\simeq.
+\]
+
+The coherent fixed objects
+\[
+    (x,\Theta_x)
+    \qquad\text{and}\qquad
+    (y,\Theta_y)
+\]
+provide a coherent equivariant lift of the point
+\[
+    (x,y)
+    \in
+    (\mathcal X^\simeq)^{\op}
+    \times
+    \mathcal X^\simeq.
+\]
+Pulling back the semilinear hom construction along this fixed endpoint
+diagram produces a homotopy-fixed-point structure for the
+opposite-category action on
+\[
+    \mathcal X(x,y).
+\]
+Equivalently, it produces a coherent duality
+\[
+    D_{x,y}
+    \colon
+    \mathcal X(x,y)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X(x,y).
+\]
+Its nontrivial functor is the composite
+\[
+\begin{aligned}
+    \mathcal X(x,y)^{\op}
+    &\xrightarrow{D}
+    \mathcal X(Dx,Dy)
+    \\
+    &\xrightarrow{
+        \Theta_y^{-1}\circ(-)\circ\Theta_x
+    }
+    \mathcal X(x,y),
+\end{aligned}
+\]
+which is the displayed formula.
+
+It remains to identify the visible biduality. Applying the functor twice
+gives
+\[
+\begin{aligned}
+    D_{x,y}^2(f)
+    &\simeq
+    \Theta_y^{-1}
+    \circ
+    D(\Theta_y^{-1})
+    \circ
+    D^2(f)
+    \circ
+    D(\Theta_x)
+    \circ
+    \Theta_x.
+\end{aligned}
+\]
+The fixed-point coherences imply
+\[
+    D(\Theta_x)\circ\Theta_x
+    \simeq
+    \operatorname{bid}^{D}_x
+\]
+and
+\[
+\begin{aligned}
+    \Theta_y^{-1}\circ D(\Theta_y^{-1})
+    &\simeq
+    \bigl(
+        D(\Theta_y)\circ\Theta_y
+    \bigr)^{-1}
+    \\
+    &\simeq
+    \bigl(
+        \operatorname{bid}^{D}_y
+    \bigr)^{-1}.
+\end{aligned}
+\]
+Therefore
+\[
+    D_{x,y}^2(f)
+    \simeq
+    \bigl(
+        \operatorname{bid}^{D}_y
+    \bigr)^{-1}
+    \circ
+    D^2(f)
+    \circ
+    \operatorname{bid}^{D}_x.
+\]
+Pseudonaturality of
+\[
+    \operatorname{bid}^{D}
+\]
+gives
+\[
+    D^2(f)
+    \circ
+    \operatorname{bid}^{D}_x
+    \xRightarrow{\;\simeq\;}
+    \operatorname{bid}^{D}_y
+    \circ
+    f.
+\]
+Hence there is a canonical equivalence
+\[
+    D_{x,y}^2(f)
+    \xrightarrow{\;\simeq\;}
+    f.
+\]
+Its inverse is
+\[
+    \operatorname{bid}^{x,y}_f.
+\]
+The involutivity modification and all higher cocycle simplices are those
+of the pulled-back fixed endpoint diagram.
+
+For naturality, let
+\[
+    u
+    \colon
+    (x',\Theta_{x'})
+    \xrightarrow{\;\simeq\;}
+    (x,\Theta_x),
+\]
+\[
+    v
+    \colon
+    (y,\Theta_y)
+    \xrightarrow{\;\simeq\;}
+    (y',\Theta_{y'})
+\]
+be equivalences of coherent fixed objects. Their first equivariance
+conditions are
+\[
+    D(u)\circ\Theta_{x'}
+    \simeq
+    \Theta_x\circ u,
+\]
+\[
+    D(v)\circ\Theta_y
+    \simeq
+    \Theta_{y'}\circ v.
+\]
+The transport functor
+\[
+    T_{u,v}
+    \colon
+    \mathcal X(x,y)
+    \longrightarrow
+    \mathcal X(x',y')
+\]
+is
+\[
+    T_{u,v}(f)
+    :=
+    v\circ f\circ u.
+\]
+Then
+\[
+\begin{aligned}
+    D_{x',y'}
+    \bigl(
+        T_{u,v}(f)
+    \bigr)
+    &\simeq
+    \Theta_{y'}^{-1}
+    \circ
+    D(v)
+    \circ
+    D(f)
+    \circ
+    D(u)
+    \circ
+    \Theta_{x'}
+    \\
+    &\simeq
+    v
+    \circ
+    \Theta_y^{-1}
+    \circ
+    D(f)
+    \circ
+    \Theta_x
+    \circ
+    u
+    \\
+    &=
+    T_{u,v}
+    \bigl(
+        D_{x,y}(f)
+    \bigr).
+\end{aligned}
+\]
+The complete naturality coherence is inherited from the same pulled-back
+fixed endpoint diagrams.
+\end{proof}
+
+\begin{proposition}[Functoriality of fixed-endpoint transport]
+\label{prop:fixed-endpoint-transport-functoriality}
+Let
+\[
+    D
+    \colon
+    \mathcal X^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X
+\]
+and
+\[
+    E
+    \colon
+    \mathcal Y^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal Y
+\]
+be coherent weak duality involutions.
+
+Let
+\[
+    F
+    \colon
+    \mathcal X
+    \longrightarrow
+    \mathcal Y
+\]
+be an $(\infty,2)$-functor equipped with a pseudonatural adjoint
+equivalence
+\[
+    \kappa
+    \colon
+    E\circ F^{\mathrm{co}}
+    \xRightarrow{\;\simeq\;}
+    F\circ D
+\]
+compatible with the bidualities, involutivity modifications, and complete
+coherent
+\[
+    C_2
+\]
+-structures.
+
+If
+\[
+    (x,\Theta_x)
+\]
+is a coherent fixed object of
+\[
+    D,
+\]
+then
+\[
+    F(x)
+\]
+has the transported fixed-point structure
+\[
+\begin{aligned}
+    \Theta_{F(x)}
+    \colon
+    F(x)
+    &\xrightarrow{F(\Theta_x)}
+    F(Dx)
+    \\
+    &\xrightarrow{\kappa_x^{-1}}
+    E(Fx).
+\end{aligned}
+\]
+
+For coherent fixed objects
+\[
+    x
+    \qquad\text{and}\qquad
+    y,
+\]
+the induced hom functor
+\[
+    F_{x,y}
+    \colon
+    \mathcal X(x,y)
+    \longrightarrow
+    \mathcal Y(Fx,Fy)
+\]
+is a morphism of the transported coherent dualities. There is a canonical
+natural equivalence
+\[
+    \overline\kappa_f
+    \colon
+    E_{F(x),F(y)}
+    \bigl(
+        F(f)
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    F
+    \bigl(
+        D_{x,y}(f)
+    \bigr)
+\]
+compatible with composition, biduality, and the complete coherent
+\[
+    C_2
+\]
+-structures.
+\end{proposition}
+
+\begin{proof}
+The fixed-point structure on
+\[
+    F(x)
+\]
+is the image of the fixed point
+\[
+    \Theta_x
+\]
+under the equivariant functor
+\[
+    (F,\kappa).
+\]
+Its complete fixed-point coherence follows from the compatibility of
+\[
+    \kappa
+\]
+with the weak-duality structures.
+
+For a morphism
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y,
+\]
+one has
+\[
+\begin{aligned}
+    E_{F(x),F(y)}
+    \bigl(
+        F(f)
+    \bigr)
+    &=
+    \Theta_{F(y)}^{-1}
+    \circ
+    E(F(f))
+    \circ
+    \Theta_{F(x)}
+    \\
+    &\simeq
+    F(\Theta_y^{-1})
+    \circ
+    F(D(f))
+    \circ
+    F(\Theta_x)
+    \\
+    &=
+    F
+    \bigl(
+        D_{x,y}(f)
+    \bigr).
+\end{aligned}
+\]
+The middle equivalence is obtained from the pseudonaturality of
+\[
+    \kappa.
+\]
+
+The compatibility with all $2$-morphisms, composition, biduality, and the
+higher
+\[
+    C_2
+\]
+-coherences follows by applying
+\[
+    F
+\]
+and
+\[
+    \kappa
+\]
+to the pulled-back
+\[
+    BC_2
+\]
+-diagrams used in
+\Ref{prop:fixed-endpoint-transport}.
+\end{proof}
+
+
+\section{Fixed-endpoint transport of a coherent $1$-op involution}
+\label{sec:fixed-endpoint-transport-one-op}
+
+Hermitian action reversal is the fixed-endpoint transport of the
+coherent $1$-op involution on the Morita category. We first construct it
+in an arbitrary $(\infty,2)$-category.
+
+\begin{proposition}[Fixed-endpoint transport of a coherent $1$-op involution]
+\label{prop:fixed-endpoint-transport-one-op}
+Let
+\[
+    O
+    \colon
+    \mathcal X^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X
+\]
+be a coherent $1$-op involution with biduality
+\[
+    \operatorname{bid}^{O}
+    \colon
+    \id_{\mathcal X}
+    \xRightarrow{\;\simeq\;}
+    OO^{\op}.
+\]
+Its induced action on the maximal $\infty$-groupoid of objects and
+equivalence $1$-morphisms is
+\[
+    \sigma_O
+    :=
+    O^\simeq\circ\operatorname{inv}.
+\]
+
+Let
+\[
+    (x,\Theta_x)
+    \qquad\text{and}\qquad
+    (y,\Theta_y)
+\]
+be coherent fixed objects for this action. Thus
+\[
+    \Theta_x
+    \colon
+    x
+    \xrightarrow{\;\simeq\;}
+    O(x),
+    \qquad
+    \Theta_y
+    \colon
+    y
+    \xrightarrow{\;\simeq\;}
+    O(y),
+\]
+and the first fixed-point equations are
+\[
+    O(\Theta_x^{-1})\circ\Theta_x
+    \simeq
+    \operatorname{bid}^{O}_x,
+\]
+\[
+    O(\Theta_y^{-1})\circ\Theta_y
+    \simeq
+    \operatorname{bid}^{O}_y.
+\]
+
+Then there is a canonical functor
+\[
+    J_{x,y}
+    \colon
+    \mathcal X(x,y)
+    \xrightarrow{\;\simeq\;}
+    \mathcal X(y,x)
+\]
+defined by
+\[
+    J_{x,y}(f)
+    :=
+    \Theta_x^{-1}
+    \circ
+    O(f)
+    \circ
+    \Theta_y.
+\]
+For composable $1$-morphisms
+\[
+    x
+    \xrightarrow{f}
+    y
+    \xrightarrow{g}
+    z,
+\]
+there is a canonical equivalence
+\[
+    \zeta_{f,g}
+    \colon
+    J_{x,z}(g\circ f)
+    \xrightarrow{\;\simeq\;}
+    J_{x,y}(f)
+    \circ
+    J_{y,z}(g).
+\]
+These equivalences are coherently associative and unital.
+
+For every
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y,
+\]
+there is a canonical natural equivalence
+\[
+    \epsilon^J_f
+    \colon
+    J_{y,x}J_{x,y}(f)
+    \xrightarrow{\;\simeq\;}
+    f.
+\]
+Its underlying comparison is
+\[
+\begin{aligned}
+    J_{y,x}J_{x,y}(f)
+    &\xrightarrow{\;\simeq\;}
+    \bigl(
+        \operatorname{bid}^{O}_y
+    \bigr)^{-1}
+    \circ
+    O^2(f)
+    \circ
+    \operatorname{bid}^{O}_x
+    \\
+    &\xrightarrow{\;\simeq\;}
+    f.
+\end{aligned}
+\]
+The compositors and double-reversal comparisons satisfy the complete
+coherent involutivity relations.
+\end{proposition}
+
+\begin{proof}
+The $1$-op involution induces coherent semilinear equivalences
+\[
+    \mathcal X(x,y)
+    \xrightarrow{\;\simeq\;}
+    \mathcal X(Oy,Ox).
+\]
+Pulling this semilinear hom construction back along the coherent fixed
+endpoint data produces the displayed functor
+\[
+    J_{x,y}.
+\]
+This pullback already supplies the complete composition, unit,
+involutivity, and higher coherence data. We identify the visible
+comparisons.
+
+For composable
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y,
+    \qquad
+    g
+    \colon
+    y
+    \longrightarrow
+    z,
+\]
+contravariance of
+\[
+    O
+\]
+on $1$-morphisms gives
+\[
+    O(g\circ f)
+    \simeq
+    O(f)\circ O(g).
+\]
+Therefore
+\[
+\begin{aligned}
+    J_{x,z}(g\circ f)
+    &\simeq
+    \Theta_x^{-1}
+    \circ
+    O(f)
+    \circ
+    O(g)
+    \circ
+    \Theta_z
+    \\
+    &\xrightarrow{\;\simeq\;}
+    \Theta_x^{-1}
+    \circ
+    O(f)
+    \circ
+    \Theta_y
+    \circ
+    \Theta_y^{-1}
+    \circ
+    O(g)
+    \circ
+    \Theta_z
+    \\
+    &=
+    J_{x,y}(f)
+    \circ
+    J_{y,z}(g).
+\end{aligned}
+\]
+The middle equivalence inserts the inverse-equivalence unit for
+\[
+    \Theta_y.
+\]
+
+For double reversal,
+\[
+\begin{aligned}
+    J_{y,x}J_{x,y}(f)
+    &\simeq
+    \Theta_y^{-1}
+    \circ
+    O
+    \bigl(
+        \Theta_x^{-1}
+        \circ
+        O(f)
+        \circ
+        \Theta_y
+    \bigr)
+    \circ
+    \Theta_x
+    \\
+    &\simeq
+    \Theta_y^{-1}
+    \circ
+    O(\Theta_y)
+    \circ
+    O^2(f)
+    \circ
+    O(\Theta_x^{-1})
+    \circ
+    \Theta_x.
+\end{aligned}
+\]
+The fixed-point equations and their inverses give
+\[
+    \Theta_y^{-1}\circ O(\Theta_y)
+    \simeq
+    \bigl(
+        \operatorname{bid}^{O}_y
+    \bigr)^{-1},
+\]
+\[
+    O(\Theta_x^{-1})\circ\Theta_x
+    \simeq
+    \operatorname{bid}^{O}_x.
+\]
+Hence
+\[
+    J_{y,x}J_{x,y}(f)
+    \simeq
+    \bigl(
+        \operatorname{bid}^{O}_y
+    \bigr)^{-1}
+    \circ
+    O^2(f)
+    \circ
+    \operatorname{bid}^{O}_x.
+\]
+Pseudonaturality of
+\[
+    \operatorname{bid}^{O}
+\]
+identifies this with
+\[
+    f.
+\]
+The complete coherent relations are inherited from the pulled-back
+homotopy-fixed-point construction.
+\end{proof}
+
+\begin{proposition}[Functoriality of $1$-op fixed-endpoint transport]
+\label{prop:fixed-endpoint-transport-one-op-functoriality}
+Let
+\[
+    O_{\mathcal X}
+    \colon
+    \mathcal X^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X,
+    \qquad
+    O_{\mathcal Y}
+    \colon
+    \mathcal Y^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal Y
+\]
+be coherent $1$-op involutions.
+
+Let
+\[
+    F
+    \colon
+    \mathcal X
+    \longrightarrow
+    \mathcal Y
+\]
+be equipped with a pseudonatural adjoint equivalence
+\[
+    \omega
+    \colon
+    O_{\mathcal Y}
+    \circ
+    F^{\op}
+    \xRightarrow{\;\simeq\;}
+    F
+    \circ
+    O_{\mathcal X}
+\]
+compatible with the complete coherent $1$-op involution structures.
+
+If
+\[
+    \Theta_x
+    \colon
+    x
+    \xrightarrow{\;\simeq\;}
+    O_{\mathcal X}(x)
+\]
+is a coherent fixed object, then
+\[
+    F(x)
+\]
+has the transported fixed-point structure
+\[
+\begin{aligned}
+    \Theta_{F(x)}
+    \colon
+    F(x)
+    &\xrightarrow{F(\Theta_x)}
+    F(O_{\mathcal X}x)
+    \\
+    &\xrightarrow{\omega_x^{-1}}
+    O_{\mathcal Y}(Fx).
+\end{aligned}
+\]
+
+For coherent fixed objects
+\[
+    x
+    \qquad\text{and}\qquad
+    y,
+\]
+there is a canonical natural equivalence
+\[
+    j_{F,f}
+    \colon
+    J^{\mathcal Y}_{F(x),F(y)}
+    \bigl(
+        F(f)
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    F
+    \bigl(
+        J^{\mathcal X}_{x,y}(f)
+    \bigr).
+\]
+These comparisons are compatible with reversal of composition,
+double reversal, equivalence $2$-morphisms, and the complete coherent
+involutivity data.
+\end{proposition}
+
+\begin{proof}
+The fixed-point structure is the image of
+\[
+    \Theta_x
+\]
+under the equivariant functor
+\[
+    (F,\omega).
+\]
+For
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y,
+\]
+one has
+\[
+\begin{aligned}
+    J^{\mathcal Y}_{F(x),F(y)}
+    \bigl(
+        F(f)
+    \bigr)
+    &\simeq
+    \Theta_{F(x)}^{-1}
+    \circ
+    O_{\mathcal Y}(Ff)
+    \circ
+    \Theta_{F(y)}
+    \\
+    &\simeq
+    F(\Theta_x^{-1})
+    \circ
+    \omega_x
+    \circ
+    O_{\mathcal Y}(Ff)
+    \circ
+    \omega_y^{-1}
+    \circ
+    F(\Theta_y).
+\end{aligned}
+\]
+Pseudonaturality of
+\[
+    \omega
+\]
+gives
+\[
+    F(O_{\mathcal X}f)
+    \circ
+    \omega_y
+    \xRightarrow{\;\simeq\;}
+    \omega_x
+    \circ
+    O_{\mathcal Y}(Ff).
+\]
+Substitution yields
+\[
+\begin{aligned}
+    J^{\mathcal Y}_{F(x),F(y)}
+    \bigl(
+        F(f)
+    \bigr)
+    &\xrightarrow{\;\simeq\;}
+    F(\Theta_x^{-1})
+    \circ
+    F(O_{\mathcal X}f)
+    \circ
+    F(\Theta_y)
+    \\
+    &=
+    F
+    \bigl(
+        J^{\mathcal X}_{x,y}(f)
+    \bigr).
+\end{aligned}
+\]
+This is
+\[
+    j_{F,f}.
+\]
+All stated coherences follow by applying the equivariant functor to the
+fixed-endpoint pullback construction of
+\Ref{prop:fixed-endpoint-transport-one-op}.
+\end{proof}
+
+\section{Hermitian reversal of bimodules}
+\label{sec:hermitian-reversal-bimodules}
+
+Let
+\[
+    (B,\theta_B)
+    \qquad\text{and}\qquad
+    (C,\theta_C)
+\]
+be Hermitian associative $A$-algebras, with regular Morita fixed points
+\[
+    \Theta_B
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op},
+\]
+\[
+    \Theta_C
+    \colon
+    C
+    \xrightarrow{\;\simeq\;}
+    C^{\op}.
+\]
+
+\begin{construction}[Hermitian action reversal]
+\label{con:hermitian-action-reversal}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be a $B$--$C$-bimodule.
+
+Define its \emph{Hermitian reverse} by
+\[
+\begin{aligned}
+    J_{B,C}(M)
+    &:=
+    \Theta_C
+    \otimes_{C^{\op}}
+    M^{\op}
+    \otimes_{B^{\op}}
+    \Theta_B^{-1}
+    \\
+    &\colon
+    C
+    \longrightarrow
+    B.
+\end{aligned}
+\]
+
+On bimodule maps,
+\[
+    J_{B,C}
+\]
+is induced by ordinary action reversal and whiskering with
+\[
+    \Theta_C
+    \qquad\text{and}\qquad
+    \Theta_B^{-1}.
+\]
+Thus there is a functor
+\[
+    J_{B,C}
+    \colon
+    \BMod_{B,C}(\mathcal W)
+    \longrightarrow
+    \BMod_{C,B}(\mathcal W).
+\]
+\end{construction}
+
+\begin{proposition}[Action-restriction description]
+\label{prop:hermitian-reversal-action-restriction}
+The bimodule
+\[
+    J_{B,C}(M)
+\]
+has the same underlying object of
+\[
+    \mathcal W
+\]
+as
+\[
+    M.
+\]
+
+Its left
+\[
+    C
+\]
+-action is obtained from the left
+\[
+    C^{\op}
+\]
+-action on
+\[
+    M^{\op}
+\]
+by restriction along
+\[
+    \theta_C
+    \colon
+    C
+    \xrightarrow{\;\simeq\;}
+    C^{\op}.
+\]
+
+Its right
+\[
+    B
+\]
+-action is obtained from the right
+\[
+    B^{\op}
+\]
+-action on
+\[
+    M^{\op}
+\]
+by restriction along
+\[
+    \theta_B
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op}.
+\]
+\end{proposition}
+
+\begin{proof}
+The regular Morita equivalence
+\[
+    \Theta_C
+    =
+    {}_C C^{\op}_{C^{\op}}
+\]
+performs restriction of the left
+\[
+    C^{\op}
+\]
+-action along
+\[
+    \theta_C.
+\]
+Similarly,
+\[
+    \Theta_B^{-1}
+    =
+    {}_{B^{\op}}B_B
+\]
+performs restriction of the right
+\[
+    B^{\op}
+\]
+-action along
+\[
+    \theta_B.
+\]
+
+The relative tensor products with these regular equivalences do not
+change the underlying object of
+\[
+    \mathcal W.
+\]
+They only transport the endpoint actions.
+\end{proof}
+
+\begin{proposition}[Coherent Hermitian reversal]
+\label{prop:coherent-hermitian-reversal}
+For composable bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D
+\]
+between Hermitian associative algebras, there is a canonical equivalence
+\[
+    \zeta_{M,N}
+    \colon
+    J_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    J_{C,D}(N)
+    \otimes_C
+    J_{B,C}(M).
+\]
+
+For every bimodule
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+there is a canonical natural equivalence
+\[
+    \epsilon^J_M
+    \colon
+    J_{C,B}J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M.
+\]
+
+The equivalences
+\[
+    \zeta
+    \qquad\text{and}\qquad
+    \epsilon^J
+\]
+are coherently associative and unital and satisfy
+\[
+    J(\epsilon^J_M)
+    \simeq
+    \epsilon^J_{J(M)}
+    \colon
+    J^3(M)
+    \longrightarrow
+    J(M)
+\]
+together with all higher involutivity coherences.
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:op-reversal-morita-composition},
+there is a coherent equivalence
+\[
+    (M\otimes_CN)^{\op}
+    \xrightarrow{\;\simeq\;}
+    N^{\op}
+    \otimes_{C^{\op}}
+    M^{\op}.
+\]
+Therefore
+\[
+\begin{aligned}
+    J_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr)
+    &=
+    \Theta_D
+    \otimes_{D^{\op}}
+    (M\otimes_CN)^{\op}
+    \otimes_{B^{\op}}
+    \Theta_B^{-1}
+    \\
+    &\simeq
+    \Theta_D
+    \otimes_{D^{\op}}
+    N^{\op}
+    \otimes_{C^{\op}}
+    M^{\op}
+    \otimes_{B^{\op}}
+    \Theta_B^{-1}.
+\end{aligned}
+\]
+
+Insert the canonical inverse-equivalence unit
+\[
+    \id_{C^{\op}}
+    \xrightarrow{\;\simeq\;}
+    \Theta_C^{-1}
+    \otimes_C
+    \Theta_C
+\]
+between
+\[
+    N^{\op}
+    \qquad\text{and}\qquad
+    M^{\op}.
+\]
+Reassociation gives
+\[
+\begin{aligned}
+    J_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr)
+    &\xrightarrow{\;\simeq\;}
+    \bigl(
+        \Theta_D
+        \otimes_{D^{\op}}
+        N^{\op}
+        \otimes_{C^{\op}}
+        \Theta_C^{-1}
+    \bigr)
+    \\
+    &\qquad\otimes_C
+    \bigl(
+        \Theta_C
+        \otimes_{C^{\op}}
+        M^{\op}
+        \otimes_{B^{\op}}
+        \Theta_B^{-1}
+    \bigr)
+    \\
+    &=
+    J_{C,D}(N)
+    \otimes_C
+    J_{B,C}(M).
+\end{aligned}
+\]
+This defines
+\[
+    \zeta_{M,N}.
+\]
+
+Applying Hermitian reversal twice gives a bimodule whose underlying
+object is
+\[
+    M^{\op\op}.
+\]
+Its endpoint actions are transported by the double fixed-point
+composites
+\[
+    \theta_B^{\op}\circ\theta_B
+    \qquad\text{and}\qquad
+    \theta_C^{\op}\circ\theta_C.
+\]
+The coherent fixed-point structures identify these composites with the
+canonical double-opposite equivalences. Together with
+\[
+    M^{\op\op}
+    \xrightarrow{\;\simeq\;}
+    M,
+\]
+they define
+\[
+    \epsilon^J_M.
+\]
+
+Equivalently, the entire family
+\[
+    J_{B,C}
+\]
+is the fixed-endpoint transport of the coherent $1$-op involution
+\[
+    O_A
+    \colon
+    \Mor_A^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A
+\]
+along the coherent $1$-op fixed endpoints
+\[
+    \Theta_B
+\]
+constructed in
+\Ref{con:regular-morita-fixed-point}.
+The complete associativity, unit, involutivity, and higher coherences
+therefore follow from
+\Ref{prop:fixed-endpoint-transport-one-op}.
+\end{proof}
+
+\begin{lemma}[Hermitian reversal of an adjunction]
+\label{lem:hermitian-reversal-adjunction}
+Let
+\[
+    M
+    \colon
+    B
+    \rightleftarrows
+    C
+    \colon
+    N
+\]
+be an adjunction
+\[
+    M\dashv N
+\]
+in
+\[
+    \Mor_A.
+\]
+Then Hermitian reversal gives an adjunction
+\[
+    J_{C,B}(N)
+    \dashv
+    J_{B,C}(M).
+\]
+
+The construction is coherent in adjunctions, mates, and composition of
+adjunctions.
+\end{lemma}
+
+\begin{proof}
+Ordinary action reversal sends
+\[
+    M\dashv N
+\]
+to
+\[
+    N^{\op}\dashv M^{\op}.
+\]
+Whiskering an adjunction on either side by equivalence
+$1$-morphisms preserves the adjunction. Hence
+\[
+    \Theta_B
+    \otimes_{B^{\op}}
+    N^{\op}
+    \otimes_{C^{\op}}
+    \Theta_C^{-1}
+\]
+is left adjoint to
+\[
+    \Theta_C
+    \otimes_{C^{\op}}
+    M^{\op}
+    \otimes_{B^{\op}}
+    \Theta_B^{-1}.
+\]
+These are
+\[
+    J_{C,B}(N)
+    \qquad\text{and}\qquad
+    J_{B,C}(M).
+\]
+
+The coherent compatibility with units, counits, mates, and composition
+is inherited from the coherent action-reversal involution and the
+coherent mate calculus.
+\end{proof}
+
+\section{Transported Morita duality}
+\label{sec:transported-morita-duality}
+
+Let
+\[
+    \mathcal H_{B,C}
+\]
+denote the $\infty$-category of right-perfect
+$B$--$C$-bimodules and all bimodule maps.
+
+The canonical weak Morita duality of
+\Ref{thm:weak-morita-duality-involution}
+restricts to
+\[
+    \mathbb D_A
+    \colon
+    \mathcal H_{B,C}^{\op}
+    \longrightarrow
+    \mathcal H_{B^{\op},C^{\op}}.
+\]
+
+\begin{construction}[Transported Morita duality]
+\label{con:transported-morita-duality}
+Define
+\[
+    \mathbb D_{B,C}
+    \colon
+    \mathcal H_{B,C}^{\op}
+    \longrightarrow
+    \mathcal H_{B,C}
+\]
+by fixed-endpoint transport:
+\[
+\begin{aligned}
+    \mathbb D_{B,C}(M)
+    &:=
+    \Theta_B
+    \otimes_{B^{\op}}
+    \mathbb D_A(M)
+    \otimes_{C^{\op}}
+    \Theta_C^{-1}
+    \\
+    &=
+    \Theta_B
+    \otimes_{B^{\op}}
+    (M^R)^{\op}
+    \otimes_{C^{\op}}
+    \Theta_C^{-1}.
+\end{aligned}
+\]
+
+Equivalently,
+\[
+    \mathbb D_{B,C}(M)
+    \simeq
+    J_{C,B}(M^R).
+\]
+
+For a bimodule map
+\[
+    \alpha
+    \colon
+    M
+    \longrightarrow
+    N,
+\]
+define
+\[
+    \mathbb D_{B,C}(\alpha)
+    :=
+    J_{C,B}(\alpha^R)
+    \colon
+    \mathbb D_{B,C}(N)
+    \longrightarrow
+    \mathbb D_{B,C}(M).
+\]
+\end{construction}
+
+\begin{proposition}[Coherent transported hom duality]
+\label{prop:coherent-transported-hom-duality}
+The functor
+\[
+    \mathbb D_{B,C}
+    \colon
+    \mathcal H_{B,C}^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal H_{B,C}
+\]
+is a coherent duality.
+
+There is a natural biduality equivalence
+\[
+    \operatorname{bid}^{B,C}
+    \colon
+    \id_{\mathcal H_{B,C}}
+    \xRightarrow{\;\simeq\;}
+    \mathbb D_{B,C}\mathbb D_{B,C}^{\op}
+\]
+with its complete coherent
+\[
+    C_2
+\]
+-structure.
+
+For composable right-perfect bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+there is a canonical equivalence
+\[
+\begin{aligned}
+    \mu^{B,C,D}_{M,N}
+    \colon
+    \mathbb D_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \mathbb D_{B,C}(M)
+    \otimes_C
+    \mathbb D_{C,D}(N).
+\end{aligned}
+\]
+These equivalences are coherently associative and unital.
+\end{proposition}
+
+\begin{proof}
+The regular Morita equivalences
+\[
+    \Theta_B
+    \colon
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op},
+\]
+\[
+    \Theta_C
+    \colon
+    C
+    \xrightarrow{\;\simeq\;}
+    C^{\op}
+\]
+make
+\[
+    B
+    \qquad\text{and}\qquad
+    C
+\]
+coherent fixed objects for the object action of
+\[
+    \mathbb D_A.
+\]
+
+Apply
+\Ref{prop:fixed-endpoint-transport}
+to
+\[
+    \mathcal X
+    =
+    \Mor_A^{\mathrm{rperf}},
+    \qquad
+    D
+    =
+    \mathbb D_A.
+\]
+This gives a coherent duality on
+\[
+    \operatorname{Hom}_{\Mor_A^{\mathrm{rperf}}}(B,C)
+    =
+    \mathcal H_{B,C}.
+\]
+
+Its underlying functor is
+\[
+    M
+    \longmapsto
+    \Theta_B
+    \otimes_{B^{\op}}
+    \mathbb D_A(M)
+    \otimes_{C^{\op}}
+    \Theta_C^{-1}.
+\]
+Since
+\[
+    \mathbb D_A(M)
+    =
+    (M^R)^{\op},
+\]
+this is
+\[
+    J_{C,B}(M^R).
+\]
+
+The coherent biduality and all higher
+\[
+    C_2
+\]
+-coherences are those of fixed-endpoint transport.
+
+For composition, begin with
+\[
+\begin{aligned}
+    \mathbb D_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr)
+    &=
+    \Theta_B
+    \otimes_{B^{\op}}
+    \mathbb D_A(M\otimes_CN)
+    \otimes_{D^{\op}}
+    \Theta_D^{-1}.
+\end{aligned}
+\]
+The global Morita-duality compositor gives
+\[
+    \mathbb D_A(M\otimes_CN)
+    \xrightarrow{\;\simeq\;}
+    \mathbb D_A(M)
+    \otimes_{C^{\op}}
+    \mathbb D_A(N).
+\]
+Hence
+\[
+\begin{aligned}
+    \mathbb D_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr)
+    &\xrightarrow{\;\simeq\;}
+    \Theta_B
+    \otimes_{B^{\op}}
+    \mathbb D_A(M)
+    \otimes_{C^{\op}}
+    \mathbb D_A(N)
+    \otimes_{D^{\op}}
+    \Theta_D^{-1}.
+\end{aligned}
+\]
+
+Insert
+\[
+    \id_{C^{\op}}
+    \xrightarrow{\;\simeq\;}
+    \Theta_C^{-1}\otimes_C\Theta_C
+\]
+between
+\[
+    \mathbb D_A(M)
+    \qquad\text{and}\qquad
+    \mathbb D_A(N).
+\]
+After reassociation this becomes
+\[
+\begin{aligned}
+    &
+    \bigl(
+        \Theta_B
+        \otimes_{B^{\op}}
+        \mathbb D_A(M)
+        \otimes_{C^{\op}}
+        \Theta_C^{-1}
+    \bigr)
+    \\
+    &\qquad\otimes_C
+    \bigl(
+        \Theta_C
+        \otimes_{C^{\op}}
+        \mathbb D_A(N)
+        \otimes_{D^{\op}}
+        \Theta_D^{-1}
+    \bigr),
+\end{aligned}
+\]
+which is
+\[
+    \mathbb D_{B,C}(M)
+    \otimes_C
+    \mathbb D_{C,D}(N).
+\]
+
+The associativity and unit coherences are inherited from the global
+Morita-duality compositor and the fixed-point coherences of the
+endpoints.
+\end{proof}
+
+\begin{lemma}[Right adjoint of the transported dual]
+\label{lem:transported-dual-right-adjoint}
+For every right-perfect
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+there is a canonical natural equivalence
+\[
+    \lambda_M
+    \colon
+    \mathbb D_{B,C}(M)^R
+    \xrightarrow{\;\simeq\;}
+    J_{B,C}(M).
+\]
+\end{lemma}
+
+\begin{proof}
+The Morita adjunction
+\[
+    M
+    \dashv
+    M^R
+\]
+is converted by
+\Ref{lem:hermitian-reversal-adjunction}
+into
+\[
+    J_{C,B}(M^R)
+    \dashv
+    J_{B,C}(M).
+\]
+The left-hand side is
+\[
+    \mathbb D_{B,C}(M).
+\]
+Thus
+\[
+    J_{B,C}(M)
+\]
+is a right adjoint of
+\[
+    \mathbb D_{B,C}(M).
+\]
+
+The coherent uniqueness of right adjoints supplies
+\[
+    \lambda_M
+    \colon
+    \mathbb D_{B,C}(M)^R
+    \xrightarrow{\;\simeq\;}
+    J_{B,C}(M).
+\]
+Naturality and compatibility with composition follow from the coherent
+mate calculus.
+\end{proof}
+
+\begin{proposition}[Explicit transported biduality]
+\label{prop:explicit-transported-biduality}
+For every right-perfect
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+the inverse of the transported biduality is canonically equivalent to
+the composite
+\[
+\begin{aligned}
+    \bigl(
+        \operatorname{bid}^{B,C}_M
+    \bigr)^{-1}
+    \colon
+    \mathbb D_{B,C}^2(M)
+    &=
+    J_{C,B}
+    \bigl(
+        \mathbb D_{B,C}(M)^R
+    \bigr)
+    \\
+    &\xrightarrow{
+        J_{C,B}(\lambda_M)
+    }
+    J_{C,B}J_{B,C}(M)
+    \\
+    &\xrightarrow{\epsilon^J_M}
+    M.
+\end{aligned}
+\]
+
+Equivalently,
+\[
+    \operatorname{bid}^{B,C}_M
+    \simeq
+    J_{C,B}(\lambda_M^{-1})
+    \circ
+    \bigl(
+        \epsilon^J_M
+    \bigr)^{-1}.
+\]
+\end{proposition}
+
+\begin{proof}
+Begin with the specified Morita adjunction
+\[
+    M
+    \dashv
+    M^R.
+\]
+Hermitian reversal gives the specified adjunction
+\[
+    \mathbb D_{B,C}(M)
+    =
+    J_{C,B}(M^R)
+    \dashv
+    J_{B,C}(M).
+\]
+
+Thus, before forgetting specified adjunction data, the selected right
+adjoint of
+\[
+    \mathbb D_{B,C}(M)
+\]
+is
+\[
+    J_{B,C}(M).
+\]
+The comparison with the coherently selected right adjoint is
+\[
+    \lambda_M.
+\]
+
+Applying Hermitian reversal once more and then applying
+\[
+    \epsilon^J_M
+    \colon
+    J_{C,B}J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M
+\]
+gives the displayed composite
+\[
+    \mathbb D_{B,C}^2(M)
+    \xrightarrow{\;\simeq\;}
+    M.
+\]
+
+On the specified-adjunction resolution, this is the visible double
+mate-reversal comparison. The fixed-endpoint transport construction
+identifies it with the inverse of
+\[
+    \operatorname{bid}^{B,C}_M.
+\]
+\end{proof}
+
+\section{Unitary right-perfect bimodules}
+\label{sec:unitary-right-perfect-bimodules}
+
+\begin{definition}[Unitary right-perfect bimodule]
+\label{def:unitary-right-perfect-bimodule}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be right perfect.
+
+A \emph{unitary structure} on
+\[
+    M
+\]
+is a coherent homotopy-fixed-point structure for the duality
+\[
+    \mathbb D_{B,C}
+    \colon
+    \mathcal H_{B,C}^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal H_{B,C}.
+\]
+
+Its underlying equivalence is
+\[
+    s_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    \mathbb D_{B,C}(M),
+\]
+and its first fixed-point coherence is
+\[
+    \mathbb D_{B,C}(s_M)
+    \circ
+    \operatorname{bid}^{B,C}_M
+    \simeq
+    s_M.
+\]
+
+A \emph{unitary right-perfect bimodule} is a pair
+\[
+    (M,s_M)
+\]
+equipped with this complete coherent fixed-point structure.
+\end{definition}
+
+\begin{proposition}[Adjoint formulation of unitarity]
+\label{prop:unitary-adjoint-formulation}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be right perfect.
+
+There are natural equivalences of spaces
+\[
+\begin{aligned}
+    \Phi_M,\Psi_M
+    \colon
+    \Map^\simeq_{\mathcal H_{B,C}}
+    \bigl(
+        M,
+        \mathbb D_{B,C}(M)
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \Map^\simeq_{\BMod_{C,B}(\mathcal W)}
+    \bigl(
+        J_{B,C}(M),
+        M^R
+    \bigr),
+\end{aligned}
+\]
+defined by
+\[
+    \Phi_M(s)
+    :=
+    s^R\circ\lambda_M^{-1}
+\]
+and
+\[
+    \Psi_M(s)
+    :=
+    \epsilon^J_{M^R}
+    \circ
+    J_{B,C}(s).
+\]
+
+The inverse of
+\[
+    \Psi_M
+\]
+is
+\[
+    \Psi_M^{-1}(u)
+    =
+    J_{C,B}(u)
+    \circ
+    \bigl(
+        \epsilon^J_M
+    \bigr)^{-1}.
+\]
+
+Let
+\[
+    t_M(s)
+    :=
+    \mathbb D_{B,C}(s)
+    \circ
+    \operatorname{bid}^{B,C}_M
+\]
+be transposition on
+\[
+    \Map^\simeq_{\mathcal H_{B,C}}
+    \bigl(
+        M,
+        \mathbb D_{B,C}(M)
+    \bigr).
+\]
+Then
+\[
+    t_M
+    \simeq
+    \Psi_M^{-1}\circ\Phi_M.
+\]
+
+Transporting
+\[
+    t_M
+\]
+through
+\[
+    \Psi_M
+\]
+defines a coherent involution
+\[
+    T_M
+    :=
+    \Phi_M\circ\Psi_M^{-1}
+\]
+on
+\[
+    \Map^\simeq_{\BMod_{C,B}(\mathcal W)}
+    \bigl(
+        J_{B,C}(M),
+        M^R
+    \bigr).
+\]
+
+Consequently, a unitary structure on
+\[
+    M
+\]
+is equivalently an equivalence
+\[
+    u_M
+    \colon
+    J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R
+\]
+equipped with a coherent homotopy-fixed-point structure for
+\[
+    T_M.
+\]
+\end{proposition}
+
+\begin{proof}
+Taking right mates is an equivalence of mapping spaces by
+\Ref{prop:mate-equivalence}. Since
+\[
+    \lambda_M
+\]
+is an equivalence,
+\[
+    s
+    \longmapsto
+    s^R\circ\lambda_M^{-1}
+\]
+defines the equivalence
+\[
+    \Phi_M.
+\]
+
+Hermitian reversal and
+\[
+    \epsilon^J_{M^R}
+\]
+are equivalences. Therefore
+\[
+    \Psi_M(s)
+    =
+    \epsilon^J_{M^R}
+    \circ
+    J_{B,C}(s)
+\]
+also defines an equivalence of spaces.
+
+Let
+\[
+    u
+    \colon
+    J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R.
+\]
+Define
+\[
+    s_u
+    :=
+    J_{C,B}(u)
+    \circ
+    \bigl(
+        \epsilon^J_M
+    \bigr)^{-1}
+    \colon
+    M
+    \longrightarrow
+    \mathbb D_{B,C}(M).
+\]
+Then
+\[
+\begin{aligned}
+    \Psi_M(s_u)
+    &=
+    \epsilon^J_{M^R}
+    \circ
+    J_{B,C}
+    \left(
+        J_{C,B}(u)
+        \circ
+        \bigl(
+            \epsilon^J_M
+        \bigr)^{-1}
+    \right)
+    \\
+    &\simeq
+    \epsilon^J_{M^R}
+    \circ
+    J^2(u)
+    \circ
+    J
+    \left(
+        \bigl(
+            \epsilon^J_M
+        \bigr)^{-1}
+    \right).
+\end{aligned}
+\]
+
+Naturality of
+\[
+    \epsilon^J
+\]
+gives
+\[
+    \epsilon^J_{M^R}
+    \circ
+    J^2(u)
+    \simeq
+    u\circ\epsilon^J_{J(M)}.
+\]
+The involutivity coherence gives
+\[
+    \epsilon^J_{J(M)}
+    \simeq
+    J(\epsilon^J_M).
+\]
+Therefore
+\[
+    \Psi_M(s_u)
+    \simeq
+    u.
+\]
+This proves the displayed formula for
+\[
+    \Psi_M^{-1}.
+\]
+
+By
+\Ref{prop:explicit-transported-biduality},
+\[
+    \operatorname{bid}^{B,C}_M
+    \simeq
+    J_{C,B}(\lambda_M^{-1})
+    \circ
+    \bigl(
+        \epsilon^J_M
+    \bigr)^{-1}.
+\]
+On maps, the transported duality is
+\[
+    \mathbb D_{B,C}(s)
+    =
+    J_{C,B}(s^R).
+\]
+Hence
+\[
+\begin{aligned}
+    t_M(s)
+    &=
+    \mathbb D_{B,C}(s)
+    \circ
+    \operatorname{bid}^{B,C}_M
+    \\
+    &\simeq
+    J_{C,B}(s^R)
+    \circ
+    J_{C,B}(\lambda_M^{-1})
+    \circ
+    \bigl(
+        \epsilon^J_M
+    \bigr)^{-1}
+    \\
+    &=
+    J_{C,B}
+    \bigl(
+        s^R\circ\lambda_M^{-1}
+    \bigr)
+    \circ
+    \bigl(
+        \epsilon^J_M
+    \bigr)^{-1}
+    \\
+    &=
+    \Psi_M^{-1}\Phi_M(s).
+\end{aligned}
+\]
+
+Transporting the complete coherent involution
+\[
+    t_M
+\]
+through
+\[
+    \Psi_M
+\]
+gives
+\[
+    T_M
+    =
+    \Phi_M\Psi_M^{-1}.
+\]
+The corresponding homotopy-fixed-point spaces are therefore equivalent.
+\end{proof}
+
+\begin{remark}[Meaning of the adjoint formulation]
+\label{rem:unitary-identifies-duality-adjoint}
+A unitary structure identifies two independently defined
+$C$--$B$-bimodules:
+\begin{enumerate}[label=(\roman*)]
+    \item the Hermitian reverse
+    \[
+        J_{B,C}(M),
+    \]
+    obtained from the anti-involutions of the source and target
+    algebras;
+
+    \item the Morita right adjoint
+    \[
+        M^R,
+    \]
+    obtained from right perfectness.
+\end{enumerate}
+
+The coherent
+\[
+    T_M
+\]
+-fixed-point structure is the mate symmetry which makes
+\[
+    J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R
+\]
+a unitary comparison rather than an arbitrary equivalence.
+\end{remark}
+
+\begin{theorem}[Closure under Morita composition]
+\label{thm:unitary-bimodule-composition}
+Let
+\[
+    (M,s_M)
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    (N,s_N)
+    \colon
+    C
+    \longrightarrow
+    D
+\]
+be unitary right-perfect bimodules.
+
+Then
+\[
+    M\otimes_CN
+\]
+has a canonical unitary right-perfect structure.
+
+Its underlying fixed-point equivalence is
+\[
+\begin{aligned}
+    s_{M\otimes N}
+    \colon
+    M\otimes_CN
+    &\xrightarrow{
+        s_M\otimes_Cs_N
+    }
+    \mathbb D_{B,C}(M)
+    \otimes_C
+    \mathbb D_{C,D}(N)
+    \\
+    &\xrightarrow{
+        \bigl(
+            \mu^{B,C,D}_{M,N}
+        \bigr)^{-1}
+    }
+    \mathbb D_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr).
+\end{aligned}
+\]
+
+Under the adjoint formulation, if
+\[
+    u_M
+    \colon
+    J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R
+\]
+and
+\[
+    u_N
+    \colon
+    J_{C,D}(N)
+    \xrightarrow{\;\simeq\;}
+    N^R
+\]
+are the corresponding mate-symmetric equivalences, then the composite
+unitary comparison is
+\[
+\begin{aligned}
+    J_{B,D}
+    \bigl(
+        M\otimes_CN
+    \bigr)
+    &\xrightarrow{\zeta_{M,N}}
+    J_{C,D}(N)
+    \otimes_C
+    J_{B,C}(M)
+    \\
+    &\xrightarrow{
+        u_N\otimes_Cu_M
+    }
+    N^R\otimes_CM^R
+    \\
+    &\xrightarrow{
+        \chi_{M,N}^{-1}
+    }
+    (M\otimes_CN)^R.
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+Right perfectness follows from
+\Ref{prop:morita-adjoint-composite}.
+
+The Morita composition functor
+\[
+    -\otimes_C-
+    \colon
+    \mathcal H_{B,C}
+    \times
+    \mathcal H_{C,D}
+    \longrightarrow
+    \mathcal H_{B,D}
+\]
+is a morphism of coherent dualities through the comparison
+\[
+    \mu^{B,C,D}.
+\]
+
+Passing to maximal $\infty$-groupoids gives a
+\[
+    C_2
+\]
+-equivariant map
+\[
+    \mathcal H_{B,C}^\simeq
+    \times
+    \mathcal H_{C,D}^\simeq
+    \longrightarrow
+    \mathcal H_{B,D}^\simeq.
+\]
+Taking homotopy fixed points gives
+\[
+\begin{aligned}
+    \bigl(
+        \mathcal H_{B,C}^\simeq
+    \bigr)^{hC_2}
+    \times
+    \bigl(
+        \mathcal H_{C,D}^\simeq
+    \bigr)^{hC_2}
+    \longrightarrow
+    \bigl(
+        \mathcal H_{B,D}^\simeq
+    \bigr)^{hC_2}.
+\end{aligned}
+\]
+
+The image of
+\[
+    (s_M,s_N)
+\]
+under this map has underlying equivalence
+\[
+    s_{M\otimes N}.
+\]
+Its complete higher fixed-point data are supplied by the equivariant
+composition construction.
+
+The adjoint formula follows from
+\Ref{prop:coherent-hermitian-reversal},
+\Ref{prop:coherent-adjoints-composites},
+and the equivalence of the two formulations in
+\Ref{prop:unitary-adjoint-formulation}.
+\end{proof}
+
+\begin{proposition}[Canonical coherent unitary identity bimodule]
+\label{prop:unit-bimodule-unitary}
+For every Hermitian associative algebra
+\[
+    (B,\theta_B),
+\]
+the regular identity bimodule
+\[
+    \mathbf 1_B
+    :=
+    {}_B B_B
+    \colon
+    B
+    \longrightarrow
+    B
+\]
+has a canonical unitary right-perfect structure
+\[
+    s_{\mathbf 1_B}
+    \colon
+    \mathbf 1_B
+    \xrightarrow{\;\simeq\;}
+    \mathbb D_{B,B}(\mathbf 1_B).
+\]
+
+These unitary identity structures are natural in equivalences of
+Hermitian associative algebras. More precisely, if
+\[
+    u
+    \colon
+    (B,\theta_B)
+    \xrightarrow{\;\simeq\;}
+    (C,\theta_C)
+\]
+is a Hermitian algebra equivalence, then transport by the corresponding
+unitary regular Morita equivalence identifies
+\[
+    (\mathbf 1_B,s_{\mathbf 1_B})
+\]
+with
+\[
+    (\mathbf 1_C,s_{\mathbf 1_C}).
+\]
+The identity structures are coherently compatible with composition and
+identity Hermitian algebra equivalences.
+\end{proposition}
+
+\begin{proof}
+The identity bimodule is right adjoint to itself and is therefore right
+perfect. The unit comparison of the global Morita duality gives a
+coherent equivalence
+\[
+    \mathbb D_A(\mathbf 1_B)
+    \xrightarrow{\;\simeq\;}
+    \mathbf 1_{B^{\op}}.
+\]
+Consequently,
+\[
+\begin{aligned}
+    \mathbb D_{B,B}(\mathbf 1_B)
+    &\simeq
+    \Theta_B
+    \otimes_{B^{\op}}
+    \mathbf 1_{B^{\op}}
+    \otimes_{B^{\op}}
+    \Theta_B^{-1}
+    \\
+    &\simeq
+    \Theta_B
+    \otimes_{B^{\op}}
+    \Theta_B^{-1}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    \mathbf 1_B.
+\end{aligned}
+\]
+Let
+\[
+    c_B
+    \colon
+    \mathbb D_{B,B}(\mathbf 1_B)
+    \xrightarrow{\;\simeq\;}
+    \mathbf 1_B
+\]
+denote this contraction and define
+\[
+    s_{\mathbf 1_B}
+    :=
+    c_B^{-1}.
+\]
+
+The global unit comparison for
+\[
+    \mathbb D_A,
+\]
+the inverse-equivalence triangle data for
+\[
+    \Theta_B,
+\]
+and the coherent fixed-point structure of
+\[
+    \Theta_B
+\]
+identify
+\[
+    \mathbb D_{B,B}(s_{\mathbf 1_B})
+    \circ
+    \operatorname{bid}^{B,B}_{\mathbf 1_B}
+\]
+with
+\[
+    s_{\mathbf 1_B}.
+\]
+All higher fixed-point coherences are inherited from the equivariant unit
+section of the transported Morita composition system. Hence
+\[
+    s_{\mathbf 1_B}
+\]
+is a complete unitary structure.
+
+Let
+\[
+    u
+    \colon
+    (B,\theta_B)
+    \xrightarrow{\;\simeq\;}
+    (C,\theta_C)
+\]
+be a Hermitian algebra equivalence. Transport along the regular Morita
+equivalence
+\[
+    U_u
+\]
+sends the underlying identity bimodule to the identity bimodule through
+the unit constraints
+\[
+    U_u^{-1}
+    \otimes_B
+    \mathbf 1_B
+    \otimes_B
+    U_u
+    \xrightarrow{\;\simeq\;}
+    \mathbf 1_C.
+\]
+The regular-bimodule equivariance and the fixed-point path represented by
+\[
+    u
+\]
+intertwine
+\[
+    c_B
+    \qquad\text{and}\qquad
+    c_C.
+\]
+Therefore the displayed transport carries
+\[
+    s_{\mathbf 1_B}
+\]
+to
+\[
+    s_{\mathbf 1_C}.
+\]
+Compatibility with composition and identities is inherited from the
+coherent regular-bimodule functor and the Morita unit constraints.
+\end{proof}
+
+\begin{remark}[Plain Hermitian reversal need not preserve right perfectness]
+\label{rem:plain-reversal-not-right-perfect}
+The Hermitian reverse
+\[
+    J_{B,C}(M)
+\]
+of a right-perfect bimodule need not itself be right perfect.
+
+A unitary structure identifies it with
+\[
+    M^R,
+\]
+but a right adjoint need not itself admit a right adjoint.
+
+Accordingly, the canonical weak duality on the right-perfect Morita
+category is
+\[
+    M
+    \longmapsto
+    (M^R)^{\op},
+\]
+not plain action reversal.
+\end{remark}
+
+\section{Object decoration and local dagger categories}
+\label{sec:object-decoration-local-dagger}
+
+The unitary structure is imposed on objects of a hom category. Morphisms
+are not required to preserve the selected unitary structures. Instead,
+the selected structures define the dagger of every underlying bimodule
+map.
+
+\begin{construction}[Object decoration of an $\infty$-category]
+\label{con:object-decoration}
+Let
+\[
+    \mathcal C
+\]
+be an $\infty$-category and let
+\[
+    e
+    \colon
+    E
+    \longrightarrow
+    \mathcal C^\simeq
+\]
+be a map of spaces.
+
+Define a simplicial space
+\[
+    \widetilde{\Dec}(\mathcal C,E)_n
+    :=
+    \Fun([n],\mathcal C)^\simeq
+    \times_{
+        (\mathcal C^\simeq)^{n+1}
+    }
+    E^{n+1},
+\]
+where
+\[
+    \Fun([n],\mathcal C)^\simeq
+    \longrightarrow
+    (\mathcal C^\simeq)^{n+1}
+\]
+is evaluation at the vertices.
+
+Let
+\[
+    \Dec(\mathcal C,E)
+\]
+denote the $\infty$-category presented by the functorial completion of
+this Segal space, using the completion convention of
+\Ref{chap:right-perfect-morita-duality}.
+\end{construction}
+
+\begin{proposition}[Properties and functoriality of object decoration]
+\label{prop:object-decoration-properties}
+The simplicial space
+\[
+    \widetilde{\Dec}(\mathcal C,E)_\bullet
+\]
+is a Segal space.
+
+Its represented objects are points
+\[
+    x\in E.
+\]
+For
+\[
+    x,y\in E,
+\]
+there is a canonical equivalence
+\[
+    \Map_{\Dec(\mathcal C,E)}(x,y)
+    \simeq
+    \Map_{\mathcal C}
+    \bigl(
+        e(x),
+        e(y)
+    \bigr).
+\]
+
+The forgetful functor
+\[
+    q
+    \colon
+    \Dec(\mathcal C,E)
+    \longrightarrow
+    \mathcal C
+\]
+is fully faithful. Its essential image is the full subcategory of
+objects lying in the essential image of
+\[
+    e.
+\]
+
+The construction is functorial as follows. Let
+\[
+    F
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be a functor, let
+\[
+    e
+    \colon
+    E
+    \longrightarrow
+    \mathcal C^\simeq,
+    \qquad
+    e'
+    \colon
+    E'
+    \longrightarrow
+    \mathcal D^\simeq,
+\]
+and let
+\[
+    \phi
+    \colon
+    E
+    \longrightarrow
+    E'
+\]
+be a map equipped with a coherent homotopy
+\[
+    e'\circ\phi
+    \simeq
+    F^\simeq\circ e.
+\]
+Then there is an induced functor
+\[
+    \Dec(F,\phi)
+    \colon
+    \Dec(\mathcal C,E)
+    \longrightarrow
+    \Dec(\mathcal D,E').
+\]
+
+These functors are coherently compatible with identities and
+composition.
+\end{proposition}
+
+\begin{proof}
+The categorical nerve of
+\[
+    \mathcal C
+\]
+satisfies
+\[
+\begin{aligned}
+    \Fun([n],\mathcal C)^\simeq
+    \simeq
+    \underbrace{
+        \Fun([1],\mathcal C)^\simeq
+        \times_{\mathcal C^\simeq}
+        \cdots
+        \times_{\mathcal C^\simeq}
+        \Fun([1],\mathcal C)^\simeq
+    }_{n\text{ factors}}.
+\end{aligned}
+\]
+Pulling this equivalence back along
+\[
+    E^{n+1}
+    \longrightarrow
+    (\mathcal C^\simeq)^{n+1}
+\]
+gives the Segal equivalence for
+\[
+    \widetilde{\Dec}(\mathcal C,E)_\bullet.
+\]
+
+Before completion, the mapping space from
+\[
+    x
+\]
+to
+\[
+    y
+\]
+is the fibre of
+\[
+    \widetilde{\Dec}(\mathcal C,E)_1
+    \longrightarrow
+    E\times E
+\]
+over
+\[
+    (x,y).
+\]
+This fibre is
+\[
+    \Map_{\mathcal C}
+    \bigl(
+        e(x),
+        e(y)
+    \bigr).
+\]
+
+Functorial completion is a Dwyer--Kan equivalence and preserves the
+represented mapping spaces. Hence
+\[
+    \Map_{\Dec(\mathcal C,E)}(x,y)
+    \simeq
+    \Map_{\mathcal C}
+    \bigl(
+        e(x),
+        e(y)
+    \bigr).
+\]
+The forgetful functor is therefore fully faithful. Its essential image
+is the full subcategory of objects equivalent to points in the image of
+\[
+    e.
+\]
+
+The pair
+\[
+    (F,\phi)
+\]
+defines in every degree a map
+\[
+\begin{aligned}
+    &
+    \Fun([n],\mathcal C)^\simeq
+    \times_{(\mathcal C^\simeq)^{n+1}}
+    E^{n+1}
+    \\
+    &\qquad\longrightarrow
+    \Fun([n],\mathcal D)^\simeq
+    \times_{(\mathcal D^\simeq)^{n+1}}
+    (E')^{n+1}.
+\end{aligned}
+\]
+These maps commute with all simplicial operators. Functoriality of
+completion gives
+\[
+    \Dec(F,\phi).
+\]
+Identity and composition coherences are inherited degreewise.
+\end{proof}
+
+\begin{proposition}[Products of object decorations]
+\label{prop:object-decoration-products}
+Let
+\[
+    e
+    \colon
+    E
+    \longrightarrow
+    \mathcal C^\simeq,
+    \qquad
+    e'
+    \colon
+    E'
+    \longrightarrow
+    \mathcal D^\simeq
+\]
+be maps of spaces.
+
+There is a canonical equivalence
+\[
+    \Dec
+    \bigl(
+        \mathcal C\times\mathcal D,
+        E\times E'
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \Dec(\mathcal C,E)
+    \times
+    \Dec(\mathcal D,E').
+\]
+
+These equivalences are coherently associative, unital, and symmetric.
+\end{proposition}
+
+\begin{proof}
+For every
+\[
+    n\geq0,
+\]
+there is a canonical equivalence
+\[
+    \Fun
+    \bigl(
+        [n],
+        \mathcal C\times\mathcal D
+    \bigr)^\simeq
+    \simeq
+    \Fun([n],\mathcal C)^\simeq
+    \times
+    \Fun([n],\mathcal D)^\simeq.
+\]
+The vertex-evaluation maps are products of the corresponding evaluation
+maps. Hence
+\[
+\begin{aligned}
+    &
+    \widetilde{\Dec}
+    \bigl(
+        \mathcal C\times\mathcal D,
+        E\times E'
+    \bigr)_n
+    \\
+    &\qquad\simeq
+    \widetilde{\Dec}(\mathcal C,E)_n
+    \times
+    \widetilde{\Dec}(\mathcal D,E')_n.
+\end{aligned}
+\]
+Thus the uncompleted decorated Segal spaces agree degreewise.
+
+Products of Dwyer--Kan equivalences are Dwyer--Kan equivalences, and
+products of complete Segal spaces are complete. Therefore the product of
+the two completions is a completion of the product Segal space.
+The universal property of functorial completion gives the displayed
+equivalence.
+
+All associativity, unit, and symmetry coherences are inherited from
+finite products in spaces and
+\[
+    \Cat_\infty.
+\]
+\end{proof}
+
+\begin{proposition}[Fixed-point decoration and dagger]
+\label{prop:fixed-point-decoration-dagger}
+Let
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C
+\]
+be an $\infty$-category with coherent duality.
+
+Let
+\[
+    E_D
+    :=
+    (\mathcal C^\simeq)^{hC_2},
+\]
+where the
+\[
+    C_2
+\]
+-action on
+\[
+    \mathcal C^\simeq
+\]
+is
+\[
+    \sigma_D
+    =
+    D^\simeq\circ\operatorname{inv}
+\]
+as in
+\Ref{lem:core-action-coherent-duality}.
+Let
+\[
+    e_D
+    \colon
+    E_D
+    \longrightarrow
+    \mathcal C^\simeq
+\]
+be evaluation at the underlying object.
+
+Then
+\[
+    \Dec(\mathcal C,E_D)
+\]
+carries a canonical coherent dagger
+\[
+    \dagger
+    \colon
+    \Dec(\mathcal C,E_D)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Dec(\mathcal C,E_D).
+\]
+It fixes represented objects with their specified coherent
+identifications. For fixed objects
+\[
+    (X,s_X),
+    \qquad
+    (Y,s_Y),
+\]
+and a morphism
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y,
+\]
+it is
+\[
+    f^\dagger
+    :=
+    s_X^{-1}
+    \circ
+    D(f)
+    \circ
+    s_Y
+    \colon
+    Y
+    \longrightarrow
+    X.
+\]
+It satisfies
+\[
+    (g\circ f)^\dagger
+    \simeq
+    f^\dagger\circ g^\dagger,
+\]
+\[
+    (f^\dagger)^\dagger
+    \simeq
+    f,
+\]
+\[
+    \id_X^\dagger
+    \simeq
+    \id_X,
+\]
+together with all coherent higher involutivity data.
+\end{proposition}
+
+\begin{proof}
+The homotopy-fixed-point space
+\[
+    E_D
+\]
+carries the universal fixed-point equivalence
+\[
+    s
+    \colon
+    e_D
+    \xRightarrow{\;\simeq\;}
+    \sigma_D\circ e_D.
+\]
+Its component at
+\[
+    (X,s_X)
+\]
+is the selected equivalence
+\[
+    s_X
+    \colon
+    X
+    \xrightarrow{\;\simeq\;}
+    D(X).
+\]
+
+An $n$-simplex of
+\[
+    \widetilde{\Dec}(\mathcal C,E_D)
+\]
+is represented by a chain
+\[
+    X_0
+    \xrightarrow{f_1}
+    X_1
+    \xrightarrow{f_2}
+    \cdots
+    \xrightarrow{f_n}
+    X_n
+\]
+together with coherent fixed-point structures
+\[
+    s_{X_i}
+    \colon
+    X_i
+    \xrightarrow{\;\simeq\;}
+    D(X_i).
+\]
+Define its dagger to be the reversed chain
+\[
+    X_n
+    \xrightarrow{f_n^\dagger}
+    X_{n-1}
+    \longrightarrow
+    \cdots
+    \xrightarrow{f_1^\dagger}
+    X_0,
+\]
+where
+\[
+    f_i^\dagger
+    :=
+    s_{X_{i-1}}^{-1}
+    \circ
+    D(f_i)
+    \circ
+    s_{X_i}.
+\]
+This operation is obtained by applying the order-reversal equivalence
+\[
+    [n]^{\op}
+    \xrightarrow{\;\cong\;}
+    [n],
+\]
+then applying
+\[
+    D,
+\]
+and finally conjugating at the vertices by the universal fixed-point
+equivalence
+\[
+    s.
+\]
+
+For composable morphisms
+\[
+    X
+    \xrightarrow{f}
+    Y
+    \xrightarrow{g}
+    Z,
+\]
+contravariance gives
+\[
+\begin{aligned}
+    (g\circ f)^\dagger
+    &\simeq
+    s_X^{-1}
+    \circ
+    D(f)
+    \circ
+    D(g)
+    \circ
+    s_Z
+    \\
+    &=
+    f^\dagger
+    \circ
+    g^\dagger.
+\end{aligned}
+\]
+Thus the degreewise construction commutes with the inner face maps.
+Compatibility with outer faces is restriction of the chain, and
+compatibility with degeneracies follows from
+\[
+    \id_X^\dagger
+    \simeq
+    \id_X.
+\]
+Hence there is a morphism of Segal spaces
+\[
+    \widetilde{\Dec}(\mathcal C,E_D)^{\op}
+    \longrightarrow
+    \widetilde{\Dec}(\mathcal C,E_D).
+\]
+
+For involutivity, the first fixed-point equation is
+\[
+    D(s_X)\circ\operatorname{bid}_X
+    \simeq
+    s_X.
+\]
+Therefore
+\[
+    D(s_X)
+    \simeq
+    s_X\circ\operatorname{bid}_X^{-1}
+\]
+and
+\[
+    D(s_X^{-1})
+    \simeq
+    \operatorname{bid}_X\circ s_X^{-1}.
+\]
+Consequently,
+\[
+\begin{aligned}
+    D(f^\dagger)
+    &\simeq
+    D(s_Y)
+    \circ
+    D^2(f)
+    \circ
+    D(s_X^{-1})
+    \\
+    &\simeq
+    s_Y
+    \circ
+    \operatorname{bid}_Y^{-1}
+    \circ
+    D^2(f)
+    \circ
+    \operatorname{bid}_X
+    \circ
+    s_X^{-1}.
+\end{aligned}
+\]
+Naturality of biduality gives
+\[
+    \operatorname{bid}_Y^{-1}
+    \circ
+    D^2(f)
+    \circ
+    \operatorname{bid}_X
+    \simeq
+    f.
+\]
+Hence
+\[
+    D(f^\dagger)
+    \simeq
+    s_Y\circ f\circ s_X^{-1},
+\]
+and therefore
+\[
+    (f^\dagger)^\dagger
+    \simeq
+    f.
+\]
+
+Because the degreewise construction is formed from the universal
+complete fixed-point datum, its involutivity modification and all higher
+\[
+    C_2
+\]
+-coherences commute with every simplicial operator. Functorial completion
+therefore yields the coherent dagger on
+\[
+    \Dec(\mathcal C,E_D).
+\]
+\end{proof}
+
+\begin{proposition}[Functoriality of fixed-point decoration]
+\label{prop:fixed-point-decoration-functoriality}
+Let
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C,
+    \qquad
+    E
+    \colon
+    \mathcal D^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal D
+\]
+be coherent dualities.
+
+Let
+\[
+    F
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be equipped with a natural equivalence
+\[
+    \rho
+    \colon
+    E\circ F^{\op}
+    \xRightarrow{\;\simeq\;}
+    F\circ D
+\]
+compatible with biduality and the complete coherent
+\[
+    C_2
+\]
+-structures.
+
+Then
+\[
+    F
+\]
+induces a functor
+\[
+    \Dec(F,\rho)
+    \colon
+    \Dec
+    \left(
+        \mathcal C,
+        (\mathcal C^\simeq)^{hC_2}
+    \right)
+    \longrightarrow
+    \Dec
+    \left(
+        \mathcal D,
+        (\mathcal D^\simeq)^{hC_2}
+    \right)
+\]
+which is compatible with the daggers through a coherent natural
+equivalence
+\[
+    \Dec(F,\rho)\circ\dagger_{\mathcal C}
+    \xRightarrow{\;\simeq\;}
+    \dagger_{\mathcal D}
+    \circ
+    \Dec(F,\rho)^{\op}.
+\]
+\end{proposition}
+
+\begin{proof}
+The equivariant functor
+\[
+    (F,\rho)
+\]
+induces a map of homotopy-fixed-point spaces
+\[
+    \bigl(
+        \mathcal C^\simeq
+    \bigr)^{hC_2}
+    \longrightarrow
+    \bigl(
+        \mathcal D^\simeq
+    \bigr)^{hC_2}.
+\]
+Together with
+\[
+    F,
+\]
+this defines a functor of decorated categories by
+\Ref{prop:object-decoration-properties}.
+
+For a morphism
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y,
+\]
+the image of the dagger is
+\[
+    F
+    \bigl(
+        s_X^{-1}D(f)s_Y
+    \bigr).
+\]
+The selected fixed-point structures on
+\[
+    F(X)
+    \qquad\text{and}\qquad
+    F(Y)
+\]
+are obtained from
+\[
+    F(s_X),
+    \qquad
+    F(s_Y),
+\]
+and
+\[
+    \rho_X^{-1},
+    \qquad
+    \rho_Y^{-1}.
+\]
+Pseudonaturality of
+\[
+    \rho
+\]
+identifies the preceding expression with the dagger of
+\[
+    F(f).
+\]
+
+The complete compatibility follows by applying the equivariant functor
+to the degreewise reversed-chain construction in
+\Ref{prop:fixed-point-decoration-dagger}.
+\end{proof}
+
+\section{Unitary hom categories}
+\label{sec:unitary-hom-categories}
+
+\begin{construction}[Unitary hom category]
+\label{con:unitary-hom-category}
+For Hermitian associative algebras
+\[
+    (B,\theta_B),
+    \qquad
+    (C,\theta_C),
+\]
+put
+\[
+    K_{B,C}
+    :=
+    \mathcal H_{B,C}^\simeq
+\]
+and
+\[
+    E_{B,C}
+    :=
+    K_{B,C}^{hC_2},
+\]
+where the
+\[
+    C_2
+\]
+-action is induced by the transported duality
+\[
+    \mathbb D_{B,C}.
+\]
+
+Let
+\[
+    e_{B,C}
+    \colon
+    E_{B,C}
+    \longrightarrow
+    K_{B,C}
+\]
+be evaluation at the underlying bimodule.
+
+Define
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}
+    :=
+    \Dec
+    \bigl(
+        \mathcal H_{B,C},
+        E_{B,C}
+    \bigr).
+\]
+\end{construction}
+
+\begin{proposition}[Properties of the unitary hom category]
+\label{prop:unitary-hom-category-properties}
+The represented objects of
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}
+\]
+are unitary right-perfect bimodules
+\[
+    (M,s_M).
+\]
+
+For two represented objects, there is a canonical equivalence
+\[
+\begin{aligned}
+    \Map_{\mathcal H^{\mathrm{unit}}_{B,C}}
+    \bigl(
+        (M,s_M),
+        (N,s_N)
+    \bigr)
+    \simeq
+    \Map_{\mathcal H_{B,C}}(M,N).
+\end{aligned}
+\]
+
+The selected unitary structures decorate the objects only. Morphisms are
+all underlying bimodule maps and are not required to preserve the
+unitary structures.
+
+The category
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}
+\]
+carries a coherent dagger
+\[
+    \dagger_{B,C}
+    \colon
+    \bigl(
+        \mathcal H^{\mathrm{unit}}_{B,C}
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal H^{\mathrm{unit}}_{B,C}.
+\]
+It fixes represented objects with their selected coherent
+identifications and sends
+\[
+    \alpha
+    \colon
+    (M,s_M)
+    \longrightarrow
+    (N,s_N)
+\]
+to
+\[
+    \alpha^\dagger
+    :=
+    s_M^{-1}
+    \circ
+    \mathbb D_{B,C}(\alpha)
+    \circ
+    s_N
+    \colon
+    N
+    \longrightarrow
+    M.
+\]
+\end{proposition}
+
+\begin{proof}
+Apply
+\Ref{prop:object-decoration-properties}
+and
+\Ref{prop:fixed-point-decoration-dagger}
+to
+\[
+    \mathcal C
+    =
+    \mathcal H_{B,C},
+    \qquad
+    D
+    =
+    \mathbb D_{B,C}.
+\]
+\end{proof}
+
+\begin{definition}[Unitary-admissible bimodule]
+\label{def:unitary-admissible-bimodule}
+Let
+\[
+    \mathcal H^{\mathrm{uadm}}_{B,C}
+    \subseteq
+    \mathcal H_{B,C}
+\]
+be the full subcategory spanned by those right-perfect
+$B$--$C$-bimodules for which the space of unitary structures is
+nonempty.
+\end{definition}
+
+\begin{proposition}[Underlying admissible hom category]
+\label{prop:underlying-admissible-hom-category}
+The forgetful functor
+\[
+    q_{B,C}
+    \colon
+    \mathcal H^{\mathrm{unit}}_{B,C}
+    \longrightarrow
+    \mathcal H_{B,C}
+\]
+is fully faithful, with essential image
+\[
+    \mathcal H^{\mathrm{uadm}}_{B,C}.
+\]
+
+Consequently, after forgetting the dagger enhancement, there is an
+equivalence
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}
+    \xrightarrow{\;\simeq\;}
+    \mathcal H^{\mathrm{uadm}}_{B,C}.
+\]
+\end{proposition}
+
+\begin{proof}
+The mapping-space formula of
+\Ref{prop:unitary-hom-category-properties}
+shows that
+\[
+    q_{B,C}
+\]
+is fully faithful.
+
+A right-perfect bimodule
+\[
+    M
+\]
+lies in its essential image precisely when the homotopy fibre of
+\[
+    E_{B,C}
+    \longrightarrow
+    K_{B,C}
+\]
+over
+\[
+    M
+\]
+is nonempty. This fibre is the space of unitary structures on
+\[
+    M.
+\]
+Hence the essential image is
+\[
+    \mathcal H^{\mathrm{uadm}}_{B,C}.
+\]
+\end{proof}
+
+\begin{remark}[Selected structures and the underlying category]
+\label{rem:selected-structures-underlying-category}
+Different selected unitary structures on the same underlying bimodule
+determine different represented objects of
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}.
+\]
+They are nevertheless equivalent objects because the identity map of
+the underlying bimodule is an equivalence in the decorated category.
+
+After forgetting the dagger enhancement, the decorated category is
+equivalent to the full subcategory of unitary-admissible bimodules.
+
+The selected unitary structures remain essential for the dagger formula
+\[
+    \alpha^\dagger
+    =
+    s_M^{-1}
+    \circ
+    \mathbb D_{B,C}(\alpha)
+    \circ
+    s_N.
+\]
+There is no canonical dagger on
+\[
+    \mathcal H^{\mathrm{uadm}}_{B,C}
+\]
+without retaining coherent choices of unitary structures.
+\end{remark}
+
+\section{Transport along Hermitian algebra equivalences}
+\label{sec:transport-hermitian-algebra-equivalences}
+
+\begin{lemma}[Hermitian algebra equivalences give unitary Morita equivalences]
+\label{lem:hermitian-equivalence-unitary-regular}
+Let
+\[
+    u
+    \colon
+    (B,\theta_B)
+    \xrightarrow{\;\simeq\;}
+    (C,\theta_C)
+\]
+be an equivalence in
+\[
+    \HermAlg_A.
+\]
+
+Then the regular extension bimodule
+\[
+    U_u
+    =
+    {}_B C_C
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+is a Morita equivalence and carries a canonical unitary structure
+\[
+    s_u
+    \colon
+    U_u
+    \xrightarrow{\;\simeq\;}
+    \mathbb D_{B,C}(U_u).
+\]
+
+Under the action-restriction description of
+\[
+    \mathbb D_{B,C}(U_u),
+\]
+the underlying $A$-module map of
+\[
+    s_u
+\]
+is represented by
+\[
+    \theta_C
+    \colon
+    C
+    \xrightarrow{\;\simeq\;}
+    C^{\op}.
+\]
+\end{lemma}
+
+\begin{proof}
+The bimodule
+\[
+    U_u
+\]
+is a Morita equivalence by
+\Ref{lem:regular-algebra-equivalence-morita}.
+
+By
+\Ref{prop:regular-morita-equivariance},
+the regular-bimodule assignment is equivariant for the
+opposite-algebra action and the canonical Morita duality.
+
+The equivalence
+\[
+    u
+\]
+is a path in the homotopy-fixed-point space
+\[
+    \HermAlg_A.
+\]
+Its first equivariance homotopy is
+\[
+    \theta_C\circ u
+    \simeq
+    u^{\op}\circ\theta_B
+\]
+as algebra maps
+\[
+    B
+    \longrightarrow
+    C^{\op}.
+\]
+Applying the equivariant regular-bimodule functor gives the unitary
+fixed-point equivalence
+\[
+    s_u
+    \colon
+    U_u
+    \xrightarrow{\;\simeq\;}
+    \mathbb D_{B,C}(U_u).
+\]
+
+The underlying object of both bimodules is
+\[
+    C.
+\]
+The displayed equivariance homotopy and anti-multiplicativity of
+\[
+    \theta_C
+\]
+show that the map represented by
+\[
+    \theta_C
+\]
+intertwines the transported endpoint actions.
+
+The complete unitary coherence is the image of the complete coherent
+fixed-point path
+\[
+    u
+\]
+under the equivariant regular-bimodule construction.
+\end{proof}
+
+\begin{proposition}[Functoriality of unitary hom categories]
+\label{prop:unitary-hom-category-functor}
+The assignments
+\[
+    \bigl(
+        (B,\theta_B),
+        (C,\theta_C)
+    \bigr)
+    \longmapsto
+    \mathcal H^{\mathrm{unit}}_{B,C}
+\]
+define a functor
+\[
+    \mathcal H_A^{\mathrm{unit}}
+    \colon
+    (\HermAlg_A)^{\op}
+    \times
+    \HermAlg_A
+    \longrightarrow
+    \Cat_\infty.
+\]
+
+For equivalences
+\[
+    u
+    \colon
+    (B',\theta_{B'})
+    \xrightarrow{\;\simeq\;}
+    (B,\theta_B)
+\]
+and
+\[
+    v
+    \colon
+    (C,\theta_C)
+    \xrightarrow{\;\simeq\;}
+    (C',\theta_{C'}),
+\]
+the induced transport functor is represented by
+\[
+\begin{aligned}
+    T_{u,v}
+    \colon
+    \mathcal H^{\mathrm{unit}}_{B,C}
+    &\longrightarrow
+    \mathcal H^{\mathrm{unit}}_{B',C'},
+    \\
+    M
+    &\longmapsto
+    U_u\otimes_BM\otimes_CU_v.
+\end{aligned}
+\]
+
+The transport functors are compatible with the local daggers through
+canonical coherent natural equivalences
+\[
+    T_{u,v}\circ\dagger_{B,C}
+    \xRightarrow{\;\simeq\;}
+    \dagger_{B',C'}
+    \circ
+    T_{u,v}^{\op}.
+\]
+\end{proposition}
+
+\begin{proof}
+On underlying right-perfect bimodule categories, fixed-endpoint
+transport gives
+\[
+    T_{u,v}(M)
+    :=
+    U_u\otimes_BM\otimes_CU_v.
+\]
+Since
+\[
+    U_u
+    \qquad\text{and}\qquad
+    U_v
+\]
+are Morita equivalences, this preserves right-perfect bimodules.
+
+Naturality in coherent fixed endpoints, proved in
+\Ref{prop:fixed-endpoint-transport},
+makes
+\[
+    T_{u,v}
+\]
+a morphism of the transported coherent dualities. Applying
+\Ref{prop:fixed-point-decoration-functoriality}
+gives the functor on unitary hom categories and its compatibility with
+the dagger.
+
+For composable endpoint equivalences, the canonical regular-bimodule
+equivalences
+\[
+    U_{u_2\circ u_1}
+    \simeq
+    U_{u_1}\otimes U_{u_2}
+\]
+and their target analogues identify the corresponding transport
+functors. The associativity and unit coherences are those of Morita
+composition and the regular-bimodule functor.
+
+Thus the assignment is a coherent functor
+\[
+    (\HermAlg_A)^{\op}
+    \times
+    \HermAlg_A
+    \longrightarrow
+    \Cat_\infty.
+\]
+\end{proof}
+
+\section{The global Hermitian right-perfect Morita category}
+\label{sec:global-hermitian-right-perfect-morita}
+
+Let
+\[
+    (s,t)
+    \colon
+    \mathcal A_A^{\mathrm{unit}}
+    \longrightarrow
+    \HermAlg_A\times\HermAlg_A
+\]
+be the unstraightening of
+\[
+    \mathcal H_A^{\mathrm{unit}}
+    \colon
+    (\HermAlg_A)^{\op}
+    \times
+    \HermAlg_A
+    \longrightarrow
+    \Cat_\infty.
+\]
+
+Thus the fibre over
+\[
+    \bigl(
+        (B,\theta_B),
+        (C,\theta_C)
+    \bigr)
+\]
+is
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}.
+\]
+
+\begin{proposition}[Coherent multi-composition of unitary hom categories]
+\label{prop:coherent-multicomposition-unitary-homs}
+For every sequence of Hermitian associative algebras
+\[
+    (B_0,\theta_{B_0}),
+    \ldots,
+    (B_n,\theta_{B_n}),
+\]
+Morita composition induces a functor
+\[
+\begin{aligned}
+    &
+    \mathcal H^{\mathrm{unit}}_{B_0,B_1}
+    \times
+    \cdots
+    \times
+    \mathcal H^{\mathrm{unit}}_{B_{n-1},B_n}
+    \\
+    &\qquad\longrightarrow
+    \mathcal H^{\mathrm{unit}}_{B_0,B_n}.
+\end{aligned}
+\]
+
+On represented objects it sends
+\[
+    (M_1,s_{M_1}),
+    \ldots,
+    (M_n,s_{M_n})
+\]
+to the iterated Morita composite with the unitary structure induced by
+the coherent multi-compositor of
+\[
+    \mathbb D_A.
+\]
+
+These multi-composition functors are coherently associative and unital
+and are natural in equivalences of Hermitian endpoints.
+\end{proposition}
+
+\begin{proof}
+The higher Morita category already supplies a coherent system of
+multi-composition functors
+\[
+\begin{aligned}
+    &
+    \mathcal H_{B_0,B_1}
+    \times
+    \cdots
+    \times
+    \mathcal H_{B_{n-1},B_n}
+    \\
+    &\qquad\longrightarrow
+    \mathcal H_{B_0,B_n}.
+\end{aligned}
+\]
+
+The coherent multi-compositors of
+\[
+    \mathbb D_A
+\]
+and fixed-endpoint transport make each such functor a morphism of the
+corresponding product duality to
+\[
+    \mathbb D_{B_0,B_n}.
+\]
+
+Homotopy fixed points commute with finite products because they are
+limits. By
+\Ref{prop:object-decoration-products}
+and
+\Ref{prop:fixed-point-decoration-functoriality},
+fixed-point decoration carries every multi-composition functor to a
+functor of the displayed unitary hom categories.
+
+These functors are obtained functorially from the complete coherent
+multi-composition system of
+\[
+    \Mor_A.
+\]
+Hence their associativity, unit, endpoint naturality, and all higher
+compatibilities are inherited simultaneously.
+\end{proof}
+
+\begin{construction}[Unitary Morita Segal object]
+\label{con:unitary-morita-segal-object}
+Define
+\[
+    \mathcal N_{A,0}
+    :=
+    \HermAlg_A,
+\]
+\[
+    \mathcal N_{A,1}
+    :=
+    \mathcal A_A^{\mathrm{unit}},
+\]
+and, for
+\[
+    n\geq2,
+\]
+define
+\[
+    \mathcal N_{A,n}
+    :=
+    \underbrace{
+        \mathcal A_A^{\mathrm{unit}}
+        \times_{t,\HermAlg_A,s}
+        \cdots
+        \times_{t,\HermAlg_A,s}
+        \mathcal A_A^{\mathrm{unit}}
+    }_{n\text{ factors}}.
+\]
+
+The face and degeneracy maps are induced by the coherent
+multi-composition and unit functors of
+\Ref{prop:coherent-multicomposition-unitary-homs}.
+
+Thus
+\[
+    \mathcal N_{A,\bullet}
+    \colon
+    \Delta^{\op}
+    \longrightarrow
+    \Cat_\infty
+\]
+is a Segal object.
+
+A represented object of
+\[
+    \mathcal N_{A,n}
+\]
+consists of Hermitian associative algebras
+\[
+    (B_0,\theta_{B_0}),
+    \ldots,
+    (B_n,\theta_{B_n})
+\]
+and unitary right-perfect bimodules
+\[
+    (M_i,s_{M_i})
+    \colon
+    B_{i-1}
+    \longrightarrow
+    B_i,
+    \qquad
+    1\leq i\leq n.
+\]
+\end{construction}
+
+\begin{proposition}[The unitary Morita Segal object]
+\label{prop:unitary-morita-segal-object}
+The construction
+\[
+    \mathcal N_{A,\bullet}
+\]
+is a coherent simplicial object in
+\[
+    \Cat_\infty.
+\]
+
+Its inner face maps perform Morita composition with the induced unitary
+structure of
+\Ref{thm:unitary-bimodule-composition}.
+Its degeneracy maps insert the canonical unitary identity bimodules of
+\Ref{prop:unit-bimodule-unitary}.
+
+For every
+\[
+    n\geq2,
+\]
+the Segal map is the defining equivalence
+\[
+    \mathcal N_{A,n}
+    \xrightarrow{\;\simeq\;}
+    \mathcal N_{A,1}
+    \times_{\mathcal N_{A,0}}
+    \cdots
+    \times_{\mathcal N_{A,0}}
+    \mathcal N_{A,1}.
+\]
+
+The object category
+\[
+    \mathcal N_{A,0}
+    =
+    \HermAlg_A
+\]
+is an $\infty$-groupoid.
+\end{proposition}
+
+\begin{proof}
+The functorial Segal presentation of
+\[
+    \Mor_A^{\mathrm{rperf}}
+\]
+used in
+\Ref{chap:right-perfect-morita-duality}
+already carries all face, degeneracy, associativity, unit, and higher
+simplicial coherences for Morita composition.
+
+By
+\Ref{prop:coherent-multicomposition-unitary-homs},
+every multi-composition functor lifts functorially to the fixed-point
+decorations. The identity functors lift by
+\Ref{prop:unit-bimodule-unitary}.
+
+Since the lifts are obtained functorially from the existing coherent
+Morita simplicial operators, all simplicial identities and higher
+compatibilities are inherited. Thus the displayed graded object is a
+coherent simplicial object.
+
+The Segal equivalences hold by the definition of
+\[
+    \mathcal N_{A,n}
+\]
+as iterated fibre products. The degree-zero category is a space by the
+definition of
+\[
+    \HermAlg_A.
+\]
+\end{proof}
+
+\begin{construction}[Global Hermitian right-perfect Morita category]
+\label{con:global-hermitian-right-perfect-morita}
+Define
+\[
+    \Mor_A^{\mathrm{Herm,rperf}}
+\]
+to be the $(\infty,2)$-category presented by the functorial completion
+of the Segal object
+\[
+    \mathcal N_{A,\bullet}
+    \colon
+    \Delta^{\op}
+    \longrightarrow
+    \Cat_\infty,
+\]
+using the completion convention of
+\Ref{chap:right-perfect-morita-duality}.
+\end{construction}
+
+\begin{proposition}[Objects, morphisms, and hom categories]
+\label{prop:global-hermitian-morita-description}
+The $(\infty,2)$-category
+\[
+    \Mor_A^{\mathrm{Herm,rperf}}
+\]
+has the following description:
+\begin{enumerate}[label=(\roman*)]
+    \item its represented objects are Hermitian associative
+    $A$-algebras;
+
+    \item its represented $1$-morphisms are unitary right-perfect
+    bimodules;
+
+    \item its $2$-morphisms are all underlying bimodule maps;
+
+    \item horizontal composition is Morita tensor product equipped with
+    the induced unitary structure;
+
+    \item for Hermitian associative algebras
+    \[
+        (B,\theta_B),
+        \qquad
+        (C,\theta_C),
+    \]
+    there is a canonical equivalence
+    \[
+    \begin{aligned}
+        \operatorname{Hom}_{\Mor_A^{\mathrm{Herm,rperf}}}
+        \bigl(
+            (B,\theta_B),
+            (C,\theta_C)
+        \bigr)
+        \simeq
+        \mathcal H^{\mathrm{unit}}_{B,C}.
+    \end{aligned}
+    \]
+\end{enumerate}
+
+After forgetting the dagger enhancement, the hom category is equivalent
+to
+\[
+    \mathcal H^{\mathrm{uadm}}_{B,C}.
+\]
+\end{proposition}
+
+\begin{proof}
+Before completion, the fibre of
+\[
+    \mathcal N_{A,1}
+    \longrightarrow
+    \mathcal N_{A,0}\times\mathcal N_{A,0}
+\]
+over
+\[
+    \bigl(
+        (B,\theta_B),
+        (C,\theta_C)
+    \bigr)
+\]
+is
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}.
+\]
+
+Functorial completion is a Dwyer--Kan equivalence and preserves the
+represented mapping $\infty$-categories up to canonical equivalence.
+Therefore
+\[
+\begin{aligned}
+    \operatorname{Hom}_{\Mor_A^{\mathrm{Herm,rperf}}}
+    \bigl(
+        (B,\theta_B),
+        (C,\theta_C)
+    \bigr)
+    \simeq
+    \mathcal H^{\mathrm{unit}}_{B,C}.
+\end{aligned}
+\]
+
+The descriptions of represented objects, represented $1$-morphisms,
+$2$-morphisms, and horizontal composition follow from the Segal
+construction.
+
+Finally,
+\Ref{prop:underlying-admissible-hom-category}
+gives
+\[
+    \mathcal H^{\mathrm{unit}}_{B,C}
+    \xrightarrow{\;\simeq\;}
+    \mathcal H^{\mathrm{uadm}}_{B,C}
+\]
+after forgetting the dagger enhancement.
+\end{proof}
+
+\section{The global dagger}
+\label{sec:global-hermitian-dagger}
+
+\begin{lemma}[Completion and variance operations]
+\label{lem:completion-coopposite}
+Let
+\[
+    L
+\]
+denote the functorial completion of Segal objects used in
+\Ref{chap:right-perfect-morita-duality}.
+For
+\[
+    \varepsilon
+    \in
+    \{\op,\mathrm{co},\mathrm{coop}\},
+\]
+and every Segal object
+\[
+    X_\bullet,
+\]
+there is a canonical equivalence
+\[
+    L
+    \bigl(
+        X_\bullet^{\varepsilon}
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    L(X_\bullet)^{\varepsilon}.
+\]
+These equivalences are coherently compatible with the involutive
+relations among
+\[
+    \op,
+    \qquad
+    \mathrm{co},
+    \qquad
+    \mathrm{coop}.
+\]
+Consequently, coherent actions involving any of these variance
+operations pass canonically to functorial completion.
+\end{lemma}
+
+\begin{proof}
+Each variance operation is an autoequivalence of the $\infty$-category
+of Segal objects in
+\[
+    \Cat_\infty.
+\]
+It preserves the Segal condition, complete objects, and
+Dwyer--Kan equivalences.
+
+The completion map
+\[
+    X_\bullet
+    \longrightarrow
+    L(X_\bullet)
+\]
+is a Dwyer--Kan equivalence with complete target. Applying
+\[
+    (-)^\varepsilon
+\]
+gives a Dwyer--Kan equivalence
+\[
+    X_\bullet^\varepsilon
+    \longrightarrow
+    L(X_\bullet)^\varepsilon
+\]
+with complete target. Hence
+\[
+    L(X_\bullet)^\varepsilon
+\]
+has the universal property of a completion of
+\[
+    X_\bullet^\varepsilon.
+\]
+Functorial uniqueness of completion supplies the displayed canonical
+equivalence.
+
+The relevant spaces of comparison equivalences are contractible.
+Therefore the comparisons are coherently compatible with
+\[
+    \varepsilon^2\simeq\id
+\]
+and with
+\[
+    \op\circ\mathrm{co}
+    \simeq
+    \mathrm{coop}.
+\]
+Applying
+\[
+    L
+\]
+to a coherent variance-twisted
+\[
+    BC_2
+\]
+-diagram produces the corresponding coherent diagram after completion.
+\end{proof}
+
+\begin{theorem}[Global dagger structure]
+\label{thm:global-hermitian-dagger}
+The local dagger functors
+\[
+    \dagger_{B,C}
+    \colon
+    \bigl(
+        \mathcal H^{\mathrm{unit}}_{B,C}
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal H^{\mathrm{unit}}_{B,C}
+\]
+assemble into a coherent weak duality involution
+\[
+    \dagger
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm{Herm,rperf}}
+    \bigr)^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm{Herm,rperf}}.
+\]
+It fixes the represented Hermitian objects and represented unitary
+$1$-morphisms with their specified coherent identifications.
+
+For a $2$-morphism
+\[
+    \alpha
+    \colon
+    (M,s_M)
+    \longrightarrow
+    (N,s_N)
+\]
+between unitary right-perfect
+\[
+    B\text{--}C
+\]
+-bimodules, it is
+\[
+    \alpha^\dagger
+    :=
+    s_M^{-1}
+    \circ
+    \mathbb D_{B,C}(\alpha)
+    \circ
+    s_N
+    \colon
+    N
+    \longrightarrow
+    M.
+\]
+It satisfies
+\[
+    (\beta\circ\alpha)^\dagger
+    \simeq
+    \alpha^\dagger\circ\beta^\dagger,
+\]
+\[
+    (\alpha^\dagger)^\dagger
+    \simeq
+    \alpha,
+\]
+\[
+    \id_M^\dagger
+    \simeq
+    \id_M,
+\]
+and, for horizontally composable maps,
+\[
+    (\alpha\otimes_C\beta)^\dagger
+    \simeq
+    \alpha^\dagger\otimes_C\beta^\dagger.
+\]
+
+For every selected unitary $1$-morphism
+\[
+    (M,s_M),
+\]
+the adjoint formulation gives a coherent mate-symmetric equivalence
+\[
+    J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R.
+\]
+\end{theorem}
+
+\begin{proof}
+Put
+\[
+    S
+    :=
+    \HermAlg_A.
+\]
+Since
+\[
+    S
+\]
+is an $\infty$-groupoid, inversion gives the canonical equivalence
+\[
+    S^{\op}
+    \xrightarrow{\;\simeq\;}
+    S.
+\]
+Under this equivalence, define the degree-zero dagger
+\[
+    \dagger_0
+    \colon
+    \mathcal N_{A,0}^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal N_{A,0}
+\]
+to be the identity on represented Hermitian algebras and their complete
+fixed-point data.
+
+The functor of unitary hom categories is
+\[
+    \mathcal H_A^{\mathrm{unit}}
+    \colon
+    S^{\op}\times S
+    \longrightarrow
+    \Cat_\infty,
+\]
+and its unstraightening is
+\[
+    (s,t)
+    \colon
+    \mathcal A_A^{\mathrm{unit}}
+    \longrightarrow
+    S\times S.
+\]
+For every pair
+\[
+    (B,C),
+\]
+\Ref{prop:unitary-hom-category-properties} supplies a coherent dagger
+\[
+    \dagger_{B,C}
+    \colon
+    \bigl(
+        \mathcal H^{\mathrm{unit}}_{B,C}
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal H^{\mathrm{unit}}_{B,C}.
+\]
+By
+\Ref{prop:unitary-hom-category-functor},
+these daggers are coherently natural in Hermitian equivalences of both
+endpoints.
+
+Since
+\[
+    S\times S
+\]
+is an $\infty$-groupoid, the opposite of the total unstraightening is
+the unstraightening of the fiberwise opposite functor. Unstraightening
+the preceding natural family therefore gives an equivalence
+\[
+    \dagger_1
+    \colon
+    \bigl(
+        \mathcal A_A^{\mathrm{unit}}
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal A_A^{\mathrm{unit}}
+\]
+over the identity of
+\[
+    S\times S.
+\]
+It fixes represented decorated objects and sends every represented
+bimodule map to its local dagger.
+
+For
+\[
+    n\geq2,
+\]
+one has
+\[
+    \mathcal N_{A,n}
+    =
+    \underbrace{
+        \mathcal A_A^{\mathrm{unit}}
+        \times_S
+        \cdots
+        \times_S
+        \mathcal A_A^{\mathrm{unit}}
+    }_{n\text{ factors}}.
+\]
+The opposite-category functor preserves these limits. Hence
+\[
+\begin{aligned}
+    \bigl(
+        \mathcal N_{A,n}
+    \bigr)^{\op}
+    \simeq
+    \underbrace{
+        \bigl(
+            \mathcal A_A^{\mathrm{unit}}
+        \bigr)^{\op}
+        \times_S
+        \cdots
+        \times_S
+        \bigl(
+            \mathcal A_A^{\mathrm{unit}}
+        \bigr)^{\op}
+    }_{n\text{ factors}}.
+\end{aligned}
+\]
+Define
+\[
+    \dagger_n
+    \colon
+    \bigl(
+        \mathcal N_{A,n}
+    \bigr)^{\op}
+    \longrightarrow
+    \mathcal N_{A,n}
+\]
+by applying
+\[
+    \dagger_1
+\]
+to every factor. Because the desired global variance is
+\[
+    \mathrm{co},
+\]
+the order of the represented string of $1$-morphisms is unchanged; only
+morphisms inside the hom $\infty$-categories are reversed.
+
+We verify compatibility with the simplicial operators. Outer face maps
+forget factors and therefore commute with
+\[
+    \dagger_n.
+\]
+Degeneracy maps insert the coherently natural unitary identities of
+\Ref{prop:unit-bimodule-unitary},
+so they also commute with the dagger.
+
+For an inner face, let
+\[
+    \alpha
+    \colon
+    M
+    \longrightarrow
+    M',
+    \qquad
+    \beta
+    \colon
+    N
+    \longrightarrow
+    N'
+\]
+be horizontally composable maps. By definition,
+\[
+\begin{aligned}
+    (\alpha\otimes_C\beta)^\dagger
+    &:=
+    s_{M\otimes N}^{-1}
+    \circ
+    \mathbb D_{B,D}
+    \bigl(
+        \alpha\otimes_C\beta
+    \bigr)
+    \circ
+    s_{M'\otimes N'}.
+\end{aligned}
+\]
+The Morita-duality compositor identifies
+\[
+    \mathbb D_{B,D}
+    \bigl(
+        \alpha\otimes_C\beta
+    \bigr)
+\]
+with
+\[
+    \mathbb D_{B,C}(\alpha)
+    \otimes_C
+    \mathbb D_{C,D}(\beta).
+\]
+The composite unitary structures satisfy
+\[
+    s_{M\otimes N}
+    =
+    \mu_{M,N}^{-1}
+    \circ
+    (s_M\otimes_Cs_N).
+\]
+Substitution cancels the two occurrences of
+\[
+    \mu,
+\]
+and gives
+\[
+    (\alpha\otimes_C\beta)^\dagger
+    \simeq
+    \alpha^\dagger
+    \otimes_C
+    \beta^\dagger.
+\]
+The same argument in every arity uses the coherent multi-compositors and
+shows that the family
+\[
+    \dagger_\bullet
+\]
+commutes with all inner face maps and all higher simplicial coherence
+cells.
+
+Thus there is a coherent equivalence of Segal objects
+\[
+    \dagger_\bullet
+    \colon
+    \mathcal N_{A,\bullet}^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal N_{A,\bullet}.
+\]
+The local involutivity modifications assemble factorwise. Every higher
+\[
+    C_2
+\]
+-coherence is inherited from the universal unitary fixed-point data and
+the complete coherent transported Morita dualities.
+
+Applying functorial completion and
+\Ref{lem:completion-coopposite}
+gives
+\[
+    \dagger
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm{Herm,rperf}}
+    \bigr)^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm{Herm,rperf}}.
+\]
+The local formulas imply the displayed vertical composition,
+involutivity, and identity laws. Finally,
+\Ref{prop:unitary-adjoint-formulation}
+identifies every selected unitary structure with a coherent
+mate-symmetric equivalence
+\[
+    J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R.
+\]
+\end{proof}
+
+\section{Base change}
+\label{sec:equivariant-base-change}
+
+Let
+\[
+    f
+    \colon
+    A
+    \longrightarrow
+    A'
+\]
+be a morphism in
+\[
+    \CAlg(\V).
+\]
+Write
+\[
+    F_f
+    :=
+    F_f^{\mathrm{rperf}}
+    \colon
+    \Mor_A^{\mathrm{rperf}}
+    \longrightarrow
+    \Mor_{A'}^{\mathrm{rperf}}.
+\]
+
+No equivariance condition on the commutative base is required.
+
+\begin{proposition}[Base change of Hermitian associative algebras]
+\label{prop:base-change-hermitian-algebra}
+Let
+\[
+    (B,\theta_B)
+\]
+be a Hermitian associative $A$-algebra.
+
+The base-changed algebra
+\[
+    F_f(B)
+    =
+    B\otimes_AA'
+\]
+has a canonical Hermitian structure
+\[
+\begin{aligned}
+    \theta_{F_f(B)}
+    \colon
+    F_f(B)
+    &\xrightarrow{
+        F_f(\theta_B)
+    }
+    F_f(B^{\op})
+    \\
+    &\xrightarrow{
+        \bigl(
+            \omega_{f,B}^{\mathrm{alg}}
+        \bigr)^{-1}
+    }
+    F_f(B)^{\op},
+\end{aligned}
+\]
+where
+\[
+    \omega_{f,B}^{\mathrm{alg}}
+    \colon
+    F_f(B)^{\op}
+    \xrightarrow{\;\simeq\;}
+    F_f(B^{\op})
+\]
+is the opposite-algebra comparison of
+\Ref{prop:base-change-opposites}.
+
+This construction defines a map
+\[
+    F_f^{\HermAlg}
+    \colon
+    \HermAlg_A
+    \longrightarrow
+    \HermAlg_{A'}.
+\]
+\end{proposition}
+
+\begin{proof}
+The composite
+\[
+\begin{aligned}
+    F_f(B)
+    &\xrightarrow{
+        F_f(\theta_B)
+    }
+    F_f(B^{\op})
+    \\
+    &\xrightarrow{
+        \bigl(
+            \omega_{f,B}^{\mathrm{alg}}
+        \bigr)^{-1}
+    }
+    F_f(B)^{\op}
+\end{aligned}
+\]
+is an equivalence of associative
+\[
+    A'
+\]
+-algebras.
+
+The comparison
+\[
+    \omega_f
+    \colon
+    O_{A'}
+    \circ
+    \bigl(
+        F_f^{\mathrm{Mor}}
+    \bigr)^{\op}
+    \xRightarrow{\;\simeq\;}
+    F_f^{\mathrm{Mor}}
+    \circ
+    O_A
+\]
+intertwines the complete coherent
+\[
+    C_2
+\]
+-structures of the two opposite operations. It therefore sends the
+fixed-point structure of
+\[
+    \theta_B
+\]
+to a fixed-point structure on
+\[
+    \theta_{F_f(B)}.
+\]
+
+Functoriality on Hermitian algebra equivalences gives
+\[
+    F_f^{\HermAlg}.
+\]
+\end{proof}
+
+\begin{proposition}[Base change of transported hom duality]
+\label{prop:base-change-transported-hom-duality}
+Let
+\[
+    (B,\theta_B),
+    \qquad
+    (C,\theta_C)
+\]
+be Hermitian associative $A$-algebras.
+
+For every right-perfect
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+there is a canonical natural equivalence
+\[
+\begin{aligned}
+    \overline\kappa_{f,M}
+    \colon
+    \mathbb D_{F_f(B),F_f(C)}
+    \bigl(
+        F_f(M)
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    F_f
+    \bigl(
+        \mathbb D_{B,C}(M)
+    \bigr).
+\end{aligned}
+\]
+
+These comparisons are coherently compatible with bimodule maps, Morita
+composition, biduality, and the complete coherent
+\[
+    C_2
+\]
+-structures.
+\end{proposition}
+
+\begin{proof}
+The global base-change comparison of
+\Ref{prop:base-change-morita-duality}
+is
+\[
+    \kappa_f
+    \colon
+    \mathbb D_{A'}
+    \circ
+    F_f^{\mathrm{co}}
+    \xRightarrow{\;\simeq\;}
+    F_f
+    \circ
+    \mathbb D_A.
+\]
+
+By
+\Ref{prop:base-change-hermitian-algebra},
+the fixed-point structure on
+\[
+    F_f(B)
+\]
+is the transport of the fixed-point structure on
+\[
+    B
+\]
+through
+\[
+    (F_f,\kappa_f),
+\]
+and similarly for
+\[
+    C.
+\]
+
+Apply
+\Ref{prop:fixed-endpoint-transport-functoriality}
+with
+\[
+    \mathcal X
+    =
+    \Mor_A^{\mathrm{rperf}},
+    \qquad
+    \mathcal Y
+    =
+    \Mor_{A'}^{\mathrm{rperf}},
+\]
+\[
+    D
+    =
+    \mathbb D_A,
+    \qquad
+    E
+    =
+    \mathbb D_{A'},
+    \qquad
+    F
+    =
+    F_f.
+\]
+This gives
+\[
+    \overline\kappa_{f,M}
+\]
+and all the stated coherent compatibilities.
+\end{proof}
+
+\begin{proposition}[Base change of Hermitian reversal]
+\label{prop:base-change-hermitian-reversal}
+Let
+\[
+    (B,\theta_B),
+    \qquad
+    (C,\theta_C)
+\]
+be Hermitian associative $A$-algebras. For every bimodule
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+there is a canonical natural equivalence
+\[
+    j_{f,M}
+    \colon
+    J_{F_f(B),F_f(C)}
+    \bigl(
+        F_f(M)
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    F_f
+    \bigl(
+        J_{B,C}(M)
+    \bigr).
+\]
+
+For composable bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+the comparisons satisfy the canonically typed identity
+\[
+\begin{aligned}
+    F_f(\zeta_{M,N})
+    \circ
+    j_{f,M\otimes_CN}
+    \simeq{}&
+    \phi_{f;J_{C,D}(N),J_{B,C}(M)}^{-1}
+    \\
+    &\circ
+    \bigl(
+        j_{f,N}
+        \otimes_{F_f(C)}
+        j_{f,M}
+    \bigr)
+    \\
+    &\circ
+    \zeta_{F_f(M),F_f(N)}
+    \circ
+    J_{F_f(B),F_f(D)}
+    \bigl(
+        \phi_{f;M,N}
+    \bigr),
+\end{aligned}
+\]
+where
+\[
+    \phi_{f;M,N}
+    \colon
+    F_f(M\otimes_CN)
+    \xrightarrow{\;\simeq\;}
+    F_f(M)
+    \otimes_{F_f(C)}
+    F_f(N)
+\]
+is the Morita-composition comparison of
+\Ref{prop:morita-base-change}.
+They are also compatible with double Hermitian reversal:
+\[
+    F_f(\epsilon^J_M)
+    \circ
+    j^{(2)}_{f,M}
+    \simeq
+    \epsilon^J_{F_f(M)},
+\]
+where
+\[
+    j^{(2)}_{f,M}
+\]
+is the comparison obtained by applying
+\[
+    j_f
+\]
+twice. All identities hold with their complete higher coherences.
+\end{proposition}
+
+\begin{proof}
+The coherent action-reversal involutions and base change are related by
+\[
+    \omega_f
+    \colon
+    O_{A'}
+    \circ
+    \bigl(
+        F_f^{\mathrm{Mor}}
+    \bigr)^{\op}
+    \xRightarrow{\;\simeq\;}
+    F_f^{\mathrm{Mor}}
+    \circ
+    O_A.
+\]
+The Hermitian structures on
+\[
+    F_f(B)
+    \qquad\text{and}\qquad
+    F_f(C)
+\]
+are precisely the fixed-point structures transported through
+\[
+    (F_f^{\mathrm{Mor}},\omega_f).
+\]
+Apply
+\Ref{prop:fixed-endpoint-transport-one-op-functoriality}
+with
+\[
+    \mathcal X
+    =
+    \Mor_A,
+    \qquad
+    \mathcal Y
+    =
+    \Mor_{A'},
+\]
+\[
+    O_{\mathcal X}
+    =
+    O_A,
+    \qquad
+    O_{\mathcal Y}
+    =
+    O_{A'}.
+\]
+It gives the displayed comparison
+\[
+    j_{f,M}.
+\]
+Its compatibility with reversal of composition, double reversal, and all
+higher involutivity data is part of the functorial fixed-endpoint
+transport theorem.
+\end{proof}
+
+\begin{proposition}[Base change of unitary bimodules]
+\label{prop:base-change-unitary-bimodules}
+Let
+\[
+    (M,s_M)
+    \colon
+    (B,\theta_B)
+    \longrightarrow
+    (C,\theta_C)
+\]
+be a unitary right-perfect bimodule.
+
+Then
+\[
+    F_f(M)
+    =
+    M\otimes_AA'
+\]
+has a canonical unitary structure
+\[
+\begin{aligned}
+    s_{F_f(M)}
+    \colon
+    F_f(M)
+    &\xrightarrow{
+        F_f(s_M)
+    }
+    F_f
+    \bigl(
+        \mathbb D_{B,C}(M)
+    \bigr)
+    \\
+    &\xrightarrow{
+        \overline\kappa_{f,M}^{-1}
+    }
+    \mathbb D_{F_f(B),F_f(C)}
+    \bigl(
+        F_f(M)
+    \bigr).
+\end{aligned}
+\]
+
+Under the adjoint formulation, let
+\[
+    u_M
+    \colon
+    J_{B,C}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R
+\]
+be the mate-symmetric equivalence corresponding to
+\[
+    s_M.
+\]
+Then the base-changed mate-symmetric equivalence is
+\[
+\begin{aligned}
+    u_{F_f(M)}
+    \colon
+    J_{F_f(B),F_f(C)}
+    \bigl(
+        F_f(M)
+    \bigr)
+    &\xrightarrow{
+        j_{f,M}
+    }
+    F_f
+    \bigl(
+        J_{B,C}(M)
+    \bigr)
+    \\
+    &\xrightarrow{
+        F_f(u_M)
+    }
+    F_f(M^R)
+    \\
+    &\xrightarrow{
+        \beta_{f,M}^{-1}
+    }
+    F_f(M)^R,
+\end{aligned}
+\]
+where
+\[
+    j_{f,M}
+    \colon
+    J_{F_f(B),F_f(C)}
+    \bigl(
+        F_f(M)
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    F_f
+    \bigl(
+        J_{B,C}(M)
+    \bigr)
+\]
+is the Hermitian-reversal comparison and
+\[
+    \beta_{f,M}
+    \colon
+    F_f(M)^R
+    \xrightarrow{\;\simeq\;}
+    F_f(M^R)
+\]
+is the right-adjoint comparison of
+\Ref{prop:base-change-morita-adjoints}.
+\end{proposition}
+
+\begin{proof}
+Right perfectness is preserved by
+\Ref{prop:base-change-morita-adjoints}.
+
+The functor
+\[
+    F_f
+\]
+with comparison
+\[
+    \overline\kappa_f
+\]
+is a morphism of the transported coherent dualities. Hence it induces a
+map of homotopy-fixed-point spaces. The image of
+\[
+    s_M
+\]
+under this map has underlying equivalence
+\[
+    s_{F_f(M)}.
+\]
+Its complete coherent fixed-point structure is therefore supplied
+functorially.
+
+The comparison
+\[
+    j_{f,M}
+\]
+is the coherent fixed-endpoint $1$-op transport comparison of
+\Ref{prop:base-change-hermitian-reversal}.
+The comparison
+\[
+    \beta_{f,M}^{-1}
+\]
+identifies the base change of the right adjoint with the right adjoint of
+the base change.
+
+Compatibility of
+\[
+    \beta_f
+\]
+with right mates and compatibility of
+\[
+    j_f
+\]
+with double Hermitian reversal transport the mate symmetry of
+\[
+    u_M
+\]
+to the mate symmetry of
+\[
+    u_{F_f(M)}.
+\]
+\end{proof}
+
+\begin{theorem}[Base change of the global Hermitian Morita category]
+\label{thm:base-change-hermitian-morita-category}
+Extension of scalars induces an $(\infty,2)$-functor
+\[
+    F_f^{\mathrm{Herm}}
+    \colon
+    \Mor_A^{\mathrm{Herm,rperf}}
+    \longrightarrow
+    \Mor_{A'}^{\mathrm{Herm,rperf}}.
+\]
+
+It is compatible with the global dagger involutions through a coherent
+natural equivalence
+\[
+    F_f^{\mathrm{Herm}}
+    \circ
+    \dagger_A
+    \xRightarrow{\;\simeq\;}
+    \dagger_{A'}
+    \circ
+    \bigl(
+        F_f^{\mathrm{Herm}}
+    \bigr)^{\mathrm{co}}.
+\]
+\end{theorem}
+
+\begin{proof}
+By
+\Ref{prop:base-change-hermitian-algebra},
+extension of scalars induces
+\[
+    F_f^{\HermAlg}
+    \colon
+    \HermAlg_A
+    \longrightarrow
+    \HermAlg_{A'}.
+\]
+
+For every pair of Hermitian $A$-algebras
+\[
+    B,
+    \qquad
+    C,
+\]
+\Ref{prop:base-change-unitary-bimodules}
+and functoriality of fixed-point decoration give
+\[
+\begin{aligned}
+    F_{f;B,C}^{\mathrm{unit}}
+    \colon
+    \mathcal H^{\mathrm{unit}}_{B,C}
+    \longrightarrow
+    \mathcal H^{\mathrm{unit}}_{F_f(B),F_f(C)}.
+\end{aligned}
+\]
+
+These functors are natural in Hermitian endpoint equivalences. They
+therefore give a map of the unstraightened degree-one categories.
+
+Extension of scalars preserves regular identity bimodules and Morita
+composition through
+\[
+    F_f(M\otimes_CN)
+    \xrightarrow{\;\simeq\;}
+    F_f(M)
+    \otimes_{F_f(C)}
+    F_f(N).
+\]
+Compatibility of
+\[
+    \overline\kappa_f
+\]
+with the Morita-duality multi-compositors shows that these comparisons
+preserve the induced unitary structures.
+
+Consequently, extension of scalars defines a morphism of Segal objects
+\[
+    \mathcal N_{A,\bullet}
+    \longrightarrow
+    \mathcal N_{A',\bullet}.
+\]
+Functoriality of completion gives
+\[
+    F_f^{\mathrm{Herm}}.
+\]
+
+Compatibility with the dagger is the fixed-point-decoration
+functoriality of
+\Ref{prop:fixed-point-decoration-functoriality}.
+Explicitly, for
+\[
+    \alpha
+    \colon
+    (M,s_M)
+    \longrightarrow
+    (N,s_N),
+\]
+naturality of
+\[
+    \overline\kappa_f
+\]
+gives
+\[
+\begin{aligned}
+    \overline\kappa_{f,M}
+    \circ
+    \mathbb D_{F_f(B),F_f(C)}
+    \bigl(
+        F_f(\alpha)
+    \bigr)
+    \simeq
+    F_f
+    \bigl(
+        \mathbb D_{B,C}(\alpha)
+    \bigr)
+    \circ
+    \overline\kappa_{f,N}.
+\end{aligned}
+\]
+Using
+\[
+    s_{F_f(M)}
+    =
+    \overline\kappa_{f,M}^{-1}
+    \circ
+    F_f(s_M),
+\]
+one obtains
+\[
+    F_f(\alpha)^\dagger
+    \simeq
+    F_f(\alpha^\dagger).
+\]
+
+The complete compatibility with the involutivity modifications and
+higher
+\[
+    C_2
+\]
+-coherences follows from the corresponding compatibility of
+\[
+    \kappa_f.
+\]
+\end{proof}
+
+\begin{proposition}[Pseudofunctoriality in the commutative base]
+\label{prop:hermitian-morita-base-change-pseudofunctorial}
+For composable morphisms
+\[
+    A
+    \xrightarrow{f}
+    A'
+    \xrightarrow{g}
+    A'',
+\]
+the base-change compositor
+\[
+    \gamma_{g,f}
+    \colon
+    F_gF_f
+    \xRightarrow{\;\simeq\;}
+    F_{g\circ f}
+\]
+of
+\Ref{prop:morita-base-change}
+induces a pseudonatural adjoint equivalence
+\[
+    F_g^{\mathrm{Herm}}
+    F_f^{\mathrm{Herm}}
+    \xRightarrow{\;\simeq\;}
+    F_{g\circ f}^{\mathrm{Herm}}.
+\]
+
+These comparisons satisfy the pseudofunctorial pentagon and unit
+coherences and are compatible with the global dagger involutions.
+
+Thus the assignment
+\[
+    A
+    \longmapsto
+    \bigl(
+        \Mor_A^{\mathrm{Herm,rperf}},
+        \dagger_A
+    \bigr)
+\]
+is pseudofunctorial in
+\[
+    A\in\CAlg(\V).
+\]
+\end{proposition}
+
+\begin{proof}
+The pseudofunctorial comparison
+\[
+    \gamma_{g,f}
+\]
+is compatible with the global Morita dualities through the modification
+of
+\Ref{prop:base-change-morita-duality-composition}.
+
+Applying fixed-endpoint transport sends this modification to the
+corresponding comparison of transported hom dualities. Applying
+homotopy fixed points and object decoration then gives the comparison on
+unitary hom categories.
+
+These comparisons preserve the coherent multi-composition and unit
+functors. Hence they define a pseudonatural comparison between the
+associated Segal objects and, after completion, between
+\[
+    F_g^{\mathrm{Herm}}F_f^{\mathrm{Herm}}
+\]
+and
+\[
+    F_{g\circ f}^{\mathrm{Herm}}.
+\]
+
+The pentagon and unit coherences are inherited from those of
+\[
+    \gamma.
+\]
+Compatibility with the dagger follows from the compatibility of the
+modifications
+\[
+    \Theta_{g,f}
+\]
+with the complete coherent weak-duality structures.
+\end{proof}
+
+\section{Examples}
+\label{sec:examples-relative-hermitian-morita}
+
+\begin{example}[Associative algebras with coherent anti-involution]
+\label{ex:derived-star-algebras}
+Let
+\[
+    A
+\]
+be a commutative ring or an
+\[
+    \EE_\infty
+\]
+-ring.
+
+A Hermitian associative $A$-algebra is an associative $A$-algebra
+equipped with a coherent anti-involution
+\[
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op}.
+\]
+
+These include derived and spectral analogues of associative algebras with
+involution. No conjugation on
+\[
+    A
+\]
+is used.
+\end{example}
+
+\begin{example}[Endomorphism algebras]
+\label{ex:hermitian-endomorphism-algebras}
+Let
+\[
+    (M,h_M)
+\]
+be a Hermitian perfect $A$-module.
+
+Then
+\[
+    \End_A(M)
+\]
+has the coherent anti-involution
+\[
+    f
+    \longmapsto
+    h_M^{-1}f^\vee h_M.
+\]
+
+Thus every Hermitian perfect module canonically determines a Hermitian
+associative algebra.
+\end{example}
+
+\begin{example}[Matrix algebra and the standard unitary Morita equivalence]
+\label{ex:matrix-hermitian-morita}
+Let
+\[
+    A
+\]
+be a commutative ring or an
+\[
+    \EE_\infty
+\]
+-ring, equipped with its canonical Hermitian structure
+\[
+    A
+    \xrightarrow{\;\simeq\;}
+    A^{\op}.
+\]
+
+Let
+\[
+    n\geq1
+\]
+and put
+\[
+    M
+    :=
+    A^{\oplus n}.
+\]
+Suppose
+\[
+    h_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee
+\]
+is a Hermitian perfect structure. Define
+\[
+    B
+    :=
+    \End_A(M).
+\]
+Then:
+\begin{enumerate}[label=(\roman*)]
+    \item
+    \[
+        B
+    \]
+    is a Hermitian associative $A$-algebra with anti-involution
+    \[
+        b
+        \longmapsto
+        b^\dagger
+        :=
+        h_M^{-1}
+        \circ
+        b^\vee
+        \circ
+        h_M;
+    \]
+
+    \item the
+    \[
+        B\text{--}A
+    \]
+    -bimodule
+    \[
+        M
+        \colon
+        B
+        \longrightarrow
+        A
+    \]
+    is a Morita equivalence;
+
+    \item the comparison
+    \[
+        h_M
+        \colon
+        J_{B,A}(M)
+        \xrightarrow{\;\simeq\;}
+        M^R
+    \]
+    is mate-symmetric and defines a unitary structure on
+    \[
+        M.
+    \]
+\end{enumerate}
+\end{example}
+
+\begin{proof}
+The Hermitian algebra structure on
+\[
+    B
+    =
+    \End_A(M)
+\]
+is supplied by
+\Ref{prop:hermitian-endomorphism-algebra}.
+Regard
+\[
+    M
+\]
+as a
+\[
+    B\text{--}A
+\]
+-bimodule, where
+\[
+    B
+\]
+acts on the left by evaluation. Since
+\[
+    M
+    =
+    A^{\oplus n}
+\]
+is perfect as an $A$-module, it is right perfect as a
+\[
+    B\text{--}A
+\]
+-bimodule, and
+\[
+    M^R
+    \simeq
+    M^\vee
+\]
+with its natural
+\[
+    A\text{--}B
+\]
+-bimodule structure.
+
+Let
+\[
+    c_i
+    \colon
+    A
+    \longrightarrow
+    M,
+    \qquad
+    r_i
+    \colon
+    M
+    \longrightarrow
+    A
+\]
+be the biproduct inclusions and projections. They satisfy
+\[
+    r_ic_j
+    \simeq
+    \delta_{ij}\id_A
+\]
+and
+\[
+    \sum_{i=1}^n c_ir_i
+    \simeq
+    \id_M.
+\]
+Define the matrix units
+\[
+    e_{ij}
+    :=
+    c_ir_j
+    \in
+    B.
+\]
+Then
+\[
+    e_{ij}e_{kl}
+    \simeq
+    \delta_{jk}e_{il}.
+\]
+
+Rigidity gives the rank-one-operator equivalence
+\[
+    \rho
+    \colon
+    M\otimes_AM^\vee
+    \xrightarrow{\;\simeq\;}
+    B,
+\]
+characterized by
+\[
+    \rho(m\otimes\phi)(x)
+    =
+    \phi(x)m.
+\]
+It is a
+\[
+    B\text{--}B
+\]
+-bimodule equivalence because
+\[
+    \rho(bm\otimes\phi)
+    =
+    b\circ\rho(m\otimes\phi)
+\]
+and
+\[
+    \rho(m\otimes\phi b)
+    =
+    \rho(m\otimes\phi)\circ b.
+\]
+
+The Morita unit
+\[
+    \eta
+    \colon
+    B
+    \longrightarrow
+    M\otimes_AM^\vee
+\]
+is explicitly
+\[
+    \eta(b)
+    =
+    \sum_{i=1}^n
+    bc_i\otimes r_i.
+\]
+Applying
+\[
+    \rho
+\]
+gives
+\[
+\begin{aligned}
+    \rho\eta(b)
+    &=
+    \sum_{i=1}^n
+    bc_ir_i
+    \\
+    &=
+    b.
+\end{aligned}
+\]
+Thus
+\[
+    \eta
+    =
+    \rho^{-1}
+\]
+is an equivalence.
+
+Let
+\[
+    Q
+    :=
+    M^\vee\otimes_BM
+\]
+and let
+\[
+    q_0
+    \colon
+    M^\vee\otimes_AM
+    \longrightarrow
+    Q
+\]
+be the canonical balancing map. The Morita counit is evaluation
+\[
+    \epsilon
+    \colon
+    Q
+    \longrightarrow
+    A.
+\]
+Define
+\[
+    \sigma
+    \colon
+    A
+    \longrightarrow
+    Q
+\]
+by
+\[
+    \sigma
+    :=
+    q_0(r_1\otimes c_1).
+\]
+Then
+\[
+    \epsilon\sigma
+    =
+    r_1c_1
+    =
+    \id_A.
+\]
+
+Set
+\[
+    h
+    :=
+    \sigma\epsilon
+    \colon
+    Q
+    \longrightarrow
+    Q.
+\]
+For every matrix component,
+\[
+\begin{aligned}
+    q_0(r_i\otimes c_j)
+    &\simeq
+    q_0(r_1e_{1i}\otimes c_j)
+    \\
+    &\simeq
+    q_0(r_1\otimes e_{1i}c_j)
+    \\
+    &\simeq
+    \delta_{ij}
+    q_0(r_1\otimes c_1)
+    \\
+    &=
+    \delta_{ij}\sigma.
+\end{aligned}
+\]
+On the other hand,
+\[
+\begin{aligned}
+    h\,q_0(r_i\otimes c_j)
+    &=
+    \sigma\epsilon q_0(r_i\otimes c_j)
+    \\
+    &=
+    \sigma(r_ic_j)
+    \\
+    &=
+    \delta_{ij}\sigma.
+\end{aligned}
+\]
+Hence
+\[
+    h\circ q_0
+    \simeq
+    q_0.
+\]
+The maps
+\[
+    r_i\otimes c_j
+    \colon
+    A
+    \longrightarrow
+    M^\vee\otimes_AM
+\]
+are the inclusions of the finite biproduct decomposition of
+\[
+    M^\vee\otimes_AM.
+\]
+Thus the preceding equality holds on the entire degree-zero bar object.
+
+Realize
+\[
+    Q
+\]
+as the two-sided bar construction
+\[
+    Q
+    \simeq
+    \left|
+        [k]
+        \longmapsto
+        M^\vee
+        \otimes_A
+        B^{\otimes_A k}
+        \otimes_A
+        M
+    \right|.
+\]
+Let
+\[
+    q_k
+    \colon
+    M^\vee
+    \otimes_A
+    B^{\otimes_A k}
+    \otimes_A
+    M
+    \longrightarrow
+    Q
+\]
+be its canonical cocone maps. Each
+\[
+    q_k
+\]
+factors as
+\[
+    q_k
+    \simeq
+    q_0\circ a_k,
+\]
+where
+\[
+    a_k
+\]
+is obtained by applying the iterated left and right
+\[
+    B
+\]
+-actions. Therefore
+\[
+    h\circ q_k
+    \simeq
+    h\circ q_0\circ a_k
+    \simeq
+    q_0\circ a_k
+    \simeq
+    q_k
+\]
+for every
+\[
+    k\geq0.
+\]
+Thus
+\[
+    h
+\]
+and
+\[
+    \id_Q
+\]
+agree on the complete canonical bar cocone. The universal property of
+geometric realization gives
+\[
+    h
+    \simeq
+    \id_Q.
+\]
+Consequently,
+\[
+    \sigma\epsilon
+    \simeq
+    \id_Q,
+    \qquad
+    \epsilon\sigma
+    \simeq
+    \id_A.
+\]
+Hence
+\[
+    \epsilon
+    \colon
+    M^\vee\otimes_BM
+    \xrightarrow{\;\simeq\;}
+    A
+\]
+is an equivalence. Both the unit and counit of
+\[
+    M\dashv M^\vee
+\]
+are equivalences, so
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    A
+\]
+is a Morita equivalence.
+
+The Hermitian reverse
+\[
+    J_{B,A}(M)
+\]
+is an
+\[
+    A\text{--}B
+\]
+-bimodule with underlying object
+\[
+    M.
+\]
+Its right
+\[
+    B
+\]
+-action is induced by the adjoint anti-involution:
+\[
+    m\cdot b
+    :=
+    b^\dagger m.
+\]
+The map
+\[
+    h_M
+    \colon
+    J_{B,A}(M)
+    \longrightarrow
+    M^\vee
+\]
+is left $A$-linear. It is right
+\[
+    B
+\]
+-linear because
+\[
+\begin{aligned}
+    h_M(m\cdot b)
+    &=
+    h_M(b^\dagger m)
+    \\
+    &=
+    h_M
+    \bigl(
+        h_M^{-1}b^\vee h_M(m)
+    \bigr)
+    \\
+    &=
+    b^\vee h_M(m)
+    \\
+    &=
+    h_M(m)\cdot b.
+\end{aligned}
+\]
+Thus
+\[
+    h_M
+    \colon
+    J_{B,A}(M)
+    \xrightarrow{\;\simeq\;}
+    M^\vee
+    =
+    M^R
+\]
+is an equivalence of
+\[
+    A\text{--}B
+\]
+-bimodules.
+
+By
+\Ref{prop:equivariant-endomorphism-morita-context},
+the assignment
+\[
+    M
+    \longmapsto
+    \bigl(
+        \End_A(M),
+        M:\End_A(M)\to A
+    \bigr)
+\]
+is coherently equivariant for perfect duality and canonical Morita
+duality. Applying it to the complete Hermitian fixed point
+\[
+    h_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^\vee
+\]
+produces the complete unitary fixed-point structure on the Morita
+morphism
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    A.
+\]
+Under the adjoint formulation of
+\Ref{prop:unitary-adjoint-formulation},
+its underlying mate-symmetric equivalence is precisely
+\[
+    h_M
+    \colon
+    J_{B,A}(M)
+    \xrightarrow{\;\simeq\;}
+    M^R.
+\]
+Therefore
+\[
+    M
+\]
+is a unitary Morita equivalence.
+\end{proof}
+
+Canonical Morita duality changes algebra endpoints to their opposites.
+Hermitian endpoint structures transport this duality back to the
+original hom categories. Unitary bimodules identify Hermitian reversal
+with the Morita right adjoint, and conjugation by their selected
+fixed-point equivalences equips every bimodule map with a coherent
+dagger.

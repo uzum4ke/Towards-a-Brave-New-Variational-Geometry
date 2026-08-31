@@ -1,0 +1,4586 @@
+\chapter{Cotangent Complexes and Spectral Deformation Theory}
+\label{chap:spectral-deformation-theory}
+
+\section{Purpose and standing conventions}
+\label{sec:spectral-deformation-purpose}
+
+This chapter develops the infinitesimal geometry of the spectral schemes
+constructed in \Ref{chap:spectral-algebraic-geometry}. All affine,
+Zariski, quasi-coherent, relative-spectrum, open--closed, and linear
+geometric constructions are those of that chapter. The new input is the
+tangent theory of commutative ring spectra and its globalization to the
+existing structure sheaves of spectral schemes.
+
+The chapter proceeds from the stabilization of commutative algebra to
+split and nonsplit square-zero extensions, relative cotangent complexes,
+multiplicative Postnikov invariants, affine and global obstruction theory,
+and quasi-smooth closed immersions. The affine foundations are taken from
+\cite[Sections~7.3--7.4]{LurieHigherAlgebra} and
+\cite[Sections~1--3]{LurieDAGIV}. The sheaf-level cotangent and
+square-zero constructions are the specialization to spectral schemes of
+the cotangent theory of spectrally ringed $\infty$-topoi developed in
+\cite[Chapter~17]{LurieSAG}. The global deformation statements below are
+obtained by identifying an infinitesimal deformation with a square-zero
+deformation of the structure sheaf on the fixed Zariski $\infty$-topos
+and applying the sheaf-level tangent correspondence; they agree with the
+spectral Deligne--Mumford formulation of
+\cite[Section~19.4.3]{LurieSAG}. Closed immersions are those of
+\Ref{def:affine-closed-immersion-spectral} and
+\cite{LurieDAGIX}. The terminology and local geometry of quasi-smooth
+closed immersions are standard in derived algebraic geometry; see
+\cite[Section~2.1.2]{KhanQuasiSmoothBlowups}.
+
+All conventions of \Ref{chap:spectral-algebraic-geometry} remain in
+force. In particular, coordinate algebras and spectral schemes are
+connective, while module categories and mapping spectra are taken in their
+full stable \(\infty\)-categories. For a commutative ring spectrum \(A\),
+put
+\[
+    L_A
+    :=
+    L_{A/\mathbb S}.
+\]
+For a spectral scheme \(X\), put
+\[
+    L_X
+    :=
+    L_{X/\Spec(\mathbb S)}.
+\]
+
+A square-zero extension used in connective spectral geometry will always
+carry its classifying derivation and its specified pullback
+identification. This structured data is retained because an underlying
+morphism of commutative ring spectra does not, in unrestricted
+connectivity, determine the coefficient module or the classifying
+derivation.
+
+When no relative base is displayed, a structured square-zero extension
+or structured infinitesimal extension is understood to be relative to
+the sphere spectrum, respectively to
+\[
+    \Spec(\mathbb S).
+\]
+
+\section{Tangent theory and spectral derivations}
+\label{sec:spectral-tangent-derivations}
+
+\subsection{The tangent category of commutative algebra}
+
+\begin{theorem}[Tangent category of a commutative ring spectrum]
+\label{thm:tangent-category-calg}
+Let \(B\in\CAlg(\Sp)\). There is a canonical equivalence of stable
+\(\infty\)-categories
+\[
+    \operatorname{Sp}
+    \bigl(
+        \CAlg(\Sp)_{/B}
+    \bigr)
+    \simeq
+    \Mod_B.
+\]
+The zeroth-space functor has target
+\[
+    \Omega^\infty
+    \colon
+    \operatorname{Sp}
+    \bigl(
+        \CAlg(\Sp)_{/B}
+    \bigr)
+    \longrightarrow
+    \bigl(
+        \CAlg(\Sp)_{/B}
+    \bigr)_*,
+\]
+where
+\[
+    \bigl(
+        \CAlg(\Sp)_{/B}
+    \bigr)_*
+    \simeq
+    \CAlg(\Sp)_{B//B}
+\]
+is the \(\infty\)-category of diagrams
+\[
+    B
+    \longrightarrow
+    C
+    \longrightarrow
+    B
+\]
+whose composite is equivalent to \(\id_B\).
+
+Under the tangent equivalence, the zeroth-space functor carries a
+\(B\)-module \(M\) to the split square-zero algebra
+\[
+    B
+    \longrightarrow
+    B\oplus M
+    \longrightarrow
+    B.
+\]
+\end{theorem}
+
+\begin{proof}
+This is the commutative specialization of the tangent-category theorem
+for algebras over a coherent \(\infty\)-operad; see
+\cite[Theorem~7.3.4.13, Corollary~7.3.4.14, and
+Remark~7.3.4.15]{LurieHigherAlgebra}.
+
+The zeroth-space functor from the stabilization of an
+\(\infty\)-category with finite limits lands in the pointed objects of
+that \(\infty\)-category. A pointed object of
+\(\CAlg(\Sp)_{/B}\) consists of an augmented commutative algebra
+\[
+    C
+    \longrightarrow
+    B
+\]
+together with a morphism from the terminal object \(B\to B\), hence a
+section
+\[
+    B
+    \longrightarrow
+    C.
+\]
+It is therefore equivalently a diagram
+\[
+    B
+    \longrightarrow
+    C
+    \longrightarrow
+    B
+\]
+whose composite is equivalent to \(\id_B\).
+\end{proof}
+
+\subsection{Split square-zero algebras}
+
+\begin{construction}[Split square-zero algebra]
+\label{con:split-square-zero-algebra}
+For a commutative ring spectrum \(B\), write
+\[
+    \CAlg(\Sp)_{B//B}
+\]
+for the \(\infty\)-category of diagrams
+\[
+    B
+    \longrightarrow
+    C
+    \longrightarrow
+    B
+\]
+whose composite is equivalent to \(\id_B\).
+
+Let \(M\in\Mod_B\). The tangent equivalence of
+\Ref{thm:tangent-category-calg}, followed by the zeroth-space functor,
+supplies a commutative ring spectrum
+\[
+    B\oplus M
+\]
+together with morphisms
+\[
+    B
+    \xrightarrow{s}
+    B\oplus M
+    \xrightarrow{p}
+    B
+\]
+satisfying
+\[
+    p\circ s
+    \simeq
+    \id_B.
+\]
+Its underlying \(B\)-module is the direct sum \(B\oplus M\), and the
+multiplication on the \(M\)-summand is coherently null. It is called the
+\textbf{split square-zero algebra of \(B\) by \(M\)}.
+\end{construction}
+
+\begin{proposition}[Functoriality of split square-zero algebras]
+\label{prop:split-square-zero-functoriality}
+For every commutative ring spectrum \(B\), the construction
+\[
+    M
+    \longmapsto
+    \bigl(
+        B
+        \longrightarrow
+        B\oplus M
+        \longrightarrow
+        B
+    \bigr)
+\]
+defines a limit-preserving functor
+\[
+    \Mod_B
+    \longrightarrow
+    \CAlg(\Sp)_{B//B}.
+\]
+If \(B\) and \(M\) are connective, then \(B\oplus M\) is connective.
+\end{proposition}
+
+\begin{proof}
+Under the equivalence
+\[
+    \Mod_B
+    \simeq
+    \operatorname{Sp}
+    \bigl(
+        \CAlg(\Sp)_{/B}
+    \bigr),
+\]
+the displayed functor is the zeroth-space functor
+\[
+    \Omega^\infty
+    \colon
+    \operatorname{Sp}
+    \bigl(
+        \CAlg(\Sp)_{/B}
+    \bigr)
+    \longrightarrow
+    \bigl(
+        \CAlg(\Sp)_{/B}
+    \bigr)_*
+    \simeq
+    \CAlg(\Sp)_{B//B}.
+\]
+The zeroth-space functor is a right adjoint and therefore preserves
+limits.
+
+The underlying spectrum of \(B\oplus M\) is the direct sum of the
+underlying spectra of \(B\) and \(M\). Hence \(B\oplus M\) is connective
+whenever \(B\) and \(M\) are connective. See
+\cite[Remark~7.3.4.15]{LurieHigherAlgebra}.
+\end{proof}
+
+\subsection{Relative derivations}
+
+\begin{definition}[Spectral derivation]
+\label{def:spectral-derivation}
+Let $A\to B$ be a morphism of commutative ring spectra and let
+$M\in\Mod_B$. The \textbf{space of $A$-linear derivations from $B$ to
+$M$} is
+\[
+    \operatorname{Der}_A(B,M)
+    :=
+    \Map_{\CAlg(\Sp)_{A//B}}
+    \bigl(
+        B,
+        B\oplus M
+    \bigr).
+\]
+Thus an $A$-linear derivation is a section of
+\[
+    B\oplus M
+    \longrightarrow
+    B
+\]
+in commutative $A$-algebras.
+\end{definition}
+
+\begin{proposition}[Elementary functoriality of derivations]
+\label{prop:elementary-derivation-functoriality}
+Let
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C
+\]
+be morphisms of commutative ring spectra.
+\begin{enumerate}[label=(\roman*)]
+    \item A morphism of $B$-modules $M\to M'$ induces a natural morphism
+    \[
+        \operatorname{Der}_A(B,M)
+        \longrightarrow
+        \operatorname{Der}_A(B,M').
+    \]
+
+    \item For every $C$-module $N$, restriction along $B\to C$ induces a
+    natural morphism
+    \[
+        \operatorname{Der}_A(C,N)
+        \longrightarrow
+        \operatorname{Der}_A(B,N),
+    \]
+    where $N$ on the right is regarded as a $B$-module.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part (i) follows by postcomposition with the induced morphism
+$B\oplus M\to B\oplus M'$. For part (ii), compose an $A$-algebra
+section $C\to C\oplus N$ with $B\to C$ and use the canonical pullback
+identification
+\[
+    B\times_C(C\oplus N)
+    \simeq
+    B\oplus N.
+\]
+\end{proof}
+
+\section{Cotangent complexes of commutative ring spectra}
+\label{sec:affine-cotangent-complexes}
+
+\subsection{Existence and the universal derivation}
+
+\begin{theorem}[Existence of the relative cotangent complex]
+\label{thm:relative-cotangent-existence}
+Let $A\to B$ be a morphism of commutative ring spectra. There exists a
+$B$-module
+\[
+    L_{B/A}
+    \in
+    \Mod_B
+\]
+and a universal $A$-linear derivation such that, for every $B$-module
+$M$, there is a natural equivalence
+\[
+    \Map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        M
+    \bigr)
+    \simeq
+    \operatorname{Der}_A(B,M).
+\]
+The construction is functorial in commutative triangles of ring spectra.
+\end{theorem}
+
+\begin{proof}
+The relative cotangent complex is the relative cotangent object in the
+tangent bundle of $\CAlg(\Sp)$. The tangent equivalence of
+\Ref{thm:tangent-category-calg} identifies its fibre at $B$ with
+$\Mod_B$, and the stabilization adjunction gives the displayed
+representing equivalence. See
+\cite[Sections~7.3.2--7.3.4]{LurieHigherAlgebra} and
+\cite[Section~1]{LurieDAGIV}.
+\end{proof}
+
+\begin{corollary}[Cotangent complex of an equivalence]
+\label{cor:cotangent-equivalence-zero}
+If $A\to B$ is an equivalence, then
+\[
+    L_{B/A}
+    \simeq
+    0.
+\]
+\end{corollary}
+
+\begin{proof}
+The space of relative derivations is contractible for every coefficient
+module, so its representing object is zero.
+\end{proof}
+
+\subsection{Free commutative algebras}
+
+\begin{proposition}[Cotangent complex of a free algebra]
+\label{prop:cotangent-free-algebra}
+Let $A\in\CAlg(\Sp)$ and let $M\in\Mod_A$. Put
+\[
+    B
+    :=
+    \operatorname{Sym}_A(M).
+\]
+Then there is a natural equivalence of $B$-modules
+\[
+    L_{B/A}
+    \simeq
+    B\otimes_A M.
+\]
+\end{proposition}
+
+\begin{proof}
+For every $B$-module $N$, the free-algebra and extension-of-scalars
+adjunctions give
+\[
+\begin{aligned}
+    \operatorname{Der}_A(B,N)
+    &\simeq
+    \Map_{\Mod_A}(M,N)
+    \\
+    &\simeq
+    \Map_{\Mod_B}(B\otimes_A M,N).
+\end{aligned}
+\]
+Yoneda and \Ref{thm:relative-cotangent-existence} give the result.
+See also \cite[Proposition~7.4.3.14]{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{corollary}[Cotangent complex of brave new affine space]
+\label{cor:cotangent-brave-affine-space}
+For
+\[
+    A\{t_1,\ldots,t_n\}
+    :=
+    \operatorname{Sym}_A(A^{\oplus n}),
+\]
+there is a natural equivalence
+\[
+    L_{A\{t_1,\ldots,t_n\}/A}
+    \simeq
+    A\{t_1,\ldots,t_n\}^{\oplus n}.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply \Ref{prop:cotangent-free-algebra} to $M=A^{\oplus n}$.
+\end{proof}
+
+\subsection{Base change and transitivity}
+
+\begin{theorem}[Base change for cotangent complexes]
+\label{thm:cotangent-base-change}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    A
+        \arrow[r]
+        \arrow[d]
+    &
+    B
+        \arrow[d]
+    \\
+    A'
+        \arrow[r]
+    &
+    B':=B\otimes_AA'
+\end{tikzcd}
+\]
+be a pushout square of commutative ring spectra. Then there is a natural
+equivalence of $B'$-modules
+\[
+    L_{B/A}\otimes_BB'
+    \simeq
+    L_{B'/A'}.
+\]
+\end{theorem}
+
+\begin{proof}
+For every $B'$-module $N$, extension and restriction of scalars give
+\[
+\begin{aligned}
+    \Map_{\Mod_{B'}}(L_{B/A}\otimes_BB',N)
+    &\simeq
+    \Map_{\Mod_B}(L_{B/A},N)
+    \\
+    &\simeq
+    \operatorname{Der}_A(B,N)
+    \\
+    &\simeq
+    \operatorname{Der}_{A'}(B',N)
+    \\
+    &\simeq
+    \Map_{\Mod_{B'}}(L_{B'/A'},N).
+\end{aligned}
+\]
+The middle equivalence is the pushout universal property. Yoneda gives
+the result. See
+\cite[Proposition~7.3.3.7]{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{corollary}[Base change of derivations]
+\label{cor:derivation-base-change}
+In the situation of \Ref{thm:cotangent-base-change}, for every
+$B'$-module $N$ there is a natural equivalence
+\[
+    \operatorname{Der}_{A'}(B',N)
+    \simeq
+    \operatorname{Der}_A(B,N).
+\]
+\end{corollary}
+
+\begin{proof}
+Apply the representing property and
+\Ref{thm:cotangent-base-change}.
+\end{proof}
+
+\begin{theorem}[Transitivity triangle]
+\label{thm:cotangent-transitivity}
+For composable morphisms of commutative ring spectra
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C,
+\]
+there is a natural cofibre sequence of $C$-modules
+\[
+    L_{B/A}\otimes_BC
+    \longrightarrow
+    L_{C/A}
+    \longrightarrow
+    L_{C/B}.
+\]
+\end{theorem}
+
+\begin{proof}
+Restriction of an $A$-linear derivation of $C$ to $B$ gives the
+corresponding fibre sequence of derivation functors. Representing those
+functors in the stable category $\Mod_C$ gives the asserted cofibre
+sequence. See
+\cite[Proposition~7.3.3.5 and Corollary~7.3.3.6]{LurieHigherAlgebra}.
+\end{proof}
+
+\subsection{Connectivity and classical comparison}
+
+\begin{proposition}[Connectivity and degree-zero comparison]
+\label{prop:cotangent-connectivity-degree-zero}
+Let $A\to B$ be a morphism of connective commutative ring spectra. Then
+\[
+    L_{B/A}
+    \in
+    \Mod_{B,\geq0},
+\]
+and there is a natural isomorphism of $\pi_0(B)$-modules
+\[
+    \pi_0(L_{B/A})
+    \simeq
+    \Omega^1_{\pi_0(B)/\pi_0(A)}.
+\]
+\end{proposition}
+
+\begin{proof}
+This is
+\cite[Proposition~7.4.3.9]{LurieHigherAlgebra}; see also
+\cite[Section~2]{LurieDAGIV}.
+\end{proof}
+
+\begin{theorem}[Derived conormal comparison]
+\label{thm:derived-conormal-comparison}
+Let
+\[
+    f
+    \colon
+    A
+    \longrightarrow
+    B
+\]
+be a morphism of connective commutative ring spectra which is surjective
+on \(\pi_0\). Put
+\[
+    K
+    :=
+    \operatorname{fib}(f).
+\]
+Then \(K\) is connective, \(L_{B/A}\) is \(1\)-connective, and there is a
+canonical morphism of connective \(B\)-modules
+\[
+    B\otimes_AK
+    \longrightarrow
+    L_{B/A}[-1]
+\]
+which induces an isomorphism
+\[
+    \pi_0(B\otimes_AK)
+    \xrightarrow{\simeq}
+    \pi_0
+    \bigl(
+        L_{B/A}[-1]
+    \bigr).
+\]
+
+The comparison is natural in commutative triangles. More precisely, let
+\[
+    A
+    \longrightarrow
+    C
+    \longrightarrow
+    B
+\]
+be a commutative triangle of connective commutative ring spectra such
+that both
+\[
+    A
+    \longrightarrow
+    C
+    \qquad\text{and}\qquad
+    A
+    \longrightarrow
+    B
+\]
+are surjective on \(\pi_0\). Put
+\[
+    K_C
+    :=
+    \operatorname{fib}(A\to C),
+    \qquad
+    K_B
+    :=
+    \operatorname{fib}(A\to B).
+\]
+Then there is a natural commutative square of \(B\)-modules
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    B\otimes_AK_C
+        \arrow[r]
+        \arrow[d]
+    &
+    \bigl(
+        L_{C/A}\otimes_CB
+    \bigr)[-1]
+        \arrow[d]
+    \\
+    B\otimes_AK_B
+        \arrow[r]
+    &
+    L_{B/A}[-1].
+\end{tikzcd}
+\]
+The horizontal morphisms are the derived-conormal comparison morphisms,
+with the upper one extended from \(C\) to \(B\), and the right vertical
+morphism is induced by transitivity.
+\end{theorem}
+
+\begin{proof}
+Since \(A\to B\) is surjective on \(\pi_0\), its cofibre is
+\(1\)-connective. In the stable category of spectra there is a canonical
+equivalence
+\[
+    \operatorname{cofib}(A\to B)
+    \simeq
+    K[1].
+\]
+The canonical morphism
+\[
+    B\otimes_A
+    \operatorname{cofib}(A\to B)
+    \longrightarrow
+    L_{B/A}
+\]
+has \(2\)-connective fibre by the relative cotangent connectivity
+theorem. After using
+\[
+    \operatorname{cofib}(A\to B)
+    \simeq
+    K[1]
+\]
+and shifting by \([-1]\), one obtains a canonical morphism
+\[
+    B\otimes_AK
+    \longrightarrow
+    L_{B/A}[-1]
+\]
+which induces an isomorphism on \(\pi_0\). The same connectivity theorem
+shows that \(L_{B/A}\) is \(1\)-connective. The fibre \(K\) is connective
+because \(A\) and \(B\) are connective and \(A\to B\) is surjective on
+\(\pi_0\).
+
+The morphism from the relative cofibre to the relative cotangent complex
+is natural in commutative diagrams of commutative ring spectra. Applying
+this naturality to the triangle
+\[
+    A
+    \longrightarrow
+    C
+    \longrightarrow
+    B,
+\]
+then identifying the relevant cofibres with \(K_C[1]\) and \(K_B[1]\),
+extending scalars from \(C\) to \(B\), and shifting by \([-1]\), gives
+the displayed commutative square. The right vertical morphism agrees
+with the morphism induced by the transitivity triangle.
+
+See
+\cite[Theorem~7.4.3.1 and Corollary~7.4.3.2]{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{lemma}[Classical quotient of the derived conormal module]
+\label{lem:derived-conormal-classical-quotient}
+In the situation of \Ref{thm:derived-conormal-comparison}, put
+\[
+    R:=\pi_0(A),
+    \qquad
+    S:=\pi_0(B),
+    \qquad
+    I:=\ker(R\to S).
+\]
+Then the morphism $K\to A$ induces a natural surjection
+\[
+    \pi_0(B\otimes_AK)
+    \longrightarrow
+    I/I^2.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $B$ and $K$ are connective, the connective tensor-product spectral
+sequence gives
+\[
+    \pi_0(B\otimes_AK)
+    \simeq
+    S\otimes_R\pi_0(K).
+\]
+The long exact sequence of the fibre $K\to A\to B$ shows that
+$\pi_0(K)\to R$ has image $I$ and is surjective onto $I$. Tensoring
+with $S$ over $R$ gives a surjection
+\[
+    S\otimes_R\pi_0(K)
+    \longrightarrow
+    S\otimes_RI
+    \simeq
+    I/I^2.
+\]
+\end{proof}
+
+\begin{remark}[Classical and derived conormal modules]
+\label{rem:classical-derived-conormal-distinction}
+Let
+\[
+    I
+    :=
+    \ker
+    \bigl(
+        \pi_0(A)
+        \longrightarrow
+        \pi_0(B)
+    \bigr).
+\]
+The spectral conormal module
+\[
+    \pi_0\bigl(L_{B/A}[-1]\bigr)
+\]
+need not be isomorphic to $I/I^2$. The derived fibre $K$ can carry
+conormal information which is invisible in the ordinary ideal $I$.
+Accordingly, local equations for a spectral closed immersion must be
+lifted from the derived fibre; such a lift includes a chosen
+nullhomotopy after restriction to $B$.
+\end{remark}
+
+\begin{corollary}[Cotangent rigidity]
+\label{cor:cotangent-rigidity}
+Let $A\to B$ be a morphism of connective commutative ring spectra. If
+\[
+    \pi_0(A)
+    \xrightarrow{\simeq}
+    \pi_0(B)
+\]
+and
+\[
+    L_{B/A}
+    \simeq
+    0,
+\]
+then $A\to B$ is an equivalence.
+\end{corollary}
+
+\begin{proof}
+This is
+\cite[Corollary~7.4.3.4]{LurieHigherAlgebra}; see also
+\cite[Corollary~2.7]{LurieDAGIV}.
+\end{proof}
+
+\subsection{Finiteness detected by the cotangent complex}
+
+\begin{theorem}[Cotangent criterion for finite presentation]
+\label{thm:cotangent-finite-presentation}
+Let $A\to B$ be a morphism of connective commutative ring spectra.
+\begin{enumerate}[label=(\roman*)]
+    \item If $B$ is of finite presentation over $A$, then $L_{B/A}$ is a
+    perfect $B$-module.
+
+    \item Conversely, if $L_{B/A}$ is perfect and $\pi_0(B)$ is finitely
+    presented as a $\pi_0(A)$-algebra, then $B$ is of finite presentation
+    over $A$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+This is
+\cite[Theorem~7.4.3.18]{LurieHigherAlgebra}.
+\end{proof}
+
+\section{Structured square-zero extensions and Postnikov theory}
+\label{sec:structured-square-zero-postnikov}
+
+\subsection{The extension classified by a derivation}
+
+\begin{definition}[Structured square-zero extension]
+\label{def:structured-square-zero-extension}
+Let \(A\to B\) be a morphism of commutative ring spectra and let
+\(M\in\Mod_B\). A morphism
+\[
+    \eta
+    \colon
+    L_{B/A}
+    \longrightarrow
+    M[1]
+\]
+represents an \(A\)-linear derivation
+\[
+    d_\eta
+    \colon
+    B
+    \longrightarrow
+    B\oplus M[1].
+\]
+Let
+\[
+    d_0
+    \colon
+    B
+    \longrightarrow
+    B\oplus M[1]
+\]
+denote the zero derivation. Define
+\[
+    B^\eta
+    :=
+    B
+    \times_{B\oplus M[1]}
+    B,
+\]
+where the right vertical morphism in the pullback square below is
+\(d_\eta\) and the lower horizontal morphism is \(d_0\):
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    B^\eta
+        \arrow[r, "q_\eta"]
+        \arrow[d, "r_\eta"']
+    &
+    B
+        \arrow[d, "d_\eta"]
+    \\
+    B
+        \arrow[r, "d_0"']
+    &
+    B\oplus M[1].
+\end{tikzcd}
+\]
+The derivation \(\eta\), the object \(B^\eta\), and the specified
+pullback identification form the
+\textbf{structured square-zero extension of \(B\) by \(M\) over \(A\)
+classified by \(\eta\)}.
+
+By convention, the morphism
+\[
+    q_\eta
+    \colon
+    B^\eta
+    \longrightarrow
+    B
+\]
+is the underlying square-zero extension. Thus every subsequent reference
+to the morphism \(B^\eta\to B\) means \(q_\eta\).
+\end{definition}
+
+\begin{proposition}[Fibre of a structured square-zero extension]
+\label{prop:fibre-structured-square-zero}
+In the situation of \Ref{def:structured-square-zero-extension}, the
+fibre of
+\[
+    q_\eta
+    \colon
+    B^\eta
+    \longrightarrow
+    B
+\]
+is canonically equivalent to \(M\), regarded as a
+\(B^\eta\)-module by restriction of scalars along \(q_\eta\). The induced
+multiplication on the fibre is null.
+
+If \(B\) and \(M\) are connective, then \(B^\eta\) is connective and
+\[
+    \pi_0(q_\eta)
+    \colon
+    \pi_0(B^\eta)
+    \longrightarrow
+    \pi_0(B)
+\]
+is surjective with square-zero kernel.
+\end{proposition}
+\begin{proof}
+The forgetful functor
+\[
+    \CAlg(\Sp)
+    \longrightarrow
+    \Sp
+\]
+creates limits. Hence the underlying square of spectra
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    B^\eta
+        \arrow[r, "q_\eta"]
+        \arrow[d, "r_\eta"']
+    &
+    B
+        \arrow[d, "d_\eta"]
+    \\
+    B
+        \arrow[r, "d_0"']
+    &
+    B\oplus M[1]
+\end{tikzcd}
+\]
+is a pullback square.
+
+As a morphism of underlying spectra, the zero derivation
+\[
+    d_0
+    \colon
+    B
+    \longrightarrow
+    B\oplus M[1]
+\]
+is the inclusion of the first summand. Therefore
+\[
+    \operatorname{cofib}(d_0)
+    \simeq
+    M[1].
+\]
+By stability,
+\[
+    \operatorname{fib}(d_0)
+    \simeq
+    M.
+\]
+Fibres are preserved by pullback, so
+\[
+    \operatorname{fib}(q_\eta)
+    \simeq
+    M.
+\]
+The resulting equivalence is an equivalence of
+\(B^\eta\)-modules, where \(M\) is regarded as a
+\(B^\eta\)-module by restriction of scalars along
+\[
+    q_\eta
+    \colon
+    B^\eta
+    \longrightarrow
+    B.
+\]
+Thus there is a canonical fibre sequence of
+\(B^\eta\)-modules
+\[
+    M
+    \longrightarrow
+    B^\eta
+    \xrightarrow{q_\eta}
+    B.
+\]
+
+The fibre of a morphism of commutative ring spectra carries a canonical
+nonunital commutative algebra structure over the source. In the present
+case, \(q_\eta\) is the extension obtained from the derivation
+\(d_\eta\) by the tangent-theoretic square-zero construction. Under the
+tangent equivalence of
+\Ref{thm:tangent-category-calg}, its coefficient nonunital algebra is
+the \(B^\eta\)-module \(M\) equipped with the zero multiplication.
+Equivalently, the binary operation
+\[
+    M\otimes_{B^\eta}M
+    \longrightarrow
+    M
+\]
+is coherently null. This is the square-zero property of the
+derivation-to-extension construction.
+
+Suppose now that \(B\) and \(M\) are connective. Since the connective
+part of \(\Mod_{B^\eta}\) is closed under extensions, the fibre sequence
+\[
+    M
+    \longrightarrow
+    B^\eta
+    \longrightarrow
+    B
+\]
+shows that \(B^\eta\) is connective.
+
+The associated long exact sequence of homotopy groups contains
+\[
+    \pi_0(B^\eta)
+    \xrightarrow{\pi_0(q_\eta)}
+    \pi_0(B)
+    \longrightarrow
+    \pi_{-1}(M).
+\]
+Since \(M\) is connective,
+\[
+    \pi_{-1}(M)
+    =
+    0.
+\]
+Therefore
+\[
+    \pi_0(q_\eta)
+    \colon
+    \pi_0(B^\eta)
+    \longrightarrow
+    \pi_0(B)
+\]
+is surjective.
+
+Its kernel is the image of
+\[
+    \pi_0(M)
+    \longrightarrow
+    \pi_0(B^\eta).
+\]
+Because the multiplication
+\[
+    M\otimes_{B^\eta}M
+    \longrightarrow
+    M
+\]
+is coherently null, the product of any two elements in this image is
+zero. Hence the kernel of \(\pi_0(q_\eta)\) is a square-zero ideal.
+\end{proof}
+
+\subsection{Classification and recognition}
+
+\begin{theorem}[Structured square-zero classification]
+\label{thm:structured-square-zero-classification}
+Let $A\to B$ be a morphism of commutative ring spectra and let
+$M\in\Mod_B$.
+
+Let
+\[
+    \operatorname{SqZ}^{\mathrm{str}}_A(B;M)
+\]
+denote the $\infty$-groupoid whose objects are structured square-zero
+extensions of $B$ by $M$ over $A$, consisting of:
+\begin{enumerate}[label=(\roman*)]
+    \item a morphism
+    \[
+        \eta
+        \colon
+        L_{B/A}
+        \longrightarrow
+        M[1];
+    \]
+
+    \item a commutative $A$-algebra $B^\eta$ equipped with a morphism
+    \[
+        q_\eta
+        \colon
+        B^\eta
+        \longrightarrow
+        B;
+    \]
+
+    \item a specified pullback identification
+    \[
+        B^\eta
+        \simeq
+        B
+        \times_{B\oplus M[1]}
+        B
+    \]
+    formed using the derivation represented by $\eta$ and the zero
+    derivation.
+\end{enumerate}
+Its morphisms are equivalences over $B$ which preserve the identified
+coefficient module $M$, the classifying morphism $\eta$, and the
+specified pullback identification, together with the required coherent
+homotopies.
+
+There are natural equivalences
+\[
+    \operatorname{SqZ}^{\mathrm{str}}_A(B;M)
+    \simeq
+    \operatorname{Der}_A(B,M[1])
+    \simeq
+    \Map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        M[1]
+    \bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+The second equivalence is the universal property of the relative
+cotangent complex:
+\[
+    \operatorname{Der}_A(B,M[1])
+    \simeq
+    \Map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        M[1]
+    \bigr).
+\]
+
+For a derivation
+\[
+    d_\eta
+    \colon
+    B
+    \longrightarrow
+    B\oplus M[1],
+\]
+the construction of
+\Ref{def:structured-square-zero-extension} forms the pullback
+\[
+    B^\eta
+    :=
+    B
+    \times_{B\oplus M[1]}
+    B,
+\]
+where the second map from $B$ to $B\oplus M[1]$ is the zero
+derivation. This produces a structured square-zero extension of $B$ by
+$M$ over $A$.
+
+Conversely, the retained classifying morphism and specified pullback
+identification recover the corresponding derivation. For a fixed
+derivation, the space of choices of a pullback object together with a
+specified pullback identification is contractible. Equivalences between
+such structured extensions are therefore exactly equivalences preserving
+the classifying derivation, the coefficient identification, and the
+pullback data.
+
+Hence the square-zero construction induces the first displayed
+equivalence. See
+\cite[Section~7.4.1]{LurieHigherAlgebra} and
+\cite[Section~3.1]{LurieDAGIV}.
+\end{proof}
+
+\begin{remark}[Recognition of underlying extensions]
+\label{rem:recognition-underlying-square-zero}
+The theorem classifies structured extensions. Recovering the coefficient
+module and classifying derivation from an underlying morphism requires a
+separate recognition theorem.
+
+Lurie's \(n\)-small extension theorem supplies such a recognition for
+the bounded extensions occurring in Postnikov towers: on the specified
+connectivity and truncation range, the structured derivation is recovered
+from the underlying extension. See
+\cite[Theorem~3.17 and Corollaries~3.18--3.19]{LurieDAGIV} and
+\cite[Section~7.4.1]{LurieHigherAlgebra}.
+
+For the arbitrary connective square-zero extensions used in the
+deformation theory below, the coefficient module, the classifying
+derivation, and the specified pullback identification are retained as
+part of the input. No reconstruction of this structured data from the
+underlying morphism alone is asserted.
+\end{remark}
+
+\subsection{Multiplicative Postnikov extensions}
+
+\begin{theorem}[Postnikov stages are square-zero extensions]
+\label{thm:postnikov-square-zero}
+Let $B$ be a connective commutative ring spectrum. For every integer
+$n\geq1$, the truncation morphism
+\[
+    \tau_{\leq n}B
+    \longrightarrow
+    \tau_{\leq n-1}B
+\]
+is canonically a structured square-zero extension with fibre
+\[
+    H\pi_n(B)[n].
+\]
+The coefficient module is regarded as a module over
+$\tau_{\leq n-1}B$ through
+\[
+    \tau_{\leq n-1}B
+    \longrightarrow
+    H\pi_0(B),
+\]
+and the extension is classified by a multiplicative Postnikov
+$k$-invariant
+\[
+    L_{\tau_{\leq n-1}B}
+    \longrightarrow
+    H\pi_n(B)[n+1].
+\]
+\end{theorem}
+
+\begin{proof}
+The underlying truncation map has the displayed fibre. It is an
+$n$-small extension, so the connective recognition theorem identifies it
+with the square-zero extension classified by its multiplicative
+$k$-invariant. See
+\cite[Corollary~3.19]{LurieDAGIV} and
+\cite[Corollary~7.4.1.28]{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{corollary}[Relative Postnikov extensions]
+\label{cor:relative-postnikov-square-zero}
+Let $A\to B$ be a morphism of connective commutative ring spectra. For
+every $n\geq1$, the map
+\[
+    \tau_{\leq n}B
+    \longrightarrow
+    \tau_{\leq n-1}B
+\]
+is canonically a structured square-zero extension in
+$\CAlg(\Sp)^{\mathrm{cn}}_{A/}$ by $H\pi_n(B)[n]$. Its relative
+classifying morphism is
+\[
+    L_{\tau_{\leq n-1}B/A}
+    \longrightarrow
+    H\pi_n(B)[n+1].
+\]
+\end{corollary}
+
+\begin{proof}
+The canonical structural morphism
+\[
+    A
+    \longrightarrow
+    \tau_{\leq n}B
+\]
+is a lift of
+\[
+    A
+    \longrightarrow
+    \tau_{\leq n-1}B
+\]
+through the Postnikov square-zero extension
+\[
+    \tau_{\leq n}B
+    \longrightarrow
+    \tau_{\leq n-1}B.
+\]
+Consequently, the absolute classifying morphism
+\[
+    L_{\tau_{\leq n-1}B}
+    \longrightarrow
+    H\pi_n(B)[n+1]
+\]
+comes equipped with a canonical nullhomotopy after precomposition with
+\[
+    L_A\otimes_A\tau_{\leq n-1}B
+    \longrightarrow
+    L_{\tau_{\leq n-1}B}.
+\]
+By the transitivity cofibre sequence
+\[
+    L_A\otimes_A\tau_{\leq n-1}B
+    \longrightarrow
+    L_{\tau_{\leq n-1}B}
+    \longrightarrow
+    L_{\tau_{\leq n-1}B/A},
+\]
+this structured nullhomotopy determines the relative classifying
+morphism
+\[
+    L_{\tau_{\leq n-1}B/A}
+    \longrightarrow
+    H\pi_n(B)[n+1].
+\]
+The relative structured square-zero classification now gives the
+assertion.
+\end{proof}
+
+\begin{corollary}[Infinitesimal Postnikov reconstruction]
+\label{cor:postnikov-infinitesimal-reconstruction}
+Every connective commutative ring spectrum is reconstructed from its
+ordinary ring of components by an inverse tower of structured square-zero
+extensions:
+\[
+    B
+    \simeq
+    \varprojlim_n
+    \tau_{\leq n}B,
+    \qquad
+    \tau_{\leq0}B
+    \simeq
+    H\pi_0(B).
+\]
+\end{corollary}
+
+\begin{proof}
+Combine \Ref{prop:operadic-postnikov-truncations} with
+\Ref{thm:postnikov-square-zero}.
+\end{proof}
+
+\subsection{Formal lifting across a fixed extension}
+
+\begin{proposition}[Formal lifting across a square-zero extension]
+\label{prop:formal-lifting-square-zero}
+Let
+\[
+    A
+    \longrightarrow
+    B,
+    \qquad
+    A
+    \longrightarrow
+    C
+\]
+be morphisms of commutative ring spectra. Let
+\[
+    C'
+    \longrightarrow
+    C
+\]
+be a structured square-zero extension in commutative $A$-algebras by a
+$C$-module $J$, classified by
+\[
+    \delta
+    \colon
+    L_{C/A}
+    \longrightarrow
+    J[1].
+\]
+For an $A$-algebra morphism
+\[
+    \varphi
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+define
+\[
+    o(\varphi)
+    \colon
+    L_{B/A}\otimes_BC
+    \longrightarrow
+    L_{C/A}
+    \xrightarrow{\delta}
+    J[1].
+\]
+Then the space of lifts of $\varphi$ to an $A$-algebra morphism
+$B\to C'$ is naturally equivalent to the space of nullhomotopies of
+$o(\varphi)$. Consequently:
+\begin{enumerate}[label=(\roman*)]
+    \item a lift exists if and only if
+    \[
+        [o(\varphi)]
+        =
+        0
+    \]
+    in
+    \[
+        \pi_0
+        \Map_{\Mod_C}
+        \bigl(
+            L_{B/A}\otimes_BC,
+            J[1]
+        \bigr);
+    \]
+
+    \item when nonempty, the lift space is a torsor under
+    \[
+        \Omega^\infty
+        \map_{\Mod_C}
+        \bigl(
+            L_{B/A}\otimes_BC,
+            J
+        \bigr);
+    \]
+
+    \item if $L_{B/A}\simeq0$, the lift space is contractible.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Write the structured extension as the pullback
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    C'
+        \arrow[r]
+        \arrow[d]
+    &
+    C
+        \arrow[d, "d_\delta"]
+    \\
+    C
+        \arrow[r, "d_0"']
+    &
+    C\oplus J[1].
+\end{tikzcd}
+\]
+Applying $\Map_{\CAlg(\Sp)_{A/}}(B,-)$ gives a pullback square of
+mapping spaces. Taking the fibre over $\varphi$ identifies the lift space
+with the space of homotopies between $d_\delta\circ\varphi$ and the zero
+derivation. Naturality of cotangent complexes identifies that derivation
+with $o(\varphi)$. The remaining assertions follow by taking the
+connected components and loop action of the mapping spectrum.
+\end{proof}
+
+\section{Affine deformation and obstruction theory}
+\label{sec:affine-spectral-deformation-theory}
+
+\subsection{Deformations over an infinitesimal base}
+
+\begin{definition}[Affine deformation over a square-zero extension]
+\label{def:affine-deformation-square-zero}
+Let
+\[
+    A'
+    \longrightarrow
+    A
+\]
+be a structured square-zero extension of connective commutative ring
+spectra by a connective \(A\)-module \(I\). Let \(B\) be a connective
+commutative \(A\)-algebra.
+
+A \textbf{deformation of \(B\) over \(A'\)} is a pair
+\[
+    (B',\alpha)
+\]
+consisting of a connective commutative \(A'\)-algebra \(B'\) and an
+equivalence
+\[
+    \alpha
+    \colon
+    B'\otimes_{A'}A
+    \xrightarrow{\simeq}
+    B
+\]
+of commutative \(A\)-algebras.
+
+A morphism
+\[
+    (B'_1,\alpha_1)
+    \longrightarrow
+    (B'_2,\alpha_2)
+\]
+is an equivalence of commutative \(A'\)-algebras
+\[
+    u
+    \colon
+    B'_1
+    \xrightarrow{\simeq}
+    B'_2
+\]
+together with the specified coherent compatibility
+\[
+    \alpha_2
+    \circ
+    (u\otimes_{A'}A)
+    \simeq
+    \alpha_1.
+\]
+The resulting \(\infty\)-groupoid is denoted
+\[
+    \operatorname{Def}_{A'/A}(B).
+\]
+\end{definition}
+
+\subsection{The deformation space as a homotopy fibre}
+
+\begin{theorem}[Affine deformation fibre sequence]
+\label{thm:affine-deformation-homotopy-fibre}
+Let
+\[
+    A'
+    \longrightarrow
+    A
+\]
+be classified by
+\[
+    \eta_A
+    \colon
+    L_A
+    \longrightarrow
+    I[1],
+\]
+where $I$ is connective. Let $B$ be a connective commutative $A$-algebra
+and put
+\[
+    J
+    :=
+    B\otimes_AI.
+\]
+Base change gives
+\[
+    \eta_B
+    \colon
+    L_A\otimes_AB
+    \longrightarrow
+    J[1].
+\]
+Then there is a natural equivalence
+\[
+    \operatorname{Def}_{A'/A}(B)
+    \simeq
+    \operatorname{fib}_{\eta_B}
+    \left(
+        \Map_{\Mod_B}(L_B,J[1])
+        \longrightarrow
+        \Map_{\Mod_B}(L_A\otimes_AB,J[1])
+    \right).
+\]
+Equivalently, a deformation is a morphism
+\[
+    \widetilde\eta
+    \colon
+    L_B
+    \longrightarrow
+    J[1]
+\]
+together with a specified homotopy
+\[
+    \widetilde\eta|_{L_A\otimes_AB}
+    \simeq
+    \eta_B.
+\]
+\end{theorem}
+
+\begin{proof}
+The structured extension $A'\to A$ is classified by $\eta_A$.
+Lurie's tangent correspondence identifies connective commutative
+$A'$-algebras reducing to $B$ with derivations of $B$ compatible with
+$\eta_A$, and identifies the associated square of commutative ring
+spectra with a pushout square. Under the cotangent representing property,
+compatibility is precisely the displayed homotopy fibre. See
+\cite[Proposition~3.22 and Theorem~3.25]{LurieDAGIV} and
+\cite[Section~7.4.2]{LurieHigherAlgebra}.
+\end{proof}
+
+\subsection{Obstruction, deformations, and automorphisms}
+
+\begin{theorem}[Affine cotangent obstruction theory]
+\label{thm:affine-cotangent-obstruction}
+In the situation of
+\Ref{thm:affine-deformation-homotopy-fibre}, the transitivity triangle
+\[
+    L_A\otimes_AB
+    \longrightarrow
+    L_B
+    \longrightarrow
+    L_{B/A}
+\]
+determines a canonical obstruction class
+\[
+    \operatorname{ob}(B/A')
+    \in
+    \pi_0
+    \map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        J[2]
+    \bigr).
+\]
+It has the following properties.
+\begin{enumerate}[label=(\roman*)]
+    \item The obstruction vanishes if and only if $B$ admits a
+    deformation over $A'$.
+
+    \item When it vanishes, the deformation $\infty$-groupoid is a
+    torsor under
+    \[
+        \Omega^\infty
+        \map_{\Mod_B}
+        \bigl(
+            L_{B/A},
+            J[1]
+        \bigr).
+    \]
+
+    \item Let
+    \[
+        \xi
+        \in
+        \operatorname{Def}_{A'/A}(B)
+    \]
+    be a fixed deformation. Write
+    \[
+        \operatorname{Aut}(\xi)
+        :=
+        \Omega_\xi
+        \operatorname{Def}_{A'/A}(B)
+    \]
+    for its automorphism space in the deformation $\infty$-groupoid.
+    Thus its elements are automorphisms over $A'$ which preserve the
+    specified identification of the reduction with $B$, together with
+    the required coherent homotopy. There is a natural equivalence
+    \[
+        \operatorname{Aut}(\xi)
+        \simeq
+        \Omega^\infty
+        \map_{\Mod_B}
+        \bigl(
+            L_{B/A},
+            J
+        \bigr).
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Applying the exact contravariant functor
+\[
+    \map_{\Mod_B}(-,J[1])
+\]
+to the transitivity triangle gives a fibre sequence of spectra
+\[
+\begin{aligned}
+    \map_{\Mod_B}(L_{B/A},J[1])
+    &\longrightarrow
+    \map_{\Mod_B}(L_B,J[1])
+    \\
+    &\longrightarrow
+    \map_{\Mod_B}(L_A\otimes_AB,J[1])
+    \\
+    &\xrightarrow{\partial}
+    \map_{\Mod_B}(L_{B/A},J[2]).
+\end{aligned}
+\]
+Define
+\[
+    \operatorname{ob}(B/A')
+    :=
+    \partial(\eta_B).
+\]
+
+By
+\Ref{thm:affine-deformation-homotopy-fibre},
+the deformation $\infty$-groupoid is the homotopy fibre over $\eta_B$
+of
+\[
+    \Map_{\Mod_B}(L_B,J[1])
+    \longrightarrow
+    \Map_{\Mod_B}(L_A\otimes_AB,J[1]).
+\]
+The point $\eta_B$ lifts through this map if and only if its boundary
+under $\partial$ is null. This proves \textup{(i)}.
+
+When the homotopy fibre is nonempty, translation by a chosen point
+identifies it as a torsor under the homotopy fibre over zero. By the
+displayed fibre sequence, that homotopy fibre is
+\[
+    \Omega^\infty
+    \map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        J[1]
+    \bigr).
+\]
+This proves \textup{(ii)}.
+
+For a fixed deformation $\xi$, its automorphism space in the deformation
+$\infty$-groupoid is the based loop space
+\[
+    \Omega_\xi
+    \operatorname{Def}_{A'/A}(B).
+\]
+Using the torsor description and the canonical equivalence between the
+loop spaces at any two points of a grouplike infinite loop space gives
+\[
+\begin{aligned}
+    \operatorname{Aut}(\xi)
+    &\simeq
+    \Omega
+    \Omega^\infty
+    \map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        J[1]
+    \bigr)
+    \\
+    &\simeq
+    \Omega^\infty
+    \map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        J
+    \bigr).
+\end{aligned}
+\]
+This proves \textup{(iii)}. See
+\cite[Remark~3.23]{LurieDAGIV}.
+\end{proof}
+
+\section{Global cotangent complexes on spectral schemes}
+\label{sec:global-cotangent-spectral-schemes}
+
+\subsection{The Zariski ringed $\infty$-topos}
+
+Every spectral scheme $X$ constructed in
+\Ref{chap:spectral-algebraic-geometry} has a canonical Zariski
+$\infty$-topos, denoted
+\[
+    X_{\mathrm{Zar}},
+\]
+and its existing structure sheaf determines a sheaf of connective
+commutative ring spectra
+\[
+    \mathcal O_X
+    \in
+    \CAlg
+    \bigl(
+        \operatorname{Shv}_{\Sp}(X_{\mathrm{Zar}})
+    \bigr).
+\]
+The category $\QCoh(X)$ of
+\Ref{def:qcoh-spectral-prestack} identifies with the full subcategory of
+quasi-coherent $\mathcal O_X$-modules in the sheaf-theoretic module
+category. Thus the ringed-$\infty$-topos formalism used below is intrinsic
+machinery attached to the spectral schemes already constructed; it does
+not alter the affine or Zariski foundations of the preceding chapter.
+
+\subsection{Definition and affine comparison}
+
+\begin{definition}[Global relative cotangent complex]
+\label{def:global-relative-cotangent}
+Let
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+be a morphism of spectral schemes. The induced geometric morphism of
+Zariski $\infty$-topoi carries a morphism of sheaves of commutative ring
+spectra
+\[
+    f^{-1}\mathcal O_Y
+    \longrightarrow
+    \mathcal O_X.
+\]
+The \textbf{relative cotangent complex} of $f$ is the sheaf-level
+cotangent complex
+\[
+    L_{X/Y}
+    :=
+    L_{\mathcal O_X/f^{-1}\mathcal O_Y}.
+\]
+\end{definition}
+
+\begin{theorem}[Quasi-coherence and affine compatibility]
+\label{thm:global-cotangent-affine-compatibility}
+Let $f:X\to Y$ be a morphism of spectral schemes.
+\begin{enumerate}[label=(\roman*)]
+    \item The sheaf-level cotangent complex is quasi-coherent and hence
+    determines an object
+    \[
+        L_{X/Y}
+        \in
+        \QCoh(X).
+    \]
+
+    \item Let
+    \[
+        V=\Spec(B)
+        \longrightarrow
+        X
+    \]
+    be an affine open and let
+    \[
+        U=\Spec(A)
+        \longrightarrow
+        Y
+    \]
+    be an affine open through which $V\to Y$ factors. Then there is a
+    canonical equivalence
+    \[
+        L_{X/Y}|_V
+        \simeq
+        L_{B/A}.
+    \]
+
+    \item The global cotangent complex is objectwise connective:
+    \[
+        L_{X/Y}
+        \in
+        \QCoh(X)_{\geq0}.
+    \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Form the sheaf-level relative cotangent complex
+\[
+    L_{\mathcal O_X/f^{-1}\mathcal O_Y}
+\]
+in the stable category of \(\mathcal O_X\)-modules on
+\(X_{\mathrm{Zar}}\). The existence of this object, its compatibility
+with inverse-image functors, and its relative derivation universal
+property are the sheaf-level cotangent constructions of
+\cite[Sections~17.1.1--17.1.2]{LurieSAG}.
+
+Let
+\[
+    V=\Spec(B)
+    \longrightarrow
+    X
+\]
+be an affine open, and suppose that the composite
+\[
+    V
+    \longrightarrow
+    X
+    \longrightarrow
+    Y
+\]
+factors through an affine open
+\[
+    U=\Spec(A)
+    \longrightarrow
+    Y.
+\]
+Restricting the morphism of structure sheaves
+\[
+    f^{-1}\mathcal O_Y
+    \longrightarrow
+    \mathcal O_X
+\]
+to \(V_{\mathrm{Zar}}\) identifies it with the morphism of Zariski
+structure sheaves associated to the commutative ring-spectrum morphism
+\[
+    A
+    \longrightarrow
+    B.
+\]
+
+Compatibility of sheaf-level cotangent complexes with inverse image
+along the open immersion \(V\hookrightarrow X\) therefore gives
+\[
+    L_{\mathcal O_X/f^{-1}\mathcal O_Y}|_V
+    \simeq
+    L_{\mathcal O_V/\mathcal O_U|_V}.
+\]
+The sheaf-level derivation universal property on the affine spectral
+scheme \(V=\Spec(B)\) identifies the right side with the quasi-coherent
+sheaf associated to the affine cotangent complex
+\[
+    L_{B/A}.
+\]
+Thus there is a canonical equivalence
+\[
+    L_{\mathcal O_X/f^{-1}\mathcal O_Y}|_V
+    \simeq
+    \widetilde{L_{B/A}}.
+\]
+
+These affine identifications are compatible with further affine
+restriction. Indeed, if
+\[
+    W=\Spec(C)
+    \longrightarrow
+    V
+\]
+is an affine open, then the comparison on \(W\) is obtained from that on
+\(V\) by cotangent base change. Hence the affine cotangent complexes on
+the members of an affine atlas and on all their iterated intersections
+form a compatible object of the descent limit computing
+\(\QCoh(X)\).
+
+By the atlas equivalence of
+\Ref{thm:qcoh-atlas-computation}, the sheaf-level cotangent complex is
+therefore quasi-coherent and determines an object
+\[
+    L_{X/Y}
+    \in
+    \QCoh(X).
+\]
+This proves \textup{(i)}, and the affine calculation proves
+\textup{(ii)}.
+
+Finally, for every such affine \(V=\Spec(B)\), the morphism
+\(A\to B\) is a morphism of connective commutative ring spectra.
+Therefore
+\[
+    L_{B/A}
+    \in
+    \Mod_{B,\geq0}
+\]
+by \Ref{prop:cotangent-connectivity-degree-zero}. Objectwise
+connectivity in \(\QCoh(X)\) is detected on an affine atlas, so
+\[
+    L_{X/Y}
+    \in
+    \QCoh(X)_{\geq0}.
+\]
+This proves \textup{(iii)}.
+\end{proof}
+
+\begin{remark}[Atlas computation]
+\label{rem:global-cotangent-atlas-computation}
+Under the atlas equivalence of \Ref{thm:qcoh-atlas-computation}, the
+object $L_{X/Y}$ is represented by the compatible family of affine
+cotangent complexes on the members of the atlas and all iterated
+intersections. Thus affine descent computes the intrinsic global object,
+but is not needed to construct it.
+\end{remark}
+
+\subsection{Global base change and transitivity}
+
+\begin{theorem}[Global base change]
+\label{thm:global-cotangent-base-change}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    X'
+        \arrow[r, "g'"]
+        \arrow[d, "f'"']
+    &
+    X
+        \arrow[d, "f"]
+    \\
+    Y'
+        \arrow[r, "g"']
+    &
+    Y
+\end{tikzcd}
+\]
+be a Cartesian square of spectral schemes. Then there is a natural
+equivalence
+\[
+    L_{X'/Y'}
+    \simeq
+    (g')^*L_{X/Y}.
+\]
+\end{theorem}
+
+\begin{proof}
+Sheaf-level cotangent complexes commute with inverse image and algebraic
+base change; see \cite[Section~17.1.1]{LurieSAG}. The assertion can also
+be checked on compatible affine opens using
+\Ref{thm:cotangent-base-change} and
+\Ref{thm:global-cotangent-affine-compatibility}.
+\end{proof}
+
+\begin{theorem}[Global transitivity]
+\label{thm:global-cotangent-transitivity}
+For composable morphisms
+\[
+    X
+    \xrightarrow{f}
+    Y
+    \xrightarrow{g}
+    Z,
+\]
+there is a natural cofibre sequence in $\QCoh(X)$
+\[
+    f^*L_{Y/Z}
+    \longrightarrow
+    L_{X/Z}
+    \longrightarrow
+    L_{X/Y}.
+\]
+\end{theorem}
+
+\begin{proof}
+This is the transitivity sequence for the morphisms of structure sheaves
+on $X_{\mathrm{Zar}}$; see \cite[Section~17.1.1]{LurieSAG}. Affine
+restriction recovers \Ref{thm:cotangent-transitivity}.
+\end{proof}
+
+\begin{corollary}[Cotangent complex of an open immersion]
+\label{cor:cotangent-open-immersion}
+Let
+\[
+    j
+    \colon
+    U
+    \hookrightarrow
+    X
+\]
+be an open immersion of spectral schemes. Then
+\[
+    L_{U/X}
+    \simeq
+    0.
+\]
+\end{corollary}
+
+\begin{proof}
+The structure sheaf of $U$ is the inverse image of the structure sheaf of
+$X$. Hence the relative morphism of sheaves of commutative ring spectra is
+an equivalence, and its cotangent complex vanishes. See
+\cite[Section~17.1.1]{LurieSAG}.
+\end{proof}
+
+\section{Global structured square-zero extensions}
+\label{sec:global-structured-square-zero}
+
+\subsection{The sheaf-level extension}
+
+\begin{construction}[Global square-zero extension]
+\label{con:global-square-zero-extension}
+Let
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+be a morphism of spectral schemes, let
+\[
+    \mathcal M
+    \in
+    \QCoh(X),
+\]
+and let
+\[
+    \eta
+    \colon
+    L_{X/Y}
+    \longrightarrow
+    \mathcal M[1].
+\]
+
+The structural morphism
+\[
+    f^{-1}\mathcal O_Y
+    \longrightarrow
+    \mathcal O_X
+\]
+makes both
+\[
+    \mathcal O_X
+    \qquad\text{and}\qquad
+    \mathcal O_X\oplus\mathcal M[1]
+\]
+commutative \(f^{-1}\mathcal O_Y\)-algebras. The augmentation
+\[
+    \mathcal O_X\oplus\mathcal M[1]
+    \longrightarrow
+    \mathcal O_X
+\]
+is the projection onto the first summand.
+
+By the relative cotangent universal property, the morphism \(\eta\)
+represents a derivation
+\[
+    d_\eta
+    \colon
+    \mathcal O_X
+    \longrightarrow
+    \mathcal O_X\oplus\mathcal M[1]
+\]
+in the \(\infty\)-category
+\[
+    \CAlg
+    \bigl(
+        \operatorname{Shv}_{\Sp}(X_{\mathrm{Zar}})
+    \bigr)_{f^{-1}\mathcal O_Y//\mathcal O_X}.
+\]
+Thus \(d_\eta\) is \(f^{-1}\mathcal O_Y\)-linear. Equivalently, its
+underlying absolute derivation is classified by the composite
+\[
+    L_X
+    \longrightarrow
+    L_{X/Y}
+    \xrightarrow{\eta}
+    \mathcal M[1].
+\]
+
+Let
+\[
+    d_0
+    \colon
+    \mathcal O_X
+    \longrightarrow
+    \mathcal O_X\oplus\mathcal M[1]
+\]
+denote the zero \(f^{-1}\mathcal O_Y\)-linear derivation.
+
+Define
+\[
+    \mathcal O_X^\eta
+    :=
+    \mathcal O_X
+    \times_{\mathcal O_X\oplus\mathcal M[1]}
+    \mathcal O_X
+\]
+by the specified pullback square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    \mathcal O_X^\eta
+        \arrow[r, "q_\eta^\sharp"]
+        \arrow[d, "r_\eta^\sharp"']
+    &
+    \mathcal O_X
+        \arrow[d, "d_\eta"]
+    \\
+    \mathcal O_X
+        \arrow[r, "d_0"']
+    &
+    \mathcal O_X\oplus\mathcal M[1].
+\end{tikzcd}
+\]
+The pullback is formed in
+\[
+    \CAlg
+    \bigl(
+        \operatorname{Shv}_{\Sp}(X_{\mathrm{Zar}})
+    \bigr)_{f^{-1}\mathcal O_Y/}.
+\]
+In particular, \(\mathcal O_X^\eta\) inherits a canonical structural
+morphism
+\[
+    f^{-1}\mathcal O_Y
+    \longrightarrow
+    \mathcal O_X^\eta.
+\]
+
+By convention,
+\[
+    q_\eta^\sharp
+    \colon
+    \mathcal O_X^\eta
+    \longrightarrow
+    \mathcal O_X
+\]
+is the structure-sheaf morphism underlying the square-zero thickening.
+
+There is a canonical fibre sequence of
+\(\mathcal O_X^\eta\)-modules
+\[
+    \mathcal M
+    \longrightarrow
+    \mathcal O_X^\eta
+    \xrightarrow{q_\eta^\sharp}
+    \mathcal O_X,
+\]
+where \(\mathcal M\) and \(\mathcal O_X\) are regarded as
+\(\mathcal O_X^\eta\)-modules by restriction of scalars along
+\(q_\eta^\sharp\).
+\end{construction}
+
+\begin{theorem}[Square-zero thickenings of spectral schemes]
+\label{thm:global-square-zero-spectral-scheme}
+In \Ref{con:global-square-zero-extension}, suppose that
+\[
+    \mathcal M
+    \in
+    \QCoh(X)_{\geq0}.
+\]
+Then the spectrally ringed Zariski $\infty$-topos
+\[
+    X^\eta
+    :=
+    \bigl(
+        X_{\mathrm{Zar}},
+        \mathcal O_X^\eta
+    \bigr)
+\]
+is a spectral scheme. The canonical morphism
+\[
+    i_\eta
+    \colon
+    X
+    \hookrightarrow
+    X^\eta
+\]
+is a closed immersion over $Y$, its underlying topological map is a
+homeomorphism, and its affine restrictions are the structured square-zero
+extensions of \Ref{def:structured-square-zero-extension}.
+\end{theorem}
+\begin{proof}
+Because the pullback defining
+\[
+    \mathcal O_X^\eta
+\]
+is formed in commutative \(f^{-1}\mathcal O_Y\)-algebras,
+\(\mathcal O_X^\eta\) carries a canonical structural morphism
+\[
+    f^{-1}\mathcal O_Y
+    \longrightarrow
+    \mathcal O_X^\eta.
+\]
+Thus, once the resulting ringed \(\infty\)-topos is shown to be a
+spectral scheme, it is canonically a spectral scheme over \(Y\).
+
+Let
+\[
+    U=\Spec(B)
+    \longrightarrow
+    X
+\]
+be an affine open. After shrinking an affine neighbourhood in \(Y\) if
+necessary, suppose that the composite \(U\to Y\) factors through
+\[
+    V=\Spec(A)
+    \longrightarrow
+    Y.
+\]
+Write
+\[
+    M_U
+    \in
+    \Mod_B
+\]
+for the \(B\)-module corresponding to
+\(\mathcal M|_U\).
+
+By
+\Ref{thm:global-cotangent-affine-compatibility}, restriction of
+\(\eta\) to \(U\) is identified with a morphism
+\[
+    \eta_U
+    \colon
+    L_{B/A}
+    \longrightarrow
+    M_U[1].
+\]
+Restriction to \(U_{\mathrm{Zar}}\) preserves the specified pullback
+defining \(\mathcal O_X^\eta\). Consequently,
+\[
+    \mathcal O_X^\eta|_U
+\]
+is canonically identified with the Zariski structure sheaf associated
+to the commutative ring spectrum
+\[
+    B^{\eta_U}
+    :=
+    B
+    \times_{B\oplus M_U[1]}
+    B.
+\]
+
+Since \(B\) and \(M_U\) are connective,
+\Ref{prop:fibre-structured-square-zero} shows that
+\(B^{\eta_U}\) is connective. Hence the restriction of the ringed
+\(\infty\)-topos
+\[
+    \bigl(
+        X_{\mathrm{Zar}},
+        \mathcal O_X^\eta
+    \bigr)
+\]
+to the open subtopos \(U_{\mathrm{Zar}}\) is represented by the affine
+spectral scheme
+\[
+    \Spec(B^{\eta_U}).
+\]
+
+These affine identifications are compatible on intersections. Indeed,
+restriction to a smaller affine open is inverse image on sheaves, and
+inverse image preserves the pullback defining the square-zero
+extension. Equivalently, on coordinate algebras the compatibility is
+the base-change compatibility of relative derivations and structured
+square-zero extensions.
+
+An affine open atlas of \(X\) therefore gives an affine open atlas of
+\[
+    X^\eta
+    :=
+    \bigl(
+        X_{\mathrm{Zar}},
+        \mathcal O_X^\eta
+    \bigr).
+\]
+Thus \(X^\eta\) is a spectral scheme.
+
+The morphism
+\[
+    q_\eta^\sharp
+    \colon
+    \mathcal O_X^\eta
+    \longrightarrow
+    \mathcal O_X
+\]
+defines a morphism of spectral schemes
+\[
+    i_\eta
+    \colon
+    X
+    \longrightarrow
+    X^\eta.
+\]
+Affine-locally it is represented by
+\[
+    B^{\eta_U}
+    \longrightarrow
+    B.
+\]
+By \Ref{prop:fibre-structured-square-zero}, this morphism is
+surjective on \(\pi_0\) and its kernel is square-zero. The affine
+closed-immersion criterion of
+\Ref{def:affine-closed-immersion-spectral} therefore shows that
+\(i_\eta\) is a closed immersion. Since closed immersions are
+Zariski-local, the conclusion holds globally.
+
+Moreover,
+\[
+    \Spec\pi_0(B)
+    \longrightarrow
+    \Spec\pi_0(B^{\eta_U})
+\]
+is defined by a square-zero ideal and is therefore a homeomorphism on
+underlying topological spaces. These affine homeomorphisms glue, so
+\[
+    |X|
+    \xrightarrow{\simeq}
+    |X^\eta|
+\]
+is a homeomorphism.
+
+Finally, the affine restriction of \(i_\eta\) over \(U=\Spec(B)\) is
+exactly the structured square-zero extension classified by
+\[
+    \eta_U
+    \colon
+    L_{B/A}
+    \longrightarrow
+    M_U[1].
+\]
+Hence all assertions follow.
+\end{proof}
+
+\subsection{Intrinsic structured extensions}
+
+\begin{definition}[Structured infinitesimal extension]
+\label{def:structured-infinitesimal-extension}
+Let
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+be a morphism of spectral schemes and let
+\[
+    \mathcal M
+    \in
+    \QCoh(X)_{\geq0}.
+\]
+A \textbf{structured infinitesimal extension of \(X\) over \(Y\) by
+\(\mathcal M\)} is a morphism
+\[
+    \eta
+    \colon
+    L_{X/Y}
+    \longrightarrow
+    \mathcal M[1]
+\]
+together with the associated thickening
+\[
+    X
+    \hookrightarrow
+    X^\eta
+\]
+of \Ref{thm:global-square-zero-spectral-scheme}, including its specified
+square-zero pullback identification. Its underlying infinitesimal
+extension is the closed immersion obtained after forgetting the
+classifying morphism and the specified pullback identification.
+
+The resulting \(\infty\)-groupoid of structured infinitesimal extensions
+of \(X\) over \(Y\) by \(\mathcal M\), with equivalences preserving the
+classifying morphism and the specified pullback data, is denoted
+\[
+    \operatorname{SqZ}^{\mathrm{str}}_Y(X;\mathcal M).
+\]
+\end{definition}
+
+\begin{theorem}[Global structured square-zero classification]
+\label{thm:global-structured-square-zero-classification}
+Let $f:X\to Y$ be a morphism of spectral schemes and let
+$\mathcal M\in\QCoh(X)_{\geq0}$. Then there is a natural equivalence
+\[
+    \operatorname{SqZ}^{\mathrm{str}}_Y(X;\mathcal M)
+    \simeq
+    \Map_{\QCoh(X)}
+    \bigl(
+        L_{X/Y},
+        \mathcal M[1]
+    \bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+The right side is the space of sheaf-level derivations. The construction
+of \Ref{con:global-square-zero-extension} carries such a derivation to
+its structured extension. For a fixed derivation, the space of pullback
+models and identifications is contractible. The resulting sheaf-level
+classification is developed in \cite[Section~17.1.3]{LurieSAG}.
+\end{proof}
+
+\section{Global deformation and obstruction theory}
+\label{sec:global-spectral-deformation-theory}
+
+\subsection{Deformations of spectral schemes}
+
+\begin{definition}[Deformation over an infinitesimal extension]
+\label{def:global-deformation-infinitesimal}
+Let
+\[
+    i
+    \colon
+    S
+    \hookrightarrow
+    S'
+\]
+be a structured infinitesimal extension and let
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be a spectral scheme.
+
+A \textbf{deformation of \(X\) over \(S'\)} is a pair
+\[
+    (X',\alpha)
+\]
+consisting of a spectral scheme
+\[
+    X'
+    \longrightarrow
+    S'
+\]
+and an equivalence
+\[
+    \alpha
+    \colon
+    X'\times_{S'}S
+    \xrightarrow{\simeq}
+    X
+\]
+over \(S\).
+
+A morphism
+\[
+    (X'_1,\alpha_1)
+    \longrightarrow
+    (X'_2,\alpha_2)
+\]
+is an equivalence
+\[
+    u
+    \colon
+    X'_1
+    \xrightarrow{\simeq}
+    X'_2
+\]
+over \(S'\), together with the specified coherent compatibility
+\[
+    \alpha_2
+    \circ
+    \bigl(
+        u\times_{S'}S
+    \bigr)
+    \simeq
+    \alpha_1.
+\]
+The resulting \(\infty\)-groupoid is denoted
+\[
+    \operatorname{Def}_{S'/S}(X).
+\]
+\end{definition}
+
+\begin{lemma}[Fixed-topos description of global deformations]
+\label{lem:global-deformation-fixed-topos}
+Let
+\[
+    i
+    \colon
+    S
+    \hookrightarrow
+    S'
+\]
+be a structured infinitesimal extension by
+\[
+    \mathcal I
+    \in
+    \QCoh(S)_{\geq0},
+\]
+classified by
+\[
+    \eta_S
+    \colon
+    L_S
+    \longrightarrow
+    \mathcal I[1].
+\]
+Let
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be a spectral scheme, put
+\[
+    \mathcal J
+    :=
+    f^*\mathcal I,
+\]
+and let
+\[
+    \eta_X
+    :=
+    f^*\eta_S
+    \colon
+    f^*L_S
+    \longrightarrow
+    \mathcal J[1].
+\]
+Then there is a natural equivalence
+\[
+    \operatorname{Def}_{S'/S}(X)
+    \simeq
+    \operatorname{fib}_{\eta_X}
+    \left(
+        \Map_{\QCoh(X)}
+        \bigl(
+            L_X,
+            \mathcal J[1]
+        \bigr)
+        \longrightarrow
+        \Map_{\QCoh(X)}
+        \bigl(
+            f^*L_S,
+            \mathcal J[1]
+        \bigr)
+    \right),
+\]
+where the displayed morphism is induced by the canonical map
+\[
+    f^*L_S
+    \longrightarrow
+    L_X.
+\]
+Equivalently, a deformation is classified by a morphism
+\[
+    \widetilde\eta
+    \colon
+    L_X
+    \longrightarrow
+    \mathcal J[1]
+\]
+together with a specified homotopy
+\[
+    \widetilde\eta|_{f^*L_S}
+    \simeq
+    \eta_X.
+\]
+\end{lemma}
+\begin{proof}
+Let
+\[
+    (X',\alpha)
+    \in
+    \operatorname{Def}_{S'/S}(X).
+\]
+Write
+\[
+    f'
+    \colon
+    X'
+    \longrightarrow
+    S'
+\]
+for its structural morphism. The specified equivalence
+\[
+    \alpha
+    \colon
+    X'\times_{S'}S
+    \xrightarrow{\simeq}
+    X
+\]
+identifies the canonical morphism
+\[
+    j
+    \colon
+    X
+    \longrightarrow
+    X'
+\]
+with the base change of
+\[
+    i
+    \colon
+    S
+    \longrightarrow
+    S'.
+\]
+
+Since \(i\) is a square-zero closed immersion, so is \(j\). On
+classical truncations, both are closed immersions defined by
+square-zero ideals. Hence they induce homeomorphisms on underlying
+topological spaces:
+\[
+    |S|
+    \xrightarrow{\simeq}
+    |S'|
+    \qquad\text{and}\qquad
+    |X|
+    \xrightarrow{\simeq}
+    |X'|.
+\]
+Spectral open subsets are detected on classical truncations. Therefore
+pullback along \(i\) and \(j\) identifies the corresponding Zariski
+open spectral subschemes and induces equivalences of Zariski
+\(\infty\)-topoi
+\[
+    S_{\mathrm{Zar}}
+    \xrightarrow{\simeq}
+    S'_{\mathrm{Zar}}
+\]
+and
+\[
+    X_{\mathrm{Zar}}
+    \xrightarrow{\simeq}
+    X'_{\mathrm{Zar}}.
+\]
+
+Use these equivalences to transport the structure sheaves of \(S'\) and
+\(X'\) to sheaves on \(S_{\mathrm{Zar}}\) and
+\(X_{\mathrm{Zar}}\), respectively. The base extension becomes a
+structured square-zero extension
+\[
+    \mathcal O_{S'}
+    \longrightarrow
+    \mathcal O_S
+\]
+on \(S_{\mathrm{Zar}}\), with coefficient module \(\mathcal I\) and
+classifying morphism
+\[
+    \eta_S
+    \colon
+    L_S
+    \longrightarrow
+    \mathcal I[1].
+\]
+
+Similarly, the morphism \(j\) gives a structured square-zero extension
+\[
+    \mathcal O_{X'}
+    \longrightarrow
+    \mathcal O_X
+\]
+on \(X_{\mathrm{Zar}}\). Since \(j\) is obtained by base change from
+\(i\), its coefficient module is canonically
+\[
+    \mathcal J
+    =
+    f^*\mathcal I.
+\]
+
+The sheaf-level tangent correspondence classifies the extension
+\(\mathcal O_{X'}\to\mathcal O_X\) by a morphism
+\[
+    \widetilde\eta
+    \colon
+    L_X
+    \longrightarrow
+    \mathcal J[1].
+\]
+The morphism
+\[
+    f'
+    \colon
+    X'
+    \longrightarrow
+    S'
+\]
+and the specified identification of its reduction with
+\(f:X\to S\) give a morphism from the source structured extension to
+the base structured extension. Under functoriality of cotangent
+complexes, this relative compatibility is precisely a specified
+homotopy
+\[
+    \widetilde\eta|_{f^*L_S}
+    \simeq
+    f^*\eta_S
+    =
+    \eta_X.
+\]
+Thus a deformation determines a point of
+\[
+    \operatorname{fib}_{\eta_X}
+    \left(
+        \Map_{\QCoh(X)}
+        \bigl(
+            L_X,
+            \mathcal J[1]
+        \bigr)
+        \longrightarrow
+        \Map_{\QCoh(X)}
+        \bigl(
+            f^*L_S,
+            \mathcal J[1]
+        \bigr)
+    \right).
+\]
+
+Conversely, suppose given a morphism
+\[
+    \widetilde\eta
+    \colon
+    L_X
+    \longrightarrow
+    \mathcal J[1]
+\]
+together with a specified homotopy
+\[
+    \widetilde\eta|_{f^*L_S}
+    \simeq
+    \eta_X.
+\]
+
+Use the equivalence
+\[
+    S_{\mathrm{Zar}}
+    \simeq
+    S'_{\mathrm{Zar}}
+\]
+to regard the geometric morphism
+\[
+    f
+    \colon
+    X_{\mathrm{Zar}}
+    \longrightarrow
+    S_{\mathrm{Zar}}
+\]
+as having target \(S'_{\mathrm{Zar}}\). Pulling the structured
+extension
+\[
+    \mathcal O_{S'}
+    \longrightarrow
+    \mathcal O_S
+\]
+back to \(X_{\mathrm{Zar}}\) gives a structured square-zero extension
+\[
+    f^{-1}\mathcal O_{S'}
+    \longrightarrow
+    f^{-1}\mathcal O_S
+\]
+classified by
+\[
+    \eta_X
+    \colon
+    f^*L_S
+    \longrightarrow
+    \mathcal J[1].
+\]
+
+The specified homotopy
+\[
+    \widetilde\eta|_{f^*L_S}
+    \simeq
+    \eta_X
+\]
+is exactly the compatibility datum making the derivation classified by
+\(\widetilde\eta\) a derivation over the structured base extension.
+The relative sheaf-level tangent correspondence therefore constructs a
+sheaf of connective commutative ring spectra
+\[
+    \mathcal O_{X'}
+\]
+on \(X_{\mathrm{Zar}}\), together with a commutative diagram
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    f^{-1}\mathcal O_{S'}
+        \arrow[r]
+        \arrow[d]
+    &
+    \mathcal O_{X'}
+        \arrow[d]
+    \\
+    f^{-1}\mathcal O_S
+        \arrow[r]
+    &
+    \mathcal O_X,
+\end{tikzcd}
+\]
+in which the right vertical morphism is a structured square-zero
+extension with coefficient module \(\mathcal J\), and the square is the
+specified relative pullback square.
+
+By
+\Ref{thm:global-square-zero-spectral-scheme}, the spectrally ringed
+Zariski \(\infty\)-topos
+\[
+    X'
+    :=
+    \bigl(
+        X_{\mathrm{Zar}},
+        \mathcal O_{X'}
+    \bigr)
+\]
+is a spectral scheme. The upper horizontal morphism in the displayed
+diagram supplies a morphism of spectrally ringed \(\infty\)-topoi
+\[
+    X'
+    \longrightarrow
+    S'.
+\]
+Base change along \(S\hookrightarrow S'\) recovers
+\[
+    \bigl(
+        X_{\mathrm{Zar}},
+        \mathcal O_X
+    \bigr)
+    =
+    X,
+\]
+with its original structural morphism \(f:X\to S\). The specified
+pullback identification gives an equivalence
+\[
+    X'\times_{S'}S
+    \xrightarrow{\simeq}
+    X.
+\]
+Thus the compatible derivation determines an object of
+\[
+    \operatorname{Def}_{S'/S}(X).
+\]
+
+The two constructions are inverse on objects. They are also inverse on
+equivalences and all higher homotopies, because for a fixed derivation
+the space of pullback models and specified pullback identifications is
+contractible. Hence there is a natural equivalence
+\[
+    \operatorname{Def}_{S'/S}(X)
+    \simeq
+    \operatorname{fib}_{\eta_X}
+    \left(
+        \Map_{\QCoh(X)}
+        \bigl(
+            L_X,
+            \mathcal J[1]
+        \bigr)
+        \longrightarrow
+        \Map_{\QCoh(X)}
+        \bigl(
+            f^*L_S,
+            \mathcal J[1]
+        \bigr)
+    \right).
+\]
+See
+\cite[Sections~17.1.3 and~19.4.3]{LurieSAG}.
+\end{proof}
+
+\subsection{Split first-order deformations}
+
+\begin{theorem}[Split first-order deformation space]
+\label{thm:global-split-first-order-deformations}
+Let
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be a morphism of spectral schemes and let
+\[
+    \mathcal I
+    \in
+    \QCoh(S)_{\geq0}.
+\]
+For the split square-zero thickening of \(S\) by \(\mathcal I\),
+classified by the zero morphism
+\[
+    L_S
+    \longrightarrow
+    \mathcal I[1],
+\]
+the deformation \(\infty\)-groupoid of \(X\) is naturally equivalent to
+\[
+    \Map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        f^*\mathcal I[1]
+    \bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Put
+\[
+    \mathcal J
+    :=
+    f^*\mathcal I.
+\]
+Since the base extension is split, its classifying morphism is zero, and
+hence the pulled-back classifying morphism
+\[
+    f^*L_S
+    \longrightarrow
+    \mathcal J[1]
+\]
+is also zero. By
+\Ref{lem:global-deformation-fixed-topos},
+the deformation \(\infty\)-groupoid is therefore the homotopy fibre over
+zero of
+\[
+    \Map_{\QCoh(X)}
+    \bigl(
+        L_X,
+        \mathcal J[1]
+    \bigr)
+    \longrightarrow
+    \Map_{\QCoh(X)}
+    \bigl(
+        f^*L_S,
+        \mathcal J[1]
+    \bigr).
+\]
+
+The transitivity triangle
+\[
+    f^*L_S
+    \longrightarrow
+    L_X
+    \longrightarrow
+    L_{X/S}
+\]
+gives, after applying the exact contravariant mapping-spectrum functor
+\[
+    \map_{\QCoh(X)}(-,\mathcal J[1]),
+\]
+a fibre sequence of spectra
+\[
+    \map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J[1]
+    \bigr)
+    \longrightarrow
+    \map_{\QCoh(X)}
+    \bigl(
+        L_X,
+        \mathcal J[1]
+    \bigr)
+    \longrightarrow
+    \map_{\QCoh(X)}
+    \bigl(
+        f^*L_S,
+        \mathcal J[1]
+    \bigr).
+\]
+Passing to infinite loop spaces identifies the homotopy fibre over zero
+with
+\[
+    \Map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J[1]
+    \bigr).
+\]
+Substituting
+\[
+    \mathcal J
+    =
+    f^*\mathcal I
+\]
+gives the asserted equivalence.
+\end{proof}
+
+\subsection{The Kodaira--Spencer obstruction}
+
+\begin{theorem}[Global cotangent obstruction theory]
+\label{thm:global-cotangent-obstruction}
+Let
+\[
+    i
+    \colon
+    S
+    \hookrightarrow
+    S'
+\]
+be a structured infinitesimal extension by
+\[
+    \mathcal I
+    \in
+    \QCoh(S)_{\geq0},
+\]
+classified by
+\[
+    \eta_S
+    \colon
+    L_S
+    \longrightarrow
+    \mathcal I[1].
+\]
+Let
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be a spectral scheme and put
+\[
+    \mathcal J
+    :=
+    f^*\mathcal I.
+\]
+The transitivity triangle
+\[
+    f^*L_S
+    \longrightarrow
+    L_X
+    \longrightarrow
+    L_{X/S}
+\]
+determines a canonical Kodaira--Spencer obstruction
+\[
+    \operatorname{ob}(X/S')
+    \in
+    \pi_0
+    \map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J[2]
+    \bigr).
+\]
+It satisfies:
+\begin{enumerate}[label=(\roman*)]
+    \item The obstruction vanishes if and only if \(X\) admits a
+    deformation over \(S'\).
+
+    \item When it vanishes, \(\operatorname{Def}_{S'/S}(X)\) is a torsor
+    under
+    \[
+        \Omega^\infty
+        \map_{\QCoh(X)}
+        \bigl(
+            L_{X/S},
+            \mathcal J[1]
+        \bigr).
+    \]
+
+    \item Let
+    \[
+        \xi
+        \in
+        \operatorname{Def}_{S'/S}(X)
+    \]
+    be a fixed deformation. Write
+    \[
+        \operatorname{Aut}(\xi)
+        :=
+        \Omega_\xi
+        \operatorname{Def}_{S'/S}(X)
+    \]
+    for its automorphism space in the deformation $\infty$-groupoid.
+    Thus its elements are automorphisms over \(S'\) which preserve the
+    specified identification of the reduction with \(X\), together with
+    the required coherent homotopy. There is a natural equivalence
+    \[
+        \operatorname{Aut}(\xi)
+        \simeq
+        \Omega^\infty
+        \map_{\QCoh(X)}
+        \bigl(
+            L_{X/S},
+            \mathcal J
+        \bigr).
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Pulling back the classifying morphism of the base extension gives
+\[
+    \eta_X
+    :=
+    f^*\eta_S
+    \colon
+    f^*L_S
+    \longrightarrow
+    \mathcal J[1].
+\]
+By
+\Ref{lem:global-deformation-fixed-topos},
+there is a natural equivalence
+\[
+    \operatorname{Def}_{S'/S}(X)
+    \simeq
+    \operatorname{fib}_{\eta_X}
+    \left(
+        \Map_{\QCoh(X)}
+        \bigl(
+            L_X,
+            \mathcal J[1]
+        \bigr)
+        \longrightarrow
+        \Map_{\QCoh(X)}
+        \bigl(
+            f^*L_S,
+            \mathcal J[1]
+        \bigr)
+    \right).
+\]
+
+Applying the exact contravariant functor
+\[
+    \map_{\QCoh(X)}(-,\mathcal J[1])
+\]
+to the transitivity triangle
+\[
+    f^*L_S
+    \longrightarrow
+    L_X
+    \longrightarrow
+    L_{X/S}
+\]
+gives a fibre sequence of spectra
+\[
+\begin{aligned}
+    \map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J[1]
+    \bigr)
+    &\longrightarrow
+    \map_{\QCoh(X)}
+    \bigl(
+        L_X,
+        \mathcal J[1]
+    \bigr)
+    \\
+    &\longrightarrow
+    \map_{\QCoh(X)}
+    \bigl(
+        f^*L_S,
+        \mathcal J[1]
+    \bigr)
+    \\
+    &\xrightarrow{\partial}
+    \map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J[2]
+    \bigr).
+\end{aligned}
+\]
+Define
+\[
+    \operatorname{ob}(X/S')
+    :=
+    \partial(\eta_X).
+\]
+
+The point \(\eta_X\) lifts through
+\[
+    \Map_{\QCoh(X)}
+    \bigl(
+        L_X,
+        \mathcal J[1]
+    \bigr)
+    \longrightarrow
+    \Map_{\QCoh(X)}
+    \bigl(
+        f^*L_S,
+        \mathcal J[1]
+    \bigr)
+\]
+if and only if its boundary is null. By the homotopy-fibre description,
+such a lift is exactly a deformation of \(X\) over \(S'\). This proves
+\textup{(i)}.
+
+When the homotopy fibre is nonempty, translation by a chosen point
+identifies it as a torsor under the homotopy fibre over zero. By the
+displayed fibre sequence, that homotopy fibre is
+\[
+    \Omega^\infty
+    \map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J[1]
+    \bigr).
+\]
+This proves \textup{(ii)}.
+
+For a fixed deformation \(\xi\), its automorphism space in the
+deformation $\infty$-groupoid is the based loop space
+\[
+    \Omega_\xi
+    \operatorname{Def}_{S'/S}(X).
+\]
+Using the torsor description gives
+\[
+\begin{aligned}
+    \operatorname{Aut}(\xi)
+    &\simeq
+    \Omega
+    \Omega^\infty
+    \map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J[1]
+    \bigr)
+    \\
+    &\simeq
+    \Omega^\infty
+    \map_{\QCoh(X)}
+    \bigl(
+        L_{X/S},
+        \mathcal J
+    \bigr).
+\end{aligned}
+\]
+This proves \textup{(iii)}. See
+\cite[Section~19.4.3]{LurieSAG}.
+\end{proof}
+
+\begin{corollary}[Affine compatibility of global obstruction theory]
+\label{cor:global-obstruction-affine-compatibility}
+Suppose
+\[
+    S=\Spec(A),
+    \qquad
+    S'=\Spec(A'),
+    \qquad
+    X=\Spec(B).
+\]
+Then every deformation of \(X\) over \(S'\) is affine, and under the
+resulting identification of deformation \(\infty\)-groupoids,
+\Ref{thm:global-cotangent-obstruction}
+identifies canonically with
+\Ref{thm:affine-cotangent-obstruction}.
+\end{corollary}
+
+\begin{proof}
+Let
+\[
+    (X',\alpha)
+    \in
+    \operatorname{Def}_{S'/S}(X).
+\]
+The morphism
+\[
+    X
+    \simeq
+    X'\times_{S'}S
+    \longrightarrow
+    X'
+\]
+is the base change of the square-zero closed immersion
+\[
+    S
+    \longrightarrow
+    S'.
+\]
+It is therefore a square-zero closed immersion and induces a
+homeomorphism on underlying topological spaces. On classical
+truncations,
+\[
+    X_{\mathrm{cl}}
+    \longrightarrow
+    X'_{\mathrm{cl}}
+\]
+is a nilpotent closed immersion.
+
+Since \(X_{\mathrm{cl}}\) is affine, the nilpotent thickening
+\(X'_{\mathrm{cl}}\) is affine. Affineness of spectral schemes is
+detected on classical truncations, so \(X'\) is affine. Write
+\[
+    X'
+    \simeq
+    \Spec(B')
+\]
+for a connective commutative \(A'\)-algebra \(B'\). The specified
+equivalence
+\[
+    X'\times_{S'}S
+    \simeq
+    X
+\]
+then identifies contravariantly with an equivalence
+\[
+    B'\otimes_{A'}A
+    \xrightarrow{\simeq}
+    B.
+\]
+Thus the global and affine definitions of deformation determine the same
+\(\infty\)-groupoid.
+
+Under the affine comparison theorem,
+\[
+    L_X
+    \simeq
+    L_B,
+    \qquad
+    f^*L_S
+    \simeq
+    L_A\otimes_AB,
+    \qquad
+    L_{X/S}
+    \simeq
+    L_{B/A},
+\]
+and
+\[
+    f^*\mathcal I
+    \simeq
+    B\otimes_AI.
+\]
+Moreover, quasi-coherent mapping spectra on \(\Spec(B)\) identify with
+mapping spectra in \(\Mod_B\). Consequently, the global transitivity
+triangle, its boundary morphism, the obstruction class, the deformation
+torsor, and the automorphism space identify respectively with those of
+\Ref{thm:affine-cotangent-obstruction}.
+\end{proof}
+
+\section{Quasi-smooth closed immersions and derived zero loci}
+\label{sec:quasi-smooth-closed-immersions}
+
+\subsection{Conormal modules and quasi-smoothness}
+
+\begin{definition}[Conormal module]
+\label{def:conormal-module}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+be a closed immersion of spectral schemes. Its \textbf{conormal module}
+is
+\[
+    N^*_{Z/X}
+    :=
+    L_{Z/X}[-1]
+    \in
+    \QCoh(Z).
+\]
+\end{definition}
+
+\begin{definition}[Quasi-smooth or regular closed immersion]
+\label{def:quasi-smooth-closed-immersion}
+A closed immersion
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+is \textbf{quasi-smooth} if:
+\begin{enumerate}[label=(\roman*)]
+    \item it is locally of finite presentation;
+
+    \item the conormal module
+    \[
+        N^*_{Z/X}
+        =
+        L_{Z/X}[-1]
+    \]
+    is locally free of finite rank.
+\end{enumerate}
+A quasi-smooth closed immersion will also be called a
+\textbf{regular closed immersion} in this work.
+\end{definition}
+
+\begin{definition}[Normal module and normal bundle]
+\label{def:normal-bundle}
+For a quasi-smooth closed immersion
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X,
+\]
+define the \textbf{normal module}
+\[
+    N_{Z/X}
+    :=
+    (N^*_{Z/X})^\vee.
+\]
+Define the \textbf{normal bundle} by
+\[
+    \mathbf N_{Z/X}
+    :=
+    \mathbb V_Z(N^*_{Z/X}).
+\]
+Since \(N^*_{Z/X}\) is finite locally free, finite-projective biduality
+gives a canonical equivalence
+\[
+    (N_{Z/X})^\vee
+    =
+    \bigl((N^*_{Z/X})^\vee\bigr)^\vee
+    \simeq
+    N^*_{Z/X}.
+\]
+Consequently, there is a canonical equivalence
+\[
+    \mathbf N_{Z/X}
+    \simeq
+    \mathbf V_Z(N_{Z/X}).
+\]
+\end{definition}
+
+\begin{proposition}[Base change of quasi-smooth closed immersions]
+\label{prop:quasi-smooth-closed-base-change}
+Quasi-smooth closed immersions are stable under arbitrary base change.
+For every morphism $Y\to X$, there is a natural equivalence
+\[
+    N^*_{Z\times_XY/Y}
+    \simeq
+    N^*_{Z/X}|_{Z\times_XY}.
+\]
+\end{proposition}
+
+\begin{proof}
+Closed immersions and morphisms locally of finite presentation are stable
+under base change by the results of
+\Ref{chap:spectral-algebraic-geometry}. Global cotangent base change gives
+\[
+    L_{Z\times_XY/Y}
+    \simeq
+    L_{Z/X}|_{Z\times_XY}.
+\]
+Shift by $[-1]$ and apply
+\Ref{prop:base-change-locally-free}.
+\end{proof}
+
+\subsection{Derived zero loci}
+
+\begin{construction}[Zero locus of a section]
+\label{con:derived-zero-locus}
+Let $\mathcal E$ be a finite locally free quasi-coherent module on a
+spectral scheme $X$, and let
+\[
+    \sigma
+    \colon
+    X
+    \longrightarrow
+    \mathbb V_X(\mathcal E)
+\]
+be a section. Under
+\Ref{prop:linear-space-functor-points}, the section $\sigma$ corresponds
+to a morphism of quasi-coherent $\mathcal O_X$-modules
+\[
+    s
+    \colon
+    \mathcal E
+    \longrightarrow
+    \mathcal O_X.
+\]
+Equivalently, finite-projective duality identifies $s$ with a section
+\[
+    s^\vee
+    \colon
+    \mathcal O_X
+    \longrightarrow
+    \mathcal E^\vee.
+\]
+Thus this construction is the usual derived zero locus of a section of
+$\mathcal E^\vee$; the use of $\mathcal E\to\mathcal O_X$ reflects
+the convention
+\[
+    \mathbb V_X(\mathcal E)
+    =
+    \Spec_X\operatorname{Sym}_{\mathcal O_X}(\mathcal E).
+\]
+
+The section $\sigma$ and the zero section
+\[
+    0
+    \colon
+    X
+    \longrightarrow
+    \mathbb V_X(\mathcal E)
+\]
+determine a derived fibre product
+\[
+    Z(s)
+    :=
+    X
+    \times_{\mathbb V_X(\mathcal E)}
+    X,
+\]
+where the two morphisms to $\mathbb V_X(\mathcal E)$ are respectively
+$\sigma$ and the zero section. It is called the
+\textbf{derived zero locus of $s$}.
+\end{construction}
+
+\begin{proposition}[Derived zero loci are quasi-smooth]
+\label{prop:derived-zero-locus-quasi-smooth}
+In \Ref{con:derived-zero-locus}, the projection
+\[
+    Z(s)
+    \longrightarrow
+    X
+\]
+is a quasi-smooth closed immersion. Its conormal module is canonically
+\[
+    N^*_{Z(s)/X}
+    \simeq
+    \mathcal E|_{Z(s)}.
+\]
+\end{proposition}
+
+\begin{proof}
+The assertion is local on \(X\). After a Zariski localization, write
+\[
+    X
+    =
+    \Spec(A)
+\]
+and choose an equivalence
+\[
+    \mathcal E
+    \simeq
+    A^{\oplus n}.
+\]
+Put
+\[
+    R
+    :=
+    \operatorname{Sym}_A(A^{\oplus n}).
+\]
+
+The zero section and the section \(\sigma\) of
+\Ref{con:derived-zero-locus} correspond to two morphisms of commutative
+\(A\)-algebras
+\[
+    \epsilon_0,\epsilon_s
+    \colon
+    R
+    \rightrightarrows
+    A,
+\]
+where \(\epsilon_0\) is the zero augmentation.
+
+To distinguish the two \(R\)-algebra structures, write \(A_s\) for the
+copy of \(A\) equipped with the structural morphism \(\epsilon_s\), and
+write \(A_0\) for the copy of \(A\) equipped with the structural
+morphism \(\epsilon_0\). The coordinate algebra of the derived zero
+locus is the pushout
+\[
+    C
+    :=
+    A_s
+    \otimes_R
+    A_0.
+\]
+We regard \(C\) as an \(A=A_s\)-algebra through the canonical morphism
+\[
+    A_s
+    \longrightarrow
+    C.
+\]
+
+We first analyze the zero augmentation
+\[
+    \epsilon_0
+    \colon
+    R
+    \longrightarrow
+    A_0.
+\]
+Consider the composable morphisms
+\[
+    A
+    \longrightarrow
+    R
+    \xrightarrow{\epsilon_0}
+    A_0.
+\]
+Under the canonical identification \(A_0\simeq A\) of underlying
+commutative \(A\)-algebras, their composite is the identity of \(A\).
+The transitivity triangle therefore gives a cofibre sequence
+\[
+    L_{R/A}\otimes_RA_0
+    \longrightarrow
+    L_{A_0/A}
+    \longrightarrow
+    L_{A_0/R}.
+\]
+Since
+\[
+    L_{A_0/A}
+    \simeq
+    0
+\]
+and, by the free-algebra calculation,
+\[
+    L_{R/A}
+    \simeq
+    R\otimes_AA^{\oplus n},
+\]
+there is a natural equivalence
+\[
+    L_{A_0/R}
+    \simeq
+    A_0^{\oplus n}[1].
+\]
+In particular, \(L_{A_0/R}\) is a perfect \(A_0\)-module.
+
+On degree-zero homotopy, the zero augmentation identifies
+\[
+    \pi_0(A_0)
+    \simeq
+    \pi_0(R)/(t_1,\ldots,t_n),
+\]
+so \(\pi_0(A_0)\) is finitely presented as a
+\(\pi_0(R)\)-algebra. It follows from
+\Ref{thm:cotangent-finite-presentation} that
+\[
+    R
+    \longrightarrow
+    A_0
+\]
+is of finite presentation. Since it is surjective on \(\pi_0\), it
+represents a closed immersion
+\[
+    \Spec(A_0)
+    \longrightarrow
+    \Spec(R).
+\]
+
+The projection
+\[
+    \Spec(C)
+    \longrightarrow
+    \Spec(A_s)
+\]
+is the base change of this zero section along the morphism
+\[
+    \Spec(A_s)
+    \longrightarrow
+    \Spec(R)
+\]
+represented by \(\sigma\). Hence it is a closed immersion of finite
+presentation.
+
+Applying cotangent base change to the pushout square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    R
+        \arrow[r, "\epsilon_0"]
+        \arrow[d, "\epsilon_s"']
+    &
+    A_0
+        \arrow[d]
+    \\
+    A_s
+        \arrow[r]
+    &
+    C
+\end{tikzcd}
+\]
+gives
+\[
+    L_{C/A_s}
+    \simeq
+    L_{A_0/R}\otimes_{A_0}C
+    \simeq
+    C^{\oplus n}[1].
+\]
+Consequently,
+\[
+    L_{C/A_s}[-1]
+    \simeq
+    C^{\oplus n}.
+\]
+Thus
+\[
+    \Spec(C)
+    \longrightarrow
+    \Spec(A_s)
+\]
+is quasi-smooth, and its conormal module is the restriction of
+\(A^{\oplus n}\).
+
+These affine identifications are natural under further Zariski
+localization and therefore glue to a canonical equivalence
+\[
+    N^*_{Z(s)/X}
+    \simeq
+    \mathcal E|_{Z(s)}.
+\]
+\end{proof}
+
+\begin{lemma}[Universal equations and the conormal basis]
+\label{lem:universal-equations-conormal-basis}
+Let \(A\) be a connective commutative ring spectrum and put
+\[
+    R
+    :=
+    \operatorname{Sym}_A(A^{\oplus n}).
+\]
+Let
+\[
+    \epsilon_0,
+    \epsilon_f
+    \colon
+    R
+    \rightrightarrows
+    A
+\]
+be respectively the zero augmentation and the morphism classified by
+points
+\[
+    f_1,\ldots,f_n
+    \in
+    \Omega^\infty A.
+\]
+To distinguish the two factors, write \(A_f\) for the target of
+\(\epsilon_f\) and \(A_0\) for the target of \(\epsilon_0\), and put
+\[
+    C
+    :=
+    A_f\otimes_RA_0.
+\]
+Regard \(C\) as an \(A\)-algebra through
+\[
+    A=A_f
+    \longrightarrow
+    C
+\]
+and put
+\[
+    K_C
+    :=
+    \operatorname{fib}(A\to C).
+\]
+
+For every \(1\leq i\leq n\), the \(i\)-th universal equation, together
+with its canonical nullhomotopy in \(C\), determines a class
+\[
+    \lambda_i
+    \in
+    \pi_0(K_C).
+\]
+Under the canonical equivalence
+\[
+    L_{C/A}[-1]
+    \simeq
+    C^{\oplus n},
+\]
+the derived-conormal comparison
+\[
+    C\otimes_AK_C
+    \longrightarrow
+    L_{C/A}[-1]
+\]
+carries the image of \(\lambda_i\) to the \(i\)-th standard basis vector
+of
+\[
+    \pi_0(C)^{\oplus n}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    x_1,\ldots,x_n
+\]
+denote the universal generators of
+\[
+    R
+    =
+    \operatorname{Sym}_A(A^{\oplus n}).
+\]
+The universal derivation gives the canonical equivalence
+\[
+    L_{R/A}
+    \simeq
+    R\otimes_AA^{\oplus n},
+\]
+under which the differential of \(x_i\) is the \(i\)-th standard basis
+vector.
+
+Apply transitivity to
+\[
+    A
+    \longrightarrow
+    R
+    \xrightarrow{\epsilon_0}
+    A_0.
+\]
+Since the composite is the identity and
+\[
+    L_{A_0/A}
+    \simeq
+    0,
+\]
+the transitivity triangle gives a canonical equivalence
+\[
+    L_{A_0/R}[-1]
+    \simeq
+    L_{R/A}\otimes_RA_0
+    \simeq
+    A_0^{\oplus n}.
+\]
+Under this equivalence, the class determined by \(x_i\) and its
+nullhomotopy under the zero augmentation maps to the \(i\)-th standard
+basis vector. This is the boundary description of the transitivity
+morphism applied to the universal derivation.
+
+The pushout square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    R
+        \arrow[r, "\epsilon_0"]
+        \arrow[d, "\epsilon_f"']
+    &
+    A_0
+        \arrow[d]
+    \\
+    A_f
+        \arrow[r]
+    &
+    C
+\end{tikzcd}
+\]
+and cotangent base change give
+\[
+    L_{C/A_f}
+    \simeq
+    L_{A_0/R}\otimes_{A_0}C.
+\]
+Consequently,
+\[
+    L_{C/A}[-1]
+    \simeq
+    C^{\oplus n}.
+\]
+
+The canonical homotopy between the images of \(x_i\) through the two
+legs of the pushout determines the class
+\[
+    \lambda_i
+    \in
+    \pi_0(K_C).
+\]
+Naturality of the relative-cofibre-to-cotangent morphism under the
+pushout square identifies the image of \(\lambda_i\) with the base change
+of the corresponding universal class for
+\(\epsilon_0:R\to A_0\). That universal class maps to the \(i\)-th
+standard basis vector by the preceding calculation. Its base change
+therefore maps to the \(i\)-th standard basis vector of
+\[
+    \pi_0(C)^{\oplus n}.
+\]
+\end{proof}
+
+\subsection{Local zero-locus structure}
+
+\begin{theorem}[Local zero-locus characterization]
+\label{thm:quasi-smooth-local-zero-locus}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+be a closed immersion of spectral schemes. The following conditions are
+equivalent.
+\begin{enumerate}[label=(\roman*)]
+    \item The immersion \(i\) is quasi-smooth.
+
+    \item Zariski-locally on \(X\), the immersion is equivalent to the
+    derived zero locus of a section of a finite locally free
+    quasi-coherent module, or equivalently, in the
+    \(\mathbb V\)-convention, of a morphism
+    \[
+        \mathcal E
+        \longrightarrow
+        \mathcal O_X
+    \]
+    with \(\mathcal E\) finite locally free.
+
+    \item Zariski-locally on \(X\), there is an open spectral subscheme
+    \[
+        U
+        \subseteq
+        X,
+    \]
+    an integer \(n\geq0\), and a section
+    \[
+        s
+        \colon
+        U
+        \longrightarrow
+        \mathbb A_U^n
+    \]
+    such that
+    \[
+        Z\times_XU
+        \longrightarrow
+        U
+    \]
+    is equivalent to the base change of the zero section
+    \[
+        0
+        \colon
+        U
+        \longrightarrow
+        \mathbb A_U^n
+    \]
+    along \(s\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The equivalence of \textup{(ii)} and \textup{(iii)} follows by
+Zariski-locally trivializing the finite locally free module. The
+implication
+\[
+    \textup{(ii)}
+    \Longrightarrow
+    \textup{(i)}
+\]
+is \Ref{prop:derived-zero-locus-quasi-smooth}. It remains to prove
+\[
+    \textup{(i)}
+    \Longrightarrow
+    \textup{(ii)}.
+\]
+
+The assertion is local on \(X\). On the open complement of \(Z\), the
+immersion is empty. The empty immersion is the derived zero locus of the
+unit section
+\[
+    \mathcal O_X
+    \longrightarrow
+    \mathcal O_X.
+\]
+Indeed, affine-locally this zero locus is represented by
+\[
+    A
+    \otimes_{\operatorname{Sym}_A(A)}
+    A,
+\]
+where the universal generator is sent to \(1\) on one factor and to
+\(0\) on the other. Its degree-zero homotopy ring is
+\[
+    \pi_0(A)/(1)
+    =
+    0.
+\]
+Since the resulting commutative ring spectrum is connective, it is the
+zero ring spectrum, and its spectrum is empty.
+It is therefore enough to work in a neighbourhood of a point of \(Z\).
+
+Choose an affine neighbourhood of the selected point and write the
+immersion as
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A),
+\]
+where
+\[
+    A
+    \longrightarrow
+    B
+\]
+is a morphism of connective commutative ring spectra which is surjective
+on \(\pi_0\) and of finite presentation.
+
+The conormal module
+\[
+    L_{B/A}[-1]
+\]
+is locally free of finite rank on \(\Spec(B)\). Choose an open
+neighbourhood of the selected point in \(\Spec(B)\) on which it is free
+of rank \(n\). Since
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A)
+\]
+is a closed immersion, this open neighbourhood is the intersection of
+\(\Spec(B)\) with an open neighbourhood of the selected point in
+\(\Spec(A)\). Spectral open subsets are detected on classical
+truncations. After shrinking the ambient affine \(\Spec(A)\), we may
+therefore choose an equivalence
+\[
+    L_{B/A}[-1]
+    \simeq
+    B^{\oplus n}.
+\]
+
+Put
+\[
+    K
+    :=
+    \operatorname{fib}(A\to B),
+\]
+and write
+\[
+    A_0
+    :=
+    \pi_0(A),
+    \qquad
+    B_0
+    :=
+    \pi_0(B),
+    \qquad
+    I
+    :=
+    \ker(A_0\to B_0).
+\]
+Since \(A_0\to B_0\) is surjective, there is an identification
+\[
+    B_0
+    \simeq
+    A_0/I.
+\]
+
+By \Ref{thm:derived-conormal-comparison}, the canonical morphism
+\[
+    B\otimes_AK
+    \longrightarrow
+    L_{B/A}[-1]
+\]
+induces an isomorphism
+\[
+    \pi_0(B\otimes_AK)
+    \xrightarrow{\simeq}
+    \pi_0
+    \bigl(
+        L_{B/A}[-1]
+    \bigr).
+\]
+Because \(B\) and \(K\) are connective, the connective tensor-product
+spectral sequence gives
+\[
+    \pi_0(B\otimes_AK)
+    \simeq
+    B_0\otimes_{A_0}\pi_0(K).
+\]
+Using
+\[
+    B_0
+    \simeq
+    A_0/I,
+\]
+this becomes
+\[
+    \pi_0(B\otimes_AK)
+    \simeq
+    \pi_0(K)/I\pi_0(K).
+\]
+Consequently, the natural morphism
+\[
+    \pi_0(K)
+    \longrightarrow
+    \pi_0(B\otimes_AK)
+\]
+is surjective.
+
+Let
+\[
+    e_1,\ldots,e_n
+\]
+be the basis of
+\[
+    \pi_0
+    \bigl(
+        L_{B/A}[-1]
+    \bigr)
+    \simeq
+    B_0^{\oplus n}
+\]
+determined by the chosen trivialization. Choose points
+\[
+    \widetilde\kappa_1,\ldots,\widetilde\kappa_n
+    \in
+    \Omega^\infty K
+\]
+whose connected components map under
+\[
+    \pi_0(K)
+    \longrightarrow
+    \pi_0(B\otimes_AK)
+    \xrightarrow{\simeq}
+    \pi_0
+    \bigl(
+        L_{B/A}[-1]
+    \bigr)
+\]
+to
+\[
+    e_1,\ldots,e_n.
+\]
+Write
+\[
+    \kappa_i
+    :=
+    [\widetilde\kappa_i]
+    \in
+    \pi_0(K).
+\]
+
+Let
+\[
+    \widetilde f_i
+    \in
+    \Omega^\infty A
+\]
+be the image of \(\widetilde\kappa_i\), and put
+\[
+    f_i
+    :=
+    [\widetilde f_i]
+    \in
+    A_0.
+\]
+Since \(\widetilde\kappa_i\) is a point of the homotopy fibre of
+\[
+    \Omega^\infty A
+    \longrightarrow
+    \Omega^\infty B
+\]
+over zero, it includes a specified path from the image of
+\(\widetilde f_i\) in \(\Omega^\infty B\) to zero. In particular,
+\[
+    f_i
+    \in
+    I.
+\]
+
+The surjection of
+\Ref{lem:derived-conormal-classical-quotient}
+\[
+    \pi_0(B\otimes_AK)
+    \longrightarrow
+    I/I^2
+\]
+carries the class represented by \(\kappa_i\) to the class of \(f_i\).
+Since the classes represented by the \(\kappa_i\) form a basis of
+\(\pi_0(B\otimes_AK)\), the classes of
+\[
+    f_1,\ldots,f_n
+\]
+generate \(I/I^2\).
+
+We next verify that \(I\) is finitely generated. Since \(A\to B\) is of
+finite presentation, \(B\) is compact in
+\[
+    \CAlg(\Sp)_{A/}.
+\]
+We claim that \(B_0\) is compact in
+\[
+    \operatorname{CRing}_{A_0/}.
+\]
+Let
+\[
+    \{T_\alpha\}_\alpha
+\]
+be a filtered diagram of ordinary commutative \(A_0\)-algebras. The
+Eilenberg--Mac Lane construction carries it to a filtered diagram of
+connective commutative \(A\)-algebras, where the \(A\)-algebra structure
+is induced by
+\[
+    A
+    \longrightarrow
+    HA_0
+    \longrightarrow
+    HT_\alpha.
+\]
+Filtered colimits of discrete connective commutative ring spectra remain
+discrete, so there is a natural equivalence
+\[
+    H
+    \left(
+        \varinjlim_\alpha T_\alpha
+    \right)
+    \simeq
+    \varinjlim_\alpha HT_\alpha.
+\]
+Using the adjunction
+\[
+    \pi_0
+    \dashv
+    H
+\]
+and compactness of \(B\), we obtain
+\[
+\begin{aligned}
+    \Map_{\operatorname{CRing}_{A_0/}}
+    \left(
+        B_0,
+        \varinjlim_\alpha T_\alpha
+    \right)
+    &\simeq
+    \Map_{\CAlg(\Sp)_{A/}}
+    \left(
+        B,
+        H
+        \left(
+            \varinjlim_\alpha T_\alpha
+        \right)
+    \right)
+    \\
+    &\simeq
+    \Map_{\CAlg(\Sp)_{A/}}
+    \left(
+        B,
+        \varinjlim_\alpha HT_\alpha
+    \right)
+    \\
+    &\simeq
+    \varinjlim_\alpha
+    \Map_{\CAlg(\Sp)_{A/}}
+    \left(
+        B,
+        HT_\alpha
+    \right)
+    \\
+    &\simeq
+    \varinjlim_\alpha
+    \Map_{\operatorname{CRing}_{A_0/}}
+    \left(
+        B_0,
+        T_\alpha
+    \right).
+\end{aligned}
+\]
+Thus \(B_0\) is finitely presented as an \(A_0\)-algebra.
+
+Since
+\[
+    A_0
+    \longrightarrow
+    B_0
+\]
+is surjective and finitely presented, its kernel \(I\) is finitely
+generated. Put
+\[
+    Q
+    :=
+    I/(f_1,\ldots,f_n).
+\]
+The module \(Q\) is finitely generated. Since the classes of the \(f_i\)
+generate \(I/I^2\), one has
+\[
+    I
+    =
+    (f_1,\ldots,f_n)+I^2,
+\]
+and hence
+\[
+    Q
+    =
+    IQ.
+\]
+
+Let the selected point of \(Z\) correspond to a prime ideal
+\[
+    \mathfrak p
+    \subseteq
+    A_0
+\]
+containing \(I\). Localizing at \(\mathfrak p\), the ideal
+\(I_{\mathfrak p}\) lies in the maximal ideal of
+\((A_0)_{\mathfrak p}\), and
+\[
+    Q_{\mathfrak p}
+    =
+    I_{\mathfrak p}Q_{\mathfrak p}.
+\]
+Nakayama's lemma gives
+\[
+    Q_{\mathfrak p}
+    =
+    0.
+\]
+Since \(Q\) is finitely generated, after shrinking the ambient affine
+open around the selected point, one has
+\[
+    Q
+    =
+    0.
+\]
+Thus, after this localization,
+\[
+    I
+    =
+    (f_1,\ldots,f_n).
+\]
+
+Put
+\[
+    R
+    :=
+    \operatorname{Sym}_A(A^{\oplus n}).
+\]
+Let
+\[
+    \epsilon_0
+    \colon
+    R
+    \longrightarrow
+    A
+\]
+be the zero augmentation. Let
+\[
+    u_f
+    \colon
+    A^{\oplus n}
+    \longrightarrow
+    A
+\]
+be the \(A\)-module morphism whose components correspond to the points
+\[
+    \widetilde f_1,\ldots,\widetilde f_n
+    \in
+    \Omega^\infty A.
+\]
+By the free-algebra adjunction, \(u_f\) determines a morphism of
+commutative \(A\)-algebras
+\[
+    \epsilon_f
+    \colon
+    R
+    \longrightarrow
+    A.
+\]
+Define
+\[
+    C
+    :=
+    A\otimes_RA,
+\]
+where the two morphisms from \(R\) are \(\epsilon_f\) and
+\(\epsilon_0\), and regard \(C\) as an \(A\)-algebra through the factor
+corresponding to \(\epsilon_f\).
+
+After composing with
+\[
+    A
+    \longrightarrow
+    B,
+\]
+the maps \(\epsilon_0\) and \(\epsilon_f\) correspond under the
+free-algebra adjunction to the zero map
+\[
+    A^{\oplus n}
+    \longrightarrow
+    B
+\]
+and the map whose components are the images of
+\(\widetilde f_1,\ldots,\widetilde f_n\). The specified paths carried by
+\(\widetilde\kappa_1,\ldots,\widetilde\kappa_n\) give a homotopy between
+these two module maps and hence a homotopy between the corresponding
+commutative \(A\)-algebra maps
+\[
+    R
+    \rightrightarrows
+    B.
+\]
+By the pushout universal property, this determines an \(A\)-algebra
+morphism
+\[
+    C
+    \longrightarrow
+    B.
+\]
+
+Classical truncation preserves this pushout. Therefore
+\[
+    \pi_0(C)
+    \simeq
+    A_0
+    \otimes_{\pi_0(R)}
+    A_0.
+\]
+Under the two maps from \(\pi_0(R)\), the universal variables are sent
+respectively to
+\[
+    f_1,\ldots,f_n
+    \qquad\text{and}\qquad
+    0.
+\]
+Consequently,
+\[
+    \pi_0(C)
+    \simeq
+    A_0/(f_1,\ldots,f_n)
+    \simeq
+    A_0/I
+    \simeq
+    B_0.
+\]
+Thus
+\[
+    \pi_0(C)
+    \xrightarrow{\simeq}
+    \pi_0(B).
+\]
+
+By \Ref{prop:derived-zero-locus-quasi-smooth}, there is a natural
+equivalence
+\[
+    L_{C/A}[-1]
+    \simeq
+    C^{\oplus n}.
+\]
+The transitivity triangle for
+\[
+    A
+    \longrightarrow
+    C
+    \longrightarrow
+    B
+\]
+contains the morphism
+\[
+    L_{C/A}\otimes_CB
+    \longrightarrow
+    L_{B/A}.
+\]
+After shifting by \([-1]\), this gives
+\[
+    \bigl(
+        L_{C/A}\otimes_CB
+    \bigr)[-1]
+    \longrightarrow
+    L_{B/A}[-1].
+\]
+
+Put
+\[
+    K_C
+    :=
+    \operatorname{fib}(A\to C),
+    \qquad
+    K_B
+    :=
+    \operatorname{fib}(A\to B)=K.
+\]
+The morphism \(C\to B\) induces a morphism
+\[
+    K_C
+    \longrightarrow
+    K_B.
+\]
+Since both \(A\to C\) and \(A\to B\) are surjective on \(\pi_0\),
+naturality in
+\Ref{thm:derived-conormal-comparison}
+gives a commutative square of \(B\)-modules
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    B\otimes_AK_C
+        \arrow[r]
+        \arrow[d]
+    &
+    \bigl(
+        L_{C/A}\otimes_CB
+    \bigr)[-1]
+        \arrow[d]
+    \\
+    B\otimes_AK_B
+        \arrow[r]
+    &
+    L_{B/A}[-1].
+\end{tikzcd}
+\]
+
+For each \(i\), the \(i\)-th universal equation of \(C\), together with
+its canonical nullhomotopy on \(\Spec(C)\), determines a class
+\[
+    \lambda_i
+    \in
+    \pi_0(K_C).
+\]
+The morphism
+\[
+    C
+    \longrightarrow
+    B
+\]
+was constructed using the specified nullhomotopy carried by
+\(\widetilde\kappa_i\). Consequently, the image of \(\lambda_i\) under
+\[
+    \pi_0(K_C)
+    \longrightarrow
+    \pi_0(K_B)
+\]
+is \(\kappa_i\).
+
+By
+\Ref{lem:universal-equations-conormal-basis},
+the upper horizontal derived-conormal comparison, followed by the
+equivalence
+\[
+    \bigl(
+        L_{C/A}\otimes_CB
+    \bigr)[-1]
+    \simeq
+    B^{\oplus n},
+\]
+carries the image of \(\lambda_i\) to the \(i\)-th standard basis
+vector. By the choice of \(\kappa_i\), the lower horizontal comparison
+carries its image to
+\[
+    e_i
+    \in
+    \pi_0
+    \bigl(
+        L_{B/A}[-1]
+    \bigr).
+\]
+Commutativity of the square therefore shows that the morphism
+\[
+    \bigl(
+        L_{C/A}\otimes_CB
+    \bigr)[-1]
+    \longrightarrow
+    L_{B/A}[-1]
+\]
+carries the \(i\)-th standard basis vector to \(e_i\). Hence it induces
+an isomorphism on \(\pi_0\).
+
+Both its source and target are finite projective \(B\)-modules. For a
+finite projective \(B\)-module \(P\), the flat homotopy-group formula
+gives
+\[
+    \pi_k(P)
+    \simeq
+    \pi_k(B)
+    \otimes_{B_0}
+    \pi_0(P)
+\]
+for every integer \(k\). It follows that a morphism between finite
+projective \(B\)-modules which is an isomorphism on \(\pi_0\) is an
+equivalence. Therefore
+\[
+    L_{C/A}\otimes_CB
+    \xrightarrow{\simeq}
+    L_{B/A}.
+\]
+
+The transitivity triangle now gives
+\[
+    L_{B/C}
+    \simeq
+    0.
+\]
+Together with the isomorphism
+\[
+    \pi_0(C)
+    \xrightarrow{\simeq}
+    \pi_0(B),
+\]
+cotangent rigidity
+\Ref{cor:cotangent-rigidity}
+implies that
+\[
+    C
+    \xrightarrow{\simeq}
+    B.
+\]
+Thus, in a Zariski neighbourhood of the selected point, the original
+closed immersion is the derived zero locus of
+\[
+    f_1,\ldots,f_n.
+\]
+This proves
+\[
+    \textup{(i)}
+    \Longrightarrow
+    \textup{(ii)}
+\]
+and completes the proof.
+\end{proof}
+
+\section{The deformation-theoretic output}
+\label{sec:spectral-deformation-output}
+
+The constructions of this chapter equip the spectral schemes of
+\Ref{chap:spectral-algebraic-geometry} with relative and absolute
+cotangent complexes, structured square-zero extensions, multiplicative
+Postnikov $k$-invariants, affine and global obstruction theories, and the
+local geometry of quasi-smooth closed immersions. All global objects lie
+in the quasi-coherent categories and use the pullback, base-change,
+relative-spectrum, closed-immersion, and linear-space constructions of
+the preceding chapter. Smooth, \`etale, and Nisnevich geometry are
+developed in \Ref{chap:smooth-spectral-motivic-site}.

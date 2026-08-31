@@ -1,0 +1,7615 @@
+\chapter{Closed Localization, Homotopy Purity, and Derived Nilpotent Invariance}
+\label{chap:closed-localization-purity-nil-invariance}
+
+\section{Purpose and standing open--closed convention}
+\label{sec:closed-localization-purpose}
+
+This chapter develops the closed geometric structure of unstable brave
+new motivic homotopy theory.  The preceding chapter associated to every
+quasi-compact quasi-separated spectral scheme \(S\) a presentable
+Cartesian closed \(\infty\)-category
+\[
+    \mathbf H(S)
+\]
+of brave new motivic spaces, together with its pointed smash-monoidal
+counterpart
+\[
+    \mathbf H_\bullet(S).
+\]
+For every morphism of quasi-compact quasi-separated spectral schemes one
+has an adjunction
+\[
+    f^*
+    \colon
+    \mathbf H(S)
+    \rightleftarrows
+    \mathbf H(T)
+    :
+    f_*,
+\]
+and for every smooth morphism of finite presentation one has
+\[
+    p_\sharp
+    \colon
+    \mathbf H(X)
+    \rightleftarrows
+    \mathbf H(S)
+    :
+    p^*.
+\]
+These adjunctions satisfy smooth base change and the smooth projection
+formula, in both unpointed and pointed form.
+
+We now fix a complementary closed--open pair
+\[
+\begin{tikzcd}[column sep=large]
+    Z
+        \arrow[r, hook, "i"]
+    &
+    S
+    &
+    U
+        \arrow[l, hook', "j"']
+\end{tikzcd}
+\]
+in which \(S\) is quasi-compact and quasi-separated,
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+is a closed immersion, and
+\[
+    j
+    \colon
+    U
+    =
+    S\setminus Z
+    \hookrightarrow
+    S
+\]
+is its quasi-compact open complement.  The quasi-compactness of \(j\)
+ensures that \(j\) is smooth and of finite presentation.  Hence the
+preceding chapter supplies adjunctions
+\[
+    i^*
+    \colon
+    \mathbf H(S)
+    \rightleftarrows
+    \mathbf H(Z)
+    :
+    i_*,
+\]
+and
+\[
+    j_\sharp
+    \colon
+    \mathbf H(U)
+    \rightleftarrows
+    \mathbf H(S)
+    :
+    j^*
+    \rightleftarrows
+    \mathbf H(U)
+    :
+    j_*.
+\]
+The same notation is used for the corresponding functors on pointed
+motivic spaces when no ambiguity can arise.
+
+The central result is the spectral Morel--Voevodsky localization
+theorem.  It identifies an arbitrary motivic space over \(S\) as the
+gluing of its restriction to \(U\) and its restriction to \(Z\).  From
+localization we derive closed recollement, closed base change, the
+pointed closed projection formula, pointed smooth--closed exchange, and
+derived nilpotent invariance.  We then compare brave new motivic spaces
+with ordinary motivic spaces over the classical truncation and transport
+ordinary homotopy purity through that comparison to obtain homotopy
+purity for smooth closed pairs of spectral schemes.
+
+The chapter remains unstable.  Thom spaces are constructed and
+identified geometrically, but their tensor invertibility is reserved
+for the stabilization chapter.
+
+All conventions of the preceding chapters remain in force.  In
+particular, sheaves are not hypercompleted unless explicitly stated.
+
+\begin{definition}[Motivic spaces supported on a closed subscheme]
+\label{def:motivic-spaces-supported-on-closed}
+Define
+\[
+    \mathbf H_Z(S)
+    \subseteq
+    \mathbf H(S)
+\]
+to be the full subcategory spanned by the motivic spaces \(F\) such that
+\[
+    j^*F
+    \simeq
+    *_U.
+\]
+Define
+\[
+    \mathbf H_{\bullet,Z}(S)
+    \subseteq
+    \mathbf H_\bullet(S)
+\]
+to be the full subcategory spanned by the pointed motivic spaces \(F\)
+such that
+\[
+    j^*F
+    \simeq
+    0_U.
+\]
+\end{definition}
+
+\section{Preliminary open--closed functoriality}
+\label{sec:preliminary-open-closed-functoriality}
+
+\subsection{Open immersion functors}
+
+\begin{proposition}[Full faithfulness for open immersions]
+\label{prop:open-immersion-full-faithfulness}
+Let
+\[
+    j
+    \colon
+    U
+    \hookrightarrow
+    S
+\]
+be a quasi-compact open immersion.  Then the unit and counit
+transformations
+\[
+    \operatorname{id}_{\mathbf H(U)}
+    \longrightarrow
+    j^*j_\sharp
+\]
+and
+\[
+    j^*j_*
+    \longrightarrow
+    \operatorname{id}_{\mathbf H(U)}
+\]
+are equivalences.  Consequently,
+\[
+    j_\sharp
+    \quad\text{and}\quad
+    j_*
+\]
+are fully faithful.  The same assertions hold on pointed motivic
+spaces.
+\end{proposition}
+
+\begin{proof}
+Since \(j\) is a monomorphism, there is a canonical equivalence
+\[
+    U\times_SU
+    \simeq
+    U.
+\]
+Apply smooth base change,
+\Ref{thm:unstable-smooth-base-change},
+to the Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    U
+        \arrow[r, "\id_U"]
+        \arrow[d, "\id_U"']
+    &
+    U
+        \arrow[d, "j"]
+    \\
+    U
+        \arrow[r, "j"']
+    &
+    S.
+\end{tikzcd}
+\]
+The resulting equivalence
+\[
+    j^*j_\sharp
+    \simeq
+    \operatorname{id}_{\mathbf H(U)}
+\]
+is the unit of \(j_\sharp\dashv j^*\).  Hence \(j_\sharp\) is fully
+faithful.
+
+Let \(F\in\mathbf H(U)\), and let \(X\to U\) be smooth and of finite
+presentation.  Since \(j\) is smooth, the composite \(X\to S\) is a
+smooth spectral \(S\)-scheme of finite presentation.  Using evaluation
+by smooth motives, the adjunction \(j_\sharp\dashv j^*\), smooth direct
+image on motives, and the section formula for direct image, we obtain
+\[
+\begin{aligned}
+    \operatorname{Map}_{\mathbf H(U)}
+    \bigl(
+        \mathrm M_U(X),
+        j^*j_*F
+    \bigr)
+    &\simeq
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        j_\sharp\mathrm M_U(X),
+        j_*F
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        \mathrm M_S(X),
+        j_*F
+    \bigr)
+    \\
+    &\simeq
+    F(X\times_SU)
+    \\
+    &\simeq
+    F(X).
+\end{aligned}
+\]
+Under these identifications, the map induced by the counit
+\[
+    j^*j_*F
+    \longrightarrow
+    F
+\]
+is the identity on \(F(X)\).  Since smooth motives detect equivalences,
+the counit is an equivalence.  Hence \(j_*\) is fully faithful.
+
+The pointed assertions follow from the pointed smooth adjunctions and
+the same argument after passage to underlying motivic spaces.
+\end{proof}
+
+\subsection{Open--closed orthogonality}
+
+\begin{proposition}[Open--closed orthogonality]
+\label{prop:open-closed-orthogonality}
+For the complementary pair
+\[
+    Z
+    \xrightarrow{i}
+    S
+    \xleftarrow{j}
+    U,
+\]
+there are canonical equivalences
+\[
+    i^*j_\sharp(F)
+    \simeq
+    \varnothing_Z
+\]
+for \(F\in\mathbf H(U)\), and
+\[
+    j^*i_*(G)
+    \simeq
+    *_U
+\]
+for \(G\in\mathbf H(Z)\).
+
+On pointed motivic spaces these become
+\[
+    i^*j_\sharp(F)
+    \simeq
+    0_Z
+\]
+and
+\[
+    j^*i_*(G)
+    \simeq
+    0_U.
+\]
+\end{proposition}
+
+\begin{proof}
+The fibre product
+\[
+    U\times_SZ
+\]
+is empty by the universal property of the open complement established
+in
+\Ref{sec:closed-immersions-complements}.
+
+Apply smooth base change to the Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    \varnothing
+        \arrow[r]
+        \arrow[d]
+    &
+    U
+        \arrow[d, "j"]
+    \\
+    Z
+        \arrow[r, "i"']
+    &
+    S.
+\end{tikzcd}
+\]
+Since smooth direct image along
+\[
+    \varnothing
+    \longrightarrow
+    Z
+\]
+carries every object to the initial motivic space, one obtains
+\[
+    i^*j_\sharp(F)
+    \simeq
+    \varnothing_Z
+\]
+for every
+\[
+    F
+    \in
+    \mathbf H(U).
+\]
+
+For direct image, let
+\[
+    X
+    \longrightarrow
+    U
+\]
+be smooth and of finite presentation.  Then
+\[
+    X\times_SZ
+    \simeq
+    \varnothing.
+\]
+The section formula gives
+\[
+\begin{aligned}
+    (j^*i_*G)(X)
+    &\simeq
+    (i_*G)(X)
+    \\
+    &\simeq
+    G(X\times_SZ)
+    \\
+    &\simeq
+    G(\varnothing)
+    \\
+    &\simeq
+    *.
+\end{aligned}
+\]
+Hence
+\[
+    j^*i_*G
+    \simeq
+    *_U
+\]
+for every
+\[
+    G
+    \in
+    \mathbf H(Z).
+\]
+
+We now prove the pointed assertions.  Let
+\[
+    F
+    \in
+    \mathbf H_\bullet(U),
+\]
+and write \(U(F)\) for its underlying unpointed motivic space.  By the
+definition of pointed smooth direct image,
+\[
+    j_{\sharp,\bullet}(F)
+    \simeq
+    j_\sharp U(F)
+    \amalg_{j_\sharp(*_U)}
+    *_S.
+\]
+Since \(i^*\) preserves colimits and terminal objects, the unpointed
+orthogonality equivalences give
+\[
+\begin{aligned}
+    i^*j_{\sharp,\bullet}(F)
+    &\simeq
+    i^*j_\sharp U(F)
+    \amalg_{i^*j_\sharp(*_U)}
+    *_Z
+    \\
+    &\simeq
+    \varnothing_Z
+    \amalg_{\varnothing_Z}
+    *_Z
+    \\
+    &\simeq
+    *_Z.
+\end{aligned}
+\]
+With its induced basepoint, this is the zero object
+\[
+    0_Z
+    \in
+    \mathbf H_\bullet(Z).
+\]
+Thus
+\[
+    i^*j_{\sharp,\bullet}(F)
+    \simeq
+    0_Z.
+\]
+
+Finally, let
+\[
+    G
+    \in
+    \mathbf H_\bullet(Z).
+\]
+The underlying unpointed motivic space of
+\[
+    j^*i_*G
+\]
+is
+\[
+    j^*i_*U(G)
+    \simeq
+    *_U
+\]
+by the unpointed assertion.  A pointed motivic space whose underlying
+object is terminal is canonically the zero object.  Therefore
+\[
+    j^*i_*G
+    \simeq
+    0_U.
+\]
+
+We suppress the subscript \(\bullet\) on \(j_\sharp\) in the
+statement.
+\end{proof}
+
+\subsection{Nisnevich-local conservativity}
+
+\begin{proposition}[Nisnevich-local conservativity]
+\label{prop:nisnevich-local-conservativity}
+Let
+\[
+    \{p_\alpha:S_\alpha\to S\}_{\alpha\in A}
+\]
+be a spectral Nisnevich covering family between quasi-compact
+quasi-separated spectral schemes.  Then the pullback functors
+\[
+    p_\alpha^*
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H(S_\alpha)
+\]
+are jointly conservative.  The same is true on pointed motivic spaces.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    \varphi
+    \colon
+    F
+    \longrightarrow
+    G
+\]
+be a morphism in \(\mathbf H(S)\) such that every
+\(p_\alpha^*\varphi\) is an equivalence.  Let
+\(X\to S\) be smooth and of finite presentation.  The induced family
+\[
+    X_\alpha
+    :=
+    X\times_SS_\alpha
+    \longrightarrow
+    X
+\]
+is a spectral Nisnevich cover.  Since \(X\) is quasi-compact, a finite
+subfamily already covers.  Let
+\[
+    X_\bullet
+    \longrightarrow
+    X
+\]
+be the Čech nerve of that finite subfamily.
+
+Each term \(X_n\) is a finite coproduct of iterated fibre products
+\[
+    X_{\alpha_0}
+    \times_X
+    \cdots
+    \times_X
+    X_{\alpha_n}.
+\]
+Every such iterated fibre product maps to each of the schemes
+\(S_{\alpha_r}\).  Therefore the restriction of \(\varphi\) to every
+summand of every \(X_n\) is an equivalence.  Since motivic spaces satisfy
+Nisnevich descent and send finite coproducts of smooth schemes to finite
+products of spaces, the natural map of totalizations
+\[
+    \operatorname{Tot}F(X_\bullet)
+    \longrightarrow
+    \operatorname{Tot}G(X_\bullet)
+\]
+is an equivalence.  Hence
+\[
+    F(X)
+    \xrightarrow{\simeq}
+    G(X).
+\]
+Since smooth motives detect equivalences by
+\Ref{prop:brave-new-motivic-compact-generation},
+\(\varphi\) is an equivalence.
+
+The pointed forgetful functor reflects equivalences, so the pointed
+assertion follows.
+\end{proof}
+
+\subsection{Standard smooth generators}
+
+\begin{definition}[Standard smooth spectral scheme]
+\label{def:standard-smooth-spectral-scheme}
+A smooth spectral \(S\)-scheme of finite presentation
+\[
+    X
+    \longrightarrow
+    S
+\]
+is \textbf{standard smooth} if \(X\) is affine and there exists an
+étale \(S\)-morphism
+\[
+    X
+    \longrightarrow
+    \mathbb A^n_S
+\]
+for some \(n\geq0\).
+\end{definition}
+
+\begin{proposition}[Generation by standard smooth motives]
+\label{prop:generation-by-standard-smooth-motives}
+The category
+\[
+    \mathbf H(S)
+\]
+is generated under sifted colimits by the objects
+\[
+    \mathrm M_S(X)
+\]
+with \(X\) standard smooth over \(S\).
+
+The pointed category
+\[
+    \mathbf H_\bullet(S)
+\]
+is generated under sifted colimits by the objects
+\[
+    \mathrm M_{S,+}(X)
+\]
+with \(X\) standard smooth over \(S\).
+\end{proposition}
+
+\begin{proof}
+By
+\cite[Proposition~2.4.4]{KhanBraveNewMotivicI}, in the published version
+entitled \emph{The Morel--Voevodsky localization theorem in spectral
+algebraic geometry}, the category
+\[
+    \mathbf H(S)
+\]
+is generated under sifted colimits by motives
+\[
+    \mathrm M_S(X)
+\]
+where \(X\to S\) is affine and smooth and admits an étale
+\(S\)-morphism
+\[
+    X
+    \longrightarrow
+    \mathbb A_S^n
+\]
+for some \(n>0\).  Every such \(X\) is standard smooth in the sense of
+\Ref{def:standard-smooth-spectral-scheme}.  Hence the larger collection
+of all standard smooth motives also generates
+\[
+    \mathbf H(S)
+\]
+under sifted colimits.
+
+For the pointed assertion, consider the free-pointing adjunction
+\[
+    (-)_+
+    \colon
+    \mathbf H(S)
+    \rightleftarrows
+    \mathbf H_\bullet(S)
+    :
+    U_S.
+\]
+Its associated monad on \(\mathbf H(S)\) is
+\[
+    T(F)
+    =
+    F\amalg *_S.
+\]
+The monadic bar construction expresses every pointed motivic space as
+the geometric realization of a simplicial diagram of free pointed
+objects.  Geometric realizations are sifted colimits, and the functor
+\[
+    (-)_+
+\]
+preserves sifted colimits.
+
+Since every object of \(\mathbf H(S)\) is a sifted colimit of standard
+smooth motives, every free pointed motivic space is a sifted colimit of
+objects
+\[
+    \mathrm M_{S,+}(X),
+\]
+with \(X\) standard smooth.  Applying the bar construction shows that
+every object of
+\[
+    \mathbf H_\bullet(S)
+\]
+is a sifted colimit of such free pointed motives.
+\end{proof}
+
+\section{Exactness of closed direct image}
+\label{sec:exactness-closed-direct-image}
+
+\subsection{Local lifting over a closed base}
+
+\begin{proposition}[Local lifting of smooth test schemes]
+\label{prop:local-lifting-smooth-test-schemes}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+be a closed immersion, and let
+\[
+    Y
+    \longrightarrow
+    Z
+\]
+be smooth and of finite presentation.  Then every point of \(Y\)
+admits a spectral Nisnevich neighbourhood
+\[
+    Y_\alpha
+    \longrightarrow
+    Y
+\]
+for which there exists a smooth spectral \(S\)-scheme of finite
+presentation
+\[
+    \widetilde Y_\alpha
+    \longrightarrow
+    S
+\]
+and an equivalence
+\[
+    \widetilde Y_\alpha\times_SZ
+    \simeq
+    Y_\alpha.
+\]
+The same assertion holds with ``smooth'' replaced by ``étale''.
+\end{proposition}
+
+\begin{proof}
+The local lifting theorem
+\Ref{thm:infinitesimal-lifting-smooth-etale}
+gives, after shrinking Zariski-locally around each point of \(Y\), a
+smooth, respectively étale, lift over \(S\).  A Zariski neighbourhood
+is a Nisnevich neighbourhood.  Finite presentation is retained because
+the lifted local standard form is a composite of an étale morphism of
+finite presentation with brave new affine space of finite presentation.
+\end{proof}
+
+\subsection{Weakly contractible colimits}
+
+\begin{definition}[Weakly contractible indexing category]
+\label{def:weakly-contractible-indexing-category}
+An \(\infty\)-category \(K\) is \textbf{weakly contractible} if its
+classifying space
+\[
+    |K|
+\]
+is contractible.  A colimit indexed by such a category is called a
+\textbf{weakly contractible colimit}.
+\end{definition}
+
+\begin{definition}[Topological quasi-cocontinuity]
+\label{def:topological-quasi-cocontinuity}
+Let \(\mathcal C\) and \(\mathcal D\) be essentially small sites, and
+suppose that \(\mathcal D\) admits an initial object
+\(\varnothing_{\mathcal D}\).  A functor
+\[
+    u
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+is \textbf{topologically quasi-cocontinuous} if, for every object
+\(c\in\mathcal C\) and every covering sieve
+\[
+    R'
+    \hookrightarrow
+    h_{\mathcal D}(u(c)),
+\]
+the sieve on \(c\) generated by morphisms \(c'\to c\) for which either
+\[
+    u(c')
+    \simeq
+    \varnothing_{\mathcal D}
+\]
+or the morphism
+\[
+    h_{\mathcal D}(u(c'))
+    \longrightarrow
+    h_{\mathcal D}(u(c))
+\]
+factors through \(R'\), is covering.
+\end{definition}
+
+\begin{lemma}[Quasi-cocontinuous restriction]
+\label{lem:quasi-cocontinuous-restriction}
+Let
+\[
+    u
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be topologically quasi-cocontinuous.  Suppose that the initial object of
+\(\mathcal D\) is strict and that the empty sieve covers an object of
+\(\mathcal D\) precisely when that object is initial.  Then:
+\begin{enumerate}[label=(\roman*)]
+    \item restriction
+    \[
+        u^*
+        \colon
+        \operatorname{PSh}(\mathcal D)
+        \longrightarrow
+        \operatorname{PSh}(\mathcal C)
+    \]
+    sends local equivalences between reduced presheaves to local
+    equivalences;
+
+    \item the induced functor on sheaf categories
+    \[
+        F
+        \longmapsto
+        L_{\mathcal C}u^*F
+    \]
+    preserves weakly contractible colimits.
+\end{enumerate}
+Here a presheaf is reduced if its value on the initial object is
+contractible.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    L_{\mathrm{red}}
+    \colon
+    \operatorname{PSh}(\mathcal D)
+    \longrightarrow
+    \operatorname{PSh}_{\mathrm{red}}(\mathcal D)
+\]
+be reduction.  It forces the value at the initial object to be
+contractible and does not change values on noninitial objects.  The
+category of reduced presheaves is the free completion of \(\mathcal D\)
+under weakly contractible colimits.
+
+Local equivalences in the reduced presheaf category are generated,
+under weakly contractible colimits, cobase change, and two-out-of-three,
+by covering-sieve morphisms
+\[
+    R'
+    \longrightarrow
+    h_{\mathcal D}(d)
+\]
+with \(d\) noninitial.  Let \(c\in\mathcal C\), and base-change the
+restriction of such a morphism along a map
+\[
+    h_{\mathcal C}(c)
+    \longrightarrow
+    u^*h_{\mathcal D}(d).
+\]
+By adjunction and preservation of limits by restriction, the resulting
+monomorphism is the sieve generated by maps \(c'\to c\) whose image in
+\(\mathcal D\) either becomes initial or factors through the pullback of
+\(R'\).  Topological quasi-cocontinuity says precisely that this sieve
+is covering.  Thus \(u^*\) sends every generating reduced local
+equivalence to a local equivalence, and hence sends every reduced local
+equivalence to a local equivalence.  This proves (i).
+
+Every sheaf is reduced under the hypotheses on the initial object.  If
+\(K\) is weakly contractible, an objectwise \(K\)-colimit of reduced
+presheaves is again reduced because
+\[
+    \operatorname*{colim}_{k\in K}*
+    \simeq
+    *.
+\]
+Applying (i) to the comparison from the objectwise colimit to its
+sheafification proves that
+\[
+    F
+    \longmapsto
+    L_{\mathcal C}u^*F
+\]
+preserves \(K\)-colimits.  This proves (ii).  See
+\cite{KhanBraveNewMotivicI}.
+\end{proof}
+
+\begin{lemma}[Closed base change is quasi-cocontinuous]
+\label{lem:closed-base-change-quasi-cocontinuous}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+be a closed immersion.  The base-change functor
+\[
+    u_i
+    \colon
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \longrightarrow
+    \operatorname{Sm}^{\mathrm{fp}}_{/Z}
+\]
+is topologically quasi-cocontinuous for the spectral Nisnevich
+topologies.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation, and let
+\[
+    R'
+    \hookrightarrow
+    h_Z(X_Z)
+\]
+be a Nisnevich covering sieve.  Choose a finite Nisnevich covering
+family
+\[
+    \{V_a\to X_Z\}_{a\in A}
+\]
+contained in \(R'\).
+
+Consider the closed immersion obtained by base change:
+\[
+    X_Z
+    \hookrightarrow
+    X.
+\]
+For every point
+\[
+    x\in|X_Z|,
+\]
+choose an index \(a\in A\) and a point
+\[
+    v\in|V_a|
+\]
+above \(x\) which induces an isomorphism of residue fields.  Apply the
+local étale lifting theorem
+\Ref{prop:local-lifting-smooth-test-schemes}
+to the closed immersion
+\[
+    X_Z
+    \hookrightarrow
+    X
+\]
+and to the étale morphism
+\[
+    V_a
+    \longrightarrow
+    X_Z.
+\]
+After replacing \(V_a\) by a Nisnevich neighbourhood
+\[
+    V_{a,v}
+    \longrightarrow
+    V_a
+\]
+of \(v\), there exists an étale morphism of finite presentation
+\[
+    \widetilde V_{a,v}
+    \longrightarrow
+    X
+\]
+and an equivalence
+\[
+    \widetilde V_{a,v}\times_XX_Z
+    \simeq
+    V_{a,v}
+\]
+over \(X_Z\).
+
+The composite
+\[
+    V_{a,v}
+    \longrightarrow
+    V_a
+    \longrightarrow
+    X_Z
+\]
+belongs to the sieve \(R'\).  Hence the closed base change of
+\[
+    \widetilde V_{a,v}
+    \longrightarrow
+    X
+\]
+factors through \(R'\).  By construction, the lifted family is
+Nisnevich-surjective on the points of \(X_Z\).
+
+Adjoin the open immersion
+\[
+    X_U
+    :=
+    X\times_SU
+    \hookrightarrow
+    X,
+    \qquad
+    U:=S\setminus Z.
+\]
+The family consisting of
+\[
+    X_U
+    \longrightarrow
+    X
+\]
+and the morphisms
+\[
+    \widetilde V_{a,v}
+    \longrightarrow
+    X
+\]
+is a spectral Nisnevich covering family: the open immersion covers the
+complement of \(X_Z\), while the lifted étale morphisms are
+Nisnevich-surjective over \(X_Z\).
+
+On \(X_U\), closed base change is empty:
+\[
+    X_U\times_SZ
+    \simeq
+    \varnothing.
+\]
+On every \(\widetilde V_{a,v}\), closed base change factors through
+\(R'\).  Therefore the sieve on \(X\) generated by morphisms
+\[
+    X'\longrightarrow X
+\]
+for which either
+\[
+    X'_Z
+    \simeq
+    \varnothing
+\]
+or
+\[
+    h_Z(X'_Z)
+    \longrightarrow
+    h_Z(X_Z)
+\]
+factors through \(R'\), is covering.  This is precisely the
+topological quasi-cocontinuity of \(u_i\).
+\end{proof}
+
+\begin{lemma}[Motivic quasi-cocontinuous restriction]
+\label{lem:motivic-quasi-cocontinuous-restriction}
+Let
+\[
+    u
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be a topologically quasi-cocontinuous functor between essentially small
+sites with strict initial objects.  Suppose that:
+\begin{enumerate}[label=(\roman*)]
+    \item the empty sieve covers precisely the initial object;
+
+    \item
+    \[
+        u(\varnothing_{\mathcal C})
+        \simeq
+        \varnothing_{\mathcal D};
+    \]
+
+    \item both sites are equipped with affine-line objects
+    \(\mathbb A^1_{\mathcal C}\) and
+    \(\mathbb A^1_{\mathcal D}\), together with their zero and unit
+    sections and scalar multiplication;
+
+    \item the functor \(u\) preserves terminal objects and there are
+    natural equivalences
+    \[
+        u(c\times\mathbb A^1_{\mathcal C})
+        \simeq
+        u(c)\times\mathbb A^1_{\mathcal D}
+    \]
+    compatible with the projections, zero and unit sections, and scalar
+    multiplication.
+\end{enumerate}
+Then restriction
+\[
+    u^*
+    \colon
+    \operatorname{PSh}(\mathcal D)
+    \longrightarrow
+    \operatorname{PSh}(\mathcal C)
+\]
+sends motivic equivalences between reduced presheaves to motivic
+equivalences.
+\end{lemma}
+
+\begin{proof}
+By
+\Ref{lem:quasi-cocontinuous-restriction},
+restriction sends Nisnevich-local equivalences between reduced
+presheaves to Nisnevich-local equivalences.
+
+Let \(d\in\mathcal D\), and consider the affine-line projection
+\[
+    p_d
+    \colon
+    h_{\mathcal D}
+    \bigl(
+        d\times\mathbb A^1_{\mathcal D}
+    \bigr)
+    \longrightarrow
+    h_{\mathcal D}(d).
+\]
+The zero section determines a morphism
+\[
+    z_d
+    \colon
+    h_{\mathcal D}(d)
+    \longrightarrow
+    h_{\mathcal D}
+    \bigl(
+        d\times\mathbb A^1_{\mathcal D}
+    \bigr)
+\]
+satisfying
+\[
+    p_dz_d
+    =
+    \operatorname{id}.
+\]
+Scalar multiplication on the affine-line factor defines an
+\(\mathbb A^1_{\mathcal D}\)-homotopy from the identity of
+\[
+    h_{\mathcal D}
+    \bigl(
+        d\times\mathbb A^1_{\mathcal D}
+    \bigr)
+\]
+to
+\[
+    z_dp_d.
+\]
+Condition (iv), applied to the terminal object of \(\mathcal C\),
+gives an equivalence
+\[
+    u(\mathbb A^1_{\mathcal C})
+    \simeq
+    \mathbb A^1_{\mathcal D}.
+\]
+Functoriality of \(u\) therefore gives a natural morphism
+\[
+    h_{\mathcal C}(\mathbb A^1_{\mathcal C})
+    \longrightarrow
+    u^*h_{\mathcal D}(\mathbb A^1_{\mathcal D}).
+\]
+Restricting the preceding homotopy and precomposing its parameter with
+this morphism gives an \(\mathbb A^1_{\mathcal C}\)-homotopy from the
+identity of
+\[
+    u^*h_{\mathcal D}
+    \bigl(
+        d\times\mathbb A^1_{\mathcal D}
+    \bigr)
+\]
+to
+\[
+    u^*z_d\,u^*p_d.
+\]
+Thus
+\[
+    u^*p_d
+\]
+is an elementary \(\mathbb A^1_{\mathcal C}\)-homotopy equivalence,
+with homotopy inverse \(u^*z_d\).  In particular, it is an
+\(\mathbb A^1_{\mathcal C}\)-local equivalence.
+
+The motivic equivalences between reduced presheaves are generated from
+the reduced Nisnevich-local equivalences and the affine-line
+projections by weakly contractible colimits, cobase change, retracts,
+and two-out-of-three.  Restriction preserves these operations.  The
+preceding two paragraphs therefore show that restriction carries every
+motivic equivalence between reduced presheaves to a motivic
+equivalence.
+
+See
+\cite{KhanBraveNewMotivicI}.
+\end{proof}
+
+\begin{lemma}[Closed restriction preserves motivic-local objects]
+\label{lem:closed-restriction-preserves-motivic-local-objects}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+be a closed immersion, and let
+\[
+    u_i
+    \colon
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \longrightarrow
+    \operatorname{Sm}^{\mathrm{fp}}_{/Z},
+    \qquad
+    X
+    \longmapsto
+    X_Z,
+\]
+be closed base change.  If
+\[
+    F
+    \in
+    \operatorname{PSh}(Z)
+\]
+is motivic-local, then
+\[
+    u_i^*F
+    \in
+    \operatorname{PSh}(S)
+\]
+is motivic-local.  On motivic-local presheaves, restriction along
+\(u_i\) is the direct image functor
+\[
+    i_*
+    \colon
+    \mathbf H(Z)
+    \longrightarrow
+    \mathbf H(S).
+\]
+\end{lemma}
+
+\begin{proof}
+Since
+\[
+    \varnothing_S\times_SZ
+    \simeq
+    \varnothing_Z,
+\]
+one has
+\[
+    (u_i^*F)(\varnothing_S)
+    =
+    F(\varnothing_Z)
+    \simeq
+    *.
+\]
+
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W \arrow[r] \arrow[d]
+    &
+    V \arrow[d]
+    \\
+    U \arrow[r]
+    &
+    X
+\end{tikzcd}
+\]
+be a spectral Nisnevich distinguished square over \(S\).  Closed base
+change preserves open immersions, étale morphisms, fibre products, and
+the equivalence over the closed complement.  Hence
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W_Z \arrow[r] \arrow[d]
+    &
+    V_Z \arrow[d]
+    \\
+    U_Z \arrow[r]
+    &
+    X_Z
+\end{tikzcd}
+\]
+is a spectral Nisnevich distinguished square over \(Z\).  Since \(F\)
+is Nisnevich-local, the canonical morphism
+\[
+    F(X_Z)
+    \longrightarrow
+    F(U_Z)
+    \times_{F(W_Z)}
+    F(V_Z)
+\]
+is an equivalence.  This is the Nisnevich-excision condition for
+\(u_i^*F\).
+
+Finally, closed base change is compatible with the brave new affine
+line:
+\[
+    (X\times_S\mathbb A^1_S)_Z
+    \simeq
+    X_Z\times_Z\mathbb A^1_Z.
+\]
+Therefore
+\[
+\begin{aligned}
+    (u_i^*F)(X)
+    &=
+    F(X_Z)
+    \\
+    &\simeq
+    F(X_Z\times_Z\mathbb A^1_Z)
+    \\
+    &\simeq
+    (u_i^*F)(X\times_S\mathbb A^1_S).
+\end{aligned}
+\]
+Thus \(u_i^*F\) is motivic-local.  The final assertion is the section
+formula defining motivic direct image.
+\end{proof}
+
+\begin{theorem}[Closed direct image preserves weakly contractible colimits]
+\label{thm:closed-direct-image-weakly-contractible-colimits}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+be a closed immersion between quasi-compact quasi-separated spectral
+schemes, with quasi-compact open complement.  Then
+\[
+    i_*
+    \colon
+    \mathbf H(Z)
+    \longrightarrow
+    \mathbf H(S)
+\]
+preserves weakly contractible colimits.
+\end{theorem}
+
+\begin{proof}
+At the presheaf level, direct image is restriction along the closed
+base-change functor
+\[
+    u_i
+    \colon
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \longrightarrow
+    \operatorname{Sm}^{\mathrm{fp}}_{/Z}.
+\]
+By
+\Ref{lem:closed-base-change-quasi-cocontinuous},
+this functor is topologically quasi-cocontinuous.  It preserves the
+initial and terminal objects.  Closed base change is compatible with
+the brave new affine line and all its structure maps:
+\[
+    (X\times_S\mathbb A^1_S)_Z
+    \simeq
+    X_Z\times_Z\mathbb A^1_Z.
+\]
+Thus the hypotheses of
+\Ref{lem:motivic-quasi-cocontinuous-restriction}
+are satisfied.
+
+Let \(K\) be weakly contractible, and let
+\[
+    F_\bullet
+    \colon
+    K
+    \longrightarrow
+    \mathbf H(Z)
+\]
+be a diagram.  Regard the \(F_k\) as their underlying motivic-local
+presheaves, and put
+\[
+    G
+    :=
+    \operatorname*{colim}_{k\in K}^{\operatorname{PSh}(Z)}F_k.
+\]
+Since each \(F_k\) is reduced and \(K\) is weakly contractible,
+\[
+    G(\varnothing)
+    \simeq
+    \operatorname*{colim}_{k\in K}*
+    \simeq
+    *.
+\]
+Hence \(G\) is reduced.  The colimit of the diagram in
+\(\mathbf H(Z)\) is
+\[
+    \operatorname*{colim}_{k\in K}^{\mathbf H(Z)}F_k
+    \simeq
+    L_{\mathrm{mot},Z}G.
+\]
+
+By
+\Ref{lem:closed-restriction-preserves-motivic-local-objects},
+restriction along \(u_i\) carries motivic-local presheaves over \(Z\)
+to motivic-local presheaves over \(S\), and on such presheaves it is the
+direct image \(i_*\).  Since restriction computes colimits objectwise,
+\[
+\begin{aligned}
+    \operatorname*{colim}_{k\in K}^{\mathbf H(S)}i_*F_k
+    &\simeq
+    L_{\mathrm{mot},S}
+    \operatorname*{colim}_{k\in K}^{\operatorname{PSh}(S)}u_i^*F_k
+    \\
+    &\simeq
+    L_{\mathrm{mot},S}u_i^*G.
+\end{aligned}
+\]
+The localization unit
+\[
+    G
+    \longrightarrow
+    L_{\mathrm{mot},Z}G
+\]
+is a motivic equivalence between reduced presheaves.  By
+\Ref{lem:motivic-quasi-cocontinuous-restriction}, its restriction
+\[
+    u_i^*G
+    \longrightarrow
+    u_i^*L_{\mathrm{mot},Z}G
+\]
+is a motivic equivalence over \(S\).  Its target is motivic-local, so
+localizing the source gives an equivalence
+\[
+    L_{\mathrm{mot},S}u_i^*G
+    \xrightarrow{\simeq}
+    u_i^*L_{\mathrm{mot},Z}G.
+\]
+The right side is
+\[
+    i_*
+    \operatorname*{colim}_{k\in K}^{\mathbf H(Z)}F_k.
+\]
+Combining the preceding equivalences gives
+\[
+    \operatorname*{colim}_{k\in K}i_*F_k
+    \xrightarrow{\simeq}
+    i_*
+    \operatorname*{colim}_{k\in K}F_k.
+\]
+Thus \(i_*\) preserves weakly contractible colimits.
+\end{proof}
+
+\begin{corollary}[Closed restriction and motivic localization]
+\label{cor:closed-restriction-motivic-localization}
+Let
+\[
+    G
+    \in
+    \operatorname{PSh}(Z)
+\]
+be reduced.  Then there is a canonical equivalence
+\[
+    L_{\mathrm{mot},S}
+    i_{*,\operatorname{PSh}}G
+    \simeq
+    i_*L_{\mathrm{mot},Z}G.
+\]
+\end{corollary}
+
+\begin{proof}
+The localization unit
+\[
+    G
+    \longrightarrow
+    L_{\mathrm{mot},Z}G
+\]
+is a motivic equivalence.  Its source is reduced by assumption, and its
+target is reduced because every motivic-local presheaf takes the
+initial object to a contractible space.
+
+By
+\Ref{lem:motivic-quasi-cocontinuous-restriction},
+restriction along the closed base-change functor carries this
+localization unit to a motivic equivalence
+\[
+    i_{*,\operatorname{PSh}}G
+    \longrightarrow
+    i_{*,\operatorname{PSh}}
+    L_{\mathrm{mot},Z}G
+\]
+over \(S\).
+
+By
+\Ref{lem:closed-restriction-preserves-motivic-local-objects},
+the target is motivic-local and agrees with
+\[
+    i_*L_{\mathrm{mot},Z}G.
+\]
+Applying motivic localization to the source therefore gives a canonical
+equivalence
+\[
+    L_{\mathrm{mot},S}
+    i_{*,\operatorname{PSh}}G
+    \xrightarrow{\simeq}
+    i_*L_{\mathrm{mot},Z}G.
+\]
+\end{proof}
+
+\begin{lemma}[Pointed colimits from weakly contractible colimits]
+\label{lem:pointed-colimits-from-weakly-contractible}
+Let
+\[
+    R
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be an accessible functor between presentable \(\infty\)-categories
+which preserves terminal objects and weakly contractible colimits.
+Then the induced functor
+\[
+    R_\bullet
+    \colon
+    \mathcal C_{*/}
+    \longrightarrow
+    \mathcal D_{*/}
+\]
+preserves all small colimits.
+\end{lemma}
+
+\begin{proof}
+Let \(D:K\to\mathcal C_{*/}\) be a small diagram.  Adjoin an initial
+cone point to \(K\), obtaining \(K^\triangleleft\).  Extend the
+underlying diagram to \(K^\triangleleft\) by sending the cone point to
+the terminal object of \(\mathcal C\) and the cone arrows to the chosen
+basepoint maps.  The colimit of this extended diagram in \(\mathcal C\)
+is the underlying object of the colimit of \(D\) in
+\(\mathcal C_{*/}\).  Since \(K^\triangleleft\) has an initial object,
+it is weakly contractible.  The hypotheses on \(R\) therefore identify
+the image of this colimit with the corresponding colimit in
+\(\mathcal D_{*/}\).  Thus \(R_\bullet\) preserves the colimit of every
+small diagram.
+\end{proof}
+
+\begin{corollary}[Colimit preservation of pointed closed direct image]
+\label{cor:pointed-closed-direct-image-colimit-preserving}
+The pointed closed direct image
+\[
+    i_*
+    \colon
+    \mathbf H_\bullet(Z)
+    \longrightarrow
+    \mathbf H_\bullet(S)
+\]
+preserves all small colimits.
+\end{corollary}
+
+\begin{proof}
+The unpointed direct image preserves terminal objects because it is a
+right adjoint, and it preserves weakly contractible colimits by
+\Ref{thm:closed-direct-image-weakly-contractible-colimits}.  Apply
+\Ref{lem:pointed-colimits-from-weakly-contractible}.
+\end{proof}
+
+\subsection{Exceptional inverse image for closed immersions}
+
+\begin{proposition}[Exceptional inverse image for a closed immersion]
+\label{prop:closed-exceptional-inverse-image}
+The pointed closed direct image
+\[
+    i_*
+    \colon
+    \mathbf H_\bullet(Z)
+    \longrightarrow
+    \mathbf H_\bullet(S)
+\]
+admits a right adjoint
+\[
+    i^!
+    \colon
+    \mathbf H_\bullet(S)
+    \longrightarrow
+    \mathbf H_\bullet(Z).
+\]
+Thus there is an adjunction
+\[
+    i_*
+    \dashv
+    i^!.
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{cor:pointed-closed-direct-image-colimit-preserving},
+the functor \(i_*\) preserves all small colimits.  It is accessible
+because it is induced by an accessible functor between the underlying
+presentable motivic categories.
+
+Both
+\[
+    \mathbf H_\bullet(Z)
+    \quad\text{and}\quad
+    \mathbf H_\bullet(S)
+\]
+are presentable.  The adjoint functor theorem therefore supplies a
+right adjoint
+\[
+    i^!.
+\]
+\end{proof}
+
+\section{The spectral Morel--Voevodsky localization theorem}
+\label{sec:spectral-morel-voevodsky-localization}
+
+\subsection{The localization transformation}
+
+\begin{construction}[The localization square]
+\label{con:localization-square}
+Let
+\[
+    F
+    \in
+    \mathbf H(S).
+\]
+The counit of
+\[
+    j_\sharp
+    \dashv
+    j^*
+\]
+gives
+\[
+    j_\sharp j^*F
+    \longrightarrow
+    F,
+\]
+and the unit of
+\[
+    i^*
+    \dashv
+    i_*
+\]
+gives
+\[
+    F
+    \longrightarrow
+    i_*i^*F.
+\]
+By
+\Ref{prop:open-closed-orthogonality},
+their composite factors canonically through the unique morphism
+\[
+    j_\sharp j^*F
+    \longrightarrow
+    j_\sharp(*_U).
+\]
+The terminal map \(j^*F\to *_U\) gives a commutative square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    j_\sharp j^*F
+        \arrow[r]
+        \arrow[d]
+    &
+    F
+        \arrow[d]
+    \\
+    j_\sharp(*_U)
+        \arrow[r]
+    &
+    i_*i^*F.
+\end{tikzcd}
+\]
+This is the \textbf{localization square} of \(F\).
+\end{construction}
+
+\begin{theorem}[Spectral Morel--Voevodsky localization]
+\label{thm:spectral-morel-voevodsky-localization}
+For every
+\[
+    F
+    \in
+    \mathbf H(S),
+\]
+the localization square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    j_\sharp j^*F
+        \arrow[r]
+        \arrow[d]
+    &
+    F
+        \arrow[d]
+    \\
+    j_\sharp(*_U)
+        \arrow[r]
+    &
+    i_*i^*F
+\end{tikzcd}
+\]
+is cocartesian.
+\end{theorem}
+
+The proof occupies the remainder of this section.
+
+\subsection{Presheaves supported near the closed subscheme}
+
+\begin{construction}[The presheaf obtained by collapsing the open part]
+\label{con:presheaf-collapsing-open-part}
+Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation.  Put
+\[
+    X_U
+    :=
+    X\times_SU,
+    \qquad
+    X_Z
+    :=
+    X\times_SZ.
+\]
+Define
+\[
+    h_S^Z(X)
+    :=
+    h_S(X)
+    \amalg_{h_S(X_U)}
+    h_S(U).
+\]
+At the presheaf level, restriction along closed base change gives a
+functor
+\[
+    i_{*,\operatorname{PSh}}
+    \colon
+    \operatorname{PSh}(Z)
+    \longrightarrow
+    \operatorname{PSh}(S).
+\]
+There is a canonical morphism
+\[
+    \rho_X
+    \colon
+    h_S^Z(X)
+    \longrightarrow
+    i_{*,\operatorname{PSh}}h_Z(X_Z).
+\]
+On the summand \(h_S(X)\), it is induced by restriction to \(Z\).  On
+the summand \(h_S(U)\), it is induced by the empty closed base change.
+\end{construction}
+
+\begin{proposition}[Localization square on a smooth motive]
+\label{prop:localization-square-smooth-motive}
+For
+\[
+    X
+    \in
+    \operatorname{Sm}^{\mathrm{fp}}_{/S},
+\]
+the upper-left pushout in the localization square of
+\(\mathrm M_S(X)\) is canonically equivalent to
+\[
+    L_{\mathrm{mot},S}h_S^Z(X).
+\]
+Under this identification, the induced map to
+\[
+    i_*i^*\mathrm M_S(X)
+    \simeq
+    i_*\mathrm M_Z(X_Z)
+\]
+is obtained by applying motivic localization to
+\[
+    \rho_X
+    \colon
+    h_S^Z(X)
+    \longrightarrow
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+\]
+and then using the canonical equivalence
+\[
+    L_{\mathrm{mot},S}
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+    \simeq
+    i_*\mathrm M_Z(X_Z).
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{thm:smooth-motivic-direct-image},
+\[
+    j_\sharp\mathrm M_U(X_U)
+    \simeq
+    \mathrm M_S(X_U),
+\]
+where \(X_U\) is regarded over \(S\) by composition.  Moreover,
+\[
+    j_\sharp(*_U)
+    \simeq
+    \mathrm M_S(U),
+\]
+since
+\[
+    *_U
+    =
+    \mathrm M_U(U).
+\]
+Since motivic localization preserves pushouts, the pushout
+\[
+    \mathrm M_S(X)
+    \amalg_{\mathrm M_S(X_U)}
+    \mathrm M_S(U)
+\]
+is canonically equivalent to
+\[
+    L_{\mathrm{mot},S}
+    \left(
+        h_S(X)
+        \amalg_{h_S(X_U)}
+        h_S(U)
+    \right)
+    =
+    L_{\mathrm{mot},S}h_S^Z(X).
+\]
+
+Base change gives
+\[
+    i^*\mathrm M_S(X)
+    \simeq
+    \mathrm M_Z(X_Z).
+\]
+The representable presheaf
+\[
+    h_Z(X_Z)
+\]
+is reduced, because
+\[
+    h_Z(X_Z)(\varnothing_Z)
+    \simeq
+    *.
+\]
+Therefore
+\Ref{cor:closed-restriction-motivic-localization}
+gives a canonical equivalence
+\[
+\begin{aligned}
+    L_{\mathrm{mot},S}
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+    &\simeq
+    i_*L_{\mathrm{mot},Z}h_Z(X_Z)
+    \\
+    &=
+    i_*\mathrm M_Z(X_Z).
+\end{aligned}
+\]
+
+Under these identifications, the morphism from the upper-left pushout
+to
+\[
+    i_*i^*\mathrm M_S(X)
+    \simeq
+    i_*\mathrm M_Z(X_Z)
+\]
+is precisely the composite
+\[
+\begin{aligned}
+    L_{\mathrm{mot},S}h_S^Z(X)
+    &\xrightarrow{
+        L_{\mathrm{mot},S}(\rho_X)
+    }
+    L_{\mathrm{mot},S}
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+    \\
+    &\xrightarrow{\simeq}
+    i_*\mathrm M_Z(X_Z).
+\end{aligned}
+\]
+\end{proof}
+
+\subsection{Trivialized maps}
+
+\begin{construction}[Presheaf of \(Z\)-trivialized maps]
+\label{con:presheaf-z-trivialized-maps}
+Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation, and let
+\[
+    t
+    \colon
+    Z
+    \longrightarrow
+    X
+\]
+be an \(S\)-morphism.  Equivalently, \(t\) is a section of
+\[
+    X_Z
+    \longrightarrow
+    Z.
+\]
+The section \(t\) determines a morphism
+\[
+    *_S
+    \longrightarrow
+    i_{*,\operatorname{PSh}}h_Z(X_Z).
+\]
+Define
+\[
+    h_S(X,t)
+    :=
+    h_S^Z(X)
+    \times_{i_{*,\operatorname{PSh}}h_Z(X_Z)}
+    *_S.
+\]
+\end{construction}
+
+A section of \(h_S(X,t)\) over a smooth spectral \(S\)-scheme
+\(Y\) consists of an \(S\)-morphism
+\[
+    f
+    \colon
+    Y
+    \longrightarrow
+    X
+\]
+together with an identification of its restriction to
+\[
+    Y_Z
+    :=
+    Y\times_SZ
+\]
+with the composite
+\[
+    Y_Z
+    \longrightarrow
+    Z
+    \xrightarrow{t}
+    X.
+\]
+If \(Y_Z\) is empty, the value is canonically contractible.
+
+\begin{proposition}[Smooth base change of trivialized-map presheaves]
+\label{prop:trivialized-map-base-change}
+Let
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    S
+\]
+be a smooth morphism of finite presentation.  Form the Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Z_T
+        \arrow[r, "f_Z"]
+        \arrow[d, "i_T"']
+    &
+    Z
+        \arrow[d, "i"]
+    \\
+    T
+        \arrow[r, "f"']
+    &
+    S.
+\end{tikzcd}
+\]
+Put
+\[
+    X_T
+    :=
+    X\times_ST,
+\]
+and let
+\[
+    t_T
+    \colon
+    Z_T
+    \longrightarrow
+    X_T
+\]
+be the base change of \(t\).
+
+There is a canonical presheaf-level exchange equivalence
+\[
+    f^*_{\operatorname{PSh}}
+    i_{*,\operatorname{PSh}}
+    \simeq
+    i_{T,*,\operatorname{PSh}}
+    f_Z^*.
+\]
+Consequently, there is a canonical equivalence
+\[
+    f^*_{\operatorname{PSh}}h_S(X,t)
+    \simeq
+    h_T(X_T,t_T).
+\]
+After motivic localization, one obtains
+\[
+    f^*L_{\mathrm{mot},S}h_S(X,t)
+    \simeq
+    L_{\mathrm{mot},T}h_T(X_T,t_T).
+\]
+\end{proposition}
+
+\begin{proof}
+Because \(f\) is smooth and of finite presentation, presheaf inverse
+image is restriction along the composition functor
+\[
+    f^{\mathrm{geom}}_\sharp
+    \colon
+    \mathcal C_T
+    \longrightarrow
+    \mathcal C_S.
+\]
+It therefore preserves all limits and colimits.
+
+Let
+\[
+    H
+    \in
+    \operatorname{PSh}(Z),
+\]
+and let
+\[
+    Y
+    \in
+    \mathcal C_T.
+\]
+There are natural equivalences
+\[
+\begin{aligned}
+    \bigl(
+        f^*_{\operatorname{PSh}}
+        i_{*,\operatorname{PSh}}H
+    \bigr)(Y)
+    &\simeq
+    \bigl(
+        i_{*,\operatorname{PSh}}H
+    \bigr)(Y)
+    \\
+    &\simeq
+    H(Y\times_SZ),
+\end{aligned}
+\]
+where \(Y\) in the middle expression is regarded as an \(S\)-scheme by
+composition with \(f\).  On the other hand,
+\[
+\begin{aligned}
+    \bigl(
+        i_{T,*,\operatorname{PSh}}
+        f_Z^*H
+    \bigr)(Y)
+    &\simeq
+    \bigl(
+        f_Z^*H
+    \bigr)(Y\times_TZ_T)
+    \\
+    &\simeq
+    H(Y\times_TZ_T)
+    \\
+    &\simeq
+    H(Y\times_SZ).
+\end{aligned}
+\]
+These equivalences are natural in \(H\) and \(Y\), and hence determine
+the canonical exchange equivalence
+\[
+    f^*_{\operatorname{PSh}}
+    i_{*,\operatorname{PSh}}
+    \simeq
+    i_{T,*,\operatorname{PSh}}
+    f_Z^*.
+\]
+
+Smooth inverse image sends representables to their geometric base
+changes:
+\[
+\begin{aligned}
+    f^*_{\operatorname{PSh}}h_S(X)
+    &\simeq
+    h_T(X_T),
+    \\
+    f^*_{\operatorname{PSh}}h_S(X_U)
+    &\simeq
+    h_T((X_T)_{U_T}),
+    \\
+    f^*_{\operatorname{PSh}}h_S(U)
+    &\simeq
+    h_T(U_T).
+\end{aligned}
+\]
+Since it preserves pushouts, it follows that
+\[
+    f^*_{\operatorname{PSh}}h_S^Z(X)
+    \simeq
+    h_T^{Z_T}(X_T).
+\]
+
+The exchange equivalence gives
+\[
+\begin{aligned}
+    f^*_{\operatorname{PSh}}
+    \bigl(
+        i_{*,\operatorname{PSh}}h_Z(X_Z)
+    \bigr)
+    &\simeq
+    i_{T,*,\operatorname{PSh}}
+    f_Z^*h_Z(X_Z)
+    \\
+    &\simeq
+    i_{T,*,\operatorname{PSh}}
+    h_{Z_T}(X_{Z_T}).
+\end{aligned}
+\]
+The point determined by \(t\) is carried to the point determined by
+\(t_T\).  Applying \(f^*_{\operatorname{PSh}}\) to the pullback
+defining \(h_S(X,t)\) therefore gives
+\[
+\begin{aligned}
+    f^*_{\operatorname{PSh}}h_S(X,t)
+    &\simeq
+    h_T^{Z_T}(X_T)
+    \times_{
+        i_{T,*,\operatorname{PSh}}
+        h_{Z_T}(X_{Z_T})
+    }
+    *_T
+    \\
+    &\simeq
+    h_T(X_T,t_T).
+\end{aligned}
+\]
+
+Compatibility of motivic inverse image with motivic localization gives
+the final equivalence.
+\end{proof}
+
+\subsection{Étale invariance of trivialized maps}
+
+\begin{proposition}[Étale invariance of trivialized-map presheaves]
+\label{prop:etale-invariance-trivialized-maps}
+Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation.  Consider an étale morphism over
+\(S\)
+\[
+    q
+    \colon
+    X'
+    \longrightarrow
+    X
+\]
+and \(S\)-morphisms
+\[
+    t'
+    \colon
+    Z
+    \longrightarrow
+    X',
+    \qquad
+    t
+    \colon
+    Z
+    \longrightarrow
+    X
+\]
+such that
+\[
+    q\circ t'
+    =
+    t.
+\]
+Write
+\[
+    q_Z
+    \colon
+    X'_Z
+    \longrightarrow
+    X_Z
+\]
+for the base change of \(q\).  Suppose that the induced square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Z
+        \arrow[r, "t'"]
+        \arrow[d, "\id_Z"']
+    &
+    X'_Z
+        \arrow[d, "q_Z"]
+    \\
+    Z
+        \arrow[r, "t"']
+    &
+    X_Z
+\end{tikzcd}
+\]
+is Cartesian.  Then
+\[
+    h_S(X',t')
+    \longrightarrow
+    h_S(X,t)
+\]
+is a Nisnevich-local equivalence and hence a motivic equivalence.
+\end{proposition}
+
+\begin{proof}
+Since \(q\) is étale, it is smooth and of finite presentation.
+Consequently, the composite
+\[
+    X'
+    \longrightarrow
+    X
+    \longrightarrow
+    S
+\]
+is smooth and of finite presentation, so both trivialized-map
+presheaves in the statement are defined.
+
+Write
+\[
+    \varphi
+    \colon
+    h_S(X',t')
+    \longrightarrow
+    h_S(X,t).
+\]
+We prove that the morphism obtained after Nisnevich sheafification is
+an equivalence.
+
+We first show that
+\[
+    L_{\mathrm{Nis},S}(\varphi)
+\]
+is \(0\)-truncated.  Since Nisnevich sheafification is left exact, it
+is enough to prove that \(\varphi\) is already \(0\)-truncated as a
+morphism of presheaves.
+
+Let
+\[
+    Y
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation.  If
+\[
+    Y_Z
+    :=
+    Y\times_SZ
+    \simeq
+    \varnothing,
+\]
+then both
+\[
+    h_S(X',t')(Y)
+    \qquad\text{and}\qquad
+    h_S(X,t)(Y)
+\]
+are canonically contractible.  Hence
+\[
+    \varphi(Y)
+\]
+is an equivalence and in particular is \(0\)-truncated.
+
+Suppose now that
+\[
+    Y_Z
+    \not\simeq
+    \varnothing.
+\]
+In this case evaluation of \(\varphi\) is the morphism induced on
+fibres in the diagram
+\[
+\begin{tikzcd}[column sep=large]
+    h_S(X',t')(Y)
+        \arrow[r]
+        \arrow[d]
+    &
+    \operatorname{Map}_S(Y,X')
+        \arrow[r]
+        \arrow[d]
+    &
+    \operatorname{Map}_Z(Y_Z,X'_Z)
+        \arrow[d]
+    \\
+    h_S(X,t)(Y)
+        \arrow[r]
+    &
+    \operatorname{Map}_S(Y,X)
+        \arrow[r]
+    &
+    \operatorname{Map}_Z(Y_Z,X_Z).
+\end{tikzcd}
+\]
+The two right-hand vertical morphisms are \(0\)-truncated because
+\(q\) and \(q_Z\) are étale.  It follows that the left-hand vertical
+morphism is \(0\)-truncated.  Thus \(\varphi\) is objectwise
+\(0\)-truncated, and consequently
+\[
+    L_{\mathrm{Nis},S}(\varphi)
+\]
+is \(0\)-truncated.
+
+We next show that
+\[
+    L_{\mathrm{Nis},S}(\varphi)
+\]
+is an effective epimorphism.  Let
+\[
+    (f,\eta)
+    \in
+    h_S(X,t)(Y)
+\]
+be a section.  The case \(Y_Z\simeq\varnothing\) is immediate, since
+both evaluated presheaves are contractible.  We may therefore suppose
+that \(Y_Z\) is nonempty.
+
+Pulling \(q\) back along \(f\) gives an étale morphism
+\[
+    q_Y
+    \colon
+    Y'
+    :=
+    Y\times_XX'
+    \longrightarrow
+    Y.
+\]
+The trivialization \(\eta\) identifies the restriction of \(f\) to
+\(Y_Z\) with the composite
+\[
+    Y_Z
+    \longrightarrow
+    Z
+    \xrightarrow{t}
+    X_Z.
+\]
+Therefore
+\[
+\begin{aligned}
+    Y'\times_YY_Z
+    &\simeq
+    Y_Z\times_{X_Z}X'_Z
+    \\
+    &\simeq
+    Y_Z\times_Z
+    \bigl(
+        Z\times_{X_Z}X'_Z
+    \bigr)
+    \\
+    &\simeq
+    Y_Z,
+\end{aligned}
+\]
+where the last equivalence uses the Cartesian square in the
+statement.
+
+Consequently,
+\[
+    \{Y_U\to Y,\;Y'\to Y\},
+    \qquad
+    Y_U:=Y\times_SU,
+\]
+is a spectral Nisnevich covering family.  Over \(Y'\), the morphism
+\(f\) has the tautological lift to \(X'\).  Over \(Y_U\), the closed
+base change is empty, so both trivialized-map spaces are contractible.
+Thus every section of the target lifts Nisnevich-locally.  Hence
+\[
+    L_{\mathrm{Nis},S}(\varphi)
+\]
+is an effective epimorphism.
+
+It remains to show that the diagonal of
+\[
+    L_{\mathrm{Nis},S}(\varphi)
+\]
+is an effective epimorphism.  Let two sections
+\[
+    (f',\eta_{f'}),
+    \qquad
+    (g',\eta_{g'})
+    \in
+    h_S(X',t')(Y)
+\]
+be equipped with an identification of their images in
+\[
+    h_S(X,t)(Y).
+\]
+Again, if \(Y_Z\simeq\varnothing\), the claim is immediate because the
+relevant spaces are contractible.  We may therefore suppose that
+\(Y_Z\) is nonempty.
+
+Since the diagonal of the étale morphism \(q\) is an open immersion,
+the locus on which \(f'\) and \(g'\) agree is represented by an open
+immersion
+\[
+    Y_0
+    \hookrightarrow
+    Y.
+\]
+The prescribed trivializations and the Cartesian condition over \(Z\)
+imply that \(f'\) and \(g'\) agree after restriction to \(Y_Z\).
+Hence
+\[
+    Y_Z
+    \hookrightarrow
+    Y
+\]
+factors through \(Y_0\).
+
+It follows that
+\[
+    \{Y_0\to Y,\;Y_U\to Y\}
+\]
+is a Zariski covering family.  The two sections agree over \(Y_0\),
+while over \(Y_U\) the relevant trivialized-map space is contractible.
+Thus the diagonal of
+\[
+    L_{\mathrm{Nis},S}(\varphi)
+\]
+is an effective epimorphism.
+
+We have shown that \(L_{\mathrm{Nis},S}(\varphi)\) is \(0\)-truncated,
+that it is an effective epimorphism, and that its diagonal is an
+effective epimorphism.  Since the diagonal of a \(0\)-truncated
+morphism is \((-1)\)-truncated, its being an effective epimorphism
+forces it to be an equivalence.  Therefore
+\[
+    L_{\mathrm{Nis},S}(\varphi)
+\]
+is a monomorphism.  Being both a monomorphism and an effective
+epimorphism, it is an equivalence.
+
+Hence
+\[
+    h_S(X',t')
+    \longrightarrow
+    h_S(X,t)
+\]
+is a Nisnevich-local equivalence and consequently a motivic
+equivalence.
+\end{proof}
+
+\subsection{Vector-bundle contraction}
+
+\begin{proposition}[Contractibility of the vector-bundle model]
+\label{prop:vector-bundle-trivialized-maps-contractible}
+Let
+\[
+    \pi
+    \colon
+    \mathbb V_S(E)
+    \longrightarrow
+    S
+\]
+be the relative linear space associated with a finite locally free
+quasi-coherent module \(E\), and let
+\[
+    s
+    \colon
+    S
+    \longrightarrow
+    \mathbb V_S(E)
+\]
+be its zero section.  Write
+\[
+    s_Z
+    \colon
+    Z
+    \longrightarrow
+    \mathbb V_S(E)
+\]
+for its restriction.  Then
+\[
+    L_{\mathrm{mot},S}
+    h_S\bigl(
+        \mathbb V_S(E),
+        s_Z
+    \bigr)
+    \simeq
+    *_S.
+\]
+\end{proposition}
+
+\begin{proof}
+Scalar multiplication defines a morphism
+\[
+    m
+    \colon
+    \mathbb A^1_S
+    \times_S
+    \mathbb V_S(E)
+    \longrightarrow
+    \mathbb V_S(E).
+\]
+If
+\[
+    (f,\eta)
+    \in
+    h_S(\mathbb V_S(E),s_Z)(Y),
+\]
+then the composite
+\[
+    \mathbb A^1_Y
+    \xrightarrow{\id\times f}
+    \mathbb A^1_S\times_S\mathbb V_S(E)
+    \xrightarrow{m}
+    \mathbb V_S(E)
+\]
+remains equal to the zero section after restriction to
+\(\mathbb A^1_{Y_Z}\).  Hence scalar multiplication induces an
+\(\mathbb A^1\)-homotopy on
+\[
+    h_S(\mathbb V_S(E),s_Z).
+\]
+At the unit section \(1\), this homotopy is the identity.  At the zero
+section \(0\), it is the constant map through the global zero section
+\(s\).  After imposing \(\mathbb A^1\)-invariance, the identity is
+therefore homotopic to a constant map.  The global zero section supplies
+a point, so the motivic localization is contractible.
+\end{proof}
+
+\subsection{The partial-section theorem}
+
+\begin{lemma}[Cartesian refinement of a spectral tubular neighbourhood]
+\label{lem:cartesian-tubular-neighbourhood}
+Let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be a smooth morphism of finite presentation, and let
+\[
+    s
+    \colon
+    S
+    \longrightarrow
+    X
+\]
+be a section.  Put
+\[
+    N
+    :=
+    N^*_{S/X}.
+\]
+There exists a Zariski open cover
+\[
+    \{S_\alpha\to S\}_\alpha
+\]
+such that, after writing
+\[
+    X_\alpha
+    :=
+    X\times_SS_\alpha,
+\]
+there are an open neighbourhood
+\[
+    X_\alpha^\circ
+    \subseteq
+    X_\alpha
+\]
+of \(s(S_\alpha)\) and an étale morphism
+\[
+    \varphi_\alpha
+    \colon
+    X_\alpha^\circ
+    \longrightarrow
+    \mathbb V_{S_\alpha}
+    \bigl(
+        N|_{S_\alpha}
+    \bigr)
+\]
+for which the square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    S_\alpha
+        \arrow[r, "s"]
+        \arrow[d, "\id_{S_\alpha}"']
+    &
+    X_\alpha^\circ
+        \arrow[d, "\varphi_\alpha"]
+    \\
+    S_\alpha
+        \arrow[r, "0"']
+    &
+    \mathbb V_{S_\alpha}
+    \bigl(
+        N|_{S_\alpha}
+    \bigr)
+\end{tikzcd}
+\]
+is Cartesian.
+\end{lemma}
+
+\begin{proof}
+Fix a point
+\[
+    x\in|S|.
+\]
+Choose an affine open neighbourhood
+\[
+    S_0\subseteq S
+\]
+of \(x\).  Choose an affine open neighbourhood
+\[
+    W\subseteq X\times_SS_0
+\]
+of the point \(s(x)\).
+
+The inverse image
+\[
+    s^{-1}(W)
+    \subseteq
+    S_0
+\]
+is an open neighbourhood of \(x\).  After replacing \(S_0\) by a
+smaller affine open neighbourhood contained in \(s^{-1}(W)\), the
+section \(s|_{S_0}\) factors through
+\[
+    W
+    \subseteq
+    X\times_SS_0.
+\]
+We continue to denote this affine neighbourhood by \(W\).  Since both
+\(W\) and \(S_0\) are affine, the morphism
+\[
+    W
+    \longrightarrow
+    S_0
+\]
+is affine.  It is smooth, being the restriction of \(p\).
+
+The conormal module of the section computed in \(W\) agrees with the
+restriction of the conormal module computed in \(X\):
+\[
+    N^*_{S_0/W}
+    \simeq
+    N|_{S_0},
+\]
+because \(W\hookrightarrow X\times_SS_0\) is an open immersion
+containing the image of the section.
+
+Apply
+\Ref{thm:spectral-tubular-neighbourhood}
+to the smooth affine morphism
+\[
+    W
+    \longrightarrow
+    S_0
+\]
+and its section.  After shrinking \(S_0\) further if necessary, there
+are an open neighbourhood
+\[
+    W^\circ
+    \subseteq
+    W
+\]
+of \(s(S_0)\) and an étale morphism
+\[
+    \varphi
+    \colon
+    W^\circ
+    \longrightarrow
+    \mathbb V_{S_0}
+    \bigl(
+        N|_{S_0}
+    \bigr)
+\]
+which carries \(s\) to the zero section.
+
+Form the zero fibre
+\[
+    P
+    :=
+    W^\circ
+    \times_{
+        \mathbb V_{S_0}(N|_{S_0})
+    }
+    S_0.
+\]
+The morphism
+\[
+    P
+    \longrightarrow
+    S_0
+\]
+is étale, and the section \(s\) induces a section
+\[
+    \sigma
+    \colon
+    S_0
+    \longrightarrow
+    P.
+\]
+Since \(P\to S_0\) is étale, the section \(\sigma\) is an open
+immersion.
+
+It is also a closed immersion.  Indeed, the morphism
+\[
+    W^\circ
+    \longrightarrow
+    S_0
+\]
+is separated, because it is the restriction of the affine morphism
+\(W\to S_0\).  Hence its section
+\[
+    s
+    \colon
+    S_0
+    \longrightarrow
+    W^\circ
+\]
+is a closed immersion.  The square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    S_0
+        \arrow[r, "\sigma"]
+        \arrow[d, "\id_{S_0}"']
+    &
+    P
+        \arrow[d]
+    \\
+    S_0
+        \arrow[r, "s"']
+    &
+    W^\circ
+\end{tikzcd}
+\]
+is Cartesian, since the zero section of
+\(\mathbb V_{S_0}(N|_{S_0})\) is a monomorphism.  Thus \(\sigma\) is
+closed.
+
+Consequently, \(\sigma\) is open and closed, and there is a
+decomposition
+\[
+    P
+    \simeq
+    S_0
+    \coprod
+    P',
+\]
+where the first summand is the image of \(\sigma\).
+
+The zero section of
+\[
+    \mathbb V_{S_0}(N|_{S_0})
+\]
+is a closed immersion, so
+\[
+    P
+    \hookrightarrow
+    W^\circ
+\]
+is a closed immersion.  Hence the composite
+\[
+    P'
+    \hookrightarrow
+    W^\circ
+\]
+is closed.  Put
+\[
+    W^{\circ\circ}
+    :=
+    W^\circ\setminus P'.
+\]
+Then \(W^{\circ\circ}\) is an open neighbourhood of \(s(S_0)\), the
+restriction
+\[
+    W^{\circ\circ}
+    \longrightarrow
+    \mathbb V_{S_0}
+    \bigl(
+        N|_{S_0}
+    \bigr)
+\]
+remains étale, and its zero fibre is precisely \(S_0\):
+\[
+    W^{\circ\circ}
+    \times_{
+        \mathbb V_{S_0}(N|_{S_0})
+    }
+    S_0
+    \simeq
+    S_0.
+\]
+
+Repeating this construction around every point of \(S\) gives the
+required Zariski open cover and the asserted Cartesian étale
+neighbourhoods.
+\end{proof}
+
+
+\begin{lemma}[Nisnevich extension of a partial section]
+\label{lem:nisnevich-extension-partial-section}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+be a closed immersion, let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation, and let
+\[
+    t
+    \colon
+    Z
+    \longrightarrow
+    X
+\]
+be an \(S\)-morphism.
+
+There exists a finite family of étale morphisms
+\[
+    q_a
+    \colon
+    Y_a
+    \longrightarrow
+    S,
+    \qquad
+    a\in A,
+\]
+and \(S\)-morphisms
+\[
+    r_a
+    \colon
+    Y_a
+    \longrightarrow
+    X
+\]
+such that:
+\begin{enumerate}[label=(\roman*)]
+    \item the family
+    \[
+        \{(Y_a)_Z\to Z\}_{a\in A}
+    \]
+    is a Nisnevich covering family;
+
+    \item for every \(a\), the restriction of \(r_a\) to
+    \((Y_a)_Z\) agrees with the composite
+    \[
+        (Y_a)_Z
+        \longrightarrow
+        Z
+        \xrightarrow{t}
+        X.
+    \]
+\end{enumerate}
+Consequently,
+\[
+    \{U\to S,\;Y_a\to S\}_{a\in A},
+    \qquad
+    U=S\setminus Z,
+\]
+is a spectral Nisnevich covering family of \(S\).
+\end{lemma}
+
+\begin{proof}
+Fix a point
+\[
+    z\in|Z|.
+\]
+After replacing \(S\) by an affine open neighbourhood of the image of
+\(z\), and replacing \(X\) by an affine open neighbourhood of \(t(z)\),
+we may suppose that \(S\) and \(X\) are affine and that
+\[
+    X
+    \longrightarrow
+    S
+\]
+is smooth affine.  Shrinking the chosen neighbourhood of \(S\)
+further, we may also suppose that the restricted partial section
+factors through this affine open of \(X\).
+
+Apply
+\Ref{lem:cartesian-tubular-neighbourhood}
+to the smooth morphism
+\[
+    X_Z
+    \longrightarrow
+    Z
+\]
+and its section \(t\).  After a further Zariski localization around
+\(z\), there are a finite locally free module \(N\) on \(Z\), an open
+neighbourhood
+\[
+    X_Z^\circ
+    \subseteq
+    X_Z
+\]
+of \(t(Z)\), and an étale morphism
+\[
+    f
+    \colon
+    X_Z^\circ
+    \longrightarrow
+    \mathbb V_Z(N)
+\]
+which is Cartesian over the zero section.
+
+After trivializing \(N\) Zariski-locally and shrinking once more, write
+\[
+    \mathbb V_Z(N)
+    \simeq
+    \mathbb A_Z^n.
+\]
+Replace \(X\) by an affine open neighbourhood whose closed base change
+is contained in \(X_Z^\circ\).  The morphism
+\[
+    f
+    \colon
+    X_Z
+    \longrightarrow
+    \mathbb A_Z^n
+\]
+is determined by finitely many points of the connective coordinate
+algebra of \(X_Z\).  Since
+\[
+    X_Z
+    \hookrightarrow
+    X
+\]
+is a closed immersion, the induced map on degree-zero homotopy groups
+of coordinate algebras is surjective.  Choose lifts of the
+corresponding components, together with paths identifying their
+restrictions with the original points.  They define an \(S\)-morphism
+\[
+    g
+    \colon
+    X
+    \longrightarrow
+    \mathbb A_S^n
+\]
+whose base change to \(Z\) is identified with \(f\).
+
+Define
+\[
+    Y_0
+    :=
+    X\times_{\mathbb A_S^n}S,
+\]
+where
+\[
+    S
+    \longrightarrow
+    \mathbb A_S^n
+\]
+is the zero section.  Base change to \(Z\) gives
+\[
+\begin{aligned}
+    (Y_0)_Z
+    &\simeq
+    X_Z\times_{\mathbb A_Z^n}Z
+    \\
+    &\simeq
+    Z.
+\end{aligned}
+\]
+The resulting equivalence is induced by the partial section \(t\).
+
+The morphism
+\[
+    Y_0
+    \longrightarrow
+    S
+\]
+is locally of finite presentation.  Indeed, locally it is obtained by
+base change from the morphism
+\[
+    X
+    \longrightarrow
+    \mathbb A_S^n,
+\]
+which is locally of finite presentation because both its source and
+target are of finite presentation over \(S\).
+
+Cotangent base change gives
+\[
+    L_{Y_0/S}|_Z
+    \simeq
+    L_{X_Z/\mathbb A_Z^n}|_Z
+    \simeq
+    0,
+\]
+since \(f\) is étale.
+
+Because
+\[
+    Y_0
+    \longrightarrow
+    S
+\]
+is locally of finite presentation, its relative cotangent complex
+\[
+    L_{Y_0/S}
+\]
+is perfect.  The support of a perfect quasi-coherent module is closed:
+affine-locally, compactness implies that vanishing after localization at
+a point already holds on a principal neighbourhood.  Consequently, the
+vanishing locus
+\[
+    E
+    :=
+    |Y_0|
+    \setminus
+    \operatorname{Supp}(L_{Y_0/S})
+\]
+is represented by an open spectral subscheme
+\[
+    E
+    \subseteq
+    Y_0.
+\]
+The preceding cotangent calculation shows that
+\[
+    (Y_0)_Z
+    \subseteq
+    E.
+\]
+
+On \(E\), the restricted morphism
+\[
+    E
+    \longrightarrow
+    S
+\]
+is locally of finite presentation and has vanishing relative cotangent
+complex.  It is therefore étale.
+
+Choose an affine open neighbourhood
+\[
+    Y
+    \subseteq
+    E
+\]
+of the point corresponding to \(z\) under
+\[
+    (Y_0)_Z
+    \simeq
+    Z.
+\]
+In particular, \(Y\hookrightarrow Y_0\) is a quasi-compact open
+immersion and hence is of finite presentation.  The composite
+\[
+    q
+    \colon
+    Y
+    \longrightarrow
+    Y_0
+    \longrightarrow
+    S
+\]
+is therefore étale and of finite presentation.
+
+Under the equivalence
+\[
+    (Y_0)_Z
+    \simeq
+    Z,
+\]
+the closed base change
+\[
+    Y_Z
+    :=
+    Y\times_SZ
+\]
+is an open neighbourhood of \(z\) in \(Z\).  In particular,
+\[
+    Y_Z
+    \longrightarrow
+    Z
+\]
+is a Nisnevich neighbourhood of \(z\).
+
+The projection
+\[
+    r
+    \colon
+    Y
+    \longrightarrow
+    Y_0
+    \longrightarrow
+    X
+\]
+restricts over \(Y_Z\) to the composite
+\[
+    Y_Z
+    \longrightarrow
+    Z
+    \xrightarrow{t}
+    X.
+\]
+
+Repeating the construction around every point of \(Z\) gives a
+Nisnevich covering family
+\[
+    \{(Y_a)_Z\to Z\}_{a\in A}.
+\]
+Since \(Z\) is quasi-compact, a finite subfamily suffices.
+
+Adjoining the open complement
+\[
+    U
+    \hookrightarrow
+    S
+\]
+gives a spectral Nisnevich covering family
+\[
+    \{U\to S,\;Y_a\to S\}_{a\in A},
+\]
+because the étale family is Nisnevich-surjective over the closed
+complement.
+
+See
+\cite{KhanBraveNewMotivicI}.
+\end{proof}
+
+
+\begin{theorem}[Motivic contractibility of partial-section spaces]
+\label{thm:partial-section-motivic-contractibility}
+Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation, and let
+\[
+    t
+    \colon
+    Z
+    \longrightarrow
+    X
+\]
+be an \(S\)-morphism.  Then
+\[
+    L_{\mathrm{mot},S}h_S(X,t)
+    \simeq
+    *_S.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply
+\Ref{lem:nisnevich-extension-partial-section}
+to obtain a finite Nisnevich covering family
+\[
+    \{U\to S,\;q_a:Y_a\to S\}_{a\in A}
+\]
+such that each \(q_a\) admits an \(S\)-morphism
+\[
+    r_a
+    \colon
+    Y_a
+    \longrightarrow
+    X
+\]
+whose restriction to
+\[
+    (Y_a)_Z
+    =
+    Y_a\times_SZ
+\]
+agrees with the pullback of \(t\).
+
+By
+\Ref{prop:nisnevich-local-conservativity},
+it is enough to prove contractibility after pullback to \(U\) and to
+each \(Y_a\).
+
+Over \(U\), the closed base change is empty.  By the definition of the
+trivialized-map presheaf,
+\[
+    h_U(X_U,t_U)
+    \simeq
+    *_U.
+\]
+
+Fix \(a\), and write
+\[
+    Y:=Y_a,
+    \qquad
+    r:=r_a.
+\]
+Smooth base change gives
+\[
+    q_a^*L_{\mathrm{mot},S}h_S(X,t)
+    \simeq
+    L_{\mathrm{mot},Y}h_Y(X_Y,t_Y),
+\]
+where
+\[
+    X_Y
+    :=
+    X\times_SY.
+\]
+
+The morphism
+\[
+    r
+    \colon
+    Y
+    \longrightarrow
+    X
+\]
+determines a section
+\[
+    \sigma
+    \colon
+    Y
+    \longrightarrow
+    X_Y,
+    \qquad
+    y
+    \longmapsto
+    \bigl(
+        r(y),y
+    \bigr),
+\]
+whose restriction to
+\[
+    Y_Z
+    :=
+    Y\times_SZ
+\]
+is \(t_Y\).
+
+The morphism
+\[
+    X_Y
+    \longrightarrow
+    Y
+\]
+is smooth and of finite presentation.  Apply
+\Ref{lem:cartesian-tubular-neighbourhood}
+to this morphism and the section \(\sigma\).  There is a Zariski cover
+\[
+    \{Y_\beta\to Y\}_\beta
+\]
+such that, after putting
+\[
+    X_\beta
+    :=
+    X_Y\times_YY_\beta,
+\]
+there are an open neighbourhood
+\[
+    X_\beta^\circ
+    \subseteq
+    X_\beta
+\]
+of \(\sigma(Y_\beta)\), a finite locally free module \(N_\beta\) on
+\(Y_\beta\), and an étale morphism
+\[
+    \varphi_\beta
+    \colon
+    X_\beta^\circ
+    \longrightarrow
+    \mathbb V_{Y_\beta}(N_\beta)
+\]
+such that
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Y_\beta
+        \arrow[r, "\sigma"]
+        \arrow[d, "\id_{Y_\beta}"']
+    &
+    X_\beta^\circ
+        \arrow[d, "\varphi_\beta"]
+    \\
+    Y_\beta
+        \arrow[r, "0"']
+    &
+    \mathbb V_{Y_\beta}(N_\beta)
+\end{tikzcd}
+\]
+is Cartesian.
+
+For each \(\beta\), smooth base change for trivialized-map presheaves
+gives
+\[
+    L_{\mathrm{mot},Y_\beta}
+    h_{Y_\beta}
+    \bigl(
+        X_\beta,
+        t_{Y_\beta}
+    \bigr)
+\]
+as the pullback of
+\[
+    L_{\mathrm{mot},Y}
+    h_Y(X_Y,t_Y).
+\]
+
+The open immersion
+\[
+    X_\beta^\circ
+    \hookrightarrow
+    X_\beta
+\]
+is Cartesian over the section \(\sigma\), and the étale morphism
+\[
+    \varphi_\beta
+    \colon
+    X_\beta^\circ
+    \longrightarrow
+    \mathbb V_{Y_\beta}(N_\beta)
+\]
+is Cartesian over the zero section.  Therefore
+\Ref{prop:etale-invariance-trivialized-maps}
+gives motivic equivalences
+\[
+\begin{aligned}
+    h_{Y_\beta}
+    \bigl(
+        X_\beta,
+        t_{Y_\beta}
+    \bigr)
+    &\simeq_{\mathrm{mot}}
+    h_{Y_\beta}
+    \bigl(
+        X_\beta^\circ,
+        \sigma|_{(Y_\beta)_Z}
+    \bigr)
+    \\
+    &\simeq_{\mathrm{mot}}
+    h_{Y_\beta}
+    \bigl(
+        \mathbb V_{Y_\beta}(N_\beta),
+        0_{(Y_\beta)_Z}
+    \bigr).
+\end{aligned}
+\]
+By
+\Ref{prop:vector-bundle-trivialized-maps-contractible},
+\[
+    L_{\mathrm{mot},Y_\beta}
+    h_{Y_\beta}
+    \bigl(
+        \mathbb V_{Y_\beta}(N_\beta),
+        0_{(Y_\beta)_Z}
+    \bigr)
+    \simeq
+    *_{Y_\beta}.
+\]
+Thus the pullback of
+\[
+    L_{\mathrm{mot},Y}h_Y(X_Y,t_Y)
+\]
+to every \(Y_\beta\) is terminal.
+
+The family
+\[
+    \{Y_\beta\to Y\}_\beta
+\]
+is a Nisnevich covering family.  By
+\Ref{prop:nisnevich-local-conservativity},
+\[
+    L_{\mathrm{mot},Y}h_Y(X_Y,t_Y)
+    \simeq
+    *_Y.
+\]
+
+The original Nisnevich covering family of \(S\), together with another
+application of
+\Ref{prop:nisnevich-local-conservativity},
+now gives
+\[
+    L_{\mathrm{mot},S}h_S(X,t)
+    \simeq
+    *_S.
+\]
+\end{proof}
+
+\subsection{Localization on standard smooth generators}
+
+\begin{lemma}[Presheaf projection and smooth--closed exchange]
+\label{lem:presheaf-projection-smooth-closed-exchange}
+Let
+\[
+    p
+    \colon
+    Y
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation.
+
+For presheaves
+\[
+    A
+    \in
+    \operatorname{PSh}(Y),
+    \qquad
+    G
+    \in
+    \operatorname{PSh}(S),
+\]
+there is a canonical presheaf projection equivalence
+\[
+    p^{\operatorname{PSh}}_\sharp
+    \bigl(
+        A\times p_{\operatorname{PSh}}^*G
+    \bigr)
+    \simeq
+    p^{\operatorname{PSh}}_\sharp A
+    \times
+    G.
+\]
+The corresponding relative form is the following.  If
+\[
+    G
+    \longrightarrow
+    H
+\]
+is a morphism in \(\operatorname{PSh}(S)\), and
+\[
+    A
+    \longrightarrow
+    p^*H
+\]
+is a morphism in \(\operatorname{PSh}(Y)\), then
+\[
+    p^{\operatorname{PSh}}_\sharp
+    \bigl(
+        A\times_{p^*H}p^*G
+    \bigr)
+    \simeq
+    p^{\operatorname{PSh}}_\sharp A
+    \times_H
+    G.
+\]
+
+For the Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Y_Z
+        \arrow[r, "q"]
+        \arrow[d, "k"']
+    &
+    Z
+        \arrow[d, "i"]
+    \\
+    Y
+        \arrow[r, "p"']
+    &
+    S,
+\end{tikzcd}
+\]
+there is also a canonical presheaf-level exchange equivalence
+\[
+    p_{\operatorname{PSh}}^*
+    i_{*,\operatorname{PSh}}
+    \simeq
+    k_{*,\operatorname{PSh}}
+    q_{\operatorname{PSh}}^*.
+\]
+\end{lemma}
+
+\begin{proof}
+The two sides of the first comparison preserve colimits separately in
+\(A\) and \(G\).  It is therefore enough to take
+\[
+    A=h_Y(T),
+    \qquad
+    G=h_S(V),
+\]
+with \(T\in\mathcal C_Y\) and \(V\in\mathcal C_S\).  Then
+\[
+\begin{aligned}
+    p^{\operatorname{PSh}}_\sharp
+    \bigl(
+        h_Y(T)\times p^*h_S(V)
+    \bigr)
+    &\simeq
+    p^{\operatorname{PSh}}_\sharp
+    h_Y(T\times_SV)
+    \\
+    &\simeq
+    h_S(T\times_SV),
+\end{aligned}
+\]
+while
+\[
+\begin{aligned}
+    p^{\operatorname{PSh}}_\sharp h_Y(T)
+    \times h_S(V)
+    &\simeq
+    h_S(T)\times h_S(V)
+    \\
+    &\simeq
+    h_S(T\times_SV).
+\end{aligned}
+\]
+The comparison is the identity under these identifications.  Applying
+the same argument in the presheaf slice categories gives the relative
+form.
+
+For the exchange equivalence, let
+\[
+    F
+    \in
+    \operatorname{PSh}(Z)
+\]
+and let \(T\in\mathcal C_Y\).  Since smooth presheaf inverse image is
+restriction along composition,
+\[
+    \bigl(
+        p^*i_*F
+    \bigr)(T)
+    \simeq
+    F(T\times_SZ).
+\]
+On the other hand,
+\[
+\begin{aligned}
+    \bigl(
+        k_*q^*F
+    \bigr)(T)
+    &\simeq
+    \bigl(
+        q^*F
+    \bigr)(T\times_YY_Z)
+    \\
+    &\simeq
+    F(T\times_YY_Z)
+    \\
+    &\simeq
+    F(T\times_SZ).
+\end{aligned}
+\]
+These objectwise equivalences are natural and give the asserted
+exchange equivalence.
+\end{proof}
+
+
+\begin{proposition}[Localization for a standard smooth motive]
+\label{prop:localization-standard-smooth-motive}
+Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be standard smooth.  Then the canonical morphism
+\[
+    L_{\mathrm{mot},S}h_S^Z(X)
+    \longrightarrow
+    i_*\mathrm M_Z(X_Z)
+\]
+is an equivalence.
+\end{proposition}
+
+\begin{proof}
+The morphism in the statement is the composite
+\[
+\begin{aligned}
+    L_{\mathrm{mot},S}h_S^Z(X)
+    &\xrightarrow{
+        L_{\mathrm{mot},S}(\rho_X)
+    }
+    L_{\mathrm{mot},S}
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+    \\
+    &\xrightarrow{\simeq}
+    i_*\mathrm M_Z(X_Z),
+\end{aligned}
+\]
+where the second morphism is the equivalence of
+\Ref{cor:closed-restriction-motivic-localization}.
+It is therefore enough to prove that
+\[
+    \rho_X
+    \colon
+    h_S^Z(X)
+    \longrightarrow
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+\]
+is a motivic equivalence.
+
+By the co-Yoneda presentation,
+\[
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+    \simeq
+    \operatorname*{colim}_{(Y,\tau)}
+    h_S(Y),
+\]
+where the indexing category consists of pairs
+\[
+    Y
+    \in
+    \mathcal C_S,
+    \qquad
+    \tau
+    \colon
+    Y_Z
+    \longrightarrow
+    X_Z.
+\]
+Colimits in a presheaf category are universal.  Hence
+\[
+    h_S^Z(X)
+    \simeq
+    \operatorname*{colim}_{(Y,\tau)}
+    \left(
+        h_S^Z(X)
+        \times_{
+            i_{*,\operatorname{PSh}}h_Z(X_Z)
+        }
+        h_S(Y)
+    \right).
+\]
+Under these two colimit presentations, \(\rho_X\) is the colimit of the
+projection morphisms
+\[
+    h_S^Z(X)
+    \times_{
+        i_{*,\operatorname{PSh}}h_Z(X_Z)
+    }
+    h_S(Y)
+    \longrightarrow
+    h_S(Y).
+\]
+It is therefore enough to prove that every such projection is a
+motivic equivalence.
+
+Let
+\[
+    p
+    \colon
+    Y
+    \longrightarrow
+    S
+\]
+be the structure morphism, and form
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Y_Z
+        \arrow[r, "q"]
+        \arrow[d, "k"']
+    &
+    Z
+        \arrow[d, "i"]
+    \\
+    Y
+        \arrow[r, "p"']
+    &
+    S.
+\end{tikzcd}
+\]
+The map \(\tau\) determines a partial section
+\[
+    t_\tau
+    \colon
+    Y_Z
+    \longrightarrow
+    X_Y
+    :=
+    X\times_SY,
+    \qquad
+    y
+    \longmapsto
+    \bigl(
+        \tau(y),y
+    \bigr).
+\]
+
+By
+\Ref{lem:presheaf-projection-smooth-closed-exchange},
+the projection under consideration is canonically identified with the
+image under
+\[
+    p^{\operatorname{PSh}}_\sharp
+\]
+of the structure morphism
+\[
+    h_Y(X_Y,t_\tau)
+    \longrightarrow
+    *_Y.
+\]
+Indeed, smooth base change identifies
+\[
+    p^*h_S^Z(X)
+    \simeq
+    h_Y^{Y_Z}(X_Y),
+\]
+while presheaf smooth--closed exchange identifies
+\[
+    p^*
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+    \simeq
+    k_{*,\operatorname{PSh}}
+    h_{Y_Z}(X_Z\times_ZY_Z).
+\]
+Under these identifications, the morphism supplied by \(\tau\) is the
+point defining
+\[
+    h_Y(X_Y,t_\tau).
+\]
+The relative presheaf projection formula therefore gives
+\[
+\begin{aligned}
+    &
+    h_S^Z(X)
+    \times_{
+        i_{*,\operatorname{PSh}}h_Z(X_Z)
+    }
+    h_S(Y)
+    \\
+    &\hspace{3em}\simeq
+    p^{\operatorname{PSh}}_\sharp
+    h_Y(X_Y,t_\tau).
+\end{aligned}
+\]
+
+The morphism
+\[
+    X_Y
+    \longrightarrow
+    Y
+\]
+is smooth and of finite presentation.  Therefore
+\Ref{thm:partial-section-motivic-contractibility}
+gives
+\[
+    L_{\mathrm{mot},Y}h_Y(X_Y,t_\tau)
+    \simeq
+    *_Y.
+\]
+Smooth direct image descends through motivic localization and preserves
+equivalences.  Hence
+\[
+    L_{\mathrm{mot},S}
+    p^{\operatorname{PSh}}_\sharp
+    h_Y(X_Y,t_\tau)
+    \longrightarrow
+    L_{\mathrm{mot},S}
+    p^{\operatorname{PSh}}_\sharp(*_Y)
+\]
+is an equivalence.  Since
+\[
+    p^{\operatorname{PSh}}_\sharp(*_Y)
+    \simeq
+    h_S(Y),
+\]
+the projection
+\[
+    h_S^Z(X)
+    \times_{
+        i_{*,\operatorname{PSh}}h_Z(X_Z)
+    }
+    h_S(Y)
+    \longrightarrow
+    h_S(Y)
+\]
+is a motivic equivalence.
+
+Motivic equivalences are stable under colimits.  Taking the colimit over
+all pairs \((Y,\tau)\) therefore shows that
+\[
+    \rho_X
+    \colon
+    h_S^Z(X)
+    \longrightarrow
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+\]
+is a motivic equivalence.  Consequently,
+\[
+    L_{\mathrm{mot},S}(\rho_X)
+\]
+is an equivalence.  Composing with
+\[
+    L_{\mathrm{mot},S}
+    i_{*,\operatorname{PSh}}h_Z(X_Z)
+    \simeq
+    i_*\mathrm M_Z(X_Z)
+\]
+from
+\Ref{cor:closed-restriction-motivic-localization}
+gives the asserted equivalence
+\[
+    L_{\mathrm{mot},S}h_S^Z(X)
+    \xrightarrow{\simeq}
+    i_*\mathrm M_Z(X_Z).
+\]
+\end{proof}
+
+\subsection{Proof of localization}
+
+\begin{proof}[Proof of \Ref{thm:spectral-morel-voevodsky-localization}]
+Let
+\[
+    \Lambda(F)
+    :=
+    F
+    \amalg_{j_\sharp j^*F}
+    j_\sharp(*_U).
+\]
+The localization transformation is the natural morphism
+\[
+    \lambda_F
+    \colon
+    \Lambda(F)
+    \longrightarrow
+    i_*i^*F.
+\]
+
+The functors \(j^*\), \(j_\sharp\), and \(i^*\) preserve all colimits.
+The functor \(i_*\) preserves weakly contractible colimits by
+\Ref{thm:closed-direct-image-weakly-contractible-colimits}.  Every
+sifted indexing category is weakly contractible.  Moreover, for a
+sifted indexing category \(K\),
+\[
+    \operatorname*{colim}_{k\in K}j_\sharp(*_U)
+    \simeq
+    j_\sharp(*_U).
+\]
+It follows by universality of colimits that both
+\[
+    \Lambda
+    \quad\text{and}\quad
+    i_*i^*
+\]
+preserve sifted colimits.
+
+By \Ref{prop:generation-by-standard-smooth-motives}, it is enough to
+prove that \(\lambda_F\) is an equivalence for
+\[
+    F
+    =
+    \mathrm M_S(X)
+\]
+with \(X\) standard smooth.  For such \(X\),
+\Ref{prop:localization-square-smooth-motive} identifies \(\lambda_F\)
+with
+\[
+    L_{\mathrm{mot},S}h_S^Z(X)
+    \longrightarrow
+    i_*\mathrm M_Z(X_Z),
+\]
+which is an equivalence by
+\Ref{prop:localization-standard-smooth-motive}.  Hence the localization
+square is cocartesian for every \(F\in\mathbf H(S)\).
+\end{proof}
+
+\section{Closed recollement and exchange}
+\label{sec:closed-recollement-exchange}
+
+\subsection{Pointed localization sequences}
+
+\begin{theorem}[Pointed localization cofibre sequence]
+\label{thm:pointed-localization-cofiber-sequence}
+For every
+\[
+    F
+    \in
+    \mathbf H_\bullet(S),
+\]
+there is a natural cofibre sequence
+\[
+    j_\sharp j^*F
+    \longrightarrow
+    F
+    \longrightarrow
+    i_*i^*F.
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(U(F)\) denote the underlying unpointed motivic space.  The pointed
+smooth direct image is defined by the pushout
+\[
+    j_{\sharp,\bullet}(j^*F)
+    =
+    j_\sharp U(j^*F)
+    \amalg_{j_\sharp(*_U)}
+    *_S.
+\]
+Paste this defining pushout with the unpointed localization square of
+\(U(F)\).  The result is a cocartesian square in
+\(\mathbf H_\bullet(S)\):
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    j_{\sharp,\bullet}j^*F
+        \arrow[r]
+        \arrow[d]
+    &
+    F
+        \arrow[d]
+    \\
+    0
+        \arrow[r]
+    &
+    i_*i^*F.
+\end{tikzcd}
+\]
+This is exactly the asserted cofibre sequence.  We suppress the
+subscript \(\bullet\) on \(j_\sharp\) in the statement.
+\end{proof}
+
+\subsection{Closed support and full faithfulness}
+
+\begin{lemma}[Closed-liftable Nisnevich basis]
+\label{lem:closed-liftable-nisnevich-basis}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+be a closed immersion.  Let
+\[
+    \mathcal B_i
+    \subseteq
+    \operatorname{Sm}^{\mathrm{fp}}_{/Z}
+\]
+be the full subcategory spanned by those \(Y\to Z\) for which there
+exists
+\[
+    \widetilde Y
+    \in
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+\]
+and an equivalence
+\[
+    \widetilde Y\times_SZ
+    \simeq
+    Y.
+\]
+
+Then \(\mathcal B_i\) is a basis for the spectral Nisnevich topology on
+\(\operatorname{Sm}^{\mathrm{fp}}_{/Z}\).  In particular, a morphism of
+spectral Nisnevich sheaves is an equivalence if and only if it is an
+equivalence when evaluated on every object of \(\mathcal B_i\).
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    Y
+    \longrightarrow
+    Z
+\]
+be smooth and of finite presentation.  By
+\Ref{prop:local-lifting-smooth-test-schemes},
+every point of \(Y\) has a Nisnevich neighbourhood
+\[
+    Y_\alpha
+    \longrightarrow
+    Y
+\]
+which belongs to \(\mathcal B_i\).  Since \(Y\) is quasi-compact, a
+finite subfamily covers \(Y\).
+
+Let
+\[
+    B_1
+    \longrightarrow
+    Y,
+    \qquad
+    B_2
+    \longrightarrow
+    Y
+\]
+be morphisms with \(B_1,B_2\in\mathcal B_i\).  Their fibre product
+\[
+    B_1\times_YB_2
+\]
+is smooth and of finite presentation over \(Z\).  Applying
+\Ref{prop:local-lifting-smooth-test-schemes} to this fibre product gives
+a finite Nisnevich covering by objects of \(\mathcal B_i\).  The same
+argument applies after arbitrary pullback of a covering family by
+objects of \(\mathcal B_i\).  Thus every object admits a covering by
+objects of \(\mathcal B_i\), and pullbacks of basis coverings admit
+refinements by basis coverings.  This proves the basis axioms.
+
+Let
+\[
+    v
+    \colon
+    \mathcal B_i
+    \hookrightarrow
+    \operatorname{Sm}^{\mathrm{fp}}_{/Z}
+\]
+be the inclusion.  By the comparison lemma for a basis, restriction
+induces an equivalence
+\[
+    v^*
+    \colon
+    \operatorname{Sh}_{\mathrm{Nis}}
+    \bigl(
+        \operatorname{Sm}^{\mathrm{fp}}_{/Z}
+    \bigr)
+    \xrightarrow{\simeq}
+    \operatorname{Sh}_{\mathrm{Nis}}(\mathcal B_i).
+\]
+Consequently, a morphism of spectral Nisnevich sheaves is an
+equivalence if and only if its restriction to \(\mathcal B_i\) is an
+equivalence, equivalently if and only if it is an equivalence when
+evaluated on every object of \(\mathcal B_i\).
+\end{proof}
+
+\begin{lemma}[Conservativity of closed direct image]
+\label{lem:closed-direct-image-conservative}
+The functor
+\[
+    i_*
+    \colon
+    \mathbf H(Z)
+    \longrightarrow
+    \mathbf H(S)
+\]
+is conservative.  The same is true on pointed motivic spaces.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    \varphi
+    \colon
+    G
+    \longrightarrow
+    H
+\]
+be a morphism in \(\mathbf H(Z)\) such that
+\[
+    i_*\varphi
+\]
+is an equivalence.
+
+Let
+\[
+    Y
+    \in
+    \mathcal B_i
+\]
+be an object of the closed-liftable Nisnevich basis of
+\Ref{lem:closed-liftable-nisnevich-basis}.  Choose
+\[
+    \widetilde Y
+    \in
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+\]
+and an equivalence
+\[
+    \widetilde Y\times_SZ
+    \simeq
+    Y.
+\]
+The evaluation formula for direct image gives
+\[
+\begin{aligned}
+    G(Y)
+    &\simeq
+    (i_*G)(\widetilde Y),
+    \\
+    H(Y)
+    &\simeq
+    (i_*H)(\widetilde Y).
+\end{aligned}
+\]
+Under these identifications,
+\[
+    \varphi(Y)
+\]
+is the evaluation of \(i_*\varphi\) on \(\widetilde Y\).  It is
+therefore an equivalence.
+
+Thus \(\varphi\) is an equivalence on every object of the basis
+\(\mathcal B_i\).  By
+\Ref{lem:closed-liftable-nisnevich-basis},
+it is an equivalence of Nisnevich sheaves and hence an equivalence in
+\(\mathbf H(Z)\).
+
+The pointed forgetful functor reflects equivalences, so the pointed
+assertion follows.
+\end{proof}
+
+\begin{theorem}[Closed support theorem]
+\label{thm:closed-support-kashiwara}
+The closed direct image
+\[
+    i_*
+    \colon
+    \mathbf H(Z)
+    \longrightarrow
+    \mathbf H(S)
+\]
+is fully faithful.  Its essential image is
+\[
+    \mathbf H_Z(S).
+\]
+Likewise,
+\[
+    i_*
+    \colon
+    \mathbf H_\bullet(Z)
+    \longrightarrow
+    \mathbf H_\bullet(S)
+\]
+is fully faithful with essential image
+\[
+    \mathbf H_{\bullet,Z}(S).
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(G\in\mathbf H(Z)\).  Apply localization to \(i_*G\).  By
+\Ref{prop:open-closed-orthogonality},
+\[
+    j^*i_*G
+    \simeq
+    *_U.
+\]
+The two terms in the left column of the localization square are
+therefore equivalent, and localization gives an equivalence
+\[
+    \eta_{i_*G}
+    \colon
+    i_*G
+    \xrightarrow{\simeq}
+    i_*i^*i_*G.
+\]
+Let
+\[
+    \varepsilon_G
+    \colon
+    i^*i_*G
+    \longrightarrow
+    G
+\]
+be the counit of \(i^*\dashv i_*\).  The triangle identity identifies
+\[
+    i_*(\varepsilon_G)
+\]
+with the inverse of \(\eta_{i_*G}\).  Hence
+\(i_*(\varepsilon_G)\) is an equivalence.  By
+\Ref{lem:closed-direct-image-conservative}, \(\varepsilon_G\) is an
+equivalence.  Thus \(i_*\) is fully faithful.
+
+Orthogonality shows that the essential image of \(i_*\) is contained in
+\(\mathbf H_Z(S)\).  Conversely, if \(F\in\mathbf H_Z(S)\), then
+\[
+    j^*F
+    \simeq
+    *_U.
+\]
+The localization square therefore gives
+\[
+    F
+    \xrightarrow{\simeq}
+    i_*i^*F,
+\]
+so \(F\) belongs to the essential image.  This proves the unpointed
+statement.  The pointed proof is identical, with terminal objects
+replaced by zero objects.
+\end{proof}
+
+\begin{theorem}[Pointed localization fibre sequence]
+\label{thm:pointed-localization-fiber-sequence}
+For every
+\[
+    F
+    \in
+    \mathbf H_\bullet(S),
+\]
+there is a natural fibre sequence
+\[
+    i_*i^!F
+    \longrightarrow
+    F
+    \longrightarrow
+    j_*j^*F.
+\]
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    K
+    :=
+    \operatorname{fib}
+    \bigl(
+        F
+        \longrightarrow
+        j_*j^*F
+    \bigr).
+\]
+Since
+\[
+    j_\sharp
+    \dashv
+    j^*,
+\]
+the functor \(j^*\) is a right adjoint and therefore preserves limits,
+in particular fibres.  Applying \(j^*\), and using
+\[
+    j^*j_*
+    \simeq
+    \operatorname{id},
+\]
+gives
+\[
+\begin{aligned}
+    j^*K
+    &\simeq
+    \operatorname{fib}
+    \bigl(
+        j^*F
+        \longrightarrow
+        j^*j_*j^*F
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{fib}
+    \bigl(
+        j^*F
+        \xrightarrow{\simeq}
+        j^*F
+    \bigr)
+    \\
+    &\simeq
+    0.
+\end{aligned}
+\]
+Thus \(K\) is supported on \(Z\).  By
+\Ref{thm:closed-support-kashiwara},
+there is a unique object
+\[
+    G
+    \in
+    \mathbf H_\bullet(Z)
+\]
+such that
+\[
+    K
+    \simeq
+    i_*G.
+\]
+
+For every
+\[
+    A
+    \in
+    \mathbf H_\bullet(Z),
+\]
+open--closed orthogonality gives
+\[
+\begin{aligned}
+    \operatorname{Map}_S
+    \bigl(
+        i_*A,
+        j_*j^*F
+    \bigr)
+    &\simeq
+    \operatorname{Map}_U
+    \bigl(
+        j^*i_*A,
+        j^*F
+    \bigr)
+    \\
+    &\simeq
+    *.
+\end{aligned}
+\]
+Mapping \(i_*A\) into the defining fibre sequence for \(K\) therefore
+gives
+\[
+\begin{aligned}
+    \operatorname{Map}_Z(A,G)
+    &\simeq
+    \operatorname{Map}_S(i_*A,K)
+    \\
+    &\simeq
+    \operatorname{Map}_S(i_*A,F)
+    \\
+    &\simeq
+    \operatorname{Map}_Z(A,i^!F).
+\end{aligned}
+\]
+Yoneda gives
+\[
+    G
+    \simeq
+    i^!F.
+\]
+Hence
+\[
+    K
+    \simeq
+    i_*i^!F,
+\]
+which is the asserted fibre sequence.
+\end{proof}
+
+\begin{corollary}[Concrete formula for closed exceptional pullback]
+\label{cor:closed-exceptional-pullback-formula}
+For
+\[
+    F
+    \in
+    \mathbf H_\bullet(S),
+\]
+there is a canonical equivalence
+\[
+    i^!F
+    \simeq
+    i^*
+    \operatorname{fib}
+    \bigl(
+        F
+        \longrightarrow
+        j_*j^*F
+    \bigr).
+\]
+Equivalently,
+\[
+    i_*i^!F
+    \simeq
+    \operatorname{fib}
+    \bigl(
+        F
+        \longrightarrow
+        j_*j^*F
+    \bigr).
+\]
+\end{corollary}
+
+\begin{proof}
+This is the identification of the fibre in
+\Ref{thm:pointed-localization-fiber-sequence}, together with the full
+faithfulness of \(i_*\).
+\end{proof}
+
+\subsection{The recollement package}
+
+\begin{theorem}[Closed--open recollement]
+\label{thm:closed-open-recollement}
+There is a recollement diagram
+\[
+    \mathbf H_\bullet(Z)
+    \;
+    \substack{
+        \xrightarrow{\ i_*\ }
+        \\
+        \xleftarrow[\ i^*\ ]{}
+        \\
+        \xleftarrow[\ i^!\ ]{}
+    }
+    \;
+    \mathbf H_\bullet(S)
+    \;
+    \substack{
+        \xrightarrow{\ j^*\ }
+        \\
+        \xleftarrow[\ j_\sharp\ ]{}
+        \\
+        \xleftarrow[\ j_*\ ]{}
+    }
+    \;
+    \mathbf H_\bullet(U).
+\]
+More precisely:
+\begin{enumerate}[label=(\roman*)]
+    \item \(i_*,j_\sharp,j_*\) are fully faithful;
+
+    \item
+    \[
+        j^*i_*
+        \simeq
+        0,
+        \qquad
+        i^*j_\sharp
+        \simeq
+        0;
+    \]
+
+    \item the pair
+    \[
+        (i^*,j^*)
+    \]
+    is jointly conservative;
+
+    \item every object is reconstructed by the cofibre and fibre
+    sequences of
+    \Ref{thm:pointed-localization-cofiber-sequence}
+    and
+    \Ref{thm:pointed-localization-fiber-sequence}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Full faithfulness of \(i_*\) is
+\Ref{thm:closed-support-kashiwara}; full faithfulness of \(j_\sharp\)
+and \(j_*\) is \Ref{prop:open-immersion-full-faithfulness}.
+Orthogonality is \Ref{prop:open-closed-orthogonality}.
+
+To prove joint conservativity on morphisms, let
+\[
+    \varphi
+    \colon
+    F
+    \longrightarrow
+    G
+\]
+be a morphism such that \(i^*\varphi\) and \(j^*\varphi\) are
+equivalences.  Naturality gives a morphism from the pointed
+localization pushout square of \(F\) to that of \(G\).  The induced maps
+on the upper-left and lower-right vertices are
+\[
+    j_\sharp j^*\varphi
+    \quad\text{and}\quad
+    i_*i^*\varphi,
+\]
+and are equivalences.  The lower-left vertex is the zero object in both
+squares.  Thus three corresponding vertices of the two cocartesian
+squares are equivalent.  Universality of pushouts implies that the
+remaining map \(\varphi\) is an equivalence.  Thus \((i^*,j^*)\) is
+jointly conservative.  Reconstruction is exactly the pair of
+localization sequences.
+\end{proof}
+
+\subsection{Closed base change}
+
+\begin{theorem}[Closed base change]
+\label{thm:unstable-closed-base-change}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Y
+        \arrow[r, "k"]
+        \arrow[d, "g"']
+    &
+    X
+        \arrow[d, "f"]
+    \\
+    Z
+        \arrow[r, "i"']
+    &
+    S
+\end{tikzcd}
+\]
+be a Cartesian square of quasi-compact quasi-separated spectral schemes,
+where \(i\) is a closed immersion with quasi-compact open complement.
+Then \(k\) is a closed immersion with quasi-compact open complement.
+
+The canonical exchange transformation
+\[
+    \operatorname{Ex}^{*}_{*}
+    \colon
+    f^*i_*
+    \longrightarrow
+    k_*g^*
+\]
+is an equivalence on unpointed and pointed motivic spaces.
+\end{theorem}
+
+\begin{proof}
+The exchange transformation is defined by the composite
+\[
+\begin{aligned}
+    f^*i_*
+    &\xrightarrow{\eta_k}
+    k_*k^*f^*i_*
+    \\
+    &\xrightarrow{\simeq}
+    k_*g^*i^*i_*
+    \\
+    &\xrightarrow{
+        k_*g^*(\varepsilon_i)
+    }
+    k_*g^*,
+\end{aligned}
+\]
+where
+\[
+    \eta_k
+    \colon
+    \operatorname{id}
+    \longrightarrow
+    k_*k^*
+\]
+is the unit of \(k^*\dashv k_*\), and
+\[
+    \varepsilon_i
+    \colon
+    i^*i_*
+    \longrightarrow
+    \operatorname{id}
+\]
+is the counit of \(i^*\dashv i_*\).
+
+Let
+\[
+    j
+    \colon
+    U
+    \hookrightarrow
+    S
+\]
+be the open complement of \(i\), and let
+\[
+    j'
+    \colon
+    V
+    :=
+    X\times_SU
+    \hookrightarrow
+    X
+\]
+be its base change.  Then \(j'\) is the open complement of \(k\).
+
+For \(F\in\mathbf H(Z)\), both
+\[
+    f^*i_*F
+    \quad\text{and}\quad
+    k_*g^*F
+\]
+are supported on \(Y\).  Indeed,
+\[
+\begin{aligned}
+    (j')^*f^*i_*F
+    &\simeq
+    (f|_V)^*j^*i_*F
+    \\
+    &\simeq
+    *_V,
+\end{aligned}
+\]
+while
+\[
+    (j')^*k_*g^*F
+    \simeq
+    *_V
+\]
+by open--closed orthogonality.
+
+Apply \(k^*\).  Using the Cartesian identity
+\[
+    k^*f^*
+    \simeq
+    g^*i^*
+\]
+and full faithfulness of \(i_*\) and \(k_*\), both sides identify with
+\(g^*F\):
+\[
+\begin{aligned}
+    k^*f^*i_*F
+    &\simeq
+    g^*i^*i_*F
+    \\
+    &\simeq
+    g^*F,
+    \\
+    k^*k_*g^*F
+    &\simeq
+    g^*F.
+\end{aligned}
+\]
+Under these identifications, the pullback of
+\(\operatorname{Ex}^{*}_{*}\) is the identity of \(g^*F\), by the
+triangle identities for the two adjunctions.
+
+The support theorem identifies
+\[
+    k_*
+    \colon
+    \mathbf H(Y)
+    \xrightarrow{\simeq}
+    \mathbf H_Y(X).
+\]
+Therefore a morphism between objects supported on \(Y\) is an
+equivalence if and only if its pullback by \(k^*\) is an equivalence.
+It follows that
+\[
+    f^*i_*F
+    \xrightarrow{\simeq}
+    k_*g^*F.
+\]
+
+The pointed proof is identical.
+\end{proof}
+
+\begin{corollary}[Exceptional closed base change]
+\label{cor:exceptional-closed-base-change}
+In the Cartesian square of
+\Ref{thm:unstable-closed-base-change},
+there is a canonical equivalence
+\[
+    i^!f_*
+    \simeq
+    g_*k^!
+\]
+on pointed motivic spaces.
+\end{corollary}
+
+\begin{proof}
+Take right adjoints of the closed base-change equivalence
+\[
+    f^*i_*
+    \simeq
+    k_*g^*.
+\]
+\end{proof}
+
+\subsection{Closed projection formula}
+
+\begin{theorem}[Closed projection formula]
+\label{thm:unstable-closed-projection-formula}
+For
+\[
+    F
+    \in
+    \mathbf H_\bullet(Z),
+    \qquad
+    G
+    \in
+    \mathbf H_\bullet(S),
+\]
+the canonical projection transformation is an equivalence:
+\[
+    i_*F
+    \wedge_S
+    G
+    \xrightarrow{\simeq}
+    i_*
+    \bigl(
+        F
+        \wedge_Z
+        i^*G
+    \bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Both sides are supported on \(Z\).  The left side is supported because
+\[
+    j^*(i_*F\wedge_SG)
+    \simeq
+    j^*i_*F\wedge_Uj^*G
+    \simeq
+    0.
+\]
+The right side is supported because it lies in the image of \(i_*\).
+
+Apply \(i^*\).  Strong symmetric monoidality of inverse image and
+\(i^*i_*\simeq\id\) identify the left side with
+\[
+    F\wedge_Zi^*G,
+\]
+and the right side with the same object.  Under these identifications,
+the projection transformation is the identity.  The support theorem
+then implies that it is an equivalence.
+\end{proof}
+
+\begin{corollary}[Closed internal-Hom exchange]
+\label{cor:closed-internal-hom-exchange}
+For
+\[
+    G,H
+    \in
+    \mathbf H_\bullet(S),
+\]
+there is a canonical equivalence
+\[
+    i^!
+    \underline{\operatorname{Map}}_{\mathbf H_\bullet(S)}(G,H)
+    \simeq
+    \underline{\operatorname{Map}}_{\mathbf H_\bullet(Z)}
+    \bigl(
+        i^*G,
+        i^!H
+    \bigr).
+\]
+\end{corollary}
+
+\begin{proof}
+Let
+\[
+    F
+    \in
+    \mathbf H_\bullet(Z).
+\]
+Using successively the adjunction \(i_*\dashv i^!\), the
+smash--internal-Hom adjunction, the closed projection formula, and
+again \(i_*\dashv i^!\), one obtains
+\[
+\begin{aligned}
+    &
+    \operatorname{Map}_Z
+    \left(
+        F,
+        i^!
+        \underline{\operatorname{Map}}_{\mathbf H_\bullet(S)}(G,H)
+    \right)
+    \\
+    &\simeq
+    \operatorname{Map}_S
+    \left(
+        i_*F,
+        \underline{\operatorname{Map}}_{\mathbf H_\bullet(S)}(G,H)
+    \right)
+    \\
+    &\simeq
+    \operatorname{Map}_S
+    \bigl(
+        i_*F\wedge_SG,
+        H
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_S
+    \left(
+        i_*
+        \bigl(
+            F\wedge_Zi^*G
+        \bigr),
+        H
+    \right)
+    \\
+    &\simeq
+    \operatorname{Map}_Z
+    \bigl(
+        F\wedge_Zi^*G,
+        i^!H
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_Z
+    \left(
+        F,
+        \underline{\operatorname{Map}}_{\mathbf H_\bullet(Z)}
+        \bigl(
+            i^*G,
+            i^!H
+        \bigr)
+    \right).
+\end{aligned}
+\]
+Yoneda proves the asserted equivalence.
+\end{proof}
+
+\subsection{Smooth--closed exchange}
+
+
+\begin{theorem}[Pointed smooth--closed base change]
+\label{thm:unstable-smooth-closed-base-change}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Y
+        \arrow[r, "k"]
+        \arrow[d, "q"']
+    &
+    X
+        \arrow[d, "p"]
+    \\
+    Z
+        \arrow[r, "i"']
+    &
+    S
+\end{tikzcd}
+\]
+be Cartesian, where \(p\) is smooth and of finite presentation and
+\(i\) is a closed immersion with quasi-compact open complement.
+
+The canonical exchange transformation
+\[
+    \operatorname{Ex}^{\sharp}_{*}
+    \colon
+    p_{\sharp,\bullet}k_*
+    \longrightarrow
+    i_*q_{\sharp,\bullet}
+\]
+is an equivalence on pointed motivic spaces.
+\end{theorem}
+
+\begin{proof}
+The exchange transformation is defined by the composite
+\[
+\begin{aligned}
+    p_{\sharp,\bullet}k_*
+    &\xrightarrow{\eta_i}
+    i_*i^*p_{\sharp,\bullet}k_*
+    \\
+    &\xrightarrow{\simeq}
+    i_*q_{\sharp,\bullet}k^*k_*
+    \\
+    &\xrightarrow{
+        i_*q_{\sharp,\bullet}(\varepsilon_k)
+    }
+    i_*q_{\sharp,\bullet}.
+\end{aligned}
+\]
+Here the middle equivalence is pointed smooth base change
+\[
+    i^*p_{\sharp,\bullet}
+    \simeq
+    q_{\sharp,\bullet}k^*,
+\]
+and
+\[
+    \varepsilon_k
+    \colon
+    k^*k_*
+    \longrightarrow
+    \operatorname{id}
+\]
+is the counit of \(k^*\dashv k_*\).
+
+Let
+\[
+    F
+    \in
+    \mathbf H_\bullet(Y).
+\]
+Both
+\[
+    p_{\sharp,\bullet}k_*F
+    \quad\text{and}\quad
+    i_*q_{\sharp,\bullet}F
+\]
+are supported on \(Z\).  The second assertion is immediate.
+
+For the first, let
+\[
+    j
+    \colon
+    U
+    \hookrightarrow
+    S
+\]
+be the open complement of \(i\), and let
+\[
+    j'
+    \colon
+    X_U
+    :=
+    X\times_SU
+    \hookrightarrow
+    X
+\]
+be its base change.  Write
+\[
+    p_U
+    \colon
+    X_U
+    \longrightarrow
+    U
+\]
+for the base change of \(p\).  Pointed smooth base change gives
+\[
+\begin{aligned}
+    j^*p_{\sharp,\bullet}k_*F
+    &\simeq
+    (p_U)_{\sharp,\bullet}(j')^*k_*F
+    \\
+    &\simeq
+    (p_U)_{\sharp,\bullet}(0_{X_U})
+    \\
+    &\simeq
+    0_U,
+\end{aligned}
+\]
+where the second equivalence is open--closed orthogonality and the last
+uses preservation of the zero object by the pointed left adjoint
+\((p_U)_{\sharp,\bullet}\).  Thus
+\[
+    p_{\sharp,\bullet}k_*F
+\]
+is supported on \(Z\).
+
+Apply \(i^*\).  Pointed smooth base change and full faithfulness of
+\(k_*\) give
+\[
+\begin{aligned}
+    i^*p_{\sharp,\bullet}k_*F
+    &\simeq
+    q_{\sharp,\bullet}k^*k_*F
+    \\
+    &\simeq
+    q_{\sharp,\bullet}F.
+\end{aligned}
+\]
+Likewise,
+\[
+    i^*i_*q_{\sharp,\bullet}F
+    \simeq
+    q_{\sharp,\bullet}F.
+\]
+Under these identifications, the pullback of
+\(\operatorname{Ex}^{\sharp}_{*}\) is the identity of
+\(q_{\sharp,\bullet}F\), by the triangle identity for
+\(k^*\dashv k_*\).
+
+Both the source and target of the exchange transformation are supported
+on \(Z\), and the support theorem gives an equivalence
+\[
+    i_*
+    \colon
+    \mathbf H_\bullet(Z)
+    \xrightarrow{\simeq}
+    \mathbf H_{\bullet,Z}(S).
+\]
+A morphism between supported objects is therefore an equivalence if and
+only if its pullback by \(i^*\) is an equivalence.  Consequently,
+\[
+    p_{\sharp,\bullet}k_*F
+    \xrightarrow{\simeq}
+    i_*q_{\sharp,\bullet}F.
+\]
+\end{proof}
+
+\begin{corollary}[Exceptional smooth--closed exchange]
+\label{cor:exceptional-smooth-closed-exchange}
+In the Cartesian square of
+\Ref{thm:unstable-smooth-closed-base-change},
+there is a canonical equivalence
+\[
+    q^*i^!
+    \simeq
+    k^!p^*
+\]
+on pointed motivic spaces.
+\end{corollary}
+
+\begin{proof}
+Take right adjoints of
+\[
+    p_\sharp k_*
+    \simeq
+    i_*q_\sharp.
+\]
+\end{proof}
+
+\section{Derived nilpotent invariance and classical comparison}
+\label{sec:derived-nilpotent-invariance-classical-comparison}
+
+\subsection{Closed immersions with empty complement}
+
+\begin{theorem}[Topological invariance for closed immersions]
+\label{thm:topological-invariance-closed-immersion}
+Let
+\[
+    i
+    \colon
+    S_0
+    \hookrightarrow
+    S
+\]
+be a closed immersion of quasi-compact quasi-separated spectral schemes
+which induces a homeomorphism
+\[
+    |S_0|
+    \xrightarrow{\simeq}
+    |S|.
+\]
+Then inverse and direct image are mutually inverse equivalences
+\[
+    i^*
+    \colon
+    \mathbf H(S)
+    \xrightarrow{\simeq}
+    \mathbf H(S_0),
+\]
+and
+\[
+    i_*
+    \colon
+    \mathbf H(S_0)
+    \xrightarrow{\simeq}
+    \mathbf H(S).
+\]
+The same is true for pointed motivic spaces.
+\end{theorem}
+
+\begin{proof}
+The open complement of \(S_0\) in \(S\) is empty.  The localization
+square therefore gives
+\[
+    F
+    \xrightarrow{\simeq}
+    i_*i^*F
+\]
+for every \(F\in\mathbf H(S)\).  Full faithfulness of \(i_*\) gives
+\[
+    i^*i_*
+    \simeq
+    \operatorname{id}.
+\]
+Thus \(i^*\) and \(i_*\) are mutually inverse equivalences.  The
+pointed assertion follows from pointed localization.
+\end{proof}
+
+\begin{corollary}[Invariance under equal reduced closed structure]
+\label{cor:invariance-equal-reduced-structure}
+Let
+\[
+    i
+    \colon
+    S_0
+    \hookrightarrow
+    S
+\]
+be a closed immersion inducing an equivalence on reduced classical
+schemes:
+\[
+    (S_0)_{\mathrm{cl,red}}
+    \xrightarrow{\simeq}
+    S_{\mathrm{cl,red}}.
+\]
+Then
+\[
+    i^*
+    \colon
+    \mathbf H(S)
+    \xrightarrow{\simeq}
+    \mathbf H(S_0)
+\]
+and its pointed analogue are equivalences.
+\end{corollary}
+
+\begin{proof}
+The two spectral schemes have the same underlying topological space.
+Apply \Ref{thm:topological-invariance-closed-immersion}.
+\end{proof}
+
+\subsection{Derived nilpotent invariance}
+
+\begin{theorem}[Derived nilpotent invariance]
+\label{thm:derived-nilpotent-invariance}
+For every quasi-compact quasi-separated spectral scheme \(S\), the
+canonical closed immersion
+\[
+    \iota_S
+    \colon
+    S_{\mathrm{cl}}
+    \longrightarrow
+    S
+\]
+induces equivalences
+\[
+    \iota_S^*
+    \colon
+    \mathbf H(S)
+    \xrightarrow{\simeq}
+    \mathbf H(S_{\mathrm{cl}})
+\]
+and
+\[
+    \iota_S^*
+    \colon
+    \mathbf H_\bullet(S)
+    \xrightarrow{\simeq}
+    \mathbf H_\bullet(S_{\mathrm{cl}}).
+\]
+These equivalences are natural in \(S\).
+\end{theorem}
+
+\begin{proof}
+The canonical map
+\[
+    S_{\mathrm{cl}}
+    \longrightarrow
+    S
+\]
+is a closed immersion and induces the identity on underlying
+topological spaces.  Apply
+\Ref{thm:topological-invariance-closed-immersion}.  Naturality follows
+from functoriality of classical truncation and coherent base
+functoriality of motivic inverse image.
+\end{proof}
+
+\begin{remark}[Meaning of derived nilpotent invariance]
+\label{rem:meaning-derived-nilpotent-invariance}
+The category
+\[
+    \mathbf H(S_{\mathrm{cl}})
+\]
+in \Ref{thm:derived-nilpotent-invariance} is still formed from
+differentially smooth spectral schemes over the discrete spectral base
+\(S_{\mathrm{cl}}\), using the brave new affine line.  Derived
+nilpotent invariance alone does not identify it with the ordinary
+Morel--Voevodsky category.  That comparison is the content of the next
+subsection.
+\end{remark}
+
+\subsection{Comparison with ordinary motivic spaces}
+
+\begin{definition}[Ordinary motivic spaces]
+\label{def:ordinary-motivic-spaces}
+Let \(S_0\) be an ordinary quasi-compact quasi-separated scheme.  Write
+\[
+    \mathbf H_{\mathrm{cl}}(S_0)
+\]
+for the ordinary unstable motivic \(\infty\)-category obtained from
+smooth schemes of finite presentation over \(S_0\) by imposing ordinary
+Nisnevich descent and ordinary affine-line invariance.  Its pointed
+counterpart is denoted
+\[
+    \mathbf H_{\mathrm{cl},\bullet}(S_0).
+\]
+\end{definition}
+
+\begin{construction}[Classical comparison adjunction]
+\label{con:classical-motivic-comparison}
+For a quasi-compact quasi-separated spectral scheme \(S\), classical
+truncation of smooth test schemes defines a functor
+\[
+    w_S
+    \colon
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \longrightarrow
+    \operatorname{Sm}^{\mathrm{fp},\mathrm{cl}}_{/S_{\mathrm{cl}}},
+    \qquad
+    X
+    \longmapsto
+    X_{\mathrm{cl}}.
+\]
+The local standard-form theorem implies that
+\[
+    X_{\mathrm{cl}}
+    \longrightarrow
+    S_{\mathrm{cl}}
+\]
+is ordinarily smooth and of finite presentation.
+
+Write
+\[
+    \operatorname{PSh}_{\mathrm{cl}}(S_{\mathrm{cl}})
+    :=
+    \operatorname{Fun}
+    \left(
+        \bigl(
+            \operatorname{Sm}^{\mathrm{fp},\mathrm{cl}}_{/S_{\mathrm{cl}}}
+        \bigr)^{\mathrm{op}},
+        \mathcal S
+    \right).
+\]
+Left Kan extension along \(w_S^{\mathrm{op}}\) gives a
+colimit-preserving functor
+\[
+    \widetilde\Theta_S
+    :=
+    \operatorname{Lan}_{w_S^{\mathrm{op}}}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \operatorname{PSh}_{\mathrm{cl}}(S_{\mathrm{cl}}).
+\]
+By the universal property of presheaf categories, it sends
+representables to representables:
+\[
+    \widetilde\Theta_Sh_S(X)
+    \simeq
+    h^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        X_{\mathrm{cl}}
+    \bigr).
+\]
+
+We verify that the composite
+\[
+    L^{\mathrm{cl}}_{\mathrm{mot},S_{\mathrm{cl}}}
+    \widetilde\Theta_S
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+\]
+inverts every morphism in
+\[
+    W_{\mathrm{mot},S}
+    =
+    E_{\mathrm{Nis},S}
+    \cup
+    W_{\mathbb A^1,S}.
+\]
+
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d]
+    \\
+    U
+        \arrow[r]
+    &
+    X
+\end{tikzcd}
+\]
+be a spectral Nisnevich distinguished square.  Classical truncation
+preserves fibre products, open immersions, étale morphisms, and the
+equivalence over the closed complement.  Hence
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W_{\mathrm{cl}}
+        \arrow[r]
+        \arrow[d]
+    &
+    V_{\mathrm{cl}}
+        \arrow[d]
+    \\
+    U_{\mathrm{cl}}
+        \arrow[r]
+    &
+    X_{\mathrm{cl}}
+\end{tikzcd}
+\]
+is an ordinary Nisnevich distinguished square.
+
+It follows that \(\widetilde\Theta_S\) carries the corresponding
+spectral excision morphism
+\[
+    h_S(U)
+    \amalg_{h_S(W)}
+    h_S(V)
+    \longrightarrow
+    h_S(X)
+\]
+to the ordinary excision morphism
+\[
+    h^{\mathrm{cl}}(U_{\mathrm{cl}})
+    \amalg_{h^{\mathrm{cl}}(W_{\mathrm{cl}})}
+    h^{\mathrm{cl}}(V_{\mathrm{cl}})
+    \longrightarrow
+    h^{\mathrm{cl}}(X_{\mathrm{cl}}).
+\]
+It also carries
+\[
+    \varnothing_{\operatorname{PSh}(S)}
+    \longrightarrow
+    h_S(\varnothing)
+\]
+to its ordinary analogue.  Therefore
+\[
+    L^{\mathrm{cl}}_{\mathrm{mot},S_{\mathrm{cl}}}
+    \widetilde\Theta_S
+\]
+inverts every morphism in \(E_{\mathrm{Nis},S}\).
+
+For every
+\[
+    X
+    \in
+    \operatorname{Sm}^{\mathrm{fp}}_{/S},
+\]
+classical truncation is compatible with the brave new affine line:
+\[
+\begin{aligned}
+    \bigl(
+        X\times_S\mathbb A^1_S
+    \bigr)_{\mathrm{cl}}
+    &\simeq
+    X_{\mathrm{cl}}
+    \times_{S_{\mathrm{cl}}}
+    \bigl(
+        \mathbb A^1_S
+    \bigr)_{\mathrm{cl}}
+    \\
+    &\simeq
+    X_{\mathrm{cl}}
+    \times_{S_{\mathrm{cl}}}
+    \mathbb A^1_{S_{\mathrm{cl}}}.
+\end{aligned}
+\]
+Consequently, \(\widetilde\Theta_S\) carries the brave-new
+affine-line projection
+\[
+    h_S
+    \bigl(
+        X\times_S\mathbb A^1_S
+    \bigr)
+    \longrightarrow
+    h_S(X)
+\]
+to the ordinary affine-line projection
+\[
+    h^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        X_{\mathrm{cl}}
+        \times_{S_{\mathrm{cl}}}
+        \mathbb A^1_{S_{\mathrm{cl}}}
+    \bigr)
+    \longrightarrow
+    h^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        X_{\mathrm{cl}}
+    \bigr).
+\]
+Thus
+\[
+    L^{\mathrm{cl}}_{\mathrm{mot},S_{\mathrm{cl}}}
+    \widetilde\Theta_S
+\]
+also inverts every morphism in \(W_{\mathbb A^1,S}\).
+
+By the universal property of
+\[
+    L_{\mathrm{mot},S}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \mathbf H(S),
+\]
+there is therefore a unique colimit-preserving functor
+\[
+    \Theta_S
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+\]
+equipped with a canonical equivalence
+\[
+    \Theta_SL_{\mathrm{mot},S}
+    \simeq
+    L^{\mathrm{cl}}_{\mathrm{mot},S_{\mathrm{cl}}}
+    \widetilde\Theta_S.
+\]
+
+Since \(\Theta_S\) is colimit-preserving between presentable
+\(\infty\)-categories, it admits a right adjoint
+\[
+    \Psi_S
+    \colon
+    \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+    \longrightarrow
+    \mathbf H(S).
+\]
+
+For every smooth spectral \(S\)-scheme \(X\) of finite presentation,
+there is a canonical equivalence
+\[
+\begin{aligned}
+    \Theta_S\mathrm M_S(X)
+    &=
+    \Theta_SL_{\mathrm{mot},S}h_S(X)
+    \\
+    &\simeq
+    L^{\mathrm{cl}}_{\mathrm{mot},S_{\mathrm{cl}}}
+    \widetilde\Theta_Sh_S(X)
+    \\
+    &\simeq
+    L^{\mathrm{cl}}_{\mathrm{mot},S_{\mathrm{cl}}}
+    h^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        X_{\mathrm{cl}}
+    \bigr)
+    \\
+    &=
+    \mathrm M^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        X_{\mathrm{cl}}
+    \bigr).
+\end{aligned}
+\]
+
+The fact that this adjunction is an equivalence, together with its
+compatibility with base change, Cartesian products, pointing, and the
+\((*,\sharp,\times)\)-formalism, is established in
+\Ref{thm:classical-comparison-brave-new-motivic-spaces}.
+\end{construction}
+
+\begin{theorem}[Comparison with ordinary motivic homotopy theory]
+\label{thm:classical-comparison-brave-new-motivic-spaces}
+For every quasi-compact quasi-separated spectral scheme \(S\), the
+classical comparison adjunction
+\[
+    \Theta_S
+    \colon
+    \mathbf H(S)
+    \rightleftarrows
+    \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+    :
+    \Psi_S
+\]
+is an adjoint equivalence.
+
+It induces a strong smash-monoidal equivalence
+\[
+    \Theta_{S,\bullet}
+    \colon
+    \mathbf H_\bullet(S)
+    \xrightarrow{\simeq}
+    \mathbf H_{\mathrm{cl},\bullet}(S_{\mathrm{cl}}).
+\]
+
+These equivalences are natural in \(S\).  Under them:
+\begin{enumerate}[label=(\roman*)]
+    \item inverse image corresponds to ordinary inverse image;
+
+    \item direct image corresponds to ordinary direct image;
+
+    \item smooth direct image corresponds to ordinary smooth direct
+    image;
+
+    \item Cartesian products and smash products correspond to their
+    ordinary counterparts;
+
+    \item the corresponding Cartesian and pointed internal mapping
+    objects are preserved.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The comparison theorem cited below is formulated for motivic
+categories constructed from smooth spectral algebraic spaces rather
+than only from smooth spectral schemes.  Since \(S\) is a spectral
+scheme,
+\cite[Corollary~2.4.5]{KhanBraveNewMotivicI}
+shows that restriction along the inclusion
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \hookrightarrow
+    \operatorname{Sm}^{\mathrm{fp},\mathrm{asp}}_{/S}
+\]
+induces an equivalence between the corresponding categories of
+\(\mathbb A^1\)-invariant Nisnevich sheaves.
+
+We require the analogous comparison on the ordinary side.  Let
+\[
+    \operatorname{Sm}^{\mathrm{fp},\mathrm{cl}}_{/S_{\mathrm{cl}}}
+    \hookrightarrow
+    \operatorname{Sm}^{\mathrm{fp},\mathrm{cl},\mathrm{asp}}_
+    {/S_{\mathrm{cl}}}
+\]
+be the inclusion of smooth ordinary schemes into smooth ordinary
+algebraic spaces of finite presentation over \(S_{\mathrm{cl}}\).
+Every smooth ordinary algebraic space of finite presentation admits a
+Nisnevich covering by smooth schemes of finite presentation.  Moreover,
+fibre products of smooth schemes over such an algebraic space admit
+Nisnevich coverings by smooth schemes.  Thus smooth schemes form a
+Nisnevich basis for the smooth algebraic-space site.
+
+The comparison lemma for a basis therefore gives an equivalence between
+the corresponding categories of ordinary Nisnevich sheaves.
+The inclusion is compatible with products by
+\[
+    \mathbb A^1_{S_{\mathrm{cl}}},
+\]
+so this equivalence restricts to an equivalence between the
+\(\mathbb A^1\)-invariant Nisnevich sheaf categories.  Consequently, the
+ordinary motivic category formed from smooth schemes agrees with the
+one formed from smooth algebraic spaces.
+
+Under these restriction equivalences, the comparison left adjoint of
+\cite[Corollary~2.7.5]{CisinskiKhanA1Invariance}
+agrees with the functor
+\[
+    \Theta_S
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+\]
+constructed above.  Indeed, both functors preserve colimits and carry
+every smooth spectral motive to the ordinary motive of its classical
+truncation:
+\[
+    \mathrm M_S(X)
+    \longmapsto
+    \mathrm M^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        X_{\mathrm{cl}}
+    \bigr).
+\]
+The smooth scheme motives generate the scheme-based category under
+sifted colimits by
+\Ref{prop:generation-by-standard-smooth-motives}.
+Thus the two comparison functors are canonically equivalent.
+
+It now follows from
+\cite[Corollary~2.7.5]{CisinskiKhanA1Invariance}
+that the adjunction
+\[
+    \Theta_S
+    \colon
+    \mathbf H(S)
+    \rightleftarrows
+    \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+    :
+    \Psi_S
+\]
+is an adjoint equivalence.
+
+The comparison equivalences assemble pseudonaturally in the base.  Let
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    S
+\]
+be a morphism of quasi-compact quasi-separated spectral schemes.
+Compatibility of classical truncation with geometric base change
+gives a canonical equivalence
+\[
+    \Theta_Tf^*
+    \simeq
+    f_{\mathrm{cl}}^*\Theta_S.
+\]
+This proves compatibility with inverse image.
+
+Taking right adjoints of this equivalence and using that
+\[
+    \Theta_S
+    \qquad\text{and}\qquad
+    \Theta_T
+\]
+are equivalences gives a canonical equivalence
+\[
+    \Theta_Sf_*
+    \simeq
+    (f_{\mathrm{cl}})_*\Theta_T.
+\]
+Thus direct image corresponds to ordinary direct image.
+
+Now suppose that
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+is smooth and of finite presentation.  The inverse-image comparison
+\[
+    \Theta_Xp^*
+    \simeq
+    p_{\mathrm{cl}}^*\Theta_S
+\]
+is an equivalence between right adjoints.  Passing to the corresponding
+left adjoints gives
+\[
+    \Theta_Sp_\sharp
+    \simeq
+    (p_{\mathrm{cl}})_\sharp\Theta_X.
+\]
+Hence smooth direct image corresponds to ordinary smooth direct image.
+
+These compatibilities agree with the functorial comparison described
+in
+\cite[Remark~2.7.9]{CisinskiKhanA1Invariance}.
+
+We next verify the Cartesian symmetric monoidal compatibility.  On
+smooth motives one has
+\[
+\begin{aligned}
+    \Theta_S
+    \bigl(
+        \mathrm M_S(X)
+        \times
+        \mathrm M_S(Y)
+    \bigr)
+    &\simeq
+    \Theta_S
+    \mathrm M_S(X\times_SY)
+    \\
+    &\simeq
+    \mathrm M^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        X_{\mathrm{cl}}
+        \times_{S_{\mathrm{cl}}}
+        Y_{\mathrm{cl}}
+    \bigr)
+    \\
+    &\simeq
+    \Theta_S\mathrm M_S(X)
+    \times
+    \Theta_S\mathrm M_S(Y).
+\end{aligned}
+\]
+The bifunctors
+\[
+    (F,G)
+    \longmapsto
+    \Theta_S(F\times G)
+\]
+and
+\[
+    (F,G)
+    \longmapsto
+    \Theta_S(F)\times\Theta_S(G)
+\]
+preserve colimits separately in \(F\) and \(G\).  Since smooth motives
+generate \(\mathbf H(S)\) under colimits, the displayed comparison
+extends uniquely to a canonical equivalence
+\[
+    \Theta_S(F\times G)
+    \simeq
+    \Theta_S(F)\times\Theta_S(G)
+\]
+for arbitrary
+\[
+    F,G
+    \in
+    \mathbf H(S).
+\]
+The terminal motive is also preserved.  Therefore \(\Theta_S\) is
+strong Cartesian symmetric monoidal.
+
+Since \(\Theta_S\) preserves the terminal object, it induces an
+equivalence of pointed categories
+\[
+    \Theta_{S,\bullet}
+    \colon
+    \mathbf H_\bullet(S)
+    \xrightarrow{\simeq}
+    \mathbf H_{\mathrm{cl},\bullet}(S_{\mathrm{cl}}).
+\]
+The smash product is constructed from Cartesian products and colimits
+by
+\[
+    F\wedge G
+    =
+    (F\times G)
+    \amalg_{F\amalg G}
+    *,
+\]
+so the pointed comparison equivalence is strong symmetric monoidal for
+the smash products.
+
+Finally, a strong monoidal equivalence between closed symmetric
+monoidal \(\infty\)-categories preserves internal mapping objects.
+Thus there are canonical equivalences
+\[
+    \Theta_S
+    \underline{\operatorname{Map}}_{\mathbf H(S)}
+    (F,G)
+    \simeq
+    \underline{\operatorname{Map}}_{
+        \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+    }
+    \bigl(
+        \Theta_SF,
+        \Theta_SG
+    \bigr)
+\]
+and
+\[
+    \Theta_{S,\bullet}
+    \underline{\operatorname{Map}}_{\mathbf H_\bullet(S)}
+    (F,G)
+    \simeq
+    \underline{\operatorname{Map}}_{
+        \mathbf H_{\mathrm{cl},\bullet}(S_{\mathrm{cl}})
+    }
+    \bigl(
+        \Theta_{S,\bullet}F,
+        \Theta_{S,\bullet}G
+    \bigr).
+\]
+This proves all the asserted compatibilities.
+\end{proof}
+
+\section{Homotopy purity}
+\label{sec:brave-new-homotopy-purity}
+
+\subsection{Smooth closed pairs and Thom spaces}
+
+\begin{definition}[Smooth closed pair]
+\label{def:smooth-closed-pair}
+A \textbf{smooth closed pair over \(S\)} is a closed immersion
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+such that both
+\[
+    X
+    \longrightarrow
+    S
+\]
+and
+\[
+    Z
+    \longrightarrow
+    S
+\]
+are smooth and of finite presentation.
+\end{definition}
+
+By \Ref{thm:closed-between-smooth-regular}, a smooth closed pair is a
+regular closed immersion.  Its conormal module
+\[
+    N^*_{Z/X}
+    :=
+    L_{Z/X}[-1]
+\]
+is finite locally free.
+
+\begin{notation}[Conormal module, normal module, and normal bundle]
+\label{not:normal-data-smooth-closed-pair}
+For a smooth closed pair
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X,
+\]
+write
+\[
+    N^*_{Z/X}
+    :=
+    L_{Z/X}[-1]
+\]
+for the conormal module and
+\[
+    N_{Z/X}
+    :=
+    \bigl(
+        N^*_{Z/X}
+    \bigr)^\vee
+\]
+for the normal module.
+
+The normal bundle is the relative linear space
+\[
+    \mathbb N_{Z/X}
+    :=
+    \mathbb V_Z
+    \bigl(
+        N^*_{Z/X}
+    \bigr).
+\]
+Since
+\[
+    N_{Z/X}
+    =
+    \bigl(
+        N^*_{Z/X}
+    \bigr)^\vee,
+\]
+finite-projective biduality gives a canonical equivalence
+\[
+    N_{Z/X}^\vee
+    \simeq
+    N^*_{Z/X}.
+\]
+Consequently,
+\[
+    \mathbb N_{Z/X}
+    \simeq
+    \mathbb V_Z
+    \bigl(
+        N_{Z/X}^\vee
+    \bigr),
+\]
+so \(\mathbb N_{Z/X}\) is the geometric vector bundle associated with
+the normal module \(N_{Z/X}\) under the convention
+\[
+    \mathbb V_Z(E)
+    =
+    \operatorname{Spec}_Z
+    \operatorname{Sym}_{\mathcal O_Z}(E).
+\]
+Its zero section is denoted
+\[
+    s
+    \colon
+    Z
+    \hookrightarrow
+    \mathbb N_{Z/X}.
+\]
+\end{notation}
+
+\begin{definition}[Unstable Thom space]
+\label{def:unstable-thom-space}
+Let \(E\) be a finite locally free quasi-coherent module on a smooth
+spectral \(S\)-scheme \(Z\).  Define
+\[
+    \operatorname{Th}_S(E)
+    :=
+    \mathbb V_Z(E)/
+    \bigl(
+        \mathbb V_Z(E)\setminus Z
+    \bigr)
+    \in
+    \mathbf H_\bullet(S),
+\]
+where \(Z\) is embedded by the zero section and both schemes are viewed
+over \(S\).
+
+For a smooth closed pair
+\[
+    Z
+    \hookrightarrow
+    X,
+\]
+define the Thom space of its normal bundle by
+\[
+\begin{aligned}
+    \operatorname{Th}_S
+    \bigl(
+        \mathbb N_{Z/X}
+    \bigr)
+    &:=
+    \mathbb N_{Z/X}/
+    \bigl(
+        \mathbb N_{Z/X}\setminus Z
+    \bigr)
+    \\
+    &=
+    \operatorname{Th}_S
+    \bigl(
+        N^*_{Z/X}
+    \bigr).
+\end{aligned}
+\]
+\end{definition}
+
+\subsection{Nisnevich excision for pairs}
+
+
+\begin{proposition}[Nisnevich excision for closed pairs]
+\label{prop:nisnevich-excision-closed-pairs}
+Let \(S\) be a quasi-compact quasi-separated spectral scheme.  Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation, and let
+\[
+    Z
+    \hookrightarrow
+    X
+\]
+be a closed immersion with quasi-compact open complement
+\[
+    U
+    :=
+    X\setminus Z.
+\]
+
+Let
+\[
+    q
+    \colon
+    X'
+    \longrightarrow
+    X
+\]
+be étale and of finite presentation.  Put
+\[
+    Z'
+    :=
+    X'\times_XZ,
+    \qquad
+    U'
+    :=
+    X'\times_XU,
+\]
+and suppose that the projection
+\[
+    Z'
+    \longrightarrow
+    Z
+\]
+is an equivalence.  Then the canonical morphism
+\[
+    X'/U'
+    \longrightarrow
+    X/U
+\]
+is an equivalence in
+\[
+    \mathbf H_\bullet(S).
+\]
+\end{proposition}
+
+\begin{proof}
+Because \(q\) is étale and of finite presentation and
+\(X\to S\) is smooth and of finite presentation, the composite
+\[
+    X'
+    \longrightarrow
+    S
+\]
+is smooth and of finite presentation.  The open immersions
+\[
+    U
+    \hookrightarrow
+    X
+    \qquad\text{and}\qquad
+    U'
+    \hookrightarrow
+    X'
+\]
+are quasi-compact and therefore of finite presentation.  Consequently,
+\(U\) and \(U'\) also belong to
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}.
+\]
+
+The Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    U'
+        \arrow[r]
+        \arrow[d]
+    &
+    X'
+        \arrow[d, "q"]
+    \\
+    U
+        \arrow[r]
+    &
+    X
+\end{tikzcd}
+\]
+is a spectral Nisnevich distinguished square: the lower horizontal
+morphism is an open immersion, the right vertical morphism is étale,
+and the induced morphism over the closed complement is the assumed
+equivalence
+\[
+    Z'
+    \xrightarrow{\simeq}
+    Z.
+\]
+
+Applying the motivic Yoneda functor gives a cocartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    \mathrm M_S(U')
+        \arrow[r]
+        \arrow[d]
+    &
+    \mathrm M_S(X')
+        \arrow[d]
+    \\
+    \mathrm M_S(U)
+        \arrow[r]
+    &
+    \mathrm M_S(X)
+\end{tikzcd}
+\]
+in \(\mathbf H(S)\).
+
+Push out this square along the terminal morphism
+\[
+    \mathrm M_S(U)
+    \longrightarrow
+    *_S.
+\]
+By associativity of pushouts, the resulting comparison identifies the
+two pointed quotients:
+\[
+    \mathrm M_S(X')
+    \amalg_{\mathrm M_S(U')}
+    *_S
+    \xrightarrow{\simeq}
+    \mathrm M_S(X)
+    \amalg_{\mathrm M_S(U)}
+    *_S.
+\]
+These are precisely
+\[
+    X'/U'
+    \qquad\text{and}\qquad
+    X/U.
+\]
+\end{proof}
+
+\subsection{Classical comparison of normal data}
+
+\begin{proposition}[Classical conormal comparison]
+\label{prop:classical-conormal-comparison}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+be a smooth closed pair over \(S\), and let \(\mathcal I\) be the ideal
+of the ordinary closed immersion
+\[
+    i_{\mathrm{cl}}
+    \colon
+    Z_{\mathrm{cl}}
+    \hookrightarrow
+    X_{\mathrm{cl}}.
+\]
+There is a canonical equivalence of finite locally free
+\(\mathcal O_{Z_{\mathrm{cl}}}\)-modules
+\[
+    N^*_{Z/X}
+    \otimes_{\mathcal O_Z}
+    \mathcal O_{Z_{\mathrm{cl}}}
+    \simeq
+    \mathcal I/\mathcal I^2.
+\]
+Consequently,
+\[
+    (\mathbb N_{Z/X})_{\mathrm{cl}}
+    \simeq
+    \mathbb V_{Z_{\mathrm{cl}}}
+    (\mathcal I/\mathcal I^2),
+\]
+the ordinary normal bundle of the classical closed pair.
+\end{proposition}
+
+\begin{proof}
+The transitivity triangle for
+\[
+    Z
+    \xrightarrow{i}
+    X
+    \longrightarrow
+    S
+\]
+is
+\[
+    i^*L_{X/S}
+    \longrightarrow
+    L_{Z/S}
+    \longrightarrow
+    L_{Z/X}.
+\]
+Since
+\[
+    L_{Z/X}
+    \simeq
+    N^*_{Z/X}[1],
+\]
+rotation gives a fibre sequence
+\[
+    N^*_{Z/X}
+    \longrightarrow
+    i^*L_{X/S}
+    \longrightarrow
+    L_{Z/S}.
+\]
+
+Tensor this fibre sequence with
+\[
+    \mathcal O_{Z_{\mathrm{cl}}}.
+\]
+Because
+\[
+    X\longrightarrow S,
+    \qquad
+    Z\longrightarrow S,
+\]
+are smooth, the modules
+\[
+    L_{X/S},
+    \qquad
+    L_{Z/S}
+\]
+are finite locally free.  The conormal module
+\[
+    N^*_{Z/X}
+\]
+is also finite locally free by
+\Ref{thm:closed-between-smooth-regular}.  Their base changes to the
+discrete spectral scheme \(Z_{\mathrm{cl}}\) are therefore discrete
+finite locally free modules.
+
+The degree-zero comparison for cotangent complexes gives canonical
+isomorphisms
+\[
+    \pi_0
+    \left(
+        L_{X/S}
+        \otimes_{\mathcal O_X}
+        \mathcal O_{X_{\mathrm{cl}}}
+    \right)
+    \simeq
+    \Omega^1_{X_{\mathrm{cl}}/S_{\mathrm{cl}}}
+\]
+and
+\[
+    \pi_0
+    \left(
+        L_{Z/S}
+        \otimes_{\mathcal O_Z}
+        \mathcal O_{Z_{\mathrm{cl}}}
+    \right)
+    \simeq
+    \Omega^1_{Z_{\mathrm{cl}}/S_{\mathrm{cl}}}.
+\]
+Since the two base-changed cotangent complexes are discrete, these
+degree-zero identifications determine equivalences
+\[
+    L_{X/S}
+    \otimes_{\mathcal O_X}
+    \mathcal O_{X_{\mathrm{cl}}}
+    \simeq
+    \Omega^1_{X_{\mathrm{cl}}/S_{\mathrm{cl}}}
+\]
+and
+\[
+    L_{Z/S}
+    \otimes_{\mathcal O_Z}
+    \mathcal O_{Z_{\mathrm{cl}}}
+    \simeq
+    \Omega^1_{Z_{\mathrm{cl}}/S_{\mathrm{cl}}},
+\]
+where the ordinary modules on the right are regarded as discrete
+quasi-coherent spectral modules.
+
+It follows that the base-changed fibre sequence is a fibre sequence of
+discrete modules
+\[
+    N^*_{Z/X}
+    \otimes_{\mathcal O_Z}
+    \mathcal O_{Z_{\mathrm{cl}}}
+    \longrightarrow
+    i_{\mathrm{cl}}^*
+    \Omega^1_{X_{\mathrm{cl}}/S_{\mathrm{cl}}}
+    \longrightarrow
+    \Omega^1_{Z_{\mathrm{cl}}/S_{\mathrm{cl}}}.
+\]
+Passing to degree zero gives a short exact sequence
+\[
+    0
+    \longrightarrow
+    \pi_0
+    \left(
+        N^*_{Z/X}
+        \otimes_{\mathcal O_Z}
+        \mathcal O_{Z_{\mathrm{cl}}}
+    \right)
+    \longrightarrow
+    i_{\mathrm{cl}}^*
+    \Omega^1_{X_{\mathrm{cl}}/S_{\mathrm{cl}}}
+    \longrightarrow
+    \Omega^1_{Z_{\mathrm{cl}}/S_{\mathrm{cl}}}
+    \longrightarrow
+    0.
+\]
+
+The ordinary conormal sequence for the regular closed immersion
+\[
+    Z_{\mathrm{cl}}
+    \hookrightarrow
+    X_{\mathrm{cl}}
+\]
+is
+\[
+    0
+    \longrightarrow
+    \mathcal I/\mathcal I^2
+    \longrightarrow
+    i_{\mathrm{cl}}^*
+    \Omega^1_{X_{\mathrm{cl}}/S_{\mathrm{cl}}}
+    \longrightarrow
+    \Omega^1_{Z_{\mathrm{cl}}/S_{\mathrm{cl}}}
+    \longrightarrow
+    0.
+\]
+The maps to the last two terms are the same under the canonical
+cotangent comparisons.  Therefore their fibres are canonically
+equivalent:
+\[
+    N^*_{Z/X}
+    \otimes_{\mathcal O_Z}
+    \mathcal O_{Z_{\mathrm{cl}}}
+    \simeq
+    \mathcal I/\mathcal I^2.
+\]
+
+For a connective commutative algebra \(A\) and a finite projective
+\(A\)-module \(P\), the universal property of the free commutative
+algebra gives
+\[
+    \pi_0
+    \operatorname{Sym}_A(P)
+    \simeq
+    \operatorname{Sym}_{\pi_0(A)}
+    \pi_0(P).
+\]
+Applying this affine-locally to \(N^*_{Z/X}\), using the conormal
+comparison just proved, and then gluing gives
+\[
+\begin{aligned}
+    (\mathbb N_{Z/X})_{\mathrm{cl}}
+    &=
+    \left(
+        \mathbb V_Z(N^*_{Z/X})
+    \right)_{\mathrm{cl}}
+    \\
+    &\simeq
+    \mathbb V_{Z_{\mathrm{cl}}}
+    \left(
+        N^*_{Z/X}
+        \otimes_{\mathcal O_Z}
+        \mathcal O_{Z_{\mathrm{cl}}}
+    \right)
+    \\
+    &\simeq
+    \mathbb V_{Z_{\mathrm{cl}}}
+    (\mathcal I/\mathcal I^2).
+\end{aligned}
+\]
+Under the convention
+\[
+    \mathbb V(E)
+    =
+    \operatorname{Spec}\operatorname{Sym}(E),
+\]
+this is the geometric vector bundle associated with the ordinary normal
+module
+\[
+    (\mathcal I/\mathcal I^2)^\vee.
+\]
+\end{proof}
+
+\begin{proposition}[Classical comparison of quotients and Thom spaces]
+\label{prop:classical-comparison-quotient-thom}
+For a smooth closed pair
+\[
+    Z
+    \hookrightarrow
+    X
+\]
+over \(S\), the pointed comparison equivalence of
+\Ref{thm:classical-comparison-brave-new-motivic-spaces}
+induces canonical equivalences
+\[
+    \Theta_{S,\bullet}
+    \bigl(
+        X/(X\setminus Z)
+    \bigr)
+    \simeq
+    X_{\mathrm{cl}}/
+    \bigl(
+        X_{\mathrm{cl}}\setminus Z_{\mathrm{cl}}
+    \bigr)
+\]
+and
+\[
+    \Theta_{S,\bullet}
+    \operatorname{Th}_S
+    \bigl(
+        \mathbb N_{Z/X}
+    \bigr)
+    \simeq
+    \operatorname{Th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        N_{Z_{\mathrm{cl}}/X_{\mathrm{cl}}}
+    \bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+The comparison functor is colimit-preserving and sends the motive of a
+smooth spectral scheme to the ordinary motive of its classical
+truncation.  Classical truncation preserves the open complement of a
+closed immersion.  It therefore sends the pushout defining
+\[
+    X/(X\setminus Z)
+\]
+to the ordinary pointed quotient
+\[
+    X_{\mathrm{cl}}/
+    \bigl(
+        X_{\mathrm{cl}}\setminus Z_{\mathrm{cl}}
+    \bigr).
+\]
+
+By
+\Ref{prop:classical-conormal-comparison},
+there is a canonical equivalence
+\[
+    (\mathbb N_{Z/X})_{\mathrm{cl}}
+    \simeq
+    N_{Z_{\mathrm{cl}}/X_{\mathrm{cl}}},
+\]
+where the right side denotes the ordinary normal bundle.  Classical
+truncation also preserves the complement of the zero section.  Applying
+the comparison functor to the pushout defining
+\[
+    \operatorname{Th}_S
+    \bigl(
+        \mathbb N_{Z/X}
+    \bigr)
+\]
+therefore gives the ordinary Thom quotient.
+\end{proof}
+
+\subsection{Homotopy purity by classical comparison}
+
+
+\begin{definition}[Étale morphism of smooth closed pairs]
+\label{def:etale-morphism-smooth-closed-pairs}
+Let \(S\) be a spectral scheme, and let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+and
+\[
+    i'
+    \colon
+    Z'
+    \hookrightarrow
+    X'
+\]
+be smooth closed pairs over \(S\).
+
+An \textbf{étale morphism of smooth closed pairs}
+\[
+    (X',Z')
+    \longrightarrow
+    (X,Z)
+\]
+is a Cartesian square of spectral \(S\)-schemes
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Z'
+        \arrow[r]
+        \arrow[d, hook, "i'"']
+    &
+    Z
+        \arrow[d, hook, "i"]
+    \\
+    X'
+        \arrow[r, "q"']
+    &
+    X
+\end{tikzcd}
+\]
+in which
+\[
+    q
+    \colon
+    X'
+    \longrightarrow
+    X
+\]
+is étale.
+
+When \(S\), \(X\), \(X'\), \(Z\), and \(Z'\) are ordinary schemes,
+this recovers the ordinary notion through the fully faithful discrete
+enhancement of ordinary schemes as spectral schemes.
+\end{definition}
+
+
+\begin{lemma}[Arbitrary base change for deformation spaces]
+\label{lem:deformation-space-arbitrary-base-change}
+Let \(S_0\) be an ordinary scheme, and let
+\[
+    Z_0
+    \hookrightarrow
+    X_0
+\]
+be a closed immersion such that both
+\[
+    X_0
+    \longrightarrow
+    S_0
+    \qquad\text{and}\qquad
+    Z_0
+    \longrightarrow
+    S_0
+\]
+are smooth and of finite presentation.  Let
+\[
+    f
+    \colon
+    T_0
+    \longrightarrow
+    S_0
+\]
+be an arbitrary morphism, and put
+\[
+    X_T
+    :=
+    X_0\times_{S_0}T_0,
+    \qquad
+    Z_T
+    :=
+    Z_0\times_{S_0}T_0.
+\]
+
+Then there is a canonical equivalence
+\[
+    D_{Z_0}X_0
+    \times_{S_0}
+    T_0
+    \xrightarrow{\simeq}
+    D_{Z_T}X_T
+\]
+over
+\[
+    \mathbb A^1_{T_0}.
+\]
+It is compatible with the closed immersions
+\[
+    Z_0\times\mathbb A^1
+    \hookrightarrow
+    D_{Z_0}X_0
+\]
+and
+\[
+    Z_T\times\mathbb A^1
+    \hookrightarrow
+    D_{Z_T}X_T,
+\]
+and with the canonical identifications of the fibres over \(1\) and
+\(0\) with \(X_0,X_T\) and their respective normal bundles.
+\end{lemma}
+
+\begin{proof}
+The assertion is local on \(S_0\) and \(X_0\).  Write
+\[
+    S_0
+    =
+    \Spec(R),
+    \qquad
+    X_0
+    =
+    \Spec(A),
+    \qquad
+    Z_0
+    =
+    \Spec(A/I).
+\]
+Since \(X_0\to S_0\) and \(Z_0\to S_0\) are smooth, both
+\[
+    A
+    \qquad\text{and}\qquad
+    A/I
+\]
+are flat over \(R\).
+
+The immersion \(Z_0\hookrightarrow X_0\) is regular.  Consequently,
+\[
+    \operatorname{gr}_I(A)
+    \simeq
+    \operatorname{Sym}_{A/I}(I/I^2),
+\]
+and \(I/I^2\) is finite locally free over \(A/I\).  In particular, every
+graded piece
+\[
+    I^n/I^{n+1}
+    \simeq
+    \operatorname{Sym}_{A/I}^n(I/I^2)
+\]
+is flat over \(R\).
+
+The exact sequence
+\[
+    0
+    \longrightarrow
+    I
+    \longrightarrow
+    A
+    \longrightarrow
+    A/I
+    \longrightarrow
+    0
+\]
+shows that \(I\) is \(R\)-flat.  Inductively, the exact sequences
+\[
+    0
+    \longrightarrow
+    I^{n+1}
+    \longrightarrow
+    I^n
+    \longrightarrow
+    I^n/I^{n+1}
+    \longrightarrow
+    0
+\]
+show that every \(I^n\) is \(R\)-flat.
+
+Let
+\[
+    R
+    \longrightarrow
+    R'
+\]
+be the ring map corresponding to the restriction of \(f\) to an affine
+open of \(T_0\), and put
+\[
+    A'
+    :=
+    A\otimes_RR'.
+\]
+Since \(A/I\) is \(R\)-flat, tensoring the defining sequence for \(I\)
+gives an exact sequence
+\[
+    0
+    \longrightarrow
+    I\otimes_RR'
+    \longrightarrow
+    A'
+    \longrightarrow
+    (A/I)\otimes_RR'
+    \longrightarrow
+    0.
+\]
+Thus the ideal of \(Z_T\) in \(X_T\) is
+\[
+    I'
+    :=
+    I\otimes_RR'
+    \subseteq
+    A'.
+\]
+
+The base-changed pair is again a closed immersion between schemes
+smooth over \(T_0\), and hence is regular.  Conormal base change gives
+\[
+    I'/I'^2
+    \simeq
+    (I/I^2)\otimes_RR'.
+\]
+Therefore
+\[
+\begin{aligned}
+    I'^n/I'^{n+1}
+    &\simeq
+    \operatorname{Sym}_{A'/I'}^n(I'/I'^2)
+    \\
+    &\simeq
+    \operatorname{Sym}_{A/I}^n(I/I^2)
+    \otimes_RR'
+    \\
+    &\simeq
+    (I^n/I^{n+1})\otimes_RR'.
+\end{aligned}
+\]
+
+We prove inductively that the natural morphisms
+\[
+    I^n\otimes_RR'
+    \longrightarrow
+    I'^n
+\]
+are isomorphisms.  For \(n=0\), this is the identity
+\[
+    A\otimes_RR'
+    \simeq
+    A'.
+\]
+Suppose it is known for \(n\).  Since \(I^n/I^{n+1}\) is \(R\)-flat,
+tensoring the exact sequence
+\[
+    0
+    \longrightarrow
+    I^{n+1}
+    \longrightarrow
+    I^n
+    \longrightarrow
+    I^n/I^{n+1}
+    \longrightarrow
+    0
+\]
+with \(R'\) remains exact.  Comparing it with
+\[
+    0
+    \longrightarrow
+    I'^{n+1}
+    \longrightarrow
+    I'^n
+    \longrightarrow
+    I'^n/I'^{n+1}
+    \longrightarrow
+    0
+\]
+and using the induction hypothesis and the preceding identification of
+the quotients gives
+\[
+    I^{n+1}\otimes_RR'
+    \xrightarrow{\simeq}
+    I'^{n+1}.
+\]
+The induction is complete.
+
+The extended Rees algebra of \(I\) is
+\[
+    \mathcal R_I^{\mathrm{ext}}(A)
+    :=
+    A[t,It^{-1}]
+    =
+    \bigoplus_{n\in\mathbb Z}
+    I^n t^{-n}
+    \subseteq
+    A[t,t^{-1}],
+\]
+where
+\[
+    I^n:=A
+    \qquad
+    (n\leq0).
+\]
+The preceding identifications give a canonical isomorphism
+\[
+\begin{aligned}
+    \mathcal R_I^{\mathrm{ext}}(A)
+    \otimes_RR'
+    &\simeq
+    \bigoplus_{n\in\mathbb Z}
+    (I^n\otimes_RR')t^{-n}
+    \\
+    &\simeq
+    \bigoplus_{n\in\mathbb Z}
+    I'^n t^{-n}
+    \\
+    &=
+    \mathcal R_{I'}^{\mathrm{ext}}(A').
+\end{aligned}
+\]
+Taking relative spectra gives
+\[
+    D_{Z_0}X_0
+    \times_{S_0}
+    T_0
+    \simeq
+    D_{Z_T}X_T
+\]
+over \(\mathbb A^1_{T_0}\).
+
+The closed subscheme \(Z_0\times\mathbb A^1\), the fibre over \(1\),
+and the associated-graded fibre over \(0\) are all defined directly
+from the extended Rees algebra.  The displayed isomorphism therefore
+preserves them and the canonical identifications
+\[
+    (D_{Z_0}X_0)_1
+    \simeq
+    X_0,
+    \qquad
+    (D_{Z_0}X_0)_0
+    \simeq
+    N_{Z_0/X_0},
+\]
+and their base changes.  These affine identifications are compatible
+with restriction and hence glue.
+\end{proof}
+
+\begin{theorem}[Functorial ordinary homotopy purity]
+\label{thm:ordinary-homotopy-purity-functorial}
+Let \(S_0\) be an ordinary quasi-compact quasi-separated scheme, and let
+\[
+    Z_0
+    \hookrightarrow
+    X_0
+\]
+be a closed immersion such that
+\[
+    X_0
+    \longrightarrow
+    S_0
+\]
+and
+\[
+    Z_0
+    \longrightarrow
+    S_0
+\]
+are smooth and of finite presentation.  There is a canonical
+equivalence
+\[
+    \operatorname{pur}^{\mathrm{cl}}_{Z_0/X_0}
+    \colon
+    X_0/(X_0\setminus Z_0)
+    \xrightarrow{\simeq}
+    \operatorname{Th}^{\mathrm{cl}}_{S_0}
+    \bigl(
+        N_{Z_0/X_0}
+    \bigr)
+\]
+in
+\[
+    \mathbf H_{\mathrm{cl},\bullet}(S_0).
+\]
+
+The equivalence is natural under arbitrary base change between
+quasi-compact quasi-separated base schemes and under étale morphisms of
+smooth closed pairs.
+\end{theorem}
+
+\begin{proof}
+We first compare the ordinary motivic category used here with the
+nonequivariant unstable motivic category occurring in the cited purity
+theorem.
+
+The ordinary smooth finite-presentation site used here and the
+nonequivariant smooth site used in the cited theorem admit the same
+Nisnevich-dense subsite of smooth affine schemes of finite presentation
+over \(S_0\).  Every smooth scheme in either site admits a Nisnevich
+covering by such smooth affine schemes, and fibre products of objects
+of this affine subsite admit Nisnevich coverings by objects of the same
+subsite.  The comparison lemma for a Nisnevich basis therefore
+identifies the corresponding categories of Nisnevich sheaves.
+
+It remains to compare the homotopy localizations.  Let
+\[
+    a
+    \colon
+    Y
+    \longrightarrow
+    X
+\]
+be a torsor under a vector bundle of rank \(n\).  Choose a Zariski
+covering family
+\[
+    \{U_\alpha\to X\}_\alpha
+\]
+which trivializes the torsor.  On every iterated intersection
+\[
+    U_{\alpha_0\ldots\alpha_r},
+\]
+there is an equivalence
+\[
+    Y\times_XU_{\alpha_0\ldots\alpha_r}
+    \simeq
+    U_{\alpha_0\ldots\alpha_r}
+    \times
+    \mathbb A^n.
+\]
+If \(F\) is an ordinary Nisnevich sheaf which is
+\(\mathbb A^1\)-invariant, repeated affine-line invariance gives
+\[
+    F(U_{\alpha_0\ldots\alpha_r})
+    \xrightarrow{\simeq}
+    F
+    \bigl(
+        Y\times_XU_{\alpha_0\ldots\alpha_r}
+    \bigr).
+\]
+Taking totalizations of the two Čech diagrams and using Nisnevich
+descent gives
+\[
+    F(X)
+    \xrightarrow{\simeq}
+    F(Y).
+\]
+Thus Nisnevich descent and \(\mathbb A^1\)-invariance imply invariance
+under vector-bundle torsors.
+
+Conversely, invariance under vector-bundle torsors, applied to the
+trivial torsor under the additive group of the trivial line bundle,
+\[
+    X\times\mathbb A^1
+    \longrightarrow
+    X,
+\]
+implies \(\mathbb A^1\)-invariance.  Hence the two homotopy
+localizations have the same local objects.  Together with the
+Nisnevich-site comparison above, this identifies the nonequivariant
+unstable motivic category used in the cited purity theorem with
+\[
+    \mathbf H_{\mathrm{cl}}(S_0).
+\]
+
+We may therefore apply the functorial ordinary homotopy-purity theorem
+\cite[Theorem~3.23 and the discussion following it]
+{HoyoisSixOperations}
+in the category
+\[
+    \mathbf H_{\mathrm{cl},\bullet}(S_0).
+\]
+
+The closed immersion
+\[
+    Z_0
+    \hookrightarrow
+    X_0
+\]
+is regular because both \(Z_0\) and \(X_0\) are smooth over \(S_0\).
+Let
+\[
+    D_{Z_0}X_0
+\]
+denote the deformation space of \(X_0\) along \(Z_0\).  It is smooth
+and of finite presentation over
+\[
+    S_0\times\mathbb A^1.
+\]
+Moreover,
+\[
+    Z_0\times\mathbb A^1
+    \hookrightarrow
+    D_{Z_0}X_0
+\]
+is a closed immersion of finite presentation, and the pair
+\[
+    \bigl(
+        D_{Z_0}X_0,
+        Z_0\times\mathbb A^1
+    \bigr)
+\]
+is a smooth closed pair over
+\[
+    S_0\times\mathbb A^1.
+\]
+Consequently, after composing with
+\[
+    S_0\times\mathbb A^1
+    \longrightarrow
+    S_0,
+\]
+both
+\[
+    D_{Z_0}X_0
+\]
+and its quasi-compact open complement
+\[
+    D_{Z_0}X_0
+    \setminus
+    \bigl(
+        Z_0\times\mathbb A^1
+    \bigr)
+\]
+are smooth schemes of finite presentation over \(S_0\).  Thus the
+pointed quotient
+\[
+    D_{Z_0}X_0/
+    \left(
+        D_{Z_0}X_0
+        \setminus
+        \bigl(
+            Z_0\times\mathbb A^1
+        \bigr)
+    \right)
+\]
+is an object of
+\[
+    \mathbf H_{\mathrm{cl},\bullet}(S_0).
+\]
+
+The fibre of the deformation space over \(1\) is canonically
+equivalent to \(X_0\), while its fibre over \(0\) is canonically
+equivalent to the normal bundle
+\[
+    N_{Z_0/X_0}.
+\]
+The two fibre inclusions induce a natural zigzag
+\[
+    X_0/(X_0\setminus Z_0)
+    \xrightarrow{\alpha_1}
+    D_{Z_0}X_0/
+    \left(
+        D_{Z_0}X_0
+        \setminus
+        \bigl(
+            Z_0\times\mathbb A^1
+        \bigr)
+    \right)
+    \xleftarrow{\alpha_0}
+    \operatorname{Th}^{\mathrm{cl}}_{S_0}
+    \bigl(
+        N_{Z_0/X_0}
+    \bigr).
+\]
+The ordinary homotopy-purity theorem asserts that both
+\[
+    \alpha_1
+    \qquad\text{and}\qquad
+    \alpha_0
+\]
+are equivalences in
+\[
+    \mathbf H_{\mathrm{cl},\bullet}(S_0).
+\]
+Define
+\[
+    \operatorname{pur}^{\mathrm{cl}}_{Z_0/X_0}
+    :=
+    \alpha_0^{-1}\alpha_1.
+\]
+
+Let
+\[
+    f
+    \colon
+    T_0
+    \longrightarrow
+    S_0
+\]
+be a morphism of quasi-compact quasi-separated schemes, and form the
+base-changed pair
+\[
+    Z_T
+    :=
+    Z_0\times_{S_0}T_0
+    \hookrightarrow
+    X_T
+    :=
+    X_0\times_{S_0}T_0.
+\]
+Motivic inverse image preserves colimits and carries motives of smooth
+schemes to motives of their geometric base changes.  It therefore
+gives canonical equivalences
+\[
+    f^*
+    \bigl(
+        X_0/(X_0\setminus Z_0)
+    \bigr)
+    \simeq
+    X_T/(X_T\setminus Z_T)
+\]
+and
+\[
+    f^*
+    \operatorname{Th}^{\mathrm{cl}}_{S_0}
+    \bigl(
+        N_{Z_0/X_0}
+    \bigr)
+    \simeq
+    \operatorname{Th}^{\mathrm{cl}}_{T_0}
+    \bigl(
+        N_{Z_T/X_T}
+    \bigr).
+\]
+
+By
+\Ref{lem:deformation-space-arbitrary-base-change},
+there is a canonical equivalence
+\[
+    D_{Z_0}X_0
+    \times_{S_0}
+    T_0
+    \simeq
+    D_{Z_T}X_T
+\]
+over \(\mathbb A^1_{T_0}\), compatible with the closed immersions
+\[
+    Z_0\times\mathbb A^1
+    \hookrightarrow
+    D_{Z_0}X_0
+\]
+and
+\[
+    Z_T\times\mathbb A^1
+    \hookrightarrow
+    D_{Z_T}X_T,
+\]
+with the fibres over \(1\), and with the normal-bundle fibres over
+\(0\).  Consequently, inverse image carries the deformation-space
+zigzag defining
+\[
+    \operatorname{pur}^{\mathrm{cl}}_{Z_0/X_0}
+\]
+to the deformation-space zigzag defining
+\[
+    \operatorname{pur}^{\mathrm{cl}}_{Z_T/X_T}.
+\]
+Under the preceding source and target identifications,
+\[
+    f^*\alpha_1
+\]
+and
+\[
+    f^*\alpha_0
+\]
+identify with the two specialization morphisms for
+\[
+    Z_T
+    \hookrightarrow
+    X_T.
+\]
+It follows that
+\[
+    f^*
+    \operatorname{pur}^{\mathrm{cl}}_{Z_0/X_0}
+    \simeq
+    \operatorname{pur}^{\mathrm{cl}}_{Z_T/X_T}.
+\]
+
+Now let
+\[
+    (X'_0,Z'_0)
+    \longrightarrow
+    (X_0,Z_0)
+\]
+be an étale morphism of smooth closed pairs over \(S_0\).  The assertion
+is local on \(X_0\).  Write
+\[
+    X_0
+    =
+    \Spec(A),
+    \qquad
+    Z_0
+    =
+    \Spec(A/I),
+\]
+and, after restricting to an affine open of \(X'_0\), write
+\[
+    X'_0
+    =
+    \Spec(A').
+\]
+Since
+\[
+    A
+    \longrightarrow
+    A'
+\]
+is étale, it is flat.  The Cartesian condition on the closed pairs
+identifies the ideal of \(Z'_0\) with
+\[
+    I'
+    =
+    IA'
+    \simeq
+    I\otimes_AA'.
+\]
+Flatness gives, for every \(n\geq0\), canonical isomorphisms
+\[
+    I^n\otimes_AA'
+    \xrightarrow{\simeq}
+    (I')^n.
+\]
+Consequently, there is a canonical isomorphism of extended Rees
+algebras
+\[
+    \mathcal R_I^{\mathrm{ext}}(A)
+    \otimes_A
+    A'
+    \xrightarrow{\simeq}
+    \mathcal R_{I'}^{\mathrm{ext}}(A').
+\]
+Taking relative spectra gives a Cartesian morphism of deformation
+spaces
+\[
+    D_{Z'_0}X'_0
+    \longrightarrow
+    D_{Z_0}X_0
+\]
+which is compatible with the parameter on \(\mathbb A^1\), the closed
+subschemes
+\[
+    Z'_0\times\mathbb A^1
+    \qquad\text{and}\qquad
+    Z_0\times\mathbb A^1,
+\]
+and the fibres over \(1\) and \(0\).  On the zero fibre it is the
+canonical pullback morphism of normal bundles.
+
+These affine constructions are compatible with restriction and
+therefore glue to a morphism between the two deformation-space
+zigzags.  Naturality of
+\[
+    \alpha_1
+    \qquad\text{and}\qquad
+    \alpha_0
+\]
+then gives the asserted compatibility of the purity equivalences with
+étale morphisms of smooth closed pairs.
+\end{proof}
+
+\begin{theorem}[Brave new homotopy purity]
+\label{thm:brave-new-homotopy-purity}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+be a smooth closed pair over \(S\).  There is a canonical equivalence
+\[
+    \operatorname{pur}_{Z/X}
+    \colon
+    X/(X\setminus Z)
+    \xrightarrow{\simeq}
+    \operatorname{Th}_S
+    \bigl(
+        \mathbb N_{Z/X}
+    \bigr)
+\]
+in
+\[
+    \mathbf H_\bullet(S).
+\]
+This equivalence is compatible with arbitrary base change in \(S\) and
+with étale morphisms of smooth closed pairs.
+\end{theorem}
+
+\begin{proof}
+By
+\Ref{prop:classical-comparison-quotient-thom},
+the pointed comparison equivalence identifies the source and target
+with
+\[
+    X_{\mathrm{cl}}/
+    \bigl(
+        X_{\mathrm{cl}}\setminus Z_{\mathrm{cl}}
+    \bigr)
+\]
+and
+\[
+    \operatorname{Th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        N_{Z_{\mathrm{cl}}/X_{\mathrm{cl}}}
+    \bigr),
+\]
+respectively.
+
+The functorial ordinary purity theorem
+\Ref{thm:ordinary-homotopy-purity-functorial}
+supplies a canonical equivalence
+\[
+    \operatorname{pur}^{\mathrm{cl}}_{Z_{\mathrm{cl}}/X_{\mathrm{cl}}}
+    \colon
+    X_{\mathrm{cl}}/
+    \bigl(
+        X_{\mathrm{cl}}\setminus Z_{\mathrm{cl}}
+    \bigr)
+    \xrightarrow{\simeq}
+    \operatorname{Th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+        N_{Z_{\mathrm{cl}}/X_{\mathrm{cl}}}
+    \bigr).
+\]
+
+Since
+\[
+    \Theta_{S,\bullet}
+    \colon
+    \mathbf H_\bullet(S)
+    \xrightarrow{\simeq}
+    \mathbf H_{\mathrm{cl},\bullet}(S_{\mathrm{cl}})
+\]
+is fully faithful, there is a unique morphism
+\[
+    \operatorname{pur}_{Z/X}
+    \colon
+    X/(X\setminus Z)
+    \longrightarrow
+    \operatorname{Th}_S
+    \bigl(
+        \mathbb N_{Z/X}
+    \bigr)
+\]
+whose image under \(\Theta_{S,\bullet}\) is the ordinary purity
+equivalence.  Since \(\Theta_{S,\bullet}\) reflects equivalences,
+\(\operatorname{pur}_{Z/X}\) is an equivalence.
+
+Let
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    S
+\]
+be arbitrary.  Base change of the closed pair gives
+\[
+    Z_T
+    \hookrightarrow
+    X_T.
+\]
+Cotangent base change gives
+\[
+    N^*_{Z_T/X_T}
+    \simeq
+    f_Z^*N^*_{Z/X},
+\]
+and therefore
+\[
+    \mathbb N_{Z_T/X_T}
+    \simeq
+    \mathbb N_{Z/X}\times_ST.
+\]
+Compatibility of \(\Theta\) with inverse image identifies the image of
+\[
+    f^*\operatorname{pur}_{Z/X}
+\]
+with the pullback of the ordinary purity equivalence.  By
+\Ref{thm:ordinary-homotopy-purity-functorial},
+this is the ordinary purity equivalence for
+\[
+    Z_T
+    \hookrightarrow
+    X_T.
+\]
+Full faithfulness of \(\Theta_{T,\bullet}\) therefore gives
+\[
+    f^*\operatorname{pur}_{Z/X}
+    =
+    \operatorname{pur}_{Z_T/X_T}.
+\]
+
+The same argument, using the étale naturality in
+\Ref{thm:ordinary-homotopy-purity-functorial},
+proves compatibility with étale morphisms of smooth closed pairs.
+\end{proof}
+
+\begin{corollary}[Purity for a zero section]
+\label{cor:purity-zero-section}
+Let \(E\) be finite locally free on a smooth spectral \(S\)-scheme
+\(Z\), and let
+\[
+    s
+    \colon
+    Z
+    \hookrightarrow
+    \mathbb V_Z(E)
+\]
+be the zero section.  Then the purity equivalence identifies
+\[
+    \mathbb V_Z(E)/
+    \bigl(
+        \mathbb V_Z(E)\setminus Z
+    \bigr)
+\]
+with
+\[
+    \operatorname{Th}_S(E).
+\]
+\end{corollary}
+
+\begin{proof}
+The conormal module of the zero section is canonically \(E\), by the
+cotangent calculation for a relative free commutative algebra.
+\end{proof}
+
+\begin{proposition}[Multiplicativity of Thom spaces]
+\label{prop:unstable-thom-multiplicativity}
+Let \(E\) and \(F\) be finite locally free quasi-coherent modules on a
+smooth spectral \(S\)-scheme \(p:Z\to S\).  There is a canonical
+equivalence internal to \(Z\):
+\[
+    \operatorname{Th}_Z(E\oplus F)
+    \simeq
+    \operatorname{Th}_Z(E)
+    \wedge_Z
+    \operatorname{Th}_Z(F).
+\]
+It is compatible with base change.  Moreover,
+\[
+    \operatorname{Th}_S(E)
+    \simeq
+    p_{\sharp,\bullet}
+    \operatorname{Th}_Z(E).
+\]
+\end{proposition}
+
+\begin{proof}
+Put
+\[
+    V
+    :=
+    \mathbb V_Z(E),
+    \qquad
+    W
+    :=
+    \mathbb V_Z(F),
+\]
+and write
+\[
+    V^\times
+    :=
+    V\setminus Z,
+    \qquad
+    W^\times
+    :=
+    W\setminus Z.
+\]
+There is a canonical equivalence of relative linear spaces over \(Z\):
+\[
+    \mathbb V_Z(E\oplus F)
+    \simeq
+    V\times_ZW.
+\]
+The complement \(C\) of the joint zero section in \(V\times_ZW\) is
+the union
+\[
+    C
+    =
+    (V^\times\times_ZW)
+    \cup
+    (V\times_ZW^\times),
+\]
+whose intersection is
+\[
+    V^\times\times_ZW^\times.
+\]
+Consequently, there is a Zariski distinguished square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    V^\times\times_ZW^\times
+        \arrow[r]
+        \arrow[d]
+    &
+    V^\times\times_ZW
+        \arrow[d]
+    \\
+    V\times_ZW^\times
+        \arrow[r]
+    &
+    C.
+\end{tikzcd}
+\]
+Applying the motivic Yoneda functor gives a cocartesian square in
+\(\mathbf H(Z)\).  Since motives preserve products, it identifies
+\(\mathrm M_Z(C)\) with the pushout
+\[
+    \bigl(
+        \mathrm M_Z(V^\times)
+        \times
+        \mathrm M_Z(W)
+    \bigr)
+    \amalg_{
+        \mathrm M_Z(V^\times)
+        \times
+        \mathrm M_Z(W^\times)
+    }
+    \bigl(
+        \mathrm M_Z(V)
+        \times
+        \mathrm M_Z(W^\times)
+    \bigr).
+\]
+
+For morphisms
+\[
+    A_0
+    \longrightarrow
+    A,
+    \qquad
+    B_0
+    \longrightarrow
+    B
+\]
+in a presentable Cartesian category whose product preserves colimits
+separately, distributivity of products over pushouts and the definition
+of the smash product give a canonical equivalence
+\[
+    (A/A_0)
+    \wedge
+    (B/B_0)
+    \simeq
+    \frac{A\times B}{
+        (A_0\times B)
+        \amalg_{A_0\times B_0}
+        (A\times B_0)
+    }.
+\]
+Apply this with
+\[
+    A
+    =
+    \mathrm M_Z(V),
+    \qquad
+    A_0
+    =
+    \mathrm M_Z(V^\times),
+\]
+and
+\[
+    B
+    =
+    \mathrm M_Z(W),
+    \qquad
+    B_0
+    =
+    \mathrm M_Z(W^\times).
+\]
+The preceding Zariski-excision square identifies the denominator with
+\(\mathrm M_Z(C)\).  Hence
+\[
+\begin{aligned}
+    \operatorname{Th}_Z(E)
+    \wedge_Z
+    \operatorname{Th}_Z(F)
+    &\simeq
+    \frac{
+        \mathrm M_Z(V\times_ZW)
+    }{
+        \mathrm M_Z(C)
+    }
+    \\
+    &\simeq
+    \operatorname{Th}_Z(E\oplus F).
+\end{aligned}
+\]
+Every construction in this argument commutes with base change: relative
+linear spaces, zero sections, open complements, the Zariski-excision
+square, products, and pushouts.  Thus the multiplicativity equivalence
+is compatible with base change.
+
+The pointed smooth direct image \(p_{\sharp,\bullet}\) preserves
+colimits and sends the motives of \(\mathbb V_Z(E)\) and its open
+complement to the same schemes viewed over \(S\).  Applying it to the
+pushout defining \(\operatorname{Th}_Z(E)\) gives
+\[
+    p_{\sharp,\bullet}\operatorname{Th}_Z(E)
+    \simeq
+    \operatorname{Th}_S(E).
+\]
+\end{proof}
+
+\section{The localization and purity package}
+\label{sec:localization-purity-package}
+
+
+\begin{theorem}[Localization, purity, and nil-invariance]
+\label{thm:localization-purity-nil-invariance-package}
+Let \(S\) be a quasi-compact quasi-separated spectral scheme, and let
+\[
+    Z
+    \xrightarrow{i}
+    S
+    \xleftarrow{j}
+    U
+\]
+be a complementary closed--open pair with \(j\) quasi-compact.  Then
+the following structures and properties are canonically available.
+\begin{enumerate}[label=(\roman*)]
+    \item For every \(F\in\mathbf H(S)\), the localization square
+    \[
+    \begin{tikzcd}[column sep=large, row sep=large]
+        j_\sharp j^*F
+            \arrow[r]
+            \arrow[d]
+        &
+        F
+            \arrow[d]
+        \\
+        j_\sharp(*_U)
+            \arrow[r]
+        &
+        i_*i^*F
+    \end{tikzcd}
+    \]
+    is cocartesian.
+
+    \item For every \(F\in\mathbf H_\bullet(S)\), there are natural
+    localization sequences
+    \[
+        j_\sharp j^*F
+        \longrightarrow
+        F
+        \longrightarrow
+        i_*i^*F
+    \]
+    and
+    \[
+        i_*i^!F
+        \longrightarrow
+        F
+        \longrightarrow
+        j_*j^*F.
+    \]
+
+    \item The functors \(i_*,j_\sharp,j_*\) are fully faithful, and
+    \[
+        i_*
+        \colon
+        \mathbf H_\bullet(Z)
+        \xrightarrow{\simeq}
+        \mathbf H_{\bullet,Z}(S)
+    \]
+    is an equivalence.
+
+    \item Closed base change holds:
+    for every Cartesian square
+    \[
+    \begin{tikzcd}
+        Y \arrow[r, "k"] \arrow[d, "g"']
+        &
+        X \arrow[d, "f"]
+        \\
+        Z \arrow[r, "i"']
+        &
+        S
+    \end{tikzcd}
+    \]
+    there is a canonical equivalence
+    \[
+        f^*i_*
+        \simeq
+        k_*g^*
+    \]
+    on unpointed and pointed motivic spaces.
+
+    \item The pointed closed projection formula holds:
+    for
+    \[
+        F\in\mathbf H_\bullet(Z),
+        \qquad
+        G\in\mathbf H_\bullet(S),
+    \]
+    there is a canonical equivalence
+    \[
+        i_*F\wedge_SG
+        \simeq
+        i_*
+        \bigl(
+            F\wedge_Zi^*G
+        \bigr).
+    \]
+
+    \item Pointed smooth--closed exchange holds:
+    for every Cartesian square
+    \[
+    \begin{tikzcd}
+        Y \arrow[r, "k"] \arrow[d, "q"']
+        &
+        X \arrow[d, "p"]
+        \\
+        Z \arrow[r, "i"']
+        &
+        S
+    \end{tikzcd}
+    \]
+    with \(p\) smooth and of finite presentation, there is a canonical
+    equivalence
+    \[
+        p_{\sharp,\bullet}k_*
+        \simeq
+        i_*q_{\sharp,\bullet}
+    \]
+    of functors
+    \[
+        \mathbf H_\bullet(Y)
+        \longrightarrow
+        \mathbf H_\bullet(S).
+    \]
+
+    \item For every smooth closed pair
+    \[
+        Z
+        \hookrightarrow
+        X
+    \]
+    over \(S\), there is a canonical homotopy-purity equivalence
+    \[
+        X/(X\setminus Z)
+        \simeq
+        \operatorname{Th}_S(\mathbb N_{Z/X}).
+    \]
+
+    \item The theory is derived nilpotent invariant:
+    \[
+        \mathbf H(S)
+        \simeq
+        \mathbf H(S_{\mathrm{cl}}),
+        \qquad
+        \mathbf H_\bullet(S)
+        \simeq
+        \mathbf H_\bullet(S_{\mathrm{cl}}).
+    \]
+
+    \item There are natural classical comparison equivalences
+    \[
+        \mathbf H(S)
+        \simeq
+        \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}})
+    \]
+    and
+    \[
+        \mathbf H_\bullet(S)
+        \simeq
+        \mathbf H_{\mathrm{cl},\bullet}(S_{\mathrm{cl}}).
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Localization is
+\Ref{thm:spectral-morel-voevodsky-localization}.
+The pointed localization sequences are
+\Ref{thm:pointed-localization-cofiber-sequence}
+and
+\Ref{thm:pointed-localization-fiber-sequence}.
+Recollement and support are
+\Ref{thm:closed-open-recollement}
+and
+\Ref{thm:closed-support-kashiwara}.
+Closed base change, the pointed closed projection formula, and pointed
+smooth--closed exchange are
+\Ref{thm:unstable-closed-base-change},
+\Ref{thm:unstable-closed-projection-formula}, and
+\Ref{thm:unstable-smooth-closed-base-change}.
+Homotopy purity is
+\Ref{thm:brave-new-homotopy-purity}.
+Derived nilpotent invariance is
+\Ref{thm:derived-nilpotent-invariance},
+and classical comparison is
+\Ref{thm:classical-comparison-brave-new-motivic-spaces}.
+\end{proof}
+
+The constructions of the chapter may be summarized by the recollement
+diagram
+\[
+    \mathbf H_\bullet(Z)
+    \;
+    \substack{
+        \xrightarrow{\ i_*\ }
+        \\
+        \xleftarrow[\ i^*\ ]{}
+        \\
+        \xleftarrow[\ i^!\ ]{}
+    }
+    \;
+    \mathbf H_\bullet(S)
+    \;
+    \substack{
+        \xrightarrow{\ j^*\ }
+        \\
+        \xleftarrow[\ j_\sharp\ ]{}
+        \\
+        \xleftarrow[\ j_*\ ]{}
+    }
+    \;
+    \mathbf H_\bullet(U),
+\]
+the purity equivalence
+\[
+    X/(X\setminus Z)
+    \simeq
+    \operatorname{Th}_S(\mathbb N_{Z/X}),
+\]
+and the truncation equivalence
+\[
+    \mathbf H(S)
+    \simeq
+    \mathbf H_{\mathrm{cl}}(S_{\mathrm{cl}}).
+\]
+
+The next chapter stabilizes
+\[
+    \mathbf H_\bullet(S)
+\]
+by Thom spaces.  The localization sequences then become exact triangles,
+homotopy purity supplies the geometric Thom identifications, and the
+closed exchange formulas become the first exceptional component of the
+stable six-operation formalism.

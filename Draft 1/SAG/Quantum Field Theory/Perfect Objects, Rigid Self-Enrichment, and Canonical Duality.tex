@@ -1,0 +1,4343 @@
+\chapter{Perfect Objects, Rigid Self-Enrichment, and Canonical Duality}
+\label{chap:perfect-rigid-enrichment}
+\label{chap:perfect-rigid-poincare}
+
+\section{Purpose and standing conventions}
+\label{sec:perfect-rigid-purpose}
+\label{sec:perfect-poincare-purpose}
+
+This chapter develops the rigid structures carried by the relative module
+and quasi-coherent categories constructed in
+\Ref{chap:relative-ag-monoidal-syntax}. Its central object is the full
+subcategory
+\[
+    \Perf(A)
+    :=
+    \Mod_A(\V)^{\mathrm{dual}}
+\]
+of dualizable modules over a commutative algebra object
+\[
+    A\in\CAlg(\V).
+\]
+
+The passage from
+\[
+    \Mod_A(\V)
+\]
+to
+\[
+    \Perf(A)
+\]
+converts the ambient closed symmetric monoidal structure into a rigid
+self-enriched structure. In particular, for
+\[
+    M\in\Perf(A),
+    \qquad
+    N\in\Mod_A(\V),
+\]
+the internal Hom is represented by tensoring with the dual:
+\[
+    \HHom_A(M,N)
+    \simeq
+    M^\vee\otimes_A N.
+\]
+
+The chapter separates and then recombines three layers:
+\begin{enumerate}[label=(\roman*)]
+    \item the closed self-enrichment of the ambient categories
+    \[
+        \V
+        \qquad\text{and}\qquad
+        \Mod_A(\V);
+    \]
+
+    \item the rigid stable symmetric monoidal categories
+    \[
+        \Perf(A)
+        \qquad\text{and}\qquad
+        \Perf(X),
+    \]
+    together with their affine and stackwise pullback functoriality;
+
+    \item the canonical symmetric bilinear pairing, the coherent rigid
+    duality it represents, enriched dualization, cocomposition, and the
+    perfect trace pairing.
+\end{enumerate}
+
+The canonical duality is not introduced merely as an objectwise operation.
+It is constructed from the symmetric bilinear functor
+\[
+    \mathbb B_A(M,N)
+    :=
+    \map_{\Perf(A)}
+    \bigl(
+        M\otimes_A N,
+        A
+    \bigr),
+\]
+whose symmetry is induced by the braiding of
+\[
+    \Perf(A).
+\]
+Its right representing functor is dualization,
+\[
+    D_A
+    :=
+    (-)^\vee
+    \colon
+    \Perf(A)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Perf(A).
+\]
+The coherent symmetry of
+\[
+    \mathbb B_A
+\]
+supplies
+\[
+    D_A
+\]
+with its full coherent duality structure, including biduality and all
+higher
+\[
+    C_2
+\]
+-coherences.
+
+The categorical, mapping-space, coherence, universe, and sheaf conventions
+of
+\Ref{chap:relative-ag-monoidal-syntax}
+remain in force.
+
+\begin{convention}[Higher coherence in the rigid layer]
+\label{conv:rigid-higher-coherence}
+In addition to
+\Ref{conv:higher-coherence},
+duality, biduality, enrichment, enriched dualization, cocomposition, trace,
+and cyclicity data are always understood together with all required
+coherent higher homotopies.
+
+Whenever such data are suppressed from the notation, their existence is
+supplied by a rigid, enriched, or symmetric-bilinear construction, by a
+universal property with contractible choice space, or by an explicitly
+cited coherence theorem.
+\end{convention}
+
+\begin{convention}[Perfect categorical tensor products]
+\label{conv:perfect-categorical-tensor-product}
+The notation
+\[
+    \Cat_\infty^{\mathrm{perf}}
+\]
+denotes the $\infty$-category of small stable idempotent-complete
+$\infty$-categories and exact functors. It is equipped with the symmetric
+monoidal tensor product characterized by the natural equivalence
+\[
+    \Fun^{\mathrm{ex}}
+    \bigl(
+        \mathcal C\otimes\mathcal D,
+        \mathcal E
+    \bigr)
+    \simeq
+    \Fun^{\mathrm{biex}}
+    \bigl(
+        \mathcal C\times\mathcal D,
+        \mathcal E
+    \bigr),
+\]
+where the right-hand side denotes functors exact separately in each
+variable.
+
+Accordingly,
+\[
+    \CAlg(\Cat_\infty^{\mathrm{perf}})
+\]
+is formed using this tensor product. Its objects are small stable
+idempotent-complete symmetric monoidal $\infty$-categories whose tensor
+products are exact separately in each variable, and its morphisms are
+exact strong symmetric monoidal functors.
+
+Let
+\[
+    \omega_{\mathrm{perf}}
+    \colon
+    \CAlg(\Cat_\infty^{\mathrm{perf}})
+    \longrightarrow
+    \CAlg(\Cat_\infty)
+\]
+denote the structural forgetful functor. It sends a small stable
+idempotent-complete symmetric monoidal $\infty$-category with biexact
+tensor product to its underlying symmetric monoidal $\infty$-category,
+and it sends an exact strong symmetric monoidal functor to its underlying
+strong symmetric monoidal functor.
+
+Thus
+\[
+    \omega_{\mathrm{perf}}
+\]
+forgets stability, idempotent completeness, and exactness while retaining
+the underlying symmetric monoidal structures and strong symmetric
+monoidal functors. It is not being defined by applying
+\[
+    \CAlg(-)
+\]
+to a symmetric monoidal inclusion between
+\[
+    \Cat_\infty^{\mathrm{perf}}
+\]
+with its perfect categorical tensor product and
+\[
+    \Cat_\infty
+\]
+with its Cartesian symmetric monoidal structure.
+
+All occurrences of
+\[
+    \Cat_\infty^{\mathrm{perf}}
+\]
+are formed in a universe sufficiently large that every perfect category
+under consideration is small in that universe.
+\end{convention}
+
+\section{Closed self-enrichment of the ambient module categories}
+\label{sec:closed-self-enrichment-before-perfect-restriction}
+
+The ambient closed symmetric monoidal structures already carry canonical
+self-enrichments. The perfect layer is obtained by restricting those
+enrichments to dualizable objects.
+
+\begin{proposition}[Canonical self-enrichment]
+\label{prop:ambient-self-enrichment}
+The closed symmetric monoidal structure on
+\[
+    \V
+\]
+determines a canonical
+\[
+    \V
+\]
+-enriched $\infty$-category whose objects are the objects of
+\[
+    \V
+\]
+and whose enriched Hom objects are
+\[
+    \underline{\V}(X,Y)
+    :=
+    \HHom_{\V}(X,Y).
+\]
+
+For every finite string
+\[
+    X_0,X_1,\ldots,X_n
+    \in
+    \V
+\]
+with
+\[
+    n\geq1,
+\]
+there is a canonical $n$-ary composition morphism
+\[
+\begin{aligned}
+    c_{X_0,\ldots,X_n}
+    \colon{}&
+    \HHom_{\V}(X_{n-1},X_n)
+    \otimes
+    \cdots
+    \otimes
+    \HHom_{\V}(X_0,X_1)
+    \\
+    &\longrightarrow
+    \HHom_{\V}(X_0,X_n).
+\end{aligned}
+\]
+For
+\[
+    n=0,
+\]
+the corresponding nullary operation is the enriched identity
+\[
+    \mathbf 1_{\V}
+    \longrightarrow
+    \HHom_{\V}(X_0,X_0).
+\]
+These operations satisfy all associative and unital higher coherences.
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:ambient-closedness},
+the symmetric monoidal $\infty$-category
+\[
+    \V
+\]
+is closed. The canonical self-enrichment construction for a closed
+symmetric monoidal $\infty$-category therefore supplies a
+\[
+    \V
+\]
+-enriched $\infty$-category whose enriched Hom objects are
+\[
+    \underline{\V}(X,Y)
+    =
+    \HHom_{\V}(X,Y).
+\]
+
+For
+\[
+    n\geq1,
+\]
+consider the iterated evaluation morphism
+\[
+\begin{aligned}
+    &
+    \HHom_{\V}(X_{n-1},X_n)
+    \otimes
+    \cdots
+    \otimes
+    \HHom_{\V}(X_0,X_1)
+    \otimes
+    X_0
+    \\
+    &\qquad\longrightarrow
+    \HHom_{\V}(X_{n-1},X_n)
+    \otimes
+    \cdots
+    \otimes
+    X_1
+    \\
+    &\qquad\longrightarrow
+    \cdots
+    \longrightarrow
+    X_n.
+\end{aligned}
+\]
+Adjunction with respect to
+\[
+    -\otimes X_0
+    \dashv
+    \HHom_{\V}(X_0,-)
+\]
+gives the composition morphism
+\[
+\begin{aligned}
+    c_{X_0,\ldots,X_n}
+    \colon{}&
+    \HHom_{\V}(X_{n-1},X_n)
+    \otimes
+    \cdots
+    \otimes
+    \HHom_{\V}(X_0,X_1)
+    \\
+    &\longrightarrow
+    \HHom_{\V}(X_0,X_n).
+\end{aligned}
+\]
+
+For
+\[
+    n=0,
+\]
+the enriched identity
+\[
+    \mathbf 1_{\V}
+    \longrightarrow
+    \HHom_{\V}(X_0,X_0)
+\]
+is adjoint to the unit equivalence
+\[
+    \mathbf 1_{\V}\otimes X_0
+    \simeq
+    X_0.
+\]
+
+Let
+\[
+    0=i_0<i_1<\cdots<i_r=n
+\]
+be a subdivision of the string
+\[
+    X_0,\ldots,X_n.
+\]
+One may first compose inside the blocks
+\[
+    X_{i_{j-1}},\ldots,X_{i_j}
+\]
+and then compose the resulting enriched morphisms, or apply
+\[
+    c_{X_0,\ldots,X_n}
+\]
+directly. After tensoring either resulting map with
+\[
+    X_0,
+\]
+both composites are canonically identified with the same iterated
+evaluation morphism
+\[
+\begin{aligned}
+    &
+    \HHom_{\V}(X_{n-1},X_n)
+    \otimes
+    \cdots
+    \otimes
+    \HHom_{\V}(X_0,X_1)
+    \otimes
+    X_0
+    \longrightarrow
+    X_n.
+\end{aligned}
+\]
+Adjunction identifies the corresponding composition maps.
+
+For nested subdivisions, the comparison homotopies are obtained by taking
+adjoints of the associativity and unit coherences of iterated evaluation.
+The canonical self-enrichment construction supplies all higher
+compatibilities. See
+\cite{GepnerHaugsengEnrichedInfinityCategories,LurieHigherAlgebra}.
+\end{proof}
+
+\begin{remark}
+\label{rem:closed-not-rigid}
+The existence of the internal Hom does not imply that every object of
+\[
+    \V
+\]
+is dualizable. The equivalence
+\[
+    \HHom_{\V}(X,Y)
+    \simeq
+    X^\vee\otimes Y
+\]
+holds when
+\[
+    X
+\]
+is dualizable.
+\end{remark}
+
+\begin{proposition}[Self-enrichment of the module category]
+\label{prop:module-self-enrichment}
+The category
+\[
+    \Mod_A(\V)
+\]
+is canonically enriched over itself, with enriched Hom objects
+\[
+    \underline{\Mod_A(\V)}(M,N)
+    =
+    \HHom_A(M,N).
+\]
+\end{proposition}
+
+\begin{proof}
+Apply
+\Ref{prop:ambient-self-enrichment}
+to the presentably stable symmetric monoidal category
+\[
+    \Mod_A(\V).
+\]
+\end{proof}
+
+\section{Perfect modules and tensor-dual internal Homs}
+\label{sec:quasi-coherent-perfect}
+
+
+\subsection{Dualizable and perfect modules}
+
+\begin{definition}[Dualizable module]
+\label{def:dualizable-module}
+An
+\[
+    A
+\]
+-module
+\[
+    M
+\]
+is \emph{dualizable} if there exists an
+\[
+    A
+\]
+-module
+\[
+    M^\vee
+\]
+and morphisms
+\[
+    \coev_M
+    \colon
+    A
+    \longrightarrow
+    M\otimes_A M^\vee,
+\]
+\[
+    \ev_M
+    \colon
+    M^\vee\otimes_A M
+    \longrightarrow
+    A
+\]
+satisfying the two triangle identities together with their coherent
+higher homotopies.
+\end{definition}
+
+\begin{definition}[Perfect module]
+\label{def:perfect-module}
+The full subcategory of perfect
+\[
+    A
+\]
+-modules is
+\[
+    \Perf(A)
+    :=
+    \Mod_A(\V)^{\mathrm{dual}}.
+\]
+\end{definition}
+
+\begin{remark}[Perfect versus compact]
+\label{rem:perfect-versus-compact}
+Perfectness is defined here by dualizability.
+
+For an $\EE_\infty$-ring spectrum
+\[
+    A,
+\]
+an object of
+\[
+    \Mod_A(\Sp)
+\]
+is dualizable if and only if it is compact. Thus the present definition
+recovers the usual category of perfect $A$-modules.
+
+For module categories internal to a general presentably stable symmetric
+monoidal category
+\[
+    \V,
+\]
+compactness and dualizability need not coincide. No such identification is
+used in this chapter.
+\end{remark}
+
+
+\subsection{Closure properties of perfect modules}
+
+\begin{lemma}[Closure properties of perfect modules]
+\label{lem:perfect-closed-tensor-dual}
+The category
+\[
+    \Perf(A)
+\]
+is closed under equivalences, finite tensor products, duals, all shifts,
+cofibres, and retracts.
+\end{lemma}
+
+\begin{proof}
+Closure under equivalences is immediate.
+
+If
+\[
+    M
+    \qquad\text{and}\qquad
+    N
+\]
+are dualizable, then
+\[
+    M\otimes_A N
+\]
+is dualizable with
+\[
+    (M\otimes_A N)^\vee
+    \simeq
+    N^\vee\otimes_A M^\vee.
+\]
+Evaluation and coevaluation are obtained by tensoring the duality data for
+\[
+    M
+    \qquad\text{and}\qquad
+    N
+\]
+and contracting the corresponding dual pairs.
+
+The dual of a dualizable object is dualizable, and the canonical
+biduality map gives
+\[
+    (M^\vee)^\vee
+    \simeq
+    M.
+\]
+
+The zero object is dualizable, with dual the zero object.
+
+We next prove closure under all shifts. Since tensoring is exact, there are
+canonical equivalences
+\[
+    (\Sigma^rX)\otimes_A(\Sigma^sY)
+    \simeq
+    \Sigma^{r+s}(X\otimes_A Y)
+\]
+for all
+\[
+    r,s\in\mathbb Z.
+\]
+In particular,
+\[
+    (\Sigma^nA)\otimes_A(\Sigma^{-n}A)
+    \simeq
+    A
+\]
+and
+\[
+    (\Sigma^{-n}A)\otimes_A(\Sigma^nA)
+    \simeq
+    A.
+\]
+Thus
+\[
+    \Sigma^nA
+\]
+is tensor-invertible, with tensor inverse
+\[
+    \Sigma^{-n}A,
+\]
+and is therefore dualizable. For every dualizable
+\[
+    M,
+\]
+one has
+\[
+    \Sigma^nM
+    \simeq
+    (\Sigma^nA)\otimes_A M.
+\]
+Hence
+\[
+    \Sigma^nM
+\]
+is dualizable for every
+\[
+    n\in\mathbb Z.
+\]
+Moreover,
+\[
+\begin{aligned}
+    (\Sigma^nM)^\vee
+    &\simeq
+    \bigl(
+        (\Sigma^nA)\otimes_A M
+    \bigr)^\vee
+    \\
+    &\simeq
+    M^\vee\otimes_A(\Sigma^nA)^\vee
+    \\
+    &\simeq
+    M^\vee\otimes_A\Sigma^{-n}A
+    \\
+    &\simeq
+    \Sigma^{-n}M^\vee.
+\end{aligned}
+\]
+
+We next prove closure under cofibres. Let
+\[
+    M
+    \xrightarrow{u}
+    N
+    \longrightarrow
+    P
+\]
+be a cofiber sequence with
+\[
+    M
+    \qquad\text{and}\qquad
+    N
+\]
+dualizable. Dualizing
+\[
+    u
+\]
+gives a morphism
+\[
+    u^\vee
+    \colon
+    N^\vee
+    \longrightarrow
+    M^\vee.
+\]
+Define
+\[
+    P^\vee
+    :=
+    \fib(u^\vee).
+\]
+
+For every
+\[
+    X\in\Mod_A(\V),
+\]
+exactness of tensoring gives
+\[
+\begin{aligned}
+    P^\vee\otimes_A X
+    &\simeq
+    \fib
+    \left(
+        N^\vee\otimes_A X
+        \longrightarrow
+        M^\vee\otimes_A X
+    \right)
+    \\
+    &\simeq
+    \fib
+    \left(
+        \HHom_A(N,X)
+        \longrightarrow
+        \HHom_A(M,X)
+    \right).
+\end{aligned}
+\]
+
+We identify the last fibre with
+\[
+    \HHom_A(P,X).
+\]
+For every
+\[
+    L\in\Mod_A(\V),
+\]
+one has
+\[
+\begin{aligned}
+    &
+    \Map_{\Mod_A(\V)}
+    \left(
+        L,
+        \fib
+        \left(
+            \HHom_A(N,X)
+            \longrightarrow
+            \HHom_A(M,X)
+        \right)
+    \right)
+    \\
+    &\qquad\simeq
+    \fib
+    \left(
+        \Map_{\Mod_A(\V)}
+        \bigl(
+            L\otimes_A N,
+            X
+        \bigr)
+        \longrightarrow
+        \Map_{\Mod_A(\V)}
+        \bigl(
+            L\otimes_A M,
+            X
+        \bigr)
+    \right)
+    \\
+    &\qquad\simeq
+    \Map_{\Mod_A(\V)}
+    \bigl(
+        L\otimes_A P,
+        X
+    \bigr)
+    \\
+    &\qquad\simeq
+    \Map_{\Mod_A(\V)}
+    \bigl(
+        L,
+        \HHom_A(P,X)
+    \bigr).
+\end{aligned}
+\]
+The middle equivalence uses exactness of
+\[
+    L\otimes_A-.
+\]
+The Yoneda lemma therefore gives a natural equivalence
+\[
+    P^\vee\otimes_A X
+    \xrightarrow{\;\simeq\;}
+    \HHom_A(P,X).
+\]
+
+Consequently,
+\[
+    -\otimes_A P
+    \dashv
+    -\otimes_A P^\vee.
+\]
+The unit and counit of this adjunction, evaluated at
+\[
+    A,
+\]
+are morphisms
+\[
+    \coev_P
+    \colon
+    A
+    \longrightarrow
+    P\otimes_A P^\vee
+\]
+and
+\[
+    \ev_P
+    \colon
+    P^\vee\otimes_A P
+    \longrightarrow
+    A.
+\]
+Their triangle identities are the unit--counit identities of the
+adjunction. Hence
+\[
+    P
+\]
+is dualizable with dual
+\[
+    P^\vee.
+\]
+
+Finally, suppose that
+\[
+    M
+    \xrightarrow{i}
+    N
+    \xrightarrow{r}
+    M
+\]
+exhibits
+\[
+    M
+\]
+as a retract of a dualizable object
+\[
+    N,
+\]
+so that
+\[
+    r i
+    \simeq
+    \id_M.
+\]
+Let
+\[
+    e
+    :=
+    i r
+    \colon
+    N
+    \longrightarrow
+    N.
+\]
+The dual idempotent
+\[
+    e^\vee
+    \colon
+    N^\vee
+    \longrightarrow
+    N^\vee
+\]
+splits because
+\[
+    \Mod_A(\V)
+\]
+is idempotent complete. Choose a splitting
+\[
+    M'
+    \xrightarrow{j}
+    N^\vee
+    \xrightarrow{s}
+    M'
+\]
+with
+\[
+    s j
+    \simeq
+    \id_{M'},
+    \qquad
+    j s
+    \simeq
+    e^\vee.
+\]
+
+Define
+\[
+    \ev_M
+    \colon
+    M'\otimes_A M
+    \xrightarrow{j\otimes i}
+    N^\vee\otimes_A N
+    \xrightarrow{\ev_N}
+    A
+\]
+and
+\[
+    \coev_M
+    \colon
+    A
+    \xrightarrow{\coev_N}
+    N\otimes_A N^\vee
+    \xrightarrow{r\otimes s}
+    M\otimes_A M'.
+\]
+
+The idempotents
+\[
+    e
+    \qquad\text{and}\qquad
+    e^\vee
+\]
+are mates under the duality of
+\[
+    N.
+\]
+Consequently,
+\[
+    \ev_N
+    \circ
+    \bigl(
+        e^\vee\otimes\id_N
+    \bigr)
+    \simeq
+    \ev_N
+    \circ
+    \bigl(
+        \id_{N^\vee}\otimes e
+    \bigr)
+\]
+and
+\[
+    \bigl(
+        e\otimes\id_{N^\vee}
+    \bigr)
+    \circ
+    \coev_N
+    \simeq
+    \bigl(
+        \id_N\otimes e^\vee
+    \bigr)
+    \circ
+    \coev_N.
+\]
+Using
+\[
+    r i\simeq\id_M,
+    \qquad
+    i r\simeq e,
+    \qquad
+    s j\simeq\id_{M'},
+    \qquad
+    j s\simeq e^\vee,
+\]
+the two triangle composites for
+\[
+    M
+    \qquad\text{and}\qquad
+    M'
+\]
+reduce to the triangle identities for
+\[
+    N
+    \qquad\text{and}\qquad
+    N^\vee.
+\]
+Thus
+\[
+    M'
+\]
+is a dual of
+\[
+    M.
+\]
+\end{proof}
+
+
+\subsection{The stable rigid category of perfect modules}
+
+\begin{proposition}[Stability of the perfect category]
+\label{prop:perfect-stable}
+The category
+\[
+    \Perf(A)
+\]
+is a stable idempotent-complete symmetric monoidal $\infty$-category.
+Its tensor product is exact separately in each variable.
+\end{proposition}
+
+\begin{proof}
+The tensor unit
+\[
+    A
+\]
+is dualizable. The zero object is dualizable, with dual the zero object.
+By
+\Ref{lem:perfect-closed-tensor-dual},
+the full subcategory
+\[
+    \Perf(A)
+\]
+is closed under all shifts, cofibres, tensor products, and retracts. It is
+therefore stable and idempotent complete.
+
+Its tensor product is the restriction of the tensor product on
+\[
+    \Mod_A(\V).
+\]
+Since tensoring in
+\[
+    \Mod_A(\V)
+\]
+is exact separately in each variable, its restriction to
+\[
+    \Perf(A)
+\]
+is exact separately in each variable.
+\end{proof}
+
+
+\subsection{Tensor-dual realization of internal Homs}
+
+\begin{theorem}[Tensor-dual realization of the internal Hom]
+\label{thm:tensor-dual-internal-hom}
+Let
+\[
+    M\in\Perf(A),
+    \qquad
+    N\in\Mod_A(\V).
+\]
+There is a canonical natural equivalence
+\[
+    M^\vee\otimes_A N
+    \xrightarrow{\;\simeq\;}
+    \HHom_A(M,N).
+\]
+Equivalently, there is a canonical equivalence of functors
+\[
+    M^\vee\otimes_A-
+    \xrightarrow{\;\simeq\;}
+    \HHom_A(M,-).
+\]
+\end{theorem}
+
+\begin{proof}
+The duality of
+\[
+    M
+\]
+gives an adjunction
+\[
+    -\otimes_A M
+    \dashv
+    -\otimes_A M^\vee.
+\]
+The closed structure on
+\[
+    \Mod_A(\V)
+\]
+gives an adjunction
+\[
+    -\otimes_A M
+    \dashv
+    \HHom_A(M,-).
+\]
+Right adjoints to a fixed functor are unique through a contractible space
+of choices. Therefore there is a canonical natural equivalence
+\[
+    M^\vee\otimes_A-
+    \xrightarrow{\;\simeq\;}
+    \HHom_A(M,-).
+\]
+Evaluating at
+\[
+    N
+\]
+gives the stated equivalence.
+\end{proof}
+
+\begin{corollary}
+\label{cor:perfect-internal-hom}
+If
+\[
+    M,N\in\Perf(A),
+\]
+then
+\[
+    \HHom_A(M,N)
+    \in
+    \Perf(A).
+\]
+\end{corollary}
+
+\begin{proof}
+By
+\Ref{thm:tensor-dual-internal-hom},
+\[
+    \HHom_A(M,N)
+    \simeq
+    M^\vee\otimes_A N.
+\]
+The right-hand side is dualizable by
+\Ref{lem:perfect-closed-tensor-dual}.
+\end{proof}
+
+\section{Indexed perfect categories and perfect objects on relative stacks}
+\label{sec:indexed-perfect-stacks}
+
+
+\subsection{Affine base change and indexed perfect categories}
+
+\begin{proposition}[Base change of perfect modules]
+\label{prop:base-change-perfect-modules}
+Let
+\[
+    A
+    \longrightarrow
+    B
+\]
+be a morphism in
+\[
+    \CAlg(\V).
+\]
+If
+\[
+    M\in\Perf(A),
+\]
+then
+\[
+    M_B
+    :=
+    M\otimes_A B
+\]
+belongs to
+\[
+    \Perf(B),
+\]
+and there is a canonical equivalence
+\[
+    (M_B)^\vee
+    \simeq
+    M^\vee\otimes_A B.
+\]
+\end{proposition}
+
+\begin{proof}
+Extension of scalars is strong symmetric monoidal by
+\Ref{prop:monoidality-base-change}.
+A strong symmetric monoidal functor carries evaluation, coevaluation, and
+the triangle identities to evaluation, coevaluation, and the triangle
+identities. It therefore preserves dualizable objects and their duals.
+\end{proof}
+
+\begin{proposition}[The indexed perfect category]
+\label{prop:indexed-perfect-category}
+The indexed module category restricts to a functor
+\[
+    \mathbf{Perf}_{\V}
+    \colon
+    \CAlg(\V)
+    \longrightarrow
+    \CAlg(\Cat_\infty^{\mathrm{perf}})
+\]
+given by
+\[
+    A
+    \longmapsto
+    \Perf(A),
+\]
+and
+\[
+    (A\to B)
+    \longmapsto
+    (-\otimes_A B).
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:base-change-perfect-modules},
+extension of scalars preserves dualizable objects and their duality data.
+Hence every morphism
+\[
+    A
+    \longrightarrow
+    B
+\]
+induces a strong symmetric monoidal functor
+\[
+    -\otimes_A B
+    \colon
+    \Perf(A)
+    \longrightarrow
+    \Perf(B).
+\]
+
+Extension of scalars preserves all small colimits on the ambient module
+categories. Since both source and target are stable, it is exact and
+therefore preserves zero objects, fibre sequences, and cofiber sequences.
+Its restriction to perfect objects is consequently exact.
+
+The coherence of composition and units is inherited from the indexed
+module category of
+\Ref{prop:module-indexed-category}.
+Thus the indexed module functor restricts to
+\[
+    \mathbf{Perf}_{\V}
+    \colon
+    \CAlg(\V)
+    \longrightarrow
+    \CAlg(\Cat_\infty^{\mathrm{perf}}).
+\]
+The target is interpreted using
+\Ref{conv:perfect-categorical-tensor-product}.
+\end{proof}
+
+\subsection{Perfect objects on relative stacks}
+
+\begin{definition}[Perfect quasi-coherent object]
+\label{def:perfect-qcoh-object}
+For
+\[
+    X\in\PSh(\Aff),
+\]
+define
+\[
+    \Perf(X)
+    :=
+    \QCoh(X)^{\mathrm{dual}}.
+\]
+\end{definition}
+
+\begin{lemma}[Duality data commute with symmetric monoidal limits]
+\label{lem:duality-data-commute-with-limits}
+Let
+\[
+    F
+    \colon
+    I
+    \longrightarrow
+    \CAlg(\Cat_\infty),
+    \qquad
+    i
+    \longmapsto
+    \mathcal C_i,
+\]
+be a small diagram of symmetric monoidal $\infty$-categories and strong
+symmetric monoidal functors. Let
+\[
+    \mathcal C
+    :=
+    \lim_{i\in I}\mathcal C_i
+\]
+be its limit in
+\[
+    \CAlg(\Cat_\infty).
+\]
+
+For
+\[
+    M=(M_i)_{i\in I}\in\mathcal C,
+\]
+let
+\[
+    \Dual_{\mathcal C}(M)
+\]
+denote the space of choices of a dual of
+\[
+    M,
+\]
+including evaluation, coevaluation, the triangle homotopies, and all
+coherent higher data.
+
+Restriction to the factors induces a natural equivalence
+\[
+    \Dual_{\mathcal C}(M)
+    \xrightarrow{\;\simeq\;}
+    \lim_{i\in I}
+    \Dual_{\mathcal C_i}(M_i).
+\]
+
+Consequently, an object
+\[
+    M\in\mathcal C
+\]
+is dualizable if and only if every component
+\[
+    M_i\in\mathcal C_i
+\]
+is dualizable.
+
+Moreover, restriction induces an equivalence of symmetric monoidal
+$\infty$-categories
+\[
+    \mathcal C^{\mathrm{dual}}
+    \xrightarrow{\;\simeq\;}
+    \lim_{i\in I}
+    \mathcal C_i^{\mathrm{dual}}
+\]
+in
+\[
+    \CAlg(\Cat_\infty).
+\]
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    \operatorname{DualPair}^{\otimes}
+\]
+denote the walking dual pair: the symmetric monoidal $\infty$-category
+freely generated by two objects
+\[
+    x,
+    \qquad
+    x^\vee,
+\]
+together with evaluation and coevaluation morphisms
+\[
+    x^\vee\otimes x
+    \longrightarrow
+    \mathbf 1,
+\]
+\[
+    \mathbf 1
+    \longrightarrow
+    x\otimes x^\vee,
+\]
+and the coherent triangle identities.
+
+For a symmetric monoidal $\infty$-category
+\[
+    \mathcal D,
+\]
+let
+\[
+    \operatorname{DP}(\mathcal D)
+    :=
+    \Map_{\CAlg(\Cat_\infty)}
+    \bigl(
+        \operatorname{DualPair}^{\otimes},
+        \mathcal D
+    \bigr)
+\]
+be its space of dual pairs.
+
+Evaluation at the generating object
+\[
+    x
+\]
+defines a morphism
+\[
+    e_x
+    \colon
+    \operatorname{DP}(\mathcal D)
+    \longrightarrow
+    \mathcal D^\simeq.
+\]
+For
+\[
+    Y\in\mathcal D,
+\]
+the space
+\[
+    \Dual_{\mathcal D}(Y)
+\]
+is the homotopy fibre of
+\[
+    e_x
+\]
+over
+\[
+    Y\in\mathcal D^\simeq.
+\]
+
+Since mapping out of a fixed object preserves limits in the target, the
+limit presentation
+\[
+    \mathcal C
+    \simeq
+    \lim_{i\in I}\mathcal C_i
+\]
+induces an equivalence
+\[
+\begin{aligned}
+    \operatorname{DP}(\mathcal C)
+    &=
+    \Map_{\CAlg(\Cat_\infty)}
+    \bigl(
+        \operatorname{DualPair}^{\otimes},
+        \mathcal C
+    \bigr)
+    \\
+    &\simeq
+    \Map_{\CAlg(\Cat_\infty)}
+    \left(
+        \operatorname{DualPair}^{\otimes},
+        \lim_{i\in I}\mathcal C_i
+    \right)
+    \\
+    &\simeq
+    \lim_{i\in I}
+    \Map_{\CAlg(\Cat_\infty)}
+    \bigl(
+        \operatorname{DualPair}^{\otimes},
+        \mathcal C_i
+    \bigr)
+    \\
+    &=
+    \lim_{i\in I}
+    \operatorname{DP}(\mathcal C_i).
+\end{aligned}
+\]
+
+The maximal-subgroupoid functor
+\[
+    (-)^\simeq
+    \colon
+    \Cat_\infty
+    \longrightarrow
+    \mathcal S
+\]
+is a right adjoint and therefore preserves limits. Hence
+\[
+    \mathcal C^\simeq
+    \simeq
+    \lim_{i\in I}
+    \mathcal C_i^\simeq.
+\]
+
+The evaluation morphism
+\[
+    e_x
+    \colon
+    \operatorname{DP}(\mathcal C)
+    \longrightarrow
+    \mathcal C^\simeq
+\]
+is, under these equivalences, the limit of the evaluation morphisms
+\[
+    e_{x,i}
+    \colon
+    \operatorname{DP}(\mathcal C_i)
+    \longrightarrow
+    \mathcal C_i^\simeq.
+\]
+Taking the homotopy fibre over the compatible object
+\[
+    M=(M_i)_{i\in I}
+\]
+and using that homotopy fibres are limits in
+\[
+    \mathcal S
+\]
+gives the natural equivalence
+\[
+    \Dual_{\mathcal C}(M)
+    \xrightarrow{\;\simeq\;}
+    \lim_{i\in I}
+    \Dual_{\mathcal C_i}(M_i).
+\]
+
+If
+\[
+    M
+\]
+is dualizable in
+\[
+    \mathcal C,
+\]
+then every
+\[
+    M_i
+\]
+is dualizable because each evaluation functor
+\[
+    \ev_i
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal C_i
+\]
+is strong symmetric monoidal.
+
+Conversely, suppose that every
+\[
+    M_i
+\]
+is dualizable. For a fixed dualizable object, the space of complete
+duality data is contractible. Thus every space
+\[
+    \Dual_{\mathcal C_i}(M_i)
+\]
+is contractible. The diagram
+\[
+    i
+    \longmapsto
+    \Dual_{\mathcal C_i}(M_i)
+\]
+is therefore objectwise equivalent to the constant diagram at the terminal
+space. Its limit is contractible and in particular nonempty. The preceding
+equivalence then shows that
+\[
+    \Dual_{\mathcal C}(M)
+\]
+is nonempty. Hence
+\[
+    M
+\]
+is dualizable.
+
+We now compare the full subcategories of dualizable objects.
+
+Restriction along the evaluation functors defines a canonical strong
+symmetric monoidal functor
+\[
+    r
+    \colon
+    \mathcal C^{\mathrm{dual}}
+    \longrightarrow
+    \lim_{i\in I}
+    \mathcal C_i^{\mathrm{dual}}.
+\]
+
+Conversely, the inclusions
+\[
+    \mathcal C_i^{\mathrm{dual}}
+    \hookrightarrow
+    \mathcal C_i
+\]
+induce a canonical strong symmetric monoidal functor
+\[
+    j
+    \colon
+    \lim_{i\in I}
+    \mathcal C_i^{\mathrm{dual}}
+    \longrightarrow
+    \lim_{i\in I}
+    \mathcal C_i
+    \simeq
+    \mathcal C.
+\]
+Every object in the source has dualizable components. By the componentwise
+criterion proved above, its image in
+\[
+    \mathcal C
+\]
+is dualizable. Therefore
+\[
+    j
+\]
+factors canonically through a strong symmetric monoidal functor
+\[
+    \bar j
+    \colon
+    \lim_{i\in I}
+    \mathcal C_i^{\mathrm{dual}}
+    \longrightarrow
+    \mathcal C^{\mathrm{dual}}.
+\]
+
+The composite
+\[
+    r\circ\bar j
+\]
+is canonically equivalent to the identity because its composite with every
+evaluation functor
+\[
+    \lim_{i\in I}
+    \mathcal C_i^{\mathrm{dual}}
+    \longrightarrow
+    \mathcal C_i^{\mathrm{dual}}
+\]
+is the corresponding evaluation functor.
+
+Similarly,
+\[
+    \bar j\circ r
+\]
+is canonically equivalent to the identity on
+\[
+    \mathcal C^{\mathrm{dual}},
+\]
+because the inclusion
+\[
+    \mathcal C^{\mathrm{dual}}
+    \hookrightarrow
+    \mathcal C
+\]
+is fully faithful and the two functors become canonically equivalent after
+composition with every evaluation
+\[
+    \mathcal C
+    \longrightarrow
+    \mathcal C_i.
+\]
+The universal property of the limit supplies the resulting coherent
+equivalences of functors.
+
+Thus
+\[
+    r
+    \colon
+    \mathcal C^{\mathrm{dual}}
+    \xrightarrow{\;\simeq\;}
+    \lim_{i\in I}
+    \mathcal C_i^{\mathrm{dual}}
+\]
+is an equivalence in
+\[
+    \CAlg(\Cat_\infty).
+\]
+\end{proof}
+
+
+\subsection{Affine-point reconstruction}
+
+\begin{proposition}[Perfect objects are computed from affine points]
+\label{prop:perfect-limit-description}
+Let
+\[
+    X\in\PSh(\Aff).
+\]
+The symmetric monoidal limit presentation
+\[
+    \QCoh(X)
+    \simeq
+    \lim_{
+        (U\to X)\in(\Aff_{/X})^{\op}
+    }
+    \QCoh(U)
+\]
+induces an equivalence
+\[
+    \Perf(X)
+    \xrightarrow{\;\simeq\;}
+    \lim_{
+        (U\to X)\in(\Aff_{/X})^{\op}
+    }
+    \Perf(U)
+\]
+in
+\[
+    \CAlg(\Cat_\infty).
+\]
+
+More precisely, for every
+\[
+    M\in\QCoh(X),
+\]
+there is a natural equivalence
+\[
+    \Dual_{\QCoh(X)}(M)
+    \simeq
+    \lim_{
+        (U\to X)\in(\Aff_{/X})^{\op}
+    }
+    \Dual_{\QCoh(U)}(M|_U).
+\]
+In particular,
+\[
+    M
+\]
+is perfect if and only if every restriction
+\[
+    M|_U
+\]
+is perfect.
+\end{proposition}
+
+\begin{proof}
+The displayed description of
+\[
+    \QCoh(X)
+\]
+is a limit in
+\[
+    \CAlg(\Cat_\infty),
+\]
+whose transition functors are strong symmetric monoidal
+extension-of-scalars functors. Applying
+\Ref{lem:duality-data-commute-with-limits}
+gives
+\[
+    \Dual_{\QCoh(X)}(M)
+    \simeq
+    \lim_{
+        (U\to X)\in(\Aff_{/X})^{\op}
+    }
+    \Dual_{\QCoh(U)}(M|_U).
+\]
+It follows that
+\[
+    M
+\]
+is dualizable in
+\[
+    \QCoh(X)
+\]
+if and only if every restriction
+\[
+    M|_U
+\]
+is dualizable in
+\[
+    \QCoh(U).
+\]
+
+The tensor products and transition functors on the full subcategories of
+dualizable objects are the restrictions of the corresponding structures
+on the ambient categories. Hence
+\Ref{lem:duality-data-commute-with-limits}
+also supplies the asserted equivalence in
+\[
+    \CAlg(\Cat_\infty).
+\]
+\end{proof}
+
+\begin{remark}[Affine points versus atlas descent]
+\label{rem:perfect-affine-points-versus-descent}
+The equivalence of
+\Ref{prop:perfect-limit-description}
+is indexed by the full category of affine points of
+\[
+    X.
+\]
+It does not by itself imply that
+\[
+    \Perf(X)
+\]
+can be computed from a selected
+\[
+    \tau
+\]
+-atlas or from its \v{C}ech nerve. Such a reduction requires the
+corresponding descent theorem for
+\[
+    \QCoh.
+\]
+\end{remark}
+
+
+\subsection{Stability, rigidity, and pullback functoriality}
+
+\begin{proposition}[Stability and monoidality of perfect objects]
+\label{prop:perfect-stable-monoidal}
+For every
+\[
+    X\in\PSh(\Aff),
+\]
+the $\infty$-category
+\[
+    \Perf(X)
+\]
+is stable and idempotent complete. Its tensor product is exact separately
+in each variable, and the inclusion
+\[
+    \Perf(X)
+    \hookrightarrow
+    \QCoh(X)
+\]
+is exact and strong symmetric monoidal.
+
+Consequently,
+\[
+    \Perf(X)
+\]
+is a rigid stable symmetric monoidal $\infty$-category. In particular, it
+is canonically enriched over itself, with enriched Hom object
+\[
+    \underline{\Perf(X)}(M,N)
+    \simeq
+    M^\vee\otimes N.
+\]
+
+Moreover, the equivalence of
+\Ref{prop:perfect-limit-description}
+upgrades canonically to an equivalence
+\[
+    \Perf(X)
+    \xrightarrow{\;\simeq\;}
+    \lim_{
+        (U\to X)\in(\Aff_{/X})^{\op}
+    }
+    \Perf(U)
+\]
+in
+\[
+    \CAlg(\Cat_\infty^{\mathrm{perf}}).
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:perfect-limit-description},
+there is an equivalence of symmetric monoidal $\infty$-categories
+\[
+    \Perf(X)
+    \simeq
+    \lim_{
+        (U\to X)\in(\Aff_{/X})^{\op}
+    }
+    \Perf(U)
+\]
+in
+\[
+    \CAlg(\Cat_\infty).
+\]
+
+After forgetting the symmetric monoidal structures, the right-hand side
+is a limit in
+\[
+    \Cat_\infty.
+\]
+Every category
+\[
+    \Perf(U)
+\]
+is stable, and every transition functor is exact. Hence zero objects,
+fibres, and cofibres in the limit are computed componentwise.
+
+More explicitly, let
+\[
+    M\longrightarrow N\longrightarrow P
+\]
+be a diagram in the limit. It is a cofiber sequence if and only if its
+evaluation at every affine point is a cofiber sequence. Since every
+\[
+    \Perf(U)
+\]
+is stable, the evaluated sequence is also a fibre sequence. Limits and
+equivalences in the limit category are detected componentwise, so the
+original sequence is a fibre sequence. Thus the limit category is stable.
+
+We next verify idempotent completeness. Let
+\[
+    e
+    \colon
+    M
+    \longrightarrow
+    M
+\]
+be an idempotent in the limit. Every component
+\[
+    e_U
+    \colon
+    M_U
+    \longrightarrow
+    M_U
+\]
+splits because
+\[
+    \Perf(U)
+\]
+is idempotent complete.
+
+The space of splittings of an idempotent is obtained as a fibre of the
+space of functors from the walking retraction
+\[
+    M
+    \xrightarrow{i}
+    N
+    \xrightarrow{r}
+    M,
+    \qquad
+    r i\simeq\id_M.
+\]
+Mapping out of this fixed finite category preserves limits. Consequently,
+the space of splittings of
+\[
+    e
+\]
+is the limit of the spaces of splittings of the
+\[
+    e_U.
+\]
+Each of the latter spaces is contractible. Their limit is therefore
+contractible and in particular nonempty. Hence
+\[
+    e
+\]
+splits, and
+\[
+    \Perf(X)
+\]
+is idempotent complete.
+
+The tensor product is computed componentwise:
+\[
+    (M\otimes N)|_U
+    \simeq
+    M|_U\otimes N|_U.
+\]
+For fixed
+\[
+    M,
+\]
+let
+\[
+    N'\longrightarrow N\longrightarrow N''
+\]
+be a cofiber sequence in
+\[
+    \Perf(X).
+\]
+After evaluation at every affine point,
+\[
+    M|_U\otimes N'|_U
+    \longrightarrow
+    M|_U\otimes N|_U
+    \longrightarrow
+    M|_U\otimes N''|_U
+\]
+is a cofiber sequence because tensoring in
+\[
+    \Perf(U)
+\]
+is exact. Therefore
+\[
+    M\otimes N'
+    \longrightarrow
+    M\otimes N
+    \longrightarrow
+    M\otimes N''
+\]
+is a cofiber sequence in
+\[
+    \Perf(X).
+\]
+The same argument applies in the other variable.
+
+The inclusion
+\[
+    \Perf(X)
+    \hookrightarrow
+    \QCoh(X)
+\]
+preserves zero objects and cofiber sequences because these are computed in
+the ambient category and detected componentwise. It is therefore exact.
+
+The monoidal unit of
+\[
+    \QCoh(X)
+\]
+is dualizable, and dualizable objects are closed under tensor products.
+Hence
+\[
+    \Perf(X)
+    \hookrightarrow
+    \QCoh(X)
+\]
+is strong symmetric monoidal.
+
+Every object of
+\[
+    \Perf(X)
+\]
+is dualizable by definition, so
+\[
+    \Perf(X)
+\]
+is rigid. For
+\[
+    P,M,N\in\Perf(X),
+\]
+duality gives natural equivalences
+\[
+    \Map_{\Perf(X)}
+    \bigl(
+        P,
+        M^\vee\otimes N
+    \bigr)
+    \simeq
+    \Map_{\Perf(X)}
+    \bigl(
+        P\otimes M,
+        N
+    \bigr).
+\]
+Thus
+\[
+    M^\vee\otimes N
+\]
+represents the internal Hom functor in
+\[
+    \Perf(X),
+\]
+and the canonical closed self-enrichment has
+\[
+    \underline{\Perf(X)}(M,N)
+    \simeq
+    M^\vee\otimes N.
+\]
+
+Finally, the preceding argument shows that the limit formed in
+\[
+    \CAlg(\Cat_\infty)
+\]
+is stable and idempotent complete and has tensor product exact separately.
+A strong symmetric monoidal functor into this limit is exact if and only if
+its composites with all affine evaluation functors are exact, since finite
+limits and colimits are computed componentwise. Hence this object also
+satisfies the universal property of the limit in
+\[
+    \CAlg(\Cat_\infty^{\mathrm{perf}}).
+\]
+This gives the asserted upgrade.
+\end{proof}
+
+\begin{proposition}[Functoriality of perfect objects]
+\label{prop:perfect-stack-functoriality}
+The quasi-coherent pullback functors restrict to a functor
+\[
+    \Perf
+    \colon
+    \PSh(\Aff)^{\op}
+    \longrightarrow
+    \CAlg(\Cat_\infty^{\mathrm{perf}}).
+\]
+
+For a morphism
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    Y,
+\]
+its value is the restriction
+\[
+    p^*
+    \colon
+    \Perf(Y)
+    \longrightarrow
+    \Perf(X)
+\]
+of quasi-coherent pullback.
+\end{proposition}
+
+\begin{proof}
+The functor
+\[
+    p^*
+    \colon
+    \QCoh(Y)
+    \longrightarrow
+    \QCoh(X)
+\]
+is strong symmetric monoidal. It therefore preserves dualizable objects
+and their duality data and hence restricts to
+\[
+    p^*
+    \colon
+    \Perf(Y)
+    \longrightarrow
+    \Perf(X).
+\]
+
+It remains to verify exactness. For every affine point
+\[
+    U
+    \longrightarrow
+    X,
+\]
+evaluation satisfies
+\[
+    \ev_U\circ p^*
+    \simeq
+    \ev_{p\circ U}.
+\]
+Zero objects, fibres, and cofibres in the affine-point limit descriptions
+are computed componentwise. Therefore
+\[
+    p^*
+\]
+preserves zero objects and cofiber sequences after evaluation at every
+affine point. Since affine evaluations detect equivalences, it follows
+that
+\[
+    p^*
+    \colon
+    \Perf(Y)
+    \longrightarrow
+    \Perf(X)
+\]
+is exact.
+
+The composition, unit, symmetric monoidal, and higher coherence data are
+the restrictions of those of
+\[
+    \QCoh
+    \colon
+    \PSh(\Aff)^{\op}
+    \longrightarrow
+    \CAlg(\Cat_\infty).
+\]
+Thus the assignments define the stated functor.
+\end{proof}
+
+\section{Rigid self-enrichment of perfect objects}
+\label{sec:perfect-self-enrichment}
+
+
+\subsection{Affine rigid self-enrichment}
+
+\begin{theorem}[Perfect self-enrichment]
+\label{thm:perfect-self-enrichment}
+The rigid symmetric monoidal $\infty$-category
+\[
+    \Perf(A)
+\]
+is enriched over itself. Its enriched Hom objects are
+\[
+    \underline{\Perf(A)}(M,N)
+    :=
+    M^\vee\otimes_A N.
+\]
+Under the equivalence of
+\Ref{thm:tensor-dual-internal-hom},
+this is the restriction of the closed self-enrichment of
+\[
+    \Mod_A(\V).
+\]
+\end{theorem}
+
+\begin{proof}
+By
+\Ref{cor:perfect-internal-hom},
+the internal Hom of two perfect modules is again perfect. Thus the
+self-enrichment of
+\[
+    \Mod_A(\V)
+\]
+restricts to
+\[
+    \Perf(A).
+\]
+
+The enriched identity of
+\[
+    M
+\]
+is the composite
+\[
+    A
+    \xrightarrow{\coev_M}
+    M\otimes_A M^\vee
+    \xrightarrow{\beta_{M,M^\vee}}
+    M^\vee\otimes_A M.
+\]
+
+For
+\[
+    L,M,N\in\Perf(A),
+\]
+enriched composition is the contraction
+\[
+\begin{aligned}
+    &(M^\vee\otimes_A N)
+    \otimes_A
+    (L^\vee\otimes_A M)
+    \\
+    &\qquad\xrightarrow{\;\simeq\;}
+    L^\vee
+    \otimes_A
+    M^\vee
+    \otimes_A
+    M
+    \otimes_A
+    N
+    \\
+    &\qquad\xrightarrow{
+        \id_{L^\vee}
+        \otimes
+        \ev_M
+        \otimes
+        \id_N
+    }
+    L^\vee\otimes_A N.
+\end{aligned}
+\]
+Associativity and the identity laws are the restrictions of those of the
+ambient closed self-enrichment. Equivalently, they follow from the
+triangle identities and the coherence of the symmetric monoidal
+structure.
+\end{proof}
+
+
+\subsection{Base change of enriched Hom objects}
+
+\begin{proposition}[Base change of enriched Hom objects]
+\label{prop:base-change-enriched-hom}
+Let
+\[
+    A
+    \longrightarrow
+    B
+\]
+be a morphism in
+\[
+    \CAlg(\V),
+\]
+and let
+\[
+    M,N\in\Perf(A).
+\]
+Then there is a canonical equivalence
+\[
+\begin{aligned}
+    &
+    \underline{\Perf(B)}
+    \bigl(
+        M\otimes_A B,
+        N\otimes_A B
+    \bigr)
+    \\
+    &\qquad\simeq
+    \underline{\Perf(A)}(M,N)
+    \otimes_A B.
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{proof}
+Using
+\Ref{prop:base-change-perfect-modules},
+\[
+\begin{aligned}
+    &
+    \underline{\Perf(B)}
+    \bigl(
+        M\otimes_A B,
+        N\otimes_A B
+    \bigr)
+    \\
+    &\qquad\simeq
+    (M^\vee\otimes_A B)
+    \otimes_B
+    (N\otimes_A B)
+    \\
+    &\qquad\simeq
+    (M^\vee\otimes_A N)
+    \otimes_A B
+    \\
+    &\qquad=
+    \underline{\Perf(A)}(M,N)
+    \otimes_A B.
+\end{aligned}
+\]
+\end{proof}
+
+
+\subsection{Stackwise rigid self-enrichment}
+
+\begin{proposition}[Self-enrichment on a relative stack]
+\label{prop:perfect-stack-self-enrichment}
+For every
+\[
+    X\in\PSh(\Aff),
+\]
+the rigid symmetric monoidal category
+\[
+    \Perf(X)
+\]
+is enriched over itself with
+\[
+    \underline{\Perf(X)}(M,N)
+    :=
+    M^\vee\otimes N.
+\]
+Its pullback to every affine point
+\[
+    U
+    \longrightarrow
+    X
+\]
+agrees with the affine enriched Hom object.
+\end{proposition}
+
+\begin{proof}
+The construction of enriched identities and composition uses only tensor
+products, evaluation, coevaluation, and the symmetry. These structures
+exist in
+\[
+    \Perf(X)
+\]
+and are computed componentwise in the affine-point limit description of
+\Ref{prop:perfect-limit-description}.
+
+For every affine point
+\[
+    U
+    \longrightarrow
+    X,
+\]
+the evaluation functor
+\[
+    \Perf(X)
+    \longrightarrow
+    \Perf(U)
+\]
+is strong symmetric monoidal. It therefore preserves duals, evaluation,
+coevaluation, enriched identities, and enriched composition. Hence it
+carries
+\[
+    M^\vee\otimes N
+\]
+to
+\[
+    (M|_U)^\vee\otimes(N|_U).
+\]
+\end{proof}
+
+\begin{remark}
+\label{rem:perfect-restriction-after-construction}
+The ambient module category is constructed before restricting to perfect
+objects. The category
+\[
+    \Perf(A)
+\]
+need not possess the geometric realizations required to construct
+arbitrary relative tensor products of associative modules or general bar
+constructions. Such constructions are performed in the presentable
+category
+\[
+    \Mod_A(\V)
+\]
+and then restricted when the resulting objects are perfect.
+\end{remark}
+
+\section{The canonical symmetric bilinear functor and coherent duality}
+\label{sec:canonical-perfect-duality}
+
+Set
+\[
+    \mathcal C_A
+    :=
+    \Perf(A).
+\]
+
+
+\subsection{The canonical bilinear mapping spectrum}
+
+\begin{definition}[Canonical bilinear mapping spectrum]
+\label{def:canonical-perfect-bilinear-functor}
+For
+\[
+    M,N\in\mathcal C_A,
+\]
+define
+\[
+    \mathbb B_A(M,N)
+    :=
+    \map_{\mathcal C_A}
+    \bigl(
+        M\otimes_A N,
+        A
+    \bigr).
+\]
+\end{definition}
+
+\begin{proposition}[Symmetry and representability]
+\label{prop:canonical-bilinear-symmetry-representability}
+The functor
+\[
+    \mathbb B_A
+    \colon
+    \mathcal C_A^{\op}
+    \times
+    \mathcal C_A^{\op}
+    \longrightarrow
+    \Sp
+\]
+is exact separately in each variable.
+
+The braiding of
+\[
+    \mathcal C_A
+\]
+induces a coherent symmetry equivalence
+\[
+    s_{M,N}
+    \colon
+    \mathbb B_A(M,N)
+    \xrightarrow{\;\simeq\;}
+    \mathbb B_A(N,M).
+\]
+
+Moreover,
+\[
+    \mathbb B_A
+\]
+is right represented by dualization:
+\[
+    \mathbb B_A(M,N)
+    \simeq
+    \map_{\mathcal C_A}
+    \bigl(
+        M,
+        N^\vee
+    \bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Tensoring is exact separately in each variable, and mapping into
+\[
+    A
+\]
+is exact contravariantly. Hence
+\[
+    \mathbb B_A
+\]
+is exact separately in each variable.
+
+The braiding
+\[
+    \beta_{N,M}
+    \colon
+    N\otimes_A M
+    \xrightarrow{\;\simeq\;}
+    M\otimes_A N
+\]
+induces
+\[
+    s_{M,N}(\varphi)
+    :=
+    \varphi\circ\beta_{N,M}.
+\]
+The full symmetric monoidal coherence of the braiding supplies
+\[
+    s
+\]
+with its coherent involutivity and all higher compatibilities. Thus
+\[
+    \mathbb B_A
+\]
+is a symmetric bilinear functor.
+
+Finally, rigidity gives natural equivalences
+\[
+\begin{aligned}
+    \mathbb B_A(M,N)
+    &=
+    \map_{\mathcal C_A}
+    \bigl(
+        M\otimes_A N,
+        A
+    \bigr)
+    \\
+    &\simeq
+    \map_{\mathcal C_A}
+    \bigl(
+        M,
+        N^\vee
+    \bigr).
+\end{aligned}
+\]
+\end{proof}
+
+
+\subsection{Coherent perfect dualities}
+
+\begin{definition}[Coherent perfect duality]
+\label{def:coherent-perfect-duality}
+Let
+\[
+    \mathcal C
+\]
+be a small stable $\infty$-category. A
+\textbf{coherent perfect duality} on
+\[
+    \mathcal C
+\]
+consists of an exact equivalence
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C,
+\]
+a natural equivalence
+\[
+    \operatorname{bid}
+    \colon
+    \id_{\mathcal C}
+    \xrightarrow{\;\simeq\;}
+    D D^{\op},
+\]
+and coherent higher
+\[
+    C_2
+\]
+-data whose first nontrivial coherence is
+\[
+    D(\operatorname{bid}_X)
+    \circ
+    \operatorname{bid}_{D(X)}
+    \simeq
+    \id_{D(X)}
+\]
+for every
+\[
+    X\in\mathcal C.
+\]
+
+Here
+\[
+    D^{\op}
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal C^{\op}
+\]
+is the opposite functor, so that
+\[
+    D D^{\op}
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal C.
+\]
+
+Equivalently, a coherent perfect duality is a homotopy-fixed-point
+structure for the involution on small stable $\infty$-categories induced
+by passage to the opposite category, whose underlying equivalence is
+\[
+    D
+    \colon
+    \mathcal C^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal C.
+\]
+\end{definition}
+
+
+\subsection{The canonical coherent duality}
+
+\begin{proposition}[Canonical perfect duality]
+\label{prop:canonical-perfect-duality}
+Dualization defines an exact contravariant equivalence
+\[
+    D_A
+    :=
+    (-)^\vee
+    \colon
+    \Perf(A)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Perf(A).
+\]
+
+The coherent symmetry of
+\[
+    \mathbb B_A
+\]
+canonically promotes
+\[
+    D_A
+\]
+to a coherent perfect duality. Its biduality transformation is the
+canonical natural equivalence
+\[
+    \operatorname{bid}_M
+    \colon
+    M
+    \xrightarrow{\;\simeq\;}
+    M^{\vee\vee}.
+\]
+It satisfies
+\[
+    D_A(\operatorname{bid}_M)
+    \circ
+    \operatorname{bid}_{D_A(M)}
+    \simeq
+    \id_{D_A(M)}
+\]
+together with all higher
+\[
+    C_2
+\]
+-coherences.
+\end{proposition}
+
+\begin{proof}
+Under the representing equivalence of
+\Ref{prop:canonical-bilinear-symmetry-representability},
+the symmetry of
+\[
+    \mathbb B_A
+\]
+gives natural equivalences
+\[
+    \theta_{M,N}
+    \colon
+    \map_{\mathcal C_A}
+    \bigl(
+        M,
+        D_A N
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \map_{\mathcal C_A}
+    \bigl(
+        N,
+        D_A M
+    \bigr).
+\]
+
+Explicitly, if
+\[
+    q
+    \colon
+    M
+    \longrightarrow
+    N^\vee,
+\]
+then
+\[
+    \theta_{M,N}(q)
+    =
+    q^\vee
+    \circ
+    \operatorname{bid}_N
+    \colon
+    N
+    \longrightarrow
+    M^\vee.
+\]
+Indeed, currying
+\[
+    q
+\]
+gives the pairing
+\[
+    M\otimes_A N
+    \xrightarrow{q\otimes\id_N}
+    N^\vee\otimes_A N
+    \xrightarrow{\ev_N}
+    A.
+\]
+After precomposition with the braiding
+\[
+    N\otimes_A M
+    \xrightarrow{\beta_{N,M}}
+    M\otimes_A N,
+\]
+currying in the
+\[
+    M
+\]
+-variable gives
+\[
+    q^\vee\circ\operatorname{bid}_N.
+\]
+
+Let
+\[
+    D_A^{\op}
+    \colon
+    \mathcal C_A
+    \longrightarrow
+    \mathcal C_A^{\op}
+\]
+be the opposite functor. For
+\[
+    M\in\mathcal C_A
+\]
+and
+\[
+    N\in\mathcal C_A^{\op},
+\]
+there are natural equivalences
+\[
+\begin{aligned}
+    \map_{\mathcal C_A^{\op}}
+    \bigl(
+        D_A^{\op}M,
+        N
+    \bigr)
+    &=
+    \map_{\mathcal C_A}
+    \bigl(
+        N,
+        D_A M
+    \bigr)
+    \\
+    &\simeq
+    \map_{\mathcal C_A}
+    \bigl(
+        M,
+        D_A N
+    \bigr).
+\end{aligned}
+\]
+Thus
+\[
+    D_A^{\op}
+    \dashv
+    D_A.
+\]
+
+The unit
+\[
+    \eta_M
+    \colon
+    M
+    \longrightarrow
+    D_A^2M
+\]
+is characterized by
+\[
+    \theta_{M,D_AM}(\eta_M)
+    \simeq
+    \id_{D_AM}.
+\]
+The involutivity of
+\[
+    \theta
+\]
+gives
+\[
+    \theta_{M,D_AM}^{-1}
+    \simeq
+    \theta_{D_AM,M},
+\]
+and therefore
+\[
+    \eta_M
+    =
+    \theta_{D_AM,M}
+    \bigl(
+        \id_{D_AM}
+    \bigr).
+\]
+By the explicit formula for
+\[
+    \theta,
+\]
+this is precisely
+\[
+    \operatorname{bid}_M
+    \colon
+    M
+    \longrightarrow
+    M^{\vee\vee}.
+\]
+
+Let
+\[
+    \epsilon_M
+    \colon
+    D_A^{\op}D_A M
+    \longrightarrow
+    M
+\]
+be the counit in
+\[
+    \mathcal C_A^{\op}.
+\]
+Its opposite is a morphism
+\[
+    \epsilon_M^{\op}
+    \colon
+    M
+    \longrightarrow
+    D_A^2M
+\]
+in
+\[
+    \mathcal C_A.
+\]
+The defining property of the counit gives
+\[
+    \epsilon_M^{\op}
+    =
+    \theta_{D_AM,M}
+    \bigl(
+        \id_{D_AM}
+    \bigr)
+    =
+    \operatorname{bid}_M.
+\]
+Thus the unit and the opposite of the counit are both the canonical
+biduality map.
+
+Since every object of
+\[
+    \Perf(A)
+\]
+is dualizable,
+\[
+    \operatorname{bid}_M
+\]
+is an equivalence. Hence
+\[
+    D_A^{\op}
+    \dashv
+    D_A
+\]
+is an adjoint equivalence.
+
+The coherent symmetry of
+\[
+    \mathbb B_A
+\]
+is a homotopy fixed point for the flip action on perfect bilinear
+functors. The equivalence between perfect symmetric bilinear functors and
+perfect dualities transports this entire fixed-point datum to
+\[
+    D_A.
+\]
+It therefore supplies the displayed biduality coherence and all higher
+\[
+    C_2
+\]
+-coherences. See
+\cite{CalmesDottoHarpazEtAl}.
+
+Finally,
+\[
+    D_A
+\]
+is an equivalence between stable $\infty$-categories and is therefore
+exact.
+\end{proof}
+
+
+\subsection{Evaluation and coevaluation under biduality}
+
+\begin{lemma}[Evaluation and coevaluation under biduality]
+\label{lem:biduality-evaluation-coevaluation}
+For every
+\[
+    M\in\Perf(A),
+\]
+there are canonical equivalences
+\[
+    \ev_{M^\vee}
+    \circ
+    \bigl(
+        \operatorname{bid}_M
+        \otimes_A
+        \id_{M^\vee}
+    \bigr)
+    \simeq
+    \ev_M
+    \circ
+    \beta_{M,M^\vee}
+\]
+as morphisms
+\[
+    M\otimes_A M^\vee
+    \longrightarrow
+    A,
+\]
+and
+\[
+    \bigl(
+        \operatorname{bid}_M
+        \otimes_A
+        \id_{M^\vee}
+    \bigr)
+    \circ
+    \coev_M
+    \simeq
+    \beta_{M^\vee,M^{\vee\vee}}
+    \circ
+    \coev_{M^\vee}
+\]
+as morphisms
+\[
+    A
+    \longrightarrow
+    M^{\vee\vee}\otimes_A M^\vee.
+\]
+\end{lemma}
+
+\begin{proof}
+The biduality map
+\[
+    \operatorname{bid}_M
+    \colon
+    M
+    \longrightarrow
+    M^{\vee\vee}
+\]
+is the adjunct, under
+\[
+    \Map_{\Perf(A)}
+    \bigl(
+        M,
+        M^{\vee\vee}
+    \bigr)
+    \simeq
+    \Map_{\Perf(A)}
+    \bigl(
+        M\otimes_A M^\vee,
+        A
+    \bigr),
+\]
+of the transposed evaluation pairing
+\[
+    M\otimes_A M^\vee
+    \xrightarrow{\beta_{M,M^\vee}}
+    M^\vee\otimes_A M
+    \xrightarrow{\ev_M}
+    A.
+\]
+The defining property of this adjunct is exactly
+\[
+    \ev_{M^\vee}
+    \circ
+    \bigl(
+        \operatorname{bid}_M
+        \otimes_A
+        \id_{M^\vee}
+    \bigr)
+    \simeq
+    \ev_M
+    \circ
+    \beta_{M,M^\vee}.
+\]
+
+We now derive the coevaluation identity. Define
+\[
+\begin{aligned}
+    c_M
+    :={}&
+    \beta_{M^{\vee\vee},M^\vee}
+    \circ
+    \bigl(
+        \operatorname{bid}_M
+        \otimes_A
+        \id_{M^\vee}
+    \bigr)
+    \circ
+    \coev_M
+    \\
+    &\colon
+    A
+    \longrightarrow
+    M^\vee\otimes_A M^{\vee\vee}.
+\end{aligned}
+\]
+By naturality of the braiding,
+\[
+    c_M
+    \simeq
+    \bigl(
+        \id_{M^\vee}
+        \otimes_A
+        \operatorname{bid}_M
+    \bigr)
+    \circ
+    \beta_{M,M^\vee}
+    \circ
+    \coev_M.
+\]
+
+Consider the adjunction equivalence
+\[
+\begin{aligned}
+    \Phi
+    \colon
+    \Map_{\Perf(A)}
+    \bigl(
+        A,
+        M^\vee\otimes_A M^{\vee\vee}
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    \Map_{\Perf(A)}(M^\vee,M^\vee)
+\end{aligned}
+\]
+given by
+\[
+\begin{aligned}
+    \Phi(c)
+    :=
+    \Bigl[
+    M^\vee
+    &\simeq
+    A\otimes_A M^\vee
+    \\
+    &\xrightarrow{
+        c\otimes_A\id_{M^\vee}
+    }
+    M^\vee
+    \otimes_A
+    M^{\vee\vee}
+    \otimes_A
+    M^\vee
+    \\
+    &\xrightarrow{
+        \id_{M^\vee}
+        \otimes_A
+        \ev_{M^\vee}
+    }
+    M^\vee
+    \Bigr].
+\end{aligned}
+\]
+
+By the triangle identity,
+\[
+    \Phi(\coev_{M^\vee})
+    \simeq
+    \id_{M^\vee}.
+\]
+For
+\[
+    c_M,
+\]
+the corresponding composite contains the contraction
+\[
+    M\otimes_A M^\vee
+    \xrightarrow{
+        \operatorname{bid}_M
+        \otimes_A
+        \id_{M^\vee}
+    }
+    M^{\vee\vee}\otimes_A M^\vee
+    \xrightarrow{\ev_{M^\vee}}
+    A.
+\]
+By the first equivalence of the lemma, this contraction is canonically
+equivalent to
+\[
+    M\otimes_A M^\vee
+    \xrightarrow{\beta_{M,M^\vee}}
+    M^\vee\otimes_A M
+    \xrightarrow{\ev_M}
+    A.
+\]
+After this replacement, the composite defining
+\[
+    \Phi(c_M)
+\]
+is the triangle composite for the dual pair
+\[
+    (M,M^\vee).
+\]
+Hence
+\[
+    \Phi(c_M)
+    \simeq
+    \id_{M^\vee}.
+\]
+Since
+\[
+    \Phi
+\]
+is an equivalence,
+\[
+    c_M
+    \simeq
+    \coev_{M^\vee}.
+\]
+Composing with
+\[
+    \beta_{M^\vee,M^{\vee\vee}}
+\]
+gives
+\[
+    \bigl(
+        \operatorname{bid}_M
+        \otimes_A
+        \id_{M^\vee}
+    \bigr)
+    \circ
+    \coev_M
+    \simeq
+    \beta_{M^\vee,M^{\vee\vee}}
+    \circ
+    \coev_{M^\vee}.
+\]
+\end{proof}
+
+
+\section{Functoriality of the canonical duality}
+\label{sec:functoriality-canonical-perfect-duality}
+\label{sec:base-change-perfect-duality}
+
+The coherent duality constructed above is functorial under exact strong
+symmetric monoidal functors between rigid stable symmetric monoidal
+$\infty$-categories. We record the complete comparison because it will be
+used both for extension of scalars and for pullback on relative stacks.
+
+\begin{proposition}[Duality preservation by strong symmetric monoidal functors]
+\label{prop:duality-preserving-strong-monoidal}
+Let
+\[
+    F
+    \colon
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be an exact strong symmetric monoidal functor between rigid stable
+symmetric monoidal $\infty$-categories. For every
+\[
+    M\in\mathcal C,
+\]
+there is a canonical natural equivalence
+\[
+    \chi_M
+    \colon
+    F(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    F(M)^\vee.
+\]
+The family
+\[
+    \chi_M
+\]
+is compatible with evaluation, coevaluation, composition, units, and
+biduality. More precisely, for every
+\[
+    M\in\mathcal C,
+\]
+there is a canonical equivalence
+\[
+\begin{aligned}
+    &
+    (\chi_M^{-1})^\vee
+    \circ
+    \chi_{M^\vee}
+    \circ
+    F(\operatorname{bid}_M)
+    \\
+    &\qquad\simeq
+    \operatorname{bid}_{F(M)}
+\end{aligned}
+\]
+as morphisms
+\[
+    F(M)
+    \longrightarrow
+    F(M)^{\vee\vee}.
+\]
+Equivalently,
+\[
+    \chi_M^\vee
+    \circ
+    \operatorname{bid}_{F(M)}
+    \simeq
+    \chi_{M^\vee}
+    \circ
+    F(\operatorname{bid}_M).
+\]
+Together with the induced higher coherences, these comparisons make
+\[
+    F
+\]
+a duality-preserving exact strong symmetric monoidal functor.
+\end{proposition}
+
+\begin{proof}
+If
+\[
+    M^\vee
+\]
+is a dual of
+\[
+    M,
+\]
+then
+\[
+    F(M^\vee)
+\]
+is a dual of
+\[
+    F(M).
+\]
+Its evaluation is
+\[
+\begin{aligned}
+    F(M^\vee)\otimes F(M)
+    &\simeq
+    F(M^\vee\otimes M)
+    \\
+    &\xrightarrow{F(\ev_M)}
+    F(\mathbf 1_{\mathcal C})
+    \simeq
+    \mathbf 1_{\mathcal D},
+\end{aligned}
+\]
+and its coevaluation is
+\[
+\begin{aligned}
+    \mathbf 1_{\mathcal D}
+    &\simeq
+    F(\mathbf 1_{\mathcal C})
+    \\
+    &\xrightarrow{F(\coev_M)}
+    F(M\otimes M^\vee)
+    \\
+    &\simeq
+    F(M)\otimes F(M^\vee).
+\end{aligned}
+\]
+
+The canonical object
+\[
+    F(M)^\vee
+\]
+is another dual of
+\[
+    F(M).
+\]
+The contractible uniqueness of duals therefore supplies a canonical
+equivalence
+\[
+    \chi_M
+    \colon
+    F(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    F(M)^\vee
+\]
+compatible with evaluation and coevaluation.
+
+The construction is natural in
+\[
+    M.
+\]
+Indeed, for a morphism
+\[
+    u
+    \colon
+    M
+    \longrightarrow
+    N,
+\]
+both composites
+\[
+    F(N^\vee)
+    \xrightarrow{F(u^\vee)}
+    F(M^\vee)
+    \xrightarrow{\chi_M}
+    F(M)^\vee
+\]
+and
+\[
+    F(N^\vee)
+    \xrightarrow{\chi_N}
+    F(N)^\vee
+    \xrightarrow{F(u)^\vee}
+    F(M)^\vee
+\]
+are the morphism of duals mate to
+\[
+    F(u).
+\]
+Hence there is a canonical equivalence
+\[
+    \chi_M
+    \circ
+    F(u^\vee)
+    \simeq
+    F(u)^\vee
+    \circ
+    \chi_N.
+\]
+
+The comparisons also preserve biduality. Both
+\[
+    (\chi_M^{-1})^\vee
+    \circ
+    \chi_{M^\vee}
+    \circ
+    F(\operatorname{bid}_M)
+\]
+and
+\[
+    \operatorname{bid}_{F(M)}
+\]
+are the canonical morphism from
+\[
+    F(M)
+\]
+to the double dual determined by the transported dual pair. Contractible
+uniqueness of the complete dual-pair datum identifies them, giving
+\[
+\begin{aligned}
+    &
+    (\chi_M^{-1})^\vee
+    \circ
+    \chi_{M^\vee}
+    \circ
+    F(\operatorname{bid}_M)
+    \\
+    &\qquad\simeq
+    \operatorname{bid}_{F(M)}.
+\end{aligned}
+\]
+After composing with
+\[
+    \chi_M^\vee,
+\]
+this is equivalently
+\[
+    \chi_M^\vee
+    \circ
+    \operatorname{bid}_{F(M)}
+    \simeq
+    \chi_{M^\vee}
+    \circ
+    F(\operatorname{bid}_M).
+\]
+
+The comparisons and their composition, unit, and higher coherences are
+induced functorially from the walking dual pair. Thus
+\[
+    F
+\]
+is a duality-preserving exact strong symmetric monoidal functor.
+\end{proof}
+
+\begin{corollary}[Base change of perfect duality]
+\label{cor:base-change-perfect-duality}
+Let
+\[
+    A
+    \longrightarrow
+    A'
+\]
+be a morphism in
+\[
+    \CAlg(\V).
+\]
+For every
+\[
+    M\in\Perf(A),
+\]
+there is a canonical equivalence
+\[
+    (M\otimes_A A')^\vee
+    \simeq
+    M^\vee\otimes_A A'.
+\]
+The resulting comparisons make extension of scalars
+\[
+    -\otimes_A A'
+    \colon
+    \Perf(A)
+    \longrightarrow
+    \Perf(A')
+\]
+a duality-preserving exact strong symmetric monoidal functor.
+\end{corollary}
+
+\begin{proof}
+By
+\Ref{prop:indexed-perfect-category},
+extension of scalars is exact and strong symmetric monoidal. Apply
+\Ref{prop:duality-preserving-strong-monoidal}.
+\end{proof}
+
+\begin{corollary}[Pullback compatibility of perfect duality]
+\label{cor:pullback-perfect-duality}
+Let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+be a morphism in
+\[
+    \PSh(\Aff).
+\]
+For every
+\[
+    M\in\Perf(Y),
+\]
+there is a canonical natural equivalence
+\[
+    \chi_{p,M}
+    \colon
+    p^*(M^\vee)
+    \xrightarrow{\;\simeq\;}
+    \bigl(p^*M\bigr)^\vee.
+\]
+These comparisons make
+\[
+    p^*
+    \colon
+    \Perf(Y)
+    \longrightarrow
+    \Perf(X)
+\]
+a duality-preserving exact strong symmetric monoidal functor, coherently
+compatible with identities and composition of morphisms of presheaves.
+\end{corollary}
+
+\begin{proof}
+By
+\Ref{prop:perfect-stack-functoriality},
+quasi-coherent pullback restricts to an exact strong symmetric monoidal
+functor on perfect objects. Apply
+\Ref{prop:duality-preserving-strong-monoidal}.
+The identity and composition coherences are those induced functorially from
+the walking dual pair together with the corresponding coherences of
+quasi-coherent pullback.
+\end{proof}
+
+\section{Enriched duality, cocomposition, and trace}
+\label{sec:canonical-perfect-duality-trace}
+
+
+\subsection{Duality symmetry of enriched Hom objects}
+
+\begin{theorem}[Duality symmetry of enriched Hom objects]
+\label{thm:duality-enriched-hom}
+For
+\[
+    M,N\in\Perf(A),
+\]
+there is a canonical natural equivalence
+\[
+    \delta_{M,N}
+    \colon
+    \underline{\Perf(A)}(M,N)^\vee
+    \xrightarrow{\;\simeq\;}
+    \underline{\Perf(A)}(N,M).
+\]
+Explicitly,
+\[
+    (M^\vee\otimes_A N)^\vee
+    \simeq
+    N^\vee\otimes_A M.
+\]
+\end{theorem}
+
+\begin{proof}
+There are canonical equivalences
+\[
+\begin{aligned}
+    (M^\vee\otimes_A N)^\vee
+    &\simeq
+    N^\vee\otimes_A M^{\vee\vee}
+    \\
+    &\xrightarrow{
+        \id_{N^\vee}
+        \otimes
+        \operatorname{bid}_M^{-1}
+    }
+    N^\vee\otimes_A M.
+\end{aligned}
+\]
+The construction is natural in
+\[
+    M
+    \qquad\text{and}\qquad
+    N.
+\]
+\end{proof}
+
+The equivalence
+\[
+    \delta_{M,N}
+\]
+identifies the dual of the enriched Hom object with the reverse enriched
+Hom object. The enriched action of the duality functor itself is a
+different map.
+
+
+\subsection{Enriched dualization and reversed composition}
+
+\begin{proposition}[Enriched dualization and reversed composition]
+\label{prop:coherence-enriched-duality}
+For
+\[
+    M,N\in\Perf(A),
+\]
+define
+\[
+    d_{M,N}
+    \colon
+    \underline{\Perf(A)}(M,N)
+    \longrightarrow
+    \underline{\Perf(A)}(N^\vee,M^\vee)
+\]
+by
+\[
+\begin{aligned}
+    M^\vee\otimes_A N
+    &\xrightarrow{\beta_{M^\vee,N}}
+    N\otimes_A M^\vee
+    \\
+    &\xrightarrow{
+        \operatorname{bid}_N
+        \otimes
+        \id_{M^\vee}
+    }
+    N^{\vee\vee}\otimes_A M^\vee.
+\end{aligned}
+\]
+Then:
+\begin{enumerate}[label=(\roman*)]
+    \item
+    \[
+        d_{M,N}
+    \]
+    is an equivalence natural in
+    \[
+        M
+        \qquad\text{and}\qquad
+        N;
+    \]
+
+    \item
+    \[
+        d_{M,M}
+    \]
+    carries the enriched identity of
+    \[
+        M
+    \]
+    to the enriched identity of
+    \[
+        M^\vee;
+    \]
+
+    \item for
+    \[
+        L,M,N\in\Perf(A),
+    \]
+    the diagram
+    \[
+    \begin{tikzcd}[column sep=huge]
+    \underline{\Perf(A)}(M,N)
+    \otimes_A
+    \underline{\Perf(A)}(L,M)
+        \arrow[r,"\mathrm{comp}"]
+        \arrow[d,"d_{M,N}\otimes d_{L,M}"']
+    &
+    \underline{\Perf(A)}(L,N)
+        \arrow[d,"d_{L,N}"]
+    \\
+    \underline{\Perf(A)}(N^\vee,M^\vee)
+    \otimes_A
+    \underline{\Perf(A)}(M^\vee,L^\vee)
+        \arrow[d,"\beta"']
+    &
+    \underline{\Perf(A)}(N^\vee,L^\vee)
+    \\
+    \underline{\Perf(A)}(M^\vee,L^\vee)
+    \otimes_A
+    \underline{\Perf(A)}(N^\vee,M^\vee)
+        \arrow[r,"\mathrm{comp}"']
+    &
+    \underline{\Perf(A)}(N^\vee,L^\vee)
+        \arrow[u,equal]
+    \end{tikzcd}
+    \]
+    commutes up to its canonical coherent homotopy.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The first assertion follows because the symmetry and biduality maps are
+equivalences.
+
+Let
+\[
+    u_M
+    \colon
+    A
+    \longrightarrow
+    M^\vee\otimes_A M
+\]
+be the enriched identity. By definition,
+\[
+    u_M
+    =
+    \beta_{M,M^\vee}
+    \circ
+    \coev_M.
+\]
+Therefore
+\[
+\begin{aligned}
+    d_{M,M}\circ u_M
+    &=
+    \bigl(
+        \operatorname{bid}_M
+        \otimes
+        \id_{M^\vee}
+    \bigr)
+    \circ
+    \beta_{M^\vee,M}
+    \circ
+    \beta_{M,M^\vee}
+    \circ
+    \coev_M
+    \\
+    &\simeq
+    \bigl(
+        \operatorname{bid}_M
+        \otimes
+        \id_{M^\vee}
+    \bigr)
+    \circ
+    \coev_M
+    \\
+    &\simeq
+    \beta_{M^\vee,M^{\vee\vee}}
+    \circ
+    \coev_{M^\vee}
+    \\
+    &=
+    u_{M^\vee},
+\end{aligned}
+\]
+where the penultimate equivalence is
+\Ref{lem:biduality-evaluation-coevaluation}.
+
+It remains to verify compatibility with composition. Both paths are
+morphisms
+\[
+    M^\vee
+    \otimes_A
+    N
+    \otimes_A
+    L^\vee
+    \otimes_A
+    M
+    \longrightarrow
+    N^{\vee\vee}
+    \otimes_A
+    L^\vee.
+\]
+
+The upper path is canonically equivalent to
+\[
+\begin{aligned}
+    M^\vee
+    \otimes_A
+    N
+    \otimes_A
+    L^\vee
+    \otimes_A
+    M
+    &\xrightarrow{\;\simeq\;}
+    L^\vee
+    \otimes_A
+    M^\vee
+    \otimes_A
+    M
+    \otimes_A
+    N
+    \\
+    &\xrightarrow{
+        \id_{L^\vee}
+        \otimes
+        \ev_M
+        \otimes
+        \id_N
+    }
+    L^\vee\otimes_A N
+    \\
+    &\xrightarrow{\beta}
+    N\otimes_A L^\vee
+    \\
+    &\xrightarrow{
+        \operatorname{bid}_N
+        \otimes
+        \id_{L^\vee}
+    }
+    N^{\vee\vee}\otimes_A L^\vee.
+\end{aligned}
+\]
+
+After applying
+\[
+    d_{M,N}
+    \qquad\text{and}\qquad
+    d_{L,M},
+\]
+braiding the two enriched Hom objects, and composing, the lower path is
+canonically equivalent to
+\[
+\begin{aligned}
+    M^\vee
+    \otimes_A
+    N
+    \otimes_A
+    L^\vee
+    \otimes_A
+    M
+    &\xrightarrow{\;\simeq\;}
+    N^{\vee\vee}
+    \otimes_A
+    M^{\vee\vee}
+    \otimes_A
+    M^\vee
+    \otimes_A
+    L^\vee
+    \\
+    &\xrightarrow{
+        \id_{N^{\vee\vee}}
+        \otimes
+        \ev_{M^\vee}
+        \otimes
+        \id_{L^\vee}
+    }
+    N^{\vee\vee}\otimes_A L^\vee.
+\end{aligned}
+\]
+The middle tensor factors arise from
+\[
+    M\otimes_A M^\vee
+    \xrightarrow{
+        \operatorname{bid}_M
+        \otimes
+        \id_{M^\vee}
+    }
+    M^{\vee\vee}\otimes_A M^\vee.
+\]
+By
+\Ref{lem:biduality-evaluation-coevaluation},
+\[
+    \ev_{M^\vee}
+    \circ
+    \bigl(
+        \operatorname{bid}_M
+        \otimes
+        \id_{M^\vee}
+    \bigr)
+    \simeq
+    \ev_M
+    \circ
+    \beta_{M,M^\vee}.
+\]
+Substituting this equivalence transforms the lower composite into the
+upper composite. The remaining identifications are the canonical
+associativity and symmetry coherences.
+\end{proof}
+
+\begin{remark}
+\label{rem:enriched-mate-not-parameter-dual}
+The maps
+\[
+    d_{M,N}
+\]
+assemble into an enriched contravariant equivalence. On morphisms
+represented by the tensor unit they induce ordinary dualization. More
+generally, they induce the corresponding enriched mate operation directly
+on parameterized enriched morphisms; the parameter object itself is not
+dualized.
+\end{remark}
+
+
+\subsection{Dual cocomposition}
+
+\begin{proposition}[Dual cocomposition]
+\label{prop:dual-cocomposition}
+For
+\[
+    L,M,N\in\Perf(A),
+\]
+dualizing enriched composition and applying the equivalences
+\[
+    \delta
+\]
+gives a natural cocomposition morphism
+\[
+\begin{aligned}
+    \Delta_{L,M,N}
+    \colon
+    \underline{\Perf(A)}(N,L)
+    \longrightarrow{}&
+    \underline{\Perf(A)}(M,L)
+    \otimes_A
+    \underline{\Perf(A)}(N,M).
+\end{aligned}
+\]
+Explicitly, it is the composite
+\[
+\begin{aligned}
+    N^\vee\otimes_A L
+    &\xrightarrow{
+        \id_{N^\vee\otimes_A L}
+        \otimes
+        \coev_M
+    }
+    N^\vee
+    \otimes_A
+    L
+    \otimes_A
+    M
+    \otimes_A
+    M^\vee
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (M^\vee\otimes_A L)
+    \otimes_A
+    (N^\vee\otimes_A M).
+\end{aligned}
+\]
+
+Under the canonical equivalences
+\[
+    A^\vee
+    \simeq
+    A
+\]
+and
+\[
+    \delta_{M,M}
+    \colon
+    \underline{\Perf(A)}(M,M)^\vee
+    \xrightarrow{\;\simeq\;}
+    \underline{\Perf(A)}(M,M),
+\]
+the dual of the enriched identity is the enriched counit associated to
+\[
+    M,
+\]
+namely the evaluation morphism
+\[
+    \epsilon_M
+    :=
+    \ev_M
+    \colon
+    \underline{\Perf(A)}(M,M)
+    \longrightarrow
+    A.
+\]
+
+The morphisms
+\[
+    \Delta
+\]
+are coherently coassociative, and the morphisms
+\[
+    \epsilon_M
+\]
+satisfy the two counit identities.
+\end{proposition}
+
+\begin{proof}
+Enriched composition is
+\[
+\begin{aligned}
+    \underline{\Perf(A)}(M,N)
+    \otimes_A
+    \underline{\Perf(A)}(L,M)
+    \longrightarrow
+    \underline{\Perf(A)}(L,N).
+\end{aligned}
+\]
+Dualizing gives
+\[
+\begin{aligned}
+    \underline{\Perf(A)}(L,N)^\vee
+    \longrightarrow
+    \underline{\Perf(A)}(L,M)^\vee
+    \otimes_A
+    \underline{\Perf(A)}(M,N)^\vee.
+\end{aligned}
+\]
+Applying
+\Ref{thm:duality-enriched-hom}
+identifies this with
+\[
+\begin{aligned}
+    \underline{\Perf(A)}(N,L)
+    \longrightarrow
+    \underline{\Perf(A)}(M,L)
+    \otimes_A
+    \underline{\Perf(A)}(N,M).
+\end{aligned}
+\]
+Unwinding the dual of the evaluation contraction gives the displayed
+coevaluation formula.
+
+The enriched identity is
+\[
+    u_M
+    \colon
+    A
+    \longrightarrow
+    M^\vee\otimes_A M.
+\]
+Its dual has type
+\[
+    u_M^\vee
+    \colon
+    (M^\vee\otimes_A M)^\vee
+    \longrightarrow
+    A^\vee.
+\]
+Under
+\[
+    \delta_{M,M}
+\]
+and
+\[
+    A^\vee\simeq A,
+\]
+this is the evaluation morphism
+\[
+    \ev_M
+    \colon
+    M^\vee\otimes_A M
+    \longrightarrow
+    A.
+\]
+
+Coassociativity and the counit identities follow by dualizing the
+associativity and unitality coherences of enriched composition.
+\end{proof}
+
+
+\subsection{Perfect trace pairing and cyclicity}
+
+\begin{proposition}[Perfect trace pairing and cyclicity]
+\label{prop:perfect-trace-pairing}
+For
+\[
+    M,N\in\Perf(A),
+\]
+define
+\[
+    \langle-,-\rangle_{M,N}
+    \colon
+    \underline{\Perf(A)}(N,M)
+    \otimes_A
+    \underline{\Perf(A)}(M,N)
+    \longrightarrow
+    A
+\]
+as the composite
+\[
+\begin{aligned}
+    &
+    \underline{\Perf(A)}(N,M)
+    \otimes_A
+    \underline{\Perf(A)}(M,N)
+    \\
+    &\xrightarrow{\beta}
+    \underline{\Perf(A)}(M,N)
+    \otimes_A
+    \underline{\Perf(A)}(N,M)
+    \\
+    &\xrightarrow{\mathrm{comp}}
+    \underline{\Perf(A)}(N,N)
+    \\
+    &\xrightarrow{\ev_N}
+    A.
+\end{aligned}
+\]
+
+The morphism
+\[
+    \operatorname{tr}_N
+    :=
+    \ev_N
+    \colon
+    \underline{\Perf(A)}(N,N)
+    =
+    N^\vee\otimes_A N
+    \longrightarrow
+    A
+\]
+is the trace functional on the enriched endomorphism object. After
+precomposition with a morphism
+\[
+    A
+    \longrightarrow
+    N^\vee\otimes_A N
+\]
+representing an endomorphism of
+\[
+    N,
+\]
+it gives the categorical trace of that endomorphism.
+
+The pairing
+\[
+    \langle-,-\rangle_{M,N}
+\]
+is perfect. Its adjoint is the inverse of
+\[
+    \delta_{M,N}
+    \colon
+    \underline{\Perf(A)}(M,N)^\vee
+    \xrightarrow{\;\simeq\;}
+    \underline{\Perf(A)}(N,M).
+\]
+
+For
+\[
+    L,M,N\in\Perf(A),
+\]
+the three contraction morphisms
+\[
+\begin{aligned}
+    &
+    \underline{\Perf(A)}(N,L)
+    \otimes_A
+    \underline{\Perf(A)}(M,N)
+    \otimes_A
+    \underline{\Perf(A)}(L,M)
+    \longrightarrow
+    A
+\end{aligned}
+\]
+obtained by cyclically choosing the enriched endomorphism object on which
+the trace is evaluated are canonically equivalent.
+
+Consequently, for generalized elements
+\[
+    x
+    \colon
+    M
+    \longrightarrow
+    N,
+\]
+\[
+    y
+    \colon
+    L
+    \longrightarrow
+    M,
+\]
+\[
+    z
+    \colon
+    N
+    \longrightarrow
+    L,
+\]
+there are canonical equivalences
+\[
+    \langle z,x\circ y\rangle_{L,N}
+    \simeq
+    \langle x,y\circ z\rangle_{N,M}
+    \simeq
+    \langle y,z\circ x\rangle_{M,L}.
+\]
+Equivalently,
+\[
+    \operatorname{tr}_N
+    \bigl(
+        x\circ y\circ z
+    \bigr)
+    \simeq
+    \operatorname{tr}_M
+    \bigl(
+        y\circ z\circ x
+    \bigr)
+    \simeq
+    \operatorname{tr}_L
+    \bigl(
+        z\circ x\circ y
+    \bigr).
+\]
+
+In particular, the pairing is canonically equivalent to composition in
+the opposite order followed by evaluation on
+\[
+    M.
+\]
+More explicitly, the diagram
+\[
+\begin{tikzcd}[column sep=huge]
+    \underline{\Perf(A)}(N,M)
+    \otimes_A
+    \underline{\Perf(A)}(M,N)
+        \arrow[r, "{\langle-,-\rangle_{M,N}}"]
+        \arrow[d, "\mathrm{comp}"']
+    &
+    A
+    \\
+    \underline{\Perf(A)}(M,M)
+        \arrow[ur, "\ev_M"']
+\end{tikzcd}
+\]
+commutes up to its canonical coherent homotopy.
+\end{proposition}
+
+\begin{proof}
+Using
+\[
+    \underline{\Perf(A)}(N,M)
+    =
+    N^\vee\otimes_A M
+\]
+and
+\[
+    \underline{\Perf(A)}(M,N)
+    =
+    M^\vee\otimes_A N,
+\]
+the pairing is the composite
+\[
+\begin{aligned}
+    &(N^\vee\otimes_A M)
+    \otimes_A
+    (M^\vee\otimes_A N)
+    \\
+    &\qquad\xrightarrow{\;\simeq\;}
+    N^\vee
+    \otimes_A
+    M
+    \otimes_A
+    M^\vee
+    \otimes_A
+    N
+    \\
+    &\qquad\xrightarrow{
+        \id_{N^\vee}
+        \otimes
+        \ev_M
+        \otimes
+        \id_N
+    }
+    N^\vee\otimes_A N
+    \\
+    &\qquad\xrightarrow{\ev_N}
+    A.
+\end{aligned}
+\]
+
+Its adjoint is the morphism
+\[
+    N^\vee\otimes_A M
+    \longrightarrow
+    (M^\vee\otimes_A N)^\vee.
+\]
+Under the canonical equivalence
+\[
+\begin{aligned}
+    (M^\vee\otimes_A N)^\vee
+    &\simeq
+    N^\vee\otimes_A M^{\vee\vee}
+    \\
+    &\xrightarrow{
+        \id_{N^\vee}
+        \otimes
+        \operatorname{bid}_M^{-1}
+    }
+    N^\vee\otimes_A M,
+\end{aligned}
+\]
+this adjoint is the identity. Hence it is the inverse of
+\[
+    \delta_{M,N}
+    \colon
+    (M^\vee\otimes_A N)^\vee
+    \xrightarrow{\;\simeq\;}
+    N^\vee\otimes_A M.
+\]
+Therefore the pairing is perfect.
+
+We next prove cyclicity. The tensor product of the three enriched Hom
+objects is canonically equivalent to
+\[
+\begin{aligned}
+    &
+    (N^\vee\otimes_A L)
+    \otimes_A
+    (M^\vee\otimes_A N)
+    \otimes_A
+    (L^\vee\otimes_A M)
+    \\
+    &\qquad\simeq
+    N^\vee
+    \otimes_A
+    L
+    \otimes_A
+    M^\vee
+    \otimes_A
+    N
+    \otimes_A
+    L^\vee
+    \otimes_A
+    M.
+\end{aligned}
+\]
+
+There is a canonical total contraction
+\[
+\begin{aligned}
+    &
+    N^\vee
+    \otimes_A
+    L
+    \otimes_A
+    M^\vee
+    \otimes_A
+    N
+    \otimes_A
+    L^\vee
+    \otimes_A
+    M
+    \\
+    &\qquad\longrightarrow
+    A
+\end{aligned}
+\]
+obtained by using the symmetry to place the three dual pairs next to one
+another and then applying
+\[
+    \ev_N,
+    \qquad
+    \ev_M,
+    \qquad
+    \ev_L.
+\]
+
+If one first composes
+\[
+    L
+    \xrightarrow{y}
+    M
+    \xrightarrow{x}
+    N
+\]
+and then pairs the result with
+\[
+    z
+    \colon
+    N
+    \longrightarrow
+    L,
+\]
+the resulting map is the total contraction closed at
+\[
+    N.
+\]
+It therefore represents
+\[
+    \operatorname{tr}_N
+    \bigl(
+        x\circ y\circ z
+    \bigr).
+\]
+
+If one first composes
+\[
+    N
+    \xrightarrow{z}
+    L
+    \xrightarrow{y}
+    M
+\]
+and then pairs the result with
+\[
+    x
+    \colon
+    M
+    \longrightarrow
+    N,
+\]
+the resulting map is the same total contraction closed at
+\[
+    M.
+\]
+It therefore represents
+\[
+    \operatorname{tr}_M
+    \bigl(
+        y\circ z\circ x
+    \bigr).
+\]
+
+If one first composes
+\[
+    M
+    \xrightarrow{x}
+    N
+    \xrightarrow{z}
+    L
+\]
+and then pairs the result with
+\[
+    y
+    \colon
+    L
+    \longrightarrow
+    M,
+\]
+the resulting map is the same total contraction closed at
+\[
+    L.
+\]
+It therefore represents
+\[
+    \operatorname{tr}_L
+    \bigl(
+        z\circ x\circ y
+    \bigr).
+\]
+
+The three composites differ only by coherent reassociation and
+permutation of tensor factors before the same evaluation contractions are
+performed. The coherence theorem for symmetric monoidal categories with
+duals therefore supplies canonical equivalences
+\[
+    \operatorname{tr}_N
+    \bigl(
+        x\circ y\circ z
+    \bigr)
+    \simeq
+    \operatorname{tr}_M
+    \bigl(
+        y\circ z\circ x
+    \bigr)
+    \simeq
+    \operatorname{tr}_L
+    \bigl(
+        z\circ x\circ y
+    \bigr).
+\]
+All Koszul signs on homotopy groups are already encoded by the symmetry
+morphisms of the stable symmetric monoidal category.
+
+Finally, the two-factor instance of the same contraction identifies
+\[
+\begin{aligned}
+    &
+    \underline{\Perf(A)}(N,M)
+    \otimes_A
+    \underline{\Perf(A)}(M,N)
+    \\
+    &\xrightarrow{\beta}
+    \underline{\Perf(A)}(M,N)
+    \otimes_A
+    \underline{\Perf(A)}(N,M)
+    \\
+    &\xrightarrow{\mathrm{comp}}
+    \underline{\Perf(A)}(N,N)
+    \xrightarrow{\ev_N}
+    A
+\end{aligned}
+\]
+with
+\[
+\begin{aligned}
+    &
+    \underline{\Perf(A)}(N,M)
+    \otimes_A
+    \underline{\Perf(A)}(M,N)
+    \\
+    &\xrightarrow{\mathrm{comp}}
+    \underline{\Perf(A)}(M,M)
+    \xrightarrow{\ev_M}
+    A.
+\end{aligned}
+\]
+This proves the final assertion.
+\end{proof}
+
+
+
+The rigid categories of perfect objects now carry their canonical coherent
+dualities, enriched anti-equivalences, cocomposition maps, and perfect
+cyclic trace pairings. The next chapter studies coherent fixed points of
+these dualities and identifies them with the Poincar\'e objects of canonical
+homotopy-symmetric quadratic functors.

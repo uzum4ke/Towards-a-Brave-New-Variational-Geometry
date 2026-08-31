@@ -1,0 +1,6316 @@
+\chapter{Right-Perfect Morita Theory and Canonical Morita Duality}
+\label{chap:right-perfect-morita-duality}
+
+\section{Purpose and standing conventions}
+\label{sec:right-perfect-morita-purpose}
+
+Fix
+\[
+    A\in\CAlg(\V)
+\]
+and write
+\[
+    \mathcal W
+    :=
+    \Mod_A(\V).
+\]
+This chapter develops the noncommutative Morita theory of associative
+algebra objects in
+\[
+    \mathcal W.
+\]
+Its objects are associative $A$-algebras, its $1$-morphisms are
+bimodules, and its $2$-morphisms are bimodule maps. Horizontal
+composition is relative tensor product.
+
+The passage to Morita theory does not alter the algebraic foundations of
+the preceding chapters. It raises the categorical level by one.
+Dualizable objects are replaced by adjointable $1$-morphisms, ordinary
+duals are replaced by Morita adjoints, and the canonical rigid duality is
+replaced by the composite of right-adjoint formation and action reversal.
+All algebraic constructions continue to take place in the presentably
+stable symmetric monoidal category
+\[
+    \mathcal W
+    =
+    \Mod_A(\V).
+\]
+
+The principal task is to isolate the bimodules admitting Morita right
+adjoints and to construct the coherent duality
+\[
+    B\longmapsto B^{\op},
+    \qquad
+    M\longmapsto(M^R)^{\op}.
+\]
+The two operations in the second formula have different variances. Right
+adjunction reverses the direction of a Morita $1$-morphism, and action
+reversal reverses it once more. Their composite therefore preserves the
+direction of $1$-morphisms while reversing $2$-morphisms.
+
+The chapter separates the following layers:
+\begin{enumerate}[label=(\roman*)]
+    \item associative algebras, bimodules, and the higher Morita
+    $(\infty,2)$-category;
+
+    \item one-sided perfectness and its equivalence with Morita
+    adjointability;
+
+    \item opposites, elementary mates, and the coherent mate calculus;
+
+    \item specified adjunctions and the invariant mate--reversal
+    construction;
+
+    \item canonical Morita duality and its compatibility with base
+    change.
+\end{enumerate}
+
+The conventions of
+\Ref{chap:relative-ag-monoidal-syntax},
+\Ref{chap:perfect-rigid-enrichment},
+and
+\Ref{chap:hermitian-poincare}
+remain in force.
+
+\begin{convention}[Higher coherence in the Morita layer]
+\label{conv:rigid-morita-higher-coherence}
+Adjunction, mate, action-reversal, pseudofunctoriality, biduality, weak
+involution, and base-change data are always understood together with all
+required coherent higher homotopies.
+
+Whenever such data are suppressed from the notation, their existence is
+supplied by a coherent adjunction or mate theorem, by a universal property
+with contractible choice space, by transport along an equivalence, or by
+an explicitly cited coherence theorem.
+\end{convention}
+
+\begin{convention}[Invariant $(\infty,2)$-categorical language]
+\label{conv:infinity-two-variance}
+We work invariantly with $(\infty,2)$-categories and functors between
+them. No particular presentation of the homotopy theory of
+$(\infty,2)$-categories is fixed.
+
+Whenever a cited construction or coherence theorem is proved using a
+particular model, only its invariant conclusion is used in this chapter.
+
+For an $(\infty,2)$-category $\mathcal X$:
+\begin{enumerate}[label=(\roman*)]
+    \item $\mathcal X^{\op}$ denotes reversal of $1$-morphisms while
+    retaining the directions of $2$-morphisms;
+
+    \item $\mathcal X^{\mathrm{co}}$ denotes reversal of $2$-morphisms
+    while retaining the directions of $1$-morphisms;
+
+    \item $\mathcal X^{\mathrm{coop}}$ denotes simultaneous reversal of
+    $1$- and $2$-morphisms.
+\end{enumerate}
+\end{convention}
+
+\begin{convention}[Pseudonaturality orientation]
+\label{conv:morita-pseudonaturality-orientation}
+Let
+\[
+    F,G
+    \colon
+    \mathcal X
+    \longrightarrow
+    \mathcal Y
+\]
+be $(\infty,2)$-functors. A pseudonatural transformation
+\[
+    \eta
+    \colon
+    F
+    \Longrightarrow
+    G
+\]
+has, for every object
+\[
+    x\in\mathcal X,
+\]
+a $1$-morphism
+\[
+    \eta_x
+    \colon
+    F(x)
+    \longrightarrow
+    G(x).
+\]
+
+For a $1$-morphism
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y,
+\]
+its pseudonaturality constraint is oriented as an invertible
+$2$-morphism
+\[
+    G(f)\circ\eta_x
+    \xRightarrow{\;\simeq\;}
+    \eta_y\circ F(f).
+\]
+
+In a Morita category, horizontal composition is written from left to
+right by relative tensor product. Thus the same pseudonaturality
+constraint is written
+\[
+    \eta_x
+    \otimes_{G(x)}
+    G(f)
+    \xRightarrow{\;\simeq\;}
+    F(f)
+    \otimes_{F(y)}
+    \eta_y.
+\]
+
+All pseudonaturality constraints in this chapter use this orientation.
+\end{convention}
+
+\begin{definition}[Coherent weak duality involution]
+\label{def:coherent-weak-duality-involution}
+Let
+\[
+    \Cat_{(\infty,2)}^\simeq
+\]
+denote the maximal $\infty$-groupoid of $(\infty,2)$-categories and
+equivalences in the fixed universe. The operation
+\[
+    \mathcal X
+    \longmapsto
+    \mathcal X^{\mathrm{co}}
+\]
+defines a coherent
+\[
+    C_2
+\]
+-action on
+\[
+    \Cat_{(\infty,2)}^\simeq.
+\]
+
+A \emph{coherent weak duality involution} on an $(\infty,2)$-category
+\[
+    \mathcal X
+\]
+is a coherent homotopy-fixed-point structure for this action whose
+underlying object is
+\[
+    \mathcal X.
+\]
+
+Its first visible layers consist of:
+\begin{enumerate}[label=(\roman*)]
+    \item an equivalence of $(\infty,2)$-categories
+    \[
+        D
+        \colon
+        \mathcal X^{\mathrm{co}}
+        \xrightarrow{\;\simeq\;}
+        \mathcal X;
+    \]
+
+    \item a pseudonatural adjoint equivalence
+    \[
+        \operatorname{bid}^{D}
+        \colon
+        \id_{\mathcal X}
+        \xRightarrow{\;\simeq\;}
+        D D^{\mathrm{co}};
+    \]
+
+    \item an invertible modification
+    \[
+        \vartheta^{D}
+        \colon
+        D\ast
+        \bigl(
+            \operatorname{bid}^{D}
+        \bigr)^{\mathrm{co}}
+        \xRightarrow{\;\simeq\;}
+        \operatorname{bid}^{D}\ast D
+    \]
+    between the two pseudonatural transformations
+    \[
+        D
+        \Longrightarrow
+        D D^{\mathrm{co}}D;
+    \]
+
+    \item the complete coherent
+    \[
+        C_2
+    \]
+    -cocycle data extending
+    \[
+        \operatorname{bid}^{D}
+        \qquad\text{and}\qquad
+        \vartheta^{D}.
+    \]
+\end{enumerate}
+
+Here
+\[
+    \ast
+\]
+denotes pseudonatural whiskering. The homotopy-fixed-point formulation is
+part of the definition. Thus all higher coherence beyond the displayed
+layers is included rather than being inferred from pointwise
+equivalences.
+\end{definition}
+
+\begin{definition}[Coherent $1$-op involution]
+\label{def:coherent-one-op-involution}
+Let
+\[
+    \Cat_{(\infty,2)}^\simeq
+\]
+be as in
+\Ref{def:coherent-weak-duality-involution}. The operation
+\[
+    \mathcal X
+    \longmapsto
+    \mathcal X^{\op}
+\]
+defines a coherent
+\[
+    C_2
+\]
+-action on
+\[
+    \Cat_{(\infty,2)}^\simeq.
+\]
+
+A \emph{coherent $1$-op involution} on an $(\infty,2)$-category
+\[
+    \mathcal X
+\]
+is a coherent homotopy-fixed-point structure for this action whose
+underlying object is
+\[
+    \mathcal X.
+\]
+
+Its first visible layers consist of:
+\begin{enumerate}[label=(\roman*)]
+    \item an equivalence
+    \[
+        O
+        \colon
+        \mathcal X^{\op}
+        \xrightarrow{\;\simeq\;}
+        \mathcal X;
+    \]
+
+    \item a pseudonatural adjoint equivalence
+    \[
+        \operatorname{bid}^{O}
+        \colon
+        \id_{\mathcal X}
+        \xRightarrow{\;\simeq\;}
+        O O^{\op};
+    \]
+
+    \item an invertible modification
+    \[
+        \vartheta^{O}
+        \colon
+        \left(
+            O\ast
+            \bigl(
+                \operatorname{bid}^{O}
+            \bigr)^{\op}
+        \right)
+        \circ
+        \left(
+            \operatorname{bid}^{O}\ast O
+        \right)
+        \xRightarrow{\;\simeq\;}
+        \id_O.
+    \]
+    Explicitly,
+    \[
+        \operatorname{bid}^{O}\ast O
+        \colon
+        O
+        \Longrightarrow
+        O O^{\op}O,
+    \]
+    while
+    \[
+        O\ast
+        \bigl(
+            \operatorname{bid}^{O}
+        \bigr)^{\op}
+        \colon
+        O O^{\op}O
+        \Longrightarrow
+        O;
+    \]
+
+    \item the complete coherent
+    \[
+        C_2
+    \]
+    -cocycle data extending
+    \[
+        \operatorname{bid}^{O}
+        \qquad\text{and}\qquad
+        \vartheta^{O}.
+    \]
+\end{enumerate}
+
+The homotopy-fixed-point formulation is part of the definition. In
+particular, the displayed triangle modification is only the first
+visible involutivity coherence.
+\end{definition}
+
+\begin{convention}[Full dualizability]
+\label{conv:morita-full-dualizability}
+In a symmetric monoidal $(\infty,2)$-category, an object is
+\emph{fully dualizable} if it is dualizable and its evaluation and
+coevaluation $1$-morphisms admit both left and right adjoints.
+\end{convention}
+
+\section{Associative algebras and the higher Morita category}
+\label{sec:associative-algebras-relative-base}
+
+\begin{definition}[Associative algebra over \(A\)]
+\label{def:associative-algebra-over-base}
+An \emph{associative algebra over $A$} is an object
+\[
+    B
+    \in
+    \Alg_{\EE_1}(\mathcal W).
+\]
+We abbreviate
+\[
+    \Alg_A
+    :=
+    \Alg_{\EE_1}(\mathcal W).
+\]
+\end{definition}
+
+\begin{remark}
+\label{rem:commutative-base-noncommutative-algebra}
+The algebra $A$ is commutative because it defines the relative affine
+base. The algebra $B$ is only associative and need not be commutative.
+\end{remark}
+
+\begin{definition}[Opposite and enveloping algebra]
+\label{def:opposite-enveloping-algebra}
+For
+\[
+    B\in\Alg_A,
+\]
+let
+\[
+    B^{\op}
+\]
+denote its opposite algebra and define
+\[
+    B^e
+    :=
+    B\otimes_A B^{\op}.
+\]
+\end{definition}
+
+\begin{definition}[Bimodule]
+\label{def:relative-bimodule}
+For
+\[
+    B,C\in\Alg_A,
+\]
+define
+\[
+    \BMod_{B,C}(\mathcal W)
+    :=
+    \LMod_{B\otimes_A C^{\op}}(\mathcal W).
+\]
+An object
+\[
+    {}_B M_C
+    \in
+    \BMod_{B,C}(\mathcal W)
+\]
+is called a \emph{$B$--$C$-bimodule}. It is regarded as a Morita morphism
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C.
+\]
+\end{definition}
+
+\begin{construction}[Morita composition]
+\label{con:morita-composition}
+For bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+their Morita composite is
+\[
+    M\otimes_C N,
+\]
+regarded as a $B$--$D$-bimodule.
+\end{construction}
+
+\begin{theorem}[Higher Morita category]
+\label{thm:higher-morita-category}
+There is an $(\infty,2)$-category
+\[
+    \Mor_A
+    :=
+    \Alg_{\EE_1}^{\mathrm{Mor}}(\mathcal W)
+\]
+whose:
+\begin{enumerate}[label=(\roman*)]
+    \item objects are associative $A$-algebras;
+
+    \item $1$-morphisms are bimodules;
+
+    \item $2$-morphisms are bimodule maps;
+
+    \item horizontal composition is relative tensor product.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Because
+\[
+    \mathcal W
+\]
+is presentable and its tensor product preserves colimits separately in
+each variable, all two-sided bar constructions defining relative tensor
+products exist. Their geometric realizations are preserved by tensoring
+on either side.
+
+Thus
+\[
+    \mathcal W
+\]
+has good relative tensor products in the sense required by the higher
+Morita construction. The result follows from
+\cite[Theorem~1.1]{HaugsengHigherMorita}.
+\end{proof}
+
+\begin{proposition}[Symmetric monoidal higher Morita category]
+\label{prop:symmetric-monoidal-higher-morita-category}
+The symmetric monoidal structure on
+\[
+    \mathcal W
+    =
+    \Mod_A(\V)
+\]
+induces a canonical symmetric monoidal structure
+\[
+    \Mor_A^\otimes
+\]
+on the higher Morita $(\infty,2)$-category.
+
+Its tensor unit is the commutative base algebra
+\[
+    A.
+\]
+On objects, the tensor product is
+\[
+    (B,C)
+    \longmapsto
+    B\otimes_A C.
+\]
+
+For bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    M'
+    \colon
+    B'
+    \longrightarrow
+    C',
+\]
+their external tensor product is
+\[
+    M\otimes_A M'
+    \colon
+    B\otimes_A B'
+    \longrightarrow
+    C\otimes_A C'.
+\]
+The tensor product of $2$-morphisms is the tensor product of their
+underlying bimodule maps.
+
+For composable bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+and
+\[
+    M'
+    \colon
+    B'
+    \longrightarrow
+    C',
+    \qquad
+    N'
+    \colon
+    C'
+    \longrightarrow
+    D',
+\]
+there is a canonical interchange equivalence
+\[
+\begin{aligned}
+    &
+    (M\otimes_A M')
+    \otimes_{C\otimes_A C'}
+    (N\otimes_A N')
+    \\
+    &\qquad\xrightarrow{\;\simeq\;}
+    (M\otimes_C N)
+    \otimes_A
+    (M'\otimes_{C'}N').
+\end{aligned}
+\]
+These equivalences satisfy all symmetric monoidal and interchange
+coherences.
+\end{proposition}
+
+\begin{proof}
+The external tensor product carries a $B$--$C$-bimodule and a
+$B'$--$C'$-bimodule to a
+\[
+    (B\otimes_A B')
+    \text{--}
+    (C\otimes_A C')
+\]
+-bimodule. It is functorial on bimodule maps.
+
+The interchange equivalence is induced by the canonical comparison
+between the corresponding iterated two-sided bar constructions:
+\[
+\begin{aligned}
+    &
+    \left|
+        \operatorname{Bar}
+        \bigl(
+            M\otimes_A M',
+            C\otimes_A C',
+            N\otimes_A N'
+        \bigr)
+    \right|
+    \\
+    &\qquad\xrightarrow{\;\simeq\;}
+    \left|
+        \operatorname{Bar}(M,C,N)
+    \right|
+    \otimes_A
+    \left|
+        \operatorname{Bar}(M',C',N')
+    \right|.
+\end{aligned}
+\]
+Because tensor product in
+\[
+    \mathcal W
+\]
+preserves geometric realizations separately in each variable, the
+comparison is an equivalence. Its compatibility with iterated
+composition follows from the corresponding comparison of
+multisimplicial bar constructions.
+
+The unit constraints are induced by
+\[
+    A\otimes_A B
+    \simeq
+    B
+    \simeq
+    B\otimes_A A
+\]
+and their analogues for bimodules.
+
+More conceptually,
+\cite[Corollary~5.42]{HaugsengHigherMorita}
+constructs the higher Morita assignment as a lax symmetric monoidal
+functor on monoidal $\infty$-categories with good relative tensor
+products and monoidal functors preserving them.
+
+The symmetric monoidal $\infty$-category
+\[
+    \mathcal W
+\]
+has good relative tensor products by the hypotheses used in
+\Ref{thm:higher-morita-category}. Applying Haugseng's lax symmetric
+monoidal Morita construction to the commutative algebra object
+\[
+    \mathcal W
+\]
+in monoidal $\infty$-categories therefore produces a commutative algebra
+object
+\[
+    \Mor_A^\otimes
+\]
+in $(\infty,2)$-categories.
+
+Unwinding this construction gives the tensor products, unit, and
+interchange equivalences displayed above. Since they arise from a single
+lax symmetric monoidal construction, all associativity, unit, symmetry,
+and interchange coherences are supplied simultaneously.
+\end{proof}
+
+\section{Internal Homs and one-sided perfectness}
+\label{sec:right-perfect-morita-adjoints}
+
+For an associative algebra
+\[
+    C,
+\]
+the category of right $C$-modules is not generally monoidal.
+Consequently, right-perfectness cannot be defined as ordinary monoidal
+dualizability inside
+\[
+    \RMod_C(\mathcal W).
+\]
+It is defined using the Morita morphism from the commutative base algebra
+\[
+    A
+\]
+to
+\[
+    C.
+\]
+
+\subsection{Internal Homs of right modules}
+
+\begin{proposition}[Existence of right-module internal Homs]
+\label{prop:internal-hom-right-modules-exists}
+Let
+\[
+    M\in\RMod_C(\mathcal W).
+\]
+The functor
+\[
+    -\otimes_A M
+    \colon
+    \mathcal W
+    \longrightarrow
+    \RMod_C(\mathcal W)
+\]
+admits a right adjoint.
+\end{proposition}
+
+\begin{proof}
+The displayed functor is accessible and preserves all colimits. Both its
+source and target are presentable $\infty$-categories. The adjoint
+functor theorem therefore supplies a right adjoint.
+\end{proof}
+
+\begin{definition}[Internal Hom of right modules]
+\label{def:internal-hom-right-modules}
+For
+\[
+    M,N\in\RMod_C(\mathcal W),
+\]
+the object
+\[
+    \underline{\Hom}_C(M,N)
+    \in
+    \mathcal W
+\]
+is defined by the natural equivalences
+\[
+    \Map_{\RMod_C(\mathcal W)}
+    \bigl(
+        X\otimes_A M,
+        N
+    \bigr)
+    \simeq
+    \Map_{\mathcal W}
+    \bigl(
+        X,
+        \underline{\Hom}_C(M,N)
+    \bigr)
+\]
+for every
+\[
+    X\in\mathcal W.
+\]
+\end{definition}
+
+\begin{definition}[Right \(C\)-dualizable module]
+\label{def:right-c-dualizable-module}
+A right $C$-module
+\[
+    M
+\]
+is \emph{right $C$-dualizable} if, regarded as an
+$A$--$C$-bimodule
+\[
+    M
+    \colon
+    A
+    \longrightarrow
+    C,
+\]
+it admits a right adjoint in the Morita $(\infty,2)$-category.
+
+Explicitly, this consists of a $C$--$A$-bimodule
+\[
+    M_C^\vee
+    \colon
+    C
+    \longrightarrow
+    A
+\]
+and morphisms
+\[
+    \eta_M^{A}
+    \colon
+    A
+    \longrightarrow
+    M\otimes_C M_C^\vee,
+\]
+\[
+    \epsilon_M^{A}
+    \colon
+    M_C^\vee\otimes_A M
+    \longrightarrow
+    C
+\]
+satisfying the two triangle identities.
+\end{definition}
+
+\begin{proposition}[Equivariant tensor--Hom formula]
+\label{prop:right-module-tensor-hom}
+Let
+\[
+    M
+    \in
+    \BMod_{B,C}(\mathcal W)
+\]
+be right $C$-dualizable as an $A$--$C$-bimodule, and let
+\[
+    N
+    \in
+    \BMod_{D,C}(\mathcal W).
+\]
+Then:
+\begin{enumerate}[label=(\roman*)]
+    \item the right dual
+    \[
+        M_C^\vee
+    \]
+    has a natural $C$--$B$-bimodule structure;
+
+    \item the object
+    \[
+        \underline{\Hom}_C(M,N)
+    \]
+    has a natural $D$--$B$-bimodule structure;
+
+    \item there is a canonical equivalence
+    \[
+        N\otimes_C M_C^\vee
+        \xrightarrow{\;\simeq\;}
+        \underline{\Hom}_C(M,N)
+    \]
+    in
+    \[
+        \BMod_{D,B}(\mathcal W).
+    \]
+\end{enumerate}
+
+In particular,
+\[
+    M_C^\vee
+    \simeq
+    \underline{\Hom}_C(M,C)
+\]
+as a $C$--$B$-bimodule.
+\end{proposition}
+
+\begin{proof}
+The left $B$-action on
+\[
+    M
+\]
+induces a right $B$-action on
+\[
+    M_C^\vee
+\]
+by precomposition. Thus
+\[
+    M_C^\vee
+\]
+is a $C$--$B$-bimodule.
+
+The left $D$-action on
+\[
+    N
+\]
+induces a left $D$-action on
+\[
+    \underline{\Hom}_C(M,N),
+\]
+while precomposition with the left $B$-action on
+\[
+    M
+\]
+induces a right $B$-action. Thus
+\[
+    \underline{\Hom}_C(M,N)
+\]
+is a $D$--$B$-bimodule.
+
+Define
+\[
+    N\otimes_C M_C^\vee
+    \longrightarrow
+    \underline{\Hom}_C(M,N)
+\]
+as the adjoint of
+\[
+\begin{aligned}
+    (N\otimes_C M_C^\vee)\otimes_A M
+    &\simeq
+    N\otimes_C
+    (M_C^\vee\otimes_A M)
+    \\
+    &\xrightarrow{
+        \id_N\otimes\epsilon_M^{A}
+    }
+    N\otimes_C C
+    \\
+    &\simeq
+    N.
+\end{aligned}
+\]
+
+For every
+\[
+    X\in\mathcal W,
+\]
+the adjunction
+\[
+    M\dashv M_C^\vee
+\]
+gives
+\[
+\begin{aligned}
+    \Map_{\mathcal W}
+    \bigl(
+        X,
+        N\otimes_C M_C^\vee
+    \bigr)
+    &\simeq
+    \Map_{\RMod_C(\mathcal W)}
+    \bigl(
+        X\otimes_A M,
+        N
+    \bigr)
+    \\
+    &\simeq
+    \Map_{\mathcal W}
+    \bigl(
+        X,
+        \underline{\Hom}_C(M,N)
+    \bigr).
+\end{aligned}
+\]
+Yoneda identifies the two underlying objects.
+
+Naturality with respect to endomorphisms of
+\[
+    N
+\]
+gives compatibility with the left $D$-action. Naturality
+contravariantly with respect to endomorphisms of
+\[
+    M
+\]
+gives compatibility with the right $B$-action. Hence the equivalence is
+an equivalence of $D$--$B$-bimodules.
+
+Taking
+\[
+    N=C
+\]
+gives
+\[
+    M_C^\vee
+    \simeq
+    \underline{\Hom}_C(M,C).
+\]
+\end{proof}
+
+\subsection{Right-perfect and left-perfect bimodules}
+
+\begin{definition}[Right-perfect bimodule]
+\label{def:right-perfect-bimodule}
+A $B$--$C$-bimodule
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+is \emph{right perfect} if its underlying $A$--$C$-bimodule is right
+$C$-dualizable.
+\end{definition}
+
+\begin{definition}[Action reversal]
+\label{def:action-reversal-bimodule}
+For a $B$--$C$-bimodule
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+let
+\[
+    M^{\op}
+    \colon
+    C^{\op}
+    \longrightarrow
+    B^{\op}
+\]
+denote the same underlying object with its left and right actions
+reversed.
+\end{definition}
+
+\begin{definition}[Left-perfect bimodule]
+\label{def:left-perfect-bimodule}
+A $B$--$C$-bimodule
+\[
+    M
+\]
+is \emph{left perfect} if the action-reversed bimodule
+\[
+    M^{\op}
+    \colon
+    C^{\op}
+    \longrightarrow
+    B^{\op}
+\]
+is right perfect.
+\end{definition}
+
+\section{Right-perfectness and Morita adjointability}
+\label{sec:right-perfectness-morita-adjointability}
+
+For every associative $A$-algebra
+\[
+    B,
+\]
+let
+\[
+    \iota_B
+    :=
+    {}_A B_B
+    \colon
+    A
+    \longrightarrow
+    B
+\]
+denote the regular extension bimodule.
+
+\begin{lemma}[The regular extension adjunction]
+\label{lem:regular-extension-adjunction}
+The bimodule
+\[
+    \iota_B
+    =
+    {}_A B_B
+\]
+has right adjoint
+\[
+    \iota_B^R
+    :=
+    {}_B B_A.
+\]
+\end{lemma}
+
+\begin{proof}
+The unit is the algebra unit
+\[
+    A
+    \longrightarrow
+    B
+    \simeq
+    B\otimes_B B,
+\]
+regarded as a morphism
+\[
+    A
+    \longrightarrow
+    \iota_B\otimes_B\iota_B^R.
+\]
+The counit is multiplication
+\[
+    B\otimes_A B
+    \longrightarrow
+    B,
+\]
+regarded as a morphism
+\[
+    \iota_B^R\otimes_A\iota_B
+    \longrightarrow
+    B.
+\]
+
+The first triangle composite is
+\[
+\begin{aligned}
+    B
+    &\simeq
+    A\otimes_A B
+    \\
+    &\longrightarrow
+    B\otimes_A B
+    \\
+    &\longrightarrow
+    B,
+\end{aligned}
+\]
+which is the left unit law.
+
+The second triangle composite is
+\[
+\begin{aligned}
+    B
+    &\simeq
+    B\otimes_A A
+    \\
+    &\longrightarrow
+    B\otimes_A B
+    \\
+    &\longrightarrow
+    B,
+\end{aligned}
+\]
+which is the right unit law.
+\end{proof}
+
+\begin{proposition}[Right-perfectness equals Morita right-adjointability]
+\label{prop:right-perfect-morita-adjointability}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be a $B$--$C$-bimodule. The following conditions are equivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $M$ is right perfect;
+
+    \item $M$ admits a right adjoint as a $1$-morphism
+    \[
+        B
+        \longrightarrow
+        C
+    \]
+    in
+    \[
+        \Mor_A.
+    \]
+\end{enumerate}
+
+When these conditions hold, the right adjoint is canonically equivalent
+to
+\[
+    M^R
+    :=
+    \underline{\Hom}_C(M,C)
+    \colon
+    C
+    \longrightarrow
+    B.
+\]
+\end{proposition}
+\begin{proof}
+Suppose first that
+\[
+    M
+\]
+is right perfect. Its underlying $A$--$C$-bimodule admits a right
+adjoint
+\[
+    M_C^\vee
+    \colon
+    C
+    \longrightarrow
+    A
+\]
+with unit and counit
+\[
+    \eta_M^{A}
+    \colon
+    A
+    \longrightarrow
+    M\otimes_C M_C^\vee,
+\]
+\[
+    \epsilon_M^{A}
+    \colon
+    M_C^\vee\otimes_A M
+    \longrightarrow
+    C.
+\]
+
+By
+\Ref{prop:right-module-tensor-hom},
+the object
+\[
+    M^R
+    :=
+    \underline{\Hom}_C(M,C)
+\]
+has a canonical $C$--$B$-bimodule structure, and there is a canonical
+equivalence
+\[
+    M^R
+    \simeq
+    M_C^\vee
+\]
+of $C$--$B$-bimodules. We use this equivalence to identify the two
+objects.
+
+Applying
+\Ref{prop:right-module-tensor-hom}
+with
+\[
+    N=M
+\]
+gives a canonical equivalence of $B$--$B$-bimodules
+\[
+    \theta_M
+    \colon
+    M\otimes_C M^R
+    \xrightarrow{\;\simeq\;}
+    \underline{\Hom}_C(M,M).
+\]
+
+Under the tensor--Hom adjunction, the left $B$-action
+\[
+    B\otimes_A M
+    \longrightarrow
+    M
+\]
+has an adjoint transpose
+\[
+    B
+    \longrightarrow
+    \underline{\Hom}_C(M,M).
+\]
+Transporting this morphism through
+\[
+    \theta_M^{-1}
+\]
+defines
+\[
+    \eta_M^{B}
+    \colon
+    B
+    \longrightarrow
+    M\otimes_C M^R.
+\]
+
+The composite
+\[
+    A
+    \longrightarrow
+    B
+    \xrightarrow{\eta_M^{B}}
+    M\otimes_C M^R
+\]
+is canonically equivalent to
+\[
+    \eta_M^{A}.
+\]
+Indeed, under
+\[
+    \theta_M,
+\]
+both morphisms correspond to the identity endomorphism
+\[
+    \id_M.
+\]
+
+Evaluation gives an $A$-balanced morphism
+\[
+    M^R\otimes_A M
+    \longrightarrow
+    C.
+\]
+It is $B$-balanced because
+\[
+    \ev\bigl((\phi\cdot b)\otimes m\bigr)
+    \simeq
+    \phi(bm)
+    \simeq
+    \ev(\phi\otimes bm).
+\]
+It therefore descends uniquely to a morphism
+\[
+    \epsilon_M^{C}
+    \colon
+    M^R\otimes_B M
+    \longrightarrow
+    C.
+\]
+
+Let
+\[
+    q_M
+    \colon
+    M^R\otimes_A M
+    \longrightarrow
+    M^R\otimes_B M
+\]
+denote the canonical balancing morphism. By construction,
+\[
+    \epsilon_M^{A}
+    \simeq
+    \epsilon_M^{C}\circ q_M.
+\]
+
+We now verify the triangle identities.
+
+The first triangle composite is
+\[
+\begin{aligned}
+    M
+    &\simeq
+    B\otimes_B M
+    \\
+    &\xrightarrow{
+        \eta_M^{B}\otimes\id_M
+    }
+    M\otimes_C M^R\otimes_B M
+    \\
+    &\xrightarrow{
+        \id_M\otimes\epsilon_M^{C}
+    }
+    M.
+\end{aligned}
+\]
+Under the equivalence
+\[
+    M\otimes_C M^R
+    \simeq
+    \underline{\Hom}_C(M,M),
+\]
+the morphism
+\[
+    \eta_M^{B}
+\]
+is the adjoint transpose of the left $B$-action. Hence the displayed
+composite is evaluation of that action on the regular element of
+\[
+    B.
+\]
+Equivalently, it is evaluation of
+\[
+    \id_M.
+\]
+It is therefore canonically equivalent to
+\[
+    \id_M.
+\]
+
+For the second triangle, consider
+\[
+\begin{aligned}
+    M^R
+    &\simeq
+    M^R\otimes_B B
+    \\
+    &\xrightarrow{
+        \id_{M^R}\otimes\eta_M^{B}
+    }
+    M^R\otimes_B M\otimes_C M^R
+    \\
+    &\xrightarrow{
+        \epsilon_M^{C}\otimes\id_{M^R}
+    }
+    M^R.
+\end{aligned}
+\]
+There is a canonically commutative diagram
+\[
+\begin{tikzcd}[column sep=large]
+M^R\otimes_A A
+    \ar[r, "\id_{M^R}\otimes\eta_M^{A}"]
+    \ar[d, "\simeq"']
+&
+M^R\otimes_A M\otimes_C M^R
+    \ar[d, "q_M\otimes\id_{M^R}"]
+\\
+M^R\otimes_B B
+    \ar[r, "\id_{M^R}\otimes\eta_M^{B}"']
+&
+M^R\otimes_B M\otimes_C M^R.
+\end{tikzcd}
+\]
+The left vertical equivalence is induced by the right $B$-action on
+\[
+    M^R,
+\]
+and commutativity follows from
+\[
+    \eta_M^{B}|_A
+    \simeq
+    \eta_M^{A}.
+\]
+
+Moreover,
+\[
+    \epsilon_M^{A}
+    \simeq
+    \epsilon_M^{C}\circ q_M.
+\]
+Consequently, the second Morita triangle composite is canonically
+identified with
+\[
+\begin{aligned}
+    M^R
+    &\simeq
+    M^R\otimes_A A
+    \\
+    &\xrightarrow{
+        \id_{M^R}\otimes\eta_M^{A}
+    }
+    M^R\otimes_A M\otimes_C M^R
+    \\
+    &\xrightarrow{
+        \epsilon_M^{A}\otimes\id_{M^R}
+    }
+    M^R.
+\end{aligned}
+\]
+This is the second triangle composite for the underlying adjunction
+\[
+    M\dashv M_C^\vee.
+\]
+It is therefore canonically equivalent to
+\[
+    \id_{M^R}.
+\]
+
+Thus
+\[
+    M\dashv M^R
+\]
+in
+\[
+    \Mor_A.
+\]
+
+Conversely, suppose that
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+admits a right adjoint in
+\[
+    \Mor_A.
+\]
+Its underlying $A$--$C$-bimodule is the Morita composite
+\[
+    A
+    \xrightarrow{\iota_B}
+    B
+    \xrightarrow{M}
+    C,
+\]
+because
+\[
+    \iota_B\otimes_B M
+    \simeq
+    B\otimes_B M
+    \simeq
+    M.
+\]
+
+By
+\Ref{lem:regular-extension-adjunction},
+the morphism
+\[
+    \iota_B
+\]
+admits a right adjoint. By assumption,
+\[
+    M
+\]
+admits a right adjoint. Pasting these adjunctions therefore gives a
+right adjoint for their composite
+\[
+    \iota_B\otimes_B M.
+\]
+Hence the underlying $A$--$C$-bimodule of
+\[
+    M
+\]
+is right $C$-dualizable. Thus
+\[
+    M
+\]
+is right perfect.
+
+Finally, the right adjoint of
+\[
+    M
+\]
+is canonically equivalent to
+\[
+    \underline{\Hom}_C(M,C)
+\]
+by
+\Ref{prop:right-module-tensor-hom}
+and the contractible uniqueness of right adjoints.
+\end{proof}
+
+\begin{corollary}[Right Morita adjoint]
+\label{cor:right-morita-adjoint}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be right perfect. Then
+\[
+    M
+\]
+admits a right adjoint
+\[
+    M^R
+    :=
+    \underline{\Hom}_C(M,C)
+    \colon
+    C
+    \longrightarrow
+    B.
+\]
+\end{corollary}
+
+\begin{proof}
+This is the forward implication of
+\Ref{prop:right-perfect-morita-adjointability}.
+\end{proof}
+
+\begin{proposition}[Reversal of Morita composition]
+\label{prop:op-reversal-morita-composition}
+For composable bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+there is a canonical equivalence
+\[
+    (M\otimes_C N)^{\op}
+    \xrightarrow{\;\simeq\;}
+    N^{\op}
+    \otimes_{C^{\op}}
+    M^{\op}.
+\]
+These equivalences are coherently associative and unital.
+\end{proposition}
+
+\begin{proof}
+The relative tensor product
+\[
+    M\otimes_C N
+\]
+is the geometric realization of the two-sided bar construction
+\[
+    [n]
+    \longmapsto
+    M
+    \otimes_A
+    C^{\otimes_A n}
+    \otimes_A
+    N.
+\]
+
+After action reversal and reversal of the order of tensor factors, this
+simplicial object identifies with
+\[
+    [n]
+    \longmapsto
+    N^{\op}
+    \otimes_A
+    (C^{\op})^{\otimes_A n}
+    \otimes_A
+    M^{\op},
+\]
+which is the two-sided bar construction defining
+\[
+    N^{\op}
+    \otimes_{C^{\op}}
+    M^{\op}.
+\]
+
+The comparison is natural and is induced levelwise by the symmetry of
+\[
+    \mathcal W.
+\]
+Its associativity and unit coherences follow because all comparisons are
+induced by the same coherent reversal of the corresponding iterated bar
+constructions.
+\end{proof}
+
+\begin{corollary}[Left-perfectness equals Morita left-adjointability]
+\label{cor:left-perfect-morita-adjointability}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be a bimodule. The following conditions are equivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $M$ is left perfect;
+
+    \item $M$ admits a left adjoint in
+    \[
+        \Mor_A.
+    \]
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+By definition,
+\[
+    M
+\]
+is left perfect if and only if
+\[
+    M^{\op}
+\]
+is right perfect. By
+\Ref{prop:right-perfect-morita-adjointability},
+this is equivalent to
+\[
+    M^{\op}
+\]
+admitting a right adjoint.
+
+Suppose
+\[
+    M^{\op}\dashv N.
+\]
+Action reversal transforms this adjunction into
+\[
+    N^{\op}\dashv M.
+\]
+Thus
+\[
+    M
+\]
+admits a left adjoint.
+
+Conversely, action reversal of a left adjunction for
+\[
+    M
+\]
+produces a right adjunction for
+\[
+    M^{\op}.
+\]
+\end{proof}
+
+\begin{proposition}[Adjoint of a composite]
+\label{prop:morita-adjoint-composite}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D
+\]
+be right perfect. Then
+\[
+    M\otimes_C N
+\]
+is right perfect and
+\[
+    (M\otimes_C N)^R
+    \simeq
+    N^R\otimes_C M^R.
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:right-perfect-morita-adjointability},
+the bimodules
+\[
+    M
+    \qquad\text{and}\qquad
+    N
+\]
+are right-adjointable. Pasting their adjunctions gives an adjunction
+\[
+    M\otimes_C N
+    \dashv
+    N^R\otimes_C M^R.
+\]
+
+The unit is the composite
+\[
+\begin{aligned}
+    B
+    &\xrightarrow{\eta_M^{B}}
+    M\otimes_C M^R
+    \\
+    &\xrightarrow{
+        \id_M
+        \otimes
+        \eta_N^{C}
+        \otimes
+        \id_{M^R}
+    }
+    M\otimes_C N\otimes_D N^R\otimes_C M^R.
+\end{aligned}
+\]
+The counit is
+\[
+\begin{aligned}
+    N^R\otimes_C M^R
+    \otimes_B
+    M\otimes_C N
+    &\xrightarrow{
+        \id_{N^R}
+        \otimes
+        \epsilon_M^{C}
+        \otimes
+        \id_N
+    }
+    N^R\otimes_C N
+    \\
+    &\xrightarrow{\epsilon_N^{D}}
+    D.
+\end{aligned}
+\]
+
+The triangle identities follow by pasting the triangle identities for
+\[
+    M\dashv M^R
+    \qquad\text{and}\qquad
+    N\dashv N^R.
+\]
+Thus the composite is right-adjointable and hence right perfect.
+The coherent compatibility of these adjoints with iterated composition is
+proved in
+\Ref{prop:coherent-adjoints-composites}.
+\end{proof}
+
+\section{Smoothness, properness, and full dualizability}
+\label{sec:smooth-proper-full-dualizable}
+
+\begin{definition}[Proper and smooth algebra]
+\label{def:smooth-proper-algebra}
+Let
+\[
+    B
+    \in
+    \Alg_A
+\]
+and let
+\[
+    B^e
+    :=
+    B\otimes_A B^{\op}.
+\]
+
+The algebra
+\[
+    B
+\]
+is:
+\begin{enumerate}[label=(\roman*)]
+    \item \emph{proper over $A$} if its underlying $A$-module belongs to
+    \[
+        \Perf(A);
+    \]
+
+    \item \emph{smooth over $A$} if the evaluation, or diagonal,
+    bimodule
+    \[
+        {}_{B^e}B_A
+        \colon
+        B^e
+        \longrightarrow
+        A
+    \]
+    is left perfect.
+\end{enumerate}
+
+Equivalently,
+\[
+    B
+\]
+is smooth if the action-reversed diagonal bimodule
+\[
+    {}_A B_{(B^e)^{\op}}
+    \colon
+    A
+    \longrightarrow
+    (B^e)^{\op}
+\]
+is right perfect.
+
+Equivalently again, the diagonal object
+\[
+    {}_{B^e}B
+\]
+is one-sided perfect as a left $B^e$-module in the Morita sense: under
+action reversal it determines a right-perfect Morita morphism
+\[
+    A
+    \longrightarrow
+    (B^e)^{\op}.
+\]
+\end{definition}
+
+\begin{remark}[Comparison with compact-module terminology]
+\label{rem:smoothness-compact-module-terminology}
+In settings in which the right-perfect modules over an associative
+algebra agree with the compact modules, the smoothness condition says
+that
+\[
+    {}_{B^e}B
+\]
+is compact, or equivalently perfect in the usual thick-subcategory
+sense, as a left $B^e$-module. No such compact-generation identification
+is used in this chapter.
+\end{remark}
+
+\begin{theorem}[Smooth, proper, and fully dualizable]
+\label{thm:smooth-proper-fully-dualizable}
+Every associative $A$-algebra
+\[
+    B
+\]
+is dualizable as an object of the symmetric monoidal Morita
+$(\infty,2)$-category
+\[
+    \Mor_A^\otimes.
+\]
+Its dual is
+\[
+    B^{\op}.
+\]
+
+Moreover,
+\[
+    B
+\]
+is fully dualizable in
+\[
+    \Mor_A^\otimes
+\]
+if and only if it is smooth and proper over
+\[
+    A.
+\]
+\end{theorem}
+
+\begin{proof}
+The tensor dual of
+\[
+    B
+\]
+is
+\[
+    B^{\op}.
+\]
+The evaluation and coevaluation $1$-morphisms are the diagonal bimodule
+with the appropriate action conventions:
+\[
+    \ev_B
+    :=
+    {}_{B\otimes_A B^{\op}}B_A
+    \colon
+    B\otimes_A B^{\op}
+    \longrightarrow
+    A
+\]
+and
+\[
+    \coev_B
+    :=
+    {}_A B_{B^{\op}\otimes_A B}
+    \colon
+    A
+    \longrightarrow
+    B^{\op}\otimes_A B.
+\]
+
+The first duality triangle is the composite $B$--$B$-bimodule
+\[
+\begin{aligned}
+    &\bigl(
+        \id_B\otimes_A\coev_B
+    \bigr)
+    \otimes_{B\otimes_A B^{\op}\otimes_A B}
+    \bigl(
+        \ev_B\otimes_A\id_B
+    \bigr).
+\end{aligned}
+\]
+Multiplication in
+\[
+    B
+\]
+induces a canonical equivalence
+\[
+\begin{aligned}
+    &\bigl(
+        \id_B\otimes_A\coev_B
+    \bigr)
+    \otimes_{B\otimes_A B^{\op}\otimes_A B}
+    \bigl(
+        \ev_B\otimes_A\id_B
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    {}_B B_B.
+\end{aligned}
+\]
+In the two-sided bar model, this equivalence is the regular Morita
+contraction; the algebra unit supplies a contracting extra degeneracy.
+
+Similarly, the second duality triangle is the composite
+$B^{\op}$--$B^{\op}$-bimodule
+\[
+\begin{aligned}
+    &\bigl(
+        \coev_B\otimes_A\id_{B^{\op}}
+    \bigr)
+    \otimes_{B^{\op}\otimes_A B\otimes_A B^{\op}}
+    \bigl(
+        \id_{B^{\op}}\otimes_A\ev_B
+    \bigr),
+\end{aligned}
+\]
+and multiplication induces a canonical equivalence
+\[
+\begin{aligned}
+    &\bigl(
+        \coev_B\otimes_A\id_{B^{\op}}
+    \bigr)
+    \otimes_{B^{\op}\otimes_A B\otimes_A B^{\op}}
+    \bigl(
+        \id_{B^{\op}}\otimes_A\ev_B
+    \bigr)
+    \xrightarrow{\;\simeq\;}
+    {}_{B^{\op}}B^{\op}_{B^{\op}}.
+\end{aligned}
+\]
+The two equivalences satisfy the triangle coherences because both arise
+from the unit and associativity coherences of the regular bimodule.
+Thus
+\[
+    B
+\]
+is dualizable with dual
+\[
+    B^{\op}.
+\]
+
+It remains to determine when the evaluation and coevaluation
+$1$-morphisms admit both adjoints.
+
+The evaluation bimodule is
+\[
+    \ev_B
+    =
+    {}_{B^e}B_A
+    \colon
+    B^e
+    \longrightarrow
+    A.
+\]
+By
+\Ref{prop:right-perfect-morita-adjointability},
+it has a right adjoint if and only if it is right perfect.
+
+Since its target algebra is
+\[
+    A,
+\]
+this means precisely that its underlying $A$--$A$-bimodule
+\[
+    {}_A B_A
+\]
+is dualizable under
+\[
+    \otimes_A.
+\]
+The endomorphism monoidal category of
+\[
+    A
+\]
+in
+\[
+    \Mor_A
+\]
+is canonically
+\[
+    \Mod_A(\V).
+\]
+Therefore
+\[
+    \ev_B
+    \text{ has a right adjoint}
+    \quad\Longleftrightarrow\quad
+    B\in\Perf(A).
+\]
+This is properness.
+
+By
+\Ref{cor:left-perfect-morita-adjointability},
+the evaluation bimodule has a left adjoint if and only if it is left
+perfect. This is precisely smoothness.
+
+Action reversal identifies the evaluation with the coevaluation, up to
+the canonical equivalence
+\[
+    (B\otimes_A B^{\op})^{\op}
+    \simeq
+    B^{\op}\otimes_A B.
+\]
+Action reversal interchanges left and right adjoints. Hence evaluation
+and coevaluation both admit left and right adjoints exactly when
+\[
+    B
+\]
+is both smooth and proper.
+
+Therefore
+\[
+    B
+\]
+is fully dualizable if and only if it is smooth and proper over
+\[
+    A.
+\]
+\end{proof}
+
+\begin{remark}
+\label{rem:smooth-proper-full-dualizable}
+The smooth and proper algebras form the fully dualizable sector of the
+Morita category. Compare
+\cite{ToenDerivedMorita,HaugsengHigherMorita}.
+\end{remark}
+
+\section{The elementary mate correspondence}
+\label{sec:elementary-mate-correspondence}
+
+\begin{definition}[Right mate]
+\label{def:right-mate}
+Let
+\[
+    \alpha
+    \colon
+    M
+    \longrightarrow
+    N
+\]
+be a map between right-perfect $B$--$C$-bimodules. Its \emph{right mate}
+is the map
+\[
+    \alpha^R
+    \colon
+    N^R
+    \longrightarrow
+    M^R
+\]
+defined by the composite
+\[
+\begin{aligned}
+    N^R
+    &\simeq
+    N^R\otimes_B B
+    \\
+    &\xrightarrow{
+        \id_{N^R}\otimes\eta_M^{B}
+    }
+    N^R\otimes_B M\otimes_C M^R
+    \\
+    &\xrightarrow{
+        \id_{N^R}\otimes\alpha\otimes\id_{M^R}
+    }
+    N^R\otimes_B N\otimes_C M^R
+    \\
+    &\xrightarrow{
+        \epsilon_N^{C}\otimes\id_{M^R}
+    }
+    M^R.
+\end{aligned}
+\]
+\end{definition}
+
+\begin{proposition}[Mate equivalence]
+\label{prop:mate-equivalence}
+For right-perfect $B$--$C$-bimodules
+\[
+    M
+    \qquad\text{and}\qquad
+    N,
+\]
+taking right mates defines an equivalence of mapping spaces
+\[
+    \Map_{\BMod_{B,C}(\mathcal W)}(M,N)
+    \xrightarrow{\;\simeq\;}
+    \Map_{\BMod_{C,B}(\mathcal W)}(N^R,M^R).
+\]
+
+Its inverse sends
+\[
+    \beta
+    \colon
+    N^R
+    \longrightarrow
+    M^R
+\]
+to the composite
+\[
+\begin{aligned}
+    \beta^L
+    \colon
+    M
+    &\simeq
+    B\otimes_B M
+    \\
+    &\xrightarrow{
+        \eta_N^{B}\otimes\id_M
+    }
+    N\otimes_C N^R\otimes_B M
+    \\
+    &\xrightarrow{
+        \id_N\otimes\beta\otimes\id_M
+    }
+    N\otimes_C M^R\otimes_B M
+    \\
+    &\xrightarrow{
+        \id_N\otimes\epsilon_M^{C}
+    }
+    N.
+\end{aligned}
+\]
+
+Consequently,
+\[
+    (\id_M)^R
+    \simeq
+    \id_{M^R}
+\]
+and
+\[
+    (\beta\circ\alpha)^R
+    \simeq
+    \alpha^R\circ\beta^R.
+\]
+\end{proposition}
+
+\begin{proof}
+The right mate
+\[
+    \alpha^R
+\]
+is characterized by the counit equation
+\[
+    \epsilon_M^{C}
+    \circ
+    (\alpha^R\otimes_B\id_M)
+    \simeq
+    \epsilon_N^{C}
+    \circ
+    (\id_{N^R}\otimes_B\alpha)
+\]
+as maps
+\[
+    N^R\otimes_B M
+    \longrightarrow
+    C.
+\]
+
+Substituting the displayed formulas for
+\[
+    \alpha^R
+    \qquad\text{and}\qquad
+    \beta^L,
+\]
+the triangle identities for
+\[
+    M\dashv M^R
+    \qquad\text{and}\qquad
+    N\dashv N^R
+\]
+give canonical equivalences
+\[
+    (\alpha^R)^L
+    \simeq
+    \alpha,
+    \qquad
+    (\beta^L)^R
+    \simeq
+    \beta.
+\]
+Thus mating is an equivalence of mapping spaces.
+
+The formulas for identities and composites follow either by direct
+pasting or from the uniqueness characterization by the counit equation.
+\end{proof}
+
+\section{The coherent mate calculus}
+\label{sec:coherent-mate-calculus}
+
+Let
+\[
+    \mathcal X
+\]
+be an $(\infty,2)$-category. Write
+\[
+    \mathcal X^{\mathrm L}
+\]
+for the wide, locally full sub-$(\infty,2)$-category whose
+$1$-morphisms admit right adjoints, and write
+\[
+    \mathcal X^{\mathrm R}
+\]
+for the wide, locally full sub-$(\infty,2)$-category whose
+$1$-morphisms admit left adjoints.
+
+Thus the superscripts record the side occupied by the selected
+$1$-morphism: a morphism of
+\[
+    \mathcal X^{\mathrm L}
+\]
+is a left adjoint, and a morphism of
+\[
+    \mathcal X^{\mathrm R}
+\]
+is a right adjoint.
+
+\begin{theorem}[Coherent mate calculus]
+\label{thm:coherent-mate-calculus}
+For every $(\infty,2)$-category
+\[
+    \mathcal X,
+\]
+taking right adjoints and right mates defines an equivalence of
+$(\infty,2)$-categories
+\[
+    R_{\mathcal X}
+    \colon
+    \bigl(
+        \mathcal X^{\mathrm L}
+    \bigr)^{\mathrm{coop}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X^{\mathrm R}.
+\]
+
+On the underlying $1$-morphisms of
+\[
+    \mathcal X,
+\]
+it sends a right-adjointable $1$-morphism
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y
+\]
+to a right adjoint
+\[
+    f^R
+    \colon
+    y
+    \longrightarrow
+    x,
+\]
+and a $2$-morphism
+\[
+    \alpha
+    \colon
+    f
+    \Longrightarrow
+    g
+\]
+to its right mate
+\[
+    \alpha^R
+    \colon
+    g^R
+    \Longrightarrow
+    f^R.
+\]
+
+Consequently:
+\begin{enumerate}[label=(\roman*)]
+    \item for composable right-adjointable morphisms
+    \[
+        f
+        \colon
+        x
+        \longrightarrow
+        y,
+        \qquad
+        g
+        \colon
+        y
+        \longrightarrow
+        z,
+    \]
+    there is a canonical equivalence
+    \[
+        \chi_{f,g}
+        \colon
+        (g\circ f)^R
+        \xrightarrow{\;\simeq\;}
+        f^R\circ g^R;
+    \]
+
+    \item the equivalences
+    \[
+        \chi_{f,g}
+    \]
+    are coherently associative and unital;
+
+    \item right mating is compatible with vertical and horizontal
+    composition of $2$-morphisms;
+
+    \item the inverse equivalence is given by taking left adjoints and
+    left mates.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    *
+\]
+denote the terminal $(\infty,2)$-category. There are canonical
+identifications
+\[
+    \Fun(*,\mathcal X)_{\mathrm{lax}}
+    \simeq
+    \mathcal X
+    \simeq
+    \Fun(*,\mathcal X)_{\mathrm{oplax}}.
+\]
+A functor
+\[
+    *
+    \longrightarrow
+    \mathcal X
+\]
+selects an object, a lax or oplax transformation selects a
+$1$-morphism, and a modification selects a $2$-morphism.
+
+The coherent mate theorem gives an equivalence
+\[
+    \Fun(*,\mathcal X)_{\mathrm{lax}}^{\mathrm{radj}}
+    \simeq
+    \left(
+        \Fun(*,\mathcal X)_{\mathrm{oplax}}^{\mathrm{ladj}}
+    \right)^{\mathrm{coop}}.
+\]
+Under the preceding identifications, this becomes
+\[
+    \mathcal X^{\mathrm R}
+    \simeq
+    \bigl(
+        \mathcal X^{\mathrm L}
+    \bigr)^{\mathrm{coop}}.
+\]
+Taking the inverse equivalence gives
+\[
+    R_{\mathcal X}
+    \colon
+    \bigl(
+        \mathcal X^{\mathrm L}
+    \bigr)^{\mathrm{coop}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X^{\mathrm R}.
+\]
+See
+\cite[Theorem~5.3.6]{AbellanGagnaHaugsengMates}.
+
+Since
+\[
+    R_{\mathcal X}
+\]
+is an $(\infty,2)$-functor, it preserves all composition operations in
+its source. When its action is described using the underlying
+$1$-morphisms and $2$-morphisms of
+\[
+    \mathcal X,
+\]
+the source coopposite reverses both levels.
+
+Consequently, for composable left adjoints
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y,
+    \qquad
+    g
+    \colon
+    y
+    \longrightarrow
+    z,
+\]
+the image of the composite is canonically equivalent to
+\[
+    f^R\circ g^R.
+\]
+This gives
+\[
+    \chi_{f,g}
+    \colon
+    (g\circ f)^R
+    \xrightarrow{\;\simeq\;}
+    f^R\circ g^R.
+\]
+
+The associativity pentagon and unit triangles for
+\[
+    \chi
+\]
+are the pseudofunctorial coherence diagrams of
+\[
+    R_{\mathcal X}.
+\]
+Compatibility of right mating with vertical and horizontal composition
+follows from functoriality on $2$-morphisms and coherent pasting.
+
+Taking left adjoints and left mates gives the inverse equivalence.
+\end{proof}
+
+\section{Specified adjunctions and the walking-adjunction resolution}
+\label{sec:specified-adjunctions}
+
+The coherent mate theorem makes adjoint formation functorial on the
+sub-$(\infty,2)$-categories of adjointable morphisms. For the construction
+of the complete weak involution, it is useful to retain a presentation in
+which the right adjoints, units, and counits are part of the represented
+diagram.
+
+\begin{definition}[The walking adjunction]
+\label{def:walking-adjunction}
+Let
+\[
+    \mathsf{Adj}
+\]
+denote the walking adjunction. It has two distinguished objects
+\[
+    0,
+    \qquad
+    1,
+\]
+a distinguished $1$-morphism
+\[
+    \ell
+    \colon
+    0
+    \longrightarrow
+    1,
+\]
+a specified right adjoint
+\[
+    r
+    \colon
+    1
+    \longrightarrow
+    0,
+\]
+and coherent unit, counit, and triangle data
+\[
+    \eta
+    \colon
+    \id_0
+    \Longrightarrow
+    r\ell,
+    \qquad
+    \epsilon
+    \colon
+    \ell r
+    \Longrightarrow
+    \id_1.
+\]
+
+It is characterized by the universal property that, for every
+$(\infty,2)$-category
+\[
+    \mathcal X,
+\]
+evaluation at
+\[
+    \ell
+\]
+identifies the space of functors
+\[
+    \mathsf{Adj}
+    \longrightarrow
+    \mathcal X
+\]
+with the space of $1$-morphisms of
+\[
+    \mathcal X
+\]
+equipped with complete coherent right-adjoint data.
+\end{definition}
+
+\begin{construction}[Walking strings of adjunctions]
+\label{con:walking-strings-adjunctions}
+For
+\[
+    n\geq 0,
+\]
+let
+\[
+    \mathsf{Adj}_{[n]}
+\]
+denote the walking string of
+\[
+    n
+\]
+composable adjunctions.
+
+Thus
+\[
+    \mathsf{Adj}_{[0]}
+\]
+is the terminal $(\infty,2)$-category. Let
+\[
+    i_0,i_1
+    \colon
+    \mathsf{Adj}_{[0]}
+    \longrightarrow
+    \mathsf{Adj}
+\]
+denote the inclusions of the initial and terminal distinguished objects.
+For
+\[
+    n\geq 1,
+\]
+there is an iterated pushout presentation
+\[
+\begin{aligned}
+    \mathsf{Adj}_{[n]}
+    \simeq{}&
+    \mathsf{Adj}
+    \amalg_{\mathsf{Adj}_{[0]}}
+    \mathsf{Adj}
+    \amalg_{\mathsf{Adj}_{[0]}}
+    \cdots
+    \amalg_{\mathsf{Adj}_{[0]}}
+    \mathsf{Adj},
+\end{aligned}
+\]
+with
+\[
+    n
+\]
+copies of
+\[
+    \mathsf{Adj}.
+\]
+At every pushout, the map from the preceding copy is
+\[
+    i_1,
+\]
+and the map to the following copy is
+\[
+    i_0.
+\]
+Thus the terminal distinguished object of each copy is identified with
+the initial distinguished object of the next.
+
+The coface maps compose adjacent specified adjunctions by pasting their
+units and counits, and the codegeneracy maps insert identity adjunctions.
+These maps make
+\[
+    [n]\longmapsto\mathsf{Adj}_{[n]}
+\]
+a cosimplicial $(\infty,2)$-category. Mapping this cosimplicial object
+into an $(\infty,2)$-category produces the simplicial object which
+encodes composition of specified adjunctions.
+\end{construction}
+
+\begin{theorem}[Specified-adjunction resolution]
+\label{thm:specified-adjunction-resolution}
+For every $(\infty,2)$-category
+\[
+    \mathcal X,
+\]
+there is an $(\infty,2)$-category
+\[
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)
+\]
+of specified left adjunctions, natural in
+\[
+    \mathcal X,
+\]
+with the following properties.
+
+\begin{enumerate}[label=(\roman*)]
+    \item It has the same objects as
+    \[
+        \mathcal X.
+    \]
+
+    \item A $1$-morphism from
+    \[
+        x
+    \]
+    to
+    \[
+        y
+    \]
+    is complete specified adjunction data
+    \[
+        f
+        \colon
+        x
+        \rightleftarrows
+        y
+        \colon
+        g,
+        \qquad
+        f\dashv g.
+    \]
+
+    \item A $2$-morphism between specified adjunctions
+    \[
+        f\dashv g
+        \qquad\text{and}\qquad
+        f'\dashv g'
+    \]
+    is equivalently a $2$-morphism
+    \[
+        \alpha
+        \colon
+        f
+        \Longrightarrow
+        f'
+    \]
+    together with its coherently determined right mate
+    \[
+        \alpha^R
+        \colon
+        g'
+        \Longrightarrow
+        g.
+    \]
+
+    \item Composition is pasting of specified adjunctions. If
+    \[
+        f
+        \colon
+        x
+        \rightleftarrows
+        y
+        \colon
+        g
+    \]
+    and
+    \[
+        h
+        \colon
+        y
+        \rightleftarrows
+        z
+        \colon
+        k
+    \]
+    are specified adjunctions, their composite is
+    \[
+        hf
+        \colon
+        x
+        \rightleftarrows
+        z
+        \colon
+        gk.
+    \]
+    Its unit is
+    \[
+        \id_x
+        \xRightarrow{\eta_f}
+        gf
+        \xRightarrow{g\eta_h f}
+        gkhf,
+    \]
+    and its counit is
+    \[
+        hfgk
+        \xRightarrow{h\epsilon_f k}
+        hk
+        \xRightarrow{\epsilon_h}
+        \id_z.
+    \]
+
+    \item Forgetting the right adjoint, unit, counit, and mate data
+    defines an equivalence
+    \[
+        p_{\mathrm L}
+        \colon
+        \operatorname{Adj}^{\mathrm L}(\mathcal X)
+        \xrightarrow{\;\simeq\;}
+        \mathcal X^{\mathrm L}.
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Choose a complete Segal-object presentation
+\[
+    N_\bullet\mathcal X
+    \colon
+    \Delta^{\op}
+    \longrightarrow
+    \Cat_\infty
+\]
+of
+\[
+    \mathcal X.
+\]
+
+Define
+\[
+    N_0^{\mathrm L}\mathcal X
+    :=
+    N_0\mathcal X,
+\]
+and let
+\[
+    N_1^{\mathrm L}\mathcal X
+    \subseteq
+    N_1\mathcal X
+\]
+be the full subcategory spanned by those $1$-morphisms of
+\[
+    \mathcal X
+\]
+which admit right adjoints.
+
+For
+\[
+    n\geq 2,
+\]
+define
+\[
+\begin{aligned}
+    N_n^{\mathrm L}\mathcal X
+    :={}&
+    N_1^{\mathrm L}\mathcal X
+    \times_{N_0\mathcal X}
+    \cdots
+    \times_{N_0\mathcal X}
+    N_1^{\mathrm L}\mathcal X,
+\end{aligned}
+\]
+with
+\[
+    n
+\]
+factors.
+
+Identity morphisms admit right adjoints, and left adjoints are closed
+under composition. Hence the face and degeneracy maps of
+\[
+    N_\bullet\mathcal X
+\]
+restrict to
+\[
+    N_\bullet^{\mathrm L}\mathcal X.
+\]
+By construction this restricted simplicial object satisfies the Segal
+condition.
+
+Every equivalence in
+\[
+    \mathcal X
+\]
+is both a left and a right adjoint. Consequently,
+\[
+    N_\bullet^{\mathrm L}\mathcal X
+\]
+contains the complete equivalence subspace of
+\[
+    N_\bullet\mathcal X.
+\]
+It is therefore complete and presents the wide locally full
+sub-$(\infty,2)$-category
+\[
+    \mathcal X^{\mathrm L}.
+\]
+
+We now construct a complete Segal object in which the adjunction data are
+specified.
+
+Set
+\[
+    \widetilde N_0^{\mathrm L}\mathcal X
+    :=
+    N_0\mathcal X.
+\]
+
+Let
+\[
+    \widetilde N_1^{\mathrm L}\mathcal X
+\]
+be the $\infty$-category whose objects are functors
+\[
+    H
+    \colon
+    \mathsf{Adj}
+    \longrightarrow
+    \mathcal X,
+\]
+and whose morphisms are colax transformations whose components at the
+two distinguished objects of
+\[
+    \mathsf{Adj}
+\]
+are equivalences; higher morphisms are the corresponding modifications.
+
+Evaluation at the distinguished left adjoint
+\[
+    \ell
+    \colon
+    0
+    \longrightarrow
+    1
+\]
+defines a functor
+\[
+    e_1
+    \colon
+    \widetilde N_1^{\mathrm L}\mathcal X
+    \longrightarrow
+    N_1^{\mathrm L}\mathcal X.
+\]
+
+We prove that
+\[
+    e_1
+\]
+is an equivalence of $\infty$-categories.
+
+First, it is essentially surjective. A point of the fibre of
+\[
+    e_1
+\]
+over a left adjoint
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y
+\]
+is a complete coherent choice of a right adjoint
+\[
+    g
+    \colon
+    y
+    \longrightarrow
+    x,
+\]
+together with unit, counit, triangle, and all higher adjunction data.
+The walking-adjunction classification identifies this fibre with the
+space of coherent adjunction extensions of
+\[
+    f.
+\]
+This space is nonempty and contractible. In a quasi-categorically
+enriched presentation, this is
+\cite[Theorem~4.4.18]{RiehlVerityHomotopyCoherentAdjunctions}.
+Thus every left adjoint is in the essential image of
+\[
+    e_1.
+\]
+
+We next prove full faithfulness.
+
+The icon identification
+\cite[Theorem~7.3]{HaugsengLaxTransformations}
+identifies the morphisms arising from the simplicial
+$\infty$-categorical presentation of an $(\infty,2)$-category with
+colax transformations whose components on objects are equivalences.
+
+Consequently, for specified adjunctions
+\[
+    H
+    =
+    (f\dashv g)
+    \qquad\text{and}\qquad
+    H'
+    =
+    (f'\dashv g'),
+\]
+the mapping space
+\[
+    \Map_{\widetilde N_1^{\mathrm L}\mathcal X}(H,H')
+\]
+is the space of such colax transformations between the two
+walking-adjunction diagrams.
+
+Evaluation on the left legs gives a map
+\[
+\begin{aligned}
+    \Map_{\widetilde N_1^{\mathrm L}\mathcal X}(H,H')
+    \longrightarrow
+    \Map_{N_1^{\mathrm L}\mathcal X}(f,f').
+\end{aligned}
+\]
+
+The coherent mate theorem identifies a colax transformation between
+specified adjunction diagrams with its left-leg component together with
+the coherently determined right mate. More precisely, the
+characterization of adjoints in lax and oplax functor
+$(\infty,2)$-categories is supplied by
+\cite[Corollary~5.2.10]{AbellanGagnaHaugsengMates},
+and the equivalence on transformations and modifications is supplied by
+\cite[Theorem~5.3.6]{AbellanGagnaHaugsengMates}.
+
+It follows that the displayed map of mapping spaces is an equivalence.
+Hence
+\[
+    e_1
+    \colon
+    \widetilde N_1^{\mathrm L}\mathcal X
+    \xrightarrow{\;\simeq\;}
+    N_1^{\mathrm L}\mathcal X
+\]
+is fully faithful and essentially surjective, and therefore an
+equivalence of $\infty$-categories.
+
+For
+\[
+    n\geq 2,
+\]
+define
+\[
+\begin{aligned}
+    \widetilde N_n^{\mathrm L}\mathcal X
+    :={}&
+    \widetilde N_1^{\mathrm L}\mathcal X
+    \times_{\widetilde N_0^{\mathrm L}\mathcal X}
+    \cdots
+    \times_{\widetilde N_0^{\mathrm L}\mathcal X}
+    \widetilde N_1^{\mathrm L}\mathcal X,
+\end{aligned}
+\]
+with
+\[
+    n
+\]
+factors.
+
+By the pushout description of
+\[
+    \mathsf{Adj}_{[n]},
+\]
+this $\infty$-category is equivalently the category of functors
+\[
+    H
+    \colon
+    \mathsf{Adj}_{[n]}
+    \longrightarrow
+    \mathcal X
+\]
+and colax transformations whose components at all distinguished objects
+are equivalences.
+
+The coface and codegeneracy maps of
+\Ref{con:walking-strings-adjunctions}
+make
+\[
+    \widetilde N_\bullet^{\mathrm L}\mathcal X
+\]
+a simplicial object. Its inner coface maps paste adjacent specified
+adjunctions, and its codegeneracy maps insert identity adjunctions.
+
+Evaluation on the distinguished left legs defines a morphism of
+simplicial objects
+\[
+    e_\bullet
+    \colon
+    \widetilde N_\bullet^{\mathrm L}\mathcal X
+    \longrightarrow
+    N_\bullet^{\mathrm L}\mathcal X.
+\]
+
+In degree zero,
+\[
+    e_0
+\]
+is the identity. In degree one,
+\[
+    e_1
+\]
+is the equivalence proved above. In every higher degree, both sides are
+the corresponding iterated Segal fibre products of their degree-one
+terms over their common degree-zero term. Hence
+\[
+    e_n
+\]
+is an equivalence for every
+\[
+    n\geq 0.
+\]
+
+Thus
+\[
+    e_\bullet
+\]
+is a degreewise equivalence of complete Segal objects.
+
+Define
+\[
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)
+\]
+to be the $(\infty,2)$-category presented by
+\[
+    \widetilde N_\bullet^{\mathrm L}\mathcal X.
+\]
+The degreewise equivalence induces
+\[
+    p_{\mathrm L}
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)
+    \xrightarrow{\;\simeq\;}
+    \mathcal X^{\mathrm L}.
+\]
+
+The description of $1$-morphisms follows from the degree-one walking
+adjunction.
+
+The description of $2$-morphisms is the coherent mate equivalence
+\[
+    \alpha
+    \colon
+    f
+    \Longrightarrow
+    f'
+    \qquad\longleftrightarrow\qquad
+    \alpha^R
+    \colon
+    g'
+    \Longrightarrow
+    g.
+\]
+
+Compatibility with vertical and horizontal composition and with all
+higher transformations is part of
+\cite[Theorem~5.3.6]{AbellanGagnaHaugsengMates}.
+
+Finally, the formulas for the unit and counit of a composite are the
+standard pasting formulas and agree with the inner coface maps of the
+walking-string construction.
+
+Naturality in
+\[
+    \mathcal X
+\]
+is induced by postcomposition of walking-adjunction diagrams.
+\end{proof}
+
+\begin{remark}[Invariant use of the construction]
+\label{rem:specified-adjunction-resolution-invariant}
+The preceding proof uses a complete Segal-object presentation only to
+construct the specified-adjunction resolution. Subsequent arguments use
+only the invariant $(\infty,2)$-category
+\[
+    \operatorname{Adj}^{\mathrm L}(\mathcal X),
+\]
+the walking-adjunction description of its morphisms, and the equivalence
+\[
+    p_{\mathrm L}
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)
+    \xrightarrow{\;\simeq\;}
+    \mathcal X^{\mathrm L}.
+\]
+
+In particular, the construction retains all equivalences between
+objects: it does not replace the object $\infty$-groupoid of
+\[
+    \mathcal X
+\]
+by a discrete set.
+\end{remark}
+
+\section{The right-perfect Morita category and coherent adjoints}
+\label{sec:right-perfect-morita-coherent-adjoints}
+
+\begin{definition}[Right-perfect Morita category]
+\label{def:right-perfect-morita-category}
+Let
+\[
+    \Mor_A^{\mathrm{rperf}}
+\]
+denote the wide, locally full $(\infty,2)$-subcategory of
+\[
+    \Mor_A
+\]
+with:
+\begin{enumerate}[label=(\roman*)]
+    \item all associative $A$-algebras as objects;
+
+    \item right-perfect bimodules as $1$-morphisms;
+
+    \item all bimodule maps as $2$-morphisms.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Right-perfect Morita morphisms and the mate calculus]
+\label{prop:right-perfect-mate-calculus}
+There is an equality of wide locally full subcategories
+\[
+    \Mor_A^{\mathrm{rperf}}
+    =
+    \Mor_A^{\mathrm L}.
+\]
+Consequently, coherent right adjoints and right mates on
+\[
+    \Mor_A^{\mathrm{rperf}}
+\]
+are supplied by
+\[
+    R_{\Mor_A}
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm{rperf}}
+    \bigr)^{\mathrm{coop}}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm R}.
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:right-perfect-morita-adjointability},
+the right-perfect bimodules are precisely the $1$-morphisms admitting
+Morita right adjoints. The result follows from
+\Ref{thm:coherent-mate-calculus}.
+\end{proof}
+
+\begin{proposition}[Coherent adjoints of composites]
+\label{prop:coherent-adjoints-composites}
+For composable right-perfect bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+there is a canonical equivalence
+\[
+    \chi_{M,N}
+    \colon
+    (M\otimes_C N)^R
+    \xrightarrow{\;\simeq\;}
+    N^R\otimes_C M^R.
+\]
+The equivalences
+\[
+    \chi_{M,N}
+\]
+are coherently associative and unital.
+\end{proposition}
+
+\begin{proof}
+The pointwise adjunction and its explicit unit and counit were constructed
+in
+\Ref{prop:morita-adjoint-composite}. Apply
+\Ref{thm:coherent-mate-calculus}
+to
+\[
+    \mathcal X=\Mor_A.
+\]
+The right adjoint of the Morita composite
+\[
+    M\otimes_C N
+\]
+is the reverse composite
+\[
+    N^R\otimes_C M^R.
+\]
+The associativity and unit coherences are the pseudofunctorial coherence
+maps of the right-adjoint equivalence.
+\end{proof}
+
+\begin{proposition}[Closure of right-perfect Morita morphisms]
+\label{prop:right-perfect-morita-closure}
+The class of right-perfect bimodules contains the identity bimodules and
+is closed under Morita composition.
+\end{proposition}
+
+\begin{proof}
+The identity $B$--$B$-bimodule is right adjoint to itself and hence is
+right perfect. Closure under composition follows from
+\Ref{prop:morita-adjoint-composite}.
+\end{proof}
+
+\begin{proposition}[External tensor products of right-perfect bimodules]
+\label{prop:external-tensor-right-perfect}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+and
+\[
+    N
+    \colon
+    B'
+    \longrightarrow
+    C'
+\]
+be right perfect. Then
+\[
+    M\otimes_A N
+    \colon
+    B\otimes_A B'
+    \longrightarrow
+    C\otimes_A C'
+\]
+is right perfect, with right adjoint
+\[
+    M^R\otimes_A N^R.
+\]
+\end{proposition}
+
+\begin{proof}
+Tensoring the adjunctions
+\[
+    M\dashv M^R
+    \qquad\text{and}\qquad
+    N\dashv N^R
+\]
+and using the interchange equivalences of
+\Ref{prop:symmetric-monoidal-higher-morita-category}
+gives an adjunction
+\[
+    M\otimes_A N
+    \dashv
+    M^R\otimes_A N^R.
+\]
+Thus the external tensor product is right-adjointable and hence right
+perfect.
+\end{proof}
+
+\section{Action reversal on Morita morphisms}
+\label{sec:action-reversal-adjointable-morita}
+
+\begin{proposition}[Coherent action-reversal involution]
+\label{prop:action-reversal-equivalence}
+Action reversal defines a coherent $1$-op involution
+\[
+    O_A
+    \colon
+    \Mor_A^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A.
+\]
+
+On objects,
+\[
+    O_A(B)
+    =
+    B^{\op}.
+\]
+
+A $1$-morphism
+\[
+    B
+    \longrightarrow
+    C
+\]
+in
+\[
+    \Mor_A^{\op}
+\]
+is represented by a bimodule
+\[
+    M
+    \colon
+    C
+    \longrightarrow
+    B
+\]
+in
+\[
+    \Mor_A.
+\]
+Its image is
+\[
+    O_A(M)
+    =
+    M^{\op}
+    \colon
+    B^{\op}
+    \longrightarrow
+    C^{\op}.
+\]
+
+On $2$-morphisms,
+\[
+    O_A(\alpha)
+    =
+    \alpha^{\op}.
+\]
+
+The compositor is the canonical reversal equivalence
+\[
+    (M\otimes_C N)^{\op}
+    \xrightarrow{\;\simeq\;}
+    N^{\op}
+    \otimes_{C^{\op}}
+    M^{\op}.
+\]
+
+The involutive structure has underlying pseudonatural equivalence
+\[
+    \operatorname{bid}^{O_A}
+    \colon
+    \id_{\Mor_A}
+    \xRightarrow{\;\simeq\;}
+    O_A O_A^{\op},
+\]
+induced by the canonical double-opposite equivalences on algebras,
+bimodules, and bimodule maps.
+
+Together with its involutivity modification and higher coherences, these
+data form a coherent homotopy-fixed-point structure for the
+$1$-op action.
+
+The equivalence restricts to
+\[
+    O_A
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm R}
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm L}.
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    \sigma
+    \colon
+    \Assoc^\otimes
+    \xrightarrow{\;\cong\;}
+    \Assoc^\otimes
+\]
+be the canonical involution of the associative $\infty$-operad which
+reverses every linear ordering. By
+\cite[Remark~4.1.1.7]{LurieHigherAlgebra},
+precomposition with
+\[
+    \sigma
+\]
+sends an associative algebra object to its opposite algebra and satisfies
+\[
+    \sigma^2
+    =
+    \id_{\Assoc^\otimes}.
+\]
+
+The coloured operads governing left modules, right modules, and
+bimodules inherit compatible reflection involutions. On a
+$B$--$C$-bimodule
+\[
+    {}_B M_C,
+\]
+the reflected structure is the
+$C^{\op}$--$B^{\op}$-bimodule
+\[
+    {}_{C^{\op}}M^{\op}_{B^{\op}}
+\]
+whose underlying object is
+\[
+    M
+\]
+and whose actions are obtained by reversing the original right and left
+actions.
+
+Use the functorial complete Segal presentation of the higher Morita
+category from
+\cite[Remark~5.32 and Corollary~5.37]{HaugsengHigherMorita}.
+At every simplicial degree, apply the reflection of the associative and
+bimodule operads and reverse the order of the corresponding string of
+composable bimodules.
+
+On objects this sends
+\[
+    B
+    \longmapsto
+    B^{\op}.
+\]
+On a string
+\[
+    B_0
+    \xrightarrow{M_1}
+    B_1
+    \xrightarrow{M_2}
+    \cdots
+    \xrightarrow{M_n}
+    B_n,
+\]
+it gives
+\[
+    B_n^{\op}
+    \xrightarrow{M_n^{\op}}
+    B_{n-1}^{\op}
+    \xrightarrow{M_{n-1}^{\op}}
+    \cdots
+    \xrightarrow{M_1^{\op}}
+    B_0^{\op}.
+\]
+
+These degreewise operations commute with the face and degeneracy maps:
+inner face maps are Morita composition, outer face maps forget an
+endpoint, and degeneracy maps insert regular identity bimodules. The
+reflection reverses inner composition and preserves identity
+bimodules.
+
+Consequently, before completion there is an order-two equivalence of
+Segal objects
+\[
+    \widetilde O_A
+    \colon
+    \widetilde{\Mor}_A^{\op}
+    \xrightarrow{\;\simeq\;}
+    \widetilde{\Mor}_A.
+\]
+Because both the operadic reflection and reversal of strings square to
+the identity, this equivalence is equipped at the presenting level with
+a genuine coherent
+\[
+    C_2
+\]
+-action.
+
+Passing to the functorial completion produces
+\[
+    O_A
+    \colon
+    \Mor_A^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A
+\]
+together with the induced complete coherent
+\[
+    C_2
+\]
+-cocycle.
+
+The compositor is the reversal equivalence constructed in
+\Ref{prop:op-reversal-morita-composition}:
+\[
+    (M\otimes_C N)^{\op}
+    \xrightarrow{\;\simeq\;}
+    N^{\op}
+    \otimes_{C^{\op}}
+    M^{\op}.
+\]
+Its associativity and unit coherences are the coherent bar-reversal
+compatibilities proved there.
+
+Applying action reversal twice returns the original algebra, bimodule,
+and bimodule map. At the presenting operadic level this is the identity
+\[
+    \sigma^2=\id,
+\]
+so after completion it supplies the pseudonatural equivalence
+\[
+    \operatorname{bid}^{O_A}
+    \colon
+    \id_{\Mor_A}
+    \xRightarrow{\;\simeq\;}
+    O_AO_A^{\op}
+\]
+together with its involutivity modification and all higher
+\[
+    C_2
+\]
+-coherences.
+
+Finally, suppose
+\[
+    L\dashv M
+\]
+in
+\[
+    \Mor_A.
+\]
+Action reversal carries the unit and counit of this adjunction to the
+unit and counit of
+\[
+    M^{\op}
+    \dashv
+    L^{\op}.
+\]
+Thus action reversal sends right adjoints to left adjoints and induces
+the restricted equivalence
+\[
+    O_A
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm R}
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm L}.
+\]
+\end{proof}
+
+\begin{lemma}[Mate of the reversed mate]
+\label{lem:mate-reversed-mate}
+Let
+\[
+    \alpha
+    \colon
+    M
+    \Longrightarrow
+    N
+\]
+be a map between right-perfect bimodules. Relative to the reversed
+adjunctions
+\[
+    (M^R)^{\op}
+    \dashv
+    M^{\op},
+    \qquad
+    (N^R)^{\op}
+    \dashv
+    N^{\op},
+\]
+the right mate of
+\[
+    (\alpha^R)^{\op}
+    \colon
+    (N^R)^{\op}
+    \Longrightarrow
+    (M^R)^{\op}
+\]
+is canonically equivalent to
+\[
+    \alpha^{\op}
+    \colon
+    M^{\op}
+    \Longrightarrow
+    N^{\op}.
+\]
+
+These equivalences are natural in
+\[
+    \alpha
+\]
+and coherently compatible with vertical composition, horizontal
+composition, identity $2$-morphisms, and double action reversal.
+\end{lemma}
+
+\begin{proof}
+The mate
+\[
+    \alpha^R
+\]
+is characterized by the counit equation
+\[
+    \epsilon_M^{C}
+    \circ
+    (\alpha^R\otimes_B\id_M)
+    \simeq
+    \epsilon_N^{C}
+    \circ
+    (\id_{N^R}\otimes_B\alpha).
+\]
+Applying the coherent action-reversal functor transforms this equation
+into the counit characterization of the right mate of
+\[
+    (\alpha^R)^{\op}
+\]
+relative to the reversed adjunctions. The resulting mate is
+\[
+    \alpha^{\op}.
+\]
+Thus
+\[
+    \left(
+        (\alpha^R)^{\op}
+    \right)^R
+    \simeq
+    \alpha^{\op}.
+\]
+
+The compatibility with all compositions and higher pasting operations is
+the compatibility of the coherent mate equivalence with postcomposition
+by the $(\infty,2)$-functor
+\[
+    O_A.
+\]
+\end{proof}
+
+\section{Invariant mate--reversal duality}
+\label{sec:invariant-mate-reversal-duality}
+
+The mate--reversal involution is first constructed on the
+walking-adjunction resolution. There it is induced by an actual
+involution of the indexing walking adjunction, so its complete
+\[
+    C_2
+\]
+-coherence is inherited rather than reconstructed from pointwise
+biduality equivalences.
+
+\begin{lemma}[Leg reversal of the walking adjunction]
+\label{lem:walking-adjunction-leg-reversal}
+There is a coherent involutive equivalence
+\[
+    s
+    \colon
+    \mathsf{Adj}
+    \xrightarrow{\;\simeq\;}
+    \mathsf{Adj}^{\op}
+\]
+which fixes the two distinguished objects and satisfies
+\[
+    s(\ell)=r^{\op},
+    \qquad
+    s(r)=\ell^{\op}.
+\]
+It carries the unit and counit of
+\[
+    \ell\dashv r
+\]
+to the unit and counit of
+\[
+    r^{\op}\dashv\ell^{\op}
+\]
+and, in the standard strict walking-adjunction model, satisfies
+\[
+    s^{\op}s
+    =
+    \id_{\mathsf{Adj}}.
+\]
+Invariantly, this equality supplies the canonical involutivity
+equivalence and the complete
+\[
+    C_2
+\]
+-cocycle.
+
+The construction extends levelwise to coherent involutive equivalences
+\[
+    s_{[n]}
+    \colon
+    \mathsf{Adj}_{[n]}
+    \xrightarrow{\;\simeq\;}
+    \mathsf{Adj}_{[n]}^{\op}
+\]
+compatible with the cosimplicial structure of
+\Ref{con:walking-strings-adjunctions}.
+\end{lemma}
+
+\begin{proof}
+Use the standard nerve-enriched walking adjunction model. By
+\cite[Corollary~3.3.5]{RiehlVerityHomotopyCoherentAdjunctions}, it is
+obtained by applying the nerve to the hom-categories of the
+Schanuel--Street strict free adjunction $2$-category.
+
+On the strict free adjunction $2$-category, define
+\[
+    s
+    \colon
+    \mathsf{Adj}
+    \longrightarrow
+    \mathsf{Adj}^{\op}
+\]
+by fixing the two objects and sending
+\[
+    \ell\longmapsto r^{\op},
+    \qquad
+    r\longmapsto\ell^{\op}.
+\]
+The original unit and counit have exactly the types of the unit and
+counit of
+\[
+    r^{\op}\dashv\ell^{\op}
+\]
+in the $1$-opposite. The universal property of the strict free
+adjunction therefore defines
+\[
+    s
+\]
+uniquely on the complete generating adjunction diagram.
+
+Applying the same assignment twice fixes both objects, both generating
+$1$-morphisms, the unit, and the counit. Hence
+\[
+    s^{\op}s
+    =
+    \id_{\mathsf{Adj}}
+\]
+strictly in this model. In particular, it supplies the complete coherent
+\[
+    C_2
+\]
+-cocycle after passage to the invariant $(\infty,2)$-category.
+
+Apply the construction factorwise to the iterated pushout defining
+\[
+    \mathsf{Adj}_{[n]}.
+\]
+This gives strict involutive equivalences
+\[
+    s_{[n]}
+    \colon
+    \mathsf{Adj}_{[n]}
+    \xrightarrow{\;\cong\;}
+    \mathsf{Adj}_{[n]}^{\op}.
+\]
+The inner coface maps paste adjacent adjunctions, and the right adjoint of
+a pasted composite is the reverse pasted composite. The outer cofaces
+forget endpoints, and the codegeneracies insert identity adjunctions.
+Therefore the maps
+\[
+    s_{[n]}
+\]
+commute with every coface and codegeneracy map.
+\end{proof}
+
+\begin{proposition}[Mate--reversal on specified adjunctions]
+\label{prop:specified-mate-reversal-involution}
+Let
+\[
+    \mathcal X
+\]
+be an $(\infty,2)$-category equipped with a coherent $1$-op involution
+\[
+    O
+    \colon
+    \mathcal X^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X.
+\]
+Then there is a canonical coherent weak duality involution
+\[
+    J_O
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)^{\mathrm{co}}
+    \longrightarrow
+    \operatorname{Adj}^{\mathrm L}(\mathcal X).
+\]
+
+For a specified adjunction represented by
+\[
+    H
+    \colon
+    \mathsf{Adj}
+    \longrightarrow
+    \mathcal X,
+\]
+it is represented by the composite
+\[
+\begin{aligned}
+    \mathsf{Adj}
+    &\xrightarrow{s}
+    \mathsf{Adj}^{\op}
+    \\
+    &\xrightarrow{H^{\op}}
+    \mathcal X^{\op}
+    \\
+    &\xrightarrow{O}
+    \mathcal X.
+\end{aligned}
+\]
+Thus, if
+\[
+    H
+    =
+    \bigl(
+        f\dashv g
+    \bigr),
+\]
+then
+\[
+    J_O(H)
+    =
+    \bigl(
+        O(g)\dashv O(f)
+    \bigr).
+\]
+
+For a $2$-morphism
+\[
+    \alpha
+    \colon
+    f
+    \Longrightarrow
+    f'
+\]
+with right mate
+\[
+    \alpha^R
+    \colon
+    g'
+    \Longrightarrow
+    g,
+\]
+the corresponding $2$-morphism in the co-opposite is sent to
+\[
+    O(\alpha^R)
+    \colon
+    O(g')
+    \Longrightarrow
+    O(g).
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{thm:specified-adjunction-resolution}, the specified-adjunction
+category is presented by the complete Segal object obtained from the
+walking strings
+\[
+    \mathsf{Adj}_{[n]}.
+\]
+In degree
+\[
+    n,
+\]
+define
+\[
+    J_O(H)
+    :=
+    O\circ H^{\op}\circ s_{[n]}.
+\]
+The compatibility of
+\[
+    s_{[n]}
+\]
+with cofaces and codegeneracies and the pseudofunctoriality of
+\[
+    O
+\]
+show that these assignments define an $(\infty,2)$-functor
+\[
+    J_O
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)^{\mathrm{co}}
+    \longrightarrow
+    \operatorname{Adj}^{\mathrm L}(\mathcal X).
+\]
+On a single adjunction this is the displayed formula
+\[
+    f\dashv g
+    \longmapsto
+    O(g)\dashv O(f).
+\]
+On a $2$-morphism, the functor-category description and the coherent mate
+theorem identify the left-leg component with
+\[
+    O(\alpha^R).
+\]
+
+Applying
+\[
+    J_O
+\]
+twice to a diagram
+\[
+    H
+\]
+gives
+\[
+\begin{aligned}
+    J_OJ_O^{\mathrm{co}}(H)
+    &\simeq
+    O O^{\op}
+    \circ
+    H
+    \circ
+    s_{[n]}^{\op}s_{[n]}
+    \\
+    &\simeq
+    O O^{\op}
+    \circ
+    H.
+\end{aligned}
+\]
+The biduality of the coherent $1$-op involution,
+\[
+    \operatorname{bid}^{O}
+    \colon
+    \id_{\mathcal X}
+    \xRightarrow{\;\simeq\;}
+    O O^{\op},
+\]
+therefore induces by postcomposition a pseudonatural adjoint equivalence
+\[
+    \operatorname{bid}^{J}
+    \colon
+    \id_{\operatorname{Adj}^{\mathrm L}(\mathcal X)}
+    \xRightarrow{\;\simeq\;}
+    J_OJ_O^{\mathrm{co}}.
+\]
+
+The involutivity modification and all higher
+\[
+    C_2
+\]
+-cocycle simplices are obtained by applying the corresponding simplices
+of the coherent action
+\[
+    O
+\]
+to the walking-adjunction diagrams and combining them with the strict
+identity in the chosen walking-adjunction model
+\[
+    s_{[n]}^{\op}s_{[n]}
+    =
+    \id.
+\]
+Since both operations are maps of the complete Segal presentation, the
+result is a homotopy-fixed-point structure for the co-action, not merely
+a pointwise double-dual equivalence. Hence
+\[
+    J_O
+\]
+is a coherent weak duality involution.
+\end{proof}
+
+\begin{lemma}[Action reversal and adjointable morphisms]
+\label{lem:one-op-reverses-adjunctions}
+Let
+\[
+    \mathcal X
+\]
+be an $(\infty,2)$-category equipped with a coherent $1$-op involution
+\[
+    O
+    \colon
+    \mathcal X^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X.
+\]
+
+If
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y
+\]
+and
+\[
+    g
+    \colon
+    y
+    \longrightarrow
+    x
+\]
+form an adjunction
+\[
+    f\dashv g
+\]
+in
+\[
+    \mathcal X,
+\]
+then
+\[
+    O(g)\dashv O(f).
+\]
+
+Consequently,
+\[
+    O
+\]
+restricts to an equivalence
+\[
+    O^{\mathrm{adj}}
+    \colon
+    \bigl(
+        \mathcal X^{\mathrm R}
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X^{\mathrm L}.
+\]
+\end{lemma}
+
+\begin{proof}
+An adjunction
+\[
+    f\dashv g
+\]
+consists of a unit and counit
+\[
+    \eta
+    \colon
+    \id_x
+    \Longrightarrow
+    gf,
+    \qquad
+    \epsilon
+    \colon
+    fg
+    \Longrightarrow
+    \id_y
+\]
+satisfying the triangle identities.
+
+In
+\[
+    \mathcal X^{\op},
+\]
+the morphism
+\[
+    g
+    \colon
+    y
+    \longrightarrow
+    x
+\]
+is regarded as a morphism
+\[
+    x
+    \longrightarrow
+    y,
+\]
+and
+\[
+    f
+\]
+is regarded as a morphism
+\[
+    y
+    \longrightarrow
+    x.
+\]
+Since the $1$-opposite reverses $1$-morphisms but not $2$-morphisms, the
+same unit and counit exhibit an adjunction
+\[
+    g\dashv f
+\]
+in
+\[
+    \mathcal X^{\op}.
+\]
+
+Applying the $(\infty,2)$-functor
+\[
+    O
+    \colon
+    \mathcal X^{\op}
+    \longrightarrow
+    \mathcal X
+\]
+gives an adjunction
+\[
+    O(g)\dashv O(f).
+\]
+The complete coherent unit, counit, and triangle data are transported by
+functoriality.
+
+Thus a right adjoint in
+\[
+    \mathcal X
+\]
+is carried, after passage to the $1$-opposite, to a left adjoint in
+\[
+    \mathcal X.
+\]
+This defines
+\[
+    O^{\mathrm{adj}}
+    \colon
+    \bigl(
+        \mathcal X^{\mathrm R}
+    \bigr)^{\op}
+    \longrightarrow
+    \mathcal X^{\mathrm L}.
+\]
+
+The inverse coherent $1$-op equivalence preserves adjunctions by the same
+argument. Hence
+\[
+    O^{\mathrm{adj}}
+\]
+is an equivalence.
+\end{proof}
+
+\begin{theorem}[Abstract mate--reversal duality]
+\label{thm:abstract-mate-reversal-duality}
+Let
+\[
+    \mathcal X
+\]
+be an $(\infty,2)$-category equipped with a coherent $1$-op involution
+\[
+    O
+    \colon
+    \mathcal X^{\op}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X.
+\]
+
+Let
+\[
+    R_{\mathcal X}
+    \colon
+    \bigl(
+        \mathcal X^{\mathrm L}
+    \bigr)^{\mathrm{coop}}
+    \xrightarrow{\;\simeq\;}
+    \mathcal X^{\mathrm R}
+\]
+be the coherent right-adjoint and right-mate equivalence of
+\Ref{thm:coherent-mate-calculus}.
+
+Taking the $1$-opposite gives
+\[
+    R_{\mathcal X}^{\op}
+    \colon
+    \bigl(
+        \mathcal X^{\mathrm L}
+    \bigr)^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \bigl(
+        \mathcal X^{\mathrm R}
+    \bigr)^{\op}.
+\]
+Using the restricted equivalence of
+\Ref{lem:one-op-reverses-adjunctions},
+define
+\[
+\begin{aligned}
+    D_O
+    &:=
+    O^{\mathrm{adj}}
+    \circ
+    R_{\mathcal X}^{\op}
+    \\
+    &\colon
+    \bigl(
+        \mathcal X^{\mathrm L}
+    \bigr)^{\mathrm{co}}
+    \longrightarrow
+    \mathcal X^{\mathrm L}.
+\end{aligned}
+\]
+
+Then
+\[
+    D_O
+\]
+carries a canonical coherent weak duality involution.
+
+On a left adjoint
+\[
+    f
+    \colon
+    x
+    \longrightarrow
+    y
+\]
+with right adjoint
+\[
+    f^R
+    \colon
+    y
+    \longrightarrow
+    x,
+\]
+one has
+\[
+    D_O(f)
+    =
+    O(f^R).
+\]
+
+For a $2$-morphism
+\[
+    \alpha
+    \colon
+    f
+    \Longrightarrow
+    g,
+\]
+the corresponding morphism in the co-opposite is
+\[
+    \alpha^{\mathrm{co}}
+    \colon
+    g
+    \Longrightarrow
+    f,
+\]
+and
+\[
+    D_O(\alpha^{\mathrm{co}})
+    =
+    O(\alpha^R)
+    \colon
+    O(g^R)
+    \Longrightarrow
+    O(f^R).
+\]
+\end{theorem}
+
+\begin{proof}
+By
+\Ref{thm:specified-adjunction-resolution},
+forgetting specified right adjoints, units, counits, and mate data gives
+an equivalence
+\[
+    p_{\mathrm L}
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)
+    \xrightarrow{\;\simeq\;}
+    \mathcal X^{\mathrm L}.
+\]
+
+By
+\Ref{prop:specified-mate-reversal-involution},
+the coherent $1$-op involution
+\[
+    O
+\]
+induces a coherent weak duality involution
+\[
+    J_O
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\mathcal X)^{\mathrm{co}}
+    \longrightarrow
+    \operatorname{Adj}^{\mathrm L}(\mathcal X).
+\]
+
+Transport the complete homotopy-fixed-point structure of
+\[
+    J_O
+\]
+across the equivalence
+\[
+    p_{\mathrm L}.
+\]
+Transport of a homotopy-fixed-point structure along an equivalence is
+canonical up to a contractible space of choices. It therefore produces
+a coherent weak duality involution
+\[
+    D_O
+    \colon
+    \bigl(
+        \mathcal X^{\mathrm L}
+    \bigr)^{\mathrm{co}}
+    \longrightarrow
+    \mathcal X^{\mathrm L}.
+\]
+
+A specified adjunction
+\[
+    f\dashv f^R
+\]
+is sent by
+\[
+    J_O
+\]
+to
+\[
+    O(f^R)\dashv O(f).
+\]
+After forgetting the specified adjunction data, this gives
+\[
+    f
+    \longmapsto
+    O(f^R).
+\]
+
+Similarly, a $2$-morphism
+\[
+    \alpha
+    \colon
+    f
+    \Longrightarrow
+    g
+\]
+with right mate
+\[
+    \alpha^R
+    \colon
+    g^R
+    \Longrightarrow
+    f^R
+\]
+is sent, from the co-opposite, to
+\[
+    O(\alpha^R)
+    \colon
+    O(g^R)
+    \Longrightarrow
+    O(f^R).
+\]
+
+Under
+\Ref{thm:coherent-mate-calculus},
+these are precisely the objectwise and morphismwise formulas for
+\[
+    O^{\mathrm{adj}}
+    \circ
+    R_{\mathcal X}^{\op}.
+\]
+Thus the transported functor is the displayed composite
+\[
+    D_O.
+\]
+
+Its biduality pseudonatural equivalence, involutivity modification, and
+all higher
+\[
+    C_2
+\]
+-cocycle data are transported from
+\[
+    J_O.
+\]
+Hence
+\[
+    D_O
+\]
+is a coherent weak duality involution.
+\end{proof}
+
+\section{Canonical Morita duality}
+\label{sec:canonical-morita-duality}
+
+Taking the $1$-opposite of the coherent right-adjoint equivalence gives
+\[
+    R_{\Mor_A}^{\op}
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm{rperf}}
+    \bigr)^{\mathrm{co}}
+    \xrightarrow{\;\simeq\;}
+    \bigl(
+        \Mor_A^{\mathrm R}
+    \bigr)^{\op}.
+\]
+
+\begin{definition}[Canonical Morita duality]
+\label{def:canonical-morita-duality}
+Define
+\[
+    \mathbb D_A
+    :=
+    O_A\circ R_{\Mor_A}^{\op}.
+\]
+Thus
+\[
+    \mathbb D_A
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm{rperf}}
+    \bigr)^{\mathrm{co}}
+    \longrightarrow
+    \Mor_A^{\mathrm{rperf}}.
+\]
+
+Explicitly,
+\[
+    \mathbb D_A(B)
+    :=
+    B^{\op},
+\]
+and for
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+\[
+    \mathbb D_A(M)
+    :=
+    (M^R)^{\op}
+    \colon
+    B^{\op}
+    \longrightarrow
+    C^{\op}.
+\]
+
+For a $2$-morphism
+\[
+    \alpha
+    \colon
+    M
+    \Longrightarrow
+    N
+\]
+in
+\[
+    \Mor_A^{\mathrm{rperf}},
+\]
+the corresponding $2$-morphism
+\[
+    \alpha^{\mathrm{co}}
+    \colon
+    N
+    \Longrightarrow
+    M
+\]
+is sent to
+\[
+    \mathbb D_A(\alpha^{\mathrm{co}})
+    :=
+    (\alpha^R)^{\op}
+    \colon
+    (N^R)^{\op}
+    \Longrightarrow
+    (M^R)^{\op}.
+\]
+\end{definition}
+
+\begin{theorem}[Coherent weak Morita duality involution]
+\label{thm:weak-morita-duality-involution}
+The canonical Morita duality
+\[
+    \mathbb D_A
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm{rperf}}
+    \bigr)^{\mathrm{co}}
+    \longrightarrow
+    \Mor_A^{\mathrm{rperf}}
+\]
+is a coherent weak duality involution.
+
+For composable right-perfect bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+there is a canonical compositor
+\[
+    \mu_{M,N}
+    \colon
+    \mathbb D_A(M\otimes_C N)
+    \xrightarrow{\;\simeq\;}
+    \mathbb D_A(M)
+    \otimes_{C^{\op}}
+    \mathbb D_A(N).
+\]
+These compositors are coherently associative and unital.
+
+Define
+\[
+    \mathbb D_A^2
+    :=
+    \mathbb D_A
+    \circ
+    \mathbb D_A^{\mathrm{co}}.
+\]
+There is a pseudonatural adjoint equivalence
+\[
+    \operatorname{bid}^{\mathbb D}
+    \colon
+    \id_{\Mor_A^{\mathrm{rperf}}}
+    \xRightarrow{\;\simeq\;}
+    \mathbb D_A^2.
+\]
+
+For an associative $A$-algebra
+\[
+    B,
+\]
+its component is the regular Morita equivalence
+\[
+    \operatorname{bid}^{\mathbb D}_B
+    \colon
+    B
+    \longrightarrow
+    \mathbb D_A^2(B)
+    \simeq
+    B^{\op\op}
+\]
+associated to the canonical algebra equivalence
+\[
+    B
+    \xrightarrow{\;\simeq\;}
+    B^{\op\op}.
+\]
+
+For a right-perfect bimodule
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+pseudonaturality gives an invertible $2$-morphism
+\[
+\begin{aligned}
+    \operatorname{bid}^{\mathbb D}_M
+    \colon{}&
+    \operatorname{bid}^{\mathbb D}_B
+    \otimes_{\mathbb D_A^2(B)}
+    \mathbb D_A^2(M)
+    \\
+    &\xRightarrow{\;\simeq\;}
+    M
+    \otimes_C
+    \operatorname{bid}^{\mathbb D}_C.
+\end{aligned}
+\]
+After transport along the endpoint equivalences, this comparison is the
+canonical equivalence
+\[
+\begin{aligned}
+    \mathbb D_A^2(M)
+    &\simeq
+    \left(
+        \bigl((M^R)^{\op}\bigr)^R
+    \right)^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (M^{\op})^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    M.
+\end{aligned}
+\]
+
+Finally, the biduality carries an invertible involutivity modification
+comparing
+\[
+    \mathbb D_A
+    \bigl(
+        \operatorname{bid}^{\mathbb D}
+    \bigr)
+    \qquad\text{and}\qquad
+    \operatorname{bid}^{\mathbb D}_{\mathbb D_A},
+\]
+and this modification belongs to the complete coherent
+\[
+    C_2
+\]
+-cocycle of the weak duality involution.
+\end{theorem}
+
+\begin{proof}
+By
+\Ref{prop:right-perfect-mate-calculus},
+\[
+    \Mor_A^{\mathrm{rperf}}
+    =
+    \Mor_A^{\mathrm L}.
+\]
+By
+\Ref{prop:action-reversal-equivalence}, action reversal is a coherent
+$1$-op involution
+\[
+    O_A
+    \colon
+    \Mor_A^{\op}
+    \xrightarrow{\;\simeq\;}
+    \Mor_A.
+\]
+Applying
+\Ref{thm:abstract-mate-reversal-duality} with
+\[
+    \mathcal X
+    =
+    \Mor_A,
+    \qquad
+    O
+    =
+    O_A
+\]
+shows that
+\[
+    \mathbb D_A
+    =
+    O_A\circ R_{\Mor_A}^{\op}
+\]
+is a coherent weak duality involution, including its complete
+biduality, modification, and higher
+\[
+    C_2
+\]
+-cocycle.
+
+For composable right-perfect bimodules, the coherent right-adjoint
+compositor gives
+\[
+    (M\otimes_C N)^R
+    \xrightarrow{\;\simeq\;}
+    N^R\otimes_C M^R.
+\]
+Applying action reversal and the compositor of
+\[
+    O_A
+\]
+gives
+\[
+\begin{aligned}
+    \mathbb D_A(M\otimes_C N)
+    &=
+    \bigl(
+        (M\otimes_C N)^R
+    \bigr)^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (N^R\otimes_C M^R)^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (M^R)^{\op}
+    \otimes_{C^{\op}}
+    (N^R)^{\op}
+    \\
+    &=
+    \mathbb D_A(M)
+    \otimes_{C^{\op}}
+    \mathbb D_A(N).
+\end{aligned}
+\]
+This is
+\[
+    \mu_{M,N}.
+\]
+Its associativity and unit coherences are inherited from the
+walking-adjunction pasting construction and the coherent action-reversal
+compositors.
+
+For the explicit biduality comparison, begin with a specified adjunction
+\[
+    M\dashv M^R.
+\]
+Action reversal gives the specified adjunction
+\[
+    (M^R)^{\op}
+    \dashv
+    M^{\op}.
+\]
+Thus, before forgetting the specified adjunction data, the selected right
+adjoint of
+\[
+    (M^R)^{\op}
+\]
+is precisely
+\[
+    M^{\op}.
+\]
+After passing to any coherently selected right-adjoint functor, the
+contractible uniqueness of right adjoints supplies a canonical
+comparison
+\[
+    \rho_M
+    \colon
+    \left(
+        (M^R)^{\op}
+    \right)^R
+    \xrightarrow{\;\simeq\;}
+    M^{\op}.
+\]
+Action reversal then gives
+\[
+\begin{aligned}
+    \mathbb D_A^2(M)
+    &\simeq
+    \left(
+        \left(
+            (M^R)^{\op}
+        \right)^R
+    \right)^{\op}
+    \\
+    &\xrightarrow{\rho_M^{\op}}
+    (M^{\op})^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    M.
+\end{aligned}
+\]
+For a bimodule map
+\[
+    \alpha
+    \colon
+    M
+    \Longrightarrow
+    N,
+\]
+\Ref{lem:mate-reversed-mate} gives
+\[
+    \left(
+        \left(
+            (\alpha^R)^{\op}
+        \right)^R
+    \right)^{\op}
+    \simeq
+    \alpha.
+\]
+These formulas are the visible components of the homotopy-fixed-point
+structure already constructed on specified adjunctions. They are
+therefore automatically compatible with all horizontal and vertical
+pasting operations and with the complete
+\[
+    C_2
+\]
+-cocycle.
+\end{proof}
+
+\begin{proposition}[Symmetric monoidality of canonical Morita duality]
+\label{prop:morita-duality-symmetric-monoidal}
+The symmetric monoidal structure on
+\[
+    \Mor_A
+\]
+restricts to
+\[
+    \Mor_A^{\mathrm{rperf}}.
+\]
+With respect to this restricted structure, the canonical Morita duality
+admits a canonical strong symmetric monoidal refinement
+\[
+    \mathbb D_A^\otimes
+    \colon
+    \bigl(
+        \Mor_A^{\mathrm{rperf}}
+    \bigr)^{\mathrm{co},\otimes}
+    \longrightarrow
+    \bigl(
+        \Mor_A^{\mathrm{rperf}}
+    \bigr)^\otimes.
+\]
+
+Its unit comparison is the canonical algebra equivalence
+\[
+    A^{\op}
+    \xrightarrow{\;\simeq\;}
+    A.
+\]
+
+For associative $A$-algebras
+\[
+    B
+    \qquad\text{and}\qquad
+    C,
+\]
+its objectwise tensor comparison is
+\[
+    \nu_{B,C}
+    \colon
+    (B\otimes_A C)^{\op}
+    \xrightarrow{\;\simeq\;}
+    B^{\op}\otimes_A C^{\op}.
+\]
+
+For right-perfect bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    B'
+    \longrightarrow
+    C',
+\]
+its tensor comparison is the canonical equivalence
+\[
+\begin{aligned}
+    \nu_{M,N}
+    \colon
+    \mathbb D_A(M\otimes_A N)
+    &=
+    \bigl(
+        (M\otimes_A N)^R
+    \bigr)^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (M^R\otimes_A N^R)^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (M^R)^{\op}
+    \otimes_A
+    (N^R)^{\op}
+    \\
+    &=
+    \mathbb D_A(M)\otimes_A\mathbb D_A(N).
+\end{aligned}
+\]
+
+The comparisons
+\[
+    \nu
+\]
+are coherently associative, unital, and symmetric. They are compatible
+with:
+\begin{enumerate}[label=(\roman*)]
+    \item the Morita compositors
+    \[
+        \mu_{M,N};
+    \]
+
+    \item the biduality pseudonatural equivalence
+    \[
+        \operatorname{bid}^{\mathbb D};
+    \]
+
+    \item the involutivity modification and complete coherent
+    \[
+        C_2
+    \]
+    -cocycle of
+    \[
+        \mathbb D_A.
+    \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:external-tensor-right-perfect},
+the external tensor product of two right-perfect bimodules is right
+perfect. Identity bimodules are right perfect. Hence
+\[
+    \Mor_A^{\mathrm{rperf}}
+\]
+is a symmetric monoidal wide locally full sub-$(\infty,2)$-category of
+\[
+    \Mor_A.
+\]
+
+Let
+\[
+    M\dashv M^R
+    \qquad\text{and}\qquad
+    N\dashv N^R
+\]
+be specified Morita adjunctions. Tensoring their units and counits and
+using the interchange equivalences of
+\Ref{prop:symmetric-monoidal-higher-morita-category}
+gives a specified adjunction
+\[
+    M\otimes_A N
+    \dashv
+    M^R\otimes_A N^R.
+\]
+Explicitly, the unit is the composite
+\[
+\begin{aligned}
+    B\otimes_A B'
+    &\xrightarrow{
+        \eta_M^B\otimes_A\eta_N^{B'}
+    }
+    (M\otimes_C M^R)
+    \otimes_A
+    (N\otimes_{C'}N^R)
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (M\otimes_A N)
+    \otimes_{C\otimes_A C'}
+    (M^R\otimes_A N^R),
+\end{aligned}
+\]
+and the counit is obtained similarly from
+\[
+    \epsilon_M^C
+    \qquad\text{and}\qquad
+    \epsilon_N^{C'}.
+\]
+The triangle identities follow from the two original triangle identities
+and the interchange coherences.
+
+Consequently, the specified-adjunction resolution
+\[
+    \operatorname{Adj}^{\mathrm L}(\Mor_A)
+\]
+inherits a symmetric monoidal structure for which
+\[
+    p_{\mathrm L}
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\Mor_A)
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm{rperf}}
+\]
+is a symmetric monoidal equivalence.
+
+The operadic reflection used to construct
+\[
+    O_A
+\]
+commutes with the external tensor product. Hence action reversal has a
+canonical strong symmetric monoidal refinement. On algebras it gives
+\[
+    (B\otimes_A C)^{\op}
+    \xrightarrow{\;\simeq\;}
+    B^{\op}\otimes_A C^{\op},
+\]
+and on bimodules it gives
+\[
+    (P\otimes_A Q)^{\op}
+    \xrightarrow{\;\simeq\;}
+    P^{\op}\otimes_A Q^{\op}.
+\]
+
+The leg-reversal involution of the walking adjunction commutes with
+tensoring specified adjunctions. Therefore the specified
+mate--reversal involution
+\[
+    J_{O_A}
+\]
+is strong symmetric monoidal. Transporting this structure through
+\[
+    p_{\mathrm L}
+\]
+gives a strong symmetric monoidal structure on
+\[
+    \mathbb D_A.
+\]
+
+For the visible comparison on bimodules, the tensor product of specified
+adjunctions gives the canonical right-adjoint comparison
+\[
+    (M\otimes_A N)^R
+    \xrightarrow{\;\simeq\;}
+    M^R\otimes_A N^R.
+\]
+Applying action reversal gives
+\[
+\begin{aligned}
+    \bigl(
+        (M\otimes_A N)^R
+    \bigr)^{\op}
+    &\xrightarrow{\;\simeq\;}
+    (M^R\otimes_A N^R)^{\op}
+    \\
+    &\xrightarrow{\;\simeq\;}
+    (M^R)^{\op}\otimes_A(N^R)^{\op}.
+\end{aligned}
+\]
+This is
+\[
+    \nu_{M,N}.
+\]
+
+All associativity, unit, symmetry, and interchange diagrams hold on the
+specified-adjunction resolution because they are obtained by tensoring
+complete adjunction diagrams and applying the coherent operadic
+reflection. The biduality, involutivity modification, and higher
+\[
+    C_2
+\]
+-cocycle are constructed on the same specified diagrams. The tensor
+comparisons therefore intertwine the complete weak-duality structure,
+not only its objectwise double-dual equivalences.
+\end{proof}
+
+\begin{remark}
+\label{rem:op-versus-morita-duality}
+The operation
+\[
+    M
+    \longmapsto
+    M^{\op}
+\]
+reverses the direction of $1$-morphisms.
+
+The operation
+\[
+    M
+    \longmapsto
+    (M^R)^{\op}
+\]
+uses two reversals and therefore preserves the direction of
+$1$-morphisms while reversing $2$-morphisms.
+
+It is the latter operation that defines the coherent weak Morita duality
+involution.
+\end{remark}
+
+\section{Base change of right-perfect Morita theory}
+\label{sec:base-change-right-perfect-morita}
+
+\begin{proposition}[Morita base change]
+\label{prop:morita-base-change}
+Let
+\[
+    f
+    \colon
+    A
+    \longrightarrow
+    A'
+\]
+be a morphism in
+\[
+    \CAlg(\V).
+\]
+Extension of scalars induces a strong symmetric monoidal
+$(\infty,2)$-functor
+\[
+    F_f^{\mathrm{Mor}}
+    \colon
+    \Mor_A
+    \longrightarrow
+    \Mor_{A'}.
+\]
+
+On objects,
+\[
+    F_f^{\mathrm{Mor}}(B)
+    =
+    B\otimes_A A'.
+\]
+On bimodules,
+\[
+    F_f^{\mathrm{Mor}}(M)
+    =
+    M\otimes_A A'.
+\]
+On $2$-morphisms,
+\[
+    F_f^{\mathrm{Mor}}(\alpha)
+    =
+    \alpha\otimes_A A'.
+\]
+
+For composable bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+there is a canonical equivalence
+\[
+\begin{aligned}
+    \phi_{f;M,N}
+    \colon
+    (M\otimes_C N)\otimes_A A'
+    \xrightarrow{\;\simeq\;}
+    (M\otimes_A A')
+    \otimes_{C\otimes_A A'}
+    (N\otimes_A A').
+\end{aligned}
+\]
+These equivalences are coherently associative and unital.
+
+For bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    B'
+    \longrightarrow
+    C',
+\]
+there is a canonical external tensor comparison
+\[
+\begin{aligned}
+    \psi_{f;M,N}
+    \colon
+    (M\otimes_A N)\otimes_A A'
+    \xrightarrow{\;\simeq\;}
+    (M\otimes_A A')
+    \otimes_{A'}
+    (N\otimes_A A').
+\end{aligned}
+\]
+
+If
+\[
+    A
+    \xrightarrow{f}
+    A'
+    \xrightarrow{g}
+    A''
+\]
+are composable, there is a pseudonatural adjoint equivalence
+\[
+    \gamma_{g,f}
+    \colon
+    F_g^{\mathrm{Mor}}
+    \circ
+    F_f^{\mathrm{Mor}}
+    \xRightarrow{\;\simeq\;}
+    F_{g\circ f}^{\mathrm{Mor}}
+\]
+whose component on every algebra or bimodule is induced by
+\[
+    (X\otimes_A A')\otimes_{A'}A''
+    \xrightarrow{\;\simeq\;}
+    X\otimes_A A''.
+\]
+There is also a unit equivalence
+\[
+    \gamma_A
+    \colon
+    F_{\id_A}^{\mathrm{Mor}}
+    \xRightarrow{\;\simeq\;}
+    \id_{\Mor_A}.
+\]
+The transformations
+\[
+    \gamma_{g,f}
+    \qquad\text{and}\qquad
+    \gamma_A
+\]
+satisfy the usual pseudofunctorial pentagon and triangle coherences.
+\end{proposition}
+
+\begin{proof}
+Extension of scalars
+\[
+    -\otimes_A A'
+    \colon
+    \Mod_A(\V)
+    \longrightarrow
+    \Mod_{A'}(\V)
+\]
+is colimit-preserving and strong symmetric monoidal. It therefore sends
+associative $A$-algebras to associative $A'$-algebras and sends
+bimodules and bimodule maps to their base changes.
+
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D
+\]
+be composable. The relative tensor product is the geometric realization
+\[
+    M\otimes_C N
+    \simeq
+    \left|
+        [n]
+        \longmapsto
+        M\otimes_A C^{\otimes_A n}\otimes_A N
+    \right|.
+\]
+Since extension of scalars preserves geometric realizations,
+\[
+\begin{aligned}
+    (M\otimes_C N)\otimes_A A'
+    &\simeq
+    \left|
+        [n]
+        \longmapsto
+        \bigl(
+            M\otimes_A C^{\otimes_A n}\otimes_A N
+        \bigr)
+        \otimes_A A'
+    \right|.
+\end{aligned}
+\]
+Strong symmetric monoidality gives degreewise equivalences
+\[
+\begin{aligned}
+    &
+    \bigl(
+        M\otimes_A C^{\otimes_A n}\otimes_A N
+    \bigr)
+    \otimes_A A'
+    \\
+    &\qquad\simeq
+    (M\otimes_A A')
+    \otimes_{A'}
+    (C\otimes_A A')^{\otimes_{A'}n}
+    \otimes_{A'}
+    (N\otimes_A A').
+\end{aligned}
+\]
+The geometric realization of the simplicial object on the right is
+\[
+    (M\otimes_A A')
+    \otimes_{C\otimes_A A'}
+    (N\otimes_A A').
+\]
+This constructs
+\[
+    \phi_{f;M,N}.
+\]
+
+The comparisons for iterated Morita composition arise from the
+corresponding degreewise comparisons of multisimplicial bar
+constructions. Their associativity and unit coherences follow from the
+associativity and unit coherences of extension of scalars together with
+the canonical Fubini equivalences for geometric realizations.
+
+The external tensor comparison
+\[
+    \psi_{f;M,N}
+\]
+is the strong symmetric monoidal comparison for
+\[
+    -\otimes_A A'.
+\]
+Its compatibility with Morita composition is the interchange coherence
+between
+\[
+    \phi
+    \qquad\text{and}\qquad
+    \psi.
+\]
+
+Thus the assignments on algebras, bimodules, and bimodule maps define a
+strong symmetric monoidal $(\infty,2)$-functor
+\[
+    F_f^{\mathrm{Mor}}.
+\]
+
+For composable base changes, associativity of relative tensor product
+gives canonical equivalences
+\[
+    (X\otimes_A A')\otimes_{A'}A''
+    \xrightarrow{\;\simeq\;}
+    X\otimes_A A''
+\]
+natural for algebras, bimodules, and bimodule maps. Compatibility with
+the bar comparisons makes these equivalences pseudonatural and
+compatible with Morita composition. They therefore define
+\[
+    \gamma_{g,f}.
+\]
+
+The canonical equivalence
+\[
+    X\otimes_A A
+    \simeq
+    X
+\]
+defines
+\[
+    \gamma_A.
+\]
+The pentagon and triangle coherences are the associativity and unit
+coherences of iterated extension of scalars. Hence base change is
+pseudofunctorial in the commutative base.
+\end{proof}
+
+\begin{proposition}[Base change and coherent action reversal]
+\label{prop:base-change-opposites}
+Define
+\[
+    \mathcal O_f^{\mathrm L}
+    :=
+    O_{A'}
+    \circ
+    \bigl(F_f^{\mathrm{Mor}}\bigr)^{\op}
+\]
+and
+\[
+    \mathcal O_f^{\mathrm R}
+    :=
+    F_f^{\mathrm{Mor}}
+    \circ
+    O_A,
+\]
+viewed as functors
+\[
+    \Mor_A^{\op}
+    \longrightarrow
+    \Mor_{A'}.
+\]
+There is a pseudonatural adjoint equivalence
+\[
+    \omega_f
+    \colon
+    \mathcal O_f^{\mathrm L}
+    \xRightarrow{\;\simeq\;}
+    \mathcal O_f^{\mathrm R}.
+\]
+
+For every associative $A$-algebra
+\[
+    B,
+\]
+the object component is the regular Morita equivalence associated to the
+canonical algebra equivalence
+\[
+    \omega_{f,B}^{\mathrm{alg}}
+    \colon
+    (B\otimes_A A')^{\op}
+    \xrightarrow{\;\simeq\;}
+    B^{\op}\otimes_A A'.
+\]
+
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be a bimodule, and regard it as a morphism
+\[
+    C
+    \longrightarrow
+    B
+\]
+in
+\[
+    \Mor_A^{\op}.
+\]
+The pseudonaturality constraint is an invertible $2$-morphism
+\[
+\begin{aligned}
+    \Omega_{f,M}
+    \colon{}&
+    \omega_{f,C}
+    \otimes_{\mathcal O_f^{\mathrm R}(C)}
+    \mathcal O_f^{\mathrm R}(M)
+    \\
+    &\xRightarrow{\;\simeq\;}
+    \mathcal O_f^{\mathrm L}(M)
+    \otimes_{\mathcal O_f^{\mathrm L}(B)}
+    \omega_{f,B}.
+\end{aligned}
+\]
+After transporting the endpoint actions along
+\[
+    \omega_{f,B}^{\mathrm{alg}}
+    \qquad\text{and}\qquad
+    \omega_{f,C}^{\mathrm{alg}},
+\]
+this cell is represented by the canonical identification of the
+underlying base-changed action-reversed objects
+\[
+    (M\otimes_A A')^{\op}
+    \simeq
+    M^{\op}\otimes_A A'.
+\]
+
+The pseudonatural equivalence
+\[
+    \omega_f
+\]
+is coherently compatible with relative tensor products, bimodule maps,
+double action reversal, and the complete coherent
+\[
+    C_2
+\]
+-structures on
+\[
+    O_A
+    \qquad\text{and}\qquad
+    O_{A'}.
+\]
+\end{proposition}
+
+\begin{proof}
+Extension of scalars is a strong symmetric monoidal functor
+\[
+    -\otimes_A A'
+    \colon
+    \Mod_A(\V)
+    \longrightarrow
+    \Mod_{A'}(\V).
+\]
+It commutes with the order-reversal automorphism of the associative and
+bimodule operads. Therefore functoriality of the higher Morita
+construction produces a pseudonatural equivalence
+\[
+    O_{A'}
+    \circ
+    \bigl(F_f^{\mathrm{Mor}}\bigr)^{\op}
+    \xRightarrow{\;\simeq\;}
+    F_f^{\mathrm{Mor}}
+    \circ
+    O_A.
+\]
+On algebras this is induced by the identity on the underlying object and
+the equality of the two reversed base-changed multiplication diagrams,
+giving
+\[
+    \omega_{f,B}^{\mathrm{alg}}.
+\]
+The same comparison for the two module actions gives the displayed
+pseudonaturality cell on bimodules.
+
+At the bar-construction level, compatibility with composition is the
+canonical equivalence
+\[
+    (M\otimes_C N)\otimes_A A'
+    \xrightarrow{\;\simeq\;}
+    (M\otimes_A A')
+    \otimes_{C\otimes_A A'}
+    (N\otimes_A A').
+\]
+The comparisons on all iterated bar constructions are induced by the
+same symmetric monoidal interchange and order-reversal maps. They
+therefore satisfy the pseudonaturality and compositor coherences.
+
+Finally, since the comparison is induced before passing to algebras and
+bimodules by a map of the order-two operadic actions, it intertwines the
+double-opposite bidualities, involutivity modifications, and complete
+\[
+    C_2
+\]
+-cocycles.
+\end{proof}
+
+\begin{proposition}[Base change of Morita adjoints]
+\label{prop:base-change-morita-adjoints}
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be right perfect. Then
+\[
+    F_f^{\mathrm{Mor}}(M)
+    =
+    M\otimes_A A'
+\]
+is right perfect.
+
+There is a canonical equivalence of right adjoints
+\[
+    \beta_{f,M}
+    \colon
+    (M\otimes_A A')^R
+    \xrightarrow{\;\simeq\;}
+    M^R\otimes_A A'.
+\]
+
+It is uniquely characterized by compatibility with the transported
+adjunction
+\[
+    M\otimes_A A'
+    \dashv
+    M^R\otimes_A A'.
+\]
+
+These comparisons are coherently compatible with identity bimodules,
+Morita composition, and right mates.
+\end{proposition}
+
+\begin{proof}
+Applying
+\[
+    F_f^{\mathrm{Mor}}
+\]
+to the specified adjunction
+\[
+    M\dashv M^R
+\]
+gives an adjunction
+\[
+    M\otimes_A A'
+    \dashv
+    M^R\otimes_A A'.
+\]
+Thus the base-changed bimodule is right-adjointable and hence right
+perfect.
+
+The chosen right adjoint
+\[
+    (M\otimes_A A')^R
+\]
+and the transported right adjoint
+\[
+    M^R\otimes_A A'
+\]
+are right adjoints of the same $1$-morphism. The contractible uniqueness
+of right adjoints gives a canonical equivalence
+\[
+    \beta_{f,M}
+    \colon
+    (M\otimes_A A')^R
+    \xrightarrow{\;\simeq\;}
+    M^R\otimes_A A'
+\]
+compatible with the units and counits.
+
+For a bimodule map
+\[
+    \alpha
+    \colon
+    M
+    \Longrightarrow
+    N,
+\]
+compatibility with right mates is the canonical equivalence
+\[
+    F_f^{\mathrm{Mor}}(\alpha^R)
+    \circ
+    \beta_{f,N}
+    \simeq
+    \beta_{f,M}
+    \circ
+    \bigl(
+        F_f^{\mathrm{Mor}}(\alpha)
+    \bigr)^R.
+\]
+
+For composable right-perfect bimodules
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+    \qquad
+    N
+    \colon
+    C
+    \longrightarrow
+    D,
+\]
+the two composites comparing
+\[
+    \bigl(
+        F_f^{\mathrm{Mor}}(M\otimes_C N)
+    \bigr)^R
+\]
+with
+\[
+    F_f^{\mathrm{Mor}}(N^R)
+    \otimes_{F_f^{\mathrm{Mor}}(C)}
+    F_f^{\mathrm{Mor}}(M^R)
+\]
+are equivalences between right adjoints of the same composite and preserve
+the same transported counit. They are therefore canonically equivalent.
+
+This proves coherent compatibility with identities, composition, and
+right mates.
+\end{proof}
+
+\begin{corollary}[Base-change functor on right-perfect Morita categories]
+\label{cor:base-change-right-perfect-morita}
+The functor
+\[
+    F_f^{\mathrm{Mor}}
+\]
+restricts to an $(\infty,2)$-functor
+\[
+    F_f^{\mathrm{rperf}}
+    \colon
+    \Mor_A^{\mathrm{rperf}}
+    \longrightarrow
+    \Mor_{A'}^{\mathrm{rperf}}.
+\]
+\end{corollary}
+
+\begin{proof}
+This follows from
+\Ref{prop:base-change-morita-adjoints}.
+\end{proof}
+
+\begin{proposition}[Base change of canonical Morita duality]
+\label{prop:base-change-morita-duality}
+Define
+\[
+    L_f
+    :=
+    \mathbb D_{A'}
+    \circ
+    \bigl(F_f^{\mathrm{rperf}}\bigr)^{\mathrm{co}}
+\]
+and
+\[
+    R_f
+    :=
+    F_f^{\mathrm{rperf}}
+    \circ
+    \mathbb D_A.
+\]
+There is a pseudonatural adjoint equivalence
+\[
+    \kappa_f
+    \colon
+    L_f
+    \xRightarrow{\;\simeq\;}
+    R_f.
+\]
+
+For every associative $A$-algebra
+\[
+    B,
+\]
+the object component
+\[
+    \kappa_{f,B}
+    \colon
+    L_f(B)
+    \longrightarrow
+    R_f(B)
+\]
+is the regular Morita equivalence associated to
+\[
+    \omega_{f,B}^{\mathrm{alg}}
+    \colon
+    (B\otimes_A A')^{\op}
+    \xrightarrow{\;\simeq\;}
+    B^{\op}\otimes_A A'.
+\]
+
+For every right-perfect bimodule
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C,
+\]
+the pseudonaturality constraint is an invertible $2$-morphism
+\[
+\begin{aligned}
+    \kappa_{f,M}
+    \colon{}&
+    \kappa_{f,B}
+    \otimes_{R_f(B)}
+    R_f(M)
+    \\
+    &\xRightarrow{\;\simeq\;}
+    L_f(M)
+    \otimes_{L_f(C)}
+    \kappa_{f,C}.
+\end{aligned}
+\]
+It is the composite
+\[
+\begin{aligned}
+    \kappa_{f,B}
+    \otimes_{R_f(B)}
+    F_f^{\mathrm{Mor}}
+    \bigl(
+        (M^R)^{\op}
+    \bigr)
+    &\xRightarrow{\;\Omega_{f,M^R}\;}
+    \bigl(
+        F_f^{\mathrm{Mor}}(M^R)
+    \bigr)^{\op}
+    \otimes_{L_f(C)}
+    \kappa_{f,C}
+    \\
+    &\xRightarrow{
+        \;(\beta_{f,M}^{\op})^{-1}
+        \otimes
+        \id
+    \;}
+    \bigl(
+        F_f^{\mathrm{Mor}}(M)^R
+    \bigr)^{\op}
+    \otimes_{L_f(C)}
+    \kappa_{f,C},
+\end{aligned}
+\]
+where
+\[
+    \Omega_{f,M^R}
+\]
+is the pseudonaturality cell of
+\[
+    \omega_f
+\]
+from
+\Ref{prop:base-change-opposites}, and
+\[
+    \beta_{f,M}
+    \colon
+    F_f^{\mathrm{Mor}}(M)^R
+    \xrightarrow{\;\simeq\;}
+    F_f^{\mathrm{Mor}}(M^R)
+\]
+is the comparison of right adjoints from
+\Ref{prop:base-change-morita-adjoints}.
+
+The pseudonatural equivalence
+\[
+    \kappa_f
+\]
+is compatible with the compositors, biduality pseudonatural
+equivalences, involutivity modifications, and complete coherent
+\[
+    C_2
+\]
+-cocycles of
+\[
+    \mathbb D_A
+    \qquad\text{and}\qquad
+    \mathbb D_{A'}.
+\]
+Hence
+\[
+    F_f^{\mathrm{rperf}}
+\]
+is a morphism of $(\infty,2)$-categories with coherent weak duality
+involution.
+\end{proposition}
+
+\begin{proof}
+By naturality of the specified-adjunction resolution,
+\[
+    F_f^{\mathrm{Mor}}
+\]
+induces an $(\infty,2)$-functor
+\[
+    \widetilde F_f
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\Mor_A)
+    \longrightarrow
+    \operatorname{Adj}^{\mathrm L}(\Mor_{A'}).
+\]
+It sends the complete specified adjunction
+\[
+    (M\dashv M^R,\eta_M,\epsilon_M)
+\]
+to
+\[
+    \bigl(
+        F_f^{\mathrm{Mor}}(M)
+        \dashv
+        F_f^{\mathrm{Mor}}(M^R),
+        F_f^{\mathrm{Mor}}(\eta_M),
+        F_f^{\mathrm{Mor}}(\epsilon_M)
+    \bigr).
+\]
+
+Let
+\[
+    J_A
+\]
+and
+\[
+    J_{A'}
+\]
+denote the specified mate--reversal involutions obtained from
+\[
+    O_A
+    \qquad\text{and}\qquad
+    O_{A'}
+\]
+by
+\Ref{prop:specified-mate-reversal-involution}.
+The pseudonatural equivalence
+\[
+    \omega_f
+    \colon
+    O_{A'}
+    \circ
+    \bigl(F_f^{\mathrm{Mor}}\bigr)^{\op}
+    \xRightarrow{\;\simeq\;}
+    F_f^{\mathrm{Mor}}
+    \circ
+    O_A
+\]
+acts on both legs, the unit, and the counit of every walking-adjunction
+diagram. It therefore induces a pseudonatural adjoint equivalence
+\[
+    J_{A'}
+    \circ
+    \widetilde F_f^{\mathrm{co}}
+    \xRightarrow{\;\simeq\;}
+    \widetilde F_f
+    \circ
+    J_A
+\]
+on the specified-adjunction categories.
+
+Transport this equivalence along the forgetful equivalences
+\[
+    \operatorname{Adj}^{\mathrm L}(\Mor_A)
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm{rperf}}
+\]
+and
+\[
+    \operatorname{Adj}^{\mathrm L}(\Mor_{A'})
+    \xrightarrow{\;\simeq\;}
+    \Mor_{A'}^{\mathrm{rperf}}.
+\]
+The result is
+\[
+    \kappa_f
+    \colon
+    L_f
+    \xRightarrow{\;\simeq\;}
+    R_f.
+\]
+At an algebra
+\[
+    B,
+\]
+the component is the regular Morita equivalence associated to
+\[
+    \omega_{f,B}^{\mathrm{alg}}.
+\]
+
+Let
+\[
+    M
+    \colon
+    B
+    \longrightarrow
+    C
+\]
+be right perfect. Since
+\[
+    R_f(M)
+    =
+    F_f^{\mathrm{Mor}}
+    \bigl(
+        (M^R)^{\op}
+    \bigr),
+\]
+the pseudonaturality cell
+\[
+    \Omega_{f,M^R}
+\]
+of
+\[
+    \omega_f
+\]
+gives
+\[
+\begin{aligned}
+    \kappa_{f,B}
+    \otimes_{R_f(B)}
+    R_f(M)
+    \xRightarrow{\;\simeq\;}
+    \bigl(
+        F_f^{\mathrm{Mor}}(M^R)
+    \bigr)^{\op}
+    \otimes_{L_f(C)}
+    \kappa_{f,C}.
+\end{aligned}
+\]
+The comparison of right adjoints
+\[
+    \beta_{f,M}
+    \colon
+    F_f^{\mathrm{Mor}}(M)^R
+    \xrightarrow{\;\simeq\;}
+    F_f^{\mathrm{Mor}}(M^R)
+\]
+after action reversal gives
+\[
+    \beta_{f,M}^{\op}
+    \colon
+    \bigl(
+        F_f^{\mathrm{Mor}}(M)^R
+    \bigr)^{\op}
+    \xrightarrow{\;\simeq\;}
+    \bigl(
+        F_f^{\mathrm{Mor}}(M^R)
+    \bigr)^{\op}.
+\]
+Postcomposing with its inverse gives exactly the displayed cell
+\[
+    \kappa_{f,M}.
+\]
+All endpoint algebras are now explicit, so this is a genuine Morita
+$2$-morphism rather than an untyped equivalence between bimodules with
+different actions.
+
+Compatibility with $2$-morphisms is the mate identity
+\[
+    F_f^{\mathrm{Mor}}(\alpha^R)
+    \circ
+    \beta_{f,N}
+    \simeq
+    \beta_{f,M}
+    \circ
+    \bigl(
+        F_f^{\mathrm{Mor}}(\alpha)
+    \bigr)^R.
+\]
+Compatibility with horizontal composition follows from the coherent
+right-adjoint compositors, the pseudonaturality and compositor coherence
+of
+\[
+    \omega_f,
+\]
+and the interchange equivalence for extension of scalars.
+
+Finally, the comparison was constructed on the complete
+walking-adjunction diagrams. The pseudonatural equivalence
+\[
+    \omega_f
+\]
+intertwines the coherent $1$-op involutions before mate--reversal is
+formed. Applying the functorial construction of
+\Ref{prop:specified-mate-reversal-involution} therefore intertwines the
+bidualities, involutivity modifications, and every higher simplex of the
+\[
+    C_2
+\]
+-cocycles. Transport along the forgetful equivalences preserves this
+compatibility. Hence
+\[
+    F_f^{\mathrm{rperf}}
+\]
+is a morphism of coherent weak duality involutions.
+\end{proof}
+
+\begin{proposition}[Pseudofunctoriality of base change with Morita duality]
+\label{prop:base-change-morita-duality-composition}
+Let
+\[
+    A
+    \xrightarrow{f}
+    A'
+    \xrightarrow{g}
+    A''
+\]
+be composable morphisms in
+\[
+    \CAlg(\V).
+\]
+For brevity, write
+\[
+    F_f
+    :=
+    F_f^{\mathrm{rperf}},
+    \qquad
+    F_g
+    :=
+    F_g^{\mathrm{rperf}},
+    \qquad
+    F_{gf}
+    :=
+    F_{g\circ f}^{\mathrm{rperf}}.
+\]
+
+Let
+\[
+    \gamma_{g,f}
+    \colon
+    F_gF_f
+    \xRightarrow{\;\simeq\;}
+    F_{gf}
+\]
+be the base-change compositor induced by
+\Ref{prop:morita-base-change}.
+
+Define a pseudonatural adjoint equivalence
+\[
+\begin{aligned}
+    \widetilde\kappa_{g,f}
+    \colon
+    \mathbb D_{A''}F_{gf}^{\mathrm{co}}
+    \xRightarrow{\;\simeq\;}
+    F_{gf}\mathbb D_A
+\end{aligned}
+\]
+by the composite
+\[
+\begin{aligned}
+    \mathbb D_{A''}F_{gf}^{\mathrm{co}}
+    &\xRightarrow{
+        \mathbb D_{A''}
+        \ast
+        \bigl(
+            \gamma_{g,f}^{\mathrm{co}}
+        \bigr)^{-1}
+    }
+    \mathbb D_{A''}F_g^{\mathrm{co}}F_f^{\mathrm{co}}
+    \\
+    &\xRightarrow{
+        \kappa_g\ast F_f^{\mathrm{co}}
+    }
+    F_g\mathbb D_{A'}F_f^{\mathrm{co}}
+    \\
+    &\xRightarrow{
+        F_g\ast\kappa_f
+    }
+    F_gF_f\mathbb D_A
+    \\
+    &\xRightarrow{
+        \gamma_{g,f}\ast\mathbb D_A
+    }
+    F_{gf}\mathbb D_A.
+\end{aligned}
+\]
+
+There is a canonical invertible modification
+\[
+    \Theta_{g,f}
+    \colon
+    \kappa_{g\circ f}
+    \xRightarrow{\;\simeq\;}
+    \widetilde\kappa_{g,f}.
+\]
+
+For the identity morphism
+\[
+    \id_A
+    \colon
+    A
+    \longrightarrow
+    A,
+\]
+the comparison
+\[
+    \kappa_{\id_A}
+\]
+identifies, under the unit equivalence
+\[
+    F_{\id_A}
+    \xRightarrow{\;\simeq\;}
+    \id_{\Mor_A^{\mathrm{rperf}}},
+\]
+with the identity pseudonatural transformation of
+\[
+    \mathbb D_A.
+\]
+
+For three composable morphisms
+\[
+    A
+    \xrightarrow{f}
+    A'
+    \xrightarrow{g}
+    A''
+    \xrightarrow{h}
+    A''',
+\]
+the two modifications obtained by applying
+\[
+    \Theta_{h,g},
+    \qquad
+    \Theta_{g,f},
+    \qquad
+    \Theta_{h,g\circ f},
+    \qquad
+    \Theta_{h\circ g,f}
+\]
+agree after transport along the associativity modification for the
+base-change compositors
+\[
+    \gamma.
+\]
+The corresponding unit diagrams also commute.
+
+Thus the assignment
+\[
+    A
+    \longmapsto
+    \bigl(
+        \Mor_A^{\mathrm{rperf}},
+        \mathbb D_A
+    \bigr)
+\]
+together with
+\[
+    f
+    \longmapsto
+    \bigl(
+        F_f^{\mathrm{rperf}},
+        \kappa_f
+    \bigr)
+\]
+is pseudofunctorial in the commutative base, with values in
+$(\infty,2)$-categories equipped with coherent weak duality involution.
+\end{proposition}
+
+\begin{proof}
+Work first on the specified-adjunction resolutions. Extension of scalars
+induces
+\[
+    \widetilde F_f
+    \colon
+    \operatorname{Adj}^{\mathrm L}(\Mor_A)
+    \longrightarrow
+    \operatorname{Adj}^{\mathrm L}(\Mor_{A'}),
+\]
+and similarly for
+\[
+    g
+    \qquad\text{and}\qquad
+    g\circ f.
+\]
+By
+\Ref{prop:morita-base-change},
+there is a pseudonatural adjoint equivalence
+\[
+    \widetilde\gamma_{g,f}
+    \colon
+    \widetilde F_g\widetilde F_f
+    \xRightarrow{\;\simeq\;}
+    \widetilde F_{g\circ f}
+\]
+obtained by applying
+\[
+    (X\otimes_A A')\otimes_{A'}A''
+    \xrightarrow{\;\simeq\;}
+    X\otimes_A A''
+\]
+simultaneously to the left adjoint, right adjoint, unit, and counit of
+every specified adjunction.
+
+Let
+\[
+    J_A,
+    \qquad
+    J_{A'},
+    \qquad
+    J_{A''}
+\]
+be the specified mate--reversal involutions. The comparison
+\[
+    \omega_f
+    \colon
+    O_{A'}
+    \circ
+    \bigl(
+        F_f^{\mathrm{Mor}}
+    \bigr)^{\op}
+    \xRightarrow{\;\simeq\;}
+    F_f^{\mathrm{Mor}}
+    \circ
+    O_A
+\]
+induces
+\[
+    \widetilde\kappa_f
+    \colon
+    J_{A'}\widetilde F_f^{\mathrm{co}}
+    \xRightarrow{\;\simeq\;}
+    \widetilde F_fJ_A,
+\]
+and similarly for
+\[
+    g
+    \qquad\text{and}\qquad
+    g\circ f.
+\]
+
+All these comparisons are induced by extension of scalars and the same
+order-reversal automorphism of the associative and bimodule operads.
+For a specified walking-adjunction diagram
+\[
+    H
+    \colon
+    \mathsf{Adj}_{[n]}
+    \longrightarrow
+    \Mor_A,
+\]
+the two routes
+\[
+\begin{aligned}
+    J_{A''}
+    \widetilde F_{g\circ f}^{\mathrm{co}}(H)
+    &\longrightarrow
+    \widetilde F_{g\circ f}J_A(H)
+\end{aligned}
+\]
+given respectively by
+\[
+    \widetilde\kappa_{g\circ f}
+\]
+and by the composite of
+\[
+    \widetilde\kappa_f,
+    \qquad
+    \widetilde\kappa_g,
+    \qquad
+    \widetilde\gamma_{g,f}
+\]
+are related by the associativity equivalence
+\[
+    (X\otimes_A A')\otimes_{A'}A''
+    \xrightarrow{\;\simeq\;}
+    X\otimes_A A''.
+\]
+This produces an invertible modification
+\[
+    \widetilde\Theta_{g,f}.
+\]
+
+Transport
+\[
+    \widetilde\Theta_{g,f}
+\]
+along the symmetric monoidal equivalences
+\[
+    \operatorname{Adj}^{\mathrm L}(\Mor_A)
+    \xrightarrow{\;\simeq\;}
+    \Mor_A^{\mathrm{rperf}},
+\]
+and the corresponding equivalences over
+\[
+    A'
+    \qquad\text{and}\qquad
+    A''.
+\]
+The resulting modification is
+\[
+    \Theta_{g,f}
+    \colon
+    \kappa_{g\circ f}
+    \xRightarrow{\;\simeq\;}
+    \widetilde\kappa_{g,f}.
+\]
+
+For the identity base change, the equivalence
+\[
+    X\otimes_A A
+    \xrightarrow{\;\simeq\;}
+    X
+\]
+acts identically on the specified left adjoint, right adjoint, unit, and
+counit. Hence
+\[
+    \kappa_{\id_A}
+\]
+identifies with the identity transformation of
+\[
+    \mathbb D_A.
+\]
+
+For three composable base changes, both composites of the modifications
+\[
+    \widetilde\Theta
+\]
+are induced by the two standard reassociations of
+\[
+    \bigl(
+        (X\otimes_A A')
+        \otimes_{A'}A''
+    \bigr)
+    \otimes_{A''}A'''.
+\]
+They agree by the associativity pentagon for relative tensor product.
+The unit coherences follow from its unit triangles.
+
+All comparisons are constructed on complete walking-adjunction diagrams
+and commute with action reversal there. They therefore intertwine the
+biduality pseudonatural equivalences, involutivity modifications, and
+every higher simplex of the coherent
+\[
+    C_2
+\]
+-cocycles. Transport along the specified-adjunction equivalences
+preserves these coherences.
+
+Hence base change together with
+\[
+    \kappa_f
+\]
+is pseudofunctorial as a morphism of coherent weak duality involutions.
+\end{proof}
+
+Canonical Morita duality changes every algebra endpoint to its opposite.
+The next chapter equips selected endpoints with coherent equivalences to
+their opposites. Those Hermitian fixed-point structures transport the
+canonical Morita duality back to the original hom categories and produce
+unitary bimodules and a global dagger.

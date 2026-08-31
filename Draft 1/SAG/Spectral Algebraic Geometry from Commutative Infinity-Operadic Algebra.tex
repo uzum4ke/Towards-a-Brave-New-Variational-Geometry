@@ -1,0 +1,7181 @@
+\chapter{Spectral Algebraic Geometry from Commutative
+\texorpdfstring{$\infty$}{infinity}-Operadic Algebra}
+\label{chap:spectral-algebraic-geometry}
+\label{chap:connective-spectral-algebraic-geometry}
+
+\section{Purpose and standing conventions}
+\label{sec:spectral-ag-purpose}
+
+The purpose of this chapter is to construct spectral algebraic geometry
+from the commutative $\infty$-operad, its interpretation in spectra, and
+the canonical Postnikov $t$-structure. Throughout this work, coordinate
+algebras are connective commutative ring spectra. Accordingly, an affine
+spectral scheme means an object of
+\[
+    \Aff_{\Sp}
+    :=
+    \bigl(\CAlg(\Sp)^{\mathrm{cn}}\bigr)^{\op},
+\]
+and a spectral scheme is locally represented by such affine spectral
+schemes. The adjective ``connective'' is therefore suppressed from the
+geometric terminology, though it remains explicit when contrasting
+coordinate algebras with arbitrary objects of $\CAlg(\Sp)$.
+
+The stable semantic category is
+\[
+    \Sp^\otimes
+    \in
+    \CAlg(\Pr^L_{\mathrm{st}}),
+\]
+and commutative ring spectra are interpreted operadically by
+\[
+    \CAlg(\Sp)
+    =
+    \Alg_{\Comm^\otimes}(\Sp^\otimes).
+\]
+Connectivity is imposed on coordinate algebras and selected modules, not
+on the ambient stable categories. In particular, for
+$A\in\CAlg(\Sp)^{\mathrm{cn}}$ one retains the full stable module category
+\[
+    \QCoh(\Spec(A))
+    :=
+    \Mod_A(\Sp).
+\]
+
+The operadic module construction gives a functor
+\[
+    \mathbf{Mod}_{\Sp}
+    \colon
+    \CAlg(\Sp)
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}}),
+    \qquad
+    A
+    \longmapsto
+    \Mod_A(\Sp),
+\]
+whose transition functors are extension of scalars. The Postnikov
+$t$-structures on spectra and module spectra distinguish geometric
+flatness from formal stable exactness: extension of scalars is always
+exact between stable $\infty$-categories, while it is flat precisely when
+it is $t$-exact.
+
+This chapter constructs affine and global spectral schemes, the spectral
+Zariski topology, quasi-coherent modules and algebras, relative spectra,
+open and closed geometry, closed gluing, vector bundles, relative linear
+spaces, and the brave new affine spaces. Cotangent complexes and
+infinitesimal deformation theory are developed in
+\Ref{chap:spectral-deformation-theory}; smooth, \`etale, and Nisnevich
+geometry are developed in \Ref{chap:smooth-spectral-motivic-site}.
+
+The basic variance is recorded by the definitions and functors
+\[
+    \CAlg(\Sp)^{\mathrm{cn}}
+    =
+    \Alg_{\Comm^\otimes}(\Sp^\otimes)^{\mathrm{cn}},
+    \qquad
+    \Aff_{\Sp}
+    :=
+    \bigl(\CAlg(\Sp)^{\mathrm{cn}}\bigr)^{\op},
+\]
+\[
+    h
+    \colon
+    \Aff_{\Sp}
+    \hookrightarrow
+    \PSh(\Aff_{\Sp}),
+\]
+and, for every spectral scheme $X$,
+\[
+    \Spec_X
+    \colon
+    \operatorname{QCAlg}(X)^{\mathrm{cn},\op}
+    \longrightarrow
+    \operatorname{Sch}^{\mathrm{sp}}_{/X}.
+\]
+There is no covariant functor which merely ``takes opposites'' from
+$\CAlg(\Sp)^{\mathrm{cn}}$ to $\Aff_{\Sp}$; the opposite category is part
+of the definition of the affine geometric category.
+
+The foundational sources are
+\cite{LurieHigherAlgebra,LurieSAG,LurieDAGIV}. The conventions below are
+used throughout the three foundational chapters.
+
+\begin{convention}
+\label{conv:spectral-infinity-categorical}
+All categories are $\infty$-categories unless explicitly stated otherwise.
+Mapping spaces are denoted by
+\[
+    \Map_{\mathcal C}(X,Y).
+\]
+Mapping spectra in a stable $\infty$-category are denoted by
+\[
+    \map_{\mathcal C}(X,Y).
+\]
+Equivalences are denoted by
+\[
+    \simeq.
+\]
+\end{convention}
+
+\begin{convention}[Higher coherence]
+\label{conv:spectral-higher-coherence}
+Associativity, unitality, commutativity, operadic, base-change, descent,
+and functoriality data are understood together with all required coherent
+higher homotopies. The coherent data used below are supplied by the
+operadic algebra and module constructions, coCartesian module fibrations,
+universal properties, Kan extensions, and descent totalizations. Once
+supplied, they are suppressed from the notation.
+\end{convention}
+
+\begin{convention}
+\label{conv:size-spectral-ag}
+All constructions are made relative to fixed Grothendieck universes
+\[
+    \mathbb U
+    \in
+    \mathbb V.
+\]
+Categories of algebras, modules, spectral schemes, and smooth spectral
+schemes are formed in $\mathbb U$ whenever possible, while presheaf,
+sheaf, and functor categories on essentially $\mathbb U$-small sources
+are formed in the larger universe $\mathbb V$. Universe changes are
+otherwise suppressed from the notation.
+
+\end{convention}
+
+\begin{convention}[Sheaves and hyperdescent]
+\label{conv:spectral-sheaves-hyperdescent}
+Unless explicitly stated otherwise,
+\[
+    \Sh_\tau(\mathcal C)
+\]
+denotes the $\infty$-category of $\tau$-sheaves of spaces without
+hypercompletion. When hyperdescent is required, the hypercomplete
+$\infty$-topos is denoted by
+\[
+    \Sh_\tau(\mathcal C)^\wedge.
+\]
+\end{convention}
+
+\begin{convention}[Monoidal structures on categories]
+\label{conv:spectral-monoidal-structures-on-categories}
+The notation
+\[
+    \CAlg(\Cat_\infty)
+\]
+uses the Cartesian symmetric monoidal structure on $\Cat_\infty$.
+The notation
+\[
+    \CAlg(\Pr^L_{\mathrm{st}})
+\]
+uses the tensor product of presentable stable $\infty$-categories. Its
+morphisms are colimit-preserving strong symmetric monoidal functors.
+\end{convention}
+
+\begin{convention}[Ordinary schemes as spectral schemes]
+\label{conv:ordinary-schemes-as-spectral-schemes}
+The Eilenberg--Mac Lane functor induces a fully faithful functor
+\[
+    \operatorname{AffSch}
+    \hookrightarrow
+    \Aff_{\Sp},
+    \qquad
+    \Spec(R)
+    \longmapsto
+    \Spec(HR).
+\]
+By Zariski gluing, it induces a fully faithful functor
+\[
+    \operatorname{Sch}
+    \hookrightarrow
+    \operatorname{Sch}^{\mathrm{sp}}.
+\]
+Whenever an ordinary scheme occurs as a spectral scheme or spectral
+prestack, it is understood through this fully faithful discrete
+enhancement. In particular, for an ordinary commutative ring \(R\), the
+notation
+\[
+    \Spec(R)
+\]
+may denote the ordinary affine scheme or its associated discrete affine
+spectral scheme
+\[
+    \Spec(HR),
+\]
+according to the ambient category.
+\end{convention}
+
+\section{Spectra and the canonical Postnikov structure}
+\label{sec:spectra-postnikov-structure}
+
+\subsection{The stable symmetric monoidal category of spectra}
+
+\begin{proposition}[Spectral semantic category]
+\label{prop:spectra-presentably-stable-monoidal}
+The $\infty$-category of spectra admits a canonical structure
+\[
+    \Sp^\otimes
+    \in
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+Its tensor product is the smash product
+\[
+    -\otimes-
+    \colon
+    \Sp\times\Sp
+    \longrightarrow
+    \Sp,
+\]
+its tensor unit is the sphere spectrum $\mathbb S$, and its tensor product
+preserves small colimits separately in each variable.
+\end{proposition}
+
+\begin{proof}
+The stabilization of pointed spaces is a presentable stable
+$\infty$-category. The smash product on pointed spaces stabilizes to a
+symmetric monoidal product on spectra, and the stabilization universal
+property identifies its tensor unit with the sphere spectrum. Separate
+preservation of colimits follows from the presentably symmetric monoidal
+construction; see \cite{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{proposition}[Closedness of spectra]
+\label{prop:spectra-closedness}
+For every spectrum $X$, the functor
+\[
+    -\otimes X
+    \colon
+    \Sp
+    \longrightarrow
+    \Sp
+\]
+admits a right adjoint
+\[
+    \HHom_{\Sp}(X,-)
+    \colon
+    \Sp
+    \longrightarrow
+    \Sp.
+\]
+Thus there are natural equivalences
+\[
+    \Map_{\Sp}(Z\otimes X,Y)
+    \simeq
+    \Map_{\Sp}
+    \bigl(
+        Z,
+        \HHom_{\Sp}(X,Y)
+    \bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+The functor $-\otimes X$ preserves small colimits by
+\Ref{prop:spectra-presentably-stable-monoidal}. Since $\Sp$ is
+presentable, the adjoint functor theorem supplies the right adjoint.
+\end{proof}
+
+The adjunction is displayed by
+\[
+\begin{tikzcd}[column sep=large]
+    \Sp
+        \arrow[r, shift left=1.1ex, "-\otimes X"]
+    &
+    \Sp
+        \arrow[l, shift left=1.1ex, "{\HHom_{\Sp}(X,-)}"'].
+\end{tikzcd}
+\]
+
+\subsection{The canonical \texorpdfstring{$t$}{t}-structure}
+
+\begin{definition}[Postnikov $t$-structure]
+\label{def:postnikov-t-structure}
+For every integer $n$, let
+\[
+    \Sp_{\geq n}
+\]
+be the full subcategory of spectra $X$ for which
+\[
+    \pi_i(X)=0
+    \qquad
+    (i<n),
+\]
+and let
+\[
+    \Sp_{\leq n}
+\]
+be the full subcategory of spectra $X$ for which
+\[
+    \pi_i(X)=0
+    \qquad
+    (i>n).
+\]
+The pair
+\[
+    (\Sp_{\geq0},\Sp_{\leq0})
+\]
+is the \textbf{canonical Postnikov $t$-structure} on $\Sp$. Its truncation
+functors are denoted
+\[
+    \tau_{\geq n}
+    \colon
+    \Sp
+    \longrightarrow
+    \Sp_{\geq n}
+\]
+and
+\[
+    \tau_{\leq n}
+    \colon
+    \Sp
+    \longrightarrow
+    \Sp_{\leq n}.
+\]
+\end{definition}
+
+\begin{proposition}[Postnikov truncation triangle]
+\label{prop:postnikov-truncation-triangle}
+For every spectrum $X$ and every integer $n$, there is a natural fibre and
+cofibre sequence
+\[
+    \tau_{\geq n+1}X
+    \longrightarrow
+    X
+    \longrightarrow
+    \tau_{\leq n}X.
+\]
+The functors $\tau_{\geq n}$ and $\tau_{\leq n}$ are respectively right
+and left adjoint to the inclusions of the corresponding full
+subcategories.
+\end{proposition}
+
+\begin{proof}
+This is the defining truncation sequence of the Postnikov $t$-structure.
+The equality of fibre and cofibre sequences follows from stability.
+\end{proof}
+
+\begin{proposition}[Completeness and detection]
+\label{prop:postnikov-completeness-detection}
+The Postnikov $t$-structure is accessible, compatible with filtered
+colimits, left complete, and right complete. In particular, there are
+natural equivalences
+\[
+    X
+    \simeq
+    \varprojlim_n\tau_{\leq n}X
+\]
+and
+\[
+    X
+    \simeq
+    \varinjlim_n\tau_{\geq -n}X.
+\]
+A morphism of spectra is an equivalence if and only if it induces an
+isomorphism on every homotopy group.
+\end{proposition}
+
+\begin{proof}
+These are the standard completeness and accessibility properties of the
+Postnikov $t$-structure; see \cite{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{definition}[Discrete spectrum]
+\label{def:discrete-spectrum}
+A spectrum $X$ is \textbf{discrete} if
+\[
+    X\in\Sp_{\geq0}\cap\Sp_{\leq0}.
+\]
+The heart of the Postnikov $t$-structure is denoted
+\[
+    \Sp^\heartsuit.
+\]
+\end{definition}
+
+\begin{proposition}[Eilenberg--Mac Lane equivalence]
+\label{prop:eilenberg-mac-lane-heart}
+The Eilenberg--Mac Lane functor induces an equivalence
+\[
+    H
+    \colon
+    \operatorname{Ab}
+    \xrightarrow{\simeq}
+    \Sp^\heartsuit.
+\]
+Under this equivalence, the inverse functor is $\pi_0$.
+\end{proposition}
+
+\begin{proof}
+A discrete spectrum is determined by its degree-zero homotopy group, and
+every abelian group is realized by an Eilenberg--Mac Lane spectrum.
+\end{proof}
+
+\subsection{Compatibility with the smash product}
+
+\begin{proposition}[Connectivity of the smash product]
+\label{prop:smash-product-connectivity}
+If
+\[
+    X\in\Sp_{\geq m}
+    \qquad\text{and}\qquad
+    Y\in\Sp_{\geq n},
+\]
+then
+\[
+    X\otimes Y
+    \in
+    \Sp_{\geq m+n}.
+\]
+In particular, $\Sp_{\geq0}$ is closed under the smash product and contains
+the tensor unit $\mathbb S$.
+\end{proposition}
+
+\begin{proof}
+After suspension, it is enough to consider $m=n=0$. Connective spectra are
+generated under colimits and extensions by suspension spectra of pointed
+spaces in nonnegative degrees. The smash product preserves colimits
+separately and carries the corresponding generators to connective
+spectra. Equivalently, the compatibility follows from the monoidal
+compatibility of the Postnikov $t$-structure; see
+\cite{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{corollary}[Right $t$-exactness of connective tensoring]
+\label{cor:connective-tensor-right-t-exact}
+For every connective spectrum $X$, the functor
+\[
+    -\otimes X
+    \colon
+    \Sp
+    \longrightarrow
+    \Sp
+\]
+is right $t$-exact.
+\end{corollary}
+
+\begin{proof}
+If $Y$ is connective, then $Y\otimes X$ is connective by
+\Ref{prop:smash-product-connectivity}.
+\end{proof}
+
+\section{Commutative \texorpdfstring{$\infty$}{infinity}-operadic algebra
+in spectra}
+\label{sec:commutative-operadic-spectral-algebra}
+
+Let
+\[
+    \Comm^\otimes
+    \longrightarrow
+    N(\mathrm{Fin}_*)
+\]
+denote the commutative $\infty$-operad.
+
+\begin{definition}[Commutative ring spectrum]
+\label{def:commutative-ring-spectrum}
+A \textbf{commutative ring spectrum} is an algebra over the commutative
+$\infty$-operad in spectra:
+\[
+    A
+    \in
+    \Alg_{\Comm^\otimes}(\Sp^\otimes).
+\]
+The resulting $\infty$-category is denoted
+\[
+    \CAlg(\Sp)
+    :=
+    \Alg_{\Comm^\otimes}(\Sp^\otimes).
+\]
+Its objects are also called $\EE_\infty$-rings.
+\end{definition}
+
+\begin{remark}[Symmetric monoidal envelope]
+\label{rem:spectral-commutative-envelope}
+Let
+\[
+    \operatorname{Env}(\Comm)^\otimes
+\]
+denote the symmetric monoidal envelope of the commutative
+$\infty$-operad. Its universal property gives a natural equivalence
+\[
+    \CAlg(\Sp)
+    \simeq
+    \Fun^\otimes
+    \bigl(
+        \operatorname{Env}(\Comm)^\otimes,
+        \Sp^\otimes
+    \bigr).
+\]
+Thus the commutative algebraic operations are retained together with all
+higher coherence data. See
+\cite[Proposition~2.2.4.9]{LurieHigherAlgebra}.
+\end{remark}
+
+The operadic and symmetric monoidal-envelope descriptions are related by
+\[
+\begin{tikzcd}[column sep=huge]
+    \Alg_{\Comm^\otimes}(\Sp^\otimes)
+        \arrow[r, "\simeq"]
+    &
+    \Fun^\otimes
+    \bigl(
+        \operatorname{Env}(\Comm)^\otimes,
+        \Sp^\otimes
+    \bigr).
+\end{tikzcd}
+\]
+
+\begin{proposition}[Presentability of commutative ring spectra]
+\label{prop:calg-spectra-presentable}
+The $\infty$-category
+\[
+    \CAlg(\Sp)
+\]
+is presentable. Its forgetful functor
+\[
+    U
+    \colon
+    \CAlg(\Sp)
+    \longrightarrow
+    \Sp
+\]
+is accessible, creates limits and sifted colimits, and admits a left
+adjoint.
+\end{proposition}
+
+\begin{proof}
+This is the presentability theorem for algebras over an accessible
+$\infty$-operad in a presentably symmetric monoidal $\infty$-category
+whose tensor product preserves small colimits separately; see
+\cite{LurieHigherAlgebra}.
+\end{proof}
+
+\subsection{Free commutative ring spectra}
+
+\begin{definition}[Free commutative algebra]
+\label{def:free-commutative-spectral-algebra}
+The left adjoint to the forgetful functor is denoted
+\[
+    \operatorname{Sym}
+    \colon
+    \Sp
+    \longrightarrow
+    \CAlg(\Sp).
+\]
+It is the \textbf{free commutative algebra functor} associated to the
+commutative $\infty$-operad.
+\end{definition}
+
+The adjunction is displayed by
+\[
+\begin{tikzcd}[column sep=large]
+    \Sp
+        \arrow[r, shift left=1.1ex, "\operatorname{Sym}"]
+    &
+    \CAlg(\Sp)
+        \arrow[l, shift left=1.1ex, "U"'].
+\end{tikzcd}
+\]
+
+\begin{proposition}[Underlying free algebra]
+\label{prop:underlying-free-spectral-algebra}
+For every spectrum $M$, there is a natural equivalence of underlying
+spectra
+\[
+    U\operatorname{Sym}(M)
+    \simeq
+    \bigoplus_{n\geq0}
+    \left(M^{\otimes n}\right)_{h\Sigma_n},
+\]
+where the summand for $n=0$ is the sphere spectrum.
+\end{proposition}
+
+\begin{proof}
+This is the explicit free-algebra formula for the commutative
+$\infty$-operad in a presentably symmetric monoidal $\infty$-category; see
+\cite{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{corollary}[Connectivity of free algebras]
+\label{cor:free-algebra-connective}
+If $M$ is connective, then $\operatorname{Sym}(M)$ is connective.
+\end{corollary}
+
+\begin{proof}
+Every tensor power $M^{\otimes n}$ is connective by
+\Ref{prop:smash-product-connectivity}. Homotopy orbits and small coproducts
+of connective spectra are connective. Apply
+\Ref{prop:underlying-free-spectral-algebra}.
+\end{proof}
+
+\subsection{Connective commutative ring spectra}
+
+\begin{definition}[Connective $\EE_\infty$-ring]
+\label{def:connective-e-infinity-ring}
+A commutative ring spectrum $A$ is \textbf{connective} if its underlying
+spectrum is connective. The full subcategory of connective commutative
+ring spectra is denoted
+\[
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \subseteq
+    \CAlg(\Sp).
+\]
+\end{definition}
+
+\begin{proposition}[Presentability, colimits, and limits]
+\label{prop:connective-calg-presentable}
+The $\infty$-category
+\[
+    \CAlg(\Sp)^{\mathrm{cn}}
+\]
+is presentable. The inclusion
+\[
+    \iota
+    \colon
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \hookrightarrow
+    \CAlg(\Sp)
+\]
+preserves small colimits and admits a right adjoint
+\[
+    \tau_{\geq0}^{\CAlg}
+    \colon
+    \CAlg(\Sp)
+    \longrightarrow
+    \CAlg(\Sp)^{\mathrm{cn}}.
+\]
+The underlying spectrum of
+\[
+    \tau_{\geq0}^{\CAlg}(A)
+\]
+is canonically equivalent to $\tau_{\geq0}U(A)$.
+
+Consequently, for every small diagram
+\[
+    D
+    \colon
+    K
+    \longrightarrow
+    \CAlg(\Sp)^{\mathrm{cn}},
+\]
+its limit in connective commutative ring spectra is given by
+\[
+    \varprojlim_K^{\CAlg(\Sp)^{\mathrm{cn}}}D
+    \simeq
+    \tau_{\geq0}^{\CAlg}
+    \left(
+        \varprojlim_K^{\CAlg(\Sp)}
+        \iota D
+    \right).
+\]
+In general, the inclusion $\iota$ does not preserve finite limits.
+\end{proposition}
+
+\begin{proof}
+The connective-cover theorem for structured ring spectra identifies the
+connective commutative ring spectra as a presentable full subcategory of
+$\CAlg(\Sp)$ which is closed under small colimits. Consequently the
+inclusion $\iota$ preserves small colimits. Since both categories are
+presentable, the adjoint functor theorem supplies a right adjoint
+\[
+    \tau_{\geq0}^{\CAlg}
+    \dashv
+    \iota.
+\]
+The same connective-cover theorem identifies its underlying spectrum:
+\[
+    U\bigl(\tau_{\geq0}^{\CAlg}(A)\bigr)
+    \simeq
+    \tau_{\geq0}U(A).
+\]
+No $t$-structure on the nonstable category $\CAlg(\Sp)$ is being
+asserted.
+
+Let $D:K\to\CAlg(\Sp)^{\mathrm{cn}}$ be a small diagram and put
+\[
+    L
+    :=
+    \varprojlim_K^{\CAlg(\Sp)}
+    \iota D.
+\]
+For every connective commutative ring spectrum $C$, there are natural
+equivalences
+\[
+\begin{aligned}
+    \Map_{\CAlg(\Sp)^{\mathrm{cn}}}
+    \bigl(
+        C,
+        \tau_{\geq0}^{\CAlg}L
+    \bigr)
+    &\simeq
+    \Map_{\CAlg(\Sp)}
+    \bigl(
+        \iota C,
+        L
+    \bigr)
+    \\
+    &\simeq
+    \varprojlim_{k\in K}
+    \Map_{\CAlg(\Sp)}
+    \bigl(
+        \iota C,
+        \iota D(k)
+    \bigr)
+    \\
+    &\simeq
+    \varprojlim_{k\in K}
+    \Map_{\CAlg(\Sp)^{\mathrm{cn}}}
+    \bigl(
+        C,
+        D(k)
+    \bigr).
+\end{aligned}
+\]
+Yoneda gives the asserted limit formula.
+
+The inclusion does not preserve finite limits in general. Consider the
+pullback
+\[
+    P
+    :=
+    H\mathbb Z
+    \times_{H(\mathbb Z[x])}
+    H\mathbb Z,
+\]
+where both maps are induced by the inclusion of constant polynomials.
+The fibre sequence of underlying spectra
+\[
+    P
+    \longrightarrow
+    H\mathbb Z\oplus H\mathbb Z
+    \longrightarrow
+    H(\mathbb Z[x])
+\]
+gives
+\[
+    \pi_{-1}(P)
+    \simeq
+    \operatorname{coker}
+    \left(
+        \mathbb Z\oplus\mathbb Z
+        \longrightarrow
+        \mathbb Z[x]
+    \right)
+    \simeq
+    \mathbb Z[x]/\mathbb Z,
+\]
+which is nonzero. Thus the pullback computed in $\CAlg(\Sp)$ is not
+connective; its pullback in $\CAlg(\Sp)^{\mathrm{cn}}$ is obtained by
+applying $\tau_{\geq0}^{\CAlg}$.
+See \cite{LurieHigherAlgebra,LurieSAG}.
+\end{proof}
+
+\begin{corollary}[Connective pushouts]
+\label{cor:connective-calg-pushouts}
+If
+\[
+    B
+    \longleftarrow
+    A
+    \longrightarrow
+    C
+\]
+is a span in $\CAlg(\Sp)^{\mathrm{cn}}$, then the pushout
+\[
+    B\otimes_A C
+\]
+computed in $\CAlg(\Sp)$ is connective.
+\end{corollary}
+
+\begin{proof}
+It is a colimit of connective commutative ring spectra. Apply
+\Ref{prop:connective-calg-presentable}.
+\end{proof}
+
+\subsection{Discrete rings and classical truncation}
+
+\begin{proposition}[Discrete commutative ring spectra]
+\label{prop:discrete-commutative-ring-spectra}
+The Eilenberg--Mac Lane construction refines to a fully faithful functor
+\[
+    H
+    \colon
+    \operatorname{CRing}
+    \hookrightarrow
+    \CAlg(\Sp)^{\mathrm{cn}}.
+\]
+Its essential image consists of the commutative ring spectra whose
+underlying spectra are discrete.
+\end{proposition}
+
+\begin{proof}
+The equivalence between discrete spectra and abelian groups of
+\Ref{prop:eilenberg-mac-lane-heart} is compatible with finite products.
+Commutative algebra objects in the heart are therefore ordinary
+commutative rings. Full faithfulness and the description of the essential
+image follow.
+\end{proof}
+
+\begin{proposition}[Classical truncation adjunction]
+\label{prop:pi-zero-h-adjunction}
+The functor
+\[
+    \pi_0
+    \colon
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \longrightarrow
+    \operatorname{CRing}
+\]
+is left adjoint to the Eilenberg--Mac Lane functor. Thus there are natural
+equivalences
+\[
+    \Map_{\operatorname{CRing}}
+    \bigl(
+        \pi_0(A),R
+    \bigr)
+    \simeq
+    \Map_{\CAlg(\Sp)}
+    \bigl(
+        A,H R
+    \bigr).
+\]
+The unit of the adjunction is a natural morphism
+\[
+    A
+    \longrightarrow
+    H\pi_0(A).
+\]
+\end{proposition}
+
+\begin{proof}
+A morphism from a connective commutative ring spectrum to a discrete
+commutative ring spectrum is determined by its effect on degree-zero
+homotopy. The multiplicative coherences are exactly those of the induced
+ordinary ring homomorphism. See \cite{LurieHigherAlgebra,LurieSAG}.
+\end{proof}
+
+\subsection{Truncated commutative ring spectra}
+
+\begin{proposition}[Operadic Postnikov truncations]
+\label{prop:operadic-postnikov-truncations}
+For every integer $n\geq0$, the truncation functor on spectra lifts to a
+functor
+\[
+    \tau_{\leq n}
+    \colon
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \longrightarrow
+    \CAlg(\Sp)^{\mathrm{cn}}
+\]
+whose underlying spectrum is the ordinary Postnikov truncation. For every
+connective commutative ring spectrum $A$, there is a natural equivalence
+\[
+    A
+    \simeq
+    \varprojlim_n\tau_{\leq n}A
+\]
+in $\CAlg(\Sp)$.
+\end{proposition}
+
+\begin{proof}
+The full subcategory of $n$-truncated objects in commutative ring spectra
+is reflective, and the forgetful functor identifies the reflector on
+connective objects with the spectral Postnikov truncation. Since the
+forgetful functor creates limits, Postnikov convergence in spectra from
+\Ref{prop:postnikov-completeness-detection} implies convergence in
+commutative ring spectra. See \cite{LurieHigherAlgebra,LurieDAGIV}.
+\end{proof}
+
+\section{Affine spectral schemes and classical truncation}
+\label{sec:affine-spectral-schemes}
+
+\begin{definition}[Affine spectral scheme]
+\label{def:affine-spectral-scheme}
+The $\infty$-category of \textbf{affine spectral schemes} is
+\[
+    \Aff_{\Sp}
+    :=
+    \bigl(\CAlg(\Sp)^{\mathrm{cn}}\bigr)^{\op}.
+\]
+For
+\[
+    A\in\CAlg(\Sp)^{\mathrm{cn}},
+\]
+the corresponding affine spectral scheme is denoted
+\[
+    \Spec(A).
+\]
+\end{definition}
+
+\begin{proposition}[Mapping spaces of affine spectral schemes]
+\label{prop:affine-spectral-mapping-spaces}
+For connective commutative ring spectra $A$ and $B$, there is a natural
+equivalence
+\[
+    \Map_{\Aff_{\Sp}}
+    \bigl(
+        \Spec(B),
+        \Spec(A)
+    \bigr)
+    \simeq
+    \Map_{\CAlg(\Sp)}(A,B).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the defining property of the opposite $\infty$-category.
+\end{proof}
+
+Thus a morphism of affine spectral schemes is represented
+contravariantly:
+\[
+\begin{tikzcd}[column sep=huge]
+    A
+        \arrow[r, "f"]
+    &
+    B
+    \\
+    \Spec(A)
+    &
+    \Spec(B)
+        \arrow[l, "\Spec(f)"'].
+\end{tikzcd}
+\]
+
+\begin{definition}[Spectral prestacks]
+\label{def:spectral-prestacks-affine-stage}
+The $\infty$-category of space-valued presheaves on affine spectral
+schemes is
+\[
+    \PSh(\Aff_{\Sp})
+    :=
+    \Fun
+    \bigl(
+        (\Aff_{\Sp})^{\op},
+        \mathcal S
+    \bigr).
+\]
+Its objects are called \textbf{spectral prestacks}.
+\end{definition}
+
+\begin{definition}[Functor of points]
+\label{def:spectral-functor-of-points}
+For $A\in\CAlg(\Sp)^{\mathrm{cn}}$, the functor of points of
+$\Spec(A)$ is
+\[
+    h_A
+    \colon
+    (\Aff_{\Sp})^{\op}
+    \longrightarrow
+    \mathcal S,
+\]
+defined by
+\[
+    h_A(\Spec(B))
+    :=
+    \Map_{\CAlg(\Sp)}(A,B).
+\]
+\end{definition}
+
+\begin{proposition}[Spectral Yoneda embedding]
+\label{prop:spectral-yoneda-embedding}
+The assignment
+\[
+    \Spec(A)
+    \longmapsto
+    h_A
+\]
+defines a fully faithful functor
+\[
+    h
+    \colon
+    \Aff_{\Sp}
+    \hookrightarrow
+    \PSh(\Aff_{\Sp}).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the $\infty$-categorical Yoneda lemma.
+\end{proof}
+
+\subsection{Finite limits of affine spectral schemes}
+
+\begin{proposition}[Affine spectral fibre products]
+\label{prop:affine-spectral-fibre-products}
+For a diagram of affine spectral schemes
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A)
+    \longleftarrow
+    \Spec(C),
+\]
+there is a canonical equivalence
+\[
+    \Spec(B)
+    \times_{\Spec(A)}
+    \Spec(C)
+    \simeq
+    \Spec(B\otimes_A C).
+\]
+The commutative ring spectrum $B\otimes_A C$ is connective.
+\end{proposition}
+
+\begin{proof}
+The fibre product in the opposite category is represented by the pushout
+of commutative ring spectra. Connectivity follows from
+\Ref{cor:connective-calg-pushouts}.
+\end{proof}
+
+\begin{corollary}[Finite-limit closure]
+\label{cor:affine-spectral-finite-limits}
+The $\infty$-category $\Aff_{\Sp}$ admits finite limits.
+\end{corollary}
+
+\begin{proof}
+The terminal affine spectral scheme is $\Spec(\mathbb S)$, and binary
+fibre products exist by \Ref{prop:affine-spectral-fibre-products}.
+\end{proof}
+
+\subsection{Classical truncation of affines}
+
+\begin{definition}[Classical truncation of an affine]
+\label{def:classical-truncation-affine}
+For an affine spectral scheme
+\[
+    X=\Spec(A),
+\]
+its \textbf{classical truncation} is the ordinary affine scheme
+\[
+    X_{\mathrm{cl}}
+    :=
+    \Spec\bigl(\pi_0(A)\bigr).
+\]
+The canonical algebra morphism
+\[
+    A
+    \longrightarrow
+    H\pi_0(A)
+\]
+induces a morphism of spectral prestacks
+\[
+    X_{\mathrm{cl}}
+    \longrightarrow
+    X.
+\]
+\end{definition}
+
+\begin{definition}[Underlying topological space]
+\label{def:underlying-topological-space-affine-spectral}
+The underlying topological space of $X=\Spec(A)$ is
+\[
+    |X|
+    :=
+    \left|\Spec\pi_0(A)\right|.
+\]
+\end{definition}
+
+\begin{proposition}[Functoriality of affine truncation]
+\label{prop:affine-classical-truncation-functorial}
+The assignment
+\[
+    \Spec(A)
+    \longmapsto
+    \Spec\pi_0(A)
+\]
+defines a functor
+\[
+    (-)_{\mathrm{cl}}
+    \colon
+    \Aff_{\Sp}
+    \longrightarrow
+    \operatorname{AffSch}.
+\]
+The morphisms $X_{\mathrm{cl}}\to X$ are natural in $X$.
+\end{proposition}
+
+\begin{proof}
+The functor $\pi_0$ is functorial on connective commutative ring spectra.
+Passing to opposite categories gives the asserted functor. Naturality is
+the naturality of the adjunction unit from
+\Ref{prop:pi-zero-h-adjunction}.
+\end{proof}
+
+\begin{remark}[Truncation and fibre products]
+\label{rem:classical-truncation-not-left-exact}
+Although the inclusion
+\[
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \hookrightarrow
+    \CAlg(\Sp)
+\]
+does not preserve finite limits, classical truncation does preserve
+affine spectral fibre products. For every span of connective commutative
+ring spectra, the canonical comparison morphism
+\[
+    \pi_0(B)
+    \otimes_{\pi_0(A)}
+    \pi_0(C)
+    \longrightarrow
+    \pi_0(B\otimes_A C)
+\]
+is an isomorphism. This follows because
+\[
+    \pi_0
+    \colon
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \longrightarrow
+    \operatorname{CRing}
+\]
+is a left adjoint and therefore preserves pushouts. The corresponding
+Cartesian statement for affine schemes is recorded in
+\Ref{prop:flat-base-change-classical-truncation}.
+\end{remark}
+
+\section{Module spectra and relative commutative algebras}
+\label{sec:module-spectra-relative-algebras}
+
+Fix a connective commutative ring spectrum
+\[
+    A\in\CAlg(\Sp)^{\mathrm{cn}}.
+\]
+
+\begin{definition}[Module spectrum]
+\label{def:module-spectrum-over-a}
+The $\infty$-category of $A$-module spectra is denoted
+\[
+    \Mod_A(\Sp)
+\]
+or, when no ambiguity is possible, simply
+\[
+    \Mod_A.
+\]
+\end{definition}
+
+\begin{theorem}[Spectral module category]
+\label{thm:spectral-module-category}
+The category
+\[
+    \Mod_A
+\]
+is a presentably stable symmetric monoidal $\infty$-category. Its tensor
+product is the relative tensor product
+\[
+    -\otimes_A-,
+\]
+its tensor unit is the regular module $A$, and its tensor product preserves
+small colimits separately in each variable.
+\end{theorem}
+
+\begin{proof}
+This is the operadic module construction for a commutative algebra object
+in a presentably symmetric monoidal stable $\infty$-category; see
+\cite[Theorem~4.5.2.1]{LurieHigherAlgebra}. Limits and colimits are created
+in spectra, so stability follows from stability of $\Sp$.
+\end{proof}
+
+\begin{construction}[Relative tensor product]
+\label{con:spectral-relative-tensor-product}
+For a right $A$-module $M$ and a left $A$-module $N$, the relative tensor
+product is represented by the geometric realization of the two-sided bar
+construction
+\[
+    M\otimes_A N
+    \simeq
+    \left|
+        [n]
+        \longmapsto
+        M\otimes A^{\otimes n}\otimes N
+    \right|.
+\]
+Since $A$ is commutative, its left and right module theories are
+canonically identified.
+\end{construction}
+
+\begin{proposition}[Closedness of module spectra]
+\label{prop:module-spectra-closedness}
+For every $A$-module $M$, the functor
+\[
+    -\otimes_A M
+    \colon
+    \Mod_A
+    \longrightarrow
+    \Mod_A
+\]
+admits a right adjoint
+\[
+    \HHom_A(M,-).
+\]
+\end{proposition}
+
+\begin{proof}
+The functor preserves small colimits by
+\Ref{thm:spectral-module-category}. Presentability of $\Mod_A$ and the
+adjoint functor theorem supply the right adjoint.
+\end{proof}
+
+\subsection{Extension and restriction of scalars}
+
+\begin{definition}[Extension and restriction of scalars]
+\label{def:spectral-extension-restriction-scalars}
+Let
+\[
+    f
+    \colon
+    A
+    \longrightarrow
+    B
+\]
+be a morphism of commutative ring spectra. The extension-of-scalars
+functor is
+\[
+    f^*
+    :=
+    -\otimes_A B
+    \colon
+    \Mod_A
+    \longrightarrow
+    \Mod_B.
+\]
+Its right adjoint is the restriction-of-scalars functor
+\[
+    f_*
+    \colon
+    \Mod_B
+    \longrightarrow
+    \Mod_A.
+\]
+\end{definition}
+
+The adjunction is displayed by
+\[
+\begin{tikzcd}[column sep=large]
+    \Mod_A
+        \arrow[r, shift left=1.1ex, "-\otimes_A B"]
+    &
+    \Mod_B
+        \arrow[l, shift left=1.1ex, "f_*"'].
+\end{tikzcd}
+\]
+
+\begin{proposition}[Monoidality of spectral base change]
+\label{prop:spectral-base-change-monoidal}
+The functor
+\[
+    f^*
+    =
+    -\otimes_A B
+\]
+is colimit-preserving and strong symmetric monoidal. In particular, there
+is a natural equivalence
+\[
+    (M\otimes_A N)\otimes_A B
+    \simeq
+    (M\otimes_A B)
+    \otimes_B
+    (N\otimes_A B).
+\]
+\end{proposition}
+
+\begin{proof}
+The coCartesian operadic module construction identifies the transition
+functor associated to $f$ with extension of scalars and equips it with its
+strong symmetric monoidal structure; see
+\cite[Theorem~4.5.3.1 and Remark~4.5.3.2]{LurieHigherAlgebra}.
+\end{proof}
+
+The coherent monoidality is represented by
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    \Mod_A\times\Mod_A
+        \arrow[r, "-\otimes_A-"]
+        \arrow[d, "f^*\times f^*"']
+    &
+    \Mod_A
+        \arrow[d, "f^*"]
+    \\
+    \Mod_B\times\Mod_B
+        \arrow[r, "-\otimes_B-"']
+    &
+    \Mod_B.
+\end{tikzcd}
+\]
+
+\begin{proposition}[Functoriality of module categories]
+\label{prop:spectral-module-functoriality}
+The assignments
+\[
+    A
+    \longmapsto
+    \Mod_A
+\]
+and
+\[
+    (A\to B)
+    \longmapsto
+    (-\otimes_A B)
+\]
+define a functor
+\[
+    \mathbf{Mod}_{\Sp}
+    \colon
+    \CAlg(\Sp)
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+For composable maps $A\to B\to C$, there is a canonical coherent
+equivalence
+\[
+    (-\otimes_A B)\otimes_B C
+    \simeq
+    -\otimes_A C.
+\]
+\end{proposition}
+
+\begin{proof}
+Straightening the coCartesian family of module categories over
+$\CAlg(\Sp)$ gives the asserted functor. The coCartesian composition law
+supplies the coherent comparison for composable algebra maps; see
+\cite{LurieHigherAlgebra}.
+\end{proof}
+
+\subsection{Relative commutative algebra objects}
+
+\begin{proposition}[Relative commutative spectral algebras]
+\label{prop:relative-commutative-spectral-algebras}
+There is a natural equivalence
+\[
+    \CAlg(\Mod_A)
+    \simeq
+    \CAlg(\Sp)_{A/}.
+\]
+Under this equivalence, a commutative algebra object $B$ in $A$-modules is
+identified with its structural morphism
+\[
+    A
+    \longrightarrow
+    B.
+\]
+\end{proposition}
+
+\begin{proof}
+This is the commutative specialization of the operadic equivalence between
+algebras in a module category and algebras under the base algebra; see
+\cite[Corollary~3.4.1.7]{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{proposition}[Connective relative algebras]
+\label{prop:connective-relative-algebras}
+The equivalence of \Ref{prop:relative-commutative-spectral-algebras}
+restricts to an equivalence
+\[
+    \CAlg(\Mod_A)^{\mathrm{cn}}
+    \simeq
+    \CAlg(\Sp)^{\mathrm{cn}}_{A/},
+\]
+where connectivity on the left is detected on the underlying $A$-module.
+Consequently,
+\[
+    \Aff_{\Sp}/\Spec(A)
+    \simeq
+    \bigl(
+        \CAlg(\Mod_A)^{\mathrm{cn}}
+    \bigr)^{\op}.
+\]
+\end{proposition}
+
+\begin{proof}
+The equivalence preserves underlying spectra and therefore preserves
+connective objects. Passing to opposite categories gives the affine
+statement.
+\end{proof}
+
+\subsection{The induced module \texorpdfstring{$t$}{t}-structure}
+
+\begin{definition}[Module Postnikov $t$-structure]
+\label{def:module-postnikov-t-structure}
+Let
+\[
+    \Mod_{A,\geq0}
+\]
+be the full subcategory of $A$-modules whose underlying spectra are
+connective, and let
+\[
+    \Mod_{A,\leq0}
+\]
+be the full subcategory whose underlying spectra are coconnective.
+\end{definition}
+
+\begin{proposition}[Induced module $t$-structure]
+\label{prop:induced-module-t-structure}
+The pair
+\[
+    (\Mod_{A,\geq0},\Mod_{A,\leq0})
+\]
+is an accessible, left complete, and right complete $t$-structure on
+$\Mod_A$. The forgetful functor
+\[
+    U_A
+    \colon
+    \Mod_A
+    \longrightarrow
+    \Sp
+\]
+is $t$-exact and creates Postnikov truncations.
+\end{proposition}
+
+\begin{proof}
+Limits and colimits of $A$-modules are created in spectra. The module
+structure on a truncation is induced by the connective multiplication of
+$A$, and the orthogonality and truncation axioms are detected after
+forgetting to spectra. Completeness follows from completeness of the
+Postnikov $t$-structure and creation of limits and colimits. See
+\cite{LurieHigherAlgebra,LurieSAG}.
+\end{proof}
+
+\begin{proposition}[Heart of the module category]
+\label{prop:heart-module-category}
+There is a natural equivalence of abelian categories
+\[
+    \Mod_A^\heartsuit
+    \simeq
+    \operatorname{Mod}_{\pi_0(A)}.
+\]
+\end{proposition}
+
+\begin{proof}
+A discrete $A$-module is determined by its degree-zero homotopy group. The
+$A$-action factors uniquely through the discrete commutative ring spectrum
+$H\pi_0(A)$, and hence is equivalent to an ordinary $\pi_0(A)$-module
+structure.
+\end{proof}
+
+\begin{proposition}[Exactness and right $t$-exactness of base change]
+\label{prop:base-change-exact-right-t-exact}
+Let $f:A\to B$ be a morphism of connective commutative ring spectra.
+Then:
+\begin{enumerate}[label=(\roman*)]
+    \item the extension-of-scalars functor
+    \[
+        f^*
+        \colon
+        \Mod_A
+        \longrightarrow
+        \Mod_B
+    \]
+    is exact as a functor of stable $\infty$-categories;
+
+    \item the functor $f^*$ is right $t$-exact;
+
+    \item the restriction-of-scalars functor $f_*$ is $t$-exact.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The functor $f^*$ preserves all colimits. A colimit-preserving functor
+between stable $\infty$-categories preserves finite colimits and therefore
+finite limits, proving exactness. Since $B$ is connective as an
+$A$-module, the relative tensor product of a connective $A$-module with
+$B$ is connective, proving right $t$-exactness. Restriction of scalars does
+not change the underlying spectrum and is therefore $t$-exact.
+\end{proof}
+
+\begin{remark}[Stable exactness is not flatness]
+\label{rem:stable-exactness-not-flatness}
+Assertion (i) of \Ref{prop:base-change-exact-right-t-exact} holds for every
+morphism of commutative ring spectra and carries no geometric flatness
+content. In this chapter the word \emph{flat} is reserved for the
+$t$-structural condition introduced in
+\Ref{def:flat-module-spectrum}.
+\end{remark}
+
+\section{Spectral flatness and finiteness conditions}
+\label{sec:spectral-flatness-finiteness}
+
+The canonical $t$-structures on module categories distinguish geometric
+flatness from the automatic exactness of stable base change.
+
+\subsection{Flat module spectra}
+
+\begin{definition}[Flat module spectrum]
+\label{def:flat-module-spectrum}
+Let $A$ be a connective commutative ring spectrum. A connective
+$A$-module $M$ is \textbf{flat} if the functor
+\[
+    -\otimes_A M
+    \colon
+    \Mod_A
+    \longrightarrow
+    \Mod_A
+\]
+is $t$-exact.
+\end{definition}
+
+The right $t$-exactness is automatic for a connective module. Flatness is
+therefore the additional assertion that tensoring with $M$ preserves
+coconnective modules.
+
+\begin{theorem}[Spectral Lazard theorem]
+\label{thm:spectral-lazard}
+Let $A$ be a connective commutative ring spectrum and let
+$M\in\Mod_{A,\geq0}$. The following conditions are equivalent.
+\begin{enumerate}[label=(\roman*)]
+    \item The module $M$ is flat.
+
+    \item The ordinary $\pi_0(A)$-module $\pi_0(M)$ is flat and, for every
+    integer $n$, the canonical morphism
+    \[
+        \pi_n(A)
+        \otimes_{\pi_0(A)}
+        \pi_0(M)
+        \longrightarrow
+        \pi_n(M)
+    \]
+    is an isomorphism.
+
+    \item For every $A$-module $N$ and every integer $n$, the canonical
+    morphism
+    \[
+        \pi_n(N)
+        \otimes_{\pi_0(A)}
+        \pi_0(M)
+        \longrightarrow
+        \pi_n(N\otimes_A M)
+    \]
+    is an isomorphism.
+
+    \item The module $M$ is a filtered colimit of finite free
+    $A$-modules.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The equivalence of the $t$-exactness, homotopy-group, and filtered-colimit
+conditions is the spectral form of Lazard's theorem; see
+\cite{LurieHigherAlgebra,LurieSAG}. The implication from (iii) to (ii) is
+obtained by taking $N=A$. Condition (ii), together with the Tor spectral
+sequence for $N\otimes_A M$, forces all higher Tor contributions to
+vanish and yields (iii). Condition (iv) implies (iii) because tensor
+products and homotopy groups commute with filtered colimits and the formula
+is immediate for finite free modules. The converse is the spectral
+flat-module classification.
+\end{proof}
+
+\begin{corollary}[Homotopy groups of a flat module]
+\label{cor:flat-modules-detected-homotopy}
+If $M$ is a flat $A$-module, then its graded homotopy groups are obtained
+from $\pi_0(M)$ by base change:
+\[
+    \pi_n(M)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(M)
+\]
+for every integer $n$.
+\end{corollary}
+
+\begin{proof}
+This is condition (ii) of \Ref{thm:spectral-lazard}.
+\end{proof}
+
+\begin{proposition}[Permanence of flat modules]
+\label{prop:flat-module-permanence}
+Let $A$ be a connective commutative ring spectrum.
+\begin{enumerate}[label=(\roman*)]
+    \item Finite free and finite projective $A$-modules are flat.
+
+    \item Filtered colimits of flat $A$-modules are flat.
+
+    \item If $M$ and $N$ are flat $A$-modules, then
+    \[
+        M\otimes_A N
+    \]
+    is flat over $A$.
+
+    \item Let $A\to B$ be a flat morphism of connective commutative ring
+    spectra. If $N$ is flat as a $B$-module, then $N$, regarded by
+    restriction of scalars as an $A$-module, is flat over $A$.
+
+    \item Let $A\to B$ be any morphism of connective commutative ring
+    spectra. If $M$ is flat over $A$, then
+    \[
+        M\otimes_A B
+    \]
+    is flat over $B$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+A finite free module is a finite direct sum of copies of $A$, so tensoring
+with it is a finite direct sum of the identity functor and is therefore
+$t$-exact. If $M$ is a retract of a flat module $F$, then
+\[
+    -\otimes_A M
+\]
+is a retract of the $t$-exact functor $-\otimes_A F$. Both the connective
+and coconnective subcategories are closed under retracts, so $M$ is flat.
+This proves (i).
+
+For a filtered diagram of flat modules $\{M_\alpha\}$, there is a natural
+equivalence
+\[
+    K\otimes_A
+    \left(
+        \varinjlim_\alpha M_\alpha
+    \right)
+    \simeq
+    \varinjlim_\alpha
+    (K\otimes_A M_\alpha).
+\]
+Filtered colimits preserve both connective and coconnective objects in
+the Postnikov $t$-structure, because homotopy groups commute with filtered
+colimits. Thus the displayed tensor functor is $t$-exact, proving (ii).
+
+For (iii), associativity gives
+\[
+    -\otimes_A(M\otimes_A N)
+    \simeq
+    \bigl(
+        -\otimes_A M
+    \bigr)
+    \otimes_A N.
+\]
+The right side is a composite of $t$-exact functors.
+
+For (iv), let $K$ be an $A$-module. There is a natural equivalence of
+underlying $A$-modules
+\[
+    K\otimes_A N
+    \simeq
+    (K\otimes_A B)\otimes_B N.
+\]
+Extension of scalars from $A$ to $B$ is $t$-exact by flatness of
+$A\to B$, tensoring with $N$ over $B$ is $t$-exact by flatness of $N$,
+and restriction of scalars from $B$ to $A$ is $t$-exact. Their composite
+is therefore $t$-exact.
+
+For (v), let $K$ be a $B$-module. Then
+\[
+\begin{aligned}
+    K\otimes_B(M\otimes_A B)
+    &\simeq
+    K\otimes_A M,
+\end{aligned}
+\]
+where $K$ on the right is regarded as an $A$-module. Restriction from
+$B$ to $A$ does not change the underlying spectrum and is $t$-exact.
+Since $M$ is flat over $A$, the right side depends $t$-exactly on $K$.
+Thus $M\otimes_A B$ is flat over $B$.
+\end{proof}
+
+\subsection{Flat morphisms of connective commutative ring spectra}
+
+\begin{definition}[Flat spectral algebra morphism]
+\label{def:flat-spectral-algebra-morphism}
+A morphism
+\[
+    f
+    \colon
+    A
+    \longrightarrow
+    B
+\]
+in $\CAlg(\Sp)^{\mathrm{cn}}$ is \textbf{flat} if $B$, regarded as an
+$A$-module, is flat.
+\end{definition}
+
+\begin{proposition}[Homotopy groups of a flat algebra]
+\label{prop:homotopy-groups-flat-algebra}
+If $A\to B$ is flat, then $\pi_0(B)$ is flat over $\pi_0(A)$ and there are
+natural isomorphisms
+\[
+    \pi_n(B)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(B)
+\]
+for every integer $n$.
+\end{proposition}
+
+\begin{proof}
+Apply condition (ii) of \Ref{thm:spectral-lazard} to the $A$-module $B$.
+\end{proof}
+
+\begin{proposition}[Permanence of flat algebra morphisms]
+\label{prop:flat-algebra-permanence}
+Flat morphisms in $\CAlg(\Sp)^{\mathrm{cn}}$ are stable under equivalence,
+composition, base change, and filtered colimits in the arrow category.
+\end{proposition}\begin{proof}
+Stability under equivalence is immediate.
+
+Let
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C
+\]
+be flat morphisms. Extension of scalars from $A$ to $C$ is canonically
+equivalent to the composite
+\[
+    \Mod_A
+    \xrightarrow{-\otimes_AB}
+    \Mod_B
+    \xrightarrow{-\otimes_BC}
+    \Mod_C.
+\]
+Both functors are $t$-exact, so their composite is $t$-exact. Hence
+$A\to C$ is flat.
+
+For base change, let $A\to A'$ be any morphism and put
+\[
+    B'
+    :=
+    B\otimes_AA'.
+\]
+For every $A'$-module $M$, there is a canonical equivalence of underlying
+spectra
+\[
+    M\otimes_{A'}B'
+    \simeq
+    M\otimes_AB,
+\]
+where $M$ on the right is restricted to an $A$-module. Restriction of
+scalars from $A'$ to $A$ is $t$-exact, and tensoring with $B$ over $A$ is
+$t$-exact by flatness. Thus
+\[
+    -\otimes_{A'}B'
+\]
+is $t$-exact, and $A'\to B'$ is flat.
+
+Finally, let
+\[
+    \{A_\alpha\to B_\alpha\}_{\alpha}
+\]
+be a filtered diagram of flat morphisms and put
+\[
+    A:=\varinjlim_\alpha A_\alpha,
+    \qquad
+    B:=\varinjlim_\alpha B_\alpha.
+\]
+Filtered colimits commute with homotopy groups. The flat homotopy-group
+formula at each stage gives
+\[
+    \pi_n(B_\alpha)
+    \simeq
+    \pi_n(A_\alpha)
+    \otimes_{\pi_0(A_\alpha)}
+    \pi_0(B_\alpha).
+\]
+Passing to filtered colimits yields
+\[
+    \pi_n(B)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(B).
+\]
+Moreover, $\pi_0(B)$ is flat over $\pi_0(A)$, since flatness of ordinary
+modules is preserved under filtered colimits in the arrow category.
+The flatness criterion of
+\Ref{thm:spectral-lazard} therefore implies that $A\to B$ is flat.
+\end{proof}
+
+\begin{proposition}[Classical truncation and affine fibre products]
+\label{prop:flat-base-change-classical-truncation}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    A
+        \arrow[r]
+        \arrow[d]
+    &
+    B
+        \arrow[d]
+    \\
+    A'
+        \arrow[r]
+    &
+    B':=B\otimes_AA'
+\end{tikzcd}
+\]
+be a pushout square in connective commutative ring spectra. Then the
+canonical morphism
+\[
+    \pi_0(B)
+    \otimes_{\pi_0(A)}
+    \pi_0(A')
+    \longrightarrow
+    \pi_0(B')
+\]
+is an isomorphism. Equivalently, the square of affine schemes
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    \Spec\pi_0(B')
+        \arrow[r]
+        \arrow[d]
+    &
+    \Spec\pi_0(B)
+        \arrow[d]
+    \\
+    \Spec\pi_0(A')
+        \arrow[r]
+    &
+    \Spec\pi_0(A)
+\end{tikzcd}
+\]
+is Cartesian.
+\end{proposition}
+
+\begin{proof}
+The adjunction of \Ref{prop:pi-zero-h-adjunction} shows that
+\[
+    \pi_0
+    \colon
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \longrightarrow
+    \operatorname{CRing}
+\]
+is a left adjoint. It therefore preserves all small colimits, in
+particular pushouts. Hence
+\[
+    \pi_0(B')
+    \simeq
+    \pi_0(B)
+    \otimes_{\pi_0(A)}
+    \pi_0(A').
+\]
+Passing to opposite categories gives the affine statement.
+\end{proof}
+
+\subsection{Finite presentation and finite cell algebras}
+
+\begin{definition}[Finite presentation]
+\label{def:finitely-presented-spectral-algebra}
+A morphism
+\[
+    A
+    \longrightarrow
+    B
+\]
+of connective commutative ring spectra is \textbf{of finite presentation}
+if $B$ is compact as an object of the $\infty$-category
+\[
+    \CAlg(\Sp)_{A/}.
+\]
+A morphism of affine spectral schemes is of finite presentation if its
+contravariant algebra morphism is of finite presentation. At the
+algebraic level this compactness condition is also commonly called
+``locally of finite presentation''; for an affine geometric morphism the
+global quasi-compactness and separatedness conditions are automatic.
+\end{definition}
+
+\begin{definition}[Finite cell algebra]
+\label{def:finite-cell-spectral-algebra}
+A commutative $A$-algebra is a \textbf{finite cell algebra} if it is
+obtained from $A$ by finitely many pushouts of free algebra maps induced by
+maps between finite spectra.
+\end{definition}
+
+\begin{proposition}[Compactness criterion]
+\label{prop:finite-presentation-compactness-criterion}
+A connective commutative $A$-algebra is of finite presentation if and only
+if it is a retract of a finite cell commutative $A$-algebra.
+\end{proposition}
+
+\begin{proof}
+The $\infty$-category of commutative $A$-algebras is compactly generated by
+free algebras on finite spectra. Compact objects are therefore retracts of
+finite cell objects; see \cite{LurieHigherAlgebra,LurieSAG}.
+\end{proof}
+
+\begin{proposition}[Permanence of finite presentation]
+\label{prop:finite-presentation-permanence}
+Morphisms of finite presentation are stable under equivalence,
+composition, and base change.
+\end{proposition}
+
+\begin{proof}
+Equivalence stability is immediate. Compactness is preserved under the
+base-change left adjoint because its right adjoint preserves filtered
+colimits. Composition follows by expressing mapping spaces out of the
+composite algebra through the two compact stages. Equivalently, one may
+use finite cell presentations and concatenate or base-change the finite
+cell attachments.
+\end{proof}
+
+\begin{lemma}[Compact arrows in an undercategory]
+\label{lem:compact-arrow-undercategory}
+Let $\mathcal C$ be a presentable $\infty$-category and let
+\[
+    P
+    \longrightarrow
+    B
+\]
+be a morphism between compact objects of $\mathcal C$. Then $B$, regarded
+as an object of the undercategory $\mathcal C_{P/}$, is compact.
+\end{lemma}
+
+\begin{proof}
+Let $\{C_\alpha\}_\alpha$ be a filtered diagram in $\mathcal C_{P/}$.
+The mapping space
+\[
+    \Map_{\mathcal C_{P/}}
+    \left(
+        B,
+        \varinjlim_\alpha C_\alpha
+    \right)
+\]
+is the homotopy fibre, over the structural map
+$P\to\varinjlim_\alpha C_\alpha$, of
+\[
+    \Map_{\mathcal C}
+    \left(
+        B,
+        \varinjlim_\alpha C_\alpha
+    \right)
+    \longrightarrow
+    \Map_{\mathcal C}
+    \left(
+        P,
+        \varinjlim_\alpha C_\alpha
+    \right).
+\]
+Compactness of $P$ and $B$ identifies the two mapping spaces with the
+corresponding filtered colimits. Filtered colimits of spaces commute with
+finite limits, hence with the displayed homotopy fibre. Therefore
+\[
+    \Map_{\mathcal C_{P/}}
+    \left(
+        B,
+        \varinjlim_\alpha C_\alpha
+    \right)
+    \simeq
+    \varinjlim_\alpha
+    \Map_{\mathcal C_{P/}}(B,C_\alpha),
+\]
+which proves compactness in the undercategory.
+\end{proof}
+
+\subsection{Perfect, projective, and locally free modules}
+
+\begin{definition}[Perfect module]
+\label{def:perfect-module-spectrum}
+An $A$-module $M$ is \textbf{perfect} if it belongs to the thick
+subcategory of $\Mod_A$ generated by the tensor unit $A$.
+\end{definition}
+
+\begin{proposition}[Perfect equals dualizable]
+\label{prop:perfect-equals-dualizable}
+An $A$-module is perfect if and only if it is dualizable in the symmetric
+monoidal $\infty$-category $\Mod_A$.
+\end{proposition}
+
+\begin{proof}
+The unit $A$ is compact and dualizable, and the dualizable objects form a
+thick subcategory. Conversely, a dualizable $A$-module is compact because
+its mapping functor is represented after tensoring with its dual, and the
+compact objects of $\Mod_A$ form the thick subcategory generated by $A$.
+See \cite{LurieHigherAlgebra}.
+\end{proof}
+
+\begin{definition}[Tor-amplitude]
+\label{def:tor-amplitude}
+An $A$-module $M$ has \textbf{Tor-amplitude in $[a,b]$} if, for every
+discrete $A$-module $N$, the module
+\[
+    M\otimes_A N
+\]
+has homotopy groups only in degrees $a$ through $b$.
+\end{definition}
+
+\begin{definition}[Finite projective module]
+\label{def:finite-projective-module-spectrum}
+An $A$-module $M$ is \textbf{finite projective} if it is a retract of a
+finite free $A$-module.
+\end{definition}
+
+\begin{proposition}[Characterization of finite projectives]
+\label{prop:finite-projective-characterization}
+For an $A$-module $M$, the following are equivalent.
+\begin{enumerate}[label=(\roman*)]
+    \item The module $M$ is finite projective.
+
+    \item The module $M$ is perfect and has Tor-amplitude contained in
+    $[0,0]$.
+
+    \item The module $M$ is perfect, connective, and flat.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+A finite free \(A\)-module is perfect, connective, flat, and has
+Tor-amplitude in \([0,0]\). Each of these properties is stable under
+retracts. Thus \textup{(i)} implies both \textup{(ii)} and
+\textup{(iii)}.
+
+Assume \textup{(iii)}. Since \(M\) is perfect, its base change
+\[
+    M_0
+    :=
+    M\otimes_AH\pi_0(A)
+\]
+is perfect over the discrete ring spectrum \(H\pi_0(A)\). Flatness gives
+\[
+    \pi_n(M_0)
+    \simeq
+    \pi_n(H\pi_0(A))
+    \otimes_{\pi_0(A)}
+    \pi_0(M),
+\]
+so \(M_0\) is discrete with
+\[
+    \pi_0(M_0)
+    \simeq
+    \pi_0(M).
+\]
+
+Since \(M_0\) is perfect and discrete over the discrete ring spectrum
+\(H\pi_0(A)\), the ordinary \(\pi_0(A)\)-module
+\[
+    \pi_0(M_0)
+    \simeq
+    \pi_0(M)
+\]
+admits a finite resolution by finitely generated projective modules. In
+particular, \(\pi_0(M)\) is finitely presented over \(\pi_0(A)\).
+
+Since \(M\) is flat, \(\pi_0(M)\) is flat over \(\pi_0(A)\). A finitely
+presented flat module is finitely generated projective. Hence
+\(\pi_0(M)\) is finitely generated projective over \(\pi_0(A)\).
+
+Choose an idempotent matrix
+\[
+    e
+    \in
+    M_r(\pi_0(A))
+\]
+whose image is \(\pi_0(M)\). The same idempotent defines an idempotent
+endomorphism of the finite free \(A\)-module \(A^{\oplus r}\). Since
+idempotents split in \(\Mod_A\), it determines a finite projective
+\(A\)-module \(P\) satisfying
+\[
+    \pi_0(P)
+    \simeq
+    \pi_0(M).
+\]
+
+Because \(P\) is a retract of a finite free module, the canonical map
+\[
+    \pi_0
+    \Map_{\Mod_A}(P,M)
+    \longrightarrow
+    \Hom_{\pi_0(A)}
+    \bigl(
+        \pi_0(P),
+        \pi_0(M)
+    \bigr)
+\]
+is surjective. Choose a morphism
+\[
+    u
+    \colon
+    P
+    \longrightarrow
+    M
+\]
+which induces the chosen isomorphism on \(\pi_0\).
+
+Both \(P\) and \(M\) are flat. Therefore, for every integer \(n\),
+\[
+    \pi_n(P)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(P)
+\]
+and
+\[
+    \pi_n(M)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(M).
+\]
+Under these identifications, \(\pi_n(u)\) is obtained by tensoring
+\(\pi_0(u)\) with \(\pi_n(A)\) and is therefore an isomorphism. Hence
+\(u\) is an equivalence and \(M\) is finite projective. This proves
+\[
+    \textup{(iii)}
+    \Longrightarrow
+    \textup{(i)}.
+\]
+
+Now assume \textup{(ii)}. Put
+\[
+    M_0
+    :=
+    M\otimes_AH\pi_0(A).
+\]
+By the Tor-amplitude condition, \(M_0\) has homotopy only in degree zero.
+Since \(M\) is perfect over the connective ring spectrum \(A\), it is
+bounded below.
+
+Let
+\[
+    I
+    :=
+    \operatorname{fib}
+    \bigl(
+        A\longrightarrow H\pi_0(A)
+    \bigr).
+\]
+The map \(A\to H\pi_0(A)\) induces an isomorphism on degree-zero
+homotopy, so
+\[
+    I\in\Mod_{A,\geq1}.
+\]
+Suppose \(M\neq0\), and let \(r\) be the least integer for which
+\[
+    \pi_r(M)\neq0.
+\]
+Then
+\[
+    M\in\Mod_{A,\geq r}.
+\]
+The bar construction for the relative tensor product shows that, for
+\(P\in\Mod_{A,\geq a}\) and \(Q\in\Mod_{A,\geq b}\),
+\[
+    P\otimes_AQ
+    \in
+    \Mod_{A,\geq a+b}.
+\]
+Consequently,
+\[
+    I\otimes_AM
+    \in
+    \Mod_{A,\geq r+1}.
+\]
+Tensoring the fibre sequence
+\[
+    I
+    \longrightarrow
+    A
+    \longrightarrow
+    H\pi_0(A)
+\]
+with \(M\) gives a fibre sequence
+\[
+    I\otimes_AM
+    \longrightarrow
+    M
+    \longrightarrow
+    M_0.
+\]
+It follows that
+\[
+    \pi_r(M)
+    \xrightarrow{\simeq}
+    \pi_r(M_0).
+\]
+Since \(M_0\) is discrete, one has \(r=0\). Thus \(M\) is connective.
+
+We next prove that \(M\) is flat. Let
+\[
+    F
+    :=
+    -\otimes_AM.
+\]
+The connectivity of \(M\) implies that \(F\) is right \(t\)-exact. By
+the Tor-amplitude condition, \(F\) carries every discrete \(A\)-module
+to a discrete spectrum.
+
+Let \(N\in\Mod_{A,\leq0}\). Right completeness gives
+\[
+    N
+    \simeq
+    \varinjlim_k\tau_{\geq-k}N.
+\]
+Each bounded object \(\tau_{\geq-k}N\) is obtained by finitely many
+extensions from the shifted discrete modules
+\[
+    H\pi_j(N)[j],
+    \qquad
+    -k\leq j\leq0.
+\]
+The functor \(F\) is exact and carries discrete modules to discrete
+spectra, so
+\[
+    F\bigl(\tau_{\geq-k}N\bigr)
+    \in
+    \Sp_{\leq0}
+\]
+for every \(k\). Since filtered colimits of coconnective spectra are
+coconnective,
+\[
+    F(N)
+    \simeq
+    \varinjlim_kF\bigl(\tau_{\geq-k}N\bigr)
+    \in
+    \Sp_{\leq0}.
+\]
+Thus \(F\) is also left \(t\)-exact, and \(M\) is flat. Therefore \(M\)
+satisfies \textup{(iii)}, and the implication
+\[
+    \textup{(iii)}
+    \Longrightarrow
+    \textup{(i)}
+\]
+already proved above shows that \(M\) is finite projective. This proves
+\[
+    \textup{(ii)}
+    \Longrightarrow
+    \textup{(i)}.
+\]
+\end{proof}
+
+\begin{definition}[Locally free module]
+\label{def:locally-free-affine-module}
+Let $A$ be connective. An $A$-module $M$ is \textbf{locally free of rank
+$n$} if there exists a Zariski covering family
+\[
+    \{A\to A_i\}_{i\in I}
+\]
+as defined in \Ref{def:affine-zariski-cover}, such that
+\[
+    M\otimes_AA_i
+    \simeq
+    A_i^{\oplus n}
+\]
+for every $i$.
+\end{definition}
+
+\begin{remark}
+\label{rem:local-free-definition-forward-reference}
+The preceding definition uses the spectral Zariski topology constructed in
+\Ref{sec:affine-opens-zariski-descent}. Until that construction is
+complete, finite projective modules are the affine algebraic substitute.
+\end{remark}
+
+\section{Spectral prestacks and quasi-coherent modules}
+\label{sec:spectral-prestacks-qcoh}
+
+\subsection{The affine quasi-coherent functor}
+
+\begin{definition}[Affine quasi-coherent modules]
+\label{def:affine-spectral-qcoh}
+For an affine spectral scheme $\Spec(A)$, define
+\[
+    \QCoh_{\mathrm{aff}}(\Spec(A))
+    :=
+    \Mod_A.
+\]
+For a morphism
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A),
+\]
+the pullback functor is extension of scalars
+\[
+    -\otimes_A B
+    \colon
+    \Mod_A
+    \longrightarrow
+    \Mod_B.
+\]
+\end{definition}
+
+\begin{proposition}[Affine quasi-coherent coefficient system]
+\label{prop:affine-qcoh-coefficient-system}
+The assignments of \Ref{def:affine-spectral-qcoh} define a functor
+\[
+    \QCoh_{\mathrm{aff}}
+    \colon
+    (\Aff_{\Sp})^{\op}
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the restriction of the functor
+$\mathbf{Mod}_{\Sp}$ from
+\Ref{prop:spectral-module-functoriality} to connective commutative ring
+spectra.
+\end{proof}
+
+\subsection{Affine points and right Kan extension}
+
+\begin{definition}[Affine points of a prestack]
+\label{def:affine-points-prestack}
+For a spectral prestack
+\[
+    X\in\PSh(\Aff_{\Sp}),
+\]
+let
+\[
+    \Aff_{\Sp}/X
+\]
+denote the $\infty$-category of pairs
+\[
+    (\Spec(A),x),
+    \qquad
+    x\in X(A),
+\]
+equivalently the slice of the Yoneda embedding over $X$.
+\end{definition}
+
+\begin{definition}[Quasi-coherent modules on a spectral prestack]
+\label{def:qcoh-spectral-prestack}
+For a spectral prestack $X$, define
+\[
+    \QCoh(X)
+    :=
+    \varprojlim_{(\Spec(A)\to X)
+    \in(\Aff_{\Sp}/X)^{\op}}
+    \Mod_A.
+\]
+The limit is formed in
+\[
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+\end{definition}
+
+The definition is represented schematically by
+\[
+\begin{tikzcd}[column sep=large]
+    (\Aff_{\Sp}/X)^{\op}
+        \arrow[r]
+    &
+    \CAlg(\Pr^L_{\mathrm{st}})
+    \\
+    (\Spec(A)\to X)
+        \arrow[r, mapsto]
+    &
+    \Mod_A.
+\end{tikzcd}
+\]
+
+\begin{theorem}[Affine right Kan extension]
+\label{thm:qcoh-affine-right-kan-extension}
+Let
+\[
+    h
+    \colon
+    \Aff_{\Sp}
+    \longrightarrow
+    \PSh(\Aff_{\Sp})
+\]
+be the Yoneda embedding. The construction of
+\Ref{def:qcoh-spectral-prestack} defines a functor
+\[
+    \QCoh
+    \colon
+    \PSh(\Aff_{\Sp})^{\op}
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}})
+\]
+which is the right Kan extension of
+\[
+    \QCoh_{\mathrm{aff}}
+    \colon
+    (\Aff_{\Sp})^{\op}
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}})
+\]
+along the opposite Yoneda embedding
+\[
+    h^{\op}
+    \colon
+    (\Aff_{\Sp})^{\op}
+    \longrightarrow
+    \PSh(\Aff_{\Sp})^{\op}.
+\]
+
+Equivalently, $\QCoh$ is the unique limit-preserving functor on
+$\PSh(\Aff_{\Sp})^{\op}$ whose restriction along
+$h^{\op}$ is $\QCoh_{\mathrm{aff}}$.
+\end{theorem}
+
+\begin{proof}
+For a spectral prestack $X$, the pointwise formula for right Kan extension
+along $h^{\op}$ is
+\[
+    \operatorname{Ran}_{h^{\op}}
+    (\QCoh_{\mathrm{aff}})(X)
+    \simeq
+    \varprojlim_
+    {(\Spec(A)\to X)
+    \in
+    (\Aff_{\Sp}/X)^{\op}}
+    \Mod_A.
+\]
+This is exactly the definition of $\QCoh(X)$ in
+\Ref{def:qcoh-spectral-prestack}.
+
+Functoriality follows from functoriality of the affine-point categories:
+a morphism $X\to Y$ induces a functor
+\[
+    \Aff_{\Sp}/X
+    \longrightarrow
+    \Aff_{\Sp}/Y
+\]
+by composition. Passing to opposites and applying the universal property
+of limits produces the pullback functor
+\[
+    \QCoh(Y)
+    \longrightarrow
+    \QCoh(X).
+\]
+
+The opposite Yoneda embedding generates
+\[
+    \PSh(\Aff_{\Sp})^{\op}
+\]
+under limits. Therefore a limit-preserving extension is uniquely
+determined by its restriction to representables. The right Kan extension
+is limit-preserving, so it has the claimed universal property.
+\end{proof}
+
+\begin{corollary}[Recovery on affine spectral schemes]
+\label{cor:qcoh-recovery-affines}
+For every connective commutative ring spectrum $A$, there is a canonical
+symmetric monoidal equivalence
+\[
+    \QCoh(\Spec(A))
+    \simeq
+    \Mod_A.
+\]
+\end{corollary}\begin{proof}
+For the representable prestack
+\[
+    X=\Spec(A),
+\]
+the identity map
+\[
+    \id_X
+    \colon
+    X
+    \longrightarrow
+    X
+\]
+is terminal in the affine-point category
+\[
+    \Aff_{\Sp}/X.
+\]
+It is therefore initial in
+\[
+    (\Aff_{\Sp}/X)^{\op}.
+\]
+A limit of a diagram indexed by an $\infty$-category with an initial
+object is canonically its value at that initial object. Hence
+\[
+    \QCoh(\Spec(A))
+    \simeq
+    \Mod_A.
+\]
+The equivalence is symmetric monoidal because the defining limit is
+formed in
+\[
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+\end{proof}
+
+\begin{corollary}[Colimits of prestacks]
+\label{cor:qcoh-colimits-to-limits}
+For every small diagram of spectral prestacks $X_\alpha$, there is a
+canonical equivalence
+\[
+    \QCoh
+    \left(
+        \varinjlim_\alpha X_\alpha
+    \right)
+    \simeq
+    \varprojlim_\alpha\QCoh(X_\alpha).
+\]
+\end{corollary}
+
+\begin{proof}
+Apply the limit-preservation assertion of
+\Ref{thm:qcoh-affine-right-kan-extension} to the opposite functor.
+\end{proof}
+
+\subsection{Pullback, direct image, and the structure sheaf}
+
+\begin{proposition}[Quasi-coherent pullback]
+\label{prop:qcoh-pullback}
+Every morphism of spectral prestacks
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+induces a colimit-preserving strong symmetric monoidal functor
+\[
+    f^*
+    \colon
+    \QCoh(Y)
+    \longrightarrow
+    \QCoh(X).
+\]
+For affine spectral schemes it agrees with extension of scalars.
+\end{proposition}
+
+\begin{proof}
+Functoriality of the right Kan extension gives the transition functor.
+The target of the right Kan extension is
+$\CAlg(\Pr^L_{\mathrm{st}})$, so the transition is colimit-preserving and
+strong symmetric monoidal. The affine identification follows from
+\Ref{cor:qcoh-recovery-affines} and the defining affine coefficient
+system.
+\end{proof}
+
+\begin{corollary}[Quasi-coherent direct image]
+\label{cor:qcoh-direct-image}
+The pullback functor of \Ref{prop:qcoh-pullback} admits a right adjoint
+\[
+    f_*
+    \colon
+    \QCoh(X)
+    \longrightarrow
+    \QCoh(Y).
+\]
+\end{corollary}
+
+\begin{proof}
+The functor $f^*$ preserves small colimits between presentable
+$\infty$-categories. The adjoint functor theorem supplies a right adjoint.
+\end{proof}
+
+\begin{definition}[Structure sheaf]
+\label{def:structure-sheaf-prestack}
+The \textbf{structure sheaf} of a spectral prestack $X$ is the tensor unit
+\[
+    \mathcal O_X
+    \in
+    \QCoh(X).
+\]
+\end{definition}
+
+\begin{definition}[Global sections]
+\label{def:global-sections-qcoh}
+For $\mathcal F\in\QCoh(X)$, define its spectrum of global sections by
+\[
+    \Gamma(X,\mathcal F)
+    :=
+    \map_{\QCoh(X)}
+    (\mathcal O_X,\mathcal F).
+\]
+\end{definition}
+
+\begin{proposition}[Pullback of the structure sheaf]
+\label{prop:pullback-structure-sheaf}
+For every morphism $f:X\to Y$, there is a canonical equivalence
+\[
+    f^*\mathcal O_Y
+    \simeq
+    \mathcal O_X.
+\]
+\end{proposition}
+
+\begin{proof}
+The functor $f^*$ is strong symmetric monoidal and therefore preserves the
+tensor unit.
+\end{proof}
+
+\subsection{Connectivity on prestacks}
+
+\begin{definition}[Objectwise connective quasi-coherent module]
+\label{def:objectwise-connective-qcoh}
+A quasi-coherent module $\mathcal F\in\QCoh(X)$ is
+\textbf{objectwise connective} if, for every affine point
+\[
+    x
+    \colon
+    \Spec(A)
+    \longrightarrow
+    X,
+\]
+its pullback
+\[
+    x^*\mathcal F
+\]
+belongs to $\Mod_{A,\geq0}$. Objectwise coconnective modules are defined
+similarly.
+\end{definition}
+
+\begin{remark}
+\label{rem:prestack-t-structure}
+For arbitrary prestacks, the objectwise connective and coconnective
+subcategories need not have all the locality properties required in
+geometry. After Zariski descent is established, they define the canonical
+$t$-structure on quasi-coherent modules over spectral schemes in
+\Ref{thm:qcoh-spectral-scheme-t-structure}.
+\end{remark}
+
+\section{Affine open immersions and spectral Zariski descent}
+\label{sec:affine-opens-zariski-descent}
+
+\subsection{Affine monomorphisms and open immersions}
+
+\begin{proposition}[Affine monomorphism criterion]
+\label{prop:affine-monomorphism-criterion}
+Let $A\to B$ be a morphism of connective commutative ring spectra. The
+following are equivalent.
+\begin{enumerate}[label=(\roman*)]
+    \item The morphism
+    \[
+        \Spec(B)
+        \longrightarrow
+        \Spec(A)
+    \]
+    is a monomorphism of spectral prestacks.
+
+    \item The multiplication morphism
+    \[
+        B\otimes_A B
+        \longrightarrow
+        B
+    \]
+    is an equivalence.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+A morphism $X\to Y$ is a monomorphism if and only if its diagonal is an
+equivalence. By \Ref{prop:affine-spectral-fibre-products}, the diagonal of
+$\Spec(B)\to\Spec(A)$ is represented by the multiplication map
+$B\otimes_A B\to B$.
+\end{proof}
+
+\begin{definition}[Affine open immersion]
+\label{def:affine-open-immersion-spectral}
+A morphism
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A)
+\]
+of affine spectral schemes is an \textbf{affine open immersion} if the
+algebra map $A\to B$ is flat, of finite presentation, and satisfies
+\[
+    B\otimes_A B
+    \xrightarrow{\simeq}
+    B.
+\]
+\end{definition}
+
+\begin{proposition}[Flat lifts of classical affine opens]
+\label{prop:flat-lift-classical-affine-open}
+Let $A\to B$ be a flat morphism of connective commutative ring spectra.
+If
+\[
+    \Spec\pi_0(B)
+    \longrightarrow
+    \Spec\pi_0(A)
+\]
+is an open immersion of ordinary affine schemes, then $A\to B$ is of
+finite presentation and the multiplication morphism
+\[
+    B\otimes_A B
+    \longrightarrow
+    B
+\]
+is an equivalence.
+\end{proposition}
+
+\begin{proof}
+This is the affine spectral open-lifting theorem. Flatness identifies the
+homotopy groups of $B$ and of all its base changes with extension of the
+corresponding $\pi_0(A)$-modules. The classical open immersion is a
+finitely presented flat epimorphism; the spectral lifting theorem then
+shows that its flat spectral lift is a finitely presented epimorphism.
+Equivalently, after a finite principal-open refinement the assertion
+reduces to the localization calculation
+\[
+    \pi_n(A[f^{-1}])
+    \simeq
+    \pi_n(A)[f^{-1}],
+\]
+and the local identifications descend over the finite Zariski cover. See
+\cite{LurieSAG,KhanBraveNewMotivicI}.
+\end{proof}
+
+\begin{theorem}[Classical characterization of affine opens]
+\label{thm:classical-characterization-affine-opens}
+For a morphism $A\to B$ of connective commutative ring spectra, the
+following are equivalent.
+\begin{enumerate}[label=(\roman*)]
+    \item The induced morphism $\Spec(B)\to\Spec(A)$ is an affine open
+    immersion.
+
+    \item The map $A\to B$ is flat and the induced morphism
+    \[
+        \Spec\pi_0(B)
+        \longrightarrow
+        \Spec\pi_0(A)
+    \]
+    is an open immersion of ordinary affine schemes.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+If (i) holds, flat base change identifies the classical truncation of the
+diagonal with the classical diagonal. Finite presentation and the
+monomorphism condition descend to $\pi_0$, so the classical morphism is a
+flat finitely presented monomorphism and hence an open immersion.
+
+Conversely, suppose (ii). Flatness and
+\Ref{prop:flat-base-change-classical-truncation} show that
+\[
+    \pi_0(B\otimes_A B)
+    \simeq
+    \pi_0(B)
+    \otimes_{\pi_0(A)}
+    \pi_0(B)
+    \simeq
+    \pi_0(B).
+\]
+The flat homotopy-group formula then shows that multiplication induces an
+isomorphism on every homotopy group, hence is an equivalence. Finite
+presentation, together with the multiplication equivalence, is supplied by
+\Ref{prop:flat-lift-classical-affine-open}.
+\end{proof}
+
+\begin{proposition}[Permanence of affine open immersions]
+\label{prop:affine-open-permanence}
+Affine open immersions are stable under equivalence, composition, and base
+change.
+\end{proposition}
+
+\begin{proof}
+Flatness and finite presentation have the required permanence properties
+by \Ref{prop:flat-algebra-permanence} and
+\Ref{prop:finite-presentation-permanence}. Monomorphisms are stable under
+equivalence, composition, and base change. Apply
+\Ref{def:affine-open-immersion-spectral}.
+\end{proof}
+
+\subsection{Principal opens}
+
+\begin{construction}[Spectral localization]
+\label{con:spectral-localization}
+Let $A$ be connective and let
+\[
+    f\in\pi_0(A).
+\]
+The \textbf{localization of $A$ at $f$} is the initial commutative
+$A$-algebra
+\[
+    A[f^{-1}]
+\]
+in which the image of $f$ is invertible.
+\end{construction}
+
+\begin{proposition}[Homotopy groups of a localization]
+\label{prop:homotopy-groups-localization}
+For every integer $n$, there is a natural isomorphism
+\[
+    \pi_n(A[f^{-1}])
+    \simeq
+    \pi_n(A)[f^{-1}].
+\]
+In particular, $A\to A[f^{-1}]$ is flat.
+\end{proposition}\begin{proof}
+The underlying $A$-module of the localization $A[f^{-1}]$ is canonically
+equivalent to the filtered colimit
+\[
+    A
+    \xrightarrow{f}
+    A
+    \xrightarrow{f}
+    A
+    \xrightarrow{f}
+    \cdots
+\]
+formed in $\Mod_A$, where each arrow is multiplication by $f$ as an
+$A$-module map.
+
+Homotopy groups commute with filtered colimits, so for every integer $n$,
+\[
+\begin{aligned}
+    \pi_n(A[f^{-1}])
+    &\simeq
+    \varinjlim
+    \left(
+        \pi_n(A)
+        \xrightarrow{f}
+        \pi_n(A)
+        \xrightarrow{f}
+        \cdots
+    \right)
+    \\
+    &\simeq
+    \pi_n(A)[f^{-1}].
+\end{aligned}
+\]
+In particular,
+\[
+    \pi_0(A[f^{-1}])
+    \simeq
+    \pi_0(A)[f^{-1}]
+\]
+is flat over $\pi_0(A)$, and the displayed homotopy-group formula is
+exactly the flatness criterion of
+\Ref{thm:spectral-lazard}. Hence
+\[
+    A\longrightarrow A[f^{-1}]
+\]
+is flat.
+\end{proof}
+
+\begin{proposition}[Principal spectral opens]
+\label{prop:principal-spectral-open}
+The morphism
+\[
+    D(f)
+    :=
+    \Spec(A[f^{-1}])
+    \longrightarrow
+    \Spec(A)
+\]
+is an affine open immersion. Its classical truncation is the ordinary
+principal open
+\[
+    D(f)
+    \subseteq
+    \Spec\pi_0(A).
+\]
+\end{proposition}
+\begin{proof}
+The map is flat by
+\Ref{prop:homotopy-groups-localization}.
+
+We exhibit its finite presentation. Let
+\[
+    P
+    :=
+    \operatorname{Sym}_{\mathbb S}(\mathbb S)
+\]
+with universal generator \(t\), and give \(A\) its \(P\)-algebra
+structure defined by
+\[
+    t
+    \longmapsto
+    f.
+\]
+
+Work in commutative \(P\)-algebras. Let
+\[
+    R
+    :=
+    \operatorname{Sym}_{P}(P)
+\]
+be the free commutative \(P\)-algebra on one generator \(u\), and let
+\[
+    Q
+    :=
+    \operatorname{Sym}_{P}(P)
+\]
+be the free commutative \(P\)-algebra on one generator \(z\). Form the
+pushout
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Q
+        \arrow[r, "{z\mapsto tu-1}"]
+        \arrow[d, "{z\mapsto0}"']
+    &
+    R
+        \arrow[d]
+    \\
+    P
+        \arrow[r]
+    &
+    P[t^{-1}].
+\end{tikzcd}
+\]
+The universal property of this pushout identifies its lower-right
+corner with the localization of \(P\) in which \(t\) is invertible.
+Indeed, a morphism from the pushout to a commutative \(P\)-algebra \(C\)
+is equivalently the choice of an element \(u\in\Omega^\infty C\)
+together with a homotopy
+\[
+    tu
+    \simeq
+    1.
+\]
+Such data exist exactly when the image of \(t\) is invertible in
+\(\pi_0(C)\), and in that case the space of choices is contractible.
+Thus the displayed pushout has the universal property of \(P[t^{-1}]\).
+
+The algebra \(R\) is obtained from \(P\) by one free cell attachment.
+The morphism
+\[
+    Q
+    \longrightarrow
+    P,
+    \qquad
+    z\longmapsto0,
+\]
+is the free commutative \(P\)-algebra map induced by the map
+\[
+    P
+    \longrightarrow
+    0
+\]
+of finite free \(P\)-modules, equivalently by extension of scalars from
+the map
+\[
+    \mathbb S
+    \longrightarrow
+    0
+\]
+of finite spectra. Hence the displayed pushout attaches one further
+finite cell. Therefore \(P[t^{-1}]\) is a finite cell commutative
+\(P\)-algebra.
+
+The universal property of localization gives
+\[
+    A[f^{-1}]
+    \simeq
+    A\otimes_P P[t^{-1}].
+\]
+Finite presentation is preserved under base change, so
+\[
+    A
+    \longrightarrow
+    A[f^{-1}]
+\]
+is of finite presentation.
+
+The multiplication morphism
+\[
+    A[f^{-1}]
+    \otimes_A
+    A[f^{-1}]
+    \longrightarrow
+    A[f^{-1}]
+\]
+is an equivalence by the universal property of localization. Therefore
+\[
+    D(f)
+    =
+    \Spec(A[f^{-1}])
+    \longrightarrow
+    \Spec(A)
+\]
+is an affine open immersion.
+
+Finally,
+\Ref{prop:homotopy-groups-localization}
+gives
+\[
+    \pi_0(A[f^{-1}])
+    \simeq
+    \pi_0(A)[f^{-1}],
+\]
+so the classical truncation is the ordinary principal open
+\[
+    D(f)
+    \subseteq
+    \Spec\pi_0(A).
+\]
+\end{proof}
+
+\begin{proposition}[Principal opens form a basis]
+\label{prop:principal-opens-basis}
+Every affine open immersion into $\Spec(A)$ is covered by principal open
+subschemes $D(f)$ with $f\in\pi_0(A)$.
+\end{proposition}
+\begin{proof}
+Let
+\[
+    j
+    \colon
+    U=\Spec(B)
+    \longrightarrow
+    X=\Spec(A)
+\]
+be an affine open immersion. By
+\Ref{thm:classical-characterization-affine-opens},
+the classical truncation
+\[
+    j_{\mathrm{cl}}
+    \colon
+    U_{\mathrm{cl}}
+    =
+    \Spec\pi_0(B)
+    \longrightarrow
+    X_{\mathrm{cl}}
+    =
+    \Spec\pi_0(A)
+\]
+is an open immersion of ordinary affine schemes.
+
+Ordinary principal opens form a basis. Hence, for every point of
+\(U_{\mathrm{cl}}\), there is an element
+\[
+    f\in\pi_0(A)
+\]
+such that
+\[
+    D(f)
+    \subseteq
+    X_{\mathrm{cl}}
+\]
+contains the point and is contained in \(U_{\mathrm{cl}}\).
+
+Form the spectral fibre product
+\[
+    P
+    :=
+    U
+    \times_X
+    \Spec(A[f^{-1}]).
+\]
+By
+\Ref{prop:affine-spectral-fibre-products},
+it is affine:
+\[
+    P
+    \simeq
+    \Spec
+    \bigl(
+        B\otimes_AA[f^{-1}]
+    \bigr).
+\]
+The projection
+\[
+    p
+    \colon
+    P
+    \longrightarrow
+    \Spec(A[f^{-1}])
+\]
+is the base change of the affine open immersion \(U\to X\). It is
+therefore an affine open immersion and, in particular, flat.
+
+Classical truncation preserves this fibre product by
+\Ref{prop:flat-base-change-classical-truncation}. Since the ordinary
+principal open \(D(f)\) is contained in \(U_{\mathrm{cl}}\), one obtains
+\[
+\begin{aligned}
+    P_{\mathrm{cl}}
+    &\simeq
+    U_{\mathrm{cl}}
+    \times_{X_{\mathrm{cl}}}
+    D(f)
+    \\
+    &\simeq
+    D(f).
+\end{aligned}
+\]
+Consequently, the algebra morphism representing \(p\),
+\[
+    A[f^{-1}]
+    \longrightarrow
+    B\otimes_AA[f^{-1}],
+\]
+induces an isomorphism on degree-zero homotopy groups.
+
+Because this algebra morphism is flat, the flat homotopy-group formula
+of \Ref{prop:homotopy-groups-flat-algebra} gives, for every integer \(n\),
+\[
+\begin{aligned}
+    \pi_n
+    \bigl(
+        B\otimes_AA[f^{-1}]
+    \bigr)
+    &\simeq
+    \pi_n
+    \bigl(
+        A[f^{-1}]
+    \bigr)
+    \otimes_{\pi_0(A[f^{-1}])}
+    \pi_0
+    \bigl(
+        B\otimes_AA[f^{-1}]
+    \bigr)
+    \\
+    &\simeq
+    \pi_n
+    \bigl(
+        A[f^{-1}]
+    \bigr).
+\end{aligned}
+\]
+Thus the representing algebra morphism is an equivalence, and therefore
+\[
+    P
+    \xrightarrow{\simeq}
+    \Spec(A[f^{-1}]).
+\]
+
+The inverse equivalence identifies the principal spectral open
+\[
+    D(f)
+    =
+    \Spec(A[f^{-1}])
+\]
+with an open spectral subscheme of \(U\). Choosing such an \(f\) around
+every point of \(U_{\mathrm{cl}}\) gives a family of principal spectral
+opens whose classical truncations cover \(U_{\mathrm{cl}}\). Hence, in
+the terminology of
+\Ref{def:affine-zariski-cover},
+this family is an affine spectral Zariski covering family of \(U\).
+\end{proof}
+
+\subsection{The affine spectral Zariski topology}
+
+\begin{definition}[Affine Zariski covering family]
+\label{def:affine-zariski-cover}
+A small family of affine open immersions
+\[
+    \{\Spec(B_i)\to\Spec(A)\}_{i\in I}
+\]
+is an \textbf{affine spectral Zariski covering family} if the ordinary
+opens
+\[
+    \{\Spec\pi_0(B_i)\to\Spec\pi_0(A)\}_{i\in I}
+\]
+cover the topological space $\Spec\pi_0(A)$.
+\end{definition}
+
+\begin{proposition}[The spectral Zariski pretopology]
+\label{prop:spectral-zariski-pretopology}
+Affine spectral Zariski covering families define a Grothendieck
+pretopology on $\Aff_{\Sp}$.
+\end{proposition}
+
+\begin{proof}
+The identity family covers. Base change stability follows from
+\Ref{prop:affine-open-permanence} and the base-change compatibility of
+classical truncation in
+\Ref{prop:flat-base-change-classical-truncation}. Transitivity reduces to
+transitivity of ordinary Zariski covers on classical truncations.
+\end{proof}
+
+\begin{definition}[Spectral Zariski topology]
+\label{def:spectral-zariski-topology}
+The \textbf{spectral Zariski topology}
+\[
+    \tau_{\mathrm{Zar}}
+\]
+on $\Aff_{\Sp}$ is the Grothendieck topology generated by the
+pretopology of \Ref{prop:spectral-zariski-pretopology}.
+\end{definition}
+
+\begin{proposition}[Joint conservativity criterion]
+\label{prop:zariski-cover-joint-conservativity}
+A family of affine open immersions
+\[
+    \{\Spec(B_i)\to\Spec(A)\}_{i\in I}
+\]
+is a Zariski covering family if and only if the pullback functors
+\[
+    \{-\otimes_A B_i\}_{i\in I}
+\]
+are jointly conservative on $\Mod_A$.
+\end{proposition}
+
+\begin{proof}
+Suppose first that the family covers. If $M\otimes_AB_i\simeq0$ for every
+$i$, then
+\[
+    \pi_n(M)
+    \otimes_{\pi_0(A)}
+    \pi_0(B_i)
+    \simeq
+    0
+\]
+for every $n$, by flatness. The ordinary quasi-coherent module
+$\pi_n(M)$ therefore vanishes after restriction to a Zariski cover of
+$\Spec\pi_0(A)$ and hence vanishes. Thus all homotopy groups of $M$ vanish,
+so $M\simeq0$.
+
+Conversely, if the classical opens do not cover, choose a point in the
+closed complement and a nonzero residue-field module supported at that
+point. Its Eilenberg--Mac Lane lift is an $A$-module annihilated by every
+$-\otimes_AB_i$. Joint conservativity therefore fails.
+\end{proof}
+
+\subsection{Descendability and Zariski descent}
+
+\begin{definition}[Thick tensor ideal]
+\label{def:spectral-thick-tensor-ideal}
+Let $\mathcal C^\otimes$ be a stable symmetric monoidal
+$\infty$-category. A full subcategory
+\[
+    \mathcal I
+    \subseteq
+    \mathcal C
+\]
+is a \textbf{thick tensor ideal} if it is closed under finite limits,
+finite colimits, retracts, and tensoring with arbitrary objects of
+$\mathcal C$.
+\end{definition}
+
+\begin{definition}[Descendable morphism]
+\label{def:spectral-descendable-morphism}
+A morphism
+\[
+    A
+    \longrightarrow
+    B
+\]
+of commutative ring spectra is \textbf{descendable} if $B$ generates
+$\Mod_A$ as a thick tensor ideal.
+\end{definition}
+
+\begin{proposition}[Permanence of descendability]
+\label{prop:spectral-descendability-permanence}
+Descendable morphisms are stable under equivalence, base change, and
+composition. If $A\to B\to C$ is a factorization and $A\to C$ is
+descendable, then $A\to B$ is descendable.
+\end{proposition}
+
+\begin{proof}
+Base change follows because extension of scalars is exact and strong
+symmetric monoidal. The remaining assertions are the permanence results of
+\cite[Proposition~3.24]{MathewGaloisStableHomotopy}.
+\end{proof}
+
+\begin{lemma}[Modules over finite product algebras]
+\label{lem:spectral-modules-finite-products}
+For a finite family of commutative ring spectra $\{B_i\}_{i\in I}$, there
+is a canonical symmetric monoidal equivalence
+\[
+    \Mod_{\prod_iB_i}
+    \simeq
+    \prod_i\Mod_{B_i}.
+\]
+\end{lemma}
+
+\begin{proof}
+The finite product of commutative ring spectra has underlying finite
+biproduct of spectra. Its orthogonal idempotents split every module into
+its components. Extension of scalars along the projections and finite
+direct sum of restrictions of scalars define mutually inverse symmetric
+monoidal functors, exactly as for ordinary product rings.
+\end{proof}
+
+\begin{proposition}[Finite Zariski covers are descendable]
+\label{prop:finite-zariski-covers-descendable}
+Let
+\[
+    \{\Spec(B_i)\to\Spec(A)\}_{i\in I}
+\]
+be a finite affine spectral Zariski covering family and put
+\[
+    B
+    :=
+    \prod_{i\in I}B_i.
+\]
+Then
+\[
+    A
+    \longrightarrow
+    B
+\]
+is descendable.
+\end{proposition}
+
+\begin{proof}
+Choose a finite principal refinement
+\[
+    \{D(f_j)\to\Spec(A)\}_{j=1}^r
+\]
+subordinate to the given cover, where
+\[
+    f_1,\ldots,f_r
+    \in
+    \pi_0(A)
+\]
+generate the unit ideal. Put
+\[
+    A_j
+    :=
+    A[f_j^{-1}]
+\]
+and
+\[
+    C
+    :=
+    \prod_{j=1}^rA_j.
+\]
+The refinement determines a factorization
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C.
+\]
+By the intermediate-algebra property of
+\Ref{prop:spectral-descendability-permanence}, it is enough to prove that
+$A\to C$ is descendable.
+
+Consider the finite augmented alternating \v{C}ech complex of $A$-modules
+\[
+\begin{aligned}
+    A
+    &\longrightarrow
+    \bigoplus_jA_j
+    \longrightarrow
+    \bigoplus_{j_0<j_1}
+    A_{j_0}\otimes_AA_{j_1}
+    \longrightarrow
+    \cdots
+    \\
+    &\longrightarrow
+    A_1\otimes_A\cdots\otimes_AA_r.
+\end{aligned}
+\]
+For every integer $n$, applying $\pi_n$ identifies this complex with the
+ordinary augmented \v{C}ech complex
+\[
+\begin{aligned}
+    \pi_n(A)
+    &\longrightarrow
+    \bigoplus_j\pi_n(A)[f_j^{-1}]
+    \longrightarrow
+    \bigoplus_{j_0<j_1}
+    \pi_n(A)[(f_{j_0}f_{j_1})^{-1}]
+    \longrightarrow
+    \cdots.
+\end{aligned}
+\]
+This ordinary complex is exact because the principal opens
+$D(f_j)$ cover $\Spec\pi_0(A)$. Hence the spectral augmented complex is
+exact.
+
+Every nonaugmented term is a finite direct sum of tensor products of the
+modules $A_j$. The finite direct sum
+\[
+    \bigoplus_jA_j
+\]
+is the underlying $A$-module of $C$. Consequently every nonaugmented term
+belongs to the thick tensor ideal generated by $C$.
+
+The augmented complex is finite and reconstructs $A$ by iterated fibres.
+A thick tensor ideal is closed under finite fibres. Therefore $A$ belongs
+to the thick tensor ideal generated by $C$, and $A\to C$ is descendable.
+
+Since
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C
+\]
+is a factorization and $A\to C$ is descendable,
+\Ref{prop:spectral-descendability-permanence} implies that $A\to B$ is
+descendable.
+\end{proof}
+
+\begin{theorem}[Amitsur convergence]
+\label{thm:spectral-amitsur-convergence}
+If $A\to B$ is descendable, then the augmented Amitsur object
+\[
+    A
+    \longrightarrow
+    B
+    \triplearrows
+    B\otimes_A B
+    \cdots
+\]
+is a limit diagram in $\CAlg(\Sp)$. In particular,
+\[
+    A
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    B^{\otimes_A(n+1)}.
+\]
+\end{theorem}
+
+\begin{proof}
+Regard $B$ as a commutative algebra object of $\Mod_A$. Descendability
+means that $B$ generates the tensor unit. The descendability theorem
+identifies the augmented cobar object as a limit diagram in $\Mod_A$; see
+\cite[Proposition~3.20]{MathewGaloisStableHomotopy}. The forgetful functor
+from commutative $A$-algebras to $A$-modules creates limits, so the same
+object is a limit in commutative $A$-algebras and hence in
+$\CAlg(\Sp)$.
+\end{proof}
+
+\begin{theorem}[Affine module descent]
+\label{thm:spectral-affine-module-descent}
+If $A\to B$ is descendable, then extension of scalars induces an
+equivalence in $\CAlg(\Cat_\infty)$
+\[
+    \Mod_A
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \Mod_{B^{\otimes_A(n+1)}}.
+\]
+\end{theorem}
+
+\begin{proof}
+The extension--restriction adjunction is comonadic for a descendable map,
+and its cobar resolution is the displayed Amitsur diagram; see
+\cite[Proposition~3.22]{MathewGaloisStableHomotopy}. Every transition
+functor is strong symmetric monoidal, so the comparison is an equivalence
+of symmetric monoidal $\infty$-categories.
+\end{proof}
+
+\begin{theorem}[Affine algebra descent]
+\label{thm:spectral-affine-algebra-descent}
+If $A\to B$ is descendable, then base change induces an equivalence
+\[
+    \CAlg(\Sp)_{A/}
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \CAlg(\Sp)_{B^{\otimes_A(n+1)}/}.
+\]
+\end{theorem}
+
+\begin{proof}
+By \Ref{thm:spectral-affine-module-descent}, extension of scalars gives a
+symmetric monoidal equivalence
+\[
+    \Mod_A
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \Mod_{B^{\otimes_A(n+1)}}.
+\]
+The functor assigning to a symmetric monoidal $\infty$-category its
+$\infty$-category of commutative algebra objects preserves limits.
+Applying it to the displayed equivalence gives
+\[
+    \CAlg(\Mod_A)
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \CAlg
+    \bigl(
+        \Mod_{B^{\otimes_A(n+1)}}
+    \bigr).
+\]
+Using
+\Ref{prop:relative-commutative-spectral-algebras} in every cosimplicial
+degree identifies this equivalence with
+\[
+    \CAlg(\Sp)_{A/}
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \CAlg(\Sp)_{B^{\otimes_A(n+1)}/}.
+\]
+\end{proof}
+
+\begin{corollary}[Connective algebra descent for finite Zariski covers]
+\label{cor:connective-zariski-algebra-descent}
+Let
+\[
+    \{\Spec(B_i)\to\Spec(A)\}_{i\in I}
+\]
+be a finite affine spectral Zariski covering family and put
+\[
+    B
+    :=
+    \prod_{i\in I}B_i.
+\]
+Then the equivalence of
+\Ref{thm:spectral-affine-algebra-descent} restricts to an equivalence
+\[
+    \CAlg(\Sp)^{\mathrm{cn}}_{A/}
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \CAlg(\Sp)^{\mathrm{cn}}_
+    {B^{\otimes_A(n+1)}/}.
+\]
+\end{corollary}
+
+\begin{proof}
+The morphism $A\to B$ is descendable by
+\Ref{prop:finite-zariski-covers-descendable}. It is also flat: each
+$B_i$ is flat over $A$, and the finite product $B$ is the finite direct
+sum of the $B_i$ as an $A$-module.
+
+Every Amitsur term
+\[
+    B^{\otimes_A(n+1)}
+\]
+is connective. Base change along $A\to B$ is $t$-exact and conservative
+on modules.
+
+Let a descent datum in the right side consist of connective commutative
+algebras. By the unrestricted algebra-descent theorem, it descends to a
+commutative $A$-algebra $C$. Its base change
+\[
+    C\otimes_AB
+\]
+is connective. Since $-\otimes_AB$ is $t$-exact,
+\[
+    \tau_{\leq -1}(C)\otimes_AB
+    \simeq
+    \tau_{\leq -1}(C\otimes_AB)
+    \simeq
+    0.
+\]
+Conservativity of $-\otimes_AB$ implies
+\[
+    \tau_{\leq -1}(C)
+    \simeq
+    0.
+\]
+Thus $C$ is connective. Full faithfulness is inherited from the
+unrestricted descent equivalence.
+\end{proof}
+
+\begin{theorem}[Subcanonicity of the spectral Zariski topology]
+\label{thm:spectral-zariski-subcanonical}
+Every representable spectral prestack is a sheaf for
+$\tau_{\mathrm{Zar}}$.
+\end{theorem}
+
+\begin{proof}
+It is enough to verify \v{C}ech descent on finite affine covers, since every
+affine Zariski cover admits a finite principal refinement locally on a
+quasi-compact affine. Let $\{\Spec(B_i)\to\Spec(A)\}$ be a finite cover and
+put $B=\prod_iB_i$. By
+\Ref{prop:finite-zariski-covers-descendable}, $A\to B$ is descendable.
+For every connective commutative ring spectrum $C$,
+\Ref{thm:spectral-amitsur-convergence} gives
+\[
+    \Map_{\CAlg(\Sp)}(C,A)
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \Map_{\CAlg(\Sp)}
+    \bigl(
+        C,
+        B^{\otimes_A(n+1)}
+    \bigr).
+\]
+The finite-product decomposition of the Amitsur terms identifies this
+with the componentwise \v{C}ech descent condition for the covering family.
+Hence the representable $h_C$ is a sheaf.
+\end{proof}
+
+\begin{theorem}[Zariski descent for affine quasi-coherent modules]
+\label{thm:affine-qcoh-zariski-descent}
+Let
+\[
+    U:=\coprod_i\Spec(B_i)
+    \longrightarrow
+    \Spec(A)
+\]
+be a finite affine spectral Zariski cover, and let $U_\bullet$ be its
+\v{C}ech nerve. Then the comparison functor is an equivalence
+\[
+    \Mod_A
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \QCoh(U_n).
+\]
+\end{theorem}
+
+\begin{proof}
+Put $B=\prod_iB_i$. The map $A\to B$ is descendable by
+\Ref{prop:finite-zariski-covers-descendable}. Apply
+\Ref{thm:spectral-affine-module-descent}. The decomposition of modules over
+finite product algebras from
+\Ref{lem:spectral-modules-finite-products} identifies the Amitsur diagram
+with the componentwise \v{C}ech diagram of the family.
+\end{proof}
+
+\section{Spectral stacks and spectral schemes}
+\label{sec:spectral-stacks-schemes}
+
+\begin{definition}[Spectral Zariski stack]
+\label{def:spectral-zariski-stack}
+A \textbf{spectral Zariski stack} is a sheaf of spaces on
+$\Aff_{\Sp}$ for the spectral Zariski topology. The
+$\infty$-category of spectral Zariski stacks is denoted
+\[
+    \operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}
+    :=
+    \Sh_{\tau_{\mathrm{Zar}}}
+    (\Aff_{\Sp}).
+\]
+\end{definition}
+
+By \Ref{thm:spectral-zariski-subcanonical}, the Yoneda embedding factors as
+\[
+\begin{tikzcd}[column sep=large]
+    \Aff_{\Sp}
+        \arrow[r, hook, "h"]
+    &
+    \operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}
+        \arrow[r, hook]
+    &
+    \PSh(\Aff_{\Sp}).
+\end{tikzcd}
+\]
+
+\subsection{Representable open immersions}
+
+\begin{definition}[Open immersion of spectral stacks]
+\label{def:open-immersion-spectral-stacks}
+Let
+\[
+    j
+    \colon
+    U
+    \longrightarrow
+    X
+\]
+be a morphism of spectral Zariski stacks.
+
+Suppose first that $X$ is an affine spectral scheme. Then $j$ is an
+\textbf{open immersion} if:
+\begin{enumerate}[label=(\roman*)]
+    \item $j$ is a monomorphism;
+
+    \item there exists a small family of affine spectral schemes
+    $\{U_\alpha\}_{\alpha\in I}$ and morphisms
+    \[
+        U_\alpha
+        \longrightarrow
+        U
+    \]
+    such that
+    \[
+        \coprod_{\alpha\in I}U_\alpha
+        \longrightarrow
+        U
+    \]
+    is an effective epimorphism and every composite
+    \[
+        U_\alpha
+        \longrightarrow
+        U
+        \longrightarrow
+        X
+    \]
+    is an affine open immersion in the sense of
+    \Ref{def:affine-open-immersion-spectral}.
+\end{enumerate}
+
+For a general spectral Zariski stack $X$, the morphism $j$ is an open
+immersion if, for every affine spectral scheme $T$ and every morphism
+$T\to X$, the pullback
+\[
+    U\times_XT
+    \longrightarrow
+    T
+\]
+is an open immersion in the preceding sense.
+\end{definition}
+
+\begin{proposition}[Permanence of open immersions]
+\label{prop:global-open-immersion-permanence}
+Open immersions of spectral Zariski stacks are stable under equivalence,
+composition, and base change.
+\end{proposition}
+
+\begin{proof}
+Stability under equivalence is immediate. Stability under base change is
+built into the definition.
+
+Consider composable open immersions
+\[
+    U
+    \xrightarrow{j}
+    V
+    \xrightarrow{k}
+    X.
+\]
+It is enough to prove that their composite is open after base change
+along an affine spectral scheme $T\to X$. Thus assume that $X=T$ is
+affine.
+
+Choose an affine open atlas
+\[
+    \coprod_\alpha V_\alpha
+    \longrightarrow
+    V
+\]
+such that each composite
+\[
+    V_\alpha
+    \longrightarrow
+    V
+    \longrightarrow
+    T
+\]
+is an affine open immersion. For each $\alpha$, the pullback
+\[
+    U_\alpha
+    :=
+    U\times_VV_\alpha
+\]
+is open in the affine spectral scheme $V_\alpha$. Choose an affine open
+atlas
+\[
+    \coprod_\beta U_{\alpha\beta}
+    \longrightarrow
+    U_\alpha
+\]
+whose composites
+\[
+    U_{\alpha\beta}
+    \longrightarrow
+    V_\alpha
+\]
+are affine open immersions.
+
+By composition stability of affine open immersions,
+\[
+    U_{\alpha\beta}
+    \longrightarrow
+    T
+\]
+is an affine open immersion. The family
+\[
+    \coprod_{\alpha,\beta}
+    U_{\alpha\beta}
+    \longrightarrow
+    U
+\]
+is an effective epimorphism, because effective epimorphisms are stable
+under base change and composition in an $\infty$-topos. The composite
+$U\to T$ is also a monomorphism. Hence it is an open immersion.
+\end{proof}
+
+\subsection{Spectral schemes}
+
+\begin{definition}[Spectral scheme]
+\label{def:spectral-scheme}
+A \textbf{spectral scheme} is a spectral Zariski stack $X$ for which there
+exists a small family of affine spectral schemes $\{U_i\}_{i\in I}$ and a
+morphism
+\[
+    \coprod_{i\in I}U_i
+    \longrightarrow
+    X
+\]
+such that:
+\begin{enumerate}[label=(\roman*)]
+    \item the displayed morphism is an effective epimorphism;
+
+    \item every component $U_i\to X$ is an open immersion.
+\end{enumerate}
+Such a family is an \textbf{affine spectral Zariski atlas} of $X$.
+\end{definition}
+
+The full subcategory of
+\[
+    \operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}
+\]
+spanned by spectral schemes is denoted
+\[
+    \operatorname{Sch}^{\mathrm{sp}}.
+\]
+
+\begin{proposition}[Affine spectral schemes are spectral schemes]
+\label{prop:affines-are-spectral-schemes}
+Every affine spectral scheme is a spectral scheme.
+\end{proposition}
+
+\begin{proof}
+Use the singleton atlas given by the identity map.
+\end{proof}
+
+\begin{proposition}[Coproducts of spectral schemes]
+\label{prop:spectral-schemes-coproducts}
+Small coproducts of spectral schemes exist and are spectral schemes.
+\end{proposition}
+
+\begin{proof}
+Coproducts exist in the ambient $\infty$-topos of spectral Zariski stacks.
+Taking the coproducts of affine atlases gives an effective epimorphism by
+a coproduct of affine open immersions.
+\end{proof}
+
+\begin{theorem}[Fibre products of spectral schemes]
+\label{thm:spectral-schemes-fibre-products}
+Let
+\[
+    X
+    \longrightarrow
+    Z
+    \longleftarrow
+    Y
+\]
+be morphisms of spectral schemes. Then the fibre product
+\[
+    X\times_ZY
+\]
+is a spectral scheme.
+\end{theorem}
+
+\begin{proof}
+Choose affine Zariski atlases $U\to X$, $V\to Y$, and $T\to Z$. Pulling
+$T\to Z$ back to each component of $U$ and $V$ produces affine open
+covers because open immersions are representable and stable under base
+change. Refining by these covers reduces the fibre product to fibre
+products of affine spectral schemes over affines, which are affine by
+\Ref{prop:affine-spectral-fibre-products}. The resulting family maps by
+open immersions to $X\times_ZY$ and is an effective epimorphism because
+effective epimorphisms are universal in an $\infty$-topos.
+\end{proof}
+
+\begin{corollary}[Finite limits of spectral schemes]
+\label{cor:spectral-schemes-finite-limits}
+The $\infty$-category of spectral schemes admits finite limits, computed
+in spectral Zariski stacks.
+\end{corollary}
+
+\begin{proof}
+The terminal object is $\Spec(\mathbb S)$, and binary fibre products exist
+by \Ref{thm:spectral-schemes-fibre-products}.
+\end{proof}
+
+\subsection{Classical truncation of spectral schemes}
+
+\begin{theorem}[Global classical truncation]
+\label{thm:global-classical-truncation}
+The affine classical truncation functor glues to a functor
+\[
+    (-)_{\mathrm{cl}}
+    \colon
+    \operatorname{Sch}^{\mathrm{sp}}
+    \longrightarrow
+    \operatorname{Sch}
+\]
+from spectral schemes to ordinary schemes. For every spectral scheme $X$,
+there is a natural morphism
+\[
+    X_{\mathrm{cl}}
+    \longrightarrow
+    X
+\]
+whose restriction to every affine open $\Spec(A)\subseteq X$ is
+\[
+    \Spec\pi_0(A)
+    \longrightarrow
+    \Spec(A).
+\]
+\end{theorem}
+
+\begin{proof}
+Choose an affine Zariski atlas $U\to X$. Its \v{C}ech nerve consists of
+affine spectral schemes after refinement by affine opens. Classical
+truncation preserves the open base changes occurring in this diagram by
+\Ref{prop:flat-base-change-classical-truncation}. The classical affine
+truncations therefore form a Zariski groupoid in ordinary affine schemes.
+Its colimit is an ordinary scheme $X_{\mathrm{cl}}$. The natural affine
+maps to $X$ are compatible on intersections and descend to the displayed
+morphism. Independence of the atlas follows from common refinement.
+\end{proof}
+
+\begin{lemma}[Principal classical opens determine spectral principal opens]
+\label{lem:principal-classical-open-determines-spectral-open}
+Let \(A\) be a connective commutative ring spectrum, and let
+\[
+    j
+    \colon
+    U
+    \longrightarrow
+    \Spec(A)
+\]
+be an open immersion of spectral schemes. Suppose that, as an open
+subscheme of \(\Spec\pi_0(A)\), the classical truncation of \(U\) is
+\[
+    U_{\mathrm{cl}}
+    =
+    D(f)
+\]
+for some \(f\in\pi_0(A)\). Then there is a canonical equivalence over
+\(\Spec(A)\)
+\[
+    U
+    \simeq
+    \Spec(A[f^{-1}]).
+\]
+\end{lemma}
+
+\begin{proof}
+Put
+\[
+    X
+    :=
+    \Spec(A)
+\]
+and
+\[
+    V
+    :=
+    \Spec(A[f^{-1}]).
+\]
+By
+\Ref{prop:principal-spectral-open},
+the morphism
+\[
+    V
+    \longrightarrow
+    X
+\]
+is an open immersion, and
+\[
+    V_{\mathrm{cl}}
+    =
+    D(f)
+    =
+    U_{\mathrm{cl}}
+\]
+as open subschemes of \(X_{\mathrm{cl}}\).
+
+We first record a general observation. Let
+\[
+    W
+    \longrightarrow
+    T
+\]
+be an open immersion of spectral schemes which induces an equivalence
+\[
+    W_{\mathrm{cl}}
+    \xrightarrow{\simeq}
+    T_{\mathrm{cl}}.
+\]
+Then \(W\to T\) is an equivalence.
+
+Indeed, this assertion is local on \(T\). After base change along an
+affine open
+\[
+    T_0
+    \longrightarrow
+    T,
+\]
+we may suppose that \(T=T_0\) is affine. By the definition of an open
+immersion into an affine spectral scheme, there is a family of affine
+spectral schemes \(\{W_\alpha\}_{\alpha\in I}\) and an effective
+epimorphism
+\[
+    \coprod_{\alpha\in I}W_\alpha
+    \longrightarrow
+    W
+\]
+such that every composite
+\[
+    W_\alpha
+    \longrightarrow
+    W
+    \longrightarrow
+    T
+\]
+is an affine open immersion. Since
+\[
+    W_{\mathrm{cl}}
+    \xrightarrow{\simeq}
+    T_{\mathrm{cl}},
+\]
+the corresponding classical affine opens cover \(T_{\mathrm{cl}}\).
+Hence
+\[
+    \{W_\alpha\to T\}_{\alpha\in I}
+\]
+is an affine spectral Zariski covering family. It follows that
+\[
+    \coprod_{\alpha\in I}W_\alpha
+    \longrightarrow
+    T
+\]
+is an effective epimorphism.
+
+The morphism \(W\to T\) is a monomorphism, and the preceding effective
+epimorphism factors through it. Therefore \(W\to T\) is itself an
+effective epimorphism. A morphism in an \(\infty\)-topos which is both a
+monomorphism and an effective epimorphism is an equivalence. Thus
+\[
+    W
+    \xrightarrow{\simeq}
+    T.
+\]
+
+Now form the fibre product
+\[
+    P
+    :=
+    U\times_XV.
+\]
+Both projections
+\[
+    P
+    \longrightarrow
+    U
+    \qquad\text{and}\qquad
+    P
+    \longrightarrow
+    V
+\]
+are open immersions. By
+\Ref{prop:global-classical-truncation-fibre-products},
+\[
+\begin{aligned}
+    P_{\mathrm{cl}}
+    &\simeq
+    U_{\mathrm{cl}}
+    \times_{X_{\mathrm{cl}}}
+    V_{\mathrm{cl}}
+    \\
+    &\simeq
+    D(f)
+    \times_{X_{\mathrm{cl}}}
+    D(f)
+    \\
+    &\simeq
+    D(f).
+\end{aligned}
+\]
+Consequently, each projection induces an equivalence on classical
+truncations. By the observation above, both projections are
+equivalences. Hence
+\[
+    U
+    \simeq
+    P
+    \simeq
+    V
+    =
+    \Spec(A[f^{-1}])
+\]
+over \(X=\Spec(A)\).
+\end{proof}
+
+\begin{proposition}[Classical truncation and fibre products]
+\label{prop:global-classical-truncation-fibre-products}
+For every diagram of spectral schemes
+\[
+    X
+    \longrightarrow
+    Z
+    \longleftarrow
+    Y,
+\]
+there is a canonical equivalence of ordinary schemes
+\[
+    (X\times_ZY)_{\mathrm{cl}}
+    \simeq
+    X_{\mathrm{cl}}
+    \times_{Z_{\mathrm{cl}}}
+    Y_{\mathrm{cl}}.
+\]
+\end{proposition}
+
+\begin{proof}
+The assertion is local on all three schemes for the Zariski topology.
+After choosing compatible affine open covers, it reduces to a span
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A)
+    \longleftarrow
+    \Spec(C).
+\]
+The spectral fibre product is $\Spec(B\otimes_A C)$, and
+\Ref{prop:flat-base-change-classical-truncation} gives
+\[
+    \pi_0(B\otimes_A C)
+    \simeq
+    \pi_0(B)
+    \otimes_{\pi_0(A)}
+    \pi_0(C).
+\]
+The resulting affine equivalences agree on overlaps and therefore glue.
+\end{proof}
+
+\begin{theorem}[Affineness is detected classically]
+\label{thm:affineness-detected-classically}
+A spectral scheme $X$ is affine if and only if its classical truncation
+$X_{\mathrm{cl}}$ is affine.
+\end{theorem}
+\begin{proof}
+If \(X\) is affine, then \(X_{\mathrm{cl}}\) is affine by definition.
+
+Conversely, suppose
+\[
+    X_{\mathrm{cl}}
+    \simeq
+    \Spec(R).
+\]
+Choose an affine spectral Zariski atlas
+\[
+    \{W_\alpha\to X\}_{\alpha\in J}.
+\]
+The ordinary affine opens
+\[
+    (W_\alpha)_{\mathrm{cl}}
+\]
+cover \(\Spec(R)\). Since ordinary principal opens form a basis and
+\(\Spec(R)\) is quasi-compact, there are elements
+\[
+    f_1,\ldots,f_r
+    \in
+    R
+\]
+which generate the unit ideal and such that every principal open
+\[
+    D(f_i)
+\]
+is contained in some
+\[
+    (W_{\alpha(i)})_{\mathrm{cl}}.
+\]
+
+Inside \(W_{\alpha(i)}\), take the principal spectral open determined by
+the restriction of \(f_i\). Denote its source by
+\[
+    U_i
+    =
+    \Spec(B_i).
+\]
+Its composite
+\[
+    U_i
+    \longrightarrow
+    W_{\alpha(i)}
+    \longrightarrow
+    X
+\]
+is an open immersion, and its classical truncation is the principal open
+\[
+    (U_i)_{\mathrm{cl}}
+    =
+    D(f_i)
+    \subseteq
+    \Spec(R).
+\]
+Since the \(f_i\) generate the unit ideal, the \(U_i\) form a finite
+affine open cover of \(X\).
+
+For a tuple
+\[
+    \mathbf i
+    =
+    (i_0,\ldots,i_p),
+\]
+put
+\[
+    U_{\mathbf i}
+    :=
+    U_{i_0}
+    \times_X
+    \cdots
+    \times_X
+    U_{i_p}.
+\]
+The morphism
+\[
+    U_{\mathbf i}
+    \longrightarrow
+    U_{i_0}
+\]
+is an open immersion. Its classical truncation is
+\[
+\begin{aligned}
+    (U_{\mathbf i})_{\mathrm{cl}}
+    &\simeq
+    D(f_{i_0})
+    \times_{\Spec(R)}
+    \cdots
+    \times_{\Spec(R)}
+    D(f_{i_p})
+    \\
+    &=
+    D(f_{\mathbf i}),
+\end{aligned}
+\]
+where
+\[
+    f_{\mathbf i}
+    :=
+    f_{i_0}\cdots f_{i_p}.
+\]
+By
+\Ref{lem:principal-classical-open-determines-spectral-open},
+the open spectral subscheme \(U_{\mathbf i}\) is the corresponding
+principal spectral open of \(U_{i_0}\). In particular, it is affine.
+Write
+\[
+    U_{\mathbf i}
+    =
+    \Spec(B_{\mathbf i}).
+\]
+
+For every integer \(n\geq0\), let \(B_n^\bullet\) be the cosimplicial
+commutative ring spectrum whose degree-\(p\) term is
+\[
+    B_n^p
+    :=
+    \prod_{\mathbf i\in\{1,\ldots,r\}^{p+1}}
+    \tau_{\leq n}B_{\mathbf i},
+\]
+with coface and codegeneracy maps induced by the \v{C}ech nerve of the
+cover. Define
+\[
+    A_n
+    :=
+    \operatorname*{Tot}_{[p]\in\Delta}
+    B_n^p
+\]
+in \(\CAlg(\Sp)\).
+
+For every integer \(q\geq0\), the modules \(\pi_q(B_i)\), together with
+their localization identifications on the intersections, define an
+ordinary quasi-coherent module
+\[
+    \mathcal M_q
+\]
+on \(\Spec(R)\). Put
+\[
+    M_q
+    :=
+    \Gamma
+    \bigl(
+        \Spec(R),
+        \mathcal M_q
+    \bigr).
+\]
+Flatness of the open restrictions and the homotopy-group formula for
+localization give
+\[
+    \pi_q(B_{\mathbf i})
+    \simeq
+    M_q[f_{\mathbf i}^{-1}].
+\]
+
+The totalization spectral sequence for the underlying cosimplicial
+spectra has
+\[
+    E_1^{p,q}
+    =
+    \pi_q(B_n^p)
+    \Longrightarrow
+    \pi_{q-p}(A_n).
+\]
+It has only the rows
+\[
+    0\leq q\leq n,
+\]
+and therefore converges strongly. For fixed \(q\), its \(E_1\)-complex
+is the ordinary augmented \v{C}ech complex of the quasi-coherent module
+\(\mathcal M_q\) for the finite principal cover
+\[
+    \{D(f_i)\}_{i=1}^r.
+\]
+Since \(\Spec(R)\) is affine, that augmented complex is exact. Hence
+\[
+    E_2^{p,q}
+    \simeq
+    \begin{cases}
+        M_q,&p=0,\\
+        0,&p>0.
+    \end{cases}
+\]
+It follows that
+\[
+    \pi_q(A_n)
+    \simeq
+    M_q
+    \qquad
+    (0\leq q\leq n),
+\]
+and all other homotopy groups of \(A_n\) vanish. In particular,
+\[
+    \pi_0(A_n)
+    \simeq
+    R.
+\]
+
+The totalization cone gives, for each \(i\), a morphism
+\[
+    A_n
+    \longrightarrow
+    \tau_{\leq n}B_i.
+\]
+The image of \(f_i\in\pi_0(A_n)\simeq R\) is invertible in the target.
+Consequently, this morphism factors through a map
+\[
+    A_n[f_i^{-1}]
+    \longrightarrow
+    \tau_{\leq n}B_i.
+\]
+On homotopy groups this is the canonical isomorphism
+\[
+    M_q[f_i^{-1}]
+    \xrightarrow{\simeq}
+    \pi_q(B_i)
+    \qquad
+    (0\leq q\leq n).
+\]
+Both sides are \(n\)-truncated and connective, so
+\[
+    A_n[f_i^{-1}]
+    \xrightarrow{\simeq}
+    \tau_{\leq n}B_i.
+\]
+
+The truncation morphisms induce a tower
+\[
+    \cdots
+    \longrightarrow
+    A_n
+    \longrightarrow
+    A_{n-1}
+    \longrightarrow
+    \cdots
+    \longrightarrow
+    A_0.
+\]
+Define
+\[
+    A
+    :=
+    \varprojlim_nA_n
+\]
+in \(\CAlg(\Sp)\).
+
+For every fixed \(q\geq0\), the inverse system
+\[
+    \{\pi_q(A_n)\}_n
+\]
+is eventually constant with value \(M_q\). The Milnor exact sequence
+therefore gives
+\[
+    \pi_q(A)
+    \simeq
+    M_q
+\]
+for every \(q\geq0\). For \(q<0\), both the inverse limit and the relevant
+derived inverse limit vanish, again because the homotopy groups of the
+tower are eventually constant. Thus
+\[
+    \pi_q(A)=0
+    \qquad
+    (q<0),
+\]
+so \(A\) is connective.
+
+The compatible maps
+\[
+    A_n
+    \longrightarrow
+    \tau_{\leq n}B_i,
+\]
+together with Postnikov completeness of \(B_i\), induce a morphism
+\[
+    A
+    \longrightarrow
+    B_i.
+\]
+The element \(f_i\) is invertible in \(B_i\), so this morphism factors
+through
+\[
+    A[f_i^{-1}]
+    \longrightarrow
+    B_i.
+\]
+On every homotopy group it induces the canonical isomorphism
+\[
+    M_q[f_i^{-1}]
+    \xrightarrow{\simeq}
+    \pi_q(B_i).
+\]
+Hence
+\[
+    A[f_i^{-1}]
+    \xrightarrow{\simeq}
+    B_i.
+\]
+
+The maps
+\[
+    \Spec(B_i)
+    \longrightarrow
+    \Spec(A)
+\]
+agree on all iterated intersections because they arise from the same
+totalization cones. They therefore glue to a morphism
+\[
+    X
+    \longrightarrow
+    \Spec(A).
+\]
+On the finite affine open cover \(\{U_i\}\), this morphism identifies
+\(U_i\) with the principal open
+\[
+    D(f_i)
+    \subseteq
+    \Spec(A).
+\]
+Since
+\[
+    \pi_0(A)
+    \simeq
+    R
+\]
+and the elements \(f_1,\ldots,f_r\) generate the unit ideal, these
+principal opens cover \(\Spec(A)\). The glued morphism is therefore an
+equivalence. Thus
+\[
+    X
+    \simeq
+    \Spec(A).
+\]
+See \cite{LurieSAG}.
+\end{proof}
+
+\begin{definition}[Underlying topological space]
+\label{def:underlying-space-spectral-scheme}
+For a spectral scheme $X$, define
+\[
+    |X|
+    :=
+    |X_{\mathrm{cl}}|.
+\]
+\end{definition}
+
+\begin{proposition}[Open subsets and classical truncation]
+\label{prop:opens-classical-truncation}
+The assignment
+\[
+    U
+    \longmapsto
+    U_{\mathrm{cl}}
+\]
+induces an equivalence between the poset of open spectral subschemes of
+$X$ and the poset of open subschemes of $X_{\mathrm{cl}}$.
+\end{proposition}
+
+\begin{proof}
+The assertion is local on $X$. For $X=\Spec(A)$ it follows from
+\Ref{thm:classical-characterization-affine-opens} and the fact that
+principal opens form a basis. The affine identifications glue uniquely.
+\end{proof}
+
+\subsection{Quasi-compactness and quasi-separatedness}
+
+\begin{definition}[Quasi-compact spectral scheme]
+\label{def:quasi-compact-spectral-scheme}
+A spectral scheme $X$ is \textbf{quasi-compact} if it admits a finite
+affine open cover. A morphism $f:X\to Y$ is quasi-compact if the pullback
+over every affine open of $Y$ is quasi-compact.
+\end{definition}
+
+\begin{definition}[Quasi-separated morphisms and spectral schemes]
+\label{def:quasi-separated-spectral-scheme}
+A morphism
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+of spectral schemes is \textbf{quasi-separated} if its diagonal
+\[
+    \Delta_f
+    \colon
+    X
+    \longrightarrow
+    X\times_YX
+\]
+is quasi-compact.
+
+A spectral scheme $X$ is \textbf{quasi-separated} if its structural
+morphism
+\[
+    X
+    \longrightarrow
+    \Spec(\mathbb S)
+\]
+is quasi-separated. Equivalently, the absolute diagonal
+\[
+    X
+    \longrightarrow
+    X\times X
+\]
+is quasi-compact.
+
+A spectral scheme is \textbf{qcqs} if it is quasi-compact and
+quasi-separated.
+\end{definition}
+
+\begin{proposition}[Classical detection of qcqs properties]
+\label{prop:classical-detection-qcqs}
+A spectral scheme is quasi-compact, quasi-separated, or qcqs if and only
+if its classical truncation has the corresponding property.
+\end{proposition}
+
+\begin{proof}
+Affine open covers and their intersections correspond under
+\Ref{prop:opens-classical-truncation}. Quasi-compactness and
+quasi-separatedness are therefore detected by the same finite-cover
+conditions on $X$ and $X_{\mathrm{cl}}$.
+\end{proof}
+
+\section{Quasi-coherent modules on spectral schemes and relative spectra}
+\label{sec:qcoh-spectral-schemes-relative-spec}
+
+The formal quasi-coherent category of
+\Ref{def:qcoh-spectral-prestack} acquires its geometric interpretation on
+spectral schemes through Zariski descent.
+
+\subsection{Descent and the global \texorpdfstring{$t$}{t}-structure}
+
+\begin{theorem}[Atlas computation of quasi-coherent modules]
+\label{thm:qcoh-atlas-computation}
+Let $X$ be a spectral scheme and let
+\[
+    U
+    \longrightarrow
+    X
+\]
+be an affine Zariski atlas. Write $U_\bullet$ for its \v{C}ech nerve in
+spectral schemes. Then the canonical comparison functor is a symmetric
+monoidal equivalence
+\[
+    \QCoh(X)
+    \xrightarrow{\simeq}
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \QCoh(U_n).
+\]
+\end{theorem}
+
+\begin{proof}
+An object of the totalization on the right is a quasi-coherent module on
+$U$, together with coherent descent equivalences on
+\[
+    U\times_XU,
+    \quad
+    U\times_XU\times_XU,
+    \quad\ldots.
+\]
+Restriction of a quasi-coherent module on $X$ gives such data, producing
+the comparison functor.
+
+We construct an inverse. Let
+\[
+    v
+    \colon
+    V=\Spec(A)
+    \longrightarrow
+    X
+\]
+be an arbitrary affine point. The pullback
+\[
+    U_V
+    :=
+    U\times_XV
+    \longrightarrow
+    V
+\]
+is a Zariski covering morphism. Since $V$ is quasi-compact, this cover
+admits a finite affine refinement
+\[
+    \coprod_{i=1}^r
+    V_i
+    \longrightarrow
+    V,
+    \qquad
+    V_i=\Spec(A_i).
+\]
+The given descent datum on $U_\bullet$ restricts to a descent datum on the
+\v{C}ech nerve of this finite affine cover. By
+\Ref{thm:affine-qcoh-zariski-descent}, it descends uniquely to an
+$A$-module
+\[
+    M_V
+    \in
+    \Mod_A.
+\]
+
+The construction is independent of the chosen finite affine refinement.
+Indeed, two refinements admit a common finite affine refinement, and
+full faithfulness in affine module descent identifies the two descended
+modules by a canonical equivalence. The space of such identifications is
+contractible.
+
+Now let
+\[
+    V'=\Spec(A')
+    \longrightarrow
+    V=\Spec(A)
+\]
+be any morphism of affine points over $X$. Base-changing a finite affine
+refinement of $U_V\to V$ gives a finite affine refinement of
+$U_{V'}\to V'$. The modules
+\[
+    M_V\otimes_AA'
+    \qquad\text{and}\qquad
+    M_{V'}
+\]
+descend the same pulled-back datum. Affine module descent therefore gives
+a canonical equivalence
+\[
+    M_V\otimes_AA'
+    \simeq
+    M_{V'}.
+\]
+Uniqueness in descent supplies the cocycle and all higher compatibility
+conditions.
+
+Thus the modules $M_V$, as $V$ ranges over all affine points of $X$,
+define an object
+\[
+    M
+    \in
+    \varprojlim_
+    {(\Spec(A)\to X)
+    \in
+    (\Aff_{\Sp}/X)^{\op}}
+    \Mod_A
+    =
+    \QCoh(X).
+\]
+Affine module descent shows that restricting $M$ back to $U_\bullet$
+recovers the original descent datum. Conversely, starting with an object
+of $\QCoh(X)$ and applying the two constructions recovers its restrictions
+to every affine point and hence the original object.
+
+All constructions use strong symmetric monoidal pullback functors, and
+all limits are formed in
+\[
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+The resulting equivalence is therefore symmetric monoidal.
+\end{proof}
+
+\begin{corollary}[Zariski locality of quasi-coherent modules]
+\label{cor:qcoh-zariski-locality}
+A quasi-coherent module on a spectral scheme is equivalently a family of
+modules on the members of an affine Zariski atlas, together with coherent
+descent equivalences on all iterated intersections.
+\end{corollary}
+
+\begin{proof}
+Unfold the totalization in \Ref{thm:qcoh-atlas-computation}.
+\end{proof}
+
+\begin{lemma}[Computation on the affine-open basis]
+\label{lem:qcoh-affine-open-basis}
+Let $X$ be a spectral scheme, and let
+\[
+    \operatorname{AffOp}(X)
+\]
+denote the $\infty$-category of affine open spectral subschemes of $X$.
+Restriction induces a symmetric monoidal equivalence
+\[
+    \QCoh(X)
+    \xrightarrow{\simeq}
+    \varprojlim_
+    {V\in\operatorname{AffOp}(X)^{\op}}
+    \QCoh(V).
+\]
+\end{lemma}
+
+\begin{proof}
+Restriction defines the displayed functor. Conversely, a compatible
+family of modules on the affine opens of $X$ restricts, on any affine
+Zariski atlas and all its iterated intersections, to coherent descent
+data. The atlas equivalence of
+\Ref{thm:qcoh-atlas-computation} glues these data to an object of
+$\QCoh(X)$. The two constructions are inverse because affine-open
+restrictions jointly detect equivalences. Symmetric monoidality follows
+from symmetric monoidality of restriction and from formation of the limit
+in $\CAlg(\Pr^L_{\mathrm{st}})$.
+\end{proof}
+
+\begin{definition}[Flat morphisms and flat quasi-coherent modules]
+\label{def:flat-spectral-scheme-morphism}
+A morphism
+\[
+    f
+    \colon
+    Y
+    \longrightarrow
+    X
+\]
+of spectral schemes is \textbf{flat} if, for every affine spectral scheme
+\[
+    U
+    =
+    \Spec(A)
+    \longrightarrow
+    X
+\]
+and every affine open
+\[
+    V
+    =
+    \Spec(B)
+    \subseteq
+    Y\times_XU,
+\]
+the induced morphism $A\to B$ is flat.
+
+A quasi-coherent module $\mathcal F\in\QCoh(X)$ is \textbf{flat} if, for
+every affine open $U=\Spec(A)\subseteq X$, the corresponding $A$-module
+$\mathcal F|_U$ is flat.
+\end{definition}
+
+\begin{proposition}[Zariski locality of flatness]
+\label{prop:global-flatness-zariski-local}
+Flatness of morphisms of spectral schemes is local on the source and the
+target for the spectral Zariski topology. Consequently, in
+\Ref{def:flat-spectral-scheme-morphism} it is enough to verify flatness on
+an affine Zariski atlas of the target and an affine Zariski atlas of each
+pullback to the source.
+\end{proposition}
+
+\begin{proof}
+It is enough to prove locality on the source in the affine case. Let
+$A\to B$ be a morphism of connective commutative ring spectra and let
+\[
+    \{\Spec(B_i)\to\Spec(B)\}_{i\in I}
+\]
+be a Zariski covering family such that every composite $A\to B_i$ is
+flat. Let $N\in\Mod_{A,\leq0}$ and put
+\[
+    M
+    :=
+    N\otimes_AB.
+\]
+For every $i$,
+\[
+    M\otimes_BB_i
+    \simeq
+    N\otimes_AB_i
+    \in
+    \Mod_{B_i,\leq0}.
+\]
+The maps $B\to B_i$ are flat, so their extension-of-scalars functors are
+$t$-exact. Hence
+\[
+    \tau_{\geq1}(M)\otimes_BB_i
+    \simeq
+    \tau_{\geq1}
+    \bigl(
+        M\otimes_BB_i
+    \bigr)
+    \simeq
+    0.
+\]
+The functors $-\otimes_BB_i$ are jointly conservative by
+\Ref{prop:zariski-cover-joint-conservativity}. Therefore
+\[
+    \tau_{\geq1}(M)
+    \simeq
+    0,
+\]
+so $M$ is coconnective. Extension of scalars along $A\to B$ is already
+right $t$-exact, and is therefore $t$-exact. Thus $A\to B$ is flat.
+
+Locality on the target follows by base change, locality on the source,
+and refinement by affine open covers. The final assertion follows.
+\end{proof}
+
+\begin{proposition}[Zariski locality of flat modules]
+\label{prop:flat-module-zariski-local}
+Let \(A\) be a connective commutative ring spectrum, let
+\[
+    \{\Spec(A_i)\to\Spec(A)\}_{i\in I}
+\]
+be an affine spectral Zariski covering family, and let
+\[
+    M
+    \in
+    \Mod_A.
+\]
+Then \(M\) is flat over \(A\) if and only if
+\[
+    M\otimes_AA_i
+\]
+is flat over \(A_i\) for every \(i\).
+\end{proposition}
+
+\begin{proof}
+If \(M\) is flat over \(A\), then
+\[
+    M\otimes_AA_i
+\]
+is flat over \(A_i\) by base-change permanence of flat modules from
+\Ref{prop:flat-module-permanence}.
+
+Conversely, suppose that
+\[
+    M_i
+    :=
+    M\otimes_AA_i
+\]
+is flat over \(A_i\) for every \(i\). Each map
+\[
+    A
+    \longrightarrow
+    A_i
+\]
+is flat because it represents an affine open immersion. Hence extension
+of scalars
+\[
+    -\otimes_AA_i
+    \colon
+    \Mod_A
+    \longrightarrow
+    \Mod_{A_i}
+\]
+is \(t\)-exact.
+
+We first prove that \(M\) is connective. Since every \(M_i\) is flat, it
+is connective. Therefore
+\[
+\begin{aligned}
+    \tau_{\leq-1}(M)\otimes_AA_i
+    &\simeq
+    \tau_{\leq-1}
+    \bigl(
+        M\otimes_AA_i
+    \bigr)
+    \\
+    &\simeq
+    \tau_{\leq-1}(M_i)
+    \\
+    &\simeq
+    0.
+\end{aligned}
+\]
+The extension-of-scalars functors
+\[
+    \{-\otimes_AA_i\}_{i\in I}
+\]
+are jointly conservative by
+\Ref{prop:zariski-cover-joint-conservativity}.
+Hence
+\[
+    \tau_{\leq-1}(M)
+    \simeq
+    0,
+\]
+so \(M\) is connective.
+
+It remains to prove that tensoring with \(M\) preserves coconnective
+modules. Let
+\[
+    N
+    \in
+    \Mod_{A,\leq0}.
+\]
+For every \(i\), there is a natural equivalence
+\[
+\begin{aligned}
+    (N\otimes_AM)\otimes_AA_i
+    &\simeq
+    \bigl(
+        N\otimes_AA_i
+    \bigr)
+    \otimes_{A_i}
+    \bigl(
+        M\otimes_AA_i
+    \bigr)
+    \\
+    &\simeq
+    \bigl(
+        N\otimes_AA_i
+    \bigr)
+    \otimes_{A_i}
+    M_i.
+\end{aligned}
+\]
+Since \(A\to A_i\) is flat,
+\[
+    N\otimes_AA_i
+    \in
+    \Mod_{A_i,\leq0}.
+\]
+Since \(M_i\) is flat over \(A_i\), it follows that
+\[
+    (N\otimes_AM)\otimes_AA_i
+    \in
+    \Mod_{A_i,\leq0}.
+\]
+Using \(t\)-exactness of extension of scalars once more gives
+\[
+\begin{aligned}
+    \tau_{\geq1}(N\otimes_AM)\otimes_AA_i
+    &\simeq
+    \tau_{\geq1}
+    \bigl(
+        (N\otimes_AM)\otimes_AA_i
+    \bigr)
+    \\
+    &\simeq
+    0.
+\end{aligned}
+\]
+Joint conservativity therefore implies
+\[
+    \tau_{\geq1}(N\otimes_AM)
+    \simeq
+    0.
+\]
+Thus
+\[
+    N\otimes_AM
+    \in
+    \Mod_{A,\leq0}.
+\]
+
+Because \(M\) is connective, tensoring with \(M\) is already right
+\(t\)-exact. The preceding argument proves left \(t\)-exactness.
+Therefore
+\[
+    -\otimes_AM
+\]
+is \(t\)-exact, and \(M\) is flat over \(A\).
+\end{proof}
+
+\begin{theorem}[Canonical $t$-structure on global quasi-coherent modules]
+\label{thm:qcoh-spectral-scheme-t-structure}
+Let $X$ be a spectral scheme. The full subcategories
+\[
+    \QCoh(X)_{\geq0}
+\]
+and
+\[
+    \QCoh(X)_{\leq0}
+\]
+of quasi-coherent modules which are respectively connective and
+coconnective on every affine open define an accessible, left complete,
+and right complete $t$-structure on $\QCoh(X)$.
+
+Pullback along every morphism of spectral schemes is right $t$-exact.
+Pullback along a flat morphism is $t$-exact.
+\end{theorem}
+
+\begin{proof}
+By \Ref{lem:qcoh-affine-open-basis},
+\[
+    \QCoh(X)
+    \simeq
+    \varprojlim_
+    {V\in\operatorname{AffOp}(X)^{\op}}
+    \Mod_{\Gamma(V,\mathcal O_V)}.
+\]
+Every transition functor is restriction along an open immersion. Open
+immersions are flat, so the transition functors are $t$-exact.
+
+For a compatible family
+\[
+    \mathcal F
+    =
+    \{\mathcal F_V\}_V
+\]
+in the displayed limit, apply the affine truncation functors
+componentwise. Since every transition functor is $t$-exact, the objects
+$\tau_{\geq0}\mathcal F_V$ and $\tau_{\leq-1}\mathcal F_V$ remain
+compatible and define objects of $\QCoh(X)$. Their componentwise
+truncation triangles assemble to a fibre and cofibre sequence
+\[
+    \tau_{\geq0}\mathcal F
+    \longrightarrow
+    \mathcal F
+    \longrightarrow
+    \tau_{\leq-1}\mathcal F.
+\]
+Orthogonality follows because mapping spectra in the limit are limits of
+the affine mapping spectra. Thus these subcategories define the asserted
+$t$-structure.
+
+To verify accessibility, choose a regular cardinal $\kappa$ such that
+all affine module categories in the chosen small affine-open diagram, all
+restriction functors between them, and all affine truncation functors are
+$\kappa$-accessible. The componentwise truncation functors preserve the
+limiting compatibility conditions because every restriction functor is
+$t$-exact. They therefore induce $\kappa$-accessible truncation functors
+on $\QCoh(X)$. Thus the global $t$-structure is accessible.
+
+For left completeness, the affine-open-basis equivalence and the
+componentwise definition of the $t$-structure give, for every integer
+$n$, an equivalence
+\[
+    \QCoh(X)_{\leq n}
+    \simeq
+    \varprojlim_
+    {V\in\operatorname{AffOp}(X)^{\op}}
+    \Mod_{\Gamma(V,\mathcal O_V),\leq n}.
+\]
+Every affine module category is left complete. Since limits commute with
+limits in $\Cat_\infty$, there are natural equivalences
+\[
+\begin{aligned}
+    \QCoh(X)
+    &\simeq
+    \varprojlim_V
+    \Mod_{\Gamma(V,\mathcal O_V)}
+    \\
+    &\simeq
+    \varprojlim_V
+    \varprojlim_n
+    \Mod_{\Gamma(V,\mathcal O_V),\leq n}
+    \\
+    &\simeq
+    \varprojlim_n
+    \varprojlim_V
+    \Mod_{\Gamma(V,\mathcal O_V),\leq n}
+    \\
+    &\simeq
+    \varprojlim_n
+    \QCoh(X)_{\leq n}.
+\end{aligned}
+\]
+Under these identifications, the resulting functor is the canonical
+Postnikov-completion functor. Thus the global $t$-structure is left
+complete.
+
+For right completeness, consider the canonical morphism
+\[
+    \varinjlim_n
+    \tau_{\geq-n}\mathcal F
+    \longrightarrow
+    \mathcal F.
+\]
+Restriction to every affine open preserves the filtered colimit and
+identifies this morphism with the right-completeness equivalence in the
+corresponding affine module category. Since affine-open restrictions
+jointly detect equivalences, the displayed morphism is an equivalence.
+
+Let $f:Y\to X$ be any morphism. On affine charts, $f^*$ is extension of
+scalars along a morphism of connective commutative ring spectra and is
+right $t$-exact by
+\Ref{prop:base-change-exact-right-t-exact}. Therefore the global
+pullback is right $t$-exact.
+
+If $f$ is flat, then its affine base changes are flat. On affine charts,
+extension of scalars is $t$-exact by the definition of flatness. Hence the
+global pullback is $t$-exact.
+\end{proof}
+
+\begin{theorem}[Heart and classical truncation]
+\label{thm:qcoh-heart-classical-truncation}
+For every spectral scheme $X$, restriction of scalars along
+\[
+    i_X
+    \colon
+    X_{\mathrm{cl}}
+    \longrightarrow
+    X
+\]
+induces an equivalence of abelian categories
+\[
+    i_{X,*}
+    \colon
+    \QCoh(X_{\mathrm{cl}})^\heartsuit
+    \xrightarrow{\simeq}
+    \QCoh(X)^\heartsuit.
+\]
+Its inverse is
+\[
+    \mathcal F
+    \longmapsto
+    \pi_0\bigl(i_X^*\mathcal F\bigr).
+\]
+Equivalently,
+\[
+    \QCoh(X)^\heartsuit
+    \simeq
+    \operatorname{QCoh}_{\mathrm{ab}}(X_{\mathrm{cl}}),
+\]
+where the right side denotes the ordinary abelian category of
+quasi-coherent modules on $X_{\mathrm{cl}}$.
+\end{theorem}
+
+\begin{proof}
+The assertion is local for the Zariski topology. Let
+\[
+    X=\Spec(A).
+\]
+The map $i_X$ is induced by the canonical algebra morphism
+\[
+    A
+    \longrightarrow
+    H\pi_0(A).
+\]
+Restriction of scalars gives
+\[
+    \Mod_{H\pi_0(A)}^\heartsuit
+    \longrightarrow
+    \Mod_A^\heartsuit.
+\]
+Every discrete $A$-module is determined by its degree-zero homotopy group,
+and its action factors uniquely through $H\pi_0(A)$. Hence restriction of
+scalars is fully faithful and essentially surjective.
+
+For a discrete $A$-module $M$, the degree-zero edge morphism gives
+\[
+    \pi_0
+    \left(
+        H\pi_0(A)\otimes_AM
+    \right)
+    \simeq
+    \pi_0(M).
+\]
+Thus the inverse equivalence on the heart is
+\[
+    M
+    \longmapsto
+    \pi_0
+    \left(
+        H\pi_0(A)\otimes_AM
+    \right).
+\]
+These affine equivalences are natural under restriction to open
+subschemes and therefore glue through
+\Ref{lem:qcoh-affine-open-basis}.
+
+The use of $\pi_0$ is essential: the raw pullback $i_X^*$ need not carry a
+heart object to a heart object.
+\end{proof}
+
+\subsection{Quasi-coherent commutative algebras}
+
+\begin{definition}[Quasi-coherent commutative algebra]
+\label{def:quasi-coherent-commutative-algebra}
+For a spectral scheme \(X\), define
+\[
+    \operatorname{QCAlg}(X)
+    :=
+    \CAlg\bigl(\QCoh(X)\bigr).
+\]
+Let
+\[
+    U_X
+    \colon
+    \operatorname{QCAlg}(X)
+    \longrightarrow
+    \QCoh(X)
+\]
+denote the forgetful functor. The full subcategory of algebra objects
+whose underlying quasi-coherent modules are connective is denoted
+\[
+    \operatorname{QCAlg}(X)^{\mathrm{cn}}
+    :=
+    \left\{
+        \mathcal A
+        \in
+        \operatorname{QCAlg}(X)
+        \,\middle|\,
+        U_X(\mathcal A)
+        \in
+        \QCoh(X)_{\geq0}
+    \right\}.
+\]
+No \(t\)-structure on the generally nonstable
+\(\infty\)-category \(\operatorname{QCAlg}(X)\) is being asserted.
+\end{definition}
+
+\begin{proposition}[Pullback of quasi-coherent algebras]
+\label{prop:pullback-qcalg}
+Every morphism $f:X\to Y$ of spectral schemes induces a functor
+\[
+    f^*
+    \colon
+    \operatorname{QCAlg}(Y)
+    \longrightarrow
+    \operatorname{QCAlg}(X).
+\]
+It preserves connective algebra objects, and for composable morphisms
+there are canonical coherent equivalences
+\[
+    (g\circ f)^*
+    \simeq
+    f^*g^*.
+\]
+\end{proposition}
+
+\begin{proof}
+The quasi-coherent pullback functor is strong symmetric monoidal by
+\Ref{prop:qcoh-pullback}, hence carries commutative algebra objects to
+commutative algebra objects. Right $t$-exactness gives preservation of
+connectivity. Coherence is inherited from the functoriality of
+quasi-coherent pullback.
+\end{proof}
+
+\subsection{Relative spectra}
+
+\begin{theorem}[Relative spectrum construction]
+\label{thm:relative-spectrum-construction}
+Let $X$ be a spectral scheme. There is a functor
+\[
+    \Spec_X
+    \colon
+    \operatorname{QCAlg}(X)^{\mathrm{cn},\op}
+    \longrightarrow
+    \operatorname{Sch}^{\mathrm{sp}}_{/X}
+\]
+characterized by the following properties.
+\begin{enumerate}[label=(\roman*)]
+    \item If $X=\Spec(A)$ and $\mathcal A$ corresponds to a connective
+    commutative $A$-algebra $B$, then
+    \[
+        \Spec_X(\mathcal A)
+        \simeq
+        \Spec(B).
+    \]
+
+    \item For every morphism $f:Y\to X$, there is a natural equivalence
+    \[
+        \Map_X
+        \bigl(
+            Y,
+            \Spec_X(\mathcal A)
+        \bigr)
+        \simeq
+        \Map_{\operatorname{QCAlg}(Y)}
+        \bigl(
+            f^*\mathcal A,
+            \mathcal O_Y
+        \bigr).
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \mathcal A
+    \in
+    \operatorname{QCAlg}(X)^{\mathrm{cn}}.
+\]
+For every affine spectral scheme $T$, define
+\[
+    F_{\mathcal A}(T)
+    :=
+    \operatorname*{colim}_{f\in X(T)}
+    \Map_{\operatorname{QCAlg}(T)}
+    \bigl(
+        f^*\mathcal A,
+        \mathcal O_T
+    \bigr),
+\]
+where the colimit is taken over the $\infty$-groupoid $X(T)$.
+Equivalently, $F_{\mathcal A}(T)$ is the total space of the
+space-valued family over $X(T)$ whose fibre over a morphism
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    X
+\]
+is
+\[
+    \Map_{\operatorname{QCAlg}(T)}
+    \bigl(
+        f^*\mathcal A,
+        \mathcal O_T
+    \bigr).
+\]
+
+For a morphism of affine spectral schemes
+\[
+    g
+    \colon
+    T'
+    \longrightarrow
+    T,
+\]
+pullback carries a point
+\[
+    \alpha
+    \colon
+    f^*\mathcal A
+    \longrightarrow
+    \mathcal O_T
+\]
+to the point
+\[
+    g^*\alpha
+    \colon
+    (f\circ g)^*\mathcal A
+    \longrightarrow
+    \mathcal O_{T'}.
+\]
+These maps define a spectral prestack
+\[
+    F_{\mathcal A}
+    \longrightarrow
+    X.
+\]
+A morphism
+\[
+    \mathcal A
+    \longrightarrow
+    \mathcal A'
+\]
+induces, by precomposition, a morphism
+\[
+    F_{\mathcal A'}
+    \longrightarrow
+    F_{\mathcal A}.
+\]
+Thus the construction is contravariantly functorial in $\mathcal A$.
+
+We first prove that $F_{\mathcal A}$ is a spectral Zariski stack. Let
+\[
+    \{T_i\to T\}_{i\in I}
+\]
+be a finite affine spectral Zariski covering family, with $T$ and every
+$T_i$ affine. For a tuple
+\[
+    \mathbf i
+    =
+    (i_0,\ldots,i_n),
+\]
+write
+\[
+    T_{\mathbf i}
+    :=
+    T_{i_0}
+    \times_T
+    \cdots
+    \times_T
+    T_{i_n}.
+\]
+Every $T_{\mathbf i}$ is affine by
+\Ref{prop:affine-spectral-fibre-products}.
+
+Since $X$ is a spectral Zariski stack, there is a natural equivalence
+\[
+    X(T)
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \prod_{\mathbf i\in I^{n+1}}
+    X(T_{\mathbf i}).
+\]
+By affine quasi-coherent descent and preservation of limits by the
+commutative-algebra construction, there is an equivalence
+\[
+    \operatorname{QCAlg}(T)
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \prod_{\mathbf i\in I^{n+1}}
+    \operatorname{QCAlg}(T_{\mathbf i}).
+\]
+
+There is a canonical comparison morphism
+\[
+    F_{\mathcal A}(T)
+    \longrightarrow
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \prod_{\mathbf i\in I^{n+1}}
+    F_{\mathcal A}(T_{\mathbf i})
+\]
+lying over the preceding equivalence for $X(T)$.
+
+Fix a point
+\[
+    f
+    \in
+    X(T),
+\]
+and let
+\[
+    f_{\mathbf i}
+    \colon
+    T_{\mathbf i}
+    \longrightarrow
+    X
+\]
+denote its restrictions. The fibre of the comparison morphism over the
+compatible family $\{f_{\mathbf i}\}$ is
+\[
+\begin{aligned}
+    &
+    \Map_{\operatorname{QCAlg}(T)}
+    \bigl(
+        f^*\mathcal A,
+        \mathcal O_T
+    \bigr)
+    \\
+    &\qquad\longrightarrow
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \prod_{\mathbf i\in I^{n+1}}
+    \Map_{\operatorname{QCAlg}(T_{\mathbf i})}
+    \bigl(
+        f_{\mathbf i}^*\mathcal A,
+        \mathcal O_{T_{\mathbf i}}
+    \bigr).
+\end{aligned}
+\]
+Under the equivalence
+\[
+    \operatorname{QCAlg}(T)
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \prod_{\mathbf i\in I^{n+1}}
+    \operatorname{QCAlg}(T_{\mathbf i}),
+\]
+the objects $f^*\mathcal A$ and $\mathcal O_T$ correspond respectively
+to the compatible families
+\[
+    \{f_{\mathbf i}^*\mathcal A\}_{\mathbf i}
+    \qquad\text{and}\qquad
+    \{\mathcal O_{T_{\mathbf i}}\}_{\mathbf i}.
+\]
+Mapping spaces in a limit of $\infty$-categories are the corresponding
+limits of mapping spaces. Therefore the displayed morphism on fibres is
+an equivalence.
+
+The comparison morphism is consequently an equivalence on its base and
+on every fibre, and hence is an equivalence. Thus $F_{\mathcal A}$
+satisfies \v{C}ech descent for finite affine spectral Zariski covering
+families.
+
+Every affine spectral Zariski covering family admits a finite principal
+refinement, and finite affine covers generate the spectral Zariski
+topology. It follows that $F_{\mathcal A}$ is a spectral Zariski stack.
+
+Let
+\[
+    U
+    =
+    \Spec(R)
+    \longrightarrow
+    X
+\]
+be an affine point. Under
+\Ref{prop:connective-relative-algebras},
+the restriction
+\[
+    \mathcal A|_U
+\]
+corresponds to a connective commutative $R$-algebra $B$.
+
+For every affine spectral scheme
+\[
+    T
+    =
+    \Spec(C)
+    \longrightarrow
+    U,
+\]
+there are natural equivalences
+\[
+\begin{aligned}
+    \Map_{\operatorname{QCAlg}(T)}
+    \bigl(
+        (\mathcal A|_U)|_T,
+        \mathcal O_T
+    \bigr)
+    &\simeq
+    \Map_{\CAlg_C}
+    \bigl(
+        B\otimes_R C,
+        C
+    \bigr)
+    \\
+    &\simeq
+    \Map_{\CAlg_R}(B,C)
+    \\
+    &\simeq
+    \Map_U
+    \bigl(
+        T,
+        \Spec(B)
+    \bigr).
+\end{aligned}
+\]
+These equivalences are natural in $T$ and identify the fibre product
+over $U$:
+\[
+    F_{\mathcal A}
+    \times_X
+    U
+    \simeq
+    \Spec(B).
+\]
+
+Choose an affine spectral Zariski atlas
+\[
+    \{U_i\to X\}_{i\in I}.
+\]
+Then
+\[
+    \coprod_{i\in I}
+    \bigl(
+        F_{\mathcal A}
+        \times_X
+        U_i
+    \bigr)
+    \longrightarrow
+    F_{\mathcal A}
+\]
+is the base change of the effective epimorphism
+\[
+    \coprod_{i\in I}U_i
+    \longrightarrow
+    X.
+\]
+It is therefore an effective epimorphism. Each morphism
+\[
+    F_{\mathcal A}
+    \times_X
+    U_i
+    \longrightarrow
+    F_{\mathcal A}
+\]
+is an open immersion by base change, and every source is affine by the
+preceding calculation. Hence $F_{\mathcal A}$ is a spectral scheme over
+$X$.
+
+Define
+\[
+    \Spec_X(\mathcal A)
+    :=
+    F_{\mathcal A}.
+\]
+The affine calculation proves property~\textup{(i)}.
+
+It remains to prove property~\textup{(ii)} for an arbitrary spectral
+scheme over $X$. On the Zariski site of spectral schemes over $X$, define
+presheaves of spaces
+\[
+    \Phi
+    \bigl(
+        f:Y\to X
+    \bigr)
+    :=
+    \Map_X
+    \bigl(
+        Y,
+        \Spec_X(\mathcal A)
+    \bigr)
+\]
+and
+\[
+    \Psi
+    \bigl(
+        f:Y\to X
+    \bigr)
+    :=
+    \Map_{\operatorname{QCAlg}(Y)}
+    \bigl(
+        f^*\mathcal A,
+        \mathcal O_Y
+    \bigr).
+\]
+
+The presheaf $\Phi$ is a Zariski sheaf because
+$\Spec_X(\mathcal A)$ is a spectral Zariski stack. Explicitly, if
+\[
+    Y_0
+    \longrightarrow
+    Y
+\]
+is an affine Zariski atlas with \v{C}ech nerve $Y_\bullet$, then
+\[
+    \Phi(Y)
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \Phi(Y_n).
+\]
+
+The presheaf $\Psi$ is also a Zariski sheaf. Indeed,
+\Ref{thm:qcoh-atlas-computation}
+and preservation of limits by $\CAlg$ give
+\[
+    \operatorname{QCAlg}(Y)
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \operatorname{QCAlg}(Y_n).
+\]
+Under this equivalence, $f^*\mathcal A$ and $\mathcal O_Y$ correspond to
+their restrictions to the \v{C}ech nerve. Since mapping spaces in a limit
+of $\infty$-categories are computed as limits, one obtains
+\[
+    \Psi(Y)
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \Psi(Y_n).
+\]
+
+For affine $Y$, the defining construction of $F_{\mathcal A}$ gives a
+natural equivalence
+\[
+    \Phi(Y)
+    \simeq
+    \Psi(Y).
+\]
+Affine spectral schemes over $X$ form a basis for the Zariski topology
+on spectral schemes over $X$. A natural equivalence between Zariski
+sheaves on this affine basis therefore extends uniquely to a natural
+equivalence on the entire site. Consequently, for every spectral scheme
+$f:Y\to X$,
+\[
+    \Map_X
+    \bigl(
+        Y,
+        \Spec_X(\mathcal A)
+    \bigr)
+    \simeq
+    \Map_{\operatorname{QCAlg}(Y)}
+    \bigl(
+        f^*\mathcal A,
+        \mathcal O_Y
+    \bigr).
+\]
+This proves property~\textup{(ii)}.
+
+Contravariant functoriality in $\mathcal A$ was constructed above, and
+uniqueness follows from the universal property. See
+\cite{LurieSAG,KhanBraveNewMotivicI}.
+\end{proof}
+
+\begin{proposition}[Base change for relative spectra]
+\label{prop:relative-spectrum-base-change}
+Let $f:Y\to X$ be a morphism of spectral schemes and let
+$\mathcal A\in\operatorname{QCAlg}(X)^{\mathrm{cn}}$. There is a canonical
+equivalence over $Y$
+\[
+    \Spec_X(\mathcal A)
+    \times_X
+    Y
+    \simeq
+    \Spec_Y(f^*\mathcal A).
+\]
+\end{proposition}
+
+\begin{proof}
+For every $T\to Y$, the universal property of the left side gives
+\[
+\begin{aligned}
+    \Map_Y
+    \bigl(
+        T,
+        \Spec_X(\mathcal A)\times_XY
+    \bigr)
+    &\simeq
+    \Map_X
+    \bigl(
+        T,
+        \Spec_X(\mathcal A)
+    \bigr)
+    \\
+    &\simeq
+    \Map_{\operatorname{QCAlg}(T)}
+    \bigl(
+        \mathcal A|_T,
+        \mathcal O_T
+    \bigr)
+    \\
+    &\simeq
+    \Map_Y
+    \bigl(
+        T,
+        \Spec_Y(f^*\mathcal A)
+    \bigr).
+\end{aligned}
+\]
+Yoneda gives the equivalence.
+\end{proof}
+
+\begin{definition}[Affine morphism of spectral schemes]
+\label{def:affine-morphism-spectral-schemes}
+A morphism $p:Y\to X$ of spectral schemes is \textbf{affine} if, for every
+affine open $U\to X$, the pullback
+\[
+    Y\times_XU
+\]
+is an affine spectral scheme.
+\end{definition}
+
+\begin{theorem}[Classification of affine morphisms]
+\label{thm:classification-affine-morphisms}
+For every spectral scheme $X$, the relative spectrum construction induces
+an equivalence
+\[
+    \operatorname{QCAlg}(X)^{\mathrm{cn},\op}
+    \xrightarrow{\simeq}
+    \bigl(
+        \operatorname{Sch}^{\mathrm{sp}}_{/X}
+    \bigr)_{\mathrm{aff}}
+\]
+onto the full subcategory of affine morphisms over $X$.
+\end{theorem}
+
+\begin{proof}
+The assertion is affine-local on $X$. For $X=\Spec(A)$ it is exactly
+\Ref{prop:connective-relative-algebras}. The affine equivalences are
+compatible on overlaps by base change and therefore glue through Zariski
+descent.
+\end{proof}
+
+\section{Closed immersions, complements, and closed gluing}
+\label{sec:closed-immersions-complements}
+
+\subsection{Closed immersions}
+
+\begin{definition}[Affine closed immersion]
+\label{def:affine-closed-immersion-spectral}
+A morphism
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A)
+\]
+of affine spectral schemes is a \textbf{closed immersion} if the induced
+ordinary ring homomorphism
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(B)
+\]
+is surjective.
+\end{definition}
+
+\begin{definition}[Closed immersion of spectral schemes]
+\label{def:closed-immersion-spectral-schemes}
+A morphism
+\[
+    i
+    \colon
+    Z
+    \longrightarrow
+    X
+\]
+of spectral schemes is a \textbf{closed immersion} if, after base change
+along every affine open $U\to X$, the pullback
+\[
+    Z\times_XU
+    \longrightarrow
+    U
+\]
+is an affine closed immersion.
+\end{definition}
+
+\begin{proposition}[Classical detection of closed immersions]
+\label{prop:closed-immersions-classical-detection}
+A morphism $i:Z\to X$ of spectral schemes is a closed immersion if and
+only if
+\[
+    i_{\mathrm{cl}}
+    \colon
+    Z_{\mathrm{cl}}
+    \longrightarrow
+    X_{\mathrm{cl}}
+\]
+is a closed immersion of ordinary schemes.
+\end{proposition}
+
+\begin{proof}
+If $i$ is a closed immersion, the assertion follows directly on affine
+opens from the definition.
+
+Conversely, suppose $i_{\mathrm{cl}}$ is a closed immersion. The assertion
+is local on $X$, so let
+\[
+    X=\Spec(A).
+\]
+Then $Z_{\mathrm{cl}}$ is a closed subscheme of the affine scheme
+$\Spec\pi_0(A)$ and is therefore affine. By
+\Ref{thm:affineness-detected-classically}, the spectral scheme $Z$ is
+affine, say
+\[
+    Z=\Spec(B).
+\]
+The ordinary ring homomorphism
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(B)
+\]
+is surjective because it represents the given classical closed
+immersion. Hence
+\[
+    \Spec(B)
+    \longrightarrow
+    \Spec(A)
+\]
+is an affine closed immersion by
+\Ref{def:affine-closed-immersion-spectral}. The local statements glue,
+so $i$ is a closed immersion.
+\end{proof}
+
+\begin{proposition}[Permanence of closed immersions]
+\label{prop:closed-immersion-permanence}
+Closed immersions of spectral schemes are stable under equivalence,
+composition, and base change.
+\end{proposition}
+
+\begin{proof}
+The assertion is local on the target and is detected on classical
+truncations by
+\Ref{prop:closed-immersions-classical-detection}. Apply the corresponding
+permanence properties for ordinary closed immersions.
+\end{proof}
+
+\begin{proposition}[Classical truncation is closed]
+\label{prop:classical-truncation-closed-immersion}
+For every spectral scheme $X$, the canonical morphism
+\[
+    X_{\mathrm{cl}}
+    \longrightarrow
+    X
+\]
+is a closed immersion.
+\end{proposition}
+
+\begin{proof}
+On an affine open $\Spec(A)$, the corresponding map on degree-zero rings
+is the identity
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(H\pi_0(A))
+    \simeq
+    \pi_0(A),
+\]
+which is surjective.
+\end{proof}
+
+\begin{definition}[Nil-immersion]
+\label{def:nil-immersion-spectral}
+A closed immersion $i:Z\to X$ is a \textbf{nil-immersion} if it induces an
+equivalence on reduced classical schemes:
+\[
+    (Z_{\mathrm{cl}})_{\mathrm{red}}
+    \xrightarrow{\simeq}
+    (X_{\mathrm{cl}})_{\mathrm{red}}.
+\]
+\end{definition}
+
+\begin{corollary}[Classical truncation is a nil-immersion]
+\label{cor:classical-truncation-nil-immersion}
+The canonical closed immersion
+\[
+    X_{\mathrm{cl}}
+    \longrightarrow
+    X
+\]
+is a nil-immersion.
+\end{corollary}
+
+\begin{proof}
+It is the identity on classical truncations and therefore on reduced
+classical schemes.
+\end{proof}
+
+\subsection{Open complements}
+
+\begin{lemma}[Classical detection of the empty spectral scheme]
+\label{lem:empty-spectral-scheme-classical-detection}
+Let $X$ be a spectral scheme. Then
+\[
+    X
+    \simeq
+    \varnothing
+\]
+if and only if
+\[
+    X_{\mathrm{cl}}
+    \simeq
+    \varnothing.
+\]
+\end{lemma}
+
+\begin{proof}
+If $X$ is empty, then its classical truncation is empty by functoriality
+of classical truncation.
+
+Conversely, suppose
+\[
+    X_{\mathrm{cl}}
+    \simeq
+    \varnothing.
+\]
+Choose an affine spectral Zariski atlas
+\[
+    \coprod_{i\in I}
+    U_i
+    \longrightarrow
+    X,
+    \qquad
+    U_i=\Spec(A_i).
+\]
+For every $i$, the classical truncation
+\[
+    (U_i)_{\mathrm{cl}}
+    =
+    \Spec\pi_0(A_i)
+\]
+is an open subscheme of $X_{\mathrm{cl}}$ and is therefore empty. Hence
+\[
+    \pi_0(A_i)
+\]
+is the zero ring.
+
+For every integer $n$, the group $\pi_n(A_i)$ is naturally a module over
+the ordinary ring $\pi_0(A_i)$. Since $\pi_0(A_i)$ is the zero ring, one
+has
+\[
+    \pi_n(A_i)=0
+\]
+for every $n$. Homotopy groups detect equivalences of spectra, so
+\[
+    A_i
+    \simeq
+    0.
+\]
+Consequently,
+\[
+    U_i
+    =
+    \Spec(A_i)
+    \simeq
+    \varnothing
+\]
+for every $i$.
+
+The atlas morphism is therefore an effective epimorphism
+\[
+    \varnothing
+    \longrightarrow
+    X.
+\]
+An effective epimorphism from the initial object can have only the
+initial object as its target. Thus
+\[
+    X
+    \simeq
+    \varnothing.
+\]
+\end{proof}
+
+\begin{theorem}[Complement of a closed immersion]
+\label{thm:complement-closed-immersion}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+be a closed immersion of spectral schemes. There exists an open immersion
+\[
+    j
+    \colon
+    X\setminus Z
+    \hookrightarrow
+    X
+\]
+characterized by the following universal property: a morphism
+$T\to X$ factors through $X\setminus Z$ if and only if
+\[
+    T\times_X Z
+    \simeq
+    \varnothing.
+\]
+Its classical truncation is the ordinary open complement
+\[
+    (X\setminus Z)_{\mathrm{cl}}
+    \simeq
+    X_{\mathrm{cl}}\setminus Z_{\mathrm{cl}}.
+\]
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    U_{\mathrm{cl}}
+    :=
+    X_{\mathrm{cl}}
+    \setminus
+    Z_{\mathrm{cl}}.
+\]
+By
+\Ref{prop:opens-classical-truncation},
+this ordinary open subscheme determines a unique open spectral subscheme
+\[
+    j
+    \colon
+    U
+    \hookrightarrow
+    X.
+\]
+Define
+\[
+    X\setminus Z
+    :=
+    U.
+\]
+By construction,
+\[
+    (X\setminus Z)_{\mathrm{cl}}
+    \simeq
+    X_{\mathrm{cl}}
+    \setminus
+    Z_{\mathrm{cl}}.
+\]
+
+Let
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    X
+\]
+be a morphism of spectral schemes.
+
+Suppose first that \(f\) factors through \(U\). Then
+\[
+    T\times_XZ
+    \simeq
+    T\times_U(U\times_XZ).
+\]
+The classical truncation of \(U\times_XZ\) is
+\[
+\begin{aligned}
+    (U\times_XZ)_{\mathrm{cl}}
+    &\simeq
+    U_{\mathrm{cl}}
+    \times_{X_{\mathrm{cl}}}
+    Z_{\mathrm{cl}}
+    \\
+    &=
+    \varnothing
+\end{aligned}
+\]
+by
+\Ref{prop:global-classical-truncation-fibre-products}.
+A spectral scheme is empty if and only if its classical truncation is
+empty. Hence
+\[
+    U\times_XZ
+    \simeq
+    \varnothing,
+\]
+and therefore
+\[
+    T\times_XZ
+    \simeq
+    \varnothing.
+\]
+
+Conversely, suppose
+\[
+    T\times_XZ
+    \simeq
+    \varnothing.
+\]
+Taking classical truncations and using
+\Ref{prop:global-classical-truncation-fibre-products}
+gives
+\[
+    T_{\mathrm{cl}}
+    \times_{X_{\mathrm{cl}}}
+    Z_{\mathrm{cl}}
+    =
+    \varnothing.
+\]
+By the ordinary universal property of the open complement, the morphism
+\[
+    f_{\mathrm{cl}}
+    \colon
+    T_{\mathrm{cl}}
+    \longrightarrow
+    X_{\mathrm{cl}}
+\]
+factors through
+\[
+    U_{\mathrm{cl}}
+    =
+    X_{\mathrm{cl}}\setminus Z_{\mathrm{cl}}.
+\]
+
+Form the pullback open immersion
+\[
+    j_T
+    \colon
+    U_T
+    :=
+    T\times_XU
+    \longrightarrow
+    T.
+\]
+Its classical truncation is
+\[
+\begin{aligned}
+    (U_T)_{\mathrm{cl}}
+    &\simeq
+    T_{\mathrm{cl}}
+    \times_{X_{\mathrm{cl}}}
+    U_{\mathrm{cl}}
+    \\
+    &\simeq
+    T_{\mathrm{cl}},
+\end{aligned}
+\]
+where the last equivalence uses the factorization of \(f_{\mathrm{cl}}\)
+through \(U_{\mathrm{cl}}\).
+
+By
+\Ref{prop:opens-classical-truncation},
+open spectral subschemes of \(T\) are determined by their classical open
+subschemes. Since \(U_T\to T\) has classical truncation equal to all of
+\(T_{\mathrm{cl}}\), it follows that
+\[
+    U_T
+    \xrightarrow{\simeq}
+    T.
+\]
+The inverse equivalence gives a section
+\[
+    T
+    \longrightarrow
+    U_T
+    =
+    T\times_XU,
+\]
+and composition with the projection to \(U\) yields a factorization
+\[
+    T
+    \longrightarrow
+    U
+    \longrightarrow
+    X
+\]
+of \(f\).
+
+The factorization is unique because
+\[
+    U
+    \longrightarrow
+    X
+\]
+is an open immersion and therefore a monomorphism. This proves the
+universal property.
+\end{proof}
+
+\begin{proposition}[Base change of complements]
+\label{prop:complement-base-change}
+Let $Z\hookrightarrow X$ be closed and let $Y\to X$ be any morphism. Then
+there is a canonical equivalence
+\[
+    Y\times_X(X\setminus Z)
+    \simeq
+    Y\setminus(Y\times_XZ).
+\]
+\end{proposition}
+
+\begin{proof}
+Both sides are open subschemes of $Y$. Their classical truncations are the
+same ordinary open complement, and open spectral subschemes are determined
+by their classical opens by \Ref{prop:opens-classical-truncation}.
+\end{proof}
+
+\begin{corollary}[Complement depends on the reduced closed part]
+\label{cor:complement-reduced-closed-part}
+If $Z\hookrightarrow X$ and $Z'\hookrightarrow X$ have the same reduced
+classical closed subscheme, then
+\[
+    X\setminus Z
+    \simeq
+    X\setminus Z'.
+\]
+\end{corollary}
+
+\begin{proof}
+Their ordinary open complements in $X_{\mathrm{cl}}$ coincide. Apply
+\Ref{prop:opens-classical-truncation}.
+\end{proof}
+
+\subsection{Pushouts along closed immersions}
+
+\begin{theorem}[Closed pushouts]
+\label{thm:closed-pushouts-spectral-schemes}
+Suppose
+\[
+    Z
+    \hookrightarrow
+    X
+    \qquad\text{and}\qquad
+    Z
+    \hookrightarrow
+    Y
+\]
+are closed immersions of spectral schemes. Then the pushout
+\[
+    X\coprod_ZY
+\]
+exists in spectral schemes. The canonical maps
+\[
+    X
+    \longrightarrow
+    X\coprod_ZY
+    \qquad\text{and}\qquad
+    Y
+    \longrightarrow
+    X\coprod_ZY
+\]
+are closed immersions. The construction is compatible with arbitrary
+base change.
+\end{theorem}
+
+\begin{proof}
+We first record the affine calculation. Write
+\[
+    X=\Spec(A),
+    \qquad
+    Y=\Spec(B),
+    \qquad
+    Z=\Spec(C),
+\]
+so that the two closed immersions are represented by morphisms
+\[
+    A
+    \longrightarrow
+    C
+    \longleftarrow
+    B
+\]
+which are surjective on degree-zero homotopy. Put
+\[
+    D
+    :=
+    A\times_C B
+\]
+in $\CAlg(\Sp)$.
+
+The forgetful functor
+\[
+    \CAlg(\Sp)
+    \longrightarrow
+    \Sp
+\]
+creates limits. Hence the underlying spectrum of $D$ fits into a fibre
+sequence
+\[
+    D
+    \longrightarrow
+    A\oplus B
+    \longrightarrow
+    C,
+\]
+where the second morphism is the difference of the two structural
+morphisms.
+
+Since $A$, $B$, and $C$ are connective, the only possible negative
+homotopy group of $D$ is $\pi_{-1}(D)$. The associated exact sequence
+gives
+\[
+    \pi_{-1}(D)
+    \simeq
+    \operatorname{coker}
+    \left(
+        \pi_0(A)\oplus\pi_0(B)
+        \longrightarrow
+        \pi_0(C)
+    \right).
+\]
+The displayed morphism is surjective because either structural
+homomorphism
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(C)
+    \qquad\text{or}\qquad
+    \pi_0(B)
+    \longrightarrow
+    \pi_0(C)
+\]
+is surjective. Therefore
+\[
+    \pi_{-1}(D)=0,
+\]
+and $D$ is connective.
+
+The same exact sequence identifies
+\[
+    \pi_0(D)
+    \simeq
+    \pi_0(A)
+    \times_{\pi_0(C)}
+    \pi_0(B).
+\]
+The projections
+\[
+    \pi_0(D)
+    \longrightarrow
+    \pi_0(A)
+    \qquad\text{and}\qquad
+    \pi_0(D)
+    \longrightarrow
+    \pi_0(B)
+\]
+are surjective. Consequently,
+\[
+    \Spec(A)
+    \longrightarrow
+    \Spec(D)
+    \qquad\text{and}\qquad
+    \Spec(B)
+    \longrightarrow
+    \Spec(D)
+\]
+are closed immersions.
+
+The universal property of the pullback algebra $D$ gives the universal
+property of the affine pushout:
+\[
+    \Spec(D)
+    \simeq
+    \Spec(A)
+    \coprod_{\Spec(C)}
+    \Spec(B).
+\]
+
+We also record affine base-change compatibility. Let
+\[
+    D
+    \longrightarrow
+    D'
+\]
+be any morphism of connective commutative ring spectra. Tensoring the
+fibre sequence
+\[
+    D
+    \longrightarrow
+    A\oplus B
+    \longrightarrow
+    C
+\]
+with $D'$ over $D$ gives a fibre sequence of $D'$-modules
+\[
+    D'
+    \longrightarrow
+    \bigl(
+        A\otimes_DD'
+    \bigr)
+    \oplus
+    \bigl(
+        B\otimes_DD'
+    \bigr)
+    \longrightarrow
+    C\otimes_DD',
+\]
+because extension of scalars is exact.
+
+The compatible structural morphisms determine a canonical morphism
+\[
+    D'
+    \longrightarrow
+    \bigl(
+        A\otimes_DD'
+    \bigr)
+    \times_{C\otimes_DD'}
+    \bigl(
+        B\otimes_DD'
+    \bigr).
+\]
+The forgetful functor from commutative ring spectra to spectra creates
+limits, so the underlying spectrum of the target is the fibre of
+\[
+    \bigl(
+        A\otimes_DD'
+    \bigr)
+    \oplus
+    \bigl(
+        B\otimes_DD'
+    \bigr)
+    \longrightarrow
+    C\otimes_DD'.
+\]
+The preceding fibre sequence therefore proves that the canonical
+morphism is an equivalence:
+\[
+    D'
+    \simeq
+    \bigl(
+        A\otimes_DD'
+    \bigr)
+    \times_{C\otimes_DD'}
+    \bigl(
+        B\otimes_DD'
+    \bigr).
+\]
+Passing to affine spectra proves arbitrary base-change compatibility in
+the affine case.
+
+For general spectral schemes, the affine-local notion of closed
+immersion used in this chapter agrees with the spectral-scheme notion of
+closed immersion in the closed-gluing theorem; see
+\cite[Theorem~4.4 and Remark~4.5]{LurieDAGIX}.
+The spectral-scheme form of the closed-gluing theorem gives a pushout
+diagram
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Z
+        \arrow[r, hook]
+        \arrow[d, hook]
+    &
+    X
+        \arrow[d, hook]
+    \\
+    Y
+        \arrow[r, hook]
+    &
+    P
+\end{tikzcd}
+\]
+in spectral schemes, and asserts that the two canonical morphisms into
+$P$ are closed immersions; see
+\cite[Theorem~6.1 and Remark~6.2]{LurieDAGIX}.
+Thus
+\[
+    P
+    \simeq
+    X\coprod_ZY.
+\]
+
+Finally, the base-change theorem for closed gluing asserts that, for
+every morphism
+\[
+    T
+    \longrightarrow
+    P,
+\]
+the induced square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    T\times_PZ
+        \arrow[r, hook]
+        \arrow[d, hook]
+    &
+    T\times_PX
+        \arrow[d, hook]
+    \\
+    T\times_PY
+        \arrow[r, hook]
+    &
+    T
+\end{tikzcd}
+\]
+is again a pushout square. The same proof applies to spectral schemes;
+see \cite[Proposition~9.2]{LurieDAGIX}. Hence the construction is
+compatible with arbitrary base change.
+\end{proof}
+
+\begin{proposition}[Pushouts of nil-immersions]
+\label{prop:pushout-nil-immersions}
+In the situation of \Ref{thm:closed-pushouts-spectral-schemes}, if one of
+the two closed immersions is a nil-immersion, then the opposite canonical
+map into the pushout is a nil-immersion.
+\end{proposition}
+\begin{proof}
+The assertion is local on the pushout, so it is enough to prove the
+affine statement. Write
+\[
+    X=\Spec(A),
+    \qquad
+    Y=\Spec(B),
+    \qquad
+    Z=\Spec(C),
+\]
+and let
+\[
+    D
+    :=
+    A\times_CB.
+\]
+By the affine calculation in the proof of
+\Ref{thm:closed-pushouts-spectral-schemes},
+the pushout is
+\[
+    X\coprod_ZY
+    \simeq
+    \Spec(D),
+\]
+and
+\[
+    \pi_0(D)
+    \simeq
+    \pi_0(A)
+    \times_{\pi_0(C)}
+    \pi_0(B).
+\]
+
+Suppose first that
+\[
+    Z
+    \longrightarrow
+    X
+\]
+is a nil-immersion. Since it is a closed immersion, the map
+\[
+    \pi_0(A)
+    \twoheadrightarrow
+    \pi_0(C)
+\]
+is surjective. The nil-immersion condition says that its kernel
+\[
+    I
+    :=
+    \ker
+    \bigl(
+        \pi_0(A)
+        \longrightarrow
+        \pi_0(C)
+    \bigr)
+\]
+is a nil ideal.
+
+The projection
+\[
+    \pi_0(D)
+    =
+    \pi_0(A)
+    \times_{\pi_0(C)}
+    \pi_0(B)
+    \longrightarrow
+    \pi_0(B)
+\]
+is surjective, and its kernel is canonically identified with \(I\):
+\[
+    \ker
+    \bigl(
+        \pi_0(D)
+        \longrightarrow
+        \pi_0(B)
+    \bigr)
+    \simeq
+    I.
+\]
+This kernel is therefore a nil ideal. It follows that the closed
+immersion
+\[
+    Y
+    =
+    \Spec(B)
+    \longrightarrow
+    \Spec(D)
+    =
+    X\coprod_ZY
+\]
+induces an equivalence on reduced classical schemes. Hence it is a
+nil-immersion.
+
+The argument with \(A\) and \(B\) interchanged proves that if
+\[
+    Z
+    \longrightarrow
+    Y
+\]
+is a nil-immersion, then
+\[
+    X
+    \longrightarrow
+    X\coprod_ZY
+\]
+is a nil-immersion. The affine conclusions glue because nil-immersions
+are detected on classical reductions and are local on the target.
+\end{proof}
+
+\section{Vector bundles and brave new affine spaces}
+\label{sec:vector-bundles-brave-new-affine-spaces}
+
+\subsection{Locally free quasi-coherent modules}
+
+\begin{definition}[Locally free quasi-coherent module]
+\label{def:locally-free-qcoh}
+Let $X$ be a spectral scheme. A quasi-coherent module
+$\mathcal E\in\QCoh(X)$ is \textbf{locally free of rank $n$} if there is a
+Zariski open cover $\{U_i\to X\}$ such that
+\[
+    \mathcal E|_{U_i}
+    \simeq
+    \mathcal O_{U_i}^{\oplus n}
+\]
+for every $i$.
+\end{definition}
+
+A \textbf{vector bundle of rank $n$} on $X$ means a locally free
+quasi-coherent module of rank $n$.
+
+\begin{proposition}[Locally free modules are finite projective]
+\label{prop:locally-free-finite-projective}
+Let
+\[
+    \mathcal E
+    \in
+    \QCoh(X)
+\]
+be locally free of rank \(n<\infty\). Then \(\mathcal E\) is dualizable,
+connective, and flat. On every affine open it corresponds to a finite
+projective module.
+\end{proposition}
+
+\begin{proof}
+Choose a Zariski open cover
+\[
+    \{U_i\to X\}_{i\in I}
+\]
+such that
+\[
+    \mathcal E|_{U_i}
+    \simeq
+    \mathcal O_{U_i}^{\oplus n}
+\]
+for every \(i\).
+
+Each restriction \(\mathcal E|_{U_i}\) is dualizable, with dual
+\[
+    (\mathcal E|_{U_i})^\vee
+    \simeq
+    \mathcal O_{U_i}^{\oplus n}.
+\]
+The local duals, evaluation maps, and coevaluation maps are compatible
+on overlaps. By
+\Ref{thm:qcoh-atlas-computation},
+they glue to a quasi-coherent module
+\[
+    \mathcal E^\vee
+    \in
+    \QCoh(X)
+\]
+and morphisms
+\[
+    \mathcal E^\vee
+    \otimes_{\mathcal O_X}
+    \mathcal E
+    \longrightarrow
+    \mathcal O_X
+\]
+and
+\[
+    \mathcal O_X
+    \longrightarrow
+    \mathcal E
+    \otimes_{\mathcal O_X}
+    \mathcal E^\vee.
+\]
+The triangle identities hold after restriction to the chosen open cover
+and therefore hold globally. Thus \(\mathcal E\) is dualizable.
+
+Connectivity is detected on affine opens by the canonical \(t\)-structure
+of
+\Ref{thm:qcoh-spectral-scheme-t-structure}.
+Since every restriction
+\[
+    \mathcal E|_{U_i}
+    \simeq
+    \mathcal O_{U_i}^{\oplus n}
+\]
+is connective, \(\mathcal E\) is connective.
+
+We next prove flatness. Let
+\[
+    U
+    =
+    \Spec(A)
+    \subseteq
+    X
+\]
+be an affine open, and let
+\[
+    M
+    \in
+    \Mod_A
+\]
+correspond to \(\mathcal E|_U\). Pulling the chosen trivializing cover
+back to \(U\) and refining by affine opens gives an affine spectral
+Zariski covering family
+\[
+    \{\Spec(A_j)\to\Spec(A)\}_{j\in J}
+\]
+such that
+\[
+    M\otimes_AA_j
+    \simeq
+    A_j^{\oplus n}
+\]
+for every \(j\). Each finite free \(A_j\)-module is flat. By
+\Ref{prop:flat-module-zariski-local},
+the \(A\)-module \(M\) is flat. Since this holds on every affine open
+\(U\subseteq X\), the quasi-coherent module \(\mathcal E\) is flat.
+
+Finally, let
+\[
+    U
+    =
+    \Spec(A)
+    \subseteq
+    X
+\]
+be any affine open, and let \(M\) denote the corresponding \(A\)-module.
+The restriction \(\mathcal E|_U\) is dualizable, so \(M\) is perfect by
+\Ref{prop:perfect-equals-dualizable}.
+The preceding arguments show that \(M\) is connective and flat.
+Therefore
+\Ref{prop:finite-projective-characterization}
+implies that \(M\) is finite projective over \(A\).
+\end{proof}
+
+\begin{proposition}[Base change of locally free modules]
+\label{prop:base-change-locally-free}
+If $f:Y\to X$ is any morphism and $\mathcal E$ is locally free of rank
+$n$, then $f^*\mathcal E$ is locally free of rank $n$.
+\end{proposition}
+
+\begin{proof}
+Pull back a trivializing Zariski cover of $X$. Open covers and finite free
+modules are preserved under base change.
+\end{proof}
+
+\subsection{The relative free commutative algebra}
+
+\begin{proposition}[Relative free commutative algebra]
+\label{prop:relative-free-commutative-algebra}
+For every spectral scheme $X$, the forgetful functor
+\[
+    U_X
+    \colon
+    \operatorname{QCAlg}(X)
+    \longrightarrow
+    \QCoh(X)
+\]
+admits a left adjoint
+\[
+    \operatorname{Sym}_{\mathcal O_X}
+    \colon
+    \QCoh(X)
+    \longrightarrow
+    \operatorname{QCAlg}(X).
+\]
+The construction is compatible with pullback: for every $f:Y\to X$ there
+is a canonical equivalence
+\[
+    f^*
+    \operatorname{Sym}_{\mathcal O_X}(\mathcal E)
+    \simeq
+    \operatorname{Sym}_{\mathcal O_Y}(f^*\mathcal E).
+\]
+\end{proposition}
+
+\begin{proof}
+The category $\QCoh(X)$ is presentably symmetric monoidal, so the
+operadic free-algebra theorem supplies the adjunction. Since pullback is
+colimit-preserving and strong symmetric monoidal, it commutes with the
+operadic free commutative algebra construction.
+\end{proof}
+
+\begin{proposition}[Connectivity of the relative free algebra]
+\label{prop:relative-free-algebra-connective}
+If
+\[
+    \mathcal E
+    \in
+    \QCoh(X)_{\geq0},
+\]
+then
+\[
+    \operatorname{Sym}_{\mathcal O_X}(\mathcal E)
+    \in
+    \operatorname{QCAlg}(X)^{\mathrm{cn}}.
+\]
+\end{proposition}
+
+\begin{proof}
+The assertion is affine-local. Let $U=\Spec(A)\subseteq X$, and let
+$M\in\Mod_{A,\geq0}$ correspond to $\mathcal E|_U$. The underlying
+$A$-module of the free commutative $A$-algebra is
+\[
+    \bigoplus_{k\geq0}
+    \left(
+        M^{\otimes_Ak}
+    \right)_{h\Sigma_k}.
+\]
+Every tensor power $M^{\otimes_Ak}$ is connective. Homotopy orbits and
+small coproducts preserve connective objects, so the displayed
+$A$-module is connective. Connectivity of a quasi-coherent algebra is
+detected on affine opens, and the result follows.
+\end{proof}
+
+\subsection{Total spaces and affine spaces}
+
+\begin{definition}[Linear spectral space]
+\label{def:linear-spectral-space}
+For a connective quasi-coherent module
+$\mathcal E\in\QCoh(X)_{\geq0}$, define its \textbf{linear spectral
+space} by
+\[
+    \mathbb V_X(\mathcal E)
+    :=
+    \Spec_X
+    \operatorname{Sym}_{\mathcal O_X}(\mathcal E).
+\]
+\end{definition}
+
+\begin{proposition}[Functor of points of a linear spectral space]
+\label{prop:linear-space-functor-points}
+For every morphism $f:T\to X$, there is a natural equivalence
+\[
+    \Map_X
+    \bigl(
+        T,
+        \mathbb V_X(\mathcal E)
+    \bigr)
+    \simeq
+    \Map_{\QCoh(T)}
+    \bigl(
+        f^*\mathcal E,
+        \mathcal O_T
+    \bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Apply the relative spectrum universal property of
+\Ref{thm:relative-spectrum-construction} and the free-algebra adjunction of
+\Ref{prop:relative-free-commutative-algebra}.
+\end{proof}
+
+\begin{remark}[Dual convention]
+\label{rem:vector-bundle-dual-convention}
+With the convention of \Ref{def:linear-spectral-space}, points correspond
+to linear maps from $\mathcal E$ to the structure sheaf. If one wishes the
+points to correspond to sections of a finite locally free module
+$\mathcal E$, one uses
+\[
+    \mathbf V_X(\mathcal E)
+    :=
+    \mathbb V_X(\mathcal E^\vee).
+\]
+The brave new affine spaces below use the self-dual free modules, so the
+two conventions agree canonically there.
+\end{remark}
+
+\begin{definition}[Brave new affine space]
+\label{def:brave-new-affine-space}
+For an integer $n\geq0$, define
+\[
+    \mathbb A_X^n
+    :=
+    \mathbb V_X
+    \bigl(
+        \mathcal O_X^{\oplus n}
+    \bigr)
+    =
+    \Spec_X
+    \operatorname{Sym}_{\mathcal O_X}
+    \bigl(
+        \mathcal O_X^{\oplus n}
+    \bigr).
+\]
+The case $n=1$ is the \textbf{brave new affine line}
+\[
+    \mathbb A_X^1
+    =
+    \Spec_X
+    \operatorname{Sym}_{\mathcal O_X}(\mathcal O_X).
+\]
+\end{definition}
+
+\begin{proposition}[Base change of affine space]
+\label{prop:affine-space-base-change}
+For every morphism $f:Y\to X$, there is a canonical equivalence
+\[
+    \mathbb A_X^n
+    \times_X
+    Y
+    \simeq
+    \mathbb A_Y^n.
+\]
+\end{proposition}
+
+\begin{proof}
+Combine the pullback compatibility of the free algebra from
+\Ref{prop:relative-free-commutative-algebra} with relative spectrum base
+change from \Ref{prop:relative-spectrum-base-change}.
+\end{proof}
+
+\begin{proposition}[Classical truncation of affine space]
+\label{prop:classical-truncation-affine-space}
+There is a canonical equivalence of ordinary schemes
+\[
+    (\mathbb A_X^n)_{\mathrm{cl}}
+    \simeq
+    \mathbb A_{X_{\mathrm{cl}}}^n.
+\]
+\end{proposition}
+
+\begin{proof}
+The assertion is local on $X$. For $X=\Spec(A)$, the homotopy-degree-zero
+part of the free commutative $A$-algebra on $A^{\oplus n}$ is the ordinary
+polynomial algebra
+\[
+    \pi_0(A)[t_1,\ldots,t_n].
+\]
+Taking affine spectra gives the result.
+\end{proof}
+
+\begin{construction}[Zero and unit sections]
+\label{con:zero-unit-sections-affine-line}
+The zero endomorphism and identity endomorphism of $\mathcal O_X$ determine
+maps of quasi-coherent modules
+\[
+    \mathcal O_X
+    \rightrightarrows
+    \mathcal O_X.
+\]
+By the free-algebra and relative-spectrum adjunctions, they induce sections
+\[
+    0,1
+    \colon
+    X
+    \rightrightarrows
+    \mathbb A_X^1.
+\]
+\end{construction}
+
+\begin{proposition}[The zero section is closed]
+\label{prop:zero-section-affine-line-closed}
+The zero section
+\[
+    0
+    \colon
+    X
+    \longrightarrow
+    \mathbb A_X^1
+\]
+is a closed immersion.
+\end{proposition}
+
+\begin{proof}
+The assertion is local on $X$. Let
+\[
+    X=\Spec(A).
+\]
+Then
+\[
+    \mathbb A_X^1
+    \simeq
+    \Spec
+    \operatorname{Sym}_A(A),
+\]
+and the zero section is represented by the augmentation
+\[
+    \epsilon_0
+    \colon
+    \operatorname{Sym}_A(A)
+    \longrightarrow
+    A
+\]
+which sends the universal generator to zero.
+
+On degree-zero homotopy groups, this is the ordinary polynomial
+augmentation
+\[
+    \pi_0(A)[t]
+    \longrightarrow
+    \pi_0(A),
+    \qquad
+    t
+    \longmapsto
+    0.
+\]
+It is surjective. Therefore the zero section is a closed immersion by
+\Ref{def:affine-closed-immersion-spectral}.
+\end{proof}
+
+\begin{definition}[Spectral multiplicative group]
+\label{def:spectral-multiplicative-group}
+The \textbf{spectral multiplicative group} over $X$ is the open complement
+\[
+    \mathbb G_{m,X}
+    :=
+    \mathbb A_X^1
+    \setminus
+    0(X).
+\]
+\end{definition}
+
+\begin{proposition}[Group structure on the spectral multiplicative group]
+\label{prop:spectral-multiplicative-group-structure}
+The spectral scheme
+\[
+    \mathbb G_{m,X}
+\]
+is canonically a commutative group object in spectral schemes over $X$.
+
+For every morphism $T\to X$, there is a natural equivalence
+\[
+    \Map_X
+    \bigl(
+        T,
+        \mathbb G_{m,X}
+    \bigr)
+    \simeq
+    \operatorname{Aut}_{\QCoh(T)}
+    (\mathcal O_T),
+\]
+where the right side denotes the space of invertible
+$\mathcal O_T$-linear endomorphisms of $\mathcal O_T$.
+\end{proposition}
+
+\begin{proof}
+The assertion is local on $X$. Let $X=\Spec(A)$ and write
+\[
+    A\{t\}
+    :=
+    \operatorname{Sym}_A(A).
+\]
+The complement of the zero section is the principal open where the
+universal element $t$ is invertible:
+\[
+    \mathbb G_{m,X}
+    \simeq
+    \Spec
+    \bigl(
+        A\{t\}[t^{-1}]
+    \bigr).
+\]
+
+The coordinate algebra carries the commutative Hopf algebra maps
+\[
+    \Delta
+    \colon
+    A\{t\}[t^{-1}]
+    \longrightarrow
+    A\{t_1,t_2\}
+    [(t_1t_2)^{-1}],
+    \qquad
+    t\longmapsto t_1t_2,
+\]
+\[
+    \epsilon
+    \colon
+    A\{t\}[t^{-1}]
+    \longrightarrow
+    A,
+    \qquad
+    t\longmapsto1,
+\]
+and
+\[
+    \iota
+    \colon
+    A\{t\}[t^{-1}]
+    \longrightarrow
+    A\{t\}[t^{-1}],
+    \qquad
+    t\longmapsto t^{-1}.
+\]
+The universal property of localization gives these maps uniquely, and
+the commutative group identities follow from the corresponding identities
+satisfied by the universal invertible element. Passing contravariantly to
+relative spectra defines multiplication, unit, and inversion on
+$\mathbb G_{m,X}$.
+
+For $T\to X$, a map
+\[
+    T
+    \longrightarrow
+    \mathbb A_X^1
+\]
+corresponds to an $\mathcal O_T$-linear endomorphism of $\mathcal O_T$.
+It factors through the principal open $\mathbb G_{m,X}$ exactly when the
+corresponding element is invertible. This gives the displayed
+functor-of-points equivalence.
+
+The construction is compatible with affine restriction and therefore
+glues over an arbitrary spectral scheme $X$.
+\end{proof}
+
+\begin{proposition}[Base change of the multiplicative group]
+\label{prop:multiplicative-group-base-change}
+For every morphism $Y\to X$, there is a canonical equivalence
+\[
+    \mathbb G_{m,X}
+    \times_X
+    Y
+    \simeq
+    \mathbb G_{m,Y}.
+\]
+\end{proposition}
+
+\begin{proof}
+Use affine-space base change and base change of open complements from
+\Ref{prop:complement-base-change}.
+\end{proof}
+
+\begin{remark}[The brave new affine line is genuinely spectral]
+\label{rem:affine-line-genuinely-spectral}
+Even when $X$ is classical, the free commutative $\EE_\infty$-algebra
+\[
+    \operatorname{Sym}_{\mathcal O_X}(\mathcal O_X)
+\]
+need not be discrete. Thus $\mathbb A_X^1$ is not obtained merely by
+viewing the ordinary affine line as a spectral scheme. Its classical
+truncation is ordinary affine space by
+\Ref{prop:classical-truncation-affine-space}, but its higher spectral
+structure is part of the intended motivic interval. See
+\cite{KhanBraveNewMotivicI}.
+\end{remark}
+
+
+
+\section{The spectral-geometric output}
+\label{sec:spectral-geometric-output}
+
+\begin{theorem}[Spectral algebraic geometry package]
+\label{thm:spectral-algebraic-geometry-package}
+The constructions of this chapter canonically provide:
+\begin{enumerate}[label=(\roman*)]
+    \item the $\infty$-category $\operatorname{Sch}^{\mathrm{sp}}$ of
+    spectral schemes and its full subcategory of affine schemes
+    $\Aff_{\Sp}$;
+
+    \item classical truncation
+    \[
+        (-)_{\mathrm{cl}}
+        \colon
+        \operatorname{Sch}^{\mathrm{sp}}
+        \longrightarrow
+        \operatorname{Sch},
+    \]
+    compatible with fibre products and detecting open subsets,
+    affineness, quasi-compactness, and quasi-separatedness;
+
+    \item the symmetric monoidal quasi-coherent coefficient system
+    $X\mapsto\QCoh(X)$, its canonical $t$-structure on spectral schemes,
+    and the relative spectrum functor
+    \[
+        \Spec_X
+        \colon
+        \operatorname{QCAlg}(X)^{\mathrm{cn},\op}
+        \longrightarrow
+        \operatorname{Sch}^{\mathrm{sp}}_{/X};
+    \]
+
+    \item flat morphisms, open and closed immersions, open complements,
+    pushouts along closed immersions, affine morphisms, vector bundles,
+    relative linear spaces, affine spaces, and the spectral
+    multiplicative group, all with the base-change properties established
+    above.
+\end{enumerate}
+These constructions form the geometric base for the infinitesimal theory
+of \Ref{chap:spectral-deformation-theory}.
+\end{theorem}
+
+\begin{proof}
+The assertions collect the constructions and permanence theorems of
+\Ref{sec:affine-spectral-schemes} through
+\Ref{sec:vector-bundles-brave-new-affine-spaces}.
+\end{proof}

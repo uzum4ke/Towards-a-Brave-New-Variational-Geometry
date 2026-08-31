@@ -1,0 +1,3884 @@
+\chapter{Smooth Spectral Geometry and the Brave New Motivic Site}
+\label{chap:smooth-spectral-motivic-site}
+
+\section{Purpose and standing base convention}
+\label{sec:smooth-spectral-purpose}
+
+This chapter applies the cotangent and deformation theory of
+\Ref{chap:spectral-deformation-theory} to the geometric classes required
+for brave new motivic homotopy theory. It develops differential smoothness
+and \`etaleness, their local standard forms and lifting properties, the
+smooth finite-presentation site over a quasi-compact quasi-separated
+spectral base, the spectral Nisnevich topology, and the brave new affine
+line as interval data.
+
+The chapter stops at the geometric input triple
+\[
+    \left(
+        \operatorname{Sm}^{\mathrm{fp}}_{/S},
+        \tau_{\mathrm{Nis}},
+        \mathbb A^1_S
+    \right).
+\]
+The presheaf localizations imposing Nisnevich descent and
+$\mathbb A^1$-invariance belong to the following chapter on brave new
+motivic homotopy theory.
+
+All conventions of the preceding chapters remain in force. Unless a
+statement explicitly concerns a more general base, the base spectral
+scheme $S$ used for the smooth motivic site is assumed quasi-compact and
+quasi-separated.
+
+\section{Smooth and \texorpdfstring{\'{e}tale}{etale} spectral morphisms}
+\label{sec:smooth-etale-spectral-morphisms}
+
+The geometric morphism classes used in brave new motivic homotopy theory
+are defined by finite presentation and the cotangent complex. Smoothness in
+this section is differential smoothness. It is not defined by spectral
+flatness.
+
+\subsection{Affine definitions}
+
+\begin{definition}[\'{E}tale morphism of connective algebras]
+\label{def:etale-spectral-algebra}
+A morphism
+\[
+    A
+    \longrightarrow
+    B
+\]
+of connective commutative ring spectra is \textbf{\'{e}tale} if:
+\begin{enumerate}[label=(\roman*)]
+    \item $B$ is of finite presentation over $A$;
+
+    \item the relative cotangent complex vanishes:
+    \[
+        L_{B/A}
+        \simeq
+        0.
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Smooth morphism of connective algebras]
+\label{def:smooth-spectral-algebra}
+A morphism
+\[
+    A
+    \longrightarrow
+    B
+\]
+of connective commutative ring spectra is \textbf{smooth} if:
+\begin{enumerate}[label=(\roman*)]
+    \item $B$ is of finite presentation over $A$;
+
+    \item the relative cotangent complex $L_{B/A}$ is a finite locally
+    free $B$-module.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Differential and fibre smoothness]
+\label{rem:differential-fibre-smoothness}
+The smoothness of \Ref{def:smooth-spectral-algebra} is the differential
+notion used to define the brave new smooth site. A distinct notion is
+obtained by requiring spectral flatness and classical smoothness of
+$\pi_0(A)\to\pi_0(B)$. The two notions agree for \`etale morphisms but not
+for arbitrary smooth morphisms. In particular, the brave new affine line
+is smooth by its cotangent complex even when it is not flat. See
+\cite{KhanBraveNewMotivicI}.
+\end{remark}
+
+\subsection{Permanence properties}
+
+\begin{proposition}[Base change of smooth and \`etale morphisms]
+\label{prop:smooth-etale-base-change}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    A
+        \arrow[r]
+        \arrow[d]
+    &
+    B
+        \arrow[d]
+    \\
+    A'
+        \arrow[r]
+    &
+    B':=B\otimes_AA'
+\end{tikzcd}
+\]
+be a pushout square of connective commutative ring spectra.
+\begin{enumerate}[label=(\roman*)]
+    \item If $A\to B$ is \`etale, then $A'\to B'$ is \`etale.
+
+    \item If $A\to B$ is smooth, then $A'\to B'$ is smooth.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Finite presentation is preserved under base change by
+\Ref{prop:finite-presentation-permanence}. The cotangent base-change
+equivalence
+\[
+    L_{B'/A'}
+    \simeq
+    L_{B/A}\otimes_BB'
+\]
+is \Ref{thm:cotangent-base-change}. Vanishing and finite local freeness are
+preserved under pullback.
+\end{proof}
+
+\begin{proposition}[Composition of smooth and \`etale morphisms]
+\label{prop:smooth-etale-composition}
+Let
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C
+\]
+be morphisms of connective commutative ring spectra.
+\begin{enumerate}[label=(\roman*)]
+    \item If both morphisms are \`etale, then $A\to C$ is \`etale.
+
+    \item If both morphisms are smooth, then $A\to C$ is smooth.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Finite presentation is stable under composition by
+\Ref{prop:finite-presentation-permanence}.
+
+The transitivity triangle is
+\[
+    L_{B/A}\otimes_BC
+    \longrightarrow
+    L_{C/A}
+    \longrightarrow
+    L_{C/B}
+    \xrightarrow{\partial}
+    (L_{B/A}\otimes_BC)[1].
+\]
+
+If both maps are \`etale, the two outer cotangent complexes vanish, and
+therefore
+\[
+    L_{C/A}
+    \simeq
+    0.
+\]
+This proves (i).
+
+Suppose both maps are smooth. Put
+\[
+    P
+    :=
+    L_{B/A}\otimes_BC,
+    \qquad
+    Q
+    :=
+    L_{C/B}.
+\]
+Both $P$ and $Q$ are finite locally free $C$-modules.
+
+After restricting to a Zariski open cover of $\Spec(C)$, both modules are
+finite free. On such an open, the connecting morphism
+\[
+    \partial
+    \colon
+    Q
+    \longrightarrow
+    P[1]
+\]
+is null. Indeed, if $Q\simeq C^{\oplus r}$, then
+\[
+    \pi_0
+    \Map_{\Mod_C}
+    \bigl(
+        Q,
+        P[1]
+    \bigr)
+\]
+is a finite direct summand of
+\[
+    \pi_0(P[1])^{\oplus r}
+    =
+    \pi_{-1}(P)^{\oplus r}
+    =
+    0,
+\]
+because $P$ is connective.
+
+The transitivity triangle therefore splits Zariski-locally:
+\[
+    L_{C/A}
+    \simeq
+    P\oplus Q.
+\]
+Thus $L_{C/A}$ is finite locally free. Hence $A\to C$ is smooth.
+\end{proof}
+
+\begin{corollary}[\'{E}tale implies smooth]
+\label{cor:etale-implies-smooth}
+Every \`etale morphism of connective commutative ring spectra is smooth.
+\end{corollary}
+
+\begin{proof}
+The zero module is finite locally free of rank zero.
+\end{proof}
+
+\begin{proposition}[Open immersions are \`etale]
+\label{prop:open-immersions-etale}
+Every affine spectral open immersion is \`etale.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    A
+    \longrightarrow
+    B
+\]
+represent an affine spectral open immersion. By the definition and
+classification of affine spectral open immersions, the morphism is of
+finite presentation and is an epimorphism in commutative ring spectra:
+the multiplication morphism
+\[
+    B\otimes_A B
+    \longrightarrow
+    B
+\]
+is an equivalence.
+
+Let \(M\) be a \(B\)-module, and let
+\[
+    B\oplus M
+    \longrightarrow
+    B
+\]
+be the associated split square-zero extension. The space of relative
+derivations is the homotopy fibre
+\[
+    \Der_A(B,M)
+    \simeq
+    \operatorname{fib}_{\id_B}
+    \left(
+        \Map_{\CAlg(\Sp)_{A/}}
+        \bigl(
+            B,
+            B\oplus M
+        \bigr)
+        \longrightarrow
+        \Map_{\CAlg(\Sp)_{A/}}
+        \bigl(
+            B,
+            B
+        \bigr)
+    \right).
+\]
+By extension of scalars along \(A\to B\), this homotopy fibre is
+canonically equivalent to
+\[
+    \operatorname{fib}_{\mu}
+    \left(
+        \Map_{\CAlg(\Sp)_{B/}}
+        \bigl(
+            B\otimes_A B,
+            B\oplus M
+        \bigr)
+        \longrightarrow
+        \Map_{\CAlg(\Sp)_{B/}}
+        \bigl(
+            B\otimes_A B,
+            B
+        \bigr)
+    \right),
+\]
+where
+\[
+    \mu
+    \colon
+    B\otimes_A B
+    \longrightarrow
+    B
+\]
+is the multiplication morphism. Since \(\mu\) is an equivalence, this
+is equivalent to
+\[
+    \operatorname{fib}_{\id_B}
+    \left(
+        \Map_{\CAlg(\Sp)_{B/}}
+        \bigl(
+            B,
+            B\oplus M
+        \bigr)
+        \longrightarrow
+        \Map_{\CAlg(\Sp)_{B/}}
+        \bigl(
+            B,
+            B
+        \bigr)
+    \right).
+\]
+The object \(B\) is initial in
+\[
+    \CAlg(\Sp)_{B/},
+\]
+so both mapping spaces in the last display are contractible. Hence
+\[
+    \Der_A(B,M)
+    \simeq
+    *
+\]
+for every \(B\)-module \(M\).
+
+Since the cotangent complex represents relative derivations, it follows
+that
+\[
+    \Map_{\Mod_B}
+    \bigl(
+        L_{B/A},
+        M
+    \bigr)
+    \simeq
+    *
+\]
+for every \(B\)-module \(M\). Therefore
+\[
+    L_{B/A}
+    \simeq
+    0.
+\]
+The morphism \(A\to B\) is thus of finite presentation with vanishing
+relative cotangent complex, and hence is \`etale. See
+\cite{LurieSAG}.
+\end{proof}
+
+\subsection{Classical characterization of \texorpdfstring{\'{e}tale}{etale}
+morphisms}
+
+\begin{theorem}[Affine spectral \`etale classification]
+\label{thm:affine-spectral-etale-classification}
+Let
+\[
+    A
+    \in
+    \CAlg(\Sp)^{\mathrm{cn}}.
+\]
+The functor
+\[
+    B
+    \longmapsto
+    \pi_0(B)
+\]
+induces an equivalence from the full subcategory of
+\[
+    \CAlg(\Sp)^{\mathrm{cn}}_{A/}
+\]
+spanned by the \`etale \(A\)-algebras to the ordinary category of
+\`etale \(\pi_0(A)\)-algebras, regarded as an \(\infty\)-category through
+its nerve.
+
+Under this equivalence, the \`etale \(A\)-algebra corresponding to an
+ordinary \`etale \(\pi_0(A)\)-algebra \(R\) is flat over \(A\) and
+satisfies
+\[
+    \pi_n(B)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    R
+\]
+for every integer \(n\).
+\end{theorem}
+
+\begin{proof}
+This is the affine spectral classification theorem for \`etale
+connective commutative ring spectra. We use it as a foundational input
+to the spectral \`etale theory developed in this chapter. See
+\cite{LurieSAG,KhanBraveNewMotivicI}.
+\end{proof}
+
+\begin{theorem}[Spectral \`etale criterion]
+\label{thm:spectral-etale-criterion}
+For a morphism
+\[
+    A
+    \longrightarrow
+    B
+\]
+of connective commutative ring spectra, the following are equivalent.
+\begin{enumerate}[label=(\roman*)]
+    \item The morphism \(A\to B\) is \`etale.
+
+    \item The morphism \(A\to B\) is flat and the ordinary ring map
+    \[
+        \pi_0(A)
+        \longrightarrow
+        \pi_0(B)
+    \]
+    is \`etale.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Suppose first that
+\[
+    A
+    \longrightarrow
+    B
+\]
+is \`etale. By
+\Ref{thm:affine-spectral-etale-classification},
+the ordinary ring map
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(B)
+\]
+is \`etale, the \(A\)-algebra \(B\) is flat, and there are natural
+isomorphisms
+\[
+    \pi_n(B)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(B)
+\]
+for every integer \(n\). This proves
+\[
+    \textup{(i)}
+    \Longrightarrow
+    \textup{(ii)}.
+\]
+
+Conversely, suppose that \(A\to B\) is flat and that
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(B)
+\]
+is \`etale. By
+\Ref{thm:affine-spectral-etale-classification},
+there exists an \`etale connective \(A\)-algebra
+\[
+    B_{\mathrm{\acute et}}
+\]
+together with an isomorphism
+\[
+    \theta
+    \colon
+    \pi_0(B_{\mathrm{\acute et}})
+    \xrightarrow{\simeq}
+    \pi_0(B).
+\]
+
+The canonical truncation morphism
+\[
+    B_{\mathrm{\acute et}}
+    \longrightarrow
+    H\pi_0(B_{\mathrm{\acute et}})
+\]
+followed by \(H\theta\) gives an \(A\)-algebra morphism
+\[
+    g_0
+    \colon
+    B_{\mathrm{\acute et}}
+    \longrightarrow
+    \tau_{\leq0}B
+    \simeq
+    H\pi_0(B)
+\]
+which induces \(\theta\) on degree-zero homotopy.
+
+For every \(n\geq1\), multiplicative Postnikov theory expresses
+\[
+    \tau_{\leq n}B
+    \longrightarrow
+    \tau_{\leq n-1}B
+\]
+as a structured square-zero extension of connective \(A\)-algebras.
+Since
+\[
+    L_{B_{\mathrm{\acute et}}/A}
+    \simeq
+    0,
+\]
+the affine cotangent obstruction theory shows that every \(A\)-algebra
+morphism
+\[
+    B_{\mathrm{\acute et}}
+    \longrightarrow
+    \tau_{\leq n-1}B
+\]
+admits a lift to
+\[
+    \tau_{\leq n}B,
+\]
+and that the space of such lifts is contractible.
+
+Starting with \(g_0\), we therefore obtain a compatible family of
+\(A\)-algebra morphisms
+\[
+    g_n
+    \colon
+    B_{\mathrm{\acute et}}
+    \longrightarrow
+    \tau_{\leq n}B.
+\]
+Postnikov completeness gives
+\[
+    B
+    \simeq
+    \lim_{\longleftarrow n}
+    \tau_{\leq n}B,
+\]
+so the compatible family determines an \(A\)-algebra morphism
+\[
+    g
+    \colon
+    B_{\mathrm{\acute et}}
+    \longrightarrow
+    B
+\]
+whose map on \(\pi_0\) is \(\theta\).
+
+By
+\Ref{thm:affine-spectral-etale-classification},
+the algebra \(B_{\mathrm{\acute et}}\) is flat over \(A\), and \(B\) is
+flat by assumption. Hence, for every integer \(n\), there are natural
+identifications
+\[
+    \pi_n(B_{\mathrm{\acute et}})
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(B_{\mathrm{\acute et}})
+\]
+and
+\[
+    \pi_n(B)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(B).
+\]
+Under these identifications, naturality of the flat homotopy-group
+formula identifies \(\pi_n(g)\) with
+\[
+    \id_{\pi_n(A)}
+    \otimes
+    \pi_0(g).
+\]
+Since
+\[
+    \pi_0(g)
+    =
+    \theta
+\]
+is an isomorphism, \(\pi_n(g)\) is an isomorphism for every integer
+\(n\). Therefore
+\[
+    g
+    \colon
+    B_{\mathrm{\acute et}}
+    \xrightarrow{\simeq}
+    B
+\]
+is an equivalence.
+
+It follows that \(B\) is an \`etale \(A\)-algebra. Hence
+\[
+    L_{B/A}
+    \simeq
+    0
+\]
+and \(B\) is of finite presentation over \(A\). This proves
+\[
+    \textup{(ii)}
+    \Longrightarrow
+    \textup{(i)}.
+\]
+\end{proof}
+
+\begin{definition}[The \`etale category over a spectral scheme]
+\label{def:etale-category-over-spectral-scheme}
+For a spectral scheme \(S\), let
+\[
+    \operatorname{Et}(S)
+\]
+denote the full subcategory of
+\[
+    \operatorname{Sch}^{\mathrm{sp}}_{/S}
+\]
+spanned by the \`etale morphisms
+\[
+    X
+    \longrightarrow
+    S.
+\]
+Its morphisms are arbitrary morphisms of spectral schemes over \(S\).
+
+For an ordinary scheme \(S_0\), let
+\[
+    \operatorname{Et}(S_0)
+\]
+denote the ordinary category of ordinary schemes \`etale over \(S_0\),
+regarded as an \(\infty\)-category through its nerve. In particular, its
+mapping spaces are discrete.
+\end{definition}
+
+\begin{theorem}[Invariance of \`etale geometry under classical truncation]
+\label{thm:etale-invariance-classical-truncation}
+For every spectral scheme \(S\), base change along
+\[
+    S_{\mathrm{cl}}
+    \longrightarrow
+    S
+\]
+induces an equivalence
+\[
+    \operatorname{Et}(S)
+    \xrightarrow{\simeq}
+    \operatorname{Et}(S_{\mathrm{cl}}).
+\]
+This equivalence restricts to the full subcategories spanned by morphisms
+of finite presentation.
+\end{theorem}
+
+\begin{proof}
+The assertion is affine-local on the base. Let
+\[
+    S
+    =
+    \Spec(A).
+\]
+By the spectral classification theorem for \`etale connective
+\(A\)-algebras, the functor
+\[
+    B
+    \longmapsto
+    \pi_0(B)
+\]
+induces an equivalence between the \(\infty\)-category of \`etale
+connective \(A\)-algebras and the ordinary category of \`etale
+\(\pi_0(A)\)-algebras.
+
+Under this equivalence, an \`etale connective \(A\)-algebra \(B\) is
+determined by the ordinary \`etale algebra \(\pi_0(B)\), and its higher
+homotopy groups are forced by the flat base-change formula
+\[
+    \pi_n(B)
+    \simeq
+    \pi_n(A)
+    \otimes_{\pi_0(A)}
+    \pi_0(B)
+\]
+for every integer \(n\).
+
+Equivalently, existence and contractible uniqueness may be obtained
+inductively along the multiplicative Postnikov tower of \(A\). At each
+stage the relevant extension is structured square-zero, and the
+vanishing of the relative cotangent complex of an \`etale algebra makes
+the lifting space contractible.
+
+Passing to opposite categories gives an equivalence between affine
+spectral schemes \`etale over \(\Spec(A)\) and ordinary affine schemes
+\`etale over
+\[
+    \Spec\pi_0(A)
+    =
+    S_{\mathrm{cl}}.
+\]
+These affine equivalences are compatible with restriction to affine open
+subschemes and with \`etale base change. They therefore glue by \`etale
+descent to an equivalence
+\[
+    \operatorname{Et}(S)
+    \xrightarrow{\simeq}
+    \operatorname{Et}(S_{\mathrm{cl}}).
+\]
+
+Finite presentation is preserved and detected under this equivalence:
+affine-locally it is the compactness condition on the corresponding
+algebra, and globally the additional quasi-compactness and
+quasi-separatedness conditions are unchanged under classical
+truncation. Hence the equivalence restricts to the full subcategories of
+morphisms of finite presentation.
+
+See \cite{LurieSAG}.
+\end{proof}
+
+\begin{proposition}[Diagonals and monomorphisms of \`etale morphisms]
+\label{prop:etale-diagonal-and-monomorphisms}
+Let
+\[
+    f
+    \colon
+    Y
+    \longrightarrow
+    X
+\]
+be a morphism of spectral schemes.
+\begin{enumerate}[label=(\roman*)]
+    \item If \(f\) is \`etale, then its diagonal
+    \[
+        \Delta_f
+        \colon
+        Y
+        \longrightarrow
+        Y\times_XY
+    \]
+    is an open immersion.
+
+    \item Every \`etale monomorphism of spectral schemes is an open
+    immersion.
+
+    \item Every \`etale closed immersion is an open-and-closed
+    immersion.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We first prove (ii). Suppose that
+\[
+    f
+    \colon
+    Y
+    \longrightarrow
+    X
+\]
+is an \`etale monomorphism. Classical truncation preserves fibre
+products, so
+\[
+    f_{\mathrm{cl}}
+    \colon
+    Y_{\mathrm{cl}}
+    \longrightarrow
+    X_{\mathrm{cl}}
+\]
+is an ordinary \`etale monomorphism. It is therefore an ordinary open
+immersion.
+
+Let
+\[
+    U
+    \hookrightarrow
+    X
+\]
+be the spectral open subscheme corresponding to the open subscheme
+\(Y_{\mathrm{cl}}\subseteq X_{\mathrm{cl}}\). Then
+\[
+    U_{\mathrm{cl}}
+    \simeq
+    Y_{\mathrm{cl}}
+\]
+over \(X_{\mathrm{cl}}\). Both
+\[
+    Y
+    \longrightarrow
+    X
+\]
+and
+\[
+    U
+    \longrightarrow
+    X
+\]
+are \`etale. By
+\Ref{thm:etale-invariance-classical-truncation},
+the equivalence of their classical truncations lifts uniquely to an
+equivalence
+\[
+    Y
+    \xrightarrow{\simeq}
+    U
+\]
+over \(X\). Thus \(f\) is an open immersion.
+
+We next prove (i). The assertion is local on \(X\) and \(Y\), so consider
+an \`etale morphism of connective commutative ring spectra
+\[
+    A
+    \longrightarrow
+    B.
+\]
+Put
+\[
+    C
+    :=
+    B\otimes_AB.
+\]
+The diagonal is represented contravariantly by the multiplication
+morphism
+\[
+    \mu
+    \colon
+    C
+    \longrightarrow
+    B.
+\]
+
+The morphism
+\[
+    B
+    \longrightarrow
+    C
+\]
+obtained from either tensor factor is a base change of \(A\to B\) and
+is therefore \`etale. Consequently the composite
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C
+\]
+is \`etale. In particular, both \(B\) and \(C\) are compact objects of
+\[
+    \CAlg(\Sp)_{A/}.
+\]
+
+Applying
+\Ref{lem:compact-arrow-undercategory}
+to
+\[
+    C
+    \xrightarrow{\mu}
+    B
+\]
+in \(\CAlg(\Sp)_{A/}\) shows that \(B\) is compact as a
+\(C\)-algebra. Hence \(\mu\) is of finite presentation.
+
+The transitivity triangle for
+\[
+    A
+    \longrightarrow
+    C
+    \xrightarrow{\mu}
+    B
+\]
+is
+\[
+    L_{C/A}\otimes_CB
+    \longrightarrow
+    L_{B/A}
+    \longrightarrow
+    L_{B/C}.
+\]
+Both \(A\to C\) and \(A\to B\) are \`etale, so
+\[
+    L_{C/A}
+    \simeq
+    0
+    \qquad\text{and}\qquad
+    L_{B/A}
+    \simeq
+    0.
+\]
+It follows that
+\[
+    L_{B/C}
+    \simeq
+    0.
+\]
+Thus
+\[
+    C
+    \longrightarrow
+    B
+\]
+is \`etale.
+
+The diagonal is always a monomorphism. It is therefore an \`etale
+monomorphism, and (ii) shows that it is an open immersion. This proves
+(i).
+
+Finally, if \(f\) is both \`etale and a closed immersion, then (ii)
+shows that it is also an open immersion. Hence it is an open-and-closed
+immersion, proving (iii).
+\end{proof}
+
+\begin{corollary}[\'{E}tale morphisms are flat]
+\label{cor:etale-flat}
+Every \`etale morphism of connective commutative ring spectra is flat.
+\end{corollary}
+
+\begin{proof}
+Apply \Ref{thm:spectral-etale-criterion}.
+\end{proof}
+
+\subsection{Brave new affine space and local standard form}
+
+\begin{proposition}[Smoothness of brave new affine space]
+\label{prop:brave-new-affine-space-smooth}
+For every spectral scheme $X$ and every integer $n\geq0$, the projection
+\[
+    \mathbb A_X^n
+    \longrightarrow
+    X
+\]
+is smooth and of finite presentation.
+\end{proposition}
+
+\begin{proof}
+The assertion is local on $X$. For $X=\Spec(A)$, the coordinate algebra is
+\[
+    A\{t_1,\ldots,t_n\}
+    =
+    \operatorname{Sym}_A(A^{\oplus n}),
+\]
+which is a finite cell commutative $A$-algebra and hence is of finite
+presentation. Its cotangent complex is finite free of rank $n$ by
+\Ref{cor:cotangent-brave-new-affine-space}.
+\end{proof}
+
+\begin{proposition}[Smoothness of relative vector spaces]
+\label{prop:relative-vector-space-smooth}
+Let \(X\) be a spectral scheme, and let
+\[
+    E
+    \in
+    \QCoh(X)
+\]
+be finite locally free. Then the projection
+\[
+    \pi
+    \colon
+    \mathbb V_X(E)
+    :=
+    \Spec_X
+    \operatorname{Sym}_{\mathcal O_X}(E)
+    \longrightarrow
+    X
+\]
+is smooth and of finite presentation. Moreover, there is a canonical
+equivalence
+\[
+    L_{\mathbb V_X(E)/X}
+    \simeq
+    \pi^*E.
+\]
+\end{proposition}
+
+\begin{proof}
+The assertions are local on \(X\) for the spectral Zariski topology.
+Choose an affine open cover
+\[
+    \{U_\alpha\to X\}_\alpha
+\]
+on which \(E\) is free of finite rank. Thus, for every \(\alpha\), there
+is an integer \(n_\alpha\geq0\) and an equivalence
+\[
+    E|_{U_\alpha}
+    \simeq
+    \mathcal O_{U_\alpha}^{\oplus n_\alpha}.
+\]
+
+The relative free commutative algebra commutes with restriction, so
+\[
+\begin{aligned}
+    \mathbb V_X(E)\times_XU_\alpha
+    &\simeq
+    \Spec_{U_\alpha}
+    \operatorname{Sym}_{\mathcal O_{U_\alpha}}
+    \bigl(
+        \mathcal O_{U_\alpha}^{\oplus n_\alpha}
+    \bigr)
+    \\
+    &\simeq
+    \mathbb A^{n_\alpha}_{U_\alpha}.
+\end{aligned}
+\]
+By
+\Ref{prop:brave-new-affine-space-smooth},
+each projection
+\[
+    \mathbb A^{n_\alpha}_{U_\alpha}
+    \longrightarrow
+    U_\alpha
+\]
+is smooth and of finite presentation. Hence
+\[
+    \mathbb V_X(E)
+    \longrightarrow
+    X
+\]
+is smooth and locally of finite presentation.
+
+The projection is affine. It is therefore quasi-compact and
+quasi-separated, so it is of finite presentation in the sense of
+\Ref{def:finitely-presented-spectral-morphism}.
+
+On each \(U_\alpha\), the cotangent complex of the relative free
+commutative algebra gives
+\[
+\begin{aligned}
+    L_{\mathbb V_X(E)/X}
+    \big|_{\mathbb V_X(E)\times_XU_\alpha}
+    &\simeq
+    \mathcal O_{\mathbb A^{n_\alpha}_{U_\alpha}}^{\oplus n_\alpha}
+    \\
+    &\simeq
+    \pi^*
+    \bigl(
+        E|_{U_\alpha}
+    \bigr).
+\end{aligned}
+\]
+These local equivalences are the restrictions of the canonical
+free-algebra cotangent equivalence and therefore agree on overlaps.
+They descend to a canonical global equivalence
+\[
+    L_{\mathbb V_X(E)/X}
+    \simeq
+    \pi^*E.
+\]
+\end{proof}
+
+\begin{theorem}[Local standard form of smooth morphisms]
+\label{thm:smooth-local-standard-form}
+Let $A\to B$ be a smooth morphism of connective commutative ring spectra.
+For every point of $\Spec\pi_0(B)$, there exists an affine spectral open
+neighbourhood $\Spec(B')\to\Spec(B)$, an integer $n\geq0$, and a
+factorization
+\[
+\begin{tikzcd}[column sep=large]
+    \Spec(B')
+        \arrow[r, "u"]
+    &
+    \mathbb A_{\Spec(A)}^n
+        \arrow[r]
+    &
+    \Spec(A)
+\end{tikzcd}
+\]
+in which $u$ is \`etale.
+\end{theorem}
+
+\begin{proof}
+Fix a point of $\Spec\pi_0(B)$. Since $L_{B/A}$ is finite locally free,
+after replacing $\Spec(B)$ by an affine open neighbourhood of the chosen
+point, we may suppose that
+\[
+    L_{B/A}
+    \simeq
+    B^{\oplus n}.
+\]
+By \Ref{prop:cotangent-connectivity-degree-zero}, there is a natural
+identification
+\[
+    \pi_0(L_{B/A})
+    \simeq
+    \Omega^1_{\pi_0(B)/\pi_0(A)}.
+\]
+The ordinary cotangent module is generated by universal differentials.
+Choose elements
+\[
+    b_1,\ldots,b_n
+    \in
+    \pi_0(B)
+\]
+whose differentials form a basis after tensoring with the residue field of
+the chosen point. The determinant of the resulting morphism
+\[
+    \pi_0(B)^{\oplus n}
+    \longrightarrow
+    \pi_0(L_{B/A})
+\]
+is invertible at that point. Localizing $B$ at this determinant and
+relabeling the resulting affine neighbourhood by $B$, we may therefore
+suppose that the universal differentials $db_1,\ldots,db_n$ form a basis
+of $\pi_0(L_{B/A})$ on the entire neighbourhood.
+
+Put
+\[
+    P
+    :=
+    A\{t_1,\ldots,t_n\}
+    =
+    \operatorname{Sym}_A(A^{\oplus n}).
+\]
+Choose points
+\[
+    \widetilde b_i
+    \in
+    \Omega^\infty B
+\]
+representing the classes
+\[
+    b_i
+    \in
+    \pi_0(B).
+\]
+They determine an $A$-module morphism
+\[
+    A^{\oplus n}
+    \longrightarrow
+    B.
+\]
+By the free-algebra adjunction, this morphism determines an
+$A$-algebra morphism
+\[
+    \varphi
+    \colon
+    P
+    \longrightarrow
+    B.
+\]
+The transitivity triangle for
+\[
+    A
+    \longrightarrow
+    P
+    \xrightarrow{\varphi}
+    B
+\]
+is
+\[
+    L_{P/A}\otimes_PB
+    \longrightarrow
+    L_{B/A}
+    \longrightarrow
+    L_{B/P}.
+\]
+Using
+\[
+    L_{P/A}
+    \simeq
+    P^{\oplus n},
+\]
+the first map is
+\[
+    B^{\oplus n}
+    \longrightarrow
+    L_{B/A}
+\]
+with components $db_i$. By construction it is an isomorphism on
+$\pi_0$.
+
+Both its source and target are finite locally free and hence flat
+$B$-modules. Therefore, for every integer $m$,
+\[
+    \pi_m(B^{\oplus n})
+    \simeq
+    \pi_m(B)
+    \otimes_{\pi_0(B)}
+    \pi_0(B^{\oplus n})
+\]
+and
+\[
+    \pi_m(L_{B/A})
+    \simeq
+    \pi_m(B)
+    \otimes_{\pi_0(B)}
+    \pi_0(L_{B/A}).
+\]
+Under these identifications, the map on $\pi_m$ is obtained by tensoring
+the map on $\pi_0$ with $\pi_m(B)$. It is therefore an isomorphism for
+every $m$. Hence
+\[
+    B^{\oplus n}
+    \xrightarrow{\simeq}
+    L_{B/A},
+\]
+and the transitivity triangle gives
+\[
+    L_{B/P}
+    \simeq
+    0.
+\]
+
+It remains to prove finite presentation over $P$. The $A$-algebras $P$
+and $B$ are compact in $\CAlg(\Sp)_{A/}$: the first is a finite free cell
+algebra, and the second is compact by smoothness. Apply
+\Ref{lem:compact-arrow-undercategory} to the morphism
+\[
+    P
+    \longrightarrow
+    B
+\]
+in $\CAlg(\Sp)_{A/}$. It follows that $B$ is compact in
+\[
+    \bigl(\CAlg(\Sp)_{A/}\bigr)_{P/}
+    \simeq
+    \CAlg(\Sp)_{P/}.
+\]
+Thus $P\to B$ is of finite presentation. Together with
+$L_{B/P}\simeq0$, this shows that $P\to B$ is \`etale.
+
+Passing to affine spectra gives the required factorization.
+\end{proof}
+
+\begin{corollary}[Classical truncation of a smooth morphism]
+\label{cor:classical-truncation-smooth}
+If $A\to B$ is smooth, then the ordinary ring map
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(B)
+\]
+is smooth.
+\end{corollary}
+
+\begin{proof}
+Apply classical truncation to the local standard factorization of
+\Ref{thm:smooth-local-standard-form}. The truncation of the \`etale map is
+\`etale by \Ref{thm:spectral-etale-criterion}, and the truncation of brave
+new affine space is ordinary affine space by
+\Ref{prop:classical-truncation-affine-space}.
+\end{proof}
+
+\subsection{Global smooth and \texorpdfstring{\'{e}tale}{etale} morphisms}
+
+\begin{definition}[Locally finite presentation]
+\label{def:locally-finitely-presented-spectral-morphism}
+A morphism
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+of spectral schemes is \textbf{locally of finite presentation} if, for
+every affine open
+\[
+    V=\Spec(A)
+    \longrightarrow
+    Y,
+\]
+there exists an affine open cover
+\[
+    \{\Spec(B_\alpha)\to X\times_YV\}_{\alpha\in I}
+\]
+such that every connective commutative $A$-algebra $B_\alpha$ is compact
+in
+\[
+    \CAlg(\Sp)_{A/}.
+\]
+\end{definition}
+
+\begin{definition}[Finite presentation]
+\label{def:finitely-presented-spectral-morphism}
+A morphism of spectral schemes is \textbf{of finite presentation} if it
+is:
+\begin{enumerate}[label=(\roman*)]
+    \item locally of finite presentation;
+
+    \item quasi-compact;
+
+    \item quasi-separated.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Permanence of global finite presentation]
+\label{prop:global-finite-presentation-permanence}
+Morphisms locally of finite presentation are stable under equivalence,
+composition, and base change. Morphisms of finite presentation are stable
+under equivalence, composition, and base change.
+\end{proposition}
+
+\begin{proof}
+Local finite presentation is Zariski-local on both source and target.
+After passing to affine charts, its stability under equivalence,
+composition, and base change is exactly
+\Ref{prop:finite-presentation-permanence}.
+
+Now consider morphisms of finite presentation. Quasi-compact morphisms
+and quasi-separated morphisms are each stable under equivalence,
+composition, and base change. Combining these permanence properties with
+the corresponding permanence of local finite presentation proves that
+morphisms of finite presentation are stable under equivalence,
+composition, and base change.
+\end{proof}
+
+\begin{definition}[Smooth and \`etale morphisms of spectral schemes]
+\label{def:global-smooth-etale}
+A morphism
+\[
+    f
+    \colon
+    X
+    \longrightarrow
+    Y
+\]
+of spectral schemes is \textbf{smooth}, respectively \textbf{\`etale}, if
+the following affine-local condition holds.
+
+For every affine open
+\[
+    V=\Spec(A)
+    \longrightarrow
+    Y
+\]
+there exists an affine open cover
+\[
+    \{\Spec(B_\alpha)\to X\times_YV\}_{\alpha\in I}
+\]
+such that every induced algebra morphism
+\[
+    A
+    \longrightarrow
+    B_\alpha
+\]
+is smooth, respectively \`etale, in the sense of
+\Ref{def:smooth-spectral-algebra}, respectively
+\Ref{def:etale-spectral-algebra}.
+\end{definition}
+
+\begin{proposition}[Locality of smoothness and \`etaleness]
+\label{prop:smooth-etale-locality}
+The definition of \Ref{def:global-smooth-etale} is independent of the
+chosen affine covers. Smoothness and \`etaleness are local on both source
+and target for the spectral Zariski topology.
+\end{proposition}
+
+\begin{proof}
+Finite presentation and finite local freeness of the cotangent complex are
+Zariski-local. The cotangent complex itself is compatible with affine
+restriction by \Ref{thm:global-cotangent-affine-compatibility}. Vanishing is likewise
+local because affine restriction functors over a cover are jointly
+conservative.
+\end{proof}
+
+\begin{proposition}[Global permanence]
+\label{prop:global-smooth-etale-permanence}
+Smooth and \`etale morphisms of spectral schemes are stable under
+equivalence, composition, and base change. Open immersions are \`etale,
+and \`etale morphisms are smooth and flat.
+\end{proposition}
+
+\begin{proof}
+All assertions are local on source and target. Reduce to the affine
+permanence results
+\Ref{prop:smooth-etale-base-change},
+\Ref{prop:smooth-etale-composition},
+\Ref{prop:open-immersions-etale}, and
+\Ref{cor:etale-flat}.
+\end{proof}
+
+
+
+\section{Lifting and neighbourhood theorems}
+\label{sec:smooth-etale-lifting-neighbourhoods}
+
+\subsection{Lifting over square-zero extensions}
+
+\begin{corollary}[Lifting \`etale algebras]
+\label{cor:lifting-etale-algebras}
+In the situation of \Ref{thm:affine-cotangent-obstruction}, suppose that
+\[
+    A
+    \longrightarrow
+    B
+\]
+is \`etale. Then the \(\infty\)-groupoid of pairs
+\[
+    (B',\alpha),
+\]
+where \(B'\) is an \`etale \(A'\)-algebra and
+\[
+    \alpha
+    \colon
+    B'\otimes_{A'}A
+    \xrightarrow{\simeq}
+    B
+\]
+is an equivalence of \(A\)-algebras, is contractible.
+\end{corollary}
+
+\begin{proof}
+The morphism
+\[
+    \pi_0(A')
+    \longrightarrow
+    \pi_0(A)
+\]
+is a square-zero extension of ordinary commutative rings. Since
+\[
+    \pi_0(A)
+    \longrightarrow
+    \pi_0(B)
+\]
+is \`etale, invariance of ordinary \`etale algebras under nilpotent
+extensions supplies an \`etale \(\pi_0(A')\)-algebra \(B'_0\), unique up
+to unique isomorphism, together with an isomorphism
+\[
+    \beta_0
+    \colon
+    B'_0
+    \otimes_{\pi_0(A')}
+    \pi_0(A)
+    \xrightarrow{\simeq}
+    \pi_0(B).
+\]
+
+By
+\Ref{thm:etale-invariance-classical-truncation},
+the algebra \(B'_0\) determines an \`etale connective \(A'\)-algebra
+\[
+    A'
+    \longrightarrow
+    B',
+\]
+unique up to a contractible space of choices.
+
+The base change
+\[
+    B'\otimes_{A'}A
+\]
+is an \`etale \(A\)-algebra. Its degree-zero homotopy ring is naturally
+identified with
+\[
+    B'_0
+    \otimes_{\pi_0(A')}
+    \pi_0(A),
+\]
+and hence \(\beta_0\) gives an isomorphism
+\[
+    \pi_0
+    \bigl(
+        B'\otimes_{A'}A
+    \bigr)
+    \xrightarrow{\simeq}
+    \pi_0(B).
+\]
+
+Applying
+\Ref{thm:etale-invariance-classical-truncation}
+over \(A\), this isomorphism lifts to an equivalence of \(A\)-algebras
+\[
+    \alpha
+    \colon
+    B'\otimes_{A'}A
+    \xrightarrow{\simeq}
+    B.
+\]
+The space of equivalences inducing the specified isomorphism on
+degree-zero homotopy is contractible.
+
+Ordinary \`etale lifting across the square-zero extension
+\[
+    \pi_0(A')
+    \longrightarrow
+    \pi_0(A)
+\]
+is unique up to unique isomorphism, and spectral \`etale algebras over a
+connective base are determined by their classical truncations up to a
+contractible space of choices. It follows that the \(\infty\)-groupoid
+of pairs
+\[
+    (B',\alpha)
+\]
+with
+\[
+    \alpha
+    \colon
+    B'\otimes_{A'}A
+    \xrightarrow{\simeq}
+    B
+\]
+is contractible.
+\end{proof}
+
+\begin{corollary}[Local lifting of smooth algebras]
+\label{cor:local-lifting-smooth-algebras}
+In the situation of \Ref{thm:affine-cotangent-obstruction}, if $A\to B$ is
+smooth, then $B$ admits a deformation over $A'$ after restriction to a
+Zariski cover of $\Spec(B)$.
+\end{corollary}
+
+\begin{proof}
+Zariski-locally, $L_{B/A}$ is finite free and $A\to B$ admits the standard
+factorization of \Ref{thm:smooth-local-standard-form}. The brave new
+affine-space factor lifts canonically by base change, and the \`etale
+factor lifts uniquely by \Ref{cor:lifting-etale-algebras}. Their composite
+gives the required local lift.
+\end{proof}
+
+\subsection{Lifting across general closed immersions}
+
+\begin{theorem}[Local lifting across closed immersions]
+\label{thm:infinitesimal-lifting-smooth-etale}
+Let
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    S
+\]
+be a closed immersion of spectral schemes, and let
+\[
+    X
+    \longrightarrow
+    Z
+\]
+be smooth, respectively \`etale. Then every point of $X$ admits an open
+neighbourhood $U\subseteq X$ for which there exists a smooth,
+respectively \`etale, spectral scheme $\widetilde U\to S$ and an
+equivalence
+\[
+    \widetilde U\times_SZ
+    \simeq
+    U.
+\]
+For an infinitesimal or nilpotent thickening the \`etale lift is unique
+up to a contractible space of choices. No such uniqueness is asserted for
+an arbitrary closed immersion.
+\end{theorem}
+
+\begin{proof}
+The assertion is local on $S$, $Z$, and $X$, so fix a point and shrink
+until all three schemes are affine.
+
+Suppose first that $X\to Z$ is \`etale. Its classical truncation is an
+ordinary \`etale morphism. The ordinary local lifting theorem for
+\`etale morphisms across the closed immersion
+\[
+    Z_{\mathrm{cl}}
+    \hookrightarrow
+    S_{\mathrm{cl}}
+\]
+produces, after shrinking around the chosen point, an ordinary \`etale
+scheme
+\[
+    \widetilde U_0
+    \longrightarrow
+    S_{\mathrm{cl}}
+\]
+whose base change to $Z_{\mathrm{cl}}$ is $U_{\mathrm{cl}}$. By
+\Ref{thm:etale-invariance-classical-truncation}, $\widetilde U_0$ has a
+canonical spectral \`etale lift
+\[
+    \widetilde U
+    \longrightarrow
+    S.
+\]
+The two \`etale $Z$-schemes $\widetilde U\times_SZ$ and $U$ have
+equivalent classical truncations. Applying the same invariance theorem
+over $Z$ gives
+\[
+    \widetilde U\times_SZ
+    \simeq
+    U.
+\]
+This proves local existence. Different choices of the ordinary local lift
+need not be equivalent, which is why no uniqueness statement is made for
+a general closed immersion. If $Z\hookrightarrow S$ is an infinitesimal or nilpotent
+thickening, restriction induces an equivalence between the
+$\infty$-categories of \`etale spectral schemes over $S$ and over $Z$.
+Indeed, classical \`etale schemes are invariant under nilpotent
+thickenings, and
+\Ref{thm:etale-invariance-classical-truncation}
+identifies the spectral \`etale categories with their classical
+counterparts. Consequently the space of \`etale lifts is contractible.
+
+Now suppose that $X\to Z$ is smooth. By
+\Ref{thm:smooth-local-standard-form}, after shrinking around the chosen
+point there is a factorization
+\[
+    U
+    \longrightarrow
+    \mathbb A_Z^n
+    \longrightarrow
+    Z
+\]
+whose first morphism is \`etale. The affine-space factor lifts
+canonically to $\mathbb A_S^n\to S$. Apply the \`etale case to the closed
+immersion
+\[
+    \mathbb A_Z^n
+    \simeq
+    \mathbb A_S^n\times_SZ
+    \hookrightarrow
+    \mathbb A_S^n.
+\]
+The resulting \`etale lift over $\mathbb A_S^n$, composed with
+$\mathbb A_S^n\to S$, is smooth and restricts to $U\to Z$. See
+\cite{LurieSAG,KhanBraveNewMotivicI}.
+\end{proof}
+
+\subsection{Regularity of closed immersions}
+
+\begin{theorem}[Closed immersion between smooth schemes]
+\label{thm:closed-between-smooth-regular}
+Let $S$ be a spectral scheme. If
+\[
+    i
+    \colon
+    Z
+    \hookrightarrow
+    X
+\]
+is a closed immersion and both $Z\to S$ and $X\to S$ are smooth, then
+$i$ is a regular closed immersion.
+\end{theorem}
+
+\begin{proof}
+The assertion is local on $S$, $Z$, and $X$, so work with connective
+commutative ring spectra
+\[
+    A
+    \longrightarrow
+    B
+    \longrightarrow
+    C,
+\]
+where $A\to B$ and $A\to C$ are smooth and $B\to C$ is surjective on
+$\pi_0$.
+
+The $A$-algebras $B$ and $C$ are compact. Applying
+\Ref{lem:compact-arrow-undercategory} to $B\to C$ in
+$\CAlg(\Sp)_{A/}$ shows that $C$ is compact as a $B$-algebra. Hence the
+closed immersion is locally of finite presentation.
+
+The transitivity triangle is
+\[
+    L_{B/A}\otimes_BC
+    \longrightarrow
+    L_{C/A}
+    \longrightarrow
+    L_{C/B}.
+\]
+Put
+\[
+    P:=L_{B/A}\otimes_BC,
+    \qquad
+    Q:=L_{C/A}.
+\]
+Both $P$ and $Q$ are finite locally free $C$-modules. Since
+$\pi_0(B)\to\pi_0(C)$ is surjective,
+\[
+    \pi_0(L_{C/B})
+    \simeq
+    \Omega^1_{\pi_0(C)/\pi_0(B)}
+    =
+    0.
+\]
+Taking $\pi_0$ of the transitivity triangle gives a surjection
+\[
+    \pi_0(P)
+    \longrightarrow
+    \pi_0(Q).
+\]
+After a Zariski localization, choose a section of this surjection.
+
+Because $Q$ is finite projective, the canonical map
+\[
+    \pi_0\Map_{\Mod_C}(Q,P)
+    \longrightarrow
+    \Hom_{\pi_0(C)}
+    \bigl(
+        \pi_0(Q),
+        \pi_0(P)
+    \bigr)
+\]
+is surjective. Hence the section lifts to a morphism
+\[
+    s
+    \colon
+    Q
+    \longrightarrow
+    P.
+\]
+The composite
+\[
+    Q
+    \xrightarrow{s}
+    P
+    \longrightarrow
+    Q
+\]
+is the identity on $\pi_0$. Both modules are flat, so the flat
+homotopy-group formula shows that this composite is an equivalence.
+Consequently
+\[
+    P
+    \simeq
+    K\oplus Q,
+\]
+where
+\[
+    K
+    :=
+    \operatorname{fib}(P\to Q)
+\]
+is finite locally free. Rotating the transitivity triangle gives
+\[
+    K
+    \simeq
+    L_{C/B}[-1]
+    =
+    N^*_{Z/X}.
+\]
+Thus the conormal module is finite locally free, and the closed immersion
+is regular.
+\end{proof}
+
+\subsection{\'{E}tale neighbourhood of a smooth section}
+
+\begin{theorem}[Spectral tubular neighbourhood]
+\label{thm:spectral-tubular-neighbourhood}
+Let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be a smooth affine morphism, and let
+\[
+    s
+    \colon
+    S
+    \longrightarrow
+    X
+\]
+be a section. Then $s$ is a regular closed immersion. Put
+\[
+    N^*_{S/X}
+    :=
+    L_{S/X}[-1].
+\]
+There exists a Zariski open cover
+\[
+    \{S_\alpha\to S\}_\alpha
+\]
+such that, writing
+\[
+    X_\alpha
+    :=
+    X\times_SS_\alpha,
+\]
+there is an open neighbourhood
+\[
+    X_\alpha^\circ
+    \subseteq
+    X_\alpha
+\]
+of $s(S_\alpha)$ and an \`etale morphism over $S_\alpha$
+\[
+    \varphi_\alpha
+    \colon
+    X_\alpha^\circ
+    \longrightarrow
+    \mathbb V_{S_\alpha}
+    \bigl(
+        N^*_{S/X}|_{S_\alpha}
+    \bigr)
+\]
+which carries the section to the zero section.
+
+Under the canonical identifications
+\[
+    N^*_{S_\alpha/
+    \mathbb V_{S_\alpha}
+    (N^*_{S/X}|_{S_\alpha})}
+    \simeq
+    N^*_{S/X}|_{S_\alpha}
+\]
+and
+\[
+    N^*_{S_\alpha/X_\alpha^\circ}
+    \simeq
+    N^*_{S/X}|_{S_\alpha},
+\]
+the morphism on conormal modules induced by \(\varphi_\alpha\)
+is homotopic to the identity of
+\[
+    N^*_{S/X}|_{S_\alpha}.
+\]
+
+If $S$ is affine, the cover may be taken to consist of $S$ itself.
+\end{theorem}
+
+\begin{proof}
+We first verify directly that
+\[
+    s
+    \colon
+    S
+    \longrightarrow
+    X
+\]
+is a closed immersion. The assertion is local on \(S\). Write
+\[
+    S=\Spec(A),
+    \qquad
+    X=\Spec(B).
+\]
+The section is represented by an augmentation
+\[
+    \epsilon
+    \colon
+    B
+    \longrightarrow
+    A
+\]
+whose composite with the structural morphism
+\[
+    A
+    \longrightarrow
+    B
+\]
+is the identity. Consequently,
+\[
+    \pi_0(B)
+    \longrightarrow
+    \pi_0(A)
+\]
+is surjective. By the affine closed-immersion criterion,
+\[
+    s
+    \colon
+    S
+    \hookrightarrow
+    X
+\]
+is a closed immersion. It is regular by
+\Ref{thm:closed-between-smooth-regular}, applied to the smooth
+morphisms
+\[
+    X\longrightarrow S
+    \qquad\text{and}\qquad
+    S\longrightarrow S.
+\]
+
+The remaining assertion is Zariski-local on \(S\). Choose an affine open
+cover
+\[
+    \{S_\alpha\to S\}_\alpha.
+\]
+After base change to one member of this cover and suppressing the index,
+we may suppose that \(S\) is affine. Since \(p\) is affine, \(X\) is
+then affine. Put
+\[
+    N
+    :=
+    N^*_{S/X}.
+\]
+
+Write
+\[
+    X
+    \simeq
+    \Spec_S(\mathcal A)
+\]
+with augmentation
+\[
+    \epsilon
+    \colon
+    \mathcal A
+    \longrightarrow
+    \mathcal O_S
+\]
+corresponding to \(s\). On classical truncations, put
+\[
+    \mathcal I
+    :=
+    \ker
+    \left(
+        \pi_0(\mathcal A)
+        \longrightarrow
+        \mathcal O_{S_{\mathrm{cl}}}
+    \right).
+\]
+
+Transitivity for
+\[
+    S
+    \xrightarrow{s}
+    X
+    \xrightarrow{p}
+    S
+\]
+gives a canonical equivalence
+\[
+    N
+    =
+    L_{S/X}[-1]
+    \simeq
+    s^*L_{X/S}.
+\]
+The module \(L_{X/S}\) is finite locally free. The flat
+homotopy-group formula, together with the degree-zero comparison for the
+cotangent complex, therefore gives
+\[
+    \pi_0(N)
+    \simeq
+    \mathcal O_{S_{\mathrm{cl}}}
+    \otimes_{\pi_0(\mathcal A)}
+    \Omega^1_{\pi_0(\mathcal A)/
+    \mathcal O_{S_{\mathrm{cl}}}}.
+\]
+
+By
+\Ref{cor:classical-truncation-smooth}, the classical morphism
+\[
+    p_{\mathrm{cl}}
+    \colon
+    X_{\mathrm{cl}}
+    \longrightarrow
+    S_{\mathrm{cl}}
+\]
+is smooth. Its section
+\[
+    s_{\mathrm{cl}}
+    \colon
+    S_{\mathrm{cl}}
+    \longrightarrow
+    X_{\mathrm{cl}}
+\]
+is therefore a classical regular closed immersion. The classical
+conormal identification for a section of a smooth morphism gives a
+canonical isomorphism
+\[
+    \mathcal I/\mathcal I^2
+    \xrightarrow{\simeq}
+    \mathcal O_{S_{\mathrm{cl}}}
+    \otimes_{\pi_0(\mathcal A)}
+    \Omega^1_{\pi_0(\mathcal A)/
+    \mathcal O_{S_{\mathrm{cl}}}}.
+\]
+Consequently,
+\[
+    \pi_0(N)
+    \simeq
+    \mathcal I/\mathcal I^2.
+\]
+
+The natural epimorphism
+\[
+    \mathcal I
+    \longrightarrow
+    \mathcal I/\mathcal I^2
+\]
+admits an
+\(\mathcal O_{S_{\mathrm{cl}}}\)-linear section because \(S\) is affine
+and \(\mathcal I/\mathcal I^2\) is finite projective. Composing such a
+section with the preceding equivalence gives a morphism
+\[
+    \pi_0(N)
+    \longrightarrow
+    \mathcal I
+    \hookrightarrow
+    \pi_0(p_*\mathcal O_X).
+\]
+
+Since \(N\) is finite projective, the canonical map
+\[
+    \pi_0
+    \Map_{\QCoh(S)}
+    \bigl(
+        N,
+        p_*\mathcal O_X
+    \bigr)
+    \longrightarrow
+    \Hom_{\mathcal O_{S_{\mathrm{cl}}}}
+    \left(
+        \pi_0(N),
+        \pi_0(p_*\mathcal O_X)
+    \right)
+\]
+is surjective. Choose a lift
+\[
+    \alpha
+    \colon
+    N
+    \longrightarrow
+    p_*\mathcal O_X.
+\]
+
+The composite
+\[
+    N
+    \xrightarrow{\alpha}
+    p_*\mathcal O_X
+    \xrightarrow{\epsilon}
+    \mathcal O_S
+\]
+induces the zero morphism on \(\pi_0\). Since maps out of a finite
+projective module are detected on \(\pi_0\), this composite represents
+the zero connected component of
+\[
+    \Map_{\QCoh(S)}(N,\mathcal O_S).
+\]
+Choose a nullhomotopy of this composite.
+
+By the free-algebra adjunction, \(\alpha\), together with the chosen
+nullhomotopy, determines a morphism of augmented quasi-coherent
+commutative algebras
+\[
+    \operatorname{Sym}_{\mathcal O_S}(N)
+    \longrightarrow
+    p_*\mathcal O_X,
+\]
+and hence an \(S\)-morphism
+\[
+    q
+    \colon
+    X
+    \longrightarrow
+    \mathbb V_S(N)
+\]
+which carries \(s\) to the zero section.
+
+The resulting morphism of pairs
+\[
+    (X,S)
+    \longrightarrow
+    \bigl(
+        \mathbb V_S(N),S
+    \bigr)
+\]
+induces a morphism of conormal modules
+\[
+    N^*_{S/\mathbb V_S(N)}
+    \longrightarrow
+    N^*_{S/X}.
+\]
+Under the canonical identifications
+\[
+    N^*_{S/\mathbb V_S(N)}
+    \simeq
+    N
+    \simeq
+    N^*_{S/X},
+\]
+the induced map on \(\pi_0\) is the identity. Indeed, it is the composite
+obtained from the chosen section
+\[
+    \mathcal I/\mathcal I^2
+    \longrightarrow
+    \mathcal I
+\]
+followed by the quotient
+\[
+    \mathcal I
+    \longrightarrow
+    \mathcal I/\mathcal I^2.
+\]
+
+Both conormal modules are finite projective. A morphism between finite
+projective modules which is an isomorphism on \(\pi_0\) is an
+equivalence. Hence the induced conormal morphism is an equivalence and,
+under the displayed identifications, is homotopic to the identity of
+\(N\).
+
+Let
+\[
+    Z
+    :=
+    X
+    \times_{\mathbb V_S(N)}
+    S
+\]
+be the zero fibre. Since
+\[
+    q\circ s
+\]
+is the zero section, \(s\) factors canonically as
+\[
+    S
+    \longrightarrow
+    Z
+    \longrightarrow
+    X.
+\]
+
+The closed immersion
+\[
+    Z
+    \longrightarrow
+    X
+\]
+is the base change of the zero section
+\[
+    S
+    \longrightarrow
+    \mathbb V_S(N).
+\]
+Cotangent base change therefore identifies its conormal module with the
+pullback of \(N\). After restriction along
+\[
+    S
+    \longrightarrow
+    Z,
+\]
+the conormal morphism for the composable closed immersions
+\[
+    S
+    \longrightarrow
+    Z
+    \longrightarrow
+    X
+\]
+is precisely the conormal equivalence constructed above. The
+transitivity triangle
+\[
+    L_{Z/X}|_S
+    \longrightarrow
+    L_{S/X}
+    \longrightarrow
+    L_{S/Z}
+\]
+therefore has its first morphism an equivalence. Hence
+\[
+    L_{S/Z}
+    \simeq
+    0.
+\]
+
+The morphism
+\[
+    S
+    \longrightarrow
+    Z
+\]
+is locally of finite presentation. Indeed, on an affine chart write
+\[
+    S=\Spec(A),
+    \qquad
+    X=\Spec(B),
+    \qquad
+    \mathbb V_S(N)=\Spec(R).
+\]
+Then
+\[
+    Z
+    =
+    \Spec(C),
+    \qquad
+    C
+    :=
+    B\otimes_RA.
+\]
+The \(A\)-algebras \(B\), \(R\), and \(A\) are compact. Compact objects
+are closed under finite colimits, so \(C\) is compact in
+\[
+    \CAlg(\Sp)_{A/}.
+\]
+The morphism \(S\to Z\) is represented by the morphism
+\[
+    C
+    \longrightarrow
+    A.
+\]
+Applying
+\Ref{lem:compact-arrow-undercategory}
+to this morphism in
+\(\CAlg(\Sp)_{A/}\) shows that \(A\) is compact as a \(C\)-algebra.
+Thus \(S\to Z\) is locally of finite presentation. Together with
+\[
+    L_{S/Z}
+    \simeq
+    0,
+\]
+this shows that \(S\to Z\) is \`etale.
+
+We now verify that
+\[
+    S
+    \longrightarrow
+    Z
+\]
+is a closed immersion. The morphism \(Z\to S\) is affine because \(Z\)
+is a closed spectral subscheme of the affine \(S\)-scheme \(X\). The
+morphism \(S\to Z\) is a section of \(Z\to S\). In the affine notation
+above, it is represented by an augmented \(A\)-algebra
+\[
+    C
+    \longrightarrow
+    A
+\]
+whose composite
+\[
+    A
+    \longrightarrow
+    C
+    \longrightarrow
+    A
+\]
+is the identity. Consequently,
+\[
+    \pi_0(C)
+    \longrightarrow
+    \pi_0(A)
+\]
+is surjective. By the affine closed-immersion criterion,
+\[
+    S
+    \longrightarrow
+    Z
+\]
+is a closed immersion.
+
+An \`etale closed immersion is an open and closed immersion. Therefore
+there is a decomposition
+\[
+    Z
+    \simeq
+    S
+    \coprod
+    Z',
+\]
+where \(Z'\) is open and closed in \(Z\). Since
+\[
+    Z
+    \hookrightarrow
+    X
+\]
+is a closed immersion, the composite
+\[
+    Z'
+    \hookrightarrow
+    X
+\]
+is a closed immersion. Moreover, \(Z'\) is disjoint from \(s(S)\).
+
+Replace \(X\) by the open complement
+\[
+    X_1
+    :=
+    X\setminus Z'.
+\]
+Then \(X_1\) is an open neighbourhood of \(s(S)\), and
+\[
+    X_1
+    \times_{\mathbb V_S(N)}
+    S
+    \simeq
+    S.
+\]
+
+Both \(X_1\) and \(\mathbb V_S(N)\) are locally of finite presentation
+over \(S\). On affine charts over \(\Spec(A)\), their coordinate
+algebras are compact \(A\)-algebras. The morphism
+\[
+    q|_{X_1}
+    \colon
+    X_1
+    \longrightarrow
+    \mathbb V_S(N)
+\]
+is therefore represented locally by a morphism between compact objects
+of
+\[
+    \CAlg(\Sp)_{A/}.
+\]
+By
+\Ref{lem:compact-arrow-undercategory},
+it is locally of finite presentation.
+
+Its relative cotangent complex fits into the transitivity triangle
+\[
+    q^*L_{\mathbb V_S(N)/S}
+    \longrightarrow
+    L_{X_1/S}
+    \longrightarrow
+    L_{X_1/\mathbb V_S(N)}.
+\]
+After pulling back along \(s\), the first two terms identify canonically
+with \(N\), and the first morphism is the conormal equivalence already
+identified, under these canonical identifications, with an endomorphism
+homotopic to the identity. Hence
+\[
+    s^*L_{X_1/\mathbb V_S(N)}
+    \simeq
+    0.
+\]
+
+The relative cotangent complex
+\[
+    L_{X_1/\mathbb V_S(N)}
+\]
+is perfect, since it is the cofibre of a morphism between finite locally
+free modules. The vanishing locus of a perfect quasi-coherent module is
+open: on an affine chart, compactness implies that vanishing after
+localization at a point already holds on a principal neighbourhood.
+Therefore there is an open neighbourhood
+\[
+    X_0
+    \subseteq
+    X_1
+\]
+of \(s(S)\) such that
+\[
+    L_{X_0/\mathbb V_S(N)}
+    \simeq
+    0.
+\]
+
+The morphism
+\[
+    X_0
+    \longrightarrow
+    \mathbb V_S(N)
+\]
+is locally of finite presentation and has vanishing relative cotangent
+complex. It is therefore \`etale. It carries \(s\) to the zero section.
+
+Under the canonical identifications
+\[
+    N^*_{S/\mathbb V_S(N)}
+    \simeq
+    N
+    \simeq
+    N^*_{S/X_0},
+\]
+the induced morphism on conormal modules is homotopic to
+\[
+    \id_N.
+\]
+
+Restoring the affine-cover index gives, for every \(\alpha\), an open
+neighbourhood
+\[
+    X_\alpha^\circ
+    \subseteq
+    X_\alpha
+\]
+and an \`etale morphism
+\[
+    \varphi_\alpha
+    \colon
+    X_\alpha^\circ
+    \longrightarrow
+    \mathbb V_{S_\alpha}
+    \bigl(
+        N^*_{S/X}|_{S_\alpha}
+    \bigr)
+\]
+with all the asserted properties. When \(S\) is affine, the preceding
+construction applies globally, so the cover may be taken to consist of
+\(S\) itself.
+\end{proof}
+
+\section{The smooth spectral site over a base}
+\label{sec:smooth-spectral-site}
+
+Fix for the remainder of the chapter a quasi-compact quasi-separated
+spectral scheme
+\[
+    S.
+\]
+
+\subsection{Smooth spectral schemes of finite presentation}
+
+\begin{definition}[The smooth spectral test category]
+\label{def:smooth-spectral-test-category}
+Let
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+\]
+denote the full subcategory of spectral schemes over $S$ spanned by the
+morphisms
+\[
+    X
+    \longrightarrow
+    S
+\]
+which are smooth and of finite presentation in the sense of
+\Ref{def:finitely-presented-spectral-morphism}.
+\end{definition}
+
+Smoothness is an affine-local condition and therefore supplies local
+finite presentation. The superscript $\mathrm{fp}$ additionally imposes
+the global quasi-compactness and quasi-separatedness conditions required
+for the motivic test category.
+
+\begin{proposition}[Essential smallness]
+\label{prop:smooth-site-essentially-small}
+The $\infty$-category
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+\]
+is essentially small in a universe containing $S$.
+\end{proposition}
+
+\begin{proof}
+Choose a finite affine open cover
+\[
+    S
+    =
+    \bigcup_{a=1}^r
+    S_a,
+    \qquad
+    S_a=\Spec(A_a),
+\]
+which exists because $S$ is quasi-compact.
+
+Let $X\to S$ be smooth and of finite presentation. Since the morphism is
+quasi-compact, every pullback
+\[
+    X_a
+    :=
+    X\times_SS_a
+\]
+is quasi-compact. Since the morphism is quasi-separated and $S_a$ is
+quasi-separated, each $X_a$ is quasi-separated. Consequently each $X_a$
+admits a finite affine open cover
+\[
+    X_a
+    =
+    \bigcup_{b=1}^{m_a}
+    \Spec(B_{ab}).
+\]
+After refining these finite affine covers, local finite presentation
+ensures that every $B_{ab}$ is compact in
+\[
+    \CAlg(\Sp)_{A_a/}.
+\]
+
+For a fixed connective commutative ring spectrum $A_a$, the compact
+objects of
+\[
+    \CAlg(\Sp)_{A_a/}
+\]
+form an essentially small $\infty$-category. Hence there is only an
+essentially small collection of possible affine charts
+$\Spec(B_{ab})$.
+
+Because $X$ is quasi-separated, intersections of the finitely many affine
+charts are quasi-compact. They therefore admit finite affine covers by
+compact algebras over the corresponding base charts. The gluing maps,
+their iterated compatibility maps, and all higher coherence data belong
+to mapping spaces between objects of essentially small
+$\infty$-categories. There is therefore only a set of equivalence classes
+of such finite affine descent presentations in the chosen universe.
+
+Every object of $\operatorname{Sm}^{\mathrm{fp}}_{/S}$ admits such a
+presentation. Hence the category is essentially small.
+\end{proof}
+
+\begin{convention}[Small smooth site]
+\label{conv:small-smooth-site}
+The essentially $\mathbb U$-small category
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+\]
+is used without choosing a skeleton. Its presheaf and sheaf categories are
+formed in the larger universe $\mathbb V$, as in
+\Ref{conv:size-spectral-ag}. In particular, geometric base change remains
+a canonical functor on the stated categories.
+\end{convention}
+
+\begin{proposition}[Finite products]
+\label{prop:smooth-site-finite-products}
+The category $\operatorname{Sm}^{\mathrm{fp}}_{/S}$ admits finite products.
+The terminal object is $S$, and the product of $X\to S$ and $Y\to S$ is
+the spectral fibre product
+\[
+    X\times_SY.
+\]
+\end{proposition}\begin{proof}
+The terminal morphism
+\[
+    S\longrightarrow S
+\]
+is smooth and of finite presentation.
+
+Fibre products of spectral schemes exist by
+\Ref{thm:spectral-schemes-fibre-products}. Let $X\to S$ and $Y\to S$ be
+objects of $\operatorname{Sm}^{\mathrm{fp}}_{/S}$. The projection
+\[
+    X\times_SY
+    \longrightarrow
+    Y
+\]
+is obtained from $X\to S$ by base change and is therefore smooth and of
+finite presentation by
+\Ref{prop:global-smooth-etale-permanence} and
+\Ref{prop:global-finite-presentation-permanence}. Composing with
+$Y\to S$ shows that
+\[
+    X\times_SY
+    \longrightarrow
+    S
+\]
+is smooth and of finite presentation.
+\end{proof}
+
+\begin{proposition}[Finite coproducts]
+\label{prop:smooth-site-finite-coproducts}
+The category $\operatorname{Sm}^{\mathrm{fp}}_{/S}$ admits finite
+coproducts. The initial object is the empty spectral scheme.
+\end{proposition}
+
+\begin{proof}
+Finite coproducts of spectral schemes exist by
+\Ref{prop:spectral-schemes-coproducts}. Smoothness and finite presentation
+are checked separately on components.
+\end{proof}
+
+\subsection{Functoriality in the base}
+
+\begin{proposition}[Geometric base change]
+\label{prop:smooth-site-geometric-base-change}
+Every morphism of spectral schemes
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    S
+\]
+induces a functor
+\[
+    f^*_{\mathrm{geom}}
+    \colon
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \longrightarrow
+    \operatorname{Sm}^{\mathrm{fp}}_{/T},
+    \qquad
+    X
+    \longmapsto
+    X\times_ST.
+\]
+For composable morphisms
+\[
+    R
+    \xrightarrow{g}
+    T
+    \xrightarrow{f}
+    S,
+\]
+there is a canonical coherent equivalence
+\[
+    (f\circ g)^*_{\mathrm{geom}}
+    \simeq
+    g^*_{\mathrm{geom}}f^*_{\mathrm{geom}}.
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation. Smoothness is stable under
+arbitrary base change by
+\Ref{prop:global-smooth-etale-permanence}, and finite presentation is
+stable under arbitrary base change by
+\Ref{prop:global-finite-presentation-permanence}. Hence
+\[
+    X\times_ST
+    \longrightarrow
+    T
+\]
+belongs to
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/T}.
+\]
+
+For composable morphisms
+\[
+    R
+    \xrightarrow{g}
+    T
+    \xrightarrow{f}
+    S,
+\]
+the canonical associativity equivalence for fibre products gives
+\[
+    (X\times_ST)\times_TR
+    \simeq
+    X\times_SR.
+\]
+These equivalences are natural in \(X\) and supply
+\[
+    (f\circ g)^*_{\mathrm{geom}}
+    \simeq
+    g^*_{\mathrm{geom}}f^*_{\mathrm{geom}}.
+\]
+Their higher coherence is inherited from the universal property of
+limits.
+\end{proof}
+
+\begin{proposition}[Smooth composition functor]
+\label{prop:smooth-composition-functor}
+Let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be an object of $\operatorname{Sm}^{\mathrm{fp}}_{/S}$. Composition with
+$p$ defines a functor
+\[
+    p_{\sharp}^{\mathrm{geom}}
+    \colon
+    \operatorname{Sm}^{\mathrm{fp}}_{/X}
+    \longrightarrow
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}.
+\]
+\end{proposition}\begin{proof}
+Let $Y\to X$ be smooth and of finite presentation. Since
+\[
+    X\longrightarrow S
+\]
+is also smooth and of finite presentation, their composite
+\[
+    Y
+    \longrightarrow
+    X
+    \longrightarrow
+    S
+\]
+is smooth by
+\Ref{prop:global-smooth-etale-permanence} and of finite presentation by
+\Ref{prop:global-finite-presentation-permanence}. Thus composition with
+$p$ defines the asserted functor.
+\end{proof}
+
+\subsection{The brave new interval object}
+
+\begin{proposition}[The affine line belongs to the smooth site]
+\label{prop:affine-line-in-smooth-site}
+The projection
+\[
+    \mathbb A^1_S
+    \longrightarrow
+    S
+\]
+is an object of $\operatorname{Sm}^{\mathrm{fp}}_{/S}$.
+\end{proposition}
+
+\begin{proof}
+This is the case $n=1$ of
+\Ref{prop:brave-new-affine-space-smooth}.
+\end{proof}
+
+\begin{construction}[Interval structure maps]
+\label{con:affine-line-interval-maps}
+The zero and unit sections of
+\Ref{con:zero-unit-sections-affine-line} give
+\[
+    0,1
+    \colon
+    S
+    \rightrightarrows
+    \mathbb A^1_S.
+\]
+
+The multiplication morphism
+\[
+    \mu
+    \colon
+    \mathbb A^1_S
+    \times_S
+    \mathbb A^1_S
+    \longrightarrow
+    \mathbb A^1_S
+\]
+is induced contravariantly by the morphism of quasi-coherent
+commutative algebras
+\[
+    \operatorname{Sym}_{\mathcal O_S}(\mathcal O_S)
+    \longrightarrow
+    \operatorname{Sym}_{\mathcal O_S}
+    \bigl(
+        \mathcal O_S\oplus\mathcal O_S
+    \bigr)
+\]
+which carries the universal generator \(t\) to the product
+\[
+    t_1t_2
+\]
+of the two universal generators.
+
+The morphism \(\mu\) is coherently associative and commutative, the
+section \(1\) is a unit, and the section \(0\) is absorbing:
+\[
+    \mu\circ(1,\id)
+    \simeq
+    \id
+    \simeq
+    \mu\circ(\id,1),
+\]
+and
+\[
+    \mu\circ(0,\id)
+    \simeq
+    0
+    \simeq
+    \mu\circ(\id,0).
+\]
+Thus \(\mathbb A^1_S\) is a commutative monoid object over \(S\)
+equipped with a distinguished absorbing section. These maps are
+compatible with arbitrary base change in \(S\).
+\end{construction}
+
+\begin{proof}
+The sections were constructed operadically in
+\Ref{con:zero-unit-sections-affine-line}.
+
+Affine-locally on \(S=\Spec(A)\), write
+\[
+    A\{t\}
+    :=
+    \operatorname{Sym}_A(A)
+\]
+and
+\[
+    A\{t_1,t_2\}
+    :=
+    \operatorname{Sym}_A(A\oplus A).
+\]
+The morphism
+\[
+    \mu
+    \colon
+    \mathbb A^1_S\times_S\mathbb A^1_S
+    \longrightarrow
+    \mathbb A^1_S
+\]
+is represented contravariantly by the \(A\)-algebra morphism
+\[
+    A\{t\}
+    \longrightarrow
+    A\{t_1,t_2\},
+    \qquad
+    t
+    \longmapsto
+    t_1t_2.
+\]
+
+Associativity and commutativity follow from the coherently associative
+and commutative multiplication in the commutative algebra
+\[
+    A\{t_1,t_2,t_3\}.
+\]
+The identities
+\[
+    1\cdot t=t=t\cdot1
+\]
+and
+\[
+    0\cdot t=0=t\cdot0
+\]
+give the unit and absorption equivalences after passing
+contravariantly to affine spectra. All coherence data are inherited
+from the commutative operadic algebra structure.
+
+Finally, the free commutative algebra construction and the universal
+generators commute with extension of scalars. The construction of
+\(\mu\), together with the zero and unit sections, is therefore
+compatible with arbitrary base change by
+\Ref{prop:affine-space-base-change}.
+\end{proof}
+
+\section{Spectral Nisnevich geometry and the brave new motivic site}
+\label{sec:spectral-nisnevich-motivic-input}
+
+\subsection{Nisnevich distinguished squares}
+
+\begin{definition}[Spectral Nisnevich square]
+\label{def:spectral-nisnevich-square}
+A Cartesian square in $\operatorname{Sm}^{\mathrm{fp}}_{/S}$
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d, "p"]
+    \\
+    U
+        \arrow[r, "j"']
+    &
+    X
+\end{tikzcd}
+\]
+is a \textbf{spectral Nisnevich distinguished square} if:
+\begin{enumerate}[label=(\roman*)]
+    \item $j:U\to X$ is an open immersion;
+
+    \item $p:V\to X$ is \`etale;
+
+    \item there exists a closed immersion
+    \[
+        i
+        \colon
+        Z
+        \hookrightarrow
+        X
+    \]
+    together with an equivalence over $X$
+    \[
+        U
+        \simeq
+        X\setminus Z
+    \]
+    such that the base-change morphism
+    \[
+        V\times_XZ
+        \longrightarrow
+        Z
+    \]
+    is an equivalence.
+\end{enumerate}
+\end{definition}
+
+The square may be represented together with a complementary closed
+subscheme by
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W=V\times_XU
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d, "p"]
+    &
+    V\times_XZ
+        \arrow[l]
+        \arrow[d, "\simeq"]
+    \\
+    U
+        \arrow[r, "j"']
+    &
+    X
+    &
+    Z
+        \arrow[l, hook'].
+\end{tikzcd}
+\]
+
+\begin{proposition}[Base change of Nisnevich squares]
+\label{prop:nisnevich-square-base-change}
+Spectral Nisnevich distinguished squares are stable under arbitrary base
+change in $\operatorname{Sm}^{\mathrm{fp}}_{/S}$ and under arbitrary
+change of the base spectral scheme $S$.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+\begin{tikzcd}
+    W \arrow[r] \arrow[d]
+    &
+    V \arrow[d, "p"]
+    \\
+    U \arrow[r, "j"']
+    &
+    X
+\end{tikzcd}
+\]
+be distinguished, and choose a complementary closed immersion
+\[
+    Z\hookrightarrow X
+\]
+as in \Ref{def:spectral-nisnevich-square}. Let $X'\to X$ be any morphism
+of spectral schemes and form the base-changed square.
+
+Open immersions, \`etale morphisms, and closed immersions are stable under
+base change. By \Ref{prop:complement-base-change}, there is a canonical
+equivalence
+\[
+    X'\times_XU
+    \simeq
+    X'
+    \setminus
+    (X'\times_XZ).
+\]
+Moreover,
+\[
+\begin{aligned}
+    (V\times_XX')
+    \times_{X'}
+    (Z\times_XX')
+    &\simeq
+    (V\times_XZ)\times_XX'
+    \\
+    &\simeq
+    Z\times_XX'.
+\end{aligned}
+\]
+Thus the base-changed square is distinguished. The same argument applies
+to change of the ambient base spectral scheme.
+\end{proof}
+
+\begin{proposition}[Classical detection of the complementary condition]
+\label{prop:nisnevich-classical-detection}
+Consider a Cartesian square
+\[
+\begin{tikzcd}
+    W \arrow[r] \arrow[d]
+    &
+    V \arrow[d, "p"]
+    \\
+    U \arrow[r, "j"']
+    &
+    X
+\end{tikzcd}
+\]
+in $\operatorname{Sm}^{\mathrm{fp}}_{/S}$. Suppose that $j$ is an open
+immersion and $p$ is \`etale. Then the square is a spectral Nisnevich
+distinguished square if and only if its classical truncation is a
+Nisnevich distinguished square of ordinary schemes.
+\end{proposition}
+
+\begin{proof}
+Suppose first that the spectral square is distinguished, and choose a
+complementary closed immersion
+\[
+    Z\hookrightarrow X.
+\]
+Classical truncation carries its open complement to the ordinary open
+complement:
+\[
+    U_{\mathrm{cl}}
+    \simeq
+    X_{\mathrm{cl}}\setminus Z_{\mathrm{cl}}.
+\]
+The morphism $p$ is \`etale and therefore flat. Hence classical
+truncation commutes with the base change along $p$, giving
+\[
+    (V\times_XZ)_{\mathrm{cl}}
+    \simeq
+    V_{\mathrm{cl}}
+    \times_{X_{\mathrm{cl}}}
+    Z_{\mathrm{cl}}.
+\]
+The equivalence $V\times_XZ\simeq Z$ therefore yields the ordinary
+Nisnevich complementary equivalence.
+
+Conversely, suppose that the classical square is Nisnevich
+distinguished. Let
+\[
+    Z_{\mathrm{red}}
+    :=
+    \bigl(
+        X_{\mathrm{cl}}
+        \setminus
+        U_{\mathrm{cl}}
+    \bigr)_{\mathrm{red}}
+\]
+and regard $Z_{\mathrm{red}}$ as a classical spectral scheme equipped
+with the composite closed immersion
+\[
+    Z_{\mathrm{red}}
+    \hookrightarrow
+    X_{\mathrm{cl}}
+    \longrightarrow
+    X.
+\]
+By the equivalence between open spectral subschemes of $X$ and open
+subschemes of $X_{\mathrm{cl}}$, there is an equivalence
+\[
+    U
+    \simeq
+    X\setminus Z_{\mathrm{red}}.
+\]
+
+The base-change morphism
+\[
+    q
+    \colon
+    V\times_XZ_{\mathrm{red}}
+    \longrightarrow
+    Z_{\mathrm{red}}
+\]
+is \`etale. By the ordinary Nisnevich condition, its classical
+truncation
+\[
+    q_{\mathrm{cl}}
+    \colon
+    (V\times_XZ_{\mathrm{red}})_{\mathrm{cl}}
+    \longrightarrow
+    Z_{\mathrm{red}}
+\]
+is an equivalence.
+
+By
+\Ref{thm:etale-invariance-classical-truncation},
+an \`etale spectral scheme over $Z_{\mathrm{red}}$ is determined, up to
+a contractible space of choices, by its classical truncation. Therefore
+$q$ is an equivalence. Thus the spectral square is distinguished.
+\end{proof}
+
+\begin{proposition}[Pointwise Nisnevich criterion]
+\label{prop:nisnevich-pointwise-criterion}
+Consider a Cartesian square in $\operatorname{Sm}^{\mathrm{fp}}_{/S}$
+\[
+\begin{tikzcd}
+    W \arrow[r] \arrow[d]
+    &
+    V \arrow[d,"p"]
+    \\
+    U \arrow[r,"j"']
+    &
+    X
+\end{tikzcd}
+\]
+with $j$ an open immersion and $p$ \`etale. Then the square is
+Nisnevich distinguished if and only if, for every point
+\[
+    x
+    \in
+    |X|\setminus|U|,
+\]
+there is a unique point $v\in|V|$ above $x$ and the induced map of
+residue fields
+\[
+    \kappa(x)
+    \longrightarrow
+    \kappa(v)
+\]
+is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+By \Ref{prop:nisnevich-classical-detection}, the assertion is equivalent
+to the corresponding statement for the classical truncation of the
+square. The ordinary pointwise criterion for Nisnevich distinguished
+squares identifies the stated residue-field condition with the assertion
+that the \`etale morphism is an isomorphism over the reduced closed
+complement. Translating back through classical truncation proves the
+spectral statement.
+\end{proof}
+
+\subsection{The spectral Nisnevich topology}
+
+\begin{definition}[Spectral Nisnevich topology]
+\label{def:spectral-nisnevich-topology}
+The \textbf{spectral Nisnevich topology}
+\[
+    \tau_{\mathrm{Nis}}
+\]
+on $\operatorname{Sm}^{\mathrm{fp}}_{/S}$ is the Grothendieck topology
+generated by:
+\begin{enumerate}[label=(\roman*)]
+    \item the empty covering family of the initial object;
+
+    \item the two-member covering families
+    \[
+        \{U\to X,\,V\to X\}
+    \]
+    arising from spectral Nisnevich distinguished squares.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Pullback stability of Nisnevich generators]
+\label{prop:nisnevich-pretopology}
+The two-member families associated to spectral Nisnevich distinguished
+squares are stable under pullback. Together with the empty covering
+family of the initial object, they therefore generate the Grothendieck
+topology of \Ref{def:spectral-nisnevich-topology}.
+\end{proposition}
+
+\begin{proof}
+Pullback stability is \Ref{prop:nisnevich-square-base-change}. Any
+pullback-stable collection of covering families determines a smallest
+Grothendieck topology containing those families. By definition, this
+smallest topology is $\tau_{\mathrm{Nis}}$.
+\end{proof}
+
+\begin{definition}[Spectral \`etale topology on the smooth site]
+\label{def:spectral-etale-topology-smooth-site}
+The \textbf{spectral \`etale topology}
+\[
+    \tau_{\mathrm{\acute et}}
+\]
+on
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+\]
+is the Grothendieck topology generated by families
+\[
+    \{X_\alpha\to X\}_{\alpha\in I}
+\]
+such that:
+\begin{enumerate}[label=(\roman*)]
+    \item every morphism
+    \[
+        X_\alpha
+        \longrightarrow
+        X
+    \]
+    is \`etale;
+
+    \item the induced map of underlying topological spaces
+    \[
+        \coprod_{\alpha\in I}|X_\alpha|
+        \longrightarrow
+        |X|
+    \]
+    is surjective.
+\end{enumerate}
+Equivalently, this is the topology induced on
+\(\operatorname{Sm}^{\mathrm{fp}}_{/S}\) from the big spectral
+\`etale site over \(S\).
+\end{definition}
+
+\begin{theorem}[Subcanonicity of the spectral Nisnevich topology]
+\label{thm:spectral-nisnevich-subcanonical}
+Every representable presheaf on
+\(\operatorname{Sm}^{\mathrm{fp}}_{/S}\) is a sheaf for
+\(\tau_{\mathrm{Nis}}\).
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \{U\to X,\;V\to X\}
+\]
+be a generating two-member family arising from a spectral Nisnevich
+distinguished square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d, "p"]
+    \\
+    U
+        \arrow[r, "j"']
+    &
+    X.
+\end{tikzcd}
+\]
+The morphism
+\[
+    j
+    \colon
+    U
+    \longrightarrow
+    X
+\]
+is an open immersion and hence is \`etale by
+\Ref{prop:open-immersions-etale}. The morphism
+\[
+    p
+    \colon
+    V
+    \longrightarrow
+    X
+\]
+is \`etale by the definition of a spectral Nisnevich distinguished
+square.
+
+Choose a complementary closed immersion
+\[
+    Z
+    \hookrightarrow
+    X
+\]
+such that
+\[
+    U
+    \simeq
+    X\setminus Z
+\]
+and
+\[
+    V\times_XZ
+    \xrightarrow{\simeq}
+    Z.
+\]
+The image of \(U\to X\) contains the open complement of \(Z\). The
+equivalence
+\[
+    V\times_XZ
+    \simeq
+    Z
+\]
+shows that the image of \(V\to X\) contains every point of \(Z\).
+Consequently,
+\[
+    |U|\cup|V|
+    =
+    |X|.
+\]
+Thus
+\[
+    \{U\to X,\;V\to X\}
+\]
+is a jointly surjective family of \`etale morphisms and hence is a
+covering family for
+\[
+    \tau_{\mathrm{\acute et}}.
+\]
+
+Every generating covering family for
+\(\tau_{\mathrm{Nis}}\) is therefore a
+\(\tau_{\mathrm{\acute et}}\)-cover. Equivalently,
+\[
+    \tau_{\mathrm{Nis}}
+    \subseteq
+    \tau_{\mathrm{\acute et}},
+\]
+so the spectral Nisnevich topology is coarser than the spectral
+\`etale topology.
+
+Spectral schemes and their morphisms satisfy effective \`etale descent.
+Consequently, for every
+\[
+    Y
+    \in
+    \operatorname{Sm}^{\mathrm{fp}}_{/S},
+\]
+the representable presheaf
+\[
+    h_S(Y)
+    \colon
+    (\operatorname{Sm}^{\mathrm{fp}}_{/S})^{\op}
+    \longrightarrow
+    \mathcal S,
+    \qquad
+    h_S(Y)(T)
+    =
+    \Map_S(T,Y),
+\]
+is a sheaf for
+\(\tau_{\mathrm{\acute et}}\).
+
+A sheaf for a finer topology is a sheaf for every coarser topology.
+Therefore every representable presheaf is a sheaf for
+\[
+    \tau_{\mathrm{Nis}}.
+\]
+Hence the spectral Nisnevich topology is subcanonical. See
+\cite{LurieSAG,KhanBraveNewMotivicI}.
+\end{proof}
+
+\subsection{Excision}
+
+\begin{definition}[Nisnevich-excisive presheaf]
+\label{def:nisnevich-excisive-presheaf}
+A presheaf
+\[
+    F
+    \colon
+    (\operatorname{Sm}^{\mathrm{fp}}_{/S})^{\op}
+    \longrightarrow
+    \mathcal S
+\]
+is \textbf{Nisnevich-excisive} if:
+\begin{enumerate}[label=(\roman*)]
+    \item the space $F(\varnothing)$ is contractible;
+
+    \item every spectral Nisnevich distinguished square is carried to a
+    Cartesian square
+    \[
+    \begin{tikzcd}[column sep=large, row sep=large]
+        F(X)
+            \arrow[r]
+            \arrow[d]
+        &
+        F(U)
+            \arrow[d]
+        \\
+        F(V)
+            \arrow[r]
+        &
+        F(W).
+    \end{tikzcd}
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Excision criterion for Nisnevich descent]
+\label{thm:nisnevich-excision-criterion}
+A presheaf of spaces on $\operatorname{Sm}^{\mathrm{fp}}_{/S}$ is a sheaf
+for $\tau_{\mathrm{Nis}}$ if and only if it is Nisnevich-excisive.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    E_{\mathrm{Nis}}
+\]
+denote the collection of spectral Nisnevich distinguished squares in
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}.
+\]
+
+The empty spectral scheme is a strict initial object: every morphism
+\[
+    X
+    \longrightarrow
+    \varnothing
+\]
+is an equivalence. Moreover,
+\Ref{prop:nisnevich-square-base-change}
+shows that \(E_{\mathrm{Nis}}\) is stable under pullback. Hence
+\(E_{\mathrm{Nis}}\) is an excision structure.
+
+Consider a distinguished square
+\[
+\begin{tikzcd}
+    W \arrow[r] \arrow[d]
+    &
+    V \arrow[d, "p"]
+    \\
+    U \arrow[r, "j"']
+    &
+    X.
+\end{tikzcd}
+\]
+
+The morphism
+\[
+    j
+    \colon
+    U
+    \longrightarrow
+    X
+\]
+is an open immersion and hence a monomorphism. This verifies the
+monomorphism condition for a topological excision structure.
+
+It remains to verify stability under the diagonal construction. Consider
+the induced Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d, "\Delta_{W/U}"']
+    &
+    V
+        \arrow[d, "\Delta_{V/X}"]
+    \\
+    W\times_UW
+        \arrow[r]
+    &
+    V\times_XV.
+\end{tikzcd}
+\]
+
+Since
+\[
+    W
+    \simeq
+    U\times_XV,
+\]
+there is a canonical equivalence
+\[
+    W\times_UW
+    \simeq
+    U\times_X(V\times_XV).
+\]
+Consequently, the lower horizontal morphism
+\[
+    W\times_UW
+    \longrightarrow
+    V\times_XV
+\]
+is the base change of the open immersion
+\[
+    U
+    \longrightarrow
+    X
+\]
+and is therefore an open immersion.
+
+By
+\Ref{prop:etale-diagonal-and-monomorphisms},
+the diagonal
+\[
+    \Delta_{V/X}
+    \colon
+    V
+    \longrightarrow
+    V\times_XV
+\]
+of the \`etale morphism \(p\) is an open immersion and, in particular,
+is \`etale.
+
+Choose a complementary closed immersion
+\[
+    Z
+    \hookrightarrow
+    X
+\]
+for the original distinguished square, so that
+\[
+    U
+    \simeq
+    X\setminus Z
+\]
+and
+\[
+    V\times_XZ
+    \xrightarrow{\simeq}
+    Z.
+\]
+
+The closed complement of
+\[
+    W\times_UW
+    \longrightarrow
+    V\times_XV
+\]
+is the base change
+\[
+    D
+    :=
+    (V\times_XV)\times_XZ
+    \hookrightarrow
+    V\times_XV.
+\]
+There are canonical equivalences
+\[
+\begin{aligned}
+    D
+    &\simeq
+    (V\times_XZ)\times_Z(V\times_XZ)
+    \\
+    &\simeq
+    Z\times_ZZ
+    \\
+    &\simeq
+    Z.
+\end{aligned}
+\]
+
+The restriction of the diagonal to this closed complement is the
+morphism
+\[
+    V\times_{V\times_XV}D
+    \longrightarrow
+    D.
+\]
+Under the preceding identifications, this is the diagonal of
+\[
+    V\times_XZ
+    \longrightarrow
+    Z.
+\]
+Since
+\[
+    V\times_XZ
+    \xrightarrow{\simeq}
+    Z,
+\]
+that diagonal is an equivalence. Therefore the diagonal square is again
+a spectral Nisnevich distinguished square.
+
+Thus \(E_{\mathrm{Nis}}\) satisfies the monomorphism and diagonal
+conditions and is a topological excision structure.
+
+For a topological excision structure, the sheaves for the generated
+Grothendieck topology are exactly the presheaves which carry the initial
+object to a terminal space and every distinguished square to a Cartesian
+square. Applying the topological excision theorem to
+\(E_{\mathrm{Nis}}\) shows that a presheaf is a
+\(\tau_{\mathrm{Nis}}\)-sheaf if and only if it is
+Nisnevich-excisive. See
+\cite{VoevodskyCDStructures,KhanBraveNewMotivicI}.
+\end{proof}
+
+\subsection{Representables and the affine-line projection class}
+
+\begin{definition}[Smooth representable presheaf]
+\label{def:smooth-representable-presheaf}
+For $X\in\operatorname{Sm}^{\mathrm{fp}}_{/S}$, write
+\[
+    h_S(X)
+    \colon
+    (\operatorname{Sm}^{\mathrm{fp}}_{/S})^{\op}
+    \longrightarrow
+    \mathcal S
+\]
+for the representable presheaf
+\[
+    h_S(X)(T)
+    :=
+    \Map_S(T,X).
+\]
+\end{definition}
+
+\begin{proposition}[Yoneda on the smooth site]
+\label{prop:yoneda-smooth-site}
+The assignment $X\mapsto h_S(X)$ defines a fully faithful functor
+\[
+    h_S
+    \colon
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \hookrightarrow
+    \PSh
+    \bigl(
+        \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \bigr).
+\]
+Every $h_S(X)$ is Nisnevich-excisive.
+\end{proposition}
+
+\begin{proof}
+Full faithfulness is the Yoneda lemma. Nisnevich excision follows from
+\Ref{thm:spectral-nisnevich-subcanonical} and
+\Ref{thm:nisnevich-excision-criterion}.
+\end{proof}
+
+\begin{definition}[Brave new affine-line projection class]
+\label{def:affine-line-projection-class}
+Let
+\[
+    W_{\mathbb A^1,S}
+\]
+be the class of morphisms of presheaves
+\[
+    h_S(X\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(X)
+\]
+induced by the projections
+\[
+    X\times_S\mathbb A^1_S
+    \longrightarrow
+    X,
+\]
+as $X$ ranges over $\operatorname{Sm}^{\mathrm{fp}}_{/S}$.
+\end{definition}
+
+\begin{proposition}[Pullback stability of affine-line projections]
+\label{prop:affine-line-projection-pullback}
+The class
+\[
+    W_{\mathbb A^1,S}
+\]
+is stable under pullback along morphisms between representable
+presheaves.
+
+More precisely, for every morphism
+\[
+    Y
+    \longrightarrow
+    X
+\]
+in
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S},
+\]
+the pullback of
+\[
+    h_S(X\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(X)
+\]
+along
+\[
+    h_S(Y)
+    \longrightarrow
+    h_S(X)
+\]
+is canonically equivalent to
+\[
+    h_S(Y\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(Y).
+\]
+In particular, the resulting pullback morphism again belongs to
+\(W_{\mathbb A^1,S}\).
+\end{proposition}
+
+\begin{proof}
+For every morphism
+\[
+    Y
+    \longrightarrow
+    X
+\]
+over \(S\), there is a canonical Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    Y\times_S\mathbb A^1_S
+        \arrow[r]
+        \arrow[d]
+    &
+    X\times_S\mathbb A^1_S
+        \arrow[d]
+    \\
+    Y
+        \arrow[r]
+    &
+    X.
+\end{tikzcd}
+\]
+Indeed,
+\[
+\begin{aligned}
+    Y\times_X
+    \bigl(
+        X\times_S\mathbb A^1_S
+    \bigr)
+    &\simeq
+    Y\times_S\mathbb A^1_S.
+\end{aligned}
+\]
+
+The Yoneda embedding preserves limits. Applying \(h_S\) to the displayed
+Cartesian square therefore gives a Cartesian square of presheaves
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    h_S(Y\times_S\mathbb A^1_S)
+        \arrow[r]
+        \arrow[d]
+    &
+    h_S(X\times_S\mathbb A^1_S)
+        \arrow[d]
+    \\
+    h_S(Y)
+        \arrow[r]
+    &
+    h_S(X).
+\end{tikzcd}
+\]
+Thus the pullback of the affine-line projection associated to \(X\) is
+the affine-line projection associated to \(Y\), and hence again belongs
+to
+\[
+    W_{\mathbb A^1,S}.
+\]
+\end{proof}
+
+\begin{proposition}[Base change of the affine-line projection class]
+\label{prop:affine-line-projection-base-change}
+For every morphism of spectral schemes
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    S,
+\]
+put
+\[
+    f^{\mathrm{PSh}}_!
+    :=
+    \operatorname{Lan}_{(f^*_{\mathrm{geom}})^{\op}}
+    \colon
+    \PSh
+    \bigl(
+        \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \bigr)
+    \longrightarrow
+    \PSh
+    \bigl(
+        \operatorname{Sm}^{\mathrm{fp}}_{/T}
+    \bigr).
+\]
+There are canonical equivalences
+\[
+    f^{\mathrm{PSh}}_!h_S(X)
+    \simeq
+    h_T(X\times_ST).
+\]
+Under these equivalences, $f^{\mathrm{PSh}}_!$ carries the morphism
+\[
+    h_S(X\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(X)
+\]
+to the morphism
+\[
+    h_T
+    \bigl(
+        (X\times_ST)\times_T\mathbb A^1_T
+    \bigr)
+    \longrightarrow
+    h_T(X\times_ST).
+\]
+Consequently,
+\[
+    f^{\mathrm{PSh}}_!
+    \bigl(
+        W_{\mathbb A^1,S}
+    \bigr)
+    \subseteq
+    W_{\mathbb A^1,T}.
+\]
+\end{proposition}
+
+\begin{proof}
+Left Kan extension along a functor carries representable presheaves to
+the corresponding representable presheaves. Hence
+\[
+    f^{\mathrm{PSh}}_!h_S(X)
+    \simeq
+    h_T(X\times_ST).
+\]
+Use the canonical base-change equivalence
+\[
+    \mathbb A^1_S\times_ST
+    \simeq
+    \mathbb A^1_T
+\]
+from \Ref{prop:affine-space-base-change} and associativity of fibre
+products.
+\end{proof}
+
+\subsection{The brave new motivic site theorem}
+
+\begin{theorem}[Brave new motivic site package]
+\label{thm:motivic-input-package}
+Let $S$ be a quasi-compact quasi-separated spectral scheme. Then the
+following data and properties are canonically available.
+\begin{enumerate}[label=(\roman*)]
+    \item The $\infty$-category
+    \[
+        \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \]
+    is essentially small and admits finite products and finite coproducts.
+
+    \item Spectral Nisnevich distinguished squares generate a
+    subcanonical Grothendieck topology
+    \[
+        \tau_{\mathrm{Nis}}
+    \]
+    on $\operatorname{Sm}^{\mathrm{fp}}_{/S}$.
+
+    \item A presheaf of spaces satisfies Nisnevich descent if and only if
+    it is reduced and carries every distinguished square to a Cartesian
+    square.
+
+    \item The brave new affine line
+    \[
+        \mathbb A^1_S
+        =
+        \Spec_S
+        \operatorname{Sym}_{\mathcal O_S}(\mathcal O_S)
+    \]
+    is a smooth spectral $S$-scheme of finite presentation, equipped with
+    zero and unit sections.
+
+    \item The smooth site, Nisnevich topology, distinguished squares, and
+    brave new affine line are compatible with base change between quasi-compact quasi-separated
+    spectral bases; the underlying geometric constructions admit arbitrary base change.
+
+    \item Open immersions, closed complements, \`etale morphisms, smooth
+    morphisms, vector bundles, infinitesimal extensions, and regular closed
+    immersions satisfy the base-change and deformation properties proved
+    in the preceding chapters and in this chapter.
+\end{enumerate}
+Consequently the triple
+\[
+    \left(
+        \operatorname{Sm}^{\mathrm{fp}}_{/S},
+        \tau_{\mathrm{Nis}},
+        \mathbb A^1_S
+    \right)
+\]
+is defined functorially on qcqs spectral bases and supplies the geometric input for brave
+new motivic homotopy theory.
+\end{theorem}
+
+\begin{proof}
+Essential smallness and finite products and coproducts are
+\Ref{prop:smooth-site-essentially-small},
+\Ref{prop:smooth-site-finite-products}, and
+\Ref{prop:smooth-site-finite-coproducts}. The Nisnevich topology and its
+subcanonicity are
+\Ref{def:spectral-nisnevich-topology} and
+\Ref{thm:spectral-nisnevich-subcanonical}; the excision criterion is
+\Ref{thm:nisnevich-excision-criterion}. Smoothness of the affine line is
+\Ref{prop:affine-line-in-smooth-site}. Base-change compatibility is
+\Ref{prop:smooth-site-geometric-base-change},
+\Ref{prop:nisnevich-square-base-change}, and
+\Ref{prop:affine-line-projection-base-change}. The remaining geometric
+properties are the permanence and deformation theorems established in
+\Ref{sec:closed-immersions-complements},
+\Ref{sec:quasi-smooth-closed-immersions}, and
+\Ref{sec:smooth-etale-lifting-neighbourhoods}.
+\end{proof}
+
+The constructions of the chapter may therefore be summarized by the
+type-correct collection
+\[
+    \CAlg(\Sp)^{\mathrm{cn}}
+    =
+    \Alg_{\Comm^\otimes}(\Sp^\otimes)^{\mathrm{cn}},
+    \qquad
+    \Aff_{\Sp}
+    :=
+    \bigl(\CAlg(\Sp)^{\mathrm{cn}}\bigr)^{\op},
+\]
+\[
+    \Aff_{\Sp}
+    \longrightarrow
+    \operatorname{Sch}^{\mathrm{sp}},
+\]
+\[
+    \mathbf{Mod}_{\Sp}
+    \colon
+    \CAlg(\Sp)^{\mathrm{cn}}
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}}),
+    \qquad
+    A
+    \longmapsto
+    \Mod_A,
+\]
+\[
+    \Spec_X
+    \colon
+    \operatorname{QCAlg}(X)^{\mathrm{cn},\op}
+    \longrightarrow
+    \operatorname{Sch}^{\mathrm{sp}}_{/X},
+\]
+and
+\[
+    \mathbb A^1_S
+    \in
+    \operatorname{Sm}^{\mathrm{fp}}_{/S},
+    \qquad
+    \bigl(
+        \tau_{\mathrm{Nis}},
+        W_{\mathbb A^1,S}
+    \bigr).
+\]
+The first two displays record operadic algebra, the definition of affine
+spectral geometry, and passage to global spectral schemes. The third
+records affine module semantics, and the fourth records relative affine
+geometry. The final display records the brave new interval object,
+the spectral Nisnevich topology, and the affine-line projection class
+which will be used to define the two successive localizations of
+presheaves.
+
+The next chapter begins with the presentable presheaf
+\(\infty\)-category
+\[
+    \PSh
+    \bigl(
+        \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \bigr)
+\]
+and constructs the \(\infty\)-category of brave new motivic spaces by
+first imposing Nisnevich descent and then imposing
+\(\mathbb A^1\)-invariance. The first localization is determined by the
+Grothendieck topology
+\[
+    \tau_{\mathrm{Nis}},
+\]
+or equivalently by the Nisnevich excision conditions established in
+this chapter. The second localization inverts the morphisms in
+\[
+    W_{\mathbb A^1,S}.
+\]
+Equivalently, it imposes the equivalences
+\[
+    F(X)
+    \xrightarrow{\simeq}
+    F(X\times_S\mathbb A^1_S)
+\]
+for every
+\[
+    X
+    \in
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}.
+\]
+The subsequent constructions develop pointing and stabilization.

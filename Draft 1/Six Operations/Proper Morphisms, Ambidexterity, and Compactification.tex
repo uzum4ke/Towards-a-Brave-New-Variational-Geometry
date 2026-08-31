@@ -1,0 +1,6573 @@
+\chapter{Proper Morphisms, Ambidexterity, and Compactification}
+\label{chap:proper-ambidexterity-compactification}
+
+\section{Purpose, geometric scope, and standing conventions}
+\label{sec:proper-purpose}
+
+Chapter~\ref{chap:stable-brave-new-motivic} constructed, for every
+quasi-compact quasi-separated spectral scheme \(S\), a compactly generated
+stable presentably symmetric monoidal category
+\[
+    \SH(S),
+\]
+together with adjunctions
+\[
+    f^*:\SH(S)\rightleftarrows\SH(X):f_*
+\]
+for arbitrary morphisms
+\[
+    f:X\longrightarrow S
+\]
+between quasi-compact quasi-separated spectral schemes, and adjunctions
+\[
+    p_\sharp:\SH(X)\rightleftarrows\SH(S):p^*
+\]
+for smooth morphisms \(p\) of finite presentation.  It also supplied stable
+localization, closed recollement, smooth and closed exchange, stable homotopy
+purity, and virtual Thom twists
+\[
+    \Sigma^\xi,
+    \qquad
+    \xi\in K(X).
+\]
+
+The purpose of the present chapter is to establish the proper geometric input
+required for exceptional functoriality.  No new direct-image functor is needed
+for a proper morphism: the functor \(f_*\) already exists as the right adjoint
+of inverse image.  The new assertions are that arbitrary direct image preserves small
+colimits, proper direct image satisfies arbitrary base change and the
+projection formula, proper direct image satisfies open--proper exchange and
+the resulting support property, and smooth proper direct image is identified
+with smooth direct image after the tangent Thom twist.  The chapter then
+proves the compactification theorem and the contractibility of the category
+of compactifications.  These results are the precise geometric hypotheses
+used in the construction of \(f_!\) and \(f^!\) in the next chapter.
+
+\begin{convention}[Geometric classes]
+\label{conv:proper-geometric-classes}
+Throughout this chapter, all spectral schemes are quasi-compact and
+quasi-separated.  We use the following classes of morphisms.
+
+\begin{enumerate}
+    \item \(\mathcal E\) is the class of separated morphisms of finite
+    presentation.
+
+    \item \(\mathcal P\) is the class of morphisms
+    \[
+        p:Y\longrightarrow X
+    \]
+    whose classical truncation
+    \[
+        p_{\mathrm{cl}}:
+        Y_{\mathrm{cl}}
+        \longrightarrow
+        X_{\mathrm{cl}}
+    \]
+    is proper.
+
+    \item \(\mathcal J\subseteq\mathcal E\) is the class of quasi-compact open
+    immersions.
+
+    \item \(\mathcal S\subseteq\mathcal E\) is the class of smooth separated
+    morphisms of finite presentation.
+\end{enumerate}
+
+A compactification always means a factorization by a morphism in
+\(\mathcal J\) followed by a morphism in \(\mathcal P\).  No spectral
+finite-presentation condition is imposed on the proper part of a
+compactification.
+\end{convention}
+
+\begin{convention}[Properness and projective presentations]
+\label{conv:spectral-properness}
+A morphism
+\[
+    p:Y\longrightarrow X
+\]
+belongs to \(\mathcal P\) when its classical truncation
+\[
+    p_{\mathrm{cl}}:
+    Y_{\mathrm{cl}}
+    \longrightarrow
+    X_{\mathrm{cl}}
+\]
+is proper.
+
+When \(p\) is of finite presentation, this condition is equivalent to
+properness in the spectral-geometric sense.  Thus, for a morphism of finite
+presentation,
+\[
+    p\text{ is spectrally proper}
+    \quad\Longleftrightarrow\quad
+    p_{\mathrm{cl}}\text{ is proper}.
+\]
+Separatedness of a morphism in \(\mathcal E\) is likewise detected on
+classical truncations.
+
+Projectivity is defined below by the existence of a finite spectral
+projective presentation whose individual stages are actual closed embeddings
+into projective bundles associated to finite locally free modules.  Every
+projective morphism is of finite presentation and belongs to \(\mathcal P\).
+Classical truncation carries every spectral projective presentation to a
+classical projective presentation.  No converse projectivity-detection
+statement is used in this chapter.
+\end{convention}
+
+\begin{convention}[Tangent and normal Thom classes]
+\label{conv:tangent-normal-classes}
+Let
+\[
+    i:Z\hookrightarrow X
+\]
+be a quasi-smooth closed immersion whose conormal module is finite locally
+free.  Its normal Thom class is
+\[
+    \nu_i
+    :=
+    [N^*_{Z/X}]
+    \in
+    K(Z).
+\]
+Under the coordinate-module convention of
+Remark~\ref{rem:thom-dual-convention}, the twist \(\Sigma^{\nu_i}\) is the
+Thom suspension by the geometric normal bundle
+\[
+    \mathbf N_i
+    =
+    \mathbb V_Z(N^*_{Z/X}).
+\]
+
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth of finite presentation.  Its diagonal is a quasi-smooth
+immersion; when \(p\) is separated, it is a closed immersion.  In either
+case its conormal module is
+\[
+    N^*_{\Delta_p}
+    \simeq
+    \Omega_{X/S}.
+\]
+We define the tangent Thom class of \(p\) by
+\[
+    T_p
+    :=
+    [\Omega_{X/S}]
+    \in
+    K(X).
+\]
+Thus \(\Sigma^{T_p}\) is the Thom suspension by the geometric relative
+tangent bundle.  This convention incorporates the dualization already built
+into the definition
+\[
+    \mathbb V_X(E)
+    =
+    \operatorname{Spec}_X\operatorname{Sym}(E).
+\]
+\end{convention}
+
+\begin{remark}[Use of ordinary comparison]
+\label{rem:proper-comparison-method}
+Chapter~\ref{chap:stable-brave-new-motivic} constructed natural symmetric
+monoidal equivalences
+\[
+    \Theta_S^{\mathrm{st}}:
+    \SH(S)
+    \xrightarrow{\simeq}
+    \SH_{\mathrm{cl}}(S_{\mathrm{cl}})
+\]
+compatible with inverse image, arbitrary direct image, smooth direct image,
+closed direct image, exceptional inverse image for closed immersions,
+localization, homotopy purity, and Thom twists.
+
+The Beck--Chevalley, projection, support, and ambidexterity transformations
+used below are constructed internally from the stable coefficient system and
+its adjunctions.  Their invertibility is sometimes detected after applying
+stable classical comparison.
+
+The coefficientwise relative closed-purity transformation is treated
+slightly differently.  The preceding chapter supplied stable homotopy purity
+for the associated Thom object, but did not construct coefficientwise
+relative purity on arbitrary objects.  We therefore characterize the
+relative closed-purity transformation below by transport of the canonical
+ordinary transformation through
+\(\Theta^{\mathrm{st}}\).  This uses only the already-constructed functor
+\(i^!\) for a closed immersion.  It does not define any exceptional operation
+for a general separated morphism.
+\end{remark}
+
+\subsection{The chapter-level output}
+
+The constructions below culminate in the following assertions.
+\begin{enumerate}
+    \item Spectral projective spaces and projective bundles have their usual
+    smoothness, properness, base-change, and classical-truncation properties.
+
+    \item For every smooth proper morphism \(p:X\to S\), there is a canonical
+    ambidexterity equivalence
+    \[
+        p_\sharp\Sigma^{-T_p}
+        \xrightarrow{\simeq}
+        p_*.
+    \]
+
+    \item For every morphism \(f\), arbitrary direct image
+    \[
+        f_*:\SH(X)\longrightarrow\SH(S)
+    \]
+    preserves small colimits.
+
+    \item Proper direct image satisfies arbitrary base change and the proper
+    projection formula.
+
+    \item Proper morphisms satisfy open--proper exchange.  In particular,
+    they satisfy the support property for proper modifications that are
+    equivalences over an open complement.
+
+    \item Every separated morphism of finite presentation admits a spectral
+    compactification.  Its \(\infty\)-category of compactifications is
+    nonempty and cofiltered, and hence has contractible groupoid completion.
+
+    \item The compactification diagram
+    \[
+        c=(X\xrightarrow{j}\overline X\xrightarrow{p}S)
+        \longmapsto
+        p_*j_\sharp
+    \]
+    takes values in colimit-preserving functors and carries every refinement
+    to an equivalence through coherently compatible comparison maps.
+
+    \item For every finite composable string of morphisms in \(\mathcal E\),
+    the \(\infty\)-category of compactification grids is nonempty and
+    cofiltered, and hence has contractible groupoid completion.  The
+    associated open--proper exchange equivalences identify all iterated
+    compactification formulas coherently.
+\end{enumerate}
+
+\section{Spectral projective geometry}
+\label{sec:spectral-projective-geometry}
+
+\subsection{Spectral projective space}
+
+\begin{construction}[Spectral projective space]
+\label{constr:spectral-projective-space}
+Let \(S\) be a spectral scheme and let \(n\geq0\).  For
+\(0\leq a\leq n\), let
+\[
+    U_a
+    \simeq
+    \mathbb A^n_S
+\]
+be a copy of brave new affine \(n\)-space.  For \(a\neq b\), identify the
+principal open in \(U_a\) on which the coordinate corresponding to \(b\) is
+invertible with the corresponding principal open in \(U_b\) by the usual
+homogeneous-coordinate formulas.  These identifications satisfy the cocycle
+condition on triple intersections.  Spectral Zariski gluing therefore
+produces a spectral scheme
+\[
+    \mathbb P^n_S
+\]
+with an open cover by the \(U_a\).
+\end{construction}
+
+\begin{proposition}[Base change for projective space]
+\label{prop:projective-space-base-change}
+For every morphism of spectral schemes
+\[
+    f:T\longrightarrow S,
+\]
+there is a canonical equivalence
+\[
+    \mathbb P^n_T
+    \simeq
+    \mathbb P^n_S\times_ST.
+\]
+The equivalence is coherent in \(f\) and preserves the standard affine
+charts and their homogeneous coordinates.
+\end{proposition}
+
+\begin{proof}
+Base change carries brave new affine space to brave new affine space and
+preserves principal open immersions and their intersections.  Therefore the
+pullback of the standard affine atlas of
+\(\mathbb P^n_S\) is canonically identified with the standard affine atlas
+used to construct \(\mathbb P^n_T\), including all transition
+isomorphisms and cocycle data.
+
+Both
+\[
+    \mathbb P^n_S\times_ST
+\]
+and
+\[
+    \mathbb P^n_T
+\]
+are consequently obtained by gluing the same spectral affine charts along
+the same principal-open identifications.  The uniqueness clause in spectral
+Zariski descent gives a canonical equivalence
+\[
+    \mathbb P^n_T
+    \simeq
+    \mathbb P^n_S\times_ST.
+\]
+Coherence in \(f\) follows from the coherence of base change for affine
+spaces, principal opens, and their descent data.
+\end{proof}
+
+\begin{proposition}[Classical truncation of projective space]
+\label{prop:projective-space-truncation}
+There is a canonical equivalence of ordinary schemes
+\[
+    (\mathbb P^n_S)_{\mathrm{cl}}
+    \simeq
+    \mathbb P^n_{S_{\mathrm{cl}}}.
+\]
+It identifies the standard affine covers and is natural in \(S\).
+\end{proposition}
+
+\begin{proof}
+Classical truncation carries
+\(\mathbb A^n_S\) to \(\mathbb A^n_{S_{\mathrm{cl}}}\), preserves the
+principal opens used in the gluing construction, and preserves their
+Cartesian intersections.  Truncating the standard spectral gluing diagram
+therefore gives the standard classical gluing diagram for projective space.
+The asserted equivalence follows from ordinary Zariski descent.
+\end{proof}
+
+\begin{proposition}[Smoothness and properness of projective space]
+\label{prop:projective-space-smooth-proper}
+The structural morphism
+\[
+    \pi:\mathbb P^n_S\longrightarrow S
+\]
+is smooth, proper, and of finite presentation.
+\end{proposition}
+
+\begin{proof}
+Smoothness and finite presentation are local on the source.  On each standard
+chart, \(\pi\) is the projection
+\[
+    \mathbb A^n_S\longrightarrow S,
+\]
+which is smooth and of finite presentation.  Hence \(\pi\) is smooth and of
+finite presentation globally.
+
+By Proposition~\ref{prop:projective-space-truncation}, the classical
+truncation of \(\pi\) is the usual projective morphism
+\[
+    \mathbb P^n_{S_{\mathrm{cl}}}
+    \longrightarrow
+    S_{\mathrm{cl}},
+\]
+which is proper.  Properness is detected on classical truncations under the
+finite-presentation hypothesis, so \(\pi\) is proper.
+\end{proof}
+
+\begin{construction}[The twisting line bundle]
+\label{constr:spectral-O-one}
+The standard transition functions on the pairwise intersections of the
+affine charts glue the trivial line bundles to an invertible
+\(\mathcal O_{\mathbb P^n_S}\)-module
+\[
+    \mathcal O_{\mathbb P^n_S}(1).
+\]
+Its dual is denoted
+\[
+    \mathcal O_{\mathbb P^n_S}(-1).
+\]
+
+The construction is compatible with arbitrary base change.  More precisely,
+for every morphism
+\[
+    f:T\longrightarrow S,
+\]
+the canonical base-change equivalence
+\[
+    \mathbb P^n_T
+    \xrightarrow{\simeq}
+    \mathbb P^n_S\times_ST
+\]
+identifies
+\[
+    \mathcal O_{\mathbb P^n_T}(1)
+    \simeq
+    \operatorname{pr}_1^*
+    \mathcal O_{\mathbb P^n_S}(1).
+\]
+
+Using
+Proposition~\ref{prop:projective-space-truncation},
+let
+\[
+    \iota_{\mathbb P^n_S}:
+    \mathbb P^n_{S_{\mathrm{cl}}}
+    \simeq
+    (\mathbb P^n_S)_{\mathrm{cl}}
+    \longrightarrow
+    \mathbb P^n_S
+\]
+denote the classical truncation immersion.  Then there is a canonical
+equivalence
+\[
+    \iota_{\mathbb P^n_S}^*
+    \mathcal O_{\mathbb P^n_S}(1)
+    \simeq
+    \mathcal O_{\mathbb P^n_{S_{\mathrm{cl}}}}(1).
+\]
+\end{construction}
+
+\subsection{The projective-line model of the Thom sphere}
+
+\begin{proposition}[The spectral projective line and the Thom sphere]
+\label{prop:spectral-P1-T}
+Let
+\[
+    \infty_S:S\longrightarrow\mathbb P^1_S
+\]
+be the point at infinity.  There is a canonical equivalence
+\[
+    (\mathbb P^1_S,\infty_S)
+    \simeq
+    T_S
+\]
+in \(\HH_\bullet(S)\).  It is natural under arbitrary base change in
+\(S\).
+\end{proposition}
+
+\begin{proof}
+Write
+\[
+    \mathbb P^1_S
+    =
+    U\cup V,
+\]
+where
+\[
+    U=\mathbb A^1_0,
+    \qquad
+    V=\mathbb A^1_\infty,
+    \qquad
+    U\cap V=\Gm{}_S,
+\]
+and where the point at infinity belongs to \(V\).
+
+There is a cofiber sequence in the pointed motivic category
+\[
+    (V,\infty_S)
+    \longrightarrow
+    (\mathbb P^1_S,\infty_S)
+    \longrightarrow
+    \mathbb P^1_S/V.
+\]
+The pointed motivic space
+\[
+    (V,\infty_S)
+    \simeq
+    (\mathbb A^1_S,0_S)
+\]
+is contractible by affine-line invariance.  Hence the quotient map induces a
+canonical equivalence
+\[
+    (\mathbb P^1_S,\infty_S)
+    \xrightarrow{\simeq}
+    \mathbb P^1_S/V.
+\]
+
+Zariski descent for the open cover
+\[
+    \mathbb P^1_S=U\cup V
+\]
+gives a pushout square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \Mot_S(U\cap V) \arrow[r] \arrow[d]
+        & \Mot_S(U) \arrow[d] \\
+    \Mot_S(V) \arrow[r]
+        & \Mot_S(\mathbb P^1_S).
+\end{tikzcd}
+\]
+Taking the cofiber of the lower horizontal morphism identifies
+\[
+    \mathbb P^1_S/V
+    \simeq
+    U/(U\cap V).
+\]
+Using
+\[
+    U\simeq\mathbb A^1_S
+    \qquad\text{and}\qquad
+    U\cap V\simeq\Gm{}_S,
+\]
+we obtain
+\[
+    \mathbb P^1_S/V
+    \simeq
+    \mathbb A^1_S/\Gm{}_S
+    =
+    T_S.
+\]
+Combining the two equivalences gives
+\[
+    (\mathbb P^1_S,\infty_S)
+    \simeq
+    T_S.
+\]
+
+The standard open cover, its intersection, the point at infinity, the
+Zariski pushout, and affine-line contraction are all preserved by arbitrary
+base change.  The equivalence is therefore natural in \(S\).
+\end{proof}
+
+\begin{corollary}[Projective-line stabilization]
+\label{cor:spectral-P1-stabilization}
+There is a canonical symmetric monoidal equivalence
+\[
+    \SH(S)
+    \simeq
+    \HH_\bullet(S)
+    \bigl[
+      (\mathbb P^1_S,\infty_S)^{-1}
+    \bigr].
+\]
+\end{corollary}
+
+\begin{proof}
+Apply symmetric monoidal periodization to the equivalence of
+Proposition~\ref{prop:spectral-P1-T}.
+\end{proof}
+
+\subsection{Projective bundles}
+
+\begin{definition}[Line quotient]
+\label{def:spectral-line-quotient}
+Let \(T\) be a spectral scheme and let \(M\) be a connective
+quasi-coherent \(\mathcal O_T\)-module.
+
+A line quotient of \(M\) is a pair
+\[
+    (L,q)
+\]
+consisting of a finite locally free quasi-coherent
+\(\mathcal O_T\)-module \(L\) of rank one and a morphism
+\[
+    q:M\longrightarrow L
+\]
+such that
+\[
+    \pi_0(q):
+    \pi_0(M)
+    \longrightarrow
+    \pi_0(L)
+\]
+is surjective.
+
+Equivalently, Zariski-locally on \(T\), the module \(L\) is trivial and the
+morphism \(q\) admits an \(\mathcal O_T\)-linear section.
+\end{definition}
+
+\begin{convention}[Rank-zero projective bundles]
+\label{conv:rank-zero-projective-bundle}
+For every spectral scheme \(T\), put
+\[
+    \mathbb P^{-1}_T
+    :=
+    \varnothing.
+\]
+The unique quasi-coherent module on the empty spectral scheme is denoted
+\(\mathcal O_{\mathbb P^{-1}_T}(1)\), and the unique morphism
+\[
+    \mathcal O_{\mathbb P^{-1}_T}^{\oplus0}
+    \longrightarrow
+    \mathcal O_{\mathbb P^{-1}_T}(1)
+\]
+is regarded as the universal line quotient.  Thus the local projective
+space associated to a trivial bundle of rank \(d\geq0\) is
+\(\mathbb P^{d-1}_T\), including the rank-zero case.
+\end{convention}
+
+\begin{construction}[Projective bundle]
+\label{def:spectral-projective-bundle}
+Let \(E\) be a finite locally free quasi-coherent
+\(\mathcal O_S\)-module.  Choose a Zariski cover
+\[
+    \{U_a\longrightarrow S\}_{a\in A}
+\]
+such that, on each \(U_a\), the rank of \(E\) is constant and there is an
+equivalence
+\[
+    E|_{U_a}
+    \simeq
+    \mathcal O_{U_a}^{\oplus d_a},
+    \qquad
+    d_a\geq0.
+\]
+On an overlap
+\[
+    U_{ab}:=U_a\times_SU_b,
+\]
+the two trivializations differ by an automorphism of the corresponding
+trivial finite locally free module.  Projectivization carries this
+automorphism to an automorphism
+\[
+    \mathbb P^{d_a-1}_{U_{ab}}
+    \xrightarrow{\simeq}
+    \mathbb P^{d_b-1}_{U_{ab}}.
+\]
+On every nonempty overlap the ranks agree, and the induced projective
+automorphisms satisfy the cocycle condition on triple overlaps.
+
+Spectral Zariski gluing therefore produces a spectral \(S\)-scheme
+\[
+    \pi:
+    \mathbb P_S(E)
+    \longrightarrow
+    S
+\]
+together with canonical equivalences
+\[
+    \mathbb P_S(E)\times_SU_a
+    \simeq
+    \mathbb P^{d_a-1}_{U_a}.
+\]
+
+When \(d_a>0\), the standard quotient
+\[
+    \mathcal O_{\mathbb P^{d_a-1}_{U_a}}^{\oplus d_a}
+    \twoheadrightarrow
+    \mathcal O_{\mathbb P^{d_a-1}_{U_a}}(1)
+\]
+is equivariant for change of trivialization.  When \(d_a=0\), the
+rank-zero convention supplies the unique quotient on the empty chart.
+These local quotients therefore glue to an invertible module
+\[
+    \mathcal O_{\mathbb P_S(E)}(1)
+\]
+and a universal quotient
+\[
+    \pi^*E
+    \twoheadrightarrow
+    \mathcal O_{\mathbb P_S(E)}(1).
+\]
+The resulting spectral scheme and universal quotient are independent of the
+chosen trivializing cover through a contractible space of equivalences.
+\end{construction}
+
+\begin{proposition}[Representing property and local structure]
+\label{prop:projective-bundle-local}
+Let \(E\) be finite locally free on \(S\).  For every spectral
+\(S\)-scheme
+\[
+    f:T\longrightarrow S,
+\]
+composition with the universal quotient induces an equivalence between
+\[
+    \Map_S
+    \bigl(
+      T,
+      \mathbb P_S(E)
+    \bigr)
+\]
+and the space of line quotients
+\[
+    f^*E
+    \twoheadrightarrow
+    L
+\]
+in the sense of
+Definition~\ref{def:spectral-line-quotient}.
+
+In particular, on every open spectral subscheme \(U\subseteq S\) for which
+\[
+    E|_U
+    \simeq
+    \mathcal O_U^{\oplus d},
+    \qquad
+    d\geq0,
+\]
+there is a canonical equivalence
+\[
+    \mathbb P_S(E)\times_SU
+    \simeq
+    \mathbb P^{d-1}_U
+\]
+compatible with the universal quotient line bundles.
+\end{proposition}
+
+\begin{proof}
+For a spectral \(S\)-scheme
+\[
+    f:T\longrightarrow S,
+\]
+let
+\[
+    \mathcal Q_E(T)
+\]
+denote the space of pairs
+\[
+    (L,q)
+\]
+where \(L\) is finite locally free of rank one on \(T\) and
+\[
+    q:f^*E\longrightarrow L
+\]
+is surjective on \(\pi_0\).  Equivalences in \(\mathcal Q_E(T)\) are
+equivalences of line modules compatible with the quotient maps.
+
+The assignment
+\[
+    T\longmapsto\mathcal Q_E(T)
+\]
+is a Zariski sheaf of spaces.  Indeed, finite locally free modules, morphisms
+between them, equivalences, and surjectivity on \(\pi_0\) all satisfy
+Zariski descent.
+
+Suppose first that
+\[
+    E\simeq0.
+\]
+If \(T\) is nonempty, there is no line quotient
+\[
+    0\longrightarrow L,
+\]
+because \(\pi_0(L)\) is locally free of rank one and the zero map cannot be
+surjective at any point of \(T\).  For \(T=\varnothing\), the space of line
+quotients is contractible.  Hence
+\[
+    \mathcal Q_E(T)
+    \simeq
+    \Map_S
+    \bigl(
+      T,
+      \mathbb P^{-1}_S
+    \bigr).
+\]
+Thus the rank-zero line-quotient functor is represented by the empty
+projective space.
+
+We now treat the case
+\[
+    E\simeq
+    \mathcal O_S^{\oplus(r+1)},
+    \qquad
+    r\geq0.
+\]
+Let
+\[
+    e_0,\ldots,e_r
+\]
+be the standard basis.  For \(0\leq a\leq r\), define
+\[
+    \mathcal Q_{E,a}(T)
+    \subseteq
+    \mathcal Q_E(T)
+\]
+to be the full subspace of line quotients
+\[
+    q:
+    \mathcal O_T^{\oplus(r+1)}
+    \longrightarrow
+    L
+\]
+for which the component
+\[
+    q(e_a):
+    \mathcal O_T
+    \longrightarrow
+    L
+\]
+is an equivalence.
+
+The equivalence \(q(e_a)\) canonically trivializes \(L\).  Under this
+trivialization, \(q\) is uniquely represented by a tuple
+\[
+    (x_0,\ldots,x_r)
+\]
+of endomorphisms of \(\mathcal O_T\) with
+\[
+    x_a=1.
+\]
+Thus the remaining \(r\) components define a point of brave new affine
+\(r\)-space.  This construction gives a natural equivalence of spaces
+\[
+    \mathcal Q_{E,a}(T)
+    \simeq
+    \Map_S
+    \bigl(
+      T,
+      \mathbb A^r_S
+    \bigr).
+\]
+Hence
+\[
+    \mathcal Q_{E,a}
+\]
+is represented by the standard affine chart
+\[
+    U_a\simeq\mathbb A^r_S.
+\]
+
+On the intersection
+\[
+    \mathcal Q_{E,a}\cap\mathcal Q_{E,b},
+\]
+both
+\[
+    q(e_a)
+    \qquad\text{and}\qquad
+    q(e_b)
+\]
+are equivalences.  Under the \(a\)-th trivialization of \(L\), this is the
+principal-open condition that the \(b\)-th coordinate be invertible.  Passing
+from the \(a\)-th trivialization to the \(b\)-th trivialization divides all
+coordinates by the \(b\)-th coordinate.  Consequently, the transition
+equivalence on
+\[
+    \mathcal Q_{E,a}\cap\mathcal Q_{E,b}
+\]
+is exactly the usual homogeneous-coordinate transition equivalence between
+the standard affine charts of
+\[
+    \mathbb P^r_S.
+\]
+
+The subfunctors \(\mathcal Q_{E,a}\) form a Zariski cover of
+\(\mathcal Q_E\).  Indeed, surjectivity of
+\[
+    \pi_0(q):
+    \pi_0(\mathcal O_T)^{\oplus(r+1)}
+    \longrightarrow
+    \pi_0(L)
+\]
+implies that Zariski-locally on \(T\), at least one component
+\[
+    \pi_0(q(e_a))
+\]
+generates the rank-one module \(\pi_0(L)\).  On that open, \(q(e_a)\) is an
+equivalence of rank-one finite locally free spectral modules.
+
+It follows that the sheaf of spaces \(\mathcal Q_E\) is obtained by gluing
+the affine charts
+\[
+    \mathbb A^r_S
+\]
+along precisely the principal-open transition equivalences used in the
+construction of
+\[
+    \mathbb P^r_S.
+\]
+Therefore there is a natural equivalence
+\[
+    \Map_S
+    \bigl(
+      T,
+      \mathbb P^r_S
+    \bigr)
+    \simeq
+    \mathcal Q_E(T)
+\]
+of spaces, not merely a bijection on connected components.
+
+Now let \(E\) be arbitrary finite locally free.  Choose a Zariski cover
+\[
+    \{U_a\longrightarrow S\}
+\]
+on which \(E\) is trivial of constant rank.  Both functors
+\[
+    T\longmapsto
+    \Map_S
+    \bigl(
+      T,
+      \mathbb P_S(E)
+    \bigr)
+\]
+and
+\[
+    T\longmapsto
+    \mathcal Q_E(T)
+\]
+satisfy Zariski descent in \(T\).  On the pullback of each \(U_a\), the
+preceding trivial-bundle calculation identifies them.
+
+The local equivalences are natural under automorphisms of the trivial
+bundle.  Hence they are compatible on overlaps with the transition
+automorphisms used to construct
+\[
+    \mathbb P_S(E).
+\]
+Zariski descent therefore gives a natural equivalence
+\[
+    \Map_S
+    \bigl(
+      T,
+      \mathbb P_S(E)
+    \bigr)
+    \simeq
+    \mathcal Q_E(T).
+\]
+
+Under this equivalence, the universal quotient
+\[
+    \pi^*E
+    \twoheadrightarrow
+    \mathcal O_{\mathbb P_S(E)}(1)
+\]
+corresponds to the identity map of
+\[
+    \mathbb P_S(E).
+\]
+
+Finally, if
+\[
+    E|_U
+    \simeq
+    \mathcal O_U^{\oplus d},
+    \qquad
+    d\geq0,
+\]
+then both
+\[
+    \mathbb P_S(E)\times_SU
+\]
+and
+\[
+    \mathbb P^{d-1}_U
+\]
+represent the same line-quotient functor on spectral \(U\)-schemes.
+Yoneda gives the asserted canonical equivalence, including compatibility
+with the universal quotient line bundles.
+\end{proof}
+
+\begin{proposition}[Geometry of projective bundles]
+\label{prop:projective-bundle-geometry}
+Let \(E\) be finite locally free on \(S\).  The structural morphism
+\[
+    \pi:\mathbb P_S(E)\longrightarrow S
+\]
+is smooth, proper, and of finite presentation.
+
+For every morphism
+\[
+    f:T\longrightarrow S,
+\]
+there is a canonical equivalence
+\[
+    \mathbb P_S(E)\times_ST
+    \simeq
+    \mathbb P_T(f^*E),
+\]
+compatible with the universal quotient line bundles.  Moreover,
+\[
+    \bigl(\mathbb P_S(E)\bigr)_{\mathrm{cl}}
+    \simeq
+    \mathbb P_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+The assertions concerning smoothness and finite presentation are local on
+\(S\) for the Zariski topology.  After restricting to an open on which
+\[
+    E\simeq\mathcal O_S^{\oplus d},
+    \qquad
+    d\geq0,
+\]
+the structural morphism becomes
+\[
+    \mathbb P^{d-1}_S\longrightarrow S.
+\]
+For \(d>0\), this morphism is smooth and of finite presentation by
+Proposition~\ref{prop:projective-space-smooth-proper}.  For \(d=0\), it is
+the empty morphism, which is smooth and of finite presentation.
+
+The classical truncation is likewise local on \(S\).  On a positive-rank
+trivializing open, Proposition~\ref{prop:projective-space-truncation} gives
+\[
+    (\mathbb P^{d-1}_S)_{\mathrm{cl}}
+    \simeq
+    \mathbb P^{d-1}_{S_{\mathrm{cl}}}.
+\]
+On a rank-zero open, both sides are empty.
+The local equivalences are compatible with the transition automorphisms, so
+they descend to
+\[
+    \bigl(\mathbb P_S(E)\bigr)_{\mathrm{cl}}
+    \simeq
+    \mathbb P_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr).
+\]
+The right-hand side is proper over \(S_{\mathrm{cl}}\).  Since \(\pi\) is of
+finite presentation and properness is detected on classical truncations,
+\(\pi\) is proper.
+
+For base change, both
+\[
+    \mathbb P_S(E)\times_ST
+\]
+and
+\[
+    \mathbb P_T(f^*E)
+\]
+represent the functor assigning to a spectral \(T\)-scheme
+\[
+    h:V\longrightarrow T
+\]
+the space of invertible quotients
+\[
+    h^*f^*E\twoheadrightarrow L.
+\]
+The representing property therefore gives a canonical equivalence between
+them.  Naturality and compatibility with the universal quotient follow from
+Yoneda.
+\end{proof}
+
+\subsection{Projective and proper morphisms}
+
+\begin{definition}[Projective presentation and projective morphism]
+\label{def:spectral-projective-morphism}
+Let
+\[
+    f:X\longrightarrow S
+\]
+be a morphism of spectral schemes.
+
+A projective presentation of \(f\) of length \(m\geq0\) consists of a
+factorization
+\[
+    X=X_m
+    \xrightarrow{f_m}
+    X_{m-1}
+    \xrightarrow{f_{m-1}}
+    \cdots
+    \xrightarrow{f_2}
+    X_1
+    \xrightarrow{f_1}
+    X_0=S
+\]
+together with, for every \(1\leq a\leq m\),
+
+\begin{enumerate}
+    \item a finite locally free module \(E_a\) on \(X_{a-1}\);
+
+    \item a closed immersion of finite presentation
+    \[
+        i_a:
+        X_a
+        \hookrightarrow
+        \mathbb P_{X_{a-1}}(E_a);
+    \]
+
+    \item an equivalence
+    \[
+        f_a
+        \simeq
+        \pi_a i_a,
+    \]
+    where
+    \[
+        \pi_a:
+        \mathbb P_{X_{a-1}}(E_a)
+        \longrightarrow
+        X_{a-1}
+    \]
+    is the structural morphism.
+\end{enumerate}
+
+A presentation of length zero is the identity morphism.  A presentation of
+length one is called an elementary projective presentation.
+
+The morphism \(f\) is projective if it admits a finite projective
+presentation.
+\end{definition}
+
+\begin{proposition}[Permanence of projective morphisms]
+\label{prop:projective-permanence}
+Projective morphisms are stable under equivalence, arbitrary base change,
+products over a base, composition, and composition with closed immersions of
+finite presentation.
+
+Every projective morphism is proper and of finite presentation.  Classical
+truncation carries projective morphisms to classical projective morphisms.
+\end{proposition}
+
+\begin{proof}
+Stability under equivalence is immediate.
+
+Let
+\[
+    X=X_m
+    \longrightarrow
+    X_{m-1}
+    \longrightarrow
+    \cdots
+    \longrightarrow
+    X_0=S
+\]
+be a projective presentation, and let
+\[
+    T\longrightarrow S
+\]
+be arbitrary.  Pulling back every term, vector bundle, projective bundle, and
+closed immersion gives a projective presentation
+\[
+    X\times_ST
+    \longrightarrow
+    T.
+\]
+Thus projective morphisms are stable under arbitrary base change.
+
+If
+\[
+    X\xrightarrow{f}Y
+    \qquad\text{and}\qquad
+    Y\xrightarrow{g}S
+\]
+admit projective presentations, concatenating the two presentations gives a
+projective presentation of
+\[
+    gf:X\longrightarrow S.
+\]
+Hence projective morphisms are stable under composition.
+
+Let
+\[
+    X_1\longrightarrow S,
+    \qquad
+    X_2\longrightarrow S
+\]
+be projective.  The projection
+\[
+    X_1\times_SX_2
+    \longrightarrow
+    X_2
+\]
+is the base change of \(X_1\to S\), hence is projective.  Composing it with
+the projective morphism \(X_2\to S\) shows that
+\[
+    X_1\times_SX_2
+    \longrightarrow
+    S
+\]
+is projective.
+
+A closed immersion of finite presentation
+\[
+    i:Z\hookrightarrow Y
+\]
+is elementary projective: use the canonical equivalence
+\[
+    \mathbb P_Y(\mathcal O_Y)
+    \simeq
+    Y
+\]
+and regard \(i\) as a closed immersion into this rank-one projective bundle.
+Consequently, composition with a closed immersion of finite presentation
+preserves projectivity.
+
+Every elementary projective morphism is the composite of a closed immersion
+of finite presentation with a projective-bundle projection.  Both morphisms
+are proper and of finite presentation.  Proper morphisms and morphisms of
+finite presentation are stable under finite composition, so every projective
+morphism is proper and of finite presentation.
+
+Finally, classical truncation preserves finite locally free modules,
+projective bundles, closed immersions of finite presentation, and
+composition.  Truncating a finite spectral projective presentation therefore
+gives a finite classical projective presentation.  Its composite is a
+classical projective morphism.
+\end{proof}
+
+\begin{proposition}[Permanence of proper morphisms]
+\label{prop:proper-permanence}
+Morphisms in \(\mathcal P\) are stable under equivalence, composition,
+arbitrary base change, and products over a common base.
+
+Every closed immersion belongs to \(\mathcal P\).  Every morphism in
+\(\mathcal P\) is separated: its diagonal is a closed immersion.
+\end{proposition}
+
+\begin{proof}
+Classical truncation preserves fibre products, finite products, and
+composition.  The asserted permanence properties therefore follow from the
+corresponding classical permanence properties of proper morphisms.
+
+Every closed immersion belongs to \(\mathcal P\), because its classical
+truncation is a closed immersion and hence proper.  If
+\[
+    p:Y\longrightarrow X
+\]
+belongs to \(\mathcal P\), then
+\[
+    \Delta_{p_{\mathrm{cl}}}:
+    Y_{\mathrm{cl}}
+    \longrightarrow
+    Y_{\mathrm{cl}}\times_{X_{\mathrm{cl}}}Y_{\mathrm{cl}}
+\]
+is a closed immersion.  Classical truncation preserves fibre products, so
+\[
+    (\Delta_p)_{\mathrm{cl}}
+    \simeq
+    \Delta_{p_{\mathrm{cl}}}.
+\]
+Closed immersions of spectral schemes are detected on classical
+truncations.  Therefore
+\[
+    \Delta_p:
+    Y\longrightarrow Y\times_XY
+\]
+is a closed immersion, and \(p\) is separated.
+\end{proof}
+
+\section{Stable purity transformations}
+\label{sec:stable-purity-transformations}
+
+\subsection{Purity for smooth closed pairs}
+
+\begin{definition}[Smooth closed pair]
+\label{def:stable-smooth-closed-pair}
+A smooth closed pair over \(S\) is a closed immersion
+\[
+    i:Z\hookrightarrow X
+\]
+such that both structural morphisms
+\[
+    X\longrightarrow S,
+    \qquad
+    Z\longrightarrow S
+\]
+are smooth and of finite presentation.
+\end{definition}
+
+\begin{construction}[Relative closed-purity transformation]
+\label{constr:closed-purity-transformation}
+Let
+\[
+    i:Z\hookrightarrow X
+\]
+be a smooth closed pair over \(S\), and write
+\[
+    x:X\longrightarrow S,
+    \qquad
+    z:Z\longrightarrow S
+\]
+for the structural morphisms, so that
+\[
+    z=xi.
+\]
+
+Stable comparison and its compatibility with pullback and Thom twists give
+a canonical equivalence
+\[
+    \Theta_Z^{\mathrm{st}}
+    \Sigma^{-\nu_i}z^*
+    \bigl(
+      \Theta_S^{\mathrm{st}}
+    \bigr)^{-1}
+    \simeq
+    \Sigma^{-\nu_{i_{\mathrm{cl}}}}
+    z_{\mathrm{cl}}^*.
+\]
+Compatibility with closed exceptional inverse image gives a canonical
+equivalence
+\[
+    \Theta_Z^{\mathrm{st}}
+    i^!x^*
+    \bigl(
+      \Theta_S^{\mathrm{st}}
+    \bigr)^{-1}
+    \simeq
+    i_{\mathrm{cl}}^!x_{\mathrm{cl}}^*.
+\]
+
+Let
+\[
+    \mathfrak p^{\mathrm{cl}}_{i/S}:
+    \Sigma^{-\nu_{i_{\mathrm{cl}}}}
+    z_{\mathrm{cl}}^*
+    \longrightarrow
+    i_{\mathrm{cl}}^!x_{\mathrm{cl}}^*
+\]
+be the canonical relative-purity transformation in ordinary stable motivic
+homotopy theory.
+
+Conjugation by the comparison equivalences induces an equivalence of functor
+categories
+\[
+\begin{aligned}
+    \Fun
+    \bigl(
+      \SH(S),
+      \SH(Z)
+    \bigr)
+    &\xrightarrow{\simeq}
+    \Fun
+    \bigl(
+      \SH_{\mathrm{cl}}(S_{\mathrm{cl}}),
+      \SH_{\mathrm{cl}}(Z_{\mathrm{cl}})
+    \bigr), \\
+    F
+    &\longmapsto
+    \Theta_Z^{\mathrm{st}}
+    F
+    \bigl(
+      \Theta_S^{\mathrm{st}}
+    \bigr)^{-1}.
+\end{aligned}
+\]
+Define
+\[
+    \mathfrak p_{i/S}:
+    \Sigma^{-\nu_i}z^*
+    \longrightarrow
+    i^!x^*
+\]
+to be the unique transformation corresponding to
+\(\mathfrak p^{\mathrm{cl}}_{i/S}\) under this equivalence.
+
+For the zero section
+\[
+    s_E:X\hookrightarrow\mathbb V_X(E),
+\]
+the transformation is normalized by the ordinary inverse Thom equivalence.
+Compatibility of stable comparison with Thom spaces identifies this with the
+inverse Thom equivalence associated to \(E\) in \(\SH(X)\).
+\end{construction}
+
+\begin{theorem}[Relative purity for smooth closed pairs]
+\label{thm:closed-purity-smooth-pair}
+Let
+\[
+    i:Z\hookrightarrow X
+\]
+be a smooth closed pair over \(S\), with structural morphisms
+\[
+    x:X\longrightarrow S,
+    \qquad
+    z:Z\longrightarrow S.
+\]
+The relative purity transformation is an equivalence:
+\[
+    \mathfrak p_{i/S}:
+    \Sigma^{-\nu_i}z^*
+    \xrightarrow{\simeq}
+    i^!x^*.
+\]
+It is compatible with arbitrary base change in \(S\), composition of smooth
+closed pairs, and virtual Thom twists pulled back from the common base \(S\).
+\end{theorem}
+
+\begin{proof}
+By Construction~\ref{constr:closed-purity-transformation}, conjugation by
+stable classical comparison carries
+\[
+    \mathfrak p_{i/S}
+\]
+to the ordinary relative-purity transformation
+\[
+    \mathfrak p^{\mathrm{cl}}_{i/S}:
+    \Sigma^{-\nu_{i_{\mathrm{cl}}}}
+    z_{\mathrm{cl}}^*
+    \longrightarrow
+    i_{\mathrm{cl}}^!x_{\mathrm{cl}}^*.
+\]
+Since
+\[
+    i_{\mathrm{cl}}:
+    Z_{\mathrm{cl}}
+    \hookrightarrow
+    X_{\mathrm{cl}}
+\]
+is a closed immersion between schemes smooth over \(S_{\mathrm{cl}}\),
+ordinary relative purity identifies
+\(\mathfrak p^{\mathrm{cl}}_{i/S}\) as an equivalence.
+
+The comparison functor
+\[
+    \Theta_Z^{\mathrm{st}}
+\]
+is an equivalence and hence conservative.  Therefore
+\(\mathfrak p_{i/S}\) is an equivalence.
+
+Ordinary relative purity is compatible with arbitrary base change,
+composition of smooth closed pairs, and Thom twists pulled back from the
+common base.  Stable comparison is
+compatible with each of the operations occurring in those compatibility
+diagrams.  Conjugation by comparison therefore transports the ordinary
+compatibility diagrams to the asserted spectral compatibility diagrams.
+\end{proof}
+
+\begin{remark}[Scope of relative closed purity]
+\label{rem:closed-purity-scope}
+Theorem~\ref{thm:closed-purity-smooth-pair} asserts purity for objects pulled
+back from the common smooth base \(S\).  It does not assert an equivalence
+\[
+    \Sigma^{-\nu_i}i^*
+    \simeq
+    i^!
+\]
+on all of \(\SH(X)\).  That stronger assertion is an absolute-purity
+statement and is not required for the diagonal construction below.
+\end{remark}
+
+\subsection{Diagonal purity}
+
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, separated, and of finite presentation.  Write
+\[
+    X^{(2)}
+    :=
+    X\times_SX,
+\]
+and let
+\[
+    \pi_1,\pi_2:X^{(2)}\longrightarrow X
+\]
+be the projections.
+
+\begin{proposition}[The smooth diagonal]
+\label{prop:smooth-diagonal-purity}
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, separated, and of finite presentation.  The diagonal
+\[
+    \Delta_p:
+    X\hookrightarrow X^{(2)}
+    :=
+    X\times_SX
+\]
+is a quasi-smooth closed immersion.
+
+Relative to the first projection
+\[
+    \pi_1:X^{(2)}\longrightarrow X,
+\]
+the diagram
+\[
+    X\hookrightarrow X^{(2)}
+\]
+is a smooth closed pair over \(X\).  Its conormal module is canonically
+equivalent to
+\[
+    N^*_{\Delta_p}
+    \simeq
+    \Omega_{X/S}.
+\]
+Consequently, relative purity gives a canonical equivalence of functors
+\[
+    \Sigma^{-T_p}
+    \xrightarrow{\simeq}
+    \Delta_p^!\pi_1^*
+\]
+from \(\SH(X)\) to \(\SH(X)\).
+\end{proposition}
+
+\begin{proof}
+Since \(p\) is separated, its diagonal
+\[
+    \Delta_p:X\longrightarrow X^{(2)}
+\]
+is a closed immersion.
+
+Consider the composite
+\[
+    X
+    \xrightarrow{\Delta_p}
+    X^{(2)}
+    \xrightarrow{\pi_1}
+    X.
+\]
+Since
+\[
+    \pi_1\Delta_p=\id_X,
+\]
+the cotangent transitivity triangle gives
+\[
+    L_{X/X^{(2)}}[-1]
+    \simeq
+    \Delta_p^*L_{X^{(2)}/X}.
+\]
+The morphism \(\pi_1\) is the base change of \(p\), so
+\[
+    L_{X^{(2)}/X}
+    \simeq
+    \pi_2^*L_{X/S}.
+\]
+Pulling back along \(\Delta_p\) gives
+\[
+    N^*_{\Delta_p}
+    =
+    L_{X/X^{(2)}}[-1]
+    \simeq
+    L_{X/S}
+    \simeq
+    \Omega_{X/S}.
+\]
+The module \(\Omega_{X/S}\) is finite locally free, so \(\Delta_p\) is
+quasi-smooth.
+
+The morphism
+\[
+    \pi_1:X^{(2)}\longrightarrow X
+\]
+is smooth of finite presentation, being a base change of \(p\), and
+\[
+    X\longrightarrow X
+\]
+is smooth.  Thus \(\Delta_p\) is a smooth closed pair over \(X\).
+Applying Theorem~\ref{thm:closed-purity-smooth-pair} with base \(X\) gives
+\[
+    \Sigma^{-T_p}
+    \simeq
+    \Delta_p^!\pi_1^*.
+\]
+\end{proof}
+
+\begin{corollary}[Coherent diagonal Thom equivalence]
+\label{cor:coherent-diagonal-thom}
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, separated, and of finite presentation.  Write
+\[
+    X^{(2)}:=X\times_SX
+\]
+with second projection
+\[
+    \pi_2:X^{(2)}\longrightarrow X
+\]
+and diagonal
+\[
+    \Delta_p:X\hookrightarrow X^{(2)}.
+\]
+
+There is a canonical equivalence
+\[
+    \vartheta_p:
+    \pi_{2\sharp}\Delta_{p*}\mathbf1_X
+    \xrightarrow{\simeq}
+    \Sigma^{T_p}\mathbf1_X.
+\]
+It is compatible with arbitrary base change and with composition of smooth
+separated morphisms of finite presentation.
+\end{corollary}
+
+\begin{proof}
+View
+\[
+    \Delta_p:
+    X\hookrightarrow X^{(2)}
+\]
+as a smooth closed pair over \(X\) through the second projection
+\[
+    \pi_2:X^{(2)}\longrightarrow X.
+\]
+The structural morphism of the closed subscheme is the identity of \(X\),
+and its conormal class is
+\[
+    \nu_{\Delta_p}
+    =
+    T_p.
+\]
+Theorem~\ref{thm:closed-purity-smooth-pair} therefore gives a canonical
+equivalence of functors
+\[
+    \Sigma^{-T_p}
+    \xrightarrow{\simeq}
+    \Delta_p^!\pi_2^*
+\]
+from \(\SH(X)\) to itself.
+
+Let \(A\in\SH(X)\).  Using the adjunctions
+\[
+    \pi_{2\sharp}\dashv\pi_2^*,
+    \qquad
+    \Delta_{p*}\dashv\Delta_p^!,
+\]
+and relative purity, there are natural equivalences
+\[
+\begin{aligned}
+    \Map_X
+    \bigl(
+      \pi_{2\sharp}\Delta_{p*}\mathbf1_X,
+      A
+    \bigr)
+    &\simeq
+    \Map_{X^{(2)}}
+    \bigl(
+      \Delta_{p*}\mathbf1_X,
+      \pi_2^*A
+    \bigr) \\
+    &\simeq
+    \Map_X
+    \bigl(
+      \mathbf1_X,
+      \Delta_p^!\pi_2^*A
+    \bigr) \\
+    &\simeq
+    \Map_X
+    \bigl(
+      \mathbf1_X,
+      \Sigma^{-T_p}A
+    \bigr) \\
+    &\simeq
+    \Map_X
+    \bigl(
+      \Sigma^{T_p}\mathbf1_X,
+      A
+    \bigr).
+\end{aligned}
+\]
+By the covariant Yoneda lemma, this natural equivalence of mapping functors
+corresponds to a canonical equivalence
+\[
+    \widetilde\vartheta_p:
+    \Sigma^{T_p}\mathbf1_X
+    \xrightarrow{\simeq}
+    \pi_{2\sharp}\Delta_{p*}\mathbf1_X.
+\]
+Define
+\[
+    \vartheta_p:
+    \pi_{2\sharp}\Delta_{p*}\mathbf1_X
+    \xrightarrow{\simeq}
+    \Sigma^{T_p}\mathbf1_X
+\]
+to be the inverse of \(\widetilde\vartheta_p\).
+
+The relative-purity transformation of
+Theorem~\ref{thm:closed-purity-smooth-pair}
+is compatible with arbitrary base change.  The adjunction equivalences used
+above and the covariant Yoneda correspondence are likewise natural under
+base change.  Consequently, both
+\(\widetilde\vartheta_p\) and its inverse \(\vartheta_p\) are compatible
+with arbitrary base change.
+
+For composition, let
+\[
+    X\xrightarrow{p}Y\xrightarrow{q}S
+\]
+be smooth separated morphisms of finite presentation.  Write
+\[
+    \kappa:
+    X\times_YX
+    \longrightarrow
+    X\times_SX
+\]
+for the morphism induced by the two projections to \(X\).  It is the
+pullback of
+\[
+    \Delta_q:
+    Y\longrightarrow Y\times_SY
+\]
+along
+\[
+    p\times p:
+    X\times_SX
+    \longrightarrow
+    Y\times_SY.
+\]
+There is a canonical factorization
+\[
+    \Delta_{qp}
+    =
+    \kappa\Delta_p.
+\]
+Both factors are smooth closed pairs over \(X\), with respect to the second
+projection.  Compatibility of relative purity with composition identifies
+the normal Thom class of the composite with
+\[
+\begin{aligned}
+    \nu_{\Delta_{qp}}
+    &\simeq
+    \nu_{\Delta_p}
+    +
+    \Delta_p^*\nu_\kappa \\
+    &\simeq
+    T_p+p^*T_q.
+\end{aligned}
+\]
+Under the cotangent identifications, this is the path induced by the
+transitivity sequence
+\[
+    p^*\Omega_{Y/S}
+    \longrightarrow
+    \Omega_{X/S}
+    \longrightarrow
+    \Omega_{X/Y}.
+\]
+
+The composition compatibility of relative purity identifies the
+equivalence
+\(\widetilde\vartheta_{qp}\) with the pasted equivalence obtained from
+\(\widetilde\vartheta_p\) and \(\widetilde\vartheta_q\), under the canonical
+identification
+\[
+    T_{qp}
+    \simeq
+    T_p+p^*T_q.
+\]
+Taking inverses therefore identifies the corresponding pasted diagonal Thom
+equivalence with \(\vartheta_{qp}\), not merely with an equivalence having
+the same source and target.  Associativity of cotangent transitivity and
+the composition coherence of relative purity give the corresponding higher
+composition coherences.
+\end{proof}
+
+\begin{proposition}[Additivity of tangent classes]
+\label{prop:tangent-class-composition}
+Let
+\[
+    X\xrightarrow{p}Y\xrightarrow{q}S
+\]
+be smooth morphisms of finite presentation.  There is a canonical path in
+\(K(X)\)
+\[
+    T_{qp}
+    \simeq
+    T_p+p^*T_q.
+\]
+This path is natural under base change and coherently associative for a
+triple composite of smooth morphisms.
+\end{proposition}
+
+\begin{proof}
+The cotangent transitivity sequence is an exact sequence of finite locally
+free modules
+\[
+    p^*\Omega_{Y/S}
+    \longrightarrow
+    \Omega_{X/S}
+    \longrightarrow
+    \Omega_{X/Y}.
+\]
+The coherent Thom additivity theorem of
+Chapter~\ref{chap:stable-brave-new-motivic} carries this exact sequence to
+the displayed path in vector-bundle \(K\)-theory and hence to the
+corresponding equivalence of Thom twists.  Naturality and higher coherence
+follow from transitivity for cotangent complexes and the simplicial
+coherence of the motivic \(J\)-homomorphism.
+\end{proof}
+
+\section{Smooth proper ambidexterity}
+\label{sec:smooth-proper-ambidexterity}
+
+\subsection{The ambidexterity transformation}
+
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, separated, and of finite presentation.  The two adjunctions already
+available are
+\[
+    p_\sharp\dashv p^*\dashv p_*.
+\]
+Diagonal purity supplies the twist that compares the two adjoints of
+\(p^*\).
+
+\begin{construction}[Ambidexterity transformation]
+\label{constr:ambidexterity-transformation}
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, separated, and of finite presentation.  Write
+\[
+    X^{(2)}:=X\times_SX
+\]
+with projections
+\[
+    \pi_1,\pi_2:X^{(2)}\longrightarrow X
+\]
+and diagonal
+\[
+    \Delta_p:X\hookrightarrow X^{(2)}.
+\]
+
+Let \(A\in\SH(X)\).  Smooth base change gives a canonical equivalence
+\[
+    p^*p_\sharp\Sigma^{-T_p}A
+    \simeq
+    \pi_{2\sharp}\pi_1^*\Sigma^{-T_p}A.
+\]
+Apply \(\pi_{2\sharp}\) to the unit of
+\[
+    \Delta_p^*\dashv\Delta_{p*}:
+\]
+\[
+    \pi_1^*\Sigma^{-T_p}A
+    \longrightarrow
+    \Delta_{p*}\Delta_p^*
+    \pi_1^*\Sigma^{-T_p}A.
+\]
+Since
+\[
+    \pi_1\Delta_p
+    =
+    \pi_2\Delta_p
+    =
+    \id_X,
+\]
+the target is canonically
+\[
+    \Delta_{p*}\Sigma^{-T_p}A.
+\]
+
+The closed projection formula gives
+\[
+    \Delta_{p*}\Sigma^{-T_p}A
+    \simeq
+    \Delta_{p*}\mathbf1_X
+    \otimes
+    \pi_2^*\Sigma^{-T_p}A.
+\]
+Applying the smooth projection formula for \(\pi_2\) gives
+\[
+\begin{aligned}
+    \pi_{2\sharp}
+    \Delta_{p*}\Sigma^{-T_p}A
+    &\simeq
+    \pi_{2\sharp}
+    \bigl(
+      \Delta_{p*}\mathbf1_X
+      \otimes
+      \pi_2^*\Sigma^{-T_p}A
+    \bigr) \\
+    &\simeq
+    \pi_{2\sharp}\Delta_{p*}\mathbf1_X
+    \otimes
+    \Sigma^{-T_p}A.
+\end{aligned}
+\]
+The coherent diagonal Thom equivalence of
+Corollary~\ref{cor:coherent-diagonal-thom}
+identifies this object with
+\[
+\begin{aligned}
+    \Sigma^{T_p}\mathbf1_X
+    \otimes
+    \Sigma^{-T_p}A
+    &\simeq
+    A.
+\end{aligned}
+\]
+
+The resulting composite defines a canonical natural transformation
+\[
+    \epsilon_p:
+    p^*p_\sharp\Sigma^{-T_p}
+    \longrightarrow
+    \id_{\SH(X)}.
+\]
+Its right adjoint mate under
+\[
+    p^*\dashv p_*
+\]
+is the ambidexterity transformation
+\[
+    \alpha_p:
+    p_\sharp\Sigma^{-T_p}
+    \longrightarrow
+    p_*.
+\]
+\end{construction}
+
+\begin{proposition}[Formal properties of ambidexterity]
+\label{prop:ambidexterity-formal-properties}
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, separated, and of finite presentation.
+
+The transformations \(\alpha_p\) satisfy the following properties.
+
+\begin{enumerate}
+    \item If \(p=\id_X\), then \(\alpha_p\) is the identity.
+
+    \item If \(p\) is \'{e}tale, then \(T_p=0\), and
+    \[
+        \alpha_p:
+        p_\sharp
+        \longrightarrow
+        p_*
+    \]
+    is the untwisted ambidexterity transformation.
+
+    \item For every Cartesian square
+    \[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        X_T \arrow[r,"g'"] \arrow[d,"p'"']
+            & X \arrow[d,"p"] \\
+        T \arrow[r,"g"'] & S,
+    \end{tikzcd}
+    \]
+    the diagram
+    \[
+    \begin{tikzcd}[column sep=huge,row sep=large]
+        g^*p_\sharp\Sigma^{-T_p}
+            \arrow[r,"g^*\alpha_p"]
+            \arrow[d,"\simeq"']
+            &
+        g^*p_*
+            \arrow[d,"\operatorname{Ex}^{*}_{*}"]
+        \\
+        p'_\sharp\Sigma^{-T_{p'}}(g')^*
+            \arrow[r,"\alpha_{p'}(g')^*"']
+            &
+        p'_*(g')^*
+    \end{tikzcd}
+    \]
+    commutes.  The left vertical equivalence is smooth base change together
+    with
+    \[
+        (g')^*T_p\simeq T_{p'},
+    \]
+    and the right vertical map is the canonical Beck--Chevalley
+    transformation.
+
+    \item Let
+    \[
+        X\xrightarrow{p}Y\xrightarrow{q}S
+    \]
+    be smooth separated morphisms of finite presentation.  Under the
+    canonical equivalences
+    \[
+        (qp)_\sharp\Sigma^{-T_{qp}}
+        \simeq
+        q_\sharp\Sigma^{-T_q}
+        p_\sharp\Sigma^{-T_p}
+    \]
+    and
+    \[
+        (qp)_*
+        \simeq
+        q_*p_*,
+    \]
+    the transformation \(\alpha_{qp}\) is the composite
+    \[
+    \begin{aligned}
+        q_\sharp\Sigma^{-T_q}
+        p_\sharp\Sigma^{-T_p}
+        &\xrightarrow{
+          q_\sharp\Sigma^{-T_q}\alpha_p
+        }
+        q_\sharp\Sigma^{-T_q}p_* \\
+        &\xrightarrow{
+          \alpha_q p_*
+        }
+        q_*p_*.
+    \end{aligned}
+    \]
+    The first displayed equivalence uses
+    \[
+        T_{qp}
+        \simeq
+        T_p+p^*T_q
+    \]
+    and the smooth projection formula for \(p_\sharp\).
+\end{enumerate}
+
+All four assertions are coherently compatible with identities, iterated base
+change, and triple composition.
+\end{proposition}
+
+\begin{proof}
+For the identity morphism, the fibre product, both projections, the
+diagonal, the tangent class, and every adjunction occurring in
+Construction~\ref{constr:ambidexterity-transformation}
+are identities.  Hence the resulting transformation is the identity.
+
+If \(p\) is \'{e}tale, then
+\[
+    \Omega_{X/S}\simeq0
+\]
+and therefore
+\[
+    T_p=0.
+\]
+The construction consequently becomes untwisted.
+
+Consider a Cartesian square as in part \(3\).  Every ingredient in the
+construction of
+\[
+    \epsilon_p:
+    p^*p_\sharp\Sigma^{-T_p}
+    \longrightarrow
+    \id_{\SH(X)}
+\]
+is compatible with arbitrary base change:
+
+\begin{enumerate}
+    \item smooth Beck--Chevalley for the two projections;
+
+    \item base change of the diagonal and of its adjunction;
+
+    \item the closed and smooth projection formulas;
+
+    \item pullback of the tangent Thom twist;
+
+    \item the base-change compatibility of the coherent diagonal Thom
+    equivalence
+    \[
+        \vartheta_p:
+        \pi_{2\sharp}\Delta_{p*}\mathbf1_X
+        \simeq
+        \Sigma^{T_p}\mathbf1_X.
+    \]
+\end{enumerate}
+
+Hence base change carries the counit construction for \(p\) to the counit
+construction for \(p'\).  Taking right adjoint mates gives the commutative
+square in part \(3\).  No invertibility of the right vertical
+Beck--Chevalley transformation is used.
+
+Now let
+\[
+    X\xrightarrow{p}Y\xrightarrow{q}S
+\]
+be composable smooth separated morphisms of finite presentation.
+Cotangent transitivity gives the coherently associative path
+\[
+    T_{qp}
+    \simeq
+    T_p+p^*T_q.
+\]
+Consequently, the smooth projection formula identifies
+\[
+    (qp)_\sharp\Sigma^{-T_{qp}}
+\]
+with
+\[
+    q_\sharp\Sigma^{-T_q}
+    p_\sharp\Sigma^{-T_p}.
+\]
+
+The diagonal construction for \(qp\) is obtained by pasting the diagonal
+constructions for \(p\) and \(q\).  The composition compatibility of
+Corollary~\ref{cor:coherent-diagonal-thom}
+identifies the resulting pasted Thom equivalence with
+\[
+    \vartheta_{qp}.
+\]
+The pasting laws for smooth base change, projection formulas, units, and
+adjoint mates therefore identify the pasted counit with
+\(\epsilon_{qp}\).  Taking right adjoint mates gives precisely the composite
+displayed in part \(4\).
+
+The higher identity, base-change, and composition coherences follow from the
+higher pasting laws for adjunctions and from the coherent base-change and
+composition properties of relative purity and the motivic
+\(J\)-homomorphism.
+\end{proof}
+
+\begin{proposition}[Module-linearity of ambidexterity]
+\label{prop:ambidexterity-module-linearity}
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, separated, and of finite presentation.  For
+\[
+    A\in\SH(X),
+    \qquad
+    B\in\SH(S),
+\]
+the diagram
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+    p_\sharp\Sigma^{-T_p}A\otimes_SB
+        \arrow[r,"\simeq"]
+        \arrow[d,"\alpha_p(A)\otimes\id_B"']
+        &
+    p_\sharp
+    \Sigma^{-T_p}
+    \bigl(
+      A\otimes_Xp^*B
+    \bigr)
+        \arrow[d,"\alpha_p(A\otimes p^*B)"]
+    \\
+    p_*A\otimes_SB
+        \arrow[r,"\operatorname{PF}_p"']
+        &
+    p_*
+    \bigl(
+      A\otimes_Xp^*B
+    \bigr)
+\end{tikzcd}
+\]
+commutes.  Thus
+\[
+    \alpha_p:
+    p_\sharp\Sigma^{-T_p}
+    \longrightarrow
+    p_*
+\]
+is a morphism from the strong \(\SH(S)\)-module structure on
+\(p_\sharp\Sigma^{-T_p}\) to the canonical lax \(\SH(S)\)-module
+structure on \(p_*\).
+\end{proposition}
+
+\begin{proof}
+Put
+\[
+    F_p
+    :=
+    p_\sharp\Sigma^{-T_p}.
+\]
+The smooth projection formula gives \(F_p\) its strong
+\(\SH(S)\)-module structure, while the canonical projection
+transformation gives \(p_*\) its lax \(\SH(S)\)-module structure.
+
+It is enough to prove that the transformation
+\[
+    \epsilon_p:
+    p^*F_p
+    \longrightarrow
+    \id_{\SH(X)}
+\]
+of Construction~\ref{constr:ambidexterity-transformation} is
+\(\SH(S)\)-module-linear.  Under smooth base change,
+\[
+    p^*F_p(A)
+    \simeq
+    \pi_{2\sharp}\pi_1^*\Sigma^{-T_p}A.
+\]
+For \(B\in\SH(S)\), the equality
+\[
+    p\pi_1
+    =
+    p\pi_2
+\]
+gives a canonical equivalence
+\[
+    \pi_1^*p^*B
+    \simeq
+    \pi_2^*p^*B.
+\]
+After this identification, every step in the construction of
+\(\epsilon_p(A\otimes p^*B)\) is obtained from the corresponding step for
+\(A\) by tensoring with \(\pi_2^*p^*B\): the unit of
+\(\Delta_p^*\dashv\Delta_{p*}\), the closed projection formula, the smooth
+projection formula for \(\pi_2\), the coherent diagonal Thom equivalence,
+and cancellation of the inverse Thom twists.  Consequently, the diagram
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+    p^*F_p(A)\otimes_Xp^*B
+        \arrow[r,"\simeq"]
+        \arrow[d,"\epsilon_p(A)\otimes\id"']
+        &
+    p^*F_p(A\otimes_Xp^*B)
+        \arrow[d,"\epsilon_p(A\otimes p^*B)"]
+    \\
+    A\otimes_Xp^*B
+        \arrow[r,equal]
+        &
+    A\otimes_Xp^*B
+\end{tikzcd}
+\]
+commutes.
+
+Taking the right adjoint mate under
+\[
+    p^*\dashv p_*
+\]
+carries this module-linearity square to the asserted square for
+\(\alpha_p\).  The lower horizontal map is precisely the canonical
+projection transformation for the right adjoint \(p_*\).
+\end{proof}
+
+\begin{theorem}[Smooth proper ambidexterity]
+\label{thm:smooth-proper-ambidexterity}
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth, proper, and of finite presentation.  The canonical ambidexterity
+transformation is an equivalence:
+\[
+    \alpha_p:
+    p_\sharp\Sigma^{-T_p}
+    \xrightarrow{\simeq}
+    p_*.
+\]
+Equivalently,
+\[
+    p_\sharp
+    \xrightarrow{\simeq}
+    p_*\Sigma^{T_p}.
+\]
+
+The equivalence is \(\SH(S)\)-module-linear, where \(p_*\) carries its
+canonical lax \(\SH(S)\)-module structure.  In particular, the canonical
+projection transformation for \(p_*\) is an equivalence, so this lax module
+structure is strong.
+
+The equivalence is compatible with arbitrary base change and composition.
+It is natural in the object of \(\SH(X)\).  Consequently, for every
+\[
+    \eta\in K(X)
+\]
+and every \(A\in\SH(X)\), it gives a canonical equivalence
+\[
+    p_\sharp
+    \Sigma^{-T_p}
+    \Sigma^\eta A
+    \xrightarrow{\simeq}
+    p_*\Sigma^\eta A.
+\]
+If
+\[
+    \eta=p^*\xi
+\]
+for some \(\xi\in K(S)\), module-linearity and this projection equivalence
+further identify the preceding equivalence with
+\[
+    p_\sharp
+    \Sigma^{-T_p}
+    \Sigma^{p^*\xi}A
+    \xrightarrow{\simeq}
+    \Sigma^\xi p_*A.
+\]
+\end{theorem}
+
+\begin{proof}
+Stable classical comparison carries every ingredient of
+Construction~\ref{constr:ambidexterity-transformation} to its ordinary
+counterpart: smooth base change, the diagonal adjunction, the
+coefficientwise relative closed-purity transformation of
+Construction~\ref{constr:closed-purity-transformation} and its diagonal
+Thom mate from Corollary~\ref{cor:coherent-diagonal-thom}, the smooth and
+closed projection formulas, and the tangent Thom twist.  Consequently, it
+carries
+\[
+    \alpha_p:
+    p_\sharp\Sigma^{-T_p}
+    \longrightarrow
+    p_*
+\]
+to the ordinary smooth-proper ambidexterity transformation
+\[
+    (p_{\mathrm{cl}})_\sharp
+    \Sigma^{-T_{p_{\mathrm{cl}}}}
+    \longrightarrow
+    (p_{\mathrm{cl}})_*.
+\]
+The latter is an equivalence by ordinary motivic smooth-proper
+ambidexterity; see, for example,
+\cite{HoyoisSixOperations}.  Since
+\[
+    \Theta_S^{\mathrm{st}}
+\]
+is conservative, \(\alpha_p\) is an equivalence.
+
+The equivalent form
+\[
+    p_\sharp
+    \simeq
+    p_*\Sigma^{T_p}
+\]
+is obtained by precomposing with the inverse Thom twist.
+
+The base-change and composition compatibilities hold for the canonical
+transformation by
+Proposition~\ref{prop:ambidexterity-formal-properties}.  Its
+\(\SH(S)\)-module-linearity is
+Proposition~\ref{prop:ambidexterity-module-linearity}.  These properties
+therefore remain valid after \(\alpha_p\) is identified as an equivalence.
+Since the source
+\[
+    p_\sharp\Sigma^{-T_p}
+\]
+has a strong \(\SH(S)\)-module structure, module-linearity of the
+equivalence implies that the canonical lax module structure on \(p_*\) is
+strong.  Equivalently, the canonical projection transformation
+\[
+    p_*A\otimes_SB
+    \longrightarrow
+    p_*
+    \bigl(
+      A\otimes_Xp^*B
+    \bigr)
+\]
+is an equivalence.
+
+Naturality of \(\alpha_p\) in
+\[
+    A\in\SH(X)
+\]
+allows it to be evaluated on any Thom-twisted object
+\[
+    \Sigma^\eta A,
+    \qquad
+    \eta\in K(X),
+\]
+and gives
+\[
+    p_\sharp
+    \Sigma^{-T_p}
+    \Sigma^\eta A
+    \xrightarrow{\simeq}
+    p_*\Sigma^\eta A.
+\]
+No movement of an arbitrary source twist through \(p_*\) is asserted here.
+
+If
+\[
+    \eta=p^*\xi
+\]
+for some \(\xi\in K(S)\), pullback naturality of the motivic
+\(J\)-homomorphism gives
+\[
+    \Sigma^{p^*\xi}A
+    \simeq
+    A\otimes_Xp^*\operatorname{th}_S(\xi).
+\]
+The projection equivalence just established then gives
+\[
+\begin{aligned}
+    p_*\Sigma^{p^*\xi}A
+    &\simeq
+    p_*
+    \bigl(
+      A\otimes_Xp^*\operatorname{th}_S(\xi)
+    \bigr) \\
+    &\simeq
+    p_*A\otimes_S\operatorname{th}_S(\xi) \\
+    &\simeq
+    \Sigma^\xi p_*A.
+\end{aligned}
+\]
+This proves the final displayed compatibility.
+\end{proof}
+
+\subsection{Motivic Atiyah duality}
+
+Let \(p:X\to S\) be smooth and proper.  Define
+\[
+    M_S(X)
+    :=
+    p_\sharp\mathbf1_X
+\]
+and
+\[
+    D_S(X)
+    :=
+    p_\sharp\Sigma^{-T_p}\mathbf1_X.
+\]
+
+\begin{construction}[Coevaluation]
+\label{constr:atiyah-coevaluation}
+For \(B,C\in\SH(S)\), the smooth projection formula, the adjunctions
+\[
+    p_\sharp\dashv p^*\dashv p_*,
+\]
+and smooth proper ambidexterity give natural equivalences
+\[
+\begin{aligned}
+    \Map_S
+    \bigl(
+      M_S(X)\otimes B,
+      C
+    \bigr)
+    &\simeq
+    \Map_S
+    \bigl(
+      p_\sharp p^*B,
+      C
+    \bigr) \\
+    &\simeq
+    \Map_X
+    \bigl(
+      p^*B,
+      p^*C
+    \bigr) \\
+    &\simeq
+    \Map_S
+    \bigl(
+      B,
+      p_*p^*C
+    \bigr) \\
+    &\simeq
+    \Map_S
+    \bigl(
+      B,
+      p_\sharp\Sigma^{-T_p}p^*C
+    \bigr) \\
+    &\simeq
+    \Map_S
+    \bigl(
+      B,
+      D_S(X)\otimes C
+    \bigr).
+\end{aligned}
+\]
+Thus
+\[
+    D_S(X)\otimes-
+\]
+is right adjoint to
+\[
+    M_S(X)\otimes-.
+\]
+The unit of this adjunction, evaluated at \(\mathbf1_S\), is the canonical
+coevaluation
+\[
+    \operatorname{coev}_p:
+    \mathbf1_S
+    \longrightarrow
+    D_S(X)\otimes M_S(X).
+\]
+Using the symmetry of the tensor product, we also regard it as a map
+\[
+    \mathbf1_S
+    \longrightarrow
+    M_S(X)\otimes D_S(X).
+\]
+\end{construction}
+
+\begin{construction}[Evaluation]
+\label{constr:atiyah-evaluation}
+In the notation of
+Construction~\ref{constr:atiyah-coevaluation}, the counit of the adjunction
+\[
+    M_S(X)\otimes-
+    \dashv
+    D_S(X)\otimes-
+\]
+evaluated at \(\mathbf1_S\) is the canonical evaluation
+\[
+    \operatorname{ev}_p:
+    M_S(X)\otimes D_S(X)
+    \longrightarrow
+    \mathbf1_S.
+\]
+After applying the symmetry isomorphism, it may equivalently be written
+\[
+    \operatorname{ev}_p:
+    D_S(X)\otimes M_S(X)
+    \longrightarrow
+    \mathbf1_S.
+\]
+\end{construction}
+
+\begin{theorem}[Motivic Atiyah duality]
+\label{thm:motivic-atiyah-duality}
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth and proper.  The maps
+\[
+    \operatorname{coev}_p:
+    \mathbf1_S
+    \longrightarrow
+    M_S(X)\otimes D_S(X)
+\]
+and
+\[
+    \operatorname{ev}_p:
+    D_S(X)\otimes M_S(X)
+    \longrightarrow
+    \mathbf1_S
+\]
+exhibit \(D_S(X)\) as the strong dual of \(M_S(X)\).  Thus
+\[
+    \bigl(
+      p_\sharp\mathbf1_X
+    \bigr)^\vee
+    \simeq
+    p_\sharp\Sigma^{-T_p}\mathbf1_X.
+\]
+The duality is compatible with arbitrary base change and composition of
+smooth proper morphisms.
+\end{theorem}
+
+\begin{proof}
+Construction~\ref{constr:atiyah-coevaluation} gives an adjunction
+\[
+    M_S(X)\otimes-
+    \dashv
+    D_S(X)\otimes-.
+\]
+In a symmetric monoidal category, an object \(M\) is strongly dualizable with
+dual \(D\) precisely when tensoring by \(D\) is right adjoint to tensoring by
+\(M\).  The unit and counit of that adjunction are the coevaluation and
+evaluation maps, and their triangle identities are the triangle identities
+of the adjunction.  Hence \(D_S(X)\) is the strong dual of \(M_S(X)\).
+
+Arbitrary base change preserves the smooth projection formula, the
+adjunctions, the tangent Thom class, and the ambidexterity equivalence.
+It therefore preserves the tensor adjunction above and its unit and counit.
+Compatibility with composition follows in the same way from
+Proposition~\ref{prop:tangent-class-composition} and the composition
+compatibility of smooth proper ambidexterity.
+\end{proof}
+
+\begin{corollary}[\'{E}tale proper ambidexterity]
+\label{cor:etale-proper-ambidexterity}
+If \(p:X\to S\) is \'{e}tale and proper, then
+\[
+    p_\sharp
+    \simeq
+    p_*.
+\]
+\end{corollary}
+
+\begin{proof}
+For an \'{e}tale morphism,
+\[
+    \Omega_{X/S}\simeq0,
+\]
+so \(T_p=0\).  Apply
+Theorem~\ref{thm:smooth-proper-ambidexterity}.
+\end{proof}
+
+\begin{proposition}[Internal Hom and arbitrary direct image]
+\label{prop:arbitrary-direct-image-internal-hom}
+Let
+\[
+    f:X\longrightarrow S
+\]
+be any morphism between quasi-compact quasi-separated spectral schemes.  For
+every
+\[
+    B\in\SH(S),
+    \qquad
+    A\in\SH(X),
+\]
+there is a canonical equivalence
+\[
+    f_*
+    \underline{\operatorname{Hom}}_X
+    \bigl(
+      f^*B,
+      A
+    \bigr)
+    \simeq
+    \underline{\operatorname{Hom}}_S
+    \bigl(
+      B,
+      f_*A
+    \bigr).
+\]
+The equivalence is natural in \(A\), \(B\), and \(f\).
+\end{proposition}
+
+\begin{proof}
+Let \(C\in\SH(S)\).  Using the adjunction \(f^*\dashv f_*\), closedness of
+the tensor products, and strong symmetric monoidality of \(f^*\), there are
+natural equivalences
+\[
+\begin{aligned}
+    \Map_S
+    \Bigl(
+      C,\,
+      f_*
+      \underline{\operatorname{Hom}}_X
+      \bigl(
+        f^*B,
+        A
+      \bigr)
+    \Bigr)
+    &\simeq
+    \Map_X
+    \Bigl(
+      f^*C,\,
+      \underline{\operatorname{Hom}}_X
+      \bigl(
+        f^*B,
+        A
+      \bigr)
+    \Bigr) \\
+    &\simeq
+    \Map_X
+    \bigl(
+      f^*C\otimes f^*B,
+      A
+    \bigr) \\
+    &\simeq
+    \Map_X
+    \bigl(
+      f^*(C\otimes B),
+      A
+    \bigr) \\
+    &\simeq
+    \Map_S
+    \bigl(
+      C\otimes B,
+      f_*A
+    \bigr) \\
+    &\simeq
+    \Map_S
+    \Bigl(
+      C,\,
+      \underline{\operatorname{Hom}}_S
+      \bigl(
+        B,
+        f_*A
+      \bigr)
+    \Bigr).
+\end{aligned}
+\]
+Yoneda gives the asserted equivalence.
+\end{proof}
+
+\begin{theorem}[Cocontinuity of arbitrary direct image]
+\label{thm:arbitrary-direct-image-cocontinuous}
+Let
+\[
+    f:X\longrightarrow S
+\]
+be any morphism between quasi-compact quasi-separated spectral schemes.  The
+functor
+\[
+    f_*:\SH(X)\longrightarrow\SH(S)
+\]
+preserves all small colimits.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \mathcal G_S
+\]
+be the family of compact generators constructed in
+Chapter~\ref{chap:stable-brave-new-motivic}.  Its members have the form
+\[
+    \Sigma^{n\mathcal O_S}
+    \Sigma_{T,+}^{\infty}\Mot_S(U),
+    \qquad
+    U\in\Sm^{\mathrm{fp}}_{/S},
+    \quad
+    n\in\mathbb Z.
+\]
+Base change of smooth morphisms and pullback compatibility of Thom twists
+give
+\[
+\begin{aligned}
+    f^*
+    \bigl(
+      \Sigma^{n\mathcal O_S}
+      \Sigma_{T,+}^{\infty}\Mot_S(U)
+    \bigr)
+    &\simeq
+    \Sigma^{n\mathcal O_X}
+    \Sigma_{T,+}^{\infty}
+    \Mot_X(U\times_SX).
+\end{aligned}
+\]
+The object on the right is compact in \(\SH(X)\).  By the compact-closure
+lemma of Chapter~\ref{chap:stable-brave-new-motivic}, every compact object of
+\(\SH(S)\) is a retract of an object obtained from the family
+\(\mathcal G_S\) by finite colimits.  The functor \(f^*\) is exact, hence
+preserves finite colimits, and it preserves retracts.  Since it carries every
+member of \(\mathcal G_S\) to a compact object, it therefore preserves every
+compact object.
+
+Let
+\[
+    A:I\longrightarrow\SH(X)
+\]
+be a filtered diagram.  For every \(G\in\mathcal G_S\), compactness of
+\(G\) and \(f^*G\) gives
+\[
+\begin{aligned}
+    \Map_S
+    \bigl(
+      G,
+      \operatorname*{colim}_{i\in I}f_*A_i
+    \bigr)
+    &\simeq
+    \operatorname*{colim}_{i\in I}
+    \Map_S(G,f_*A_i) \\
+    &\simeq
+    \operatorname*{colim}_{i\in I}
+    \Map_X(f^*G,A_i) \\
+    &\simeq
+    \Map_X
+    \bigl(
+      f^*G,
+      \operatorname*{colim}_{i\in I}A_i
+    \bigr) \\
+    &\simeq
+    \Map_S
+    \bigl(
+      G,
+      f_*\operatorname*{colim}_{i\in I}A_i
+    \bigr).
+\end{aligned}
+\]
+The family \(\mathcal G_S\) detects equivalences.  Hence \(f_*\) preserves
+filtered colimits.
+
+As a right adjoint between stable \(\infty\)-categories, \(f_*\) is exact
+and therefore preserves finite colimits.  An arbitrary coproduct is the
+filtered colimit of its finite subcoproducts, so \(f_*\) preserves arbitrary
+coproducts.  An exact functor between stable presentable
+\(\infty\)-categories that preserves arbitrary coproducts preserves all
+small colimits.  Therefore \(f_*\) is colimit-preserving.
+\end{proof}
+
+\section{Projective base change and projection}
+\label{sec:projective-exchange}
+
+\subsection{Projective bundles}
+
+Consider a Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \mathbb P_T(f^*E) \arrow[r,"g'"] \arrow[d,"\pi'"']
+        & \mathbb P_S(E) \arrow[d,"\pi"] \\
+    T \arrow[r,"g"'] & S.
+\end{tikzcd}
+\]
+The morphisms \(\pi\) and \(\pi'\) are smooth and proper.
+
+\begin{theorem}[Base change for projective bundles]
+\label{thm:projective-bundle-base-change}
+The canonical Beck--Chevalley transformation
+\[
+    g^*\pi_*
+    \longrightarrow
+    \pi'_*(g')^*
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Smooth proper ambidexterity gives
+\[
+    \pi_*
+    \simeq
+    \pi_\sharp\Sigma^{-T_\pi}
+\]
+and
+\[
+    \pi'_*
+    \simeq
+    \pi'_\sharp\Sigma^{-T_{\pi'}}.
+\]
+Base change for cotangent complexes gives
+\[
+    (g')^*T_\pi
+    \simeq
+    T_{\pi'}.
+\]
+Hence stable smooth base change and pullback compatibility of Thom twists
+identify
+\[
+\begin{aligned}
+    g^*\pi_*
+    &\simeq
+    g^*\pi_\sharp\Sigma^{-T_\pi} \\
+    &\simeq
+    \pi'_\sharp(g')^*\Sigma^{-T_\pi} \\
+    &\simeq
+    \pi'_\sharp\Sigma^{-T_{\pi'}}(g')^* \\
+    &\simeq
+    \pi'_*(g')^*.
+\end{aligned}
+\]
+The resulting equivalence is the canonical Beck--Chevalley transformation,
+because every step is obtained by taking canonical mates.
+\end{proof}
+
+
+
+
+\begin{theorem}[Projection formula for projective bundles]
+\label{thm:projective-bundle-projection}
+For \(A\in\SH(\mathbb P_S(E))\) and \(B\in\SH(S)\), the canonical
+projection morphism
+\[
+    \pi_*A\otimes_SB
+    \longrightarrow
+    \pi_*(A\otimes\pi^*B)
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+The projective-bundle projection
+\[
+    \pi:\mathbb P_S(E)\longrightarrow S
+\]
+is smooth and proper.  Hence smooth proper ambidexterity gives equivalences
+\[
+    \alpha_\pi(A):
+    \pi_\sharp\Sigma^{-T_\pi}A
+    \xrightarrow{\simeq}
+    \pi_*A
+\]
+and
+\[
+    \alpha_\pi(A\otimes\pi^*B):
+    \pi_\sharp
+    \Sigma^{-T_\pi}
+    (A\otimes\pi^*B)
+    \xrightarrow{\simeq}
+    \pi_*(A\otimes\pi^*B).
+\]
+
+By
+Proposition~\ref{prop:ambidexterity-module-linearity},
+there is a commutative square
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+    \pi_\sharp\Sigma^{-T_\pi}A\otimes_SB
+        \arrow[r,"\simeq"]
+        \arrow[d,"\simeq"']
+        &
+    \pi_\sharp
+    \Sigma^{-T_\pi}
+    (A\otimes\pi^*B)
+        \arrow[d,"\simeq"]
+    \\
+    \pi_*A\otimes_SB
+        \arrow[r,"\operatorname{PF}_\pi"']
+        &
+    \pi_*(A\otimes\pi^*B).
+\end{tikzcd}
+\]
+The upper horizontal map is the smooth projection equivalence, and both
+vertical maps are ambidexterity equivalences.  Therefore the lower
+horizontal map, which is the canonical projection transformation, is an
+equivalence.
+\end{proof}
+
+\subsection{Projective morphisms}
+
+\begin{theorem}[Projective base change]
+\label{thm:projective-base-change}
+Consider a Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_T \arrow[r,"g'"] \arrow[d,"f'"']
+        & X \arrow[d,"f"] \\
+    T \arrow[r,"g"'] & S,
+\end{tikzcd}
+\]
+where \(f\) is projective.  The canonical Beck--Chevalley transformation
+\[
+    g^*f_*
+    \longrightarrow
+    f'_*(g')^*
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Choose a projective presentation of \(f\), and argue by induction on its
+length.
+
+Suppose first that \(f\) admits an elementary projective presentation
+\[
+    X
+    \xrightarrow{i}
+    \mathbb P_S(E)
+    \xrightarrow{\pi}
+    S,
+\]
+where \(i\) is a closed immersion of finite presentation.  After base change
+to \(T\), write
+\[
+    X_T
+    \xrightarrow{i'}
+    \mathbb P_T(g^*E)
+    \xrightarrow{\pi'}
+    T
+\]
+for the pulled-back presentation, and let
+\[
+    \widetilde g:
+    \mathbb P_T(g^*E)
+    \longrightarrow
+    \mathbb P_S(E)
+\]
+be the base-change morphism.
+
+Since
+\[
+    f_*
+    \simeq
+    \pi_*i_*,
+    \qquad
+    f'_*
+    \simeq
+    \pi'_*i'_*,
+\]
+stable closed base change and
+Theorem~\ref{thm:projective-bundle-base-change} give
+\[
+\begin{aligned}
+    g^*f_*
+    &\simeq
+    g^*\pi_*i_* \\
+    &\simeq
+    \pi'_*\widetilde g^*i_* \\
+    &\simeq
+    \pi'_*i'_*(g')^* \\
+    &\simeq
+    f'_*(g')^*.
+\end{aligned}
+\]
+By the pasting law for adjoint mates, this composite is the canonical
+Beck--Chevalley transformation.
+
+Now suppose that \(f\) has positive presentation length and write
+\[
+    X\xrightarrow{h}Y\xrightarrow{q}S,
+\]
+where \(h\) is elementary projective and \(q\) has shorter projective
+presentation.  Put
+\[
+    Y_T:=Y\times_ST
+\]
+and write
+\[
+    \widetilde g:Y_T\longrightarrow Y,
+    \qquad
+    h_T:X_T\longrightarrow Y_T,
+    \qquad
+    q_T:Y_T\longrightarrow T
+\]
+for the base-change morphisms.
+
+Using the inductive hypothesis for \(q\) and the elementary case for \(h\),
+we obtain
+\[
+\begin{aligned}
+    g^*f_*
+    &\simeq
+    g^*q_*h_* \\
+    &\xrightarrow{\simeq}
+    q_{T*}\widetilde g^*h_* \\
+    &\xrightarrow{\simeq}
+    q_{T*}h_{T*}(g')^* \\
+    &\simeq
+    f'_*(g')^*.
+\end{aligned}
+\]
+The Beck--Chevalley pasting law identifies this composite with the canonical
+base-change transformation for \(f=qh\).  The induction is complete.
+\end{proof}
+
+\begin{theorem}[Projective projection formula]
+\label{thm:projective-projection-formula}
+Let
+\[
+    f:X\longrightarrow S
+\]
+be projective.  For
+\[
+    A\in\SH(X),
+    \qquad
+    B\in\SH(S),
+\]
+the canonical projection morphism
+\[
+    f_*A\otimes_SB
+    \longrightarrow
+    f_*(A\otimes_Xf^*B)
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Choose a projective presentation of \(f\), and argue by induction on its
+length.
+
+Suppose first that
+\[
+    f=\pi i
+\]
+is elementary projective, where
+\[
+    i:X\hookrightarrow\mathbb P_S(E)
+\]
+is a closed immersion and
+\[
+    \pi:\mathbb P_S(E)\longrightarrow S
+\]
+is the projective-bundle projection.
+
+The canonical projection transformation for the composite \(f=\pi i\) is,
+by the projection-formula pasting law, the composite
+\[
+\begin{aligned}
+    \pi_*i_*A\otimes_SB
+    &\longrightarrow
+    \pi_*
+    \bigl(
+      i_*A\otimes\pi^*B
+    \bigr) \\
+    &\longrightarrow
+    \pi_*i_*
+    \bigl(
+      A\otimes i^*\pi^*B
+    \bigr).
+\end{aligned}
+\]
+The first arrow is the projective-bundle projection transformation and is
+an equivalence by
+Theorem~\ref{thm:projective-bundle-projection}.
+The second arrow is induced by the closed projection equivalence
+\[
+    i_*A\otimes\pi^*B
+    \xrightarrow{\simeq}
+    i_*
+    \bigl(
+      A\otimes i^*\pi^*B
+    \bigr).
+\]
+Hence the canonical projection transformation for \(f\) is an equivalence
+in the elementary case.
+
+Now write a projective morphism of positive presentation length as
+\[
+    X\xrightarrow{h}Y\xrightarrow{q}S,
+\]
+where \(h\) is elementary projective and \(q\) has shorter projective
+presentation.  The canonical projection transformation for \(f=qh\) is the
+composite
+\[
+\begin{aligned}
+    q_*h_*A\otimes_SB
+    &\longrightarrow
+    q_*
+    \bigl(
+      h_*A\otimes_Yq^*B
+    \bigr) \\
+    &\longrightarrow
+    q_*h_*
+    \bigl(
+      A\otimes_Xh^*q^*B
+    \bigr).
+\end{aligned}
+\]
+The first arrow is an equivalence by the induction hypothesis for \(q\).
+The second is obtained by applying \(q_*\) to the projection equivalence for
+the elementary projective morphism \(h\).  It is therefore an equivalence.
+
+Since
+\[
+    h^*q^*B
+    \simeq
+    f^*B,
+\]
+the target is
+\[
+    f_*(A\otimes_Xf^*B).
+\]
+Thus the canonical projection transformation for \(f\) is an equivalence.
+\end{proof}
+
+\section{Proper base change and the proper projection formula}
+\label{sec:proper-exchange}
+
+\subsection{Canonical exchange transformations}
+
+Consider a Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_T \arrow[r,"g'"] \arrow[d,"f'"']
+        & X \arrow[d,"f"] \\
+    T \arrow[r,"g"'] & S.
+\end{tikzcd}
+\]
+The inverse-image composition equivalence gives, by adjunction, a canonical
+Beck--Chevalley transformation
+\[
+    \operatorname{Ex}^{*}_{*}:
+    g^*f_*
+    \longrightarrow
+    f'_*(g')^*.
+\]
+For any morphism \(f\), lax symmetric monoidality of \(f_*\) gives the
+canonical projection morphism
+\[
+    \operatorname{PF}_f:
+    f_*A\otimes_SB
+    \longrightarrow
+    f_*(A\otimes_Xf^*B).
+\]
+
+\begin{lemma}[Comparison of proper transformations]
+\label{lem:comparison-proper-transformations}
+Suppose that \(f\) is proper.  Under stable classical comparison, the
+spectral Beck--Chevalley and projection transformations are carried to the
+ordinary transformations for
+\[
+    f_{\mathrm{cl}}:
+    X_{\mathrm{cl}}
+    \longrightarrow
+    S_{\mathrm{cl}}.
+\]
+\end{lemma}
+
+\begin{proof}
+The transformation \(\operatorname{Ex}^{*}_{*}\) is characterized as the
+adjoint mate of the canonical equivalence between the two inverse-image
+composites around the Cartesian square.  Stable classical comparison is
+compatible with inverse image, direct image, units, counits, and Cartesian
+composition.  It therefore carries this mate to the ordinary mate.
+
+The projection transformation is adjoint to
+\[
+    f^*(f_*A\otimes B)
+    \simeq
+    f^*f_*A\otimes f^*B
+    \longrightarrow
+    A\otimes f^*B.
+\]
+Strong symmetric monoidality of comparison and compatibility with the
+counit of \(f^*\dashv f_*\) identify its image with the ordinary projection
+transformation.
+\end{proof}
+
+\begin{theorem}[Proper base change]
+\label{thm:proper-base-change}
+For every Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_T \arrow[r,"g'"] \arrow[d,"f'"']
+        & X \arrow[d,"f"] \\
+    T \arrow[r,"g"'] & S
+\end{tikzcd}
+\]
+with \(f\) proper, the canonical transformation
+\[
+    g^*f_*
+    \xrightarrow{\simeq}
+    f'_*(g')^*
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Properness is detected on classical truncations, so
+\(f_{\mathrm{cl}}\) is proper.  By
+Lemma~\ref{lem:comparison-proper-transformations}, stable classical
+comparison carries the displayed transformation to the ordinary proper
+base-change transformation.  The latter is an equivalence in ordinary
+stable motivic homotopy theory.  Since
+\(\Theta_T^{\mathrm{st}}\) is conservative, the spectral transformation is
+an equivalence.
+\end{proof}
+
+\begin{theorem}[Proper projection formula]
+\label{thm:proper-projection-formula}
+Let \(f:X\to S\) be proper.  For every
+\(A\in\SH(X)\) and \(B\in\SH(S)\), the canonical projection morphism
+\[
+    f_*A\otimes_SB
+    \xrightarrow{\simeq}
+    f_*(A\otimes_Xf^*B)
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:comparison-proper-transformations}, the image of the
+canonical projection morphism under stable classical comparison is the
+ordinary proper projection transformation.  The latter is an equivalence.
+Conservativity of \(\Theta_S^{\mathrm{st}}\) proves the assertion.
+\end{proof}
+
+\begin{remark}[Why the comparison argument is not circular]
+\label{rem:proper-comparison-not-circular}
+The functor \(f_*\) and both canonical transformations were constructed
+before any use of ordinary proper functoriality.  Classical comparison is
+used only to detect their invertibility.  In particular, the exceptional
+functor \(f_!\) of the next chapter will not be defined by transport from the
+ordinary theory; it will be constructed from spectral compactifications and
+the proper support property proved below.
+\end{remark}
+
+
+
+
+
+\begin{corollary}[Proper projection with virtual twists]
+\label{cor:proper-virtual-projection}
+Let \(f:X\to S\) be proper and let \(\xi\in K(S)\).  Then
+\[
+    f_*\Sigma^{f^*\xi}A
+    \simeq
+    \Sigma^\xi f_*A.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:proper-projection-formula} to the invertible object
+\(\operatorname{th}_S(\xi)\).
+\end{proof}
+
+\section{Open--proper exchange and the support property}
+\label{sec:proper-excision}
+
+\subsection{Open--proper exchange}
+
+Consider a Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    U' \arrow[r,"j'"] \arrow[d,"q"']
+        & X' \arrow[d,"p"] \\
+    U \arrow[r,"j"']
+        & X,
+\end{tikzcd}
+\]
+where
+\[
+    p\in\mathcal P
+    \qquad\text{and}\qquad
+    j\in\mathcal J.
+\]
+Then \(j'\in\mathcal J\) and \(q\in\mathcal P\).
+
+\begin{construction}[The open--proper exchange transformation]
+\label{constr:open-proper-exchange}
+Let
+\[
+    i:Z\hookrightarrow X
+\]
+be the closed complement of \(j\), and put
+\[
+    Z':=X'\times_XZ.
+\]
+Write
+\[
+    i':Z'\hookrightarrow X'
+\]
+for the pulled-back closed immersion.
+
+For \(A\in\SH(U')\), put
+\[
+    E:=p_*j'_\sharp A.
+\]
+Proper base change for the closed Cartesian square gives
+\[
+\begin{aligned}
+    i^*E
+    &=
+    i^*p_*j'_\sharp A \\
+    &\simeq
+    (p|_{Z'})_*i'^*j'_\sharp A \\
+    &\simeq
+    0
+\end{aligned}
+\]
+by open--closed orthogonality.
+
+The localization triangle for
+\[
+    Z\xrightarrow{i}X\xleftarrow{j}U
+\]
+is
+\[
+    j_\sharp j^*E
+    \xrightarrow{\epsilon_j(E)}
+    E
+    \longrightarrow
+    i_*i^*E.
+\]
+Since \(i^*E\simeq0\), the localization counit is an equivalence.  Its
+inverse gives
+\[
+    E
+    \xrightarrow{\simeq}
+    j_\sharp j^*E.
+\]
+
+Proper base change for the original open Cartesian square gives
+\[
+\begin{aligned}
+    j^*E
+    &=
+    j^*p_*j'_\sharp A \\
+    &\xrightarrow{\simeq}
+    q_*j'^*j'_\sharp A \\
+    &\simeq
+    q_*A.
+\end{aligned}
+\]
+Define
+\[
+    \operatorname{Ex}^{\sharp}_{*}(A):
+    p_*j'_\sharp A
+    \longrightarrow
+    j_\sharp q_*A
+\]
+to be the composite
+\[
+\begin{aligned}
+    p_*j'_\sharp A
+    &=E \\
+    &\xrightarrow{\epsilon_j(E)^{-1}}
+    j_\sharp j^*E \\
+    &\xrightarrow{\simeq}
+    j_\sharp q_*A.
+\end{aligned}
+\]
+The construction is natural in \(A\).
+\end{construction}
+
+\begin{theorem}[Open--proper exchange]
+\label{thm:open-proper-exchange}
+For every Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    U' \arrow[r,"j'"] \arrow[d,"q"']
+        & X' \arrow[d,"p"] \\
+    U \arrow[r,"j"']
+        & X
+\end{tikzcd}
+\]
+with \(p\in\mathcal P\) and \(j\in\mathcal J\), the canonical exchange
+transformation is an equivalence:
+\[
+    \operatorname{Ex}^{\sharp}_{*}:
+    p_*j'_\sharp
+    \xrightarrow{\simeq}
+    j_\sharp q_*.
+\]
+It is compatible with arbitrary base change and with composition of proper
+morphisms.
+\end{theorem}
+
+\begin{proof}
+The construction of
+\[
+    \operatorname{Ex}^{\sharp}_{*}(A)
+\]
+is a composite of equivalences: proper base change and open--closed
+orthogonality show that \(i^*p_*j'_\sharp A\simeq0\); localization then
+identifies \(p_*j'_\sharp A\) with its extension from \(U\); and proper base
+change for the open square identifies the restriction with \(q_*A\).
+Hence the exchange transformation is an equivalence.
+
+For composition, suppose that
+\[
+    X''\xrightarrow{p'}X'\xrightarrow{p}X
+\]
+are proper and that compatible Cartesian open subschemes give morphisms
+\[
+    U''\xrightarrow{q'}U'\xrightarrow{q}U.
+\]
+Both the exchange map for \(pp'\) and the composite of the exchange maps for
+\(p'\) and \(p\) are transformations between objects in the essential image
+of
+\[
+    j_\sharp:\SH(U)\longrightarrow\SH(X).
+\]
+After applying \(j^*\), both become the canonical direct-image composition
+equivalence
+\[
+    (qq')_*
+    \simeq
+    q_*q'_*.
+\]
+The restriction functor
+\[
+    j^*:\operatorname{Im}(j_\sharp)\longrightarrow\SH(U)
+\]
+is an equivalence.  Therefore the two transformations agree.  The same
+uniqueness argument supplies all higher composition coherences.
+
+Every step in
+Construction~\ref{constr:open-proper-exchange} is preserved by arbitrary
+base change: proper base change, pullback of the closed complement,
+localization, open--closed orthogonality, and the direct-image composition
+constraints.  Hence the exchange equivalence is compatible with arbitrary
+base change.
+\end{proof}
+
+\subsection{Proper support}
+
+\begin{definition}[Proper excision square]
+\label{def:proper-excision-square}
+A proper excision square is a Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    Z' \arrow[r,"i'"] \arrow[d,"q"']
+        & X' \arrow[d,"p"] \\
+    Z \arrow[r,"i"']
+        & X,
+\end{tikzcd}
+\]
+where \(i\) is a closed immersion, \(p\in\mathcal P\), and, writing
+\[
+    j:U\hookrightarrow X,
+    \qquad
+    j':U'\hookrightarrow X'
+\]
+for the open complements, the induced map
+\[
+    u:U'\xrightarrow{\simeq}U
+\]
+is an equivalence.
+\end{definition}
+
+\begin{corollary}[Proper support]
+\label{thm:proper-support}
+For every proper excision square, there is a canonical equivalence
+\[
+    p_*j'_\sharp
+    \xrightarrow{\simeq}
+    j_\sharp u_*.
+\]
+After identifying \(u\) with the identity of \(U\), this becomes
+\[
+    p_*j'_\sharp
+    \simeq
+    j_\sharp.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:open-proper-exchange} to the Cartesian square of open
+complements.  Since \(u\) is an equivalence, so is
+\[
+    u_*:\SH(U')\xrightarrow{\simeq}\SH(U).
+\]
+\end{proof}
+
+\begin{corollary}[Proper invariance of extension by zero]
+\label{cor:proper-invariance-extension-zero}
+Let
+\[
+    r:\overline X'\longrightarrow\overline X
+\]
+be proper, and suppose that there is an open spectral scheme \(X\) with
+Cartesian open immersions
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X \arrow[r,"j'"] \arrow[d,"\id_X"']
+        & \overline X' \arrow[d,"r"] \\
+    X \arrow[r,"j"']
+        & \overline X.
+\end{tikzcd}
+\]
+Then
+\[
+    r_*j'_\sharp
+    \simeq
+    j_\sharp.
+\]
+\end{corollary}
+
+\begin{proof}
+Take the closed complements and apply
+Corollary~\ref{thm:proper-support}.
+\end{proof}
+
+\begin{proposition}[Composition coherence of support]
+\label{prop:proper-support-composition}
+Let
+\[
+    \overline X''
+    \xrightarrow{r'}
+    \overline X'
+    \xrightarrow{r}
+    \overline X
+\]
+be proper morphisms restricting to the identity on a common open spectral
+subscheme \(X\).  Under the canonical equivalence
+\[
+    (rr')_*
+    \simeq
+    r_*r'_*,
+\]
+the support equivalence for \(rr'\) agrees with the composite
+\[
+    (rr')_*j''_\sharp
+    \simeq
+    r_*r'_*j''_\sharp
+    \simeq
+    r_*j'_\sharp
+    \simeq
+    j_\sharp.
+\]
+The same compatibility holds coherently for arbitrary finite composites.
+\end{proposition}
+
+\begin{proof}
+This is the composition compatibility of open--proper exchange from
+Theorem~\ref{thm:open-proper-exchange}, specialized to the common open
+\(X\).  Equivalently, both transformations are maps between objects
+supported on \(X\), and after applying \(j^*\) both become the identity.
+Since \(j^*\) is an equivalence on the supported subcategory, they agree.
+The same uniqueness gives all higher coherences.
+\end{proof}
+
+\begin{proposition}[Base change of support]
+\label{prop:proper-support-base-change}
+The proper support equivalence is compatible with arbitrary base change of
+proper excision squares.
+\end{proposition}
+
+\begin{proof}
+This is the base-change compatibility of open--proper exchange from
+Theorem~\ref{thm:open-proper-exchange}, specialized to the open-complement
+square.
+\end{proof}
+
+\section{Compactifiable morphisms}
+\label{sec:compactifiable-morphisms}
+
+\begin{definition}[Compactification]
+\label{def:spectral-compactification}
+Let
+\[
+    f:X\longrightarrow S
+\]
+belong to \(\mathcal E\).
+
+A compactification of \(f\) is a factorization
+\[
+    X
+    \xrightarrow{j}
+    \overline X
+    \xrightarrow{p}
+    S
+\]
+together with a specified equivalence
+\[
+    pj\simeq f,
+\]
+where
+\[
+    j\in\mathcal J
+    \qquad\text{and}\qquad
+    p\in\mathcal P.
+\]
+The morphism \(f\) is compactifiable if it admits a compactification.
+\end{definition}
+
+\begin{definition}[Refinement of compactifications]
+\label{def:compactification-refinement}
+Let
+\[
+    c_a
+    =
+    \bigl(
+      X\xrightarrow{j_a}\overline X_a\xrightarrow{p_a}S
+    \bigr),
+    \qquad
+    a=1,2,
+\]
+be compactifications of \(f\).
+
+A refinement
+\[
+    c_2\longrightarrow c_1
+\]
+is a morphism
+\[
+    r:\overline X_2\longrightarrow\overline X_1
+\]
+over \(S\), belonging to \(\mathcal P\), together with a specified
+Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X \arrow[r,"j_2"] \arrow[d,"\id_X"']
+        & \overline X_2 \arrow[d,"r"] \\
+    X \arrow[r,"j_1"']
+        & \overline X_1.
+\end{tikzcd}
+\]
+The square is required to be compatible with the specified equivalences
+\[
+    p_aj_a\simeq f.
+\]
+\end{definition}
+
+\begin{definition}[The category of compactifications]
+\label{def:category-compactifications}
+Write
+\[
+    \operatorname{Comp}(f)
+\]
+for the \(\infty\)-category defined as follows.
+
+Its objects are compactifications of \(f\).  For two objects
+\[
+    c_a
+    =
+    \bigl(
+      X\xrightarrow{j_a}\overline X_a\xrightarrow{p_a}S
+    \bigr),
+    \qquad
+    a=1,2,
+\]
+the mapping space
+\[
+    \Map_{\operatorname{Comp}(f)}(c_2,c_1)
+\]
+is the union of those connected components of the homotopy fibre
+\[
+\Map_{\operatorname{Sch}^{\mathrm{sp}}_{/S}}
+    (\overline X_2,\overline X_1)
+\times_{
+\Map_{\operatorname{Sch}^{\mathrm{sp}}_{/S}}
+    (X,\overline X_1)
+}
+\{j_1\}
+\]
+whose underlying morphism
+\[
+    r:\overline X_2\longrightarrow\overline X_1
+\]
+belongs to \(\mathcal P\) and for which the induced square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X \arrow[r,"j_2"] \arrow[d,"\id_X"']
+        & \overline X_2 \arrow[d,"r"] \\
+    X \arrow[r,"j_1"']
+        & \overline X_1
+\end{tikzcd}
+\]
+is Cartesian.  The map to
+\[
+\Map_{\operatorname{Sch}^{\mathrm{sp}}_{/S}}
+    (X,\overline X_1)
+\]
+is induced by precomposition with \(j_2\).
+
+Composition and all higher simplices are inherited from the slice
+\(\infty\)-category
+\[
+    \operatorname{Sch}^{\mathrm{sp}}_{/S}.
+\]
+\end{definition}
+
+\begin{proposition}[Elementary permanence of compactifiability]
+\label{prop:compactifiable-permanence}
+Compactifiable morphisms in \(\mathcal E\) are stable under the following
+operations:
+
+\begin{enumerate}
+    \item arbitrary base change;
+
+    \item base restriction along a quasi-compact open subscheme of the
+    target;
+
+    \item precomposition with a quasi-compact open immersion;
+
+    \item products over a common base;
+
+    \item postcomposition with a morphism in
+    \(\mathcal P\cap\mathcal E\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    X
+    \xrightarrow{j}
+    \overline X
+    \xrightarrow{p}
+    S
+\]
+be a compactification.
+
+Arbitrary base change preserves quasi-compact open immersions and carries
+morphisms in \(\mathcal P\) to morphisms in \(\mathcal P\).  Pulling back
+the displayed factorization therefore gives a compactification after
+arbitrary base change.  Base restriction to a quasi-compact open subscheme
+of \(S\) is a special case.
+
+If
+\[
+    v:V\hookrightarrow X
+\]
+is a quasi-compact open immersion, then
+\[
+    V
+    \xrightarrow{jv}
+    \overline X
+    \xrightarrow{p}
+    S
+\]
+is a compactification of \(fv\), because a composite of quasi-compact open
+immersions is quasi-compact open.
+
+Let
+\[
+    f_a:X_a\longrightarrow S,
+    \qquad
+    a=1,2,
+\]
+be compactifiable, with compactifications
+\[
+    X_a
+    \hookrightarrow
+    \overline X_a
+    \longrightarrow
+    S.
+\]
+Then
+\[
+    X_1\times_SX_2
+    \hookrightarrow
+    \overline X_1\times_S\overline X_2
+    \longrightarrow
+    S
+\]
+is a compactification of
+\[
+    X_1\times_SX_2\longrightarrow S.
+\]
+The first map is quasi-compact open and the second belongs to
+\(\mathcal P\).
+
+Suppose
+\[
+    r:S\longrightarrow T
+\]
+belongs to \(\mathcal P\cap\mathcal E\).  Then
+\[
+    X
+    \hookrightarrow
+    \overline X
+    \xrightarrow{p}
+    S
+    \xrightarrow{r}
+    T
+\]
+is a compactification of \(rf\), because \(rp\) belongs to
+\(\mathcal P\).
+\end{proof}
+
+\section{Spectral Nagata compactification}
+\label{sec:spectral-nagata}
+
+\begin{proposition}[Spectral cobase change along a nil-immersion]
+\label{prop:spectral-nil-cobase-change-open}
+Consider a diagram of spectral schemes
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_0 \arrow[r,"i"] \arrow[d,"j_0"']
+        & X \\
+    Y_0,
+\end{tikzcd}
+\]
+where \(X_0\) and \(Y_0\) are ordinary schemes regarded as spectral
+schemes, and
+
+\begin{enumerate}
+    \item \(i:X_0\hookrightarrow X\) is a closed immersion inducing an
+    equivalence on classical truncations;
+
+    \item \(j_0:X_0\hookrightarrow Y_0\) is a quasi-compact open immersion.
+\end{enumerate}
+
+Then the pushout
+\[
+    Y
+    :=
+    X\amalg_{X_0}Y_0
+\]
+exists in spectral schemes, and the resulting square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_0 \arrow[r,"i"] \arrow[d,"j_0"']
+        & X \arrow[d,"j"] \\
+    Y_0 \arrow[r,"i_Y"']
+        & Y
+\end{tikzcd}
+\]
+is Cartesian as well as cocartesian.  Moreover,
+
+\begin{enumerate}
+    \item \(j:X\hookrightarrow Y\) is a quasi-compact open immersion;
+
+    \item \(i_Y:Y_0\hookrightarrow Y\) is a closed immersion inducing an
+    equivalence
+    \[
+        (Y_0)_{\mathrm{cl}}
+        \xrightarrow{\simeq}
+        Y_{\mathrm{cl}};
+    \]
+
+    \item the construction is compatible with arbitrary base change;
+
+    \item if \(X\) and \(Y_0\) are quasi-compact and quasi-separated, then
+    \(Y\) is quasi-compact and quasi-separated.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We use the spectral nil-cobase-change theorem in its universally
+base-change-stable form; see
+\cite{SpectralNilCobaseChange}.  In the present situation it asserts that
+the pushout
+\[
+    Y
+    :=
+    X\amalg_{X_0}Y_0
+\]
+exists in spectral schemes, that the induced morphism
+\[
+    j:X\longrightarrow Y
+\]
+is the open immersion obtained by extending the classical open
+\[
+    j_0:X_0\hookrightarrow Y_0,
+\]
+and that the construction is preserved by arbitrary base change.  It also
+identifies the structure sheaf, on the Zariski site of \(Y_0\), by the
+pullback formula
+\[
+    \mathcal O_Y
+    \simeq
+    \mathcal O_{Y_0}
+    \times_{j_{0*}\mathcal O_{X_0}}
+    j_{0*}\mathcal O_X.
+\]
+
+Because
+\[
+    i:X_0\hookrightarrow X
+\]
+induces an equivalence on classical truncations, the underlying topological
+space of \(X_0\) is canonically identified with that of \(X\).  We therefore
+view this space as the open subset
+\[
+    |X_0|\subseteq|Y_0|.
+\]
+Pulling the displayed structure-sheaf formula back along \(j_0\) gives
+\[
+\begin{aligned}
+    j_0^*\mathcal O_Y
+    &\simeq
+    \mathcal O_{X_0}
+    \times_{\mathcal O_{X_0}}
+    \mathcal O_X \\
+    &\simeq
+    \mathcal O_X.
+\end{aligned}
+\]
+Thus
+\[
+    j:X\longrightarrow Y
+\]
+is the open immersion corresponding to
+\[
+    |X_0|\subseteq|Y_0|.
+\]
+It is quasi-compact because \(j_0\) is quasi-compact.
+
+Let \(F\) be the fibre of
+\[
+    \mathcal O_X
+    \longrightarrow
+    \mathcal O_{X_0}.
+\]
+Since \(i\) induces an equivalence on classical truncations, the induced map
+on \(\pi_0\) is an equivalence, and therefore
+\[
+    \pi_0(F)=0.
+\]
+Taking fibres in the structure-sheaf pullback square identifies the fibre of
+\[
+    \mathcal O_Y
+    \longrightarrow
+    \mathcal O_{Y_0}
+\]
+with
+\[
+    j_{0*}F.
+\]
+Consequently,
+\[
+    \pi_0(\mathcal O_Y)
+    \simeq
+    \pi_0(\mathcal O_{Y_0}),
+\]
+and hence
+\[
+    Y_{\mathrm{cl}}
+    \simeq
+    (Y_0)_{\mathrm{cl}}.
+\]
+The induced morphism
+\[
+    i_Y:Y_0\longrightarrow Y
+\]
+is therefore a closed nil-immersion inducing an equivalence
+\[
+    (Y_0)_{\mathrm{cl}}
+    \xrightarrow{\simeq}
+    Y_{\mathrm{cl}}.
+\]
+
+It remains to identify the pullback of the open immersion \(j\) along
+\(i_Y\).  The fibre product
+\[
+    Y_0\times_YX
+\]
+is the restriction of \(Y_0\) to the open spectral subscheme
+\[
+    X\subseteq Y.
+\]
+Its underlying classical open is \(X_0\), and the restriction of its
+structure sheaf is
+\[
+    \mathcal O_{X_0}.
+\]
+Therefore
+\[
+    Y_0\times_YX
+    \simeq
+    X_0.
+\]
+Thus the defining square is Cartesian.  It is cocartesian by the definition
+of \(Y\).
+
+Compatibility with arbitrary base change is part of the universally
+base-change-stable nil-cobase-change theorem invoked in the first paragraph.
+In particular, after any morphism
+\[
+    T\longrightarrow Y,
+\]
+the pulled-back square is canonically the corresponding nil-cobase pushout.
+
+Finally, quasi-compactness and quasi-separatedness of spectral schemes are
+detected on classical truncations.  Since
+\[
+    Y_{\mathrm{cl}}
+    \simeq
+    (Y_0)_{\mathrm{cl}},
+\]
+qcqs-ness of \(Y_0\) implies qcqs-ness of \(Y\).
+\end{proof}
+
+\begin{theorem}[Spectral Nagata compactification]
+\label{thm:spectral-nagata-compactification}
+Let
+\[
+    f:X\longrightarrow S
+\]
+be a separated morphism of finite presentation between quasi-compact
+quasi-separated spectral schemes.  Then there exists a factorization
+\[
+    X
+    \xrightarrow{j}
+    \overline X
+    \xrightarrow{p}
+    S
+\]
+such that
+\[
+    j\in\mathcal J
+    \qquad\text{and}\qquad
+    p\in\mathcal P.
+\]
+Thus \(j\) is a quasi-compact open immersion and
+\[
+    p_{\mathrm{cl}}:
+    \overline X_{\mathrm{cl}}
+    \longrightarrow
+    S_{\mathrm{cl}}
+\]
+is proper.  The compactifying object \(\overline X\) is a spectral scheme.
+\end{theorem}
+
+\begin{proof}
+Classical truncation preserves finite presentation and separatedness.
+Consequently,
+\[
+    f_{\mathrm{cl}}:
+    X_{\mathrm{cl}}
+    \longrightarrow
+    S_{\mathrm{cl}}
+\]
+is a separated morphism of finite presentation between quasi-compact
+quasi-separated ordinary schemes.
+
+Classical Nagata compactification gives a factorization
+\[
+    X_{\mathrm{cl}}
+    \xrightarrow{j_0}
+    \overline X_0
+    \xrightarrow{p_0}
+    S_{\mathrm{cl}},
+\]
+where \(j_0\) is a quasi-compact open immersion and \(p_0\) is proper.
+
+Regard \(\overline X_0\) as a discrete spectral scheme and regard \(p_0\)
+as a morphism
+\[
+    \overline X_0
+    \longrightarrow
+    S_{\mathrm{cl}}
+    \longrightarrow
+    S.
+\]
+The classical truncation morphism
+\[
+    \iota_X:
+    X_{\mathrm{cl}}
+    \hookrightarrow
+    X
+\]
+is a closed immersion inducing an equivalence on classical truncations.
+Apply
+Proposition~\ref{prop:spectral-nil-cobase-change-open}
+to the diagram
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_{\mathrm{cl}}
+        \arrow[r,"\iota_X"]
+        \arrow[d,"j_0"']
+        & X \\
+    \overline X_0.
+\end{tikzcd}
+\]
+It produces a spectral scheme
+\[
+    \overline X
+    :=
+    X\amalg_{X_{\mathrm{cl}}}\overline X_0
+\]
+and a Cartesian and cocartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_{\mathrm{cl}}
+        \arrow[r,"\iota_X"]
+        \arrow[d,"j_0"']
+        & X \arrow[d,"j"] \\
+    \overline X_0
+        \arrow[r]
+        & \overline X.
+\end{tikzcd}
+\]
+The morphism
+\[
+    j:X\hookrightarrow\overline X
+\]
+is a quasi-compact open immersion.
+
+The compatible maps
+\[
+    X\longrightarrow S
+    \qquad\text{and}\qquad
+    \overline X_0\longrightarrow S
+\]
+induce a morphism
+\[
+    p:\overline X\longrightarrow S.
+\]
+The nil-cobase-change theorem gives a canonical equivalence
+\[
+    \overline X_{\mathrm{cl}}
+    \simeq
+    \overline X_0
+\]
+under which
+\[
+    p_{\mathrm{cl}}
+    \simeq
+    p_0.
+\]
+Since \(p_0\) is proper, \(p\) belongs to \(\mathcal P\).  Moreover,
+\(\overline X\) is quasi-compact and quasi-separated by
+Proposition~\ref{prop:spectral-nil-cobase-change-open}.
+
+Thus
+\[
+    X
+    \xrightarrow{j}
+    \overline X
+    \xrightarrow{p}
+    S
+\]
+is the required spectral compactification.
+\end{proof}
+
+\begin{corollary}[Every exceptional morphism is compactifiable]
+\label{cor:every-E-compactifiable}
+Every morphism in \(\mathcal E\) is compactifiable.
+\end{corollary}
+
+\begin{proof}
+This is Theorem~\ref{thm:spectral-nagata-compactification}.
+\end{proof}
+
+\begin{corollary}[Composition of compactifiable morphisms]
+\label{cor:compactifiable-composition}
+Let
+\[
+    X\xrightarrow{f}Y\xrightarrow{g}S
+\]
+be morphisms in \(\mathcal E\).  Then the composite
+\[
+    gf:X\longrightarrow S
+\]
+is compactifiable.
+\end{corollary}
+
+\begin{proof}
+The composite \(gf\) belongs to \(\mathcal E\), because separated morphisms
+of finite presentation are stable under composition.  Apply
+Theorem~\ref{thm:spectral-nagata-compactification}.
+\end{proof}
+
+\subsection{Classical strict refinements and spectral lifting}
+
+Put
+\[
+    X_0:=X_{\mathrm{cl}},
+    \qquad
+    S_0:=S_{\mathrm{cl}},
+    \qquad
+    f_0:=f_{\mathrm{cl}}.
+\]
+
+\begin{definition}[The strict classical compactification category]
+\label{def:strict-classical-compactifications}
+Let
+\[
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0)
+\]
+be the ordinary category, regarded through its nerve as an
+\(\infty\)-category, whose objects are classical compactifications
+\[
+    X_0
+    \xrightarrow{j_0}
+    \overline X_0
+    \xrightarrow{p_0}
+    S_0
+\]
+and whose morphisms
+\[
+    c_2\longrightarrow c_1
+\]
+are proper morphisms
+\[
+    r_0:\overline X_{0,2}\longrightarrow\overline X_{0,1}
+\]
+over \(S_0\) for which the square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_0 \arrow[r,"j_{0,2}"] \arrow[d,"\id_{X_0}"']
+        & \overline X_{0,2} \arrow[d,"r_0"] \\
+    X_0 \arrow[r,"j_{0,1}"']
+        & \overline X_{0,1}
+\end{tikzcd}
+\]
+is Cartesian.
+\end{definition}
+
+\begin{definition}[Dense compactification]
+\label{def:dense-classical-compactification}
+A classical compactification
+\[
+    X_0\hookrightarrow\overline X_0\longrightarrow S_0
+\]
+is dense if \(X_0\) is schematically dense in \(\overline X_0\).
+\end{definition}
+
+\begin{lemma}[Dense refinements and uniqueness]
+\label{lem:dense-compactification-uniqueness}
+Every object of
+\(\operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0)\) admits a dense
+refinement.  If \(\overline X_2\) is a dense compactification, then any two
+refinements
+\[
+    r,s:\overline X_2\rightrightarrows\overline X_1
+\]
+are equal.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    X_0\hookrightarrow\overline X_0\longrightarrow S_0
+\]
+be a compactification.  Let \(\overline X_0^{\mathrm{dens}}\) be the
+scheme-theoretic closure of \(X_0\) in \(\overline X_0\).  Since \(X_0\)
+is open in \(\overline X_0\), it remains open in its closure.  The closure
+is closed in a proper \(S_0\)-scheme and is therefore proper over \(S_0\).
+Its inverse image over the open \(X_0\subseteq\overline X_0\) is exactly
+\(X_0\).  Hence
+\[
+    \overline X_0^{\mathrm{dens}}
+    \longrightarrow
+    \overline X_0
+\]
+is a dense refinement.
+
+Now let \(r,s:\overline X_2\rightrightarrows\overline X_1\) be refinements
+with \(X_0\) schematically dense in \(\overline X_2\).  Since
+\(\overline X_1\to S_0\) is separated, the equalizer of \(r\) and \(s\)
+is a closed subscheme of \(\overline X_2\).  It contains \(X_0\), because
+both maps restrict to the identity there.  Schematic density forces the
+equalizer to be all of \(\overline X_2\).  Thus \(r=s\).
+\end{proof}
+
+\begin{proposition}[Cofilteredness of strict classical compactifications]
+\label{prop:classical-strict-compactifications-cofiltered}
+The category
+\[
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0)
+\]
+is nonempty and cofiltered.
+\end{proposition}
+
+\begin{proof}
+Nonemptiness follows from classical Nagata compactification.
+
+Consider finitely many dense compactifications
+\[
+    X_0\hookrightarrow\overline X_a\longrightarrow S_0,
+    \qquad
+    1\leq a\leq n.
+\]
+Form the proper \(S_0\)-scheme
+\[
+    P
+    :=
+    \overline X_1
+    \times_{S_0}
+    \cdots
+    \times_{S_0}
+    \overline X_n.
+\]
+The open subscheme
+\[
+    U
+    :=
+    X_0
+    \times_{S_0}
+    \cdots
+    \times_{S_0}
+    X_0
+\]
+is open in \(P\).  The multi-diagonal
+\[
+    \delta:X_0\longrightarrow U
+\]
+is a closed immersion because \(f_0\) is separated.  Hence
+\(\delta:X_0\to P\) is a locally closed immersion.
+
+Let \(\overline X\) be the scheme-theoretic closure of \(\delta(X_0)\) in
+\(P\).  Then
+\[
+    X_0\hookrightarrow\overline X
+\]
+is open and schematically dense, and \(\overline X\to S_0\) is proper.
+For each \(a\), let
+\[
+    \rho_a:\overline X\longrightarrow\overline X_a
+\]
+be the corresponding projection.  It is proper.
+
+Put
+\[
+    W_a
+    :=
+    \overline X\times_{\overline X_a}X_0.
+\]
+The morphism \(W_a\to X_0\) is proper, and the diagonal copy of \(X_0\)
+inside \(W_a\) is an open section.  Since \(W_a\to X_0\) is separated,
+that section is also closed.  Schematic density of \(X_0\) in
+\(\overline X\) restricts to schematic density in the open subscheme
+\(W_a\).  Therefore
+\[
+    W_a\simeq X_0.
+\]
+Thus every \(\rho_a\) is a strict refinement, so every finite family has a
+common dense refinement.
+
+Let now
+\[
+    D:K\longrightarrow
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0)
+\]
+be a diagram indexed by a finite simplicial set.  Choose dense refinements of
+its finitely many vertices and then a common dense refinement
+\(\overline X\).  For every arrow of \(D\), the two induced maps from
+\(\overline X\) to its target agree on \(X_0\), and hence agree by
+Lemma~\ref{lem:dense-compactification-uniqueness}.  All higher compatibility
+conditions follow from the same uniqueness.  Hence \(\overline X\) defines a
+cone over \(D\), proving cofilteredness.
+\end{proof}
+
+\begin{construction}[Truncation and nil-cobase lifting]
+\label{constr:compactification-lifting-adjunction}
+Classical truncation defines a functor
+\[
+    \tau_f:
+    \operatorname{Comp}(f)
+    \longrightarrow
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0).
+\]
+
+For a classical compactification
+\[
+    c_0=
+    \bigl(
+      X_0\xrightarrow{j_0}\overline X_0\xrightarrow{p_0}S_0
+    \bigr),
+\]
+define
+\[
+    \lambda_f(c_0)
+    :=
+    \left(
+      X
+      \longrightarrow
+      X\amalg_{X_0}\overline X_0
+      \longrightarrow
+      S
+    \right).
+\]
+Proposition~\ref{prop:spectral-nil-cobase-change-open} shows that the first
+map is a quasi-compact open immersion, that the middle spectral scheme is
+qcqs, and that its classical truncation is \(\overline X_0\).  The second
+map therefore belongs to \(\mathcal P\).
+
+A strict classical refinement
+\[
+    r_0:\overline X_{0,2}\longrightarrow\overline X_{0,1}
+\]
+induces, by the pushout universal property, a morphism
+\[
+    \lambda_f(r_0):
+    X\amalg_{X_0}\overline X_{0,2}
+    \longrightarrow
+    X\amalg_{X_0}\overline X_{0,1}.
+\]
+Its classical truncation is \(r_0\), so it belongs to \(\mathcal P\).  The
+pullback of the target open is an open spectral subscheme whose classical
+open is \(X_0\); uniqueness of open spectral subschemes with a prescribed
+classical open identifies it with \(X\).  Thus \(\lambda_f(r_0)\) is a
+refinement.  This defines a functor
+\[
+    \lambda_f:
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0)
+    \longrightarrow
+    \operatorname{Comp}(f).
+\]
+\end{construction}
+
+\begin{proposition}[The compactification lifting adjunction]
+\label{prop:compactification-lifting-adjunction}
+There is an adjunction
+\[
+    \lambda_f:
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0)
+    \rightleftarrows
+    \operatorname{Comp}(f):
+    \tau_f.
+\]
+Its unit is an equivalence:
+\[
+    \tau_f\lambda_f
+    \simeq
+    \id.
+\]
+For a spectral compactification
+\[
+    c=
+    \bigl(
+      X\xrightarrow{j}\overline X\xrightarrow{p}S
+    \bigr),
+\]
+the counit is the canonical refinement
+\[
+    \epsilon_c:
+    X\amalg_{X_0}\overline X_{\mathrm{cl}}
+    \longrightarrow
+    \overline X
+\]
+induced by \(j\) and the truncation immersion
+\(\overline X_{\mathrm{cl}}\to\overline X\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    c_0=
+    \bigl(
+      X_0\hookrightarrow\overline X_0\to S_0
+    \bigr)
+\]
+be classical and let
+\[
+    c=
+    \bigl(
+      X\hookrightarrow\overline X\to S
+    \bigr)
+\]
+be spectral.  The pushout universal property gives
+\[
+\begin{aligned}
+    \Map_{/S}
+    \bigl(
+      X\amalg_{X_0}\overline X_0,
+      \overline X
+    \bigr)
+    \simeq
+    &\Map_{/S}(X,\overline X) \\
+    &\times_{\Map_{/S}(X_0,\overline X)}
+    \Map_{/S}(\overline X_0,\overline X).
+\end{aligned}
+\]
+Taking the homotopy fibre over the specified map
+\(j:X\to\overline X\) fixes the first factor.
+
+For every ordinary scheme \(V_0\) and spectral scheme \(W\), the adjunction
+between discrete enhancement and classical truncation gives
+\[
+    \Map_{\operatorname{Sch}^{\mathrm{sp}}}(V_0,W)
+    \simeq
+    \Map_{\operatorname{Sch}}(V_0,W_{\mathrm{cl}}).
+\]
+The same equivalence holds in the relevant slice categories.  It follows
+that the preceding homotopy fibre is canonically the discrete mapping space
+of maps
+\[
+    \overline X_0
+    \longrightarrow
+    \overline X_{\mathrm{cl}}
+\]
+over \(S_0\) restricting to the identity on \(X_0\).
+
+Properness is detected on classical truncations.  The Cartesian open-square
+condition is also detected classically: if
+\[
+    V
+    :=
+    \bigl(
+      X\amalg_{X_0}\overline X_0
+    \bigr)
+    \times_{\overline X}X,
+\]
+then \(V\) is an open spectral subscheme and
+\[
+    V_{\mathrm{cl}}
+    \simeq
+    \overline X_0
+    \times_{\overline X_{\mathrm{cl}}}
+    X_0.
+\]
+If the classical square is Cartesian, this classical open is \(X_0\), so
+\(V\simeq X\).  Therefore
+\[
+    \Map_{\operatorname{Comp}(f)}
+    \bigl(
+      \lambda_f(c_0),c
+    \bigr)
+    \simeq
+    \Map_{\operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0)}
+    \bigl(
+      c_0,\tau_f(c)
+    \bigr).
+\]
+This equivalence is natural in both variables and proves the adjunction.
+
+Proposition~\ref{prop:spectral-nil-cobase-change-open} gives
+\[
+    \tau_f\lambda_f(c_0)
+    \simeq
+    c_0,
+\]
+so the unit is an equivalence.  The counit is induced by the compatible maps
+\[
+    X\longrightarrow\overline X
+    \qquad\text{and}\qquad
+    \overline X_{\mathrm{cl}}
+    \longrightarrow
+    \overline X.
+\]
+Its classical truncation is the identity of
+\(\overline X_{\mathrm{cl}}\), so it belongs to \(\mathcal P\).  Its open
+square is Cartesian by the classical-open detection argument above.  Hence
+it is a refinement in \(\operatorname{Comp}(f)\).
+\end{proof}
+
+\begin{proposition}[Refinement of a finite compactification diagram]
+\label{prop:finite-compactification-diagram-refinement}
+Let
+\[
+    D:K\longrightarrow\operatorname{Comp}(f)
+\]
+be a diagram indexed by a finite simplicial set.  Then \(D\) admits a
+coherently compatible refining cone.
+\end{proposition}
+
+\begin{proof}
+Apply classical truncation to obtain
+\[
+    \tau_fD:
+    K\longrightarrow
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0).
+\]
+By Proposition~\ref{prop:classical-strict-compactifications-cofiltered},
+there is a cone
+\[
+    c_0\longrightarrow\tau_fD.
+\]
+Applying \(\lambda_f\) gives a cone
+\[
+    \lambda_f(c_0)
+    \longrightarrow
+    \lambda_f\tau_fD.
+\]
+Compose objectwise with the counit of
+Proposition~\ref{prop:compactification-lifting-adjunction}:
+\[
+    \lambda_f\tau_fD
+    \longrightarrow
+    D.
+\]
+Naturality of the counit supplies all edge and higher-simplex
+compatibilities.  The resulting composite is the required refining cone.
+\end{proof}
+
+\begin{theorem}[Contractibility of compactifications]
+\label{thm:compactification-category-contractible}
+For every morphism
+\[
+    f:X\longrightarrow S
+\]
+in \(\mathcal E\), the \(\infty\)-category
+\[
+    \operatorname{Comp}(f)
+\]
+is nonempty and cofiltered.  Consequently, its groupoid completion is
+contractible:
+\[
+    \bigl|
+      \operatorname{Comp}(f)
+    \bigr|
+    \simeq
+    *.
+\]
+\end{theorem}
+
+\begin{proof}
+Nonemptiness follows from
+Theorem~\ref{thm:spectral-nagata-compactification}.  Cofilteredness is
+Proposition~\ref{prop:finite-compactification-diagram-refinement}.  The
+groupoid completion of a nonempty cofiltered \(\infty\)-category is
+contractible.
+\end{proof}
+
+\begin{proposition}[The compactification diagram of direct images]
+\label{prop:compactification-direct-image-diagram}
+Let
+\[
+    f:X\longrightarrow S
+\]
+belong to \(\mathcal E\).
+
+The assignment
+\[
+    \bigl(
+      X\xrightarrow{j}\overline X\xrightarrow{p}S
+    \bigr)
+    \longmapsto
+    p_*j_\sharp
+\]
+extends to a functor
+\[
+    \Phi_f:
+    \operatorname{Comp}(f)
+    \longrightarrow
+    \Fun^L
+    \bigl(
+      \SH(X),
+      \SH(S)
+    \bigr).
+\]
+
+For every refinement
+\[
+    r:
+    \bigl(
+      X\xrightarrow{j_2}\overline X_2\xrightarrow{p_2}S
+    \bigr)
+    \longrightarrow
+    \bigl(
+      X\xrightarrow{j_1}\overline X_1\xrightarrow{p_1}S
+    \bigr),
+\]
+the corresponding transformation
+\[
+    \Phi_f(r):
+    p_{2*}j_{2\sharp}
+    \longrightarrow
+    p_{1*}j_{1\sharp}
+\]
+is an equivalence.
+
+Consequently, \(\Phi_f\) factors through the contractible groupoid
+completion
+\[
+    \bigl|
+      \operatorname{Comp}(f)
+    \bigr|
+    \simeq
+    *.
+\]
+For every compactification \(c\), the canonical cocone map is an
+equivalence
+\[
+    \Phi_f(c)
+    \xrightarrow{\simeq}
+    \operatorname*{colim}_{d\in\operatorname{Comp}(f)}
+    \Phi_f(d).
+\]
+Consequently, its inverse determines an equivalence
+\[
+    \operatorname*{colim}_{d\in\operatorname{Comp}(f)}
+    \Phi_f(d)
+    \xrightarrow{\simeq}
+    \Phi_f(c)
+\]
+through a contractible space of compatible inverses.
+\end{proposition}
+
+\begin{proof}
+The functor \(j_\sharp\) preserves small colimits, and
+Theorem~\ref{thm:arbitrary-direct-image-cocontinuous} shows that \(p_*\)
+preserves small colimits.  Thus \(p_*j_\sharp\) belongs to
+\(\Fun^L(\SH(X),\SH(S))\).
+
+Let
+\[
+    r:\overline X_2\longrightarrow\overline X_1
+\]
+be a refinement.  There is a canonical equivalence
+\[
+    p_{2*}
+    \simeq
+    p_{1*}r_*.
+\]
+The refinement square is an open--proper Cartesian square, and
+Corollary~\ref{cor:proper-invariance-extension-zero} gives
+\[
+    r_*j_{2\sharp}
+    \xrightarrow{\simeq}
+    j_{1\sharp}.
+\]
+Define \(\Phi_f(r)\) by the composite
+\[
+\begin{aligned}
+    p_{2*}j_{2\sharp}
+    &\simeq
+    p_{1*}r_*j_{2\sharp} \\
+    &\xrightarrow{\simeq}
+    p_{1*}j_{1\sharp}.
+\end{aligned}
+\]
+
+Composition and all higher coherences follow from
+Proposition~\ref{prop:proper-support-composition}.  Hence \(\Phi_f\) is a
+functor.  Every morphism is carried to an equivalence, so it factors through
+the groupoid completion.  By
+Theorem~\ref{thm:compactification-category-contractible}, this groupoid is
+contractible.  For a diagram of equivalences indexed by a contractible groupoid, the
+canonical cocone map from every value to the colimit is an equivalence.  The
+space of inverses to these compatible equivalences is contractible.
+\end{proof}
+
+\begin{corollary}[Common and equalizing refinements]
+\label{cor:compactification-common-refinement}
+Every finite family of compactifications of \(f\) admits a common refinement.
+
+More generally, every finite diagram of compactifications and refinements
+admits a coherently compatible refining cone.  In particular, any pair of
+parallel refinements becomes homotopic after passage to a further common
+refinement, and the same assertion holds for every finite higher-coherence
+diagram.
+\end{corollary}
+
+\begin{proof}
+Apply
+Proposition~\ref{prop:finite-compactification-diagram-refinement} to the
+corresponding finite discrete diagram, parallel-pair diagram, or finite
+simplicial coherence diagram.
+\end{proof}
+
+\begin{proposition}[Base change of compactifications]
+\label{prop:compactification-base-change}
+Let
+\[
+    g:T\longrightarrow S
+\]
+be arbitrary.  Base change defines a functor
+\[
+    g^*:
+    \operatorname{Comp}(f)
+    \longrightarrow
+    \operatorname{Comp}(f_T),
+\]
+where
+\[
+    f_T:X\times_ST\longrightarrow T.
+\]
+This functor preserves refinements and common-refinement diagrams.  It is
+compatible with composition in \(g\) through coherent equivalences.
+\end{proposition}
+
+\begin{proof}
+Open immersions and proper morphisms are stable under base change, so the
+pullback of a compactification is a compactification.  Proper refinements
+remain proper and restrict to the identity on the pulled-back open.  The
+coherence is that of spectral fibre products.
+\end{proof}
+
+\begin{definition}[The category of composition data]
+\label{def:compactification-composition-data}
+Let
+\[
+    X\xrightarrow{f}Y\xrightarrow{g}S
+\]
+belong to \(\mathcal E\).
+
+Write
+\[
+    \operatorname{Comp}(f,g)
+\]
+for the full \(\infty\)-subcategory of the \(\infty\)-category of
+commutative diagrams
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X \arrow[r,hook,"j_f"] \arrow[dr,"f"']
+        & \overline X \arrow[d,"p_f"] \arrow[r,hook,"k"]
+        & \overline X' \arrow[d,"r"] \\
+    & Y \arrow[r,hook,"j_g"']
+        & \overline Y \arrow[d,"p_g"] \\
+    && S
+\end{tikzcd}
+\]
+in which
+\[
+    j_f,
+    \ j_g,
+    \ k
+    \in
+    \mathcal J,
+\]
+\[
+    p_f,
+    \ r,
+    \ p_g
+    \in
+    \mathcal P,
+\]
+and the central square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \overline X \arrow[r,hook,"k"] \arrow[d,"p_f"']
+        & \overline X' \arrow[d,"r"] \\
+    Y \arrow[r,hook,"j_g"']
+        & \overline Y
+\end{tikzcd}
+\]
+is Cartesian.
+
+Its morphisms are commutative diagrams between such objects whose maps on
+\(\overline X\), \(\overline X'\), and \(\overline Y\) belong to
+\(\mathcal P\), restrict to the identity on \(X\) and \(Y\), and make all
+corresponding open squares Cartesian.  Mapping spaces and higher simplices
+are inherited from the corresponding diagram \(\infty\)-category of
+spectral schemes.
+\end{definition}
+
+\begin{definition}[Strict classical composition data]
+\label{def:strict-classical-composition-data}
+Put
+\[
+    X_0:=X_{\mathrm{cl}},
+    \qquad
+    Y_0:=Y_{\mathrm{cl}},
+    \qquad
+    S_0:=S_{\mathrm{cl}}.
+\]
+Let
+\[
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0,g_0)
+\]
+be the ordinary category of classical diagrams satisfying the conditions of
+Definition~\ref{def:compactification-composition-data}, with proper strict
+refinements, regarded as an \(\infty\)-category through its nerve.
+An object is dense if
+\[
+    X_0\subseteq\overline X_0,
+    \qquad
+    \overline X_0\subseteq\overline X'_0,
+    \qquad
+    Y_0\subseteq\overline Y_0
+\]
+are schematically dense open immersions.
+\end{definition}
+
+\begin{proposition}[Cofilteredness of classical composition data]
+\label{prop:classical-composition-data-cofiltered}
+The category
+\[
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0,g_0)
+\]
+is nonempty and cofiltered.
+\end{proposition}
+
+\begin{proof}
+Choose a classical compactification
+\[
+    X_0\hookrightarrow\overline X_0\longrightarrow Y_0
+\]
+of \(f_0\), and a classical compactification
+\[
+    Y_0\hookrightarrow\overline Y_0\longrightarrow S_0
+\]
+of \(g_0\).  The composite
+\[
+    \overline X_0\longrightarrow Y_0\hookrightarrow\overline Y_0
+\]
+is separated and of finite type.  Choose a dense Nagata compactification
+\[
+    \overline X_0
+    \hookrightarrow
+    \overline X'_0
+    \longrightarrow
+    \overline Y_0.
+\]
+Put
+\[
+    W
+    :=
+    \overline X'_0\times_{\overline Y_0}Y_0.
+\]
+The open immersion
+\[
+    \overline X_0\hookrightarrow W
+\]
+is proper: its source is proper over \(Y_0\), its target is separated over
+\(Y_0\), and the map is a \(Y_0\)-morphism.  It is therefore also closed.
+Since \(\overline X_0\) is schematically dense in \(\overline X'_0\), it is
+schematically dense in the open subscheme \(W\).  Hence
+\[
+    W\simeq\overline X_0.
+\]
+The central square is Cartesian, proving nonemptiness.
+
+Every composition datum admits a dense refinement.  Indeed, first
+replace \(\overline Y_0\) by the scheme-theoretic closure
+\(\overline Y_0^{\mathrm{dens}}\) of \(Y_0\).  Pull back
+\(\overline X'_0\) to this closed subscheme.  Next replace
+\(\overline X_0\) by the scheme-theoretic closure
+\(\overline X_0^{\mathrm{dens}}\) of \(X_0\), and let
+\(\overline X_0'{}^{\mathrm{dens}}\) be the scheme-theoretic closure of
+\(\overline X_0^{\mathrm{dens}}\) in the pulled-back proper scheme.  The
+pullback
+\[
+    \overline X_0'{}^{\mathrm{dens}}
+    \times_{\overline Y_0^{\mathrm{dens}}}
+    Y_0
+\]
+contains \(\overline X_0^{\mathrm{dens}}\) as an open immersion.  That open
+immersion is proper, because its source is proper over \(Y_0\) and its
+target is separated over \(Y_0\).  It is therefore closed, and schematic
+density identifies the pullback with
+\(\overline X_0^{\mathrm{dens}}\).  Thus the central square remains
+Cartesian.
+
+Maps out of a dense composition datum are unique whenever they exist.
+Indeed, two maps on \(\overline Y_0\) agree because they agree on the dense
+open \(Y_0\) and the target is separated; two maps on \(\overline X_0\)
+agree because they agree on the dense open \(X_0\); and two maps on
+\(\overline X'_0\) agree because they agree on the dense open
+\(\overline X_0\).
+
+It remains to construct common dense refinements.  Consider finitely many
+dense composition data indexed by \(a\).  By
+Proposition~\ref{prop:classical-strict-compactifications-cofiltered}, choose
+a common dense refinement
+\[
+    Y_0\hookrightarrow\overline Y\longrightarrow S_0
+\]
+of the compactifications \(Y_0\hookrightarrow\overline Y_a\).  Likewise,
+choose a common dense refinement
+\[
+    X_0\hookrightarrow\overline X\longrightarrow Y_0
+\]
+of the compactifications \(X_0\hookrightarrow\overline X_a\).
+
+Put
+\[
+    Q_a
+    :=
+    \overline X'_a
+    \times_{\overline Y_a}
+    \overline Y.
+\]
+Each \(Q_a\to\overline Y\) is proper, and its pullback to \(Y_0\) is
+\(\overline X_a\).  The refinement maps
+\(\overline X\to\overline X_a\) therefore induce a morphism
+\[
+    \overline X
+    \longrightarrow
+    Q
+    :=
+    \prod_{\overline Y}Q_a.
+\]
+Choose a dense compactification
+\[
+    \overline X
+    \hookrightarrow
+    B
+    \longrightarrow
+    \overline Y
+\]
+of the separated finite-type morphism
+\(\overline X\to\overline Y\).  The graph of the morphism
+\(\overline X\to Q\) gives a locally closed immersion
+\[
+    \overline X
+    \longrightarrow
+    B\times_{\overline Y}Q.
+\]
+Let \(\overline X'\) be its scheme-theoretic closure.  Then
+\[
+    \overline X\hookrightarrow\overline X'
+\]
+is open and schematically dense, and
+\(\overline X'\to\overline Y\) is proper.  The projections give proper maps
+from \(\overline X'\) to every \(\overline X'_a\).  Their inverse images of
+\(\overline X_a\) are \(\overline X\): indeed,
+\[
+\begin{aligned}
+    \overline X'
+    \times_{\overline X'_a}
+    \overline X_a
+    &\simeq
+    \overline X'
+    \times_{\overline Y_a}
+    Y_0 \\
+    &\simeq
+    \overline X'
+    \times_{\overline Y}
+    Y_0.
+\end{aligned}
+\]
+The final term is identified with \(\overline X\) below.  Hence these maps,
+together with the strict refinements on \(\overline X\) and
+\(\overline Y\), define refinements of composition data.
+
+Finally, put
+\[
+    W
+    :=
+    \overline X'\times_{\overline Y}Y_0.
+\]
+The open immersion
+\[
+    \overline X\hookrightarrow W
+\]
+is proper, because \(\overline X\to Y_0\) is proper and \(W\to Y_0\) is
+separated.  Hence it is closed.  It is also schematically dense, so
+\[
+    W\simeq\overline X.
+\]
+Thus the central square is Cartesian and the resulting datum refines every
+original one.  For a finite diagram, compatibility with all arrows and
+higher simplices follows from uniqueness of maps out of a dense common
+refinement.  Hence the category is cofiltered.
+\end{proof}
+
+\begin{construction}[Lifting classical composition data]
+\label{constr:composition-data-lifting}
+Classical truncation defines
+\[
+    \tau_{f,g}:
+    \operatorname{Comp}(f,g)
+    \longrightarrow
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0,g_0).
+\]
+
+For a classical composition datum, define
+\[
+    \overline X
+    :=
+    X\amalg_{X_0}\overline X_0,
+\]
+\[
+    \overline Y
+    :=
+    Y\amalg_{Y_0}\overline Y_0,
+\]
+and
+\[
+    \overline X'
+    :=
+    \overline X
+    \amalg_{\overline X_0}
+    \overline X'_0.
+\]
+The pushout universal properties induce
+\[
+    p_f:\overline X\longrightarrow Y,
+    \qquad
+    p_g:\overline Y\longrightarrow S,
+    \qquad
+    r:\overline X'\longrightarrow\overline Y.
+\]
+Their classical truncations are the corresponding proper classical maps,
+so they belong to \(\mathcal P\).  The three horizontal maps are
+quasi-compact open immersions.
+
+The pullback
+\[
+    V
+    :=
+    \overline X'\times_{\overline Y}Y
+\]
+is an open spectral subscheme of \(\overline X'\), and
+\[
+    V_{\mathrm{cl}}
+    \simeq
+    \overline X'_0
+    \times_{\overline Y_0}
+    Y_0
+    \simeq
+    \overline X_0.
+\]
+The open subscheme \(\overline X\subseteq\overline X'\) has the same
+classical open.  Hence
+\[
+    V\simeq\overline X,
+\]
+so the central square is Cartesian.  This construction is functorial in
+strict refinements and defines
+\[
+    \lambda_{f,g}:
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0,g_0)
+    \longrightarrow
+    \operatorname{Comp}(f,g).
+\]
+\end{construction}
+
+\begin{proposition}[The composition-data lifting adjunction]
+\label{prop:composition-data-lifting-adjunction}
+There is an adjunction
+\[
+    \lambda_{f,g}:
+    \operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0,g_0)
+    \rightleftarrows
+    \operatorname{Comp}(f,g):
+    \tau_{f,g}.
+\]
+Its unit is an equivalence, and its counit is the natural proper refinement
+obtained from the truncation immersions of the three compactifying spectral
+schemes.
+\end{proposition}
+
+\begin{proof}
+Apply the mapping-space universal property of the three nil-cobase pushouts.
+Maps from the classical pieces into spectral schemes are identified, by the
+adjunction between discrete enhancement and classical truncation, with maps
+into the corresponding classical truncations.  After fixing the maps on
+\(X\) and \(Y\), the resulting mapping space is exactly the discrete mapping
+space of strict classical refinements.  Properness is detected on classical
+truncations, and each Cartesian open-square condition is detected by the
+classical open subscheme as in
+Proposition~\ref{prop:compactification-lifting-adjunction}.  Thus there are
+natural equivalences
+\[
+\begin{aligned}
+    &\Map_{\operatorname{Comp}(f,g)}
+    \bigl(
+      \lambda_{f,g}(c_0),c
+    \bigr) \\
+    &\qquad\simeq
+    \Map_{\operatorname{Comp}^{\square}_{\mathrm{cl}}(f_0,g_0)}
+    \bigl(
+      c_0,\tau_{f,g}(c)
+    \bigr).
+\end{aligned}
+\]
+This proves the adjunction.  The classical truncation of every lifted object
+is the original classical object, giving the unit equivalence.  The maps from
+the three nil-cobase pushouts to the original spectral compactifying schemes
+give the counit; their classical truncations are identities, and their open
+squares are Cartesian by classical-open detection.
+\end{proof}
+
+\begin{proposition}[Compactifications and composition]
+\label{prop:compactification-composition-data}
+Let
+\[
+    X\xrightarrow{f}Y\xrightarrow{g}S
+\]
+belong to \(\mathcal E\).  The \(\infty\)-category
+\[
+    \operatorname{Comp}(f,g)
+\]
+is nonempty and cofiltered.  Every finite diagram of composition data,
+proper refinements, and coherence simplices admits a coherently compatible
+refining cone.  Consequently,
+\[
+    \bigl|
+      \operatorname{Comp}(f,g)
+    \bigr|
+    \simeq
+    *.
+\]
+\end{proposition}
+
+\begin{proof}
+Nonemptiness follows by applying \(\lambda_{f,g}\) to an object supplied by
+Proposition~\ref{prop:classical-composition-data-cofiltered}.
+
+Let
+\[
+    D:K\longrightarrow\operatorname{Comp}(f,g)
+\]
+be a diagram indexed by a finite simplicial set.  By classical
+cofilteredness, \(\tau_{f,g}D\) admits a cone
+\[
+    c_0\longrightarrow\tau_{f,g}D.
+\]
+Applying \(\lambda_{f,g}\) and then composing with the natural counit
+\[
+    \lambda_{f,g}\tau_{f,g}D
+    \longrightarrow
+    D
+\]
+gives a coherently compatible cone over \(D\).  Therefore
+\(\operatorname{Comp}(f,g)\) is cofiltered, and its groupoid completion is
+contractible.
+\end{proof}
+
+\begin{remark}[Composition represented by composition data]
+\label{rem:composition-data-exceptional-formula}
+For an object of \(\operatorname{Comp}(f,g)\), open--proper exchange for the
+central Cartesian square gives
+\[
+    r_*k_\sharp
+    \simeq
+    j_{g\sharp}p_{f*}.
+\]
+Consequently,
+\[
+\begin{aligned}
+    p_{g*}j_{g\sharp}p_{f*}j_{f\sharp}
+    &\simeq
+    p_{g*}r_*k_\sharp j_{f\sharp} \\
+    &\simeq
+    (p_gr)_*(kj_f)_\sharp.
+\end{aligned}
+\]
+The right-hand side is the compactification formula associated to the
+compactification
+\[
+    X\xrightarrow{kj_f}\overline X'\xrightarrow{p_gr}S
+\]
+of \(gf\).  This is the comparison used to construct composition of
+exceptional direct images in the next chapter.
+\end{remark}
+
+\subsection{Finite compactification grids}
+
+Let
+\[
+    X_n
+    \xrightarrow{f_n}
+    X_{n-1}
+    \longrightarrow
+    \cdots
+    \longrightarrow
+    X_1
+    \xrightarrow{f_1}
+    X_0
+\]
+be a finite composable string of morphisms in \(\mathcal E\).
+
+\begin{definition}[Finite compactification grid]
+\label{def:finite-compactification-grid}
+A compactification grid for
+\[
+    (f_1,\ldots,f_n)
+\]
+consists of a coherently commutative triangular diagram of spectral schemes
+\[
+    \overline X_{a,b},
+    \qquad
+    0\leq a\leq b\leq n,
+\]
+together with the following data.
+
+\begin{enumerate}
+    \item For every \(0\leq a\leq n\), there is a specified equivalence
+    \[
+        \overline X_{a,a}
+        \simeq
+        X_a.
+    \]
+
+    \item For every \(a<b\), there is a quasi-compact open immersion
+    \[
+        u_{a,b}:
+        \overline X_{a+1,b}
+        \hookrightarrow
+        \overline X_{a,b}.
+    \]
+
+    \item For every \(a<b\), there is a morphism in \(\mathcal P\)
+    \[
+        p_{a,b}:
+        \overline X_{a,b}
+        \longrightarrow
+        \overline X_{a,b-1}.
+    \]
+
+    \item For every \(a+1<b\), the square
+    \[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        \overline X_{a+1,b}
+            \arrow[r,hook,"u_{a,b}"]
+            \arrow[d,"p_{a+1,b}"']
+            &
+        \overline X_{a,b}
+            \arrow[d,"p_{a,b}"]
+        \\
+        \overline X_{a+1,b-1}
+            \arrow[r,hook,"u_{a,b-1}"']
+            &
+        \overline X_{a,b-1}
+    \end{tikzcd}
+    \]
+    is Cartesian.
+
+    \item The induced morphism
+    \[
+        X_b
+        =
+        \overline X_{b,b}
+        \longrightarrow
+        \overline X_{a,a}
+        =
+        X_a
+    \]
+    is the specified composite
+    \[
+        f_{a+1}\cdots f_b.
+    \]
+\end{enumerate}
+
+A refinement of compactification grids is a morphism of the entire
+triangular diagrams which is the identity on the diagonal objects \(X_a\),
+whose off-diagonal components belong to \(\mathcal P\), and whose squares
+with every horizontal open immersion are Cartesian.
+
+Write
+\[
+    \operatorname{Comp}^{\triangle}
+    (f_1,\ldots,f_n)
+\]
+for the resulting \(\infty\)-category.  For \(n=1\), this is
+\(\operatorname{Comp}(f_1)\).  For \(n=2\), it is canonically identified
+with the category \(\operatorname{Comp}(f_2,f_1)\) of pairwise composition
+data constructed above.
+\end{definition}
+
+\begin{construction}[Restriction of compactification grids]
+\label{constr:restriction-finite-compactification-grids}
+Let
+\[
+    \overline X_\bullet
+    \in
+    \operatorname{Comp}^{\triangle}
+    (f_1,\ldots,f_n)
+\]
+be a compactification grid, and let
+\[
+    \phi:[m]\longrightarrow[n]
+\]
+be a monotone map.
+
+Define the restricted triangular diagram
+\[
+    \phi^*\overline X_\bullet
+\]
+on objects by
+\[
+    \bigl(
+      \phi^*\overline X
+    \bigr)_{a,b}
+    :=
+    \overline X_{\phi(a),\phi(b)},
+    \qquad
+    0\leq a\leq b\leq m.
+\]
+
+For \(a<b\), define its horizontal morphism
+\[
+    \bigl(
+      \phi^*u
+    \bigr)_{a,b}:
+    \overline X_{\phi(a+1),\phi(b)}
+    \longrightarrow
+    \overline X_{\phi(a),\phi(b)}
+\]
+to be the composite
+\[
+    \overline X_{\phi(a+1),\phi(b)}
+    \longrightarrow
+    \overline X_{\phi(a+1)-1,\phi(b)}
+    \longrightarrow
+    \cdots
+    \longrightarrow
+    \overline X_{\phi(a),\phi(b)}
+\]
+of the horizontal open immersions of
+\(\overline X_\bullet\).  When
+\[
+    \phi(a)=\phi(a+1),
+\]
+this composite is the identity.
+
+For \(a<b\), define its vertical morphism
+\[
+    \bigl(
+      \phi^*p
+    \bigr)_{a,b}:
+    \overline X_{\phi(a),\phi(b)}
+    \longrightarrow
+    \overline X_{\phi(a),\phi(b-1)}
+\]
+to be the composite
+\[
+    \overline X_{\phi(a),\phi(b)}
+    \longrightarrow
+    \overline X_{\phi(a),\phi(b)-1}
+    \longrightarrow
+    \cdots
+    \longrightarrow
+    \overline X_{\phi(a),\phi(b-1)}
+\]
+of the proper vertical morphisms of
+\(\overline X_\bullet\).  When
+\[
+    \phi(b-1)=\phi(b),
+\]
+this composite is the identity.
+
+The horizontal morphisms of
+\(\phi^*\overline X_\bullet\) are quasi-compact open immersions, and its
+vertical morphisms belong to \(\mathcal P\), by closure of those classes
+under composition.  Every elementary square of the restricted diagram is
+Cartesian by pasting the elementary Cartesian squares of
+\(\overline X_\bullet\); when an index is repeated, the corresponding
+square is an identity square.
+
+The diagonal object at \(a\) is
+\[
+    \bigl(
+      \phi^*\overline X
+    \bigr)_{a,a}
+    =
+    X_{\phi(a)},
+\]
+and the induced morphism
+\[
+    X_{\phi(b)}
+    \longrightarrow
+    X_{\phi(a)}
+\]
+is the specified composite of the morphisms in the original string between
+those two indices.  Thus
+\(\phi^*\overline X_\bullet\) is a compactification grid for the
+composable string obtained from
+\[
+    X_n\longrightarrow\cdots\longrightarrow X_0
+\]
+by restriction along \(\phi\), with identity morphisms inserted whenever
+\(\phi\) repeats an index.
+
+This construction is functorial in refinements.  For composable monotone
+maps
+\[
+    [\ell]\xrightarrow{\psi}[m]\xrightarrow{\phi}[n],
+\]
+associativity of composition gives a canonical coherent equivalence
+\[
+    \psi^*\phi^*\overline X_\bullet
+    \simeq
+    (\phi\psi)^*\overline X_\bullet.
+\]
+For the identity monotone map, the restriction is canonically the original
+grid.  These equivalences satisfy the usual higher functoriality
+coherences.
+\end{construction}
+
+\begin{definition}[Strict classical compactification grids]
+\label{def:strict-classical-compactification-grid}
+Put
+\[
+    X_{a,0}
+    :=
+    (X_a)_{\mathrm{cl}},
+    \qquad
+    f_{a,0}
+    :=
+    (f_a)_{\mathrm{cl}}.
+\]
+Let
+\[
+    \operatorname{Comp}^{\triangle,\square}_{\mathrm{cl}}
+    (f_{1,0},\ldots,f_{n,0})
+\]
+be the ordinary category, regarded through its nerve as an
+\(\infty\)-category, defined by the same triangular diagrams with ordinary
+proper morphisms, quasi-compact open immersions, strict Cartesian squares,
+and proper strict refinements.
+
+A classical compactification grid is dense if every horizontal open
+immersion
+\[
+    \overline X_{a+1,b,0}
+    \hookrightarrow
+    \overline X_{a,b,0}
+\]
+is schematically dense.
+\end{definition}
+
+\begin{lemma}[Relative common refinement of one grid cell]
+\label{lem:relative-grid-cell-refinement}
+Let \(\Lambda\) be a finite set.  For every \(\lambda\in\Lambda\), suppose
+that there is a Cartesian square of ordinary schemes
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    U_\lambda
+        \arrow[r,hook]
+        \arrow[d]
+        &
+    B_\lambda
+        \arrow[d]
+    \\
+    W_\lambda
+        \arrow[r,hook]
+        &
+    V_\lambda,
+\end{tikzcd}
+\]
+whose horizontal morphisms are schematically dense quasi-compact open
+immersions and whose vertical morphisms are proper.
+
+Suppose that there are compatible common dense refinements
+\[
+    U\longrightarrow U_\lambda,
+    \qquad
+    W\longrightarrow W_\lambda,
+    \qquad
+    V\longrightarrow V_\lambda,
+\]
+such that
+\[
+    U\longrightarrow W
+\]
+is proper,
+\[
+    W\hookrightarrow V
+\]
+is schematically dense and open, and every square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    W \arrow[r,hook] \arrow[d]
+        & V \arrow[d] \\
+    W_\lambda \arrow[r,hook]
+        & V_\lambda
+\end{tikzcd}
+\]
+is Cartesian.
+
+Then there exist a proper morphism
+\[
+    B\longrightarrow V,
+\]
+a schematically dense quasi-compact open immersion
+\[
+    U\hookrightarrow B,
+\]
+and proper morphisms
+\[
+    B\longrightarrow B_\lambda
+\]
+which refine all the displayed squares and for which
+\[
+    B\times_VW
+    \simeq
+    U.
+\]
+\end{lemma}
+
+\begin{proof}
+For every \(\lambda\), put
+\[
+    Q_\lambda
+    :=
+    B_\lambda\times_{V_\lambda}V.
+\]
+Then \(Q_\lambda\to V\) is proper.  The boundary refinement maps and the
+Cartesian square for \(B_\lambda\) induce a morphism
+\[
+    U\longrightarrow Q_\lambda.
+\]
+Put
+\[
+    Q
+    :=
+    \prod_VQ_\lambda.
+\]
+The morphism \(Q\to V\) is proper, and the preceding maps give
+\[
+    U\longrightarrow Q.
+\]
+
+The composite
+\[
+    U\longrightarrow W\hookrightarrow V
+\]
+is separated and of finite type.  Choose a dense classical Nagata
+compactification
+\[
+    U\hookrightarrow P\longrightarrow V.
+\]
+The pair of maps from \(U\) determines a locally closed immersion
+\[
+    U
+    \longrightarrow
+    P\times_VQ.
+\]
+Let \(B\) be its scheme-theoretic closure.  Then
+\[
+    B\longrightarrow V
+\]
+is proper and
+\[
+    U\hookrightarrow B
+\]
+is schematically dense and open.
+
+Put
+\[
+    B_W
+    :=
+    B\times_VW.
+\]
+The immersion
+\[
+    U\hookrightarrow B_W
+\]
+is open.  It is also proper, because \(U\to W\) is proper and
+\(B_W\to W\) is separated.  Hence it is closed.  Since \(U\) is
+schematically dense in \(B_W\), it follows that
+\[
+    B_W
+    \simeq
+    U.
+\]
+
+The projections
+\[
+    B\longrightarrow Q_\lambda\longrightarrow B_\lambda
+\]
+are proper.  Moreover,
+\[
+\begin{aligned}
+    B\times_{B_\lambda}U_\lambda
+    &\simeq
+    B\times_{V_\lambda}W_\lambda \\
+    &\simeq
+    B\times_VW \\
+    &\simeq
+    U.
+\end{aligned}
+\]
+Thus the induced open squares are Cartesian, and \(B\) gives the required
+common refinement of the cell.
+\end{proof}
+
+\begin{proposition}[Cofilteredness of strict classical compactification grids]
+\label{prop:classical-compactification-grids-cofiltered}
+The category
+\[
+    \operatorname{Comp}^{\triangle,\square}_{\mathrm{cl}}
+    (f_{1,0},\ldots,f_{n,0})
+\]
+is nonempty and cofiltered.
+\end{proposition}
+
+\begin{proof}
+We first construct one grid.  Proceed by induction on the interval length
+\[
+    b-a.
+\]
+For \(a=b\), put
+\[
+    \overline X_{a,a,0}
+    :=
+    X_{a,0}.
+\]
+Suppose that all cells of interval length less than \(b-a\) have been
+constructed.  The composite
+\[
+    \overline X_{a+1,b,0}
+    \longrightarrow
+    \overline X_{a+1,b-1,0}
+    \hookrightarrow
+    \overline X_{a,b-1,0}
+\]
+is separated and of finite type.  Choose a dense classical Nagata
+compactification
+\[
+    \overline X_{a+1,b,0}
+    \hookrightarrow
+    \overline X_{a,b,0}
+    \longrightarrow
+    \overline X_{a,b-1,0}.
+\]
+Let
+\[
+    W
+    :=
+    \overline X_{a,b,0}
+    \times_{\overline X_{a,b-1,0}}
+    \overline X_{a+1,b-1,0}.
+\]
+The induced open immersion
+\[
+    \overline X_{a+1,b,0}
+    \hookrightarrow
+    W
+\]
+is proper, because its source is proper over
+\(\overline X_{a+1,b-1,0}\) and \(W\) is separated over that base.  Hence
+it is closed.  It is schematically dense, so
+\[
+    W
+    \simeq
+    \overline X_{a+1,b,0}.
+\]
+Thus the new elementary square is Cartesian.  This proves nonemptiness.
+
+Every grid admits a dense refinement.  Construct it by induction on interval
+length, taking scheme-theoretic closures at length one and applying
+Lemma~\ref{lem:relative-grid-cell-refinement} to each subsequent cell.
+
+Now consider finitely many dense grids.  Again proceed by induction on
+interval length.  Once common dense refinements have been constructed on the
+three boundary terms of a cell, apply
+Lemma~\ref{lem:relative-grid-cell-refinement} to obtain a common dense
+refinement of the cell.  This constructs a common dense refinement of every
+finite family of grids.
+
+Finally, maps out of a dense grid are unique whenever they exist.  Let
+\[
+    r,s:
+    \overline X_\bullet
+    \rightrightarrows
+    \overline Y_\bullet
+\]
+be refinements with dense source.  Induct on interval length.  On the
+diagonal the maps agree.  At the cell \((a,b)\), the induction hypothesis
+shows that they agree on the schematically dense open
+\[
+    \overline X_{a+1,b}
+    \hookrightarrow
+    \overline X_{a,b}.
+\]
+The target \(\overline Y_{a,b}\) is separated over
+\(\overline Y_{a,b-1}\), because it is proper.  Hence the equalizer of the
+two maps on \(\overline X_{a,b}\) is closed.  Schematic density forces the
+equalizer to be the whole source, so the two maps agree.
+
+Given a finite simplicial diagram of grids, choose a common dense refinement
+of its vertices.  Compatibility with every edge and every higher simplex is
+then forced by the preceding uniqueness.  Thus every finite diagram admits
+a cone, and the category is cofiltered.
+\end{proof}
+
+\begin{construction}[Lifting finite classical compactification grids]
+\label{constr:finite-grid-lifting}
+Classical truncation defines a functor
+\[
+    \tau^\triangle:
+    \operatorname{Comp}^{\triangle}(f_1,\ldots,f_n)
+    \longrightarrow
+    \operatorname{Comp}^{\triangle,\square}_{\mathrm{cl}}
+    (f_{1,0},\ldots,f_{n,0}).
+\]
+
+Let
+\[
+    A_\bullet
+    \in
+    \operatorname{Comp}^{\triangle,\square}_{\mathrm{cl}}
+    (f_{1,0},\ldots,f_{n,0}).
+\]
+Define a spectral grid \(\lambda^\triangle(A)_\bullet\) recursively on
+interval length.  Put
+\[
+    \lambda^\triangle(A)_{a,a}
+    :=
+    X_a.
+\]
+For \(a<b\), put
+\[
+    \lambda^\triangle(A)_{a,b}
+    :=
+    \lambda^\triangle(A)_{a+1,b}
+    \amalg_{A_{a+1,b}}
+    A_{a,b}.
+\]
+Here
+\[
+    A_{a+1,b}
+    \longrightarrow
+    \lambda^\triangle(A)_{a+1,b}
+\]
+is the classical truncation immersion and
+\[
+    A_{a+1,b}
+    \hookrightarrow
+    A_{a,b}
+\]
+is the classical horizontal open immersion.
+
+Proposition~\ref{prop:spectral-nil-cobase-change-open} gives a
+quasi-compact open immersion
+\[
+    \lambda^\triangle(A)_{a+1,b}
+    \hookrightarrow
+    \lambda^\triangle(A)_{a,b}
+\]
+and a canonical equivalence
+\[
+    \bigl(
+      \lambda^\triangle(A)_{a,b}
+    \bigr)_{\mathrm{cl}}
+    \simeq
+    A_{a,b}.
+\]
+The compatible boundary maps induce
+\[
+    \lambda^\triangle(A)_{a,b}
+    \longrightarrow
+    \lambda^\triangle(A)_{a,b-1}.
+\]
+Its classical truncation is the proper morphism
+\[
+    A_{a,b}
+    \longrightarrow
+    A_{a,b-1},
+\]
+so it belongs to \(\mathcal P\).
+
+The pullback
+\[
+    V
+    :=
+    \lambda^\triangle(A)_{a,b}
+    \times_{\lambda^\triangle(A)_{a,b-1}}
+    \lambda^\triangle(A)_{a+1,b-1}
+\]
+is an open spectral subscheme of \(\lambda^\triangle(A)_{a,b}\), and
+\[
+\begin{aligned}
+    V_{\mathrm{cl}}
+    &\simeq
+    A_{a,b}
+    \times_{A_{a,b-1}}
+    A_{a+1,b-1} \\
+    &\simeq
+    A_{a+1,b}.
+\end{aligned}
+\]
+The open subscheme \(\lambda^\triangle(A)_{a+1,b}\) has the same
+classical open.  Uniqueness of open spectral subschemes with prescribed
+classical open gives
+\[
+    V
+    \simeq
+    \lambda^\triangle(A)_{a+1,b}.
+\]
+Thus every elementary square is Cartesian.
+
+Strict classical refinements induce spectral refinements through the pushout
+universal property.  This defines a functor
+\[
+    \lambda^\triangle:
+    \operatorname{Comp}^{\triangle,\square}_{\mathrm{cl}}
+    (f_{1,0},\ldots,f_{n,0})
+    \longrightarrow
+    \operatorname{Comp}^{\triangle}(f_1,\ldots,f_n).
+\]
+\end{construction}
+
+\begin{proposition}[The finite-grid lifting adjunction]
+\label{prop:finite-grid-lifting-adjunction}
+There is an adjunction
+\[
+    \lambda^\triangle:
+    \operatorname{Comp}^{\triangle,\square}_{\mathrm{cl}}
+    (f_{1,0},\ldots,f_{n,0})
+    \rightleftarrows
+    \operatorname{Comp}^{\triangle}(f_1,\ldots,f_n):
+    \tau^\triangle.
+\]
+Its unit is an equivalence.  Its counit is the natural proper refinement
+induced cellwise by the open boundary maps and the classical truncation
+immersions.
+\end{proposition}
+
+\begin{proof}
+Let \(A_\bullet\) be a strict classical grid and let \(C_\bullet\) be a
+spectral grid.  We construct the mapping-space equivalence by induction on
+interval length.  At a cell \((a,b)\), the pushout universal property gives
+\[
+\begin{aligned}
+    \Map
+    \bigl(
+      \lambda^\triangle(A)_{a,b},
+      C_{a,b}
+    \bigr)
+    \simeq{}
+    &\Map
+    \bigl(
+      \lambda^\triangle(A)_{a+1,b},
+      C_{a,b}
+    \bigr)
+    \\
+    &\times_{
+      \Map(A_{a+1,b},C_{a,b})
+    }
+    \Map(A_{a,b},C_{a,b}).
+\end{aligned}
+\]
+The first factor is fixed by the already-constructed map on the horizontal
+boundary.  Since \(A_{a,b}\) is ordinary, discrete enhancement and classical
+truncation give
+\[
+    \Map_{\operatorname{Sch}^{\mathrm{sp}}}
+    (A_{a,b},C_{a,b})
+    \simeq
+    \Map_{\operatorname{Sch}}
+    (A_{a,b},(C_{a,b})_{\mathrm{cl}}).
+\]
+The compatibility condition over \(A_{a+1,b}\), together with naturality in
+the vertical direction, is exactly the strict classical grid condition.
+Taking the finite limit over all cells gives a natural equivalence
+\[
+\begin{aligned}
+    &\Map_{\operatorname{Comp}^{\triangle}}
+    \bigl(
+      \lambda^\triangle(A),
+      C
+    \bigr) \\
+    &\qquad\simeq
+    \Map_{\operatorname{Comp}^{\triangle,\square}_{\mathrm{cl}}}
+    \bigl(
+      A,
+      \tau^\triangle(C)
+    \bigr).
+\end{aligned}
+\]
+Properness and the Cartesian open-square conditions are detected on
+classical truncations, so this equivalence restricts to the refinement
+mapping spaces.  It proves the adjunction.
+
+The equivalences
+\[
+    \bigl(
+      \lambda^\triangle(A)_{a,b}
+    \bigr)_{\mathrm{cl}}
+    \simeq
+    A_{a,b}
+\]
+identify the unit with the identity grid.  For a spectral grid \(C\), the
+pushout universal properties give cellwise maps
+\[
+    \lambda^\triangle\tau^\triangle(C)_{a,b}
+    \longrightarrow
+    C_{a,b}.
+\]
+Their classical truncations are identities, so they belong to
+\(\mathcal P\).  Their horizontal open squares are Cartesian by
+classical-open detection.  Hence they assemble into the stated counit
+refinement.
+\end{proof}
+
+\begin{theorem}[Contractibility of finite compactification grids]
+\label{thm:finite-compactification-grids}
+For every finite composable string
+\[
+    X_n
+    \xrightarrow{f_n}
+    X_{n-1}
+    \longrightarrow
+    \cdots
+    \longrightarrow
+    X_1
+    \xrightarrow{f_1}
+    X_0
+\]
+in \(\mathcal E\), the \(\infty\)-category
+\[
+    \operatorname{Comp}^{\triangle}(f_1,\ldots,f_n)
+\]
+is nonempty and cofiltered.  Consequently,
+\[
+    \left|
+      \operatorname{Comp}^{\triangle}(f_1,\ldots,f_n)
+    \right|
+    \simeq
+    *.
+\]
+Every finite diagram of compactification grids, refinements, and coherence
+simplices admits a coherently compatible refining cone.
+\end{theorem}
+
+\begin{proof}
+Nonemptiness follows by applying \(\lambda^\triangle\) to a strict classical
+grid supplied by
+Proposition~\ref{prop:classical-compactification-grids-cofiltered}.
+
+Let
+\[
+    D:K
+    \longrightarrow
+    \operatorname{Comp}^{\triangle}(f_1,\ldots,f_n)
+\]
+be indexed by a finite simplicial set.  Classical cofilteredness gives a
+cone
+\[
+    A
+    \longrightarrow
+    \tau^\triangle D.
+\]
+Applying \(\lambda^\triangle\) and then the natural counit of
+Proposition~\ref{prop:finite-grid-lifting-adjunction} gives a cone
+\[
+    \lambda^\triangle(A)
+    \longrightarrow
+    \lambda^\triangle\tau^\triangle D
+    \longrightarrow
+    D.
+\]
+Thus every finite diagram admits a coherently compatible refining cone, so
+the spectral grid category is cofiltered.  Its groupoid completion is
+therefore contractible.
+\end{proof}
+
+\begin{proposition}[Base change of finite compactification grids]
+\label{prop:finite-grid-base-change}
+Let
+\[
+    g:T\longrightarrow X_0
+\]
+be arbitrary, and write
+\[
+    X_{a,T}
+    :=
+    X_a\times_{X_0}T
+\]
+for the base-changed composable string.  Cellwise base change defines a
+functor
+\[
+    g^*:
+    \operatorname{Comp}^{\triangle}(f_1,\ldots,f_n)
+    \longrightarrow
+    \operatorname{Comp}^{\triangle}(f_{1,T},\ldots,f_{n,T}).
+\]
+It preserves refinements and coherently compatible refining cones and is
+compatible with composition in \(g\).  For every monotone map
+\[
+    \phi:[m]\longrightarrow[n],
+\]
+there is a canonical coherent equivalence
+\[
+    \phi^*(g^*\overline X_\bullet)
+    \simeq
+    g_\phi^*(\phi^*\overline X_\bullet),
+\]
+where
+\[
+    g_\phi:
+    X_{\phi(0)}\times_{X_0}T
+    \longrightarrow
+    X_{\phi(0)}
+\]
+is the induced base-change morphism.
+\end{proposition}
+
+\begin{proof}
+For a compactification grid \(\overline X_\bullet\), put
+\[
+    (g^*\overline X)_{a,b}
+    :=
+    \overline X_{a,b}\times_{X_0}T.
+\]
+Arbitrary base change preserves quasi-compact open immersions, morphisms in
+\(\mathcal P\), and Cartesian squares.  It therefore carries grids to grids
+and refinements to refinements.  Base change of a refining cone is again a
+refining cone.  Compatibility with composition in \(g\) is the coherence of
+spectral fibre products.  For a monotone map
+\[
+    \phi:[m]\longrightarrow[n],
+\]
+both
+\[
+    \phi^*(g^*\overline X_\bullet)
+\]
+and
+\[
+    g_\phi^*(\phi^*\overline X_\bullet)
+\]
+have cell \((a,b)\) canonically equivalent to
+\[
+    \overline X_{\phi(a),\phi(b)}
+    \times_{X_0}T.
+\]
+The coherence of spectral fibre products gives the asserted equivalence and
+its compatibility with composition of monotone maps.
+\end{proof}
+
+\begin{proposition}[Composition represented by finite grids]
+\label{prop:finite-grid-composition-formula}
+Let \(\overline X_\bullet\) be a compactification grid.  For \(a<b\), let
+\[
+    j_{a,b}:
+    X_b
+    \hookrightarrow
+    \overline X_{a,b}
+\]
+be the composite horizontal open immersion and let
+\[
+    q_{a,b}:
+    \overline X_{a,b}
+    \longrightarrow
+    X_a
+\]
+be the composite proper morphism.  Put
+\[
+    F_{a,b}
+    :=
+    q_{a,b*}j_{a,b\sharp}.
+\]
+
+For every \(a<k<b\), the inverse of open--proper exchange gives a canonical
+equivalence
+\[
+    F_{a,k}F_{k,b}
+    \xrightarrow{\simeq}
+    F_{a,b}.
+\]
+For every subdivision
+\[
+    a=i_0<i_1<\cdots<i_r=b,
+\]
+all parenthesized composites
+\[
+    F_{i_0,i_1}
+    F_{i_1,i_2}
+    \cdots
+    F_{i_{r-1},i_r}
+\]
+are coherently identified with \(F_{a,b}\).  These equivalences are
+compatible with refinements of grids and with restriction along monotone
+maps of finite ordinals.
+\end{proposition}
+
+\begin{proof}
+Pasting the elementary Cartesian squares of the grid gives a Cartesian
+rectangle
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \overline X_{k,b}
+        \arrow[r,hook,"u"]
+        \arrow[d,"q_{k,b}"']
+        &
+    \overline X_{a,b}
+        \arrow[d,"r"]
+    \\
+    X_k
+        \arrow[r,hook,"j_{a,k}"']
+        &
+    \overline X_{a,k},
+\end{tikzcd}
+\]
+where \(r\) is proper.  Applied to this square,
+Theorem~\ref{thm:open-proper-exchange} gives the canonical equivalence
+\[
+    \operatorname{Ex}^{\sharp}_{*}:
+    r_*u_\sharp
+    \xrightarrow{\simeq}
+    j_{a,k\sharp}q_{k,b*}.
+\]
+The comparison required for composition is its inverse:
+\[
+    \bigl(
+      \operatorname{Ex}^{\sharp}_{*}
+    \bigr)^{-1}:
+    j_{a,k\sharp}q_{k,b*}
+    \xrightarrow{\simeq}
+    r_*u_\sharp.
+\]
+
+Using this inverse exchange equivalence, we obtain
+\[
+\begin{aligned}
+    F_{a,k}F_{k,b}
+    &=
+    q_{a,k*}j_{a,k\sharp}
+    q_{k,b*}j_{k,b\sharp} \\
+    &\xrightarrow{\simeq}
+    q_{a,k*}r_*u_\sharp j_{k,b\sharp} \\
+    &\simeq
+    q_{a,b*}j_{a,b\sharp} \\
+    &=
+    F_{a,b}.
+\end{aligned}
+\]
+Here the second equivalence uses the canonical composition equivalences
+\[
+    q_{a,k}r
+    \simeq
+    q_{a,b}
+\]
+and
+\[
+    uj_{k,b}
+    \simeq
+    j_{a,b}.
+\]
+
+The composition compatibility of open--proper exchange identifies the
+exchange transformation associated to a pasted rectangle with the composite
+of the exchange transformations associated to its constituent rectangles.
+Taking inverses reverses the order of this pasted composite in precisely the
+way required by functor composition.  Hence the displayed identifications
+satisfy all associativity and higher pasting coherences.
+
+Compatibility with refinements follows from the composition coherence of
+the proper support and open--proper exchange equivalences.  Namely, a
+refinement gives a map between the corresponding Cartesian rectangles, and
+naturality of open--proper exchange identifies the resulting comparison
+maps.
+
+Restriction along a monotone map is the construction of
+Construction~\ref{constr:restriction-finite-compactification-grids}.  Its
+horizontal and vertical arrows are composites of those in the original
+grid, and its Cartesian rectangles are obtained by pasting the original
+Cartesian squares.  Naturality and composition compatibility of
+open--proper exchange therefore give the asserted face, degeneracy, and
+higher restriction compatibilities.
+\end{proof}
+
+\section{The Voevodsky conditions}
+\label{sec:voevodsky-conditions}
+
+The preceding results may be collected as the geometric conditions required
+to construct exceptional direct image by compactification.
+
+\begin{theorem}[Voevodsky conditions for stable brave new motives]
+\label{thm:voevodsky-conditions}
+The stable coefficient system
+\[
+    \SH^*:
+    \bigl(
+      \operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}
+    \bigr)^{\mathrm{op}}
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}})
+\]
+has the following properties.
+\begin{enumerate}
+    \item \textbf{Localization.}
+    For every complementary closed--open pair
+    \[
+        Z\xrightarrow{i}S\xleftarrow{j}U,
+    \]
+    there are exact triangles
+    \[
+        j_\sharp j^*E
+        \longrightarrow
+        E
+        \longrightarrow
+        i_*i^*E
+    \]
+    and
+    \[
+        i_*i^!E
+        \longrightarrow
+        E
+        \longrightarrow
+        j_*j^*E.
+    \]
+
+    \item \textbf{Smooth exchange.}
+    Smooth base change and the smooth projection formula hold for every
+    smooth separated morphism of finite presentation.
+
+    \item \textbf{Smooth proper ambidexterity.}
+    For every smooth proper morphism \(p\),
+    \[
+        p_\sharp\Sigma^{-T_p}
+        \simeq
+        p_*.
+    \]
+
+    \item \textbf{Cocontinuity.}
+    For every morphism \(f\), the direct image \(f_*\) preserves small
+    colimits.
+
+    \item \textbf{Proper exchange.}
+    Proper base change and the proper projection formula hold for every
+    proper morphism.
+
+    \item \textbf{Open--proper exchange and support.}
+    For every Cartesian square with a proper vertical morphism and a
+    quasi-compact open horizontal morphism,
+    \[
+        p_*j'_\sharp
+        \simeq
+        j_\sharp q_*.
+    \]
+    In particular, proper direct image carries extension by zero from the
+    source open to extension by zero from the target open in every proper
+    excision square.
+
+    \item \textbf{Compactification.}
+    Every separated morphism of finite presentation admits a compactification,
+    and its \(\infty\)-category of compactifications is nonempty and
+    cofiltered.  More generally, the \(\infty\)-category of compactification
+    grids for every finite composable string in \(\mathcal E\) is nonempty
+    and cofiltered.
+\end{enumerate}
+
+The localization, exchange, projection, support, and ambidexterity
+transformations satisfy the usual composition and base-change pasting laws.
+Virtual Thom twists commute with inverse image.  If
+\[
+    L\in\Pic(\SH(S))
+\]
+is a virtual Thom object on the target, then the smooth, closed, and proper
+projection formulas give canonical equivalences
+\[
+    p_\sharp\bigl(A\otimes_Xp^*L\bigr)
+    \simeq
+    p_\sharp A\otimes_SL,
+\]
+\[
+    i_*\bigl(A\otimes_Zi^*L\bigr)
+    \simeq
+    i_*A\otimes_SL,
+\]
+and
+\[
+    f_*\bigl(A\otimes_Xf^*L\bigr)
+    \simeq
+    f_*A\otimes_SL,
+\]
+respectively.
+For every morphism \(f\), arbitrary direct image satisfies the internal-Hom
+equivalence of
+Proposition~\ref{prop:arbitrary-direct-image-internal-hom}.  Finite
+compactification-grid and refinement diagrams admit coherently compatible
+refining cones.
+\end{theorem}
+
+\begin{proof}
+Localization and smooth exchange were proved in
+Chapter~\ref{chap:stable-brave-new-motivic}.  Smooth proper ambidexterity is
+Theorem~\ref{thm:smooth-proper-ambidexterity}.  Proper base change and the
+proper projection formula are
+Theorems~\ref{thm:proper-base-change} and
+\ref{thm:proper-projection-formula}.  Cocontinuity is
+Theorem~\ref{thm:arbitrary-direct-image-cocontinuous}.  Open--proper exchange
+is Theorem~\ref{thm:open-proper-exchange}, and proper support is
+Corollary~\ref{thm:proper-support}.  Compactification is
+Theorem~\ref{thm:spectral-nagata-compactification}, while cofilteredness and
+contractibility are
+Theorem~\ref{thm:compactification-category-contractible}.
+
+The composition and base-change compatibilities follow from the coherent
+construction of the canonical Beck--Chevalley, projection, purity, and
+ambidexterity transformations and from the calculus of adjoint mates.
+Compatibility with virtual Thom twists follows from pullback naturality of
+the motivic \(J\)-homomorphism and the appropriate projection formulas.
+The internal-Hom statement is
+Proposition~\ref{prop:arbitrary-direct-image-internal-hom}.  Coherent
+refinements for single compactifications are supplied by
+Proposition~\ref{prop:finite-compactification-diagram-refinement}, and the
+finite composition coherences are supplied by
+Theorem~\ref{thm:finite-compactification-grids},
+Proposition~\ref{prop:finite-grid-base-change}, and
+Proposition~\ref{prop:finite-grid-composition-formula}.
+\end{proof}
+
+\section{Classical comparison of the proper package}
+\label{sec:proper-classical-comparison}
+
+\begin{theorem}[Comparison of projective and proper geometry]
+\label{thm:proper-package-comparison}
+Let
+\[
+    f:X\longrightarrow S
+\]
+be a morphism of quasi-compact quasi-separated spectral schemes.  Stable
+classical comparison identifies the structures of this chapter with their
+ordinary counterparts as follows.
+
+\begin{enumerate}
+    \item For every \(f\), there is a canonical equivalence
+    \[
+        \Theta_S^{\mathrm{st}}f_*
+        \simeq
+        (f_{\mathrm{cl}})_*
+        \Theta_X^{\mathrm{st}}.
+    \]
+
+    \item If \(f\) is smooth and proper, comparison carries
+    \[
+        f_\sharp\Sigma^{-T_f}
+        \xrightarrow{\simeq}
+        f_*
+    \]
+    to ordinary smooth proper ambidexterity.
+
+    \item If \(f\) is proper, comparison carries spectral proper base change,
+    the proper projection formula, open--proper exchange, and the proper
+    support equivalence to their ordinary counterparts.
+
+    \item Classical truncation carries every spectral compactification
+    \[
+        X\hookrightarrow\overline X\longrightarrow S
+    \]
+    to a classical compactification
+    \[
+        X_{\mathrm{cl}}
+        \hookrightarrow
+        \overline X_{\mathrm{cl}}
+        \longrightarrow
+        S_{\mathrm{cl}}.
+    \]
+    It also carries proper refinements and finite compactification grids to
+    their classical counterparts and is compatible with base change and
+    finite refinement diagrams.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The first assertion is the arbitrary-direct-image compatibility of stable
+classical comparison established in
+Chapter~\ref{chap:stable-brave-new-motivic}.  It is obtained by taking right
+adjoints of the comparison equivalence for inverse image and does not require
+\(f\) to be proper.
+
+Suppose that \(f\) is smooth and proper.  The construction of the
+ambidexterity transformation uses smooth base change, the diagonal
+adjunction, the coefficientwise relative closed-purity transformation and
+its diagonal Thom mate, the smooth and closed projection formulas, and the
+tangent Thom twist.  Stable comparison preserves each of
+these ingredients and their adjunction data.  It therefore carries
+\[
+    f_\sharp\Sigma^{-T_f}
+    \longrightarrow
+    f_*
+\]
+to the ordinary smooth-proper ambidexterity transformation.
+
+Now suppose that \(f\) is proper.  The proper Beck--Chevalley and projection
+transformations are characterized as adjoint mates of, respectively, the
+inverse-image composition equivalence and the counit of
+\[
+    f^*\dashv f_*.
+\]
+Stable comparison preserves the adjunction, its unit and counit, Cartesian
+composition, and the symmetric monoidal structures.  It therefore carries
+the spectral transformations to the ordinary proper base-change and
+projection transformations.
+
+Open--proper exchange is constructed from proper base change,
+open--closed orthogonality, and stable recollement.  Stable comparison
+preserves each of these constructions and hence carries the spectral exchange
+map, and its proper-support specialization, to their ordinary counterparts.
+
+Finally, classical truncation preserves quasi-compact open immersions,
+carries morphisms in \(\mathcal P\) to proper morphisms, and preserves fibre
+products and composition.  It therefore carries spectral compactifications
+to classical compactifications and carries proper refinements, finite
+compactification grids, base changes, and finite refinement diagrams to
+their classical counterparts.
+\end{proof}
+
+\section{The proper geometric package}
+\label{sec:proper-geometric-package}
+
+\begin{theorem}[Proper morphisms, ambidexterity, and compactification]
+\label{thm:proper-geometric-package}
+For every quasi-compact quasi-separated spectral scheme \(S\), the stable
+brave new motivic category \(\SH(S)\) has the following additional structures
+and properties.
+\begin{enumerate}
+    \item Every smooth proper morphism
+    \[
+        p:X\longrightarrow S
+    \]
+    satisfies canonical ambidexterity
+    \[
+        p_\sharp\Sigma^{-T_p}
+        \simeq
+        p_*.
+    \]
+    In particular,
+    \[
+        \bigl(p_\sharp\mathbf1_X\bigr)^\vee
+        \simeq
+        p_\sharp\Sigma^{-T_p}\mathbf1_X.
+    \]
+
+    \item For every Cartesian square with \(f\) proper,
+    \[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        X_T \arrow[r,"g'"] \arrow[d,"f'"']
+            & X \arrow[d,"f"] \\
+        T \arrow[r,"g"'] & S,
+    \end{tikzcd}
+    \]
+    the canonical transformation is an equivalence:
+    \[
+        g^*f_*
+        \simeq
+        f'_*(g')^*.
+    \]
+
+    \item For every morphism \(f\), the functor \(f_*\) preserves small
+    colimits.  In particular, for every compactification
+    \[
+        X\xrightarrow{j}\overline X\xrightarrow{p}S,
+    \]
+    the functor \(p_*j_\sharp\) is colimit-preserving.
+
+    \item Proper direct image satisfies the projection formula
+    \[
+        f_*(A\otimes_Xf^*B)
+        \simeq
+        f_*A\otimes_SB.
+    \]
+
+    \item Proper direct image satisfies open--proper exchange and hence the
+    support property for every proper excision square.
+
+    \item Every separated morphism of finite presentation
+    \[
+        f:X\longrightarrow S
+    \]
+    admits a compactification
+    \[
+        X\xrightarrow{j}\overline X\xrightarrow{p}S.
+    \]
+    The \(\infty\)-category of all such compactifications is nonempty and
+    cofiltered, and hence has contractible groupoid completion.  Base change
+    preserves compactifications and refinements.  For every finite composable
+    string in \(\mathcal E\), the \(\infty\)-category of compactification
+    grids is nonempty and cofiltered, and every finite diagram of grids,
+    refinements, and coherence simplices admits a coherently compatible
+    refining cone.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+This is the combination of
+Theorems~\ref{thm:motivic-atiyah-duality},
+\ref{thm:smooth-proper-ambidexterity},
+\ref{thm:proper-base-change},
+\ref{thm:arbitrary-direct-image-cocontinuous},
+\ref{thm:proper-projection-formula},
+\ref{thm:open-proper-exchange},
+\ref{thm:proper-support},
+\ref{thm:spectral-nagata-compactification}, and
+\ref{thm:compactification-category-contractible}, together with
+Proposition~\ref{prop:finite-compactification-diagram-refinement},
+Proposition~\ref{prop:compactification-composition-data},
+Theorem~\ref{thm:finite-compactification-grids}, and
+Proposition~\ref{prop:finite-grid-base-change}.
+\end{proof}
+
+The chapter has supplied all proper geometric input required for exceptional
+functoriality, but it has not yet selected a general exceptional direct image
+or constructed its right adjoint.  In particular, for a general separated
+morphism of finite presentation
+\[
+    f:X\longrightarrow S,
+\]
+no functor denoted \(f_!\) or \(f^!\) has yet been fixed.
+
+For every compactification
+\[
+    c=
+    \bigl(
+      X\xrightarrow{j}\overline X\xrightarrow{p}S
+    \bigr),
+\]
+Proposition~\ref{prop:compactification-direct-image-diagram}
+associates the functor
+\[
+    \Phi_f(c)
+    =
+    p_*j_\sharp.
+\]
+Open--proper exchange identifies these functors under every proper
+refinement, and the resulting comparison equivalences satisfy all higher
+composition coherences.  Each functor \(p_*j_\sharp\) preserves small
+colimits.  Since
+\[
+    \bigl|
+      \operatorname{Comp}(f)
+    \bigr|
+    \simeq
+    *,
+\]
+the colimit
+\[
+    \operatorname*{colim}_{c\in\operatorname{Comp}(f)}
+    \Phi_f(c)
+\]
+is canonically equivalent to \(\Phi_f(c)\) for every compactification
+\(c\), through a contractible space of compatible equivalences.
+
+The next chapter denotes this colimit functor by
+\[
+    f_!.
+\]
+It proves functoriality under composition and base change using the
+contractible compactification-grid categories constructed above.  Their
+restriction maps along monotone maps of finite ordinals supply identity,
+associativity, and all higher composition coherences.  Since \(f_!\) is
+colimit-preserving, its right adjoint defines
+\[
+    f^!,
+\]
+completing the six-operation formalism.

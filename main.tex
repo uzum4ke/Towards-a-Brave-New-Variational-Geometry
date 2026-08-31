@@ -1,0 +1,120 @@
+\documentclass[oneside]{book}
+
+% ---------- Core math ----------
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{slashed}
+\usepackage{graphicx}
+%\usepackage{mathabx}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+%\usepackage{stmaryrd}
+\usepackage{bm}
+% ---------- Layout & tables ----------
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{enumitem}  % instead of enumerate
+\usepackage{longtable}
+\usepackage{array}
+
+% ---------- TikZ-cd (externalize diagrams) ----------
+\usepackage{tikz-cd}
+
+% ---------- Misc ----------
+\usepackage{cancel}
+\usepackage{epigraph}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{bbm}
+
+% ---------- Hyperref last ----------
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=cyan, pdfpagemode=FullScreen]{hyperref}
+
+% Theorem-like environments: italic body text
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{axiom}{Axiom}[section]
+
+% Definition-like environments: upright body text
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{judgement}{Judgement}[section]
+\newtheorem{construction}{Construction}[section]
+\newtheorem{data}{Data}[section]
+\newtheorem{axiomset}{Axiom Set}[section]
+\newtheorem{hypothesis}{Hypothesis}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+
+% Remark-like environments: upright body text, italic heading
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{notation}{Notation}[section]
+\newtheorem{convention}{Convention}[section]
+\newtheorem{observation}{Observation}[section]
+
+% ---------- Bibliography ----------
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+% ---------- Title / Author / Date ----------
+\newcommand{\thesisversion}{1.0}
+
+\title{Towards a Brave New Variational Geometry\\[0.5em]
+{\large Foundations}}
+\author{Conor Sheridan}
+\date{\today\\[0.5em]Version \thesisversion}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+
+    \input{macros}
+
+    \include{notation}
+    \include{Draft 2/Foundations/Introduction}
+    \include{Draft 2/Foundations/Spectral Algebraic Geometry: Contexts, Base Change, and Coefficients}
+    \include{Draft 2/Foundations/Differentiation of the Spectral Doctrine}
+    \include{Draft 2/Foundations/Formal Reconstruction of the Spectral Doctrine}
+    \include{Draft 2/Foundations/Spectral de Rham Reflection and Infinitesimal Descent}
+    \include{Draft 2/Foundations/Crystalline Jet Calculus and Formal Differential Equations}
+
+    %\include{Draft 2/Lie Theory/Brave-New Formal Lie Groupoids and Infinitesimal Quotients}
+    
+    %\include{Draft 1/SAG/Spectral Algebraic Geometry from Commutative Infinity-Operadic Algebra}
+    %\include{Draft 1/SAG/Cotangent Complexes and Spectral Deformation Theory}
+    %\include{Draft 1/Motivic Theory/Smooth Spectral Geometry and the Brave New Motivic Site}
+    
+    %\include{Draft 1/Motivic Theory/Brave New Motivic Spaces}
+    %\include{Draft 1/Motivic Theory/Closed Localization, Homotopy Purity, and Derived Nilpotent Invariance}
+    %\include{Draft 1/Motivic Theory/Stable Brave New Motivic Homotopy Theory}
+    
+    %\include{Draft 1/Six Operations/Proper Morphisms, Ambidexterity, and Compactification}
+    %\include{Draft 1/Six Operations/The Six Operations in Brave New Motivic Homotopy Theory}
+    
+    %\include{Draft 1/Variational Geometry/Brave-New Differential Cohomology and Differential Umkehr Theory}
+    %\include{Draft 1/Variational Geometry/Brave-New Differential Forms, de Rham Theory, and Differential Umkehr}
+    %\include{Draft 1/Variational Geometry/Brave-New Jet Bundle Calculus}
+    %\include{Draft 1/Variational Geometry/Brave-New Variational Geometry and Derived Euler--Lagrange Theory}
+
+    %\include{Draft 1/Lie Theory/Brave-New Formal Lie Groupoids and Infinitesimal Quotients}
+    %\include{Draft 1/Lie Theory/Brave-New Lie Algebroids and Differentiation}
+    %\include{Draft 1/Lie Theory/Atiyah--Spencer Calculus and Higher Brave-New Lie Operations}
+    %\include{Draft 1/Lie Theory/Brave-New Lie Integration and Comparison}
+    
+    %\include{Draft 1/Variational Geometry/Brave-New Infinitesimal Gauge Symmetry and Noether Theory}
+    %\include{Draft 1/Variational Geometry/Brave-New Prequantum Field Theory}
+    
+    %\part{Noncommutative Algebra}
+    %\include{Quantum Field Theory/Perfect Objects, Rigid Self-Enrichment, and Canonical Duality}
+    %\include{Quantum Field Theory/Hermitian Perfect Objects and Homotopy-Symmetric Poincare Structures}
+    %\include{Quantum Field Theory/Right-Perfect Morita Theory and Canonical Morita Duality}
+    %\include{Quantum Field Theory/Global Dagger}
+
+    \printbibliography
+\end{document}

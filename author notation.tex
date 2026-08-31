@@ -1,0 +1,1556 @@
+\chapter*{Canonical Notation Register}
+\markboth{Canonical Notation Register}{Canonical Notation Register}
+
+\begingroup
+
+\small
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\setlength{\tabcolsep}{1.5pt}
+\renewcommand{\arraystretch}{1.10}
+
+\newcommand{\CanonicalRef}[1]{%
+  \hyperref[#1]{\ref*{#1}, p.~\pageref*{#1}}%
+}
+
+\newcommand{\CanonicalEntry}[6]{%
+  #1 & #2 & #3 & #4 & #5 & \CanonicalRef{#6}\\
+}
+
+\newcommand{\CanonicalLaw}[3]{%
+  #1 & #2 & \CanonicalRef{#3}\\
+}
+
+\newcommand{\CanonicalOverload}[3]{%
+  #1 & #2 & #3\\
+}
+
+\newcommand{\CanonicalTerm}[4]{%
+  #1 & #2 & #3 & \CanonicalRef{#4}\\
+}
+
+\newcommand{\CanonicalTermOverload}[3]{%
+  #1 & #2 & #3\\
+}
+
+\section*{Register policy}
+
+This file is the author-facing source of truth for persistent notation and technical
+terminology introduced or fixed by the spectral algebraic geometry chapter.  It records
+symbols together with their mathematical type, canonical meaning, scope, publication
+status, and source anchor, and it records terms whose technical meaning must remain stable
+in later chapters.  It is not a prose glossary: ordinary locally bound algebra objects,
+modules, points, covering indices, and diagram variables are omitted unless the chapter
+promotes them to persistent notation or a later interface depends on their exact use.
+
+All categories are $\infty$-categories unless explicitly stated otherwise.  Mapping spaces
+are written $\Map_{\mathcal C}(X,Y)$ and mapping spectra in stable categories are written
+$\map_{\mathcal C}(X,Y)$.  Coherent higher structure produced by functors, adjunctions,
+coCartesian transport, operadic constructions, Kan extensions, limits, and descent
+totalizations is the canonical structure supplied by those constructions; it is not
+supplemented by independently chosen coherence data.
+
+The basic geometric variance is fixed once and for all by
+\[
+  \Aff_{\Sp}=(\CAlg(\Sp)^{\mathrm{cn}})^{\op}.
+\]
+Thus a geometric map $f:Y\to X$ reindexes coefficients contravariantly by $f^*$.
+On affine schemes this is extension of scalars, with restriction of scalars as right
+adjoint.  The same symbols $f^*$ and $f_*$ are retained globally because the affine and
+global constructions are identified by the right-Kan-extension and descent results.
+
+Classical truncation is likewise transported compatibly through the chapter.  On affines
+$\Spec(A)$ it is $\Spec\pi_0(A)$; on prestacks it is restriction $\delta^*$ to discrete affine
+spectral schemes; on spectral schemes it lands in ordinary schemes.  The notation
+$(-)_{\mathrm{cl}}$ and $X_{\mathrm{cl}}$ is deliberately reused for these compatible
+levels.  For an ordinary commutative ring $R$, $\Spec(R)$ denotes the ordinary affine scheme,
+while $\Spec(HR)$ denotes its discrete affine spectral enhancement.
+
+The chapter distinguishes stable exactness from geometric flatness.  Extension of scalars
+is exact as a functor of stable $\infty$-categories for every algebra map, while flatness
+refers to $t$-exactness for the relevant Postnikov structures.  Similarly, ``finite cell''
+denotes an explicit finite-colimit construction, whereas ``locally of finite presentation''
+denotes compactness in the appropriate undercategory.
+
+The notations $\mathbb L_X(\mathcal E)$ and $\mathbf V_X(\mathcal E)$ are intentionally
+distinct.  The former is the relative linear space associated directly to a connective
+quasi-coherent module; the latter is the section total space of a finite locally free
+module and is defined by dualizing first.
+
+References in this register use existing stable labels from the spectral algebraic geometry
+chapter.  No cross-reference label is invented only inside a notation file.
+
+In the \textbf{Public} column, ``yes'' means that the canonical symbol is eligible for
+projection to the publication-facing List of Notation.  The public list is a lean navigation
+index and may merge tightly coupled entries or append a registered defining equation, but
+every head notation item displayed there is backed by a ``yes'' entry in this register.
+
+% ============================================================================
+% I. Canonical notation
+% ============================================================================
+
+\section*{Canonical notation}
+
+\begin{longtable}{
+@{}
+>{\raggedright\arraybackslash}p{0.18\textwidth}
+>{\raggedright\arraybackslash}p{0.18\textwidth}
+>{\raggedright\arraybackslash}p{0.24\textwidth}
+>{\raggedright\arraybackslash}p{0.16\textwidth}
+>{\centering\arraybackslash}p{0.09\textwidth}
+>{\raggedleft\arraybackslash}p{0.07\textwidth}
+@{}
+}
+
+\toprule
+\textbf{Notation} & \textbf{Type / signature} & \textbf{Canonical meaning}
+& \textbf{Scope} & \textbf{Public} & \textbf{Ref.}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Notation} & \textbf{Type / signature} & \textbf{Canonical meaning}
+& \textbf{Scope} & \textbf{Public} & \textbf{Ref.}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+
+\CanonicalEntry
+{\(\Map_{\mathcal C}(X,Y)\)}
+{space}
+{mapping space in an \(\infty\)-category \(\mathcal C\)}
+{global categorical convention}
+{yes}
+{conv:spectral-infinity-categorical}
+
+\CanonicalEntry
+{\(\map_{\mathcal C}(X,Y)\)}
+{spectrum}
+{mapping spectrum in a stable \(\infty\)-category \(\mathcal C\)}
+{global categorical convention}
+{yes}
+{conv:spectral-infinity-categorical}
+
+\CanonicalEntry
+{\(\simeq\)}
+{relation / arrow decoration}
+{equivalence in an \(\infty\)-category}
+{global categorical convention}
+{no}
+{conv:spectral-infinity-categorical}
+
+\CanonicalEntry
+{\(\mathbb U\subset\mathbb V\)}
+{Grothendieck universes}
+{small-data and ambient-size universes used throughout the chapter}
+{size convention}
+{no}
+{conv:size-spectral-ag}
+
+\CanonicalEntry
+{\(\Sh_\tau(\mathcal C)\)}
+{\(\infty\)-category}
+{\(\tau\)-sheaves of spaces, not hypercompleted unless stated}
+{sheaf convention}
+{no}
+{conv:spectral-sheaves-hyperdescent}
+
+\CanonicalEntry
+{\(\Sh_\tau(\mathcal C)^\wedge\)}
+{hypercomplete \(\infty\)-topos}
+{hypercompletion of the \(\tau\)-sheaf \(\infty\)-topos}
+{sheaf convention}
+{no}
+{conv:spectral-sheaves-hyperdescent}
+
+\CanonicalEntry
+{\(\CAlg(\Cat_\infty)\)}
+{\(\infty\)-category}
+{symmetric monoidal \(\infty\)-categories for the Cartesian monoidal structure on \(\Cat_\infty\)}
+{monoidal-category convention}
+{no}
+{conv:spectral-monoidal-structures-on-categories}
+
+\CanonicalEntry
+{\(\CAlg(\Pr^L_{\mathrm{st}})\)}
+{\(\infty\)-category}
+{presentable stable symmetric monoidal \(\infty\)-categories and colimit-preserving strong symmetric monoidal functors}
+{monoidal-category convention}
+{yes}
+{conv:spectral-monoidal-structures-on-categories}
+
+\CanonicalEntry
+{\(\Sp\)}
+{presentable stable \(\infty\)-category}
+{category of spectra}
+{spectral coefficients}
+{yes}
+{prop:spectra-presentably-stable-monoidal}
+
+\CanonicalEntry
+{\(\Sp^\otimes\)}
+{object of \(\CAlg(\Pr^L_{\mathrm{st}})\)}
+{canonical symmetric monoidal category of spectra}
+{spectral coefficients}
+{yes}
+{prop:spectra-presentably-stable-monoidal}
+
+\CanonicalEntry
+{\(\mathbb S\)}
+{spectrum}
+{sphere spectrum, the tensor unit of \(\Sp^\otimes\)}
+{spectral coefficients}
+{yes}
+{prop:spectra-presentably-stable-monoidal}
+
+\CanonicalEntry
+{\(\HHom_{\Sp}(X,-)\)}
+{\(\Sp\to\Sp\)}
+{right adjoint to \(-\otimes X\)}
+{closed spectral monoidal structure}
+{yes}
+{prop:spectra-closedness}
+
+\CanonicalEntry
+{\(\Sp_{\geq n}\)}
+{full subcategory of \(\Sp\)}
+{spectra with \(\pi_i=0\) for \(i<n\)}
+{Postnikov \(t\)-structure}
+{yes}
+{def:postnikov-t-structure}
+
+\CanonicalEntry
+{\(\Sp_{\leq n}\)}
+{full subcategory of \(\Sp\)}
+{spectra with \(\pi_i=0\) for \(i>n\)}
+{Postnikov \(t\)-structure}
+{yes}
+{def:postnikov-t-structure}
+
+\CanonicalEntry
+{\(\tau_{\geq n}^{\Sp}\)}
+{Postnikov truncation functor}
+{connective truncation at degree \(n\)}
+{Postnikov \(t\)-structure on spectra}
+{yes}
+{def:postnikov-t-structure}
+
+\CanonicalEntry
+{\(\tau_{\leq n}^{\Sp}\)}
+{Postnikov truncation functor}
+{coconnective truncation at degree \(n\)}
+{Postnikov \(t\)-structure on spectra}
+{yes}
+{def:postnikov-t-structure}
+
+\CanonicalEntry
+{\(\Sp^\heartsuit\)}
+{abelian category}
+{heart \(\Sp_{\geq0}\cap\Sp_{\leq0}\)}
+{Postnikov \(t\)-structure}
+{yes}
+{def:discrete-spectrum}
+
+\CanonicalEntry
+{\(H_{\mathrm{Ab}}\)}
+{\(\operatorname{Ab}\xrightarrow{\simeq}\Sp^\heartsuit\)}
+{Eilenberg--Mac Lane equivalence from abelian groups to discrete spectra}
+{discrete spectra}
+{yes}
+{prop:eilenberg-mac-lane-heart}
+
+\CanonicalEntry
+{\(H_{\mathrm{CRing}}\)}
+{\(\operatorname{CRing}\hookrightarrow\CAlg(\Sp)^{\mathrm{cn}}\)}
+{Eilenberg--Mac Lane embedding of ordinary commutative rings as discrete connective commutative ring spectra}
+{discrete spectral algebras}
+{yes}
+{prop:discrete-commutative-ring-spectra}
+
+\CanonicalEntry
+{\(\Comm^\otimes\)}
+{\(\infty\)-operad}
+{commutative \(\infty\)-operad}
+{commutative spectral algebra}
+{no}
+{def:commutative-ring-spectrum}
+
+\CanonicalEntry
+{\(\operatorname{Env}(\Comm)^\otimes\)}
+{symmetric monoidal envelope}
+{symmetric monoidal envelope of the commutative \(\infty\)-operad}
+{commutative spectral algebra}
+{no}
+{rem:spectral-commutative-envelope}
+
+\CanonicalEntry
+{\(\CAlg(\Sp)\)}
+{\(\infty\)-category}
+{commutative ring spectra / \(\EE_\infty\)-rings}
+{commutative spectral algebra}
+{yes}
+{def:commutative-ring-spectrum}
+
+\CanonicalEntry
+{\(\operatorname{oblv}_{\CAlg}\)}
+{\(\CAlg(\Sp)\to\Sp\)}
+{forgetful functor from commutative ring spectra to spectra}
+{commutative spectral algebra}
+{no}
+{prop:calg-spectra-presentable}
+
+\CanonicalEntry
+{\(\operatorname{Sym}\)}
+{\(\Sp\to\CAlg(\Sp)\)}
+{free commutative ring-spectrum functor, left adjoint to \(\operatorname{oblv}_{\CAlg}\)}
+{commutative spectral algebra}
+{yes}
+{def:free-commutative-spectral-algebra}
+
+\CanonicalEntry
+{\(\CAlg(\Sp)^{\mathrm{cn}}\)}
+{full subcategory of \(\CAlg(\Sp)\)}
+{connective commutative ring spectra}
+{connective spectral algebra}
+{yes}
+{def:connective-e-infinity-ring}
+
+\CanonicalEntry
+{\(\iota\)}
+{\(\CAlg(\Sp)^{\mathrm{cn}}\hookrightarrow\CAlg(\Sp)\)}
+{inclusion of connective commutative ring spectra}
+{connective spectral algebra}
+{no}
+{prop:connective-calg-presentable}
+
+\CanonicalEntry
+{\(\tau_{\geq0}^{\CAlg}\)}
+{\(\CAlg(\Sp)\to\CAlg(\Sp)^{\mathrm{cn}}\)}
+{connective-cover right adjoint to \(\iota\)}
+{connective spectral algebra}
+{yes}
+{prop:connective-calg-presentable}
+
+\CanonicalEntry
+{\(\pi_0\)}
+{\(\CAlg(\Sp)^{\mathrm{cn}}\to\operatorname{CRing}\)}
+{degree-zero homotopy / classical truncation on connective commutative ring spectra}
+{classical comparison}
+{yes}
+{prop:pi-zero-h-adjunction}
+
+\CanonicalEntry
+{\(\Aff_{\Sp}\)}
+{\((\CAlg(\Sp)^{\mathrm{cn}})^{\op}\)}
+{\(\infty\)-category of affine spectral schemes}
+{affine spectral geometry}
+{yes}
+{def:affine-spectral-scheme}
+
+\CanonicalEntry
+{\(\Spec(A)\)}
+{object of \(\Aff_{\Sp}\)}
+{affine spectral scheme represented by a connective commutative ring spectrum \(A\)}
+{affine spectral geometry}
+{yes}
+{def:affine-spectral-scheme}
+
+\CanonicalEntry
+{\((-)_{\mathrm{cl}}\)}
+{affine / prestack / spectral-scheme truncation functor}
+{classical truncation, compatible across the three levels constructed in the chapter}
+{classical comparison}
+{yes}
+{thm:global-classical-truncation}
+
+\CanonicalEntry
+{\(X_{\mathrm{cl}}\)}
+{ordinary affine scheme, classical prestack, or ordinary scheme}
+{classical truncation of the spectral object \(X\)}
+{classical comparison}
+{yes}
+{thm:global-classical-truncation}
+
+\CanonicalEntry
+{\(|X|\)}
+{topological space}
+{underlying space of a spectral scheme, defined as \(|X_{\mathrm{cl}}|\)}
+{spectral schemes}
+{yes}
+{def:underlying-space-spectral-scheme}
+
+\CanonicalEntry
+{\(\Mod_A\)}
+{presentable stable symmetric monoidal \(\infty\)-category}
+{category of \(A\)-module spectra}
+{modules}
+{yes}
+{def:module-spectrum-over-a}
+
+\CanonicalEntry
+{\(-\otimes_A-\)}
+{\(\Mod_A\times\Mod_A\to\Mod_A\)}
+{relative tensor product of \(A\)-modules}
+{modules}
+{yes}
+{con:spectral-relative-tensor-product}
+
+\CanonicalEntry
+{\(\HHom_A(M,-)\)}
+{\(\Mod_A\to\Mod_A\)}
+{right adjoint to \(-\otimes_A M\)}
+{modules}
+{yes}
+{prop:module-spectra-closedness}
+
+\CanonicalEntry
+{\(f^*\)}
+{\(\Mod_A\to\Mod_B\), for \(f:A\to B\)}
+{extension of scalars \(-\otimes_A B\); globally, quasi-coherent pullback}
+{base change / reindexing}
+{yes}
+{def:spectral-extension-restriction-scalars}
+
+\CanonicalEntry
+{\(f_*\)}
+{\(\Mod_B\to\Mod_A\), for \(f:A\to B\)}
+{restriction of scalars; globally, right adjoint quasi-coherent direct image}
+{base change / reindexing}
+{yes}
+{def:spectral-extension-restriction-scalars}
+
+\CanonicalEntry
+{\(\mathbf{Mod}_{\Sp}\)}
+{\(\CAlg(\Sp)\to\CAlg(\Pr^L_{\mathrm{st}})\)}
+{operadic module-category functor, with transition functors extension of scalars}
+{indexed coefficients}
+{yes}
+{prop:spectral-module-functoriality}
+
+\CanonicalEntry
+{\(\CAlg(\Mod_A)\)}
+{\(\infty\)-category}
+{commutative algebra objects in \(A\)-modules, canonically \(\CAlg(\Sp)_{A/}\)}
+{relative spectral algebra}
+{yes}
+{prop:relative-commutative-spectral-algebras}
+
+\CanonicalEntry
+{\((\Mod_A)_{\geq0}\)}
+{full subcategory of \(\Mod_A\)}
+{\(A\)-modules with connective underlying spectrum}
+{module Postnikov structure}
+{yes}
+{def:module-postnikov-t-structure}
+
+\CanonicalEntry
+{\((\Mod_A)_{\leq0}\)}
+{full subcategory of \(\Mod_A\)}
+{\(A\)-modules with coconnective underlying spectrum}
+{module Postnikov structure}
+{yes}
+{def:module-postnikov-t-structure}
+
+\CanonicalEntry
+{\(\Mod_A^\heartsuit\)}
+{abelian category}
+{heart of the module Postnikov \(t\)-structure, naturally \(\operatorname{Mod}_{\pi_0(A)}\)}
+{module Postnikov structure}
+{yes}
+{prop:heart-module-category}
+
+\CanonicalEntry
+{\(\operatorname{Sym}_A\)}
+{\(\Mod_A\to\CAlg(\Mod_A)\)}
+{free commutative \(A\)-algebra functor}
+{relative spectral algebra}
+{yes}
+{def:finite-cell-spectral-algebra}
+
+\CanonicalEntry
+{\(\operatorname{Res}_A^B\)}
+{\(\Mod_B\to\Mod_A\)}
+{restriction of scalars, used in the affine direct-image formula}
+{affine direct image}
+{no}
+{prop:affine-direct-image-restriction-scalars}
+
+\CanonicalEntry
+{\(\PSh(\Aff_{\Sp})\)}
+{\(\Fun((\Aff_{\Sp})^{\op},\mathcal S)\)}
+{\(\infty\)-category of spectral prestacks}
+{prestack geometry}
+{yes}
+{def:spectral-prestacks-affine-stage}
+
+\CanonicalEntry
+{\(h_A\)}
+{\((\Aff_{\Sp})^{\op}\to\mathcal S\)}
+{functor of points of \(\Spec(A)\)}
+{prestack geometry}
+{yes}
+{def:spectral-functor-of-points}
+
+\CanonicalEntry
+{\(h\)}
+{\(\Aff_{\Sp}\hookrightarrow\PSh(\Aff_{\Sp})\)}
+{spectral Yoneda embedding}
+{prestack geometry}
+{yes}
+{prop:spectral-yoneda-embedding}
+
+\CanonicalEntry
+{\(\delta\)}
+{\(\operatorname{AffSch}\hookrightarrow\Aff_{\Sp}\)}
+{fully faithful discrete affine enhancement \(\Spec(R)\mapsto\Spec(HR)\)}
+{classical comparison of prestacks}
+{yes}
+{def:classical-truncation-prestack}
+
+\CanonicalEntry
+{\(\delta_!\)}
+{\(\PSh(\operatorname{AffSch})\to\PSh(\Aff_{\Sp})\)}
+{left Kan extension along \(\delta^{\op}\)}
+{classical comparison of prestacks}
+{yes}
+{def:classical-truncation-prestack}
+
+\CanonicalEntry
+{\(\delta^*\)}
+{\(\PSh(\Aff_{\Sp})\to\PSh(\operatorname{AffSch})\)}
+{restriction to discrete affine spectral schemes; prestack classical truncation}
+{classical comparison of prestacks}
+{yes}
+{def:classical-truncation-prestack}
+
+\CanonicalEntry
+{\(\QCoh_{\mathrm{aff}}\)}
+{\((\Aff_{\Sp})^{\op}\to\CAlg(\Pr^L_{\mathrm{st}})\)}
+{affine quasi-coherent coefficient system, \(\Spec(A)\mapsto\Mod_A\)}
+{quasi-coherent coefficients}
+{yes}
+{prop:affine-qcoh-coefficient-system}
+
+\CanonicalEntry
+{\(\operatorname{AffPt}(X)\)}
+{\(\infty\)-category}
+{category of affine points \(\Spec(A)\to X\) of a spectral prestack}
+{quasi-coherent coefficients}
+{yes}
+{def:affine-points-prestack}
+
+\CanonicalEntry
+{\(\QCoh(X)\)}
+{object of \(\CAlg(\Pr^L_{\mathrm{st}})\)}
+{quasi-coherent coefficient category, the affine right Kan extension of \(\QCoh_{\mathrm{aff}}\)}
+{quasi-coherent coefficients}
+{yes}
+{def:qcoh-spectral-prestack}
+
+\CanonicalEntry
+{\(\mathcal O_X\)}
+{object of \(\QCoh(X)\)}
+{tensor unit, called the structure sheaf}
+{quasi-coherent coefficients}
+{yes}
+{def:structure-sheaf-prestack}
+
+\CanonicalEntry
+{\(\Gamma(X,\mathcal F)\)}
+{spectrum}
+{global sections \(\map_{\QCoh(X)}(\mathcal O_X,\mathcal F)\)}
+{quasi-coherent coefficients}
+{yes}
+{def:global-sections-qcoh}
+
+\CanonicalEntry
+{\(A[f^{-1}]\)}
+{commutative \(A\)-algebra}
+{spectral localization initial among \(A\)-algebras in which \(f\in\pi_0(A)\) is invertible}
+{principal opens}
+{yes}
+{con:spectral-localization}
+
+\CanonicalEntry
+{\(D_A^{\mathrm{sp}}(f)\)}
+{affine spectral scheme over \(\Spec(A)\)}
+{principal spectral open \(\Spec(A[f^{-1}])\)}
+{principal opens}
+{yes}
+{prop:principal-spectral-open}
+
+\CanonicalEntry
+{\(\tau_{\mathrm{Zar}}\)}
+{Grothendieck topology on \(\Aff_{\Sp}\)}
+{spectral Zariski topology generated by affine spectral Zariski covers}
+{Zariski geometry}
+{yes}
+{def:spectral-zariski-topology}
+
+\CanonicalEntry
+{\(\operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{\(\Sh_{\tau_{\mathrm{Zar}}}(\Aff_{\Sp})\)}
+{\(\infty\)-category of spectral Zariski stacks}
+{global spectral geometry}
+{yes}
+{def:spectral-zariski-stack}
+
+\CanonicalEntry
+{\(a^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{\(\PSh(\Aff_{\Sp})\to\operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{spectral Zariski sheafification}
+{global spectral geometry}
+{yes}
+{con:spectral-zariski-sheafification}
+
+\CanonicalEntry
+{\(\operatorname{Sch}^{\mathrm{sp}}\)}
+{full subcategory of \(\operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{spectral schemes, i.e. spectral Zariski stacks with affine open atlases}
+{global spectral geometry}
+{yes}
+{def:spectral-scheme}
+
+\CanonicalEntry
+{\(\operatorname{Sch}^{\mathrm{sp}}_{\mathrm{str}}\)}
+{\(\infty\)-category}
+{connective \(0\)-localic structured spectral schemes used in the comparison theorem}
+{model comparison}
+{no}
+{thm:spectral-scheme-model-comparison}
+
+\CanonicalEntry
+{\(\Phi\)}
+{\(\operatorname{Sch}^{\mathrm{sp}}_{\mathrm{str}}\to\operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{functor-of-points comparison functor}
+{model comparison}
+{no}
+{thm:spectral-scheme-model-comparison}
+
+\CanonicalEntry
+{\(d\)}
+{\(\Sh_{\mathrm{Zar}}(\operatorname{AffSch})\to\operatorname{Stk}^{\mathrm{sp}}_{\mathrm{Zar}}\)}
+{discrete extension \(a^{\mathrm{sp}}_{\mathrm{Zar}}\circ\delta_!\), left adjoint to \(\delta^*\)}
+{classical comparison}
+{yes}
+{con:discrete-extension-zariski-sheaves}
+
+\CanonicalEntry
+{\((-)^{\mathrm{disc}}\)}
+{\(\operatorname{Sch}\hookrightarrow\operatorname{Sch}^{\mathrm{sp}}\)}
+{fully faithful discrete spectral enhancement of ordinary schemes}
+{classical comparison}
+{yes}
+{thm:ordinary-schemes-discrete-enhancement}
+
+\CanonicalEntry
+{\(i_X\)}
+{\(X_{\mathrm{cl}}^{\mathrm{disc}}\to X\)}
+{natural classical comparison closed immersion from the discrete enhancement of the classical truncation}
+{classical comparison}
+{yes}
+{cor:classical-comparison-morphism}
+
+\CanonicalEntry
+{\(\operatorname{AffOp}(X)\)}
+{\(\infty\)-category}
+{affine open spectral subschemes of \(X\)}
+{global quasi-coherent coefficients}
+{yes}
+{lem:qcoh-affine-open-basis}
+
+\CanonicalEntry
+{\(\QCoh(X)_{\geq0}\)}
+{full subcategory of \(\QCoh(X)\)}
+{quasi-coherent modules connective on every affine open}
+{global Postnikov structure}
+{yes}
+{thm:qcoh-spectral-scheme-t-structure}
+
+\CanonicalEntry
+{\(\QCoh(X)_{\leq0}\)}
+{full subcategory of \(\QCoh(X)\)}
+{quasi-coherent modules coconnective on every affine open}
+{global Postnikov structure}
+{yes}
+{thm:qcoh-spectral-scheme-t-structure}
+
+\CanonicalEntry
+{\(\QCoh(X)^\heartsuit\)}
+{abelian category}
+{heart of the global Postnikov \(t\)-structure}
+{global Postnikov structure}
+{yes}
+{thm:qcoh-heart-classical-truncation}
+
+\CanonicalEntry
+{\(\operatorname{QCAlg}(X)\)}
+{\(\CAlg(\QCoh(X))\)}
+{quasi-coherent commutative algebra objects on \(X\)}
+{relative affine geometry}
+{yes}
+{def:quasi-coherent-commutative-algebra}
+
+\CanonicalEntry
+{\(\operatorname{oblv}^{\mathrm{alg}}_X\)}
+{\(\operatorname{QCAlg}(X)\to\QCoh(X)\)}
+{forgetful functor from quasi-coherent commutative algebras}
+{relative affine geometry}
+{no}
+{def:quasi-coherent-commutative-algebra}
+
+\CanonicalEntry
+{\(\operatorname{QCAlg}(X)^{\mathrm{cn}}\)}
+{full subcategory of \(\operatorname{QCAlg}(X)\)}
+{algebra objects with connective underlying quasi-coherent module}
+{relative affine geometry}
+{yes}
+{def:quasi-coherent-commutative-algebra}
+
+\CanonicalEntry
+{\(\Spec_X\)}
+{\(\operatorname{QCAlg}(X)^{\mathrm{cn},\op}\to\operatorname{Sch}^{\mathrm{sp}}_{/X}\)}
+{relative spectrum functor classifying affine morphisms over \(X\)}
+{relative affine geometry}
+{yes}
+{thm:relative-spectrum-construction}
+
+\CanonicalEntry
+{\(X\setminus Z\)}
+{open spectral subscheme of \(X\)}
+{open complement of a closed immersion \(Z\to X\)}
+{closed geometry}
+{yes}
+{thm:complement-closed-immersion}
+
+\CanonicalEntry
+{\(\operatorname{Sym}_{\mathcal O_X}\)}
+{\(\QCoh(X)\to\operatorname{QCAlg}(X)\)}
+{relative free commutative algebra functor}
+{linear geometry}
+{yes}
+{prop:relative-free-commutative-algebra}
+
+\CanonicalEntry
+{\(\mathbb L_X(\mathcal E)\)}
+{spectral scheme over \(X\)}
+{relative linear space \(\Spec_X\operatorname{Sym}_{\mathcal O_X}(\mathcal E)\)}
+{linear geometry}
+{yes}
+{def:linear-spectral-space}
+
+\CanonicalEntry
+{\(\mathbf V_X(\mathcal E)\)}
+{spectral scheme over \(X\)}
+{section total space \(\mathbb L_X(\mathcal E^\vee)\) for finite locally free \(\mathcal E\)}
+{linear geometry}
+{yes}
+{def:vector-bundle-dual-convention}
+
+\CanonicalEntry
+{\(\mathbb A_X^n\)}
+{spectral scheme over \(X\)}
+{brave new affine \(n\)-space \(\mathbb L_X(\mathcal O_X^{\oplus n})\)}
+{distinguished affine objects}
+{yes}
+{def:brave-new-affine-space}
+
+\CanonicalEntry
+{\(\mathbb A_X^1\)}
+{spectral scheme over \(X\)}
+{brave new affine line}
+{distinguished affine objects}
+{yes}
+{def:brave-new-affine-space}
+
+\CanonicalEntry
+{\(0,1\)}
+{\(X\rightrightarrows\mathbb A_X^1\)}
+{zero and unit sections induced by the zero and identity endomorphisms of \(\mathcal O_X\)}
+{distinguished affine objects}
+{yes}
+{con:zero-unit-sections-affine-line}
+
+\CanonicalEntry
+{\(\mathbb G_{m,X}\)}
+{commutative group object over \(X\)}
+{open complement \(\mathbb A_X^1\setminus0(X)\)}
+{distinguished affine objects}
+{yes}
+{def:spectral-multiplicative-group}
+
+\CanonicalEntry
+{\(A\{t\}\)}
+{commutative \(A\)-algebra}
+{brave new polynomial algebra \(\operatorname{Sym}_A(A)\)}
+{affine line coordinates}
+{yes}
+{prop:spectral-multiplicative-group-structure}
+
+\CanonicalEntry
+{\(R\{t\}\)}
+{commutative \(HR\)-algebra}
+{\(\operatorname{Sym}_{HR}(HR)\), used for the homotopy calculation over an ordinary ring \(R\)}
+{affine line coordinates}
+{yes}
+{prop:affine-line-genuinely-spectral}
+
+\end{longtable}
+
+% ============================================================================
+% II. Canonical terminology
+% ============================================================================
+
+\section*{Canonical terminology}
+
+This section controls technical terms whose meanings must remain stable across later
+chapters.  It is intentionally definitional rather than encyclopedic.
+
+\begin{longtable}{
+@{}
+>{\raggedright\arraybackslash}p{0.24\textwidth}
+>{\raggedright\arraybackslash}p{0.50\textwidth}
+>{\raggedright\arraybackslash}p{0.14\textwidth}
+>{\raggedleft\arraybackslash}p{0.08\textwidth}
+@{}
+}
+
+\toprule
+\textbf{Term} & \textbf{Canonical use} & \textbf{Scope} & \textbf{Ref.}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Term} & \textbf{Canonical use} & \textbf{Scope} & \textbf{Ref.}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+
+\CanonicalTerm
+{spectral prestack}
+{a space-valued presheaf on \(\Aff_{\Sp}\)}
+{prestack geometry}
+{def:spectral-prestacks-affine-stage}
+
+\CanonicalTerm
+{affine spectral scheme}
+{an object \(\Spec(A)\) of \(\Aff_{\Sp}=(\CAlg(\Sp)^{\mathrm{cn}})^{\op}\)}
+{affine spectral geometry}
+{def:affine-spectral-scheme}
+
+\CanonicalTerm
+{commutative ring spectrum / \(\EE_\infty\)-ring}
+{a commutative algebra object in spectra}
+{commutative spectral algebra}
+{def:commutative-ring-spectrum}
+
+\CanonicalTerm
+{connective \(\EE_\infty\)-ring}
+{a commutative ring spectrum whose underlying spectrum is connective}
+{connective spectral algebra}
+{def:connective-e-infinity-ring}
+
+\CanonicalTerm
+{discrete spectrum}
+{an object of \(\Sp_{\geq0}\cap\Sp_{\leq0}\)}
+{Postnikov theory}
+{def:discrete-spectrum}
+
+\CanonicalTerm
+{module spectrum}
+{an object of \(\Mod_A\) for a connective commutative ring spectrum \(A\)}
+{modules}
+{def:module-spectrum-over-a}
+
+\CanonicalTerm
+{flat module spectrum}
+{a connective \(A\)-module \(M\) for which \(-\otimes_A M\) is \(t\)-exact}
+{geometric exactness}
+{def:flat-module-spectrum}
+
+\CanonicalTerm
+{flat spectral algebra morphism}
+{a map \(A\to B\) for which \(B\) is flat as an \(A\)-module}
+{geometric exactness}
+{def:flat-spectral-algebra-morphism}
+
+\CanonicalTerm
+{locally of finite presentation}
+{for \(A\to B\), compactness of \(B\) in \(\CAlg(\Sp)_{A/}\)}
+{finiteness}
+{def:finitely-presented-spectral-algebra}
+
+\CanonicalTerm
+{finite cell algebra}
+{a connective commutative \(A\)-algebra in the finite-colimit closure of the finitely generated free commutative \(A\)-algebras}
+{finiteness}
+{def:finite-cell-spectral-algebra}
+
+\CanonicalTerm
+{perfect module}
+{an \(A\)-module in the thick subcategory generated by the tensor unit \(A\)}
+{module finiteness}
+{def:perfect-module-spectrum}
+
+\CanonicalTerm
+{Tor-amplitude in \([a,b]\)}
+{the condition that tensoring with every discrete \(A\)-module has homotopy only in degrees \(a,\ldots,b\)}
+{module finiteness}
+{def:tor-amplitude}
+
+\CanonicalTerm
+{finite projective module}
+{a retract of a finite free \(A\)-module}
+{module finiteness}
+{def:finite-projective-module-spectrum}
+
+\CanonicalTerm
+{objectwise connective quasi-coherent module}
+{a quasi-coherent module whose pullback to every affine point is connective}
+{prestack coefficients}
+{def:objectwise-connective-qcoh}
+
+\CanonicalTerm
+{affine open immersion}
+{an affine map represented by a flat, locally finitely presented algebra map with idempotent multiplication \(B\otimes_A B\simeq B\)}
+{affine Zariski geometry}
+{def:affine-open-immersion-spectral}
+
+\CanonicalTerm
+{affine spectral Zariski covering family}
+{a family of affine open immersions whose classical opens cover \(\Spec\pi_0(A)\)}
+{affine Zariski geometry}
+{def:affine-zariski-cover}
+
+\CanonicalTerm
+{spectral Zariski topology}
+{the Grothendieck topology on \(\Aff_{\Sp}\) generated by affine spectral Zariski covers}
+{Zariski geometry}
+{def:spectral-zariski-topology}
+
+\CanonicalTerm
+{descendable morphism}
+{a map \(A\to B\) for which \(B\) generates \(\Mod_A\) as a thick tensor ideal}
+{descent}
+{def:spectral-descendable-morphism}
+
+\CanonicalTerm
+{spectral Zariski stack}
+{a \(\tau_{\mathrm{Zar}}\)-sheaf of spaces on \(\Aff_{\Sp}\)}
+{global spectral geometry}
+{def:spectral-zariski-stack}
+
+\CanonicalTerm
+{open immersion}
+{a representable morphism of spectral Zariski stacks whose affine base changes are covered by affine spectral open immersions}
+{global spectral geometry}
+{def:open-immersion-spectral-stacks}
+
+\CanonicalTerm
+{spectral scheme}
+{a spectral Zariski stack admitting an effective epimorphic affine open atlas}
+{global spectral geometry}
+{def:spectral-scheme}
+
+\CanonicalTerm
+{classical truncation}
+{restriction to discrete affine spectral schemes, shown on spectral schemes to land in ordinary schemes}
+{classical comparison}
+{thm:global-classical-truncation}
+
+\CanonicalTerm
+{discrete enhancement}
+{the fully faithful spectral enhancement of an ordinary scheme obtained from Eilenberg--Mac Lane affines and Zariski gluing}
+{classical comparison}
+{thm:ordinary-schemes-discrete-enhancement}
+
+\CanonicalTerm
+{quasi-compact spectral scheme}
+{a spectral scheme admitting a finite affine open cover}
+{global finiteness}
+{def:quasi-compact-spectral-scheme}
+
+\CanonicalTerm
+{quasi-separated morphism}
+{a morphism whose diagonal is quasi-compact}
+{global finiteness}
+{def:quasi-separated-spectral-scheme}
+
+\CanonicalTerm
+{qcqs spectral scheme}
+{a spectral scheme that is both quasi-compact and quasi-separated}
+{global finiteness}
+{def:quasi-separated-spectral-scheme}
+
+\CanonicalTerm
+{flat morphism of spectral schemes}
+{a morphism whose affine-local coordinate algebra maps are flat}
+{global geometric exactness}
+{def:flat-spectral-scheme-morphism}
+
+\CanonicalTerm
+{flat quasi-coherent module}
+{a quasi-coherent module whose restriction to every affine open is flat}
+{global geometric exactness}
+{def:flat-spectral-scheme-morphism}
+
+\CanonicalTerm
+{affine morphism of spectral schemes}
+{a morphism whose pullback over every affine open of the target is affine}
+{relative affine geometry}
+{def:affine-morphism-spectral-schemes}
+
+\CanonicalTerm
+{quasi-coherent commutative algebra}
+{a commutative algebra object of \(\QCoh(X)\)}
+{relative affine geometry}
+{def:quasi-coherent-commutative-algebra}
+
+\CanonicalTerm
+{relative spectrum}
+{the spectral scheme \(\Spec_X(\mathcal A)\) representing algebra maps \(f^*\mathcal A\to\mathcal O_Y\)}
+{relative affine geometry}
+{thm:relative-spectrum-construction}
+
+\CanonicalTerm
+{affine closed immersion}
+{an affine spectral map \(\Spec(B)\to\Spec(A)\) for which \(\pi_0(A)\to\pi_0(B)\) is surjective}
+{closed geometry}
+{def:affine-closed-immersion-spectral}
+
+\CanonicalTerm
+{closed immersion}
+{a morphism of spectral schemes whose pullback to every affine open is an affine closed immersion}
+{closed geometry}
+{def:closed-immersion-spectral-schemes}
+
+\CanonicalTerm
+{nil-immersion}
+{a closed immersion inducing an equivalence on reduced classical schemes}
+{closed geometry}
+{def:nil-immersion-spectral}
+
+\CanonicalTerm
+{open complement}
+{the open \(X\setminus Z\) characterized by vanishing of the base-changed closed subscheme}
+{closed geometry}
+{thm:complement-closed-immersion}
+
+\CanonicalTerm
+{locally free module of rank \(n\)}
+{an \(A\)-module that becomes \(A_i^{\oplus n}\) on a spectral Zariski cover}
+{linear geometry}
+{def:locally-free-affine-module}
+
+\CanonicalTerm
+{vector bundle of rank \(n\)}
+{a quasi-coherent module locally isomorphic to \(\mathcal O^{\oplus n}\)}
+{linear geometry}
+{def:locally-free-qcoh}
+
+\CanonicalTerm
+{relative linear space}
+{\(\mathbb L_X(\mathcal E)=\Spec_X\operatorname{Sym}_{\mathcal O_X}(\mathcal E)\) for connective \(\mathcal E\)}
+{linear geometry}
+{def:linear-spectral-space}
+
+\CanonicalTerm
+{section total space}
+{\(\mathbf V_X(\mathcal E)=\mathbb L_X(\mathcal E^\vee)\) for finite locally free \(\mathcal E\), representing sections of \(\mathcal E\)}
+{linear geometry}
+{def:vector-bundle-dual-convention}
+
+\CanonicalTerm
+{brave new affine space}
+{\(\mathbb A_X^n=\mathbb L_X(\mathcal O_X^{\oplus n})\)}
+{distinguished affine objects}
+{def:brave-new-affine-space}
+
+\CanonicalTerm
+{brave new affine line}
+{the case \(\mathbb A_X^1\) of brave new affine space}
+{distinguished affine objects}
+{def:brave-new-affine-space}
+
+\CanonicalTerm
+{spectral multiplicative group}
+{the open complement \(\mathbb G_{m,X}=\mathbb A_X^1\setminus0(X)\)}
+{distinguished affine objects}
+{def:spectral-multiplicative-group}
+
+\end{longtable}
+
+% ============================================================================
+% III. Canonical identities and status checks
+% ============================================================================
+
+\section*{Canonical identities and status checks}
+
+The entries in this section are not additional meanings for the symbols above.  They are
+equations, comparison maps, and status facts that later chapters may use to audit whether
+the registered notation is being transported correctly.
+
+\begin{longtable}{
+@{}
+>{\raggedright\arraybackslash}p{0.22\textwidth}
+>{\raggedright\arraybackslash}p{0.61\textwidth}
+>{\raggedleft\arraybackslash}p{0.13\textwidth}
+@{}
+}
+
+\toprule
+\textbf{Check} & \textbf{Canonical identity or status} & \textbf{Ref.}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Check} & \textbf{Canonical identity or status} & \textbf{Ref.}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+
+\CanonicalLaw
+{Infinity-categorical convention}
+{All categories are \(\infty\)-categories unless explicitly stated; \(\Map\) denotes mapping spaces and \(\map\) mapping spectra in stable categories.}
+{conv:spectral-infinity-categorical}
+
+\CanonicalLaw
+{Higher coherence}
+{Functorial, adjoint, coCartesian, operadic, Kan-extension, limit, and descent constructions carry the coherent higher structure supplied by those constructions; no extra coherence data are imposed.}
+{conv:spectral-higher-coherence}
+
+\CanonicalLaw
+{Sheaf convention}
+{\(\Sh_\tau(\mathcal C)\) means sheaves of spaces without hypercompletion; hypercomplete sheaves are written \(\Sh_\tau(\mathcal C)^\wedge\).}
+{conv:spectral-sheaves-hyperdescent}
+
+\CanonicalLaw
+{Affine variance}
+{\(\Aff_{\Sp}=(\CAlg(\Sp)^{\mathrm{cn}})^{\op}\); hence \(\Map_{\Aff_{\Sp}}(\Spec B,\Spec A)\simeq\Map_{\CAlg(\Sp)}(A,B)\).}
+{prop:affine-spectral-mapping-spaces}
+
+\CanonicalLaw
+{Affine fibre products}
+{\(\Spec(B)\times_{\Spec(A)}\Spec(C)\simeq\Spec(B\otimes_A C)\).}
+{prop:affine-spectral-fibre-products}
+
+\CanonicalLaw
+{Classical truncation adjunction}
+{\(\pi_0\dashv H_{\mathrm{CRing}}\) on connective commutative ring spectra; the unit is \(A\to H\pi_0(A)\).}
+{prop:pi-zero-h-adjunction}
+
+\CanonicalLaw
+{Affine classical truncation}
+{\((\Spec A)_{\mathrm{cl}}\simeq\Spec\pi_0(A)\), and affine classical truncation preserves fibre products.}
+{rem:classical-truncation-affine-left-exact}
+
+\CanonicalLaw
+{Module base change}
+{For \(f:A\to B\), \(f^*=-\otimes_A B\dashv f_*\); \(f^*\) is colimit-preserving and strong symmetric monoidal.}
+{prop:spectral-base-change-monoidal}
+
+\CanonicalLaw
+{Stable exactness versus flatness}
+{Extension of scalars is always exact as a stable functor; geometric flatness is the stronger requirement of \(t\)-exactness.}
+{rem:stable-exactness-not-flatness}
+
+\CanonicalLaw
+{Spectral Lazard criterion}
+{For connective \(M\), flatness is equivalent to ordinary flatness of \(\pi_0(M)\) plus \(\pi_n(M)\cong\pi_n(A)\otimes_{\pi_0(A)}\pi_0(M)\), and also to being a filtered colimit of finite free modules.}
+{thm:spectral-lazard}
+
+\CanonicalLaw
+{Finite-presentation criterion}
+{A connective commutative \(A\)-algebra is locally of finite presentation iff it is a retract of a finite cell \(A\)-algebra.}
+{prop:finite-presentation-compactness-criterion}
+
+\CanonicalLaw
+{Finite projective criterion}
+{Finite projective, perfect of Tor-amplitude \([0,0]\), and perfect-connective-flat are equivalent conditions for an \(A\)-module.}
+{prop:finite-projective-characterization}
+
+\CanonicalLaw
+{Prestack classical truncation}
+{For a spectral prestack \(X\), \(X_{\mathrm{cl}}=\delta^*X\); restriction preserves all limits and sends \(\Spec A\) to \(\Spec\pi_0(A)\).}
+{prop:prestack-classical-truncation}
+
+\CanonicalLaw
+{QCoh right Kan extension}
+{\(\QCoh\) is the right Kan extension of \(\QCoh_{\mathrm{aff}}\) along opposite Yoneda, with \(\QCoh(X)=\varprojlim_{(\Spec A\to X)\in\operatorname{AffPt}(X)^{\op}}\Mod_A\).}
+{thm:qcoh-affine-right-kan-extension}
+
+\CanonicalLaw
+{Affine QCoh recovery}
+{\(\QCoh(\Spec A)\simeq\Mod_A\) symmetrically monoidally.}
+{cor:qcoh-recovery-affines}
+
+\CanonicalLaw
+{QCoh variance on colimits}
+{\(\QCoh(\varinjlim_\alpha X_\alpha)\simeq\varprojlim_\alpha\QCoh(X_\alpha)\).}
+{cor:qcoh-colimits-to-limits}
+
+\CanonicalLaw
+{Principal localization}
+{\(\pi_n(A[f^{-1}])\cong\pi_n(A)[f^{-1}]\); in particular \(A\to A[f^{-1}]\) is flat.}
+{prop:homotopy-groups-localization}
+
+\CanonicalLaw
+{Affine-open recognition}
+{\(\Spec(B)\to\Spec(A)\) is an affine spectral open immersion iff \(A\to B\) is flat and \(\Spec\pi_0(B)\to\Spec\pi_0(A)\) is an ordinary open immersion.}
+{thm:classical-characterization-affine-opens}
+
+\CanonicalLaw
+{Finite principal refinements}
+{Every affine spectral Zariski cover refines to finitely many principal opens \(D_A^{\mathrm{sp}}(f_j)\) with the \(f_j\) generating the unit ideal.}
+{prop:finite-principal-refinement}
+
+\CanonicalLaw
+{Zariski joint conservativity}
+{An affine open family covers iff the pullback functors \(-\otimes_A B_i\) are jointly conservative on \(\Mod_A\).}
+{prop:zariski-cover-joint-conservativity}
+
+\CanonicalLaw
+{Finite-cover descendability}
+{For a finite affine spectral Zariski cover, \(A\to\prod_iB_i\) is descendable.}
+{prop:finite-zariski-covers-descendable}
+
+\CanonicalLaw
+{Amitsur convergence}
+{For descendable \(A\to B\), \(A\simeq\operatorname*{Tot}_{[n]\in\Delta}B^{\otimes_A(n+1)}\).}
+{thm:spectral-amitsur-convergence}
+
+\CanonicalLaw
+{Affine module descent}
+{For descendable \(A\to B\), \(\Mod_A\simeq\operatorname*{Tot}_{[n]\in\Delta}\Mod_{B^{\otimes_A(n+1)}}\).}
+{thm:spectral-affine-module-descent}
+
+\CanonicalLaw
+{Affine algebra descent}
+{For descendable \(A\to B\), commutative \(A\)-algebras satisfy the corresponding Amitsur totalization equivalence.}
+{thm:spectral-affine-algebra-descent}
+
+\CanonicalLaw
+{Zariski subcanonicity}
+{Every representable spectral prestack is a \(\tau_{\mathrm{Zar}}\)-sheaf.}
+{thm:spectral-zariski-subcanonical}
+
+\CanonicalLaw
+{Global finite limits}
+{Spectral schemes are closed under fibre products and therefore admit finite limits computed in spectral Zariski stacks.}
+{cor:spectral-schemes-finite-limits}
+
+\CanonicalLaw
+{Model comparison}
+{The functor of points gives an equivalence from connective \(0\)-localic structured spectral schemes to the spectral schemes defined in this chapter.}
+{thm:spectral-scheme-model-comparison}
+
+\CanonicalLaw
+{Discrete extension adjunction}
+{\(d=a^{\mathrm{sp}}_{\mathrm{Zar}}\circ\delta_!\), \(d\dashv\delta^*\), and \(d(\Spec R)\simeq\Spec(HR)\).}
+{prop:discrete-extension-affine-calculation}
+
+\CanonicalLaw
+{Discrete retraction}
+{For every ordinary scheme \(X\), \((X^{\mathrm{disc}})_{\mathrm{cl}}\simeq X\).}
+{thm:global-classical-truncation}
+
+\CanonicalLaw
+{Classical open control}
+{Open spectral subschemes of \(X\) and open subschemes of \(X_{\mathrm{cl}}\) form equivalent posets.}
+{prop:opens-classical-truncation}
+
+\CanonicalLaw
+{Classical affineness detection}
+{A spectral scheme is affine iff its classical truncation is affine.}
+{thm:affineness-detected-classically}
+
+\CanonicalLaw
+{Classical qcqs detection}
+{Quasi-compactness, quasi-separatedness, and qcqs are detected by classical truncation.}
+{prop:classical-detection-qcqs}
+
+\CanonicalLaw
+{Atlas computation of QCoh}
+{For an affine Zariski atlas \(U\to X\), \(\QCoh(X)\simeq\operatorname*{Tot}_{[n]\in\Delta}\QCoh(U_n)\).}
+{thm:qcoh-atlas-computation}
+
+\CanonicalLaw
+{Affine-open basis for QCoh}
+{\(\QCoh(X)\simeq\varprojlim_{V\in\operatorname{AffOp}(X)^{\op}}\QCoh(V)\).}
+{lem:qcoh-affine-open-basis}
+
+\CanonicalLaw
+{Global Postnikov structure}
+{Connectivity and coconnectivity on all affine opens define a complete accessible \(t\)-structure on \(\QCoh(X)\); arbitrary pullback is right \(t\)-exact and flat pullback is \(t\)-exact.}
+{thm:qcoh-spectral-scheme-t-structure}
+
+\CanonicalLaw
+{Classical heart}
+{\(\QCoh(X)^\heartsuit\simeq\operatorname{QCoh}_{\mathrm{ab}}(X_{\mathrm{cl}})\).}
+{thm:qcoh-heart-classical-truncation}
+
+\CanonicalLaw
+{QCAlg descent}
+{Quasi-coherent commutative algebras and their connective subcategories satisfy Zariski descent.}
+{prop:qcalg-zariski-descent}
+
+\CanonicalLaw
+{Relative-spectrum universal property}
+{\(\Map_X(Y,\Spec_X\mathcal A)\simeq\Map_{\operatorname{QCAlg}(Y)}(f^*\mathcal A,\mathcal O_Y)\).}
+{thm:relative-spectrum-construction}
+
+\CanonicalLaw
+{Relative-spectrum base change}
+{\(\Spec_X(\mathcal A)\times_XY\simeq\Spec_Y(f^*\mathcal A)\).}
+{prop:relative-spectrum-base-change}
+
+\CanonicalLaw
+{Affine-morphism classification}
+{\(\operatorname{QCAlg}(X)^{\mathrm{cn},\op}\simeq(\operatorname{Sch}^{\mathrm{sp}}_{/X})_{\mathrm{aff}}\), with inverse \(p\mapsto p_*\mathcal O_Y\).}
+{thm:classification-affine-morphisms}
+
+\CanonicalLaw
+{Closed-immersion detection}
+{A morphism of spectral schemes is a closed immersion iff its classical truncation is a closed immersion.}
+{prop:closed-immersions-classical-detection}
+
+\CanonicalLaw
+{Classical comparison is closed}
+{\(i_X:X_{\mathrm{cl}}^{\mathrm{disc}}\to X\) is a nil-immersion.}
+{cor:classical-truncation-nil-immersion}
+
+\CanonicalLaw
+{Complement universal property}
+{A map \(T\to X\) factors through \(X\setminus Z\) iff \(T\times_XZ\simeq\varnothing\); classical truncation gives the ordinary open complement.}
+{thm:complement-closed-immersion}
+
+\CanonicalLaw
+{Closed pushouts}
+{Pushouts along two closed immersions exist in spectral schemes, the canonical maps are closed, and the construction is stable under arbitrary base change.}
+{thm:closed-pushouts-spectral-schemes}
+
+\CanonicalLaw
+{Vector bundle criterion}
+{Finite projective, Zariski-locally finite free of finite rank, and perfect-connective-flat are equivalent for \(A\)-modules.}
+{thm:finite-projective-locally-free}
+
+\CanonicalLaw
+{Relative free algebra base change}
+{\(f^*\operatorname{Sym}_{\mathcal O_X}(\mathcal E)\simeq\operatorname{Sym}_{\mathcal O_Y}(f^*\mathcal E)\).}
+{prop:relative-free-commutative-algebra}
+
+\CanonicalLaw
+{Linear-space functor of points}
+{\(\Map_X(T,\mathbb L_X(\mathcal E))\simeq\Map_{\QCoh(T)}(f^*\mathcal E,\mathcal O_T)\).}
+{prop:linear-space-functor-points}
+
+\CanonicalLaw
+{Section-total-space functor of points}
+{For finite locally free \(\mathcal E\), \(\Map_X(T,\mathbf V_X(\mathcal E))\simeq\Map_{\QCoh(T)}(\mathcal O_T,f^*\mathcal E)\).}
+{prop:vector-bundle-total-space-sections}
+
+\CanonicalLaw
+{Affine-space base change}
+{\(\mathbb A_X^n\times_XY\simeq\mathbb A_Y^n\), and \((\mathbb A_X^n)_{\mathrm{cl}}\simeq\mathbf A_{X_{\mathrm{cl}}}^n\).}
+{prop:classical-truncation-affine-space}
+
+\CanonicalLaw
+{Spectral multiplicative group}
+{\(\Map_X(T,\mathbb G_{m,X})\simeq\operatorname{Aut}_{\QCoh(T)}(\mathcal O_T)\); the construction commutes with base change.}
+{prop:spectral-multiplicative-group-structure}
+
+\CanonicalLaw
+{Brave polynomial homotopy}
+{For ordinary \(R\), \(R\{t\}\simeq\bigoplus_{n\geq0}HR\otimes\Sigma^\infty_+B\Sigma_n\), with \(\pi_0(R\{t\})\cong R[t]\).}
+{prop:affine-line-genuinely-spectral}
+
+\end{longtable}
+
+% ============================================================================
+% IV. Intentional notation overloads
+% ============================================================================
+
+\section*{Intentional notation overloads}
+
+Only symbol-level overloads are recorded here.  The ambient mathematical type or explicit
+adornment determines the intended sense.
+
+\begin{longtable}{
+@{}
+>{\raggedright\arraybackslash}p{0.22\textwidth}
+>{\raggedright\arraybackslash}p{0.50\textwidth}
+>{\raggedright\arraybackslash}p{0.24\textwidth}
+@{}
+}
+
+\toprule
+\textbf{Notation} & \textbf{Permitted senses} & \textbf{Consistency rule}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Notation} & \textbf{Permitted senses} & \textbf{Consistency rule}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+
+\CanonicalOverload
+{\(f^*,\ f_*\)}
+{For an algebra map \(A\to B\), these are extension and restriction of scalars on module categories.  For a geometric map \(f:Y\to X\), they are quasi-coherent pullback and its right adjoint; the pullback also acts on \(\operatorname{QCAlg}\).}
+{Use the displayed domain and codomain.  On affines the geometric functors identify with extension and restriction of scalars.}
+
+\CanonicalOverload
+{\(\tau_{\geq n}^{\Sp},\ \tau_{\leq n}^{\Sp},\ \tau_{\geq n}^{A},\ \tau_{\leq n}^{A},\ \tau_{\geq n}^{X},\ \tau_{\leq n}^{X}\)}
+{Postnikov truncations on spectra, on \(A\)-module categories, and on global quasi-coherent categories; \(\tau_{\geq0}^{\CAlg}\) is the separately adorned connective cover on commutative ring spectra.}
+{Retain the ambient superscript when more than one Postnikov structure is in scope, and retain the \(\CAlg\) superscript for the algebra connective-cover functor.}
+
+\CanonicalOverload
+{\((-)_{\mathrm{cl}},\ X_{\mathrm{cl}}\)}
+{Classical truncation is first defined on affines, then on spectral prestacks by \(\delta^*\), and finally restricted to spectral schemes.}
+{These are compatible constructions; do not introduce separate notation for the three stages.}
+
+\CanonicalOverload
+{\(|X|\)}
+{For an affine spectral scheme it is \(|\Spec\pi_0(A)|\); for a global spectral scheme it is \(|X_{\mathrm{cl}}|\).}
+{The global definition extends the affine one.}
+
+\CanonicalOverload
+{\(-\otimes_A-\)}
+{Relative tensor product in \(\Mod_A\); the same notation \(B\otimes_A C\) denotes the pushout of commutative \(A\)-algebras when the operands are algebra objects.}
+{Use the algebra/module type of the operands; affine fibre products are represented by the algebra pushout.}
+
+\CanonicalOverload
+{\(\operatorname{Sym},\ \operatorname{Sym}_A,\ \operatorname{Sym}_{\mathcal O_X}\)}
+{Free commutative algebra on spectra, on \(A\)-modules, and on quasi-coherent modules over \(X\), respectively.}
+{Retain the base subscript once working relatively.}
+
+\CanonicalOverload
+{\(0,1\)}
+{Ordinary numerical values throughout; in the affine-line construction they additionally denote the zero and unit sections \(X\rightrightarrows\mathbb A_X^1\).}
+{The section sense is determined by the displayed source and target.}
+
+\CanonicalOverload
+{\(\mathbb L_X(\mathcal E),\ \mathbf V_X(\mathcal E)\)}
+{\(\mathbb L_X(\mathcal E)\) is the relative linear space associated directly to \(\mathcal E\); \(\mathbf V_X(\mathcal E)=\mathbb L_X(\mathcal E^\vee)\) is the section total space for finite locally free \(\mathcal E\).}
+{Preserve \(\mathbb L_X\) versus \(\mathbf V_X\): they represent dual functors of points and are not interchangeable.}
+
+\CanonicalOverload
+{\(\Sh,\ \Sh_\tau(\mathcal C)\)}
+{In the earlier context-shape notation, bare \(\Sh\) denotes the fixed category of context shapes.  In this chapter the adorned expression \(\Sh_\tau(\mathcal C)\) denotes the \(\infty\)-category of sheaves for a topology \(\tau\).}
+{Never use bare \(\Sh\) as an abbreviation for a sheaf category in the spectral chapter; retain both the topology subscript and the argument.}
+
+\CanonicalOverload
+{\(\Gamma,\ \Gamma(X,\mathcal F)\)}
+{Earlier shaped syntax uses \(\Gamma\) as a context metavariable.  Here \(\Gamma(X,\mathcal F)\) is the persistent global-sections spectrum.}
+{The parenthesized two-argument form is the global-sections notation; bare \(\Gamma\) remains available as a locally bound context or object variable according to scope.}
+
+\CanonicalOverload
+{\(\pi_0,\ \pi_n\)}
+{Across the manuscript these symbols denote connected components or homotopy groups according to the ambient homotopical object; in this chapter they are used for spectra, ring spectra, and modules, with \(\pi_0\) also providing classical truncation of connective spectral algebras.}
+{Use the ambient object type.  The ring structure on \(\pi_0(A)\) and module structures on \(\pi_n(M)\) are part of the spectral-algebraic use.}
+
+\CanonicalOverload
+{\(i_X,\ i_A,\ i\)}
+{Here \(i_X:X_{\mathrm{cl}}^{\mathrm{disc}}\to X\) is the classical comparison morphism.  Earlier notation uses \(i_A\) for category of elements and bare \(i\) for the diagrammatic simplex inclusion.}
+{Retain the \(X\)-subscript on the classical comparison morphism and the \(A\)-subscript on the category-of-elements functor.}
+
+\CanonicalOverload
+{\(\operatorname{Res}_A^B,\ \operatorname{Res}_\pi,\ \operatorname{Res}_{\pi,p}\)}
+{In this chapter \(\operatorname{Res}_A^B\) is restriction of scalars along \(A\to B\).  Earlier shaped semantics uses \(\operatorname{Res}_\pi\) for ambient restriction and \(\operatorname{Res}_{\pi,p}\) for restricted realization.}
+{Always retain the full subscript/superscript package; these are distinct constructions.}
+
+\end{longtable}
+
+% ============================================================================
+% V. Intentional terminology overloads
+% ============================================================================
+
+\section*{Intentional terminology overloads}
+
+The following technical words have established scoped senses at more than one level of the
+spectral algebraic geometry construction.  They are not to be silently identified beyond
+the compatibility statements proved in the chapter.
+
+\begin{longtable}{
+@{}
+>{\raggedright\arraybackslash}p{0.22\textwidth}
+>{\raggedright\arraybackslash}p{0.50\textwidth}
+>{\raggedright\arraybackslash}p{0.24\textwidth}
+@{}
+}
+
+\toprule
+\textbf{Term} & \textbf{Permitted senses} & \textbf{Consistency rule}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Term} & \textbf{Permitted senses} & \textbf{Consistency rule}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+
+\CanonicalTermOverload
+{flat}
+{Flat module spectrum; flat morphism of connective commutative ring spectra; flat morphism of spectral schemes; or flat quasi-coherent module.}
+{Use the full noun phrase when more than one level is in scope.  Every sense is controlled by \(t\)-exact tensor/base change and is compatible with affine localization.}
+
+\CanonicalTermOverload
+{exact}
+{Exact as a functor of stable \(\infty\)-categories versus left/right/fully \(t\)-exact for a Postnikov \(t\)-structure.}
+{Do not use stable exactness as a synonym for geometric flatness; the chapter explicitly separates them.}
+
+\CanonicalTermOverload
+{connective}
+{Connective spectrum, commutative ring spectrum, module, quasi-coherent module, or quasi-coherent algebra object.}
+{Connectivity is always with respect to the relevant Postnikov \(t\)-structure and is detected on underlying spectra or affine restrictions as specified.}
+
+\CanonicalTermOverload
+{discrete}
+{Discrete spectrum, discrete commutative ring spectrum, discrete affine spectral scheme, or discrete enhancement of an ordinary scheme.}
+{All uses are Eilenberg--Mac Lane / degree-zero notions, but preserve the ambient object type.}
+
+\CanonicalTermOverload
+{open immersion}
+{Affine spectral open immersion or representable open immersion of spectral Zariski stacks/schemes.}
+{Global open immersions are defined by affine base change to the affine notion.}
+
+\CanonicalTermOverload
+{closed immersion}
+{Affine closed immersion, detected by surjectivity on \(\pi_0\), or global closed immersion tested after affine base change.}
+{Global closedness is affine-local and classically detected.}
+
+\CanonicalTermOverload
+{affine}
+{Affine spectral scheme; affine open immersion; or affine morphism of spectral schemes.}
+{State the noun being modified; an affine morphism is characterized by affine pullback over every affine open of the target.}
+
+\CanonicalTermOverload
+{finite presentation / finite cell}
+{``Locally of finite presentation'' is the compactness condition; ``finite cell'' is the explicit finite-colimit closure of finitely generated free commutative algebras.}
+{Do not identify the terms.  A locally finitely presented connective algebra is a retract of a finite cell algebra.}
+
+\CanonicalTermOverload
+{classical truncation}
+{Affine truncation, prestack restriction to discrete affines, and the resulting functor on spectral schemes.}
+{The constructions are compatible and use the same notation \((-)_{\mathrm{cl}}\).}
+
+\CanonicalTermOverload
+{vector bundle / locally free}
+{Locally free modules on affines and locally free quasi-coherent modules globally; a vector bundle of rank \(n\) is the global fixed-rank notion.}
+{Finite projective is the affine intrinsic characterization; locally constant rank need not be globally constant.}
+
+\end{longtable}
+
+\medskip
+\noindent
+\emph{Projection rule.}
+The publication-facing List of Notation is a lean navigation projection drawn only from
+entries marked ``yes'' above.  Every canonical head notation item displayed there is backed
+by a public entry in this register.  The public display may append registered type, signature,
+or defining-equation information, and tightly coupled aliases or adjoint pairs may be merged
+into one row, but no such presentation change alters a symbol's registered mathematical type
+or technical meaning.  New persistent notation and terminology are registered here first;
+the public list is then updated from this register.
+
+\endgroup

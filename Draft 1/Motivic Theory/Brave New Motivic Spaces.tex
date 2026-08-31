@@ -1,0 +1,4270 @@
+\chapter{Brave New Motivic Spaces}
+\label{chap:brave-new-motivic-spaces}
+
+\section{Purpose and standing conventions}
+\label{sec:brave-new-motivic-purpose}
+
+This chapter constructs the unstable brave new motivic homotopy theory
+associated with the geometric input of
+\Ref{chap:smooth-spectral-motivic-site}.  For a quasi-compact
+quasi-separated spectral scheme \(S\), the preceding chapter supplied the
+essentially small category
+\[
+    \operatorname{Sm}^{\mathrm{fp}}_{/S},
+\]
+the spectral Nisnevich topology
+\[
+    \tau_{\mathrm{Nis}},
+\]
+and the brave new affine line
+\[
+    \mathbb A^1_S
+    =
+    \operatorname{Spec}_S
+    \operatorname{Sym}_{\mathcal O_S}(\mathcal O_S).
+\]
+We impose Nisnevich descent and brave new affine-line invariance by an
+accessible localization of the presheaf \(\infty\)-category.  The result
+is the presentable \(\infty\)-category
+\[
+    \mathbf H(S)
+\]
+of brave new motivic spaces over \(S\).
+
+The chapter then constructs the Cartesian symmetric monoidal structure,
+pointed motivic spaces, inverse and direct image for arbitrary morphisms
+of quasi-compact quasi-separated spectral schemes, and smooth direct
+image for smooth morphisms of finite presentation.  The output is the
+unstable
+\[
+    (*,\sharp,\times)
+\]
+formalism.  Closed localization, homotopy purity, and nil-invariance are
+reserved for the following chapter.
+
+All conventions of the preceding chapters remain in force.  In
+particular, sheaves are not hypercompleted unless explicitly stated.
+Throughout the chapter,
+\[
+    S
+\]
+denotes a quasi-compact quasi-separated spectral scheme and
+\[
+    \mathcal C_S
+    :=
+    \operatorname{Sm}^{\mathrm{fp}}_{/S}.
+\]
+We write
+\[
+    \operatorname{PSh}(S)
+    :=
+    \operatorname{PSh}(\mathcal C_S)
+    =
+    \operatorname{Fun}(\mathcal C_S^{\mathrm{op}},\mathcal S).
+\]
+The Yoneda embedding is denoted
+\[
+    h_S
+    \colon
+    \mathcal C_S
+    \hookrightarrow
+    \operatorname{PSh}(S).
+\]
+
+\section{Presheaves and motivic localization}
+\label{sec:brave-new-motivic-localization}
+
+\subsection{The free presentable category on the smooth site}
+
+\begin{proposition}[Presheaves as a free presentable category]
+\label{prop:motivic-presheaf-free-cocompletion}
+The \(\infty\)-category
+\[
+    \operatorname{PSh}(S)
+\]
+is presentable.  Limits and colimits are computed objectwise, and its
+Cartesian symmetric monoidal structure is closed and preserves colimits
+separately in each variable.
+
+For every presentable \(\infty\)-category \(\mathcal D\), restriction
+along the Yoneda embedding induces an equivalence
+\[
+    \operatorname{Fun}^{L}
+    \bigl(
+        \operatorname{PSh}(S),
+        \mathcal D
+    \bigr)
+    \xrightarrow{\simeq}
+    \operatorname{Fun}
+    \bigl(
+        \mathcal C_S,
+        \mathcal D
+    \bigr).
+\]
+Under this equivalence, a functor
+\[
+    \Phi
+    \colon
+    \mathcal C_S
+    \longrightarrow
+    \mathcal D
+\]
+corresponds to its colimit-preserving extension
+\[
+    \overline\Phi
+    :=
+    \operatorname{Lan}_{h_S}(\Phi).
+\]
+\end{proposition}
+
+\begin{proof}
+The category \(\mathcal C_S\) is essentially small by
+\Ref{prop:smooth-site-essentially-small}.  After replacing it by a small
+equivalent category, the assertions are the standard properties of a
+space-valued presheaf category.  Presentability and objectwise
+computation of limits and colimits follow from presentability of
+\(\mathcal S\).  Cartesian closedness follows from the existence of
+right adjoints to the functors
+\[
+    F\times -
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \operatorname{PSh}(S).
+\]
+The universal property is the free-cocompletion theorem for the Yoneda
+embedding.  See \cite{LurieHTT,LurieHA}.
+\end{proof}
+
+\begin{notation}[Internal mapping presheaf]
+\label{not:motivic-internal-map}
+For presheaves \(F,G\in\operatorname{PSh}(S)\), write
+\[
+    \underline{\operatorname{Map}}_S(F,G)
+\]
+for the internal mapping object of the Cartesian closed category
+\(\operatorname{PSh}(S)\).  Thus
+\[
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        K\times F,
+        G
+    \bigr)
+    \simeq
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        K,
+        \underline{\operatorname{Map}}_S(F,G)
+    \bigr).
+\]
+\end{notation}
+
+\subsection{Nisnevich excision morphisms}
+
+\begin{construction}[Nisnevich excision morphisms]
+\label{con:nisnevich-excision-morphisms}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d]
+    \\
+    U
+        \arrow[r]
+    &
+    X
+\end{tikzcd}
+\]
+be a spectral Nisnevich distinguished square in \(\mathcal C_S\).  The
+Yoneda image of the square determines a canonical morphism
+\[
+    e_Q
+    \colon
+    h_S(U)
+    \amalg_{h_S(W)}
+    h_S(V)
+    \longrightarrow
+    h_S(X).
+\]
+Let
+\[
+    e_{\varnothing}
+    \colon
+    \varnothing_{\operatorname{PSh}(S)}
+    \longrightarrow
+    h_S(\varnothing)
+\]
+be the canonical morphism from the initial presheaf to the representable
+presheaf of the empty spectral scheme.
+
+Write
+\[
+    E_{\mathrm{Nis},S}
+\]
+for the set consisting of \(e_{\varnothing}\) and the morphisms \(e_Q\)
+as \(Q\) ranges through a set of representatives of spectral Nisnevich
+distinguished squares.
+\end{construction}
+
+The use of a set is justified by essential smallness of
+\(\mathcal C_S\).  Replacing the chosen representatives changes neither
+the local objects nor the resulting localization.
+
+\begin{proposition}[Local objects for Nisnevich excision]
+\label{prop:nisnevich-local-objects}
+For a presheaf \(F\in\operatorname{PSh}(S)\), the following are
+equivalent.
+\begin{enumerate}[label=(\roman*)]
+    \item The presheaf \(F\) is local with respect to every morphism in
+    \(E_{\mathrm{Nis},S}\).
+
+    \item The space \(F(\varnothing)\) is contractible and every spectral
+    Nisnevich distinguished square is carried to a Cartesian square.
+
+    \item The presheaf \(F\) is a sheaf for
+    \(\tau_{\mathrm{Nis}}\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Locality with respect to \(e_{\varnothing}\) is the assertion that
+\[
+    \operatorname{Map}
+    \bigl(
+        h_S(\varnothing),
+        F
+    \bigr)
+    \longrightarrow
+    \operatorname{Map}
+    \bigl(
+        \varnothing_{\operatorname{PSh}(S)},
+        F
+    \bigr)
+\]
+is an equivalence.  By Yoneda, its source is \(F(\varnothing)\), while
+its target is contractible.
+
+For a distinguished square \(Q\), mapping \(e_Q\) into \(F\) gives
+\[
+    F(X)
+    \longrightarrow
+    F(U)
+    \times_{F(W)}
+    F(V).
+\]
+Thus locality with respect to \(e_Q\) is precisely Nisnevich excision
+for \(Q\).  This proves the equivalence of (i) and (ii).  The equivalence
+of (ii) and (iii) is
+\Ref{thm:nisnevich-excision-criterion}.
+\end{proof}
+
+\begin{definition}[Nisnevich-local spectral spaces]
+\label{def:nisnevich-local-spectral-spaces}
+Let
+\[
+    \operatorname{Spc}_{\mathrm{Nis}}(S)
+    \subseteq
+    \operatorname{PSh}(S)
+\]
+be the full subcategory spanned by the
+\(E_{\mathrm{Nis},S}\)-local objects.  Equivalently,
+\[
+    \operatorname{Spc}_{\mathrm{Nis}}(S)
+    =
+    \operatorname{Sh}_{\tau_{\mathrm{Nis}}}(\mathcal C_S).
+\]
+\end{definition}
+
+\begin{proposition}[Nisnevich localization]
+\label{prop:nisnevich-localization-exists}
+The inclusion
+\[
+    \operatorname{Spc}_{\mathrm{Nis}}(S)
+    \hookrightarrow
+    \operatorname{PSh}(S)
+\]
+admits an accessible left exact left adjoint
+\[
+    L_{\mathrm{Nis},S}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \operatorname{Spc}_{\mathrm{Nis}}(S).
+\]
+\end{proposition}
+
+\begin{proof}
+By \Ref{prop:nisnevich-local-objects}, the local objects are the sheaves
+for the Grothendieck topology \(\tau_{\mathrm{Nis}}\).  Sheafification
+for a Grothendieck topology on an essentially small \(\infty\)-category
+is an accessible left exact localization of the presheaf category.  See
+\cite{LurieHTT}.
+\end{proof}
+
+\subsection{Affine-line invariance}
+
+\begin{definition}[Brave new affine-line invariance]
+\label{def:brave-new-affine-line-invariance}
+A presheaf
+\[
+    F
+    \in
+    \operatorname{PSh}(S)
+\]
+is \textbf{\(\mathbb A^1\)-invariant} if, for every
+\(X\in\mathcal C_S\), the projection induces an equivalence
+\[
+    F(X)
+    \xrightarrow{\simeq}
+    F(X\times_S\mathbb A^1_S).
+\]
+\end{definition}
+
+Recall from
+\Ref{def:affine-line-projection-class}
+the set of morphisms
+\[
+    W_{\mathbb A^1,S}
+    =
+    \left\{
+        h_S(X\times_S\mathbb A^1_S)
+        \longrightarrow
+        h_S(X)
+    \right\}_{X\in\mathcal C_S}.
+\]
+
+\begin{proposition}[Affine-line local objects]
+\label{prop:affine-line-local-objects}
+A presheaf \(F\in\operatorname{PSh}(S)\) is local with respect to
+\(W_{\mathbb A^1,S}\) if and only if it is
+\(\mathbb A^1\)-invariant.
+\end{proposition}
+
+\begin{proof}
+For every \(X\in\mathcal C_S\), Yoneda identifies the map obtained by
+mapping the projection
+\[
+    h_S(X\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(X)
+\]
+into \(F\) with
+\[
+    F(X)
+    \longrightarrow
+    F(X\times_S\mathbb A^1_S).
+\]
+The assertion follows.
+\end{proof}
+
+\subsection{The category of brave new motivic spaces}
+
+\begin{definition}[Motivic localization data]
+\label{def:brave-new-motivic-localization-data}
+Put
+\[
+    W_{\mathrm{mot},S}
+    :=
+    E_{\mathrm{Nis},S}
+    \cup
+    W_{\mathbb A^1,S}.
+\]
+
+A presheaf
+\[
+    F
+    \in
+    \operatorname{PSh}(S)
+\]
+is \textbf{motivic-local} if it is local with respect to every
+morphism in \(W_{\mathrm{mot},S}\).
+
+A morphism
+\[
+    u
+    \colon
+    F
+    \longrightarrow
+    G
+\]
+in \(\operatorname{PSh}(S)\) is a
+\textbf{motivic equivalence} if, for every motivic-local presheaf
+\[
+    Z
+    \in
+    \operatorname{PSh}(S),
+\]
+the induced morphism
+\[
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        G,
+        Z
+    \bigr)
+    \longrightarrow
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        F,
+        Z
+    \bigr)
+\]
+is an equivalence.
+\end{definition}
+
+\begin{theorem}[Existence and characterization of brave new motivic spaces]
+\label{thm:brave-new-motivic-localization}
+There is an accessible localization
+\[
+    L_{\mathrm{mot},S}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \mathbf H(S)
+\]
+whose local objects are precisely the presheaves \(F\) satisfying:
+\begin{enumerate}[label=(\roman*)]
+    \item \(F(\varnothing)\) is contractible;
+
+    \item \(F\) carries every spectral Nisnevich distinguished square to
+    a Cartesian square;
+
+    \item for every \(X\in\mathcal C_S\), the projection induces an
+    equivalence
+    \[
+        F(X)
+        \xrightarrow{\simeq}
+        F(X\times_S\mathbb A^1_S).
+    \]
+\end{enumerate}
+Equivalently,
+\[
+    \mathbf H(S)
+    =
+    \operatorname{Sh}_{\mathrm{Nis}}(\mathcal C_S)
+    \cap
+    \operatorname{PSh}(S)^{\mathbb A^1}
+\]
+as a full subcategory of \(\operatorname{PSh}(S)\).
+
+The \(\infty\)-category \(\mathbf H(S)\) is presentable, and the
+inclusion
+\[
+    \iota_S
+    \colon
+    \mathbf H(S)
+    \hookrightarrow
+    \operatorname{PSh}(S)
+\]
+is fully faithful and accessible.
+
+Moreover, the class of motivic equivalences in
+\(\operatorname{PSh}(S)\) is precisely the strongly saturated class
+generated by
+\[
+    W_{\mathrm{mot},S}.
+\]
+\end{theorem}
+
+\begin{proof}
+The set
+\[
+    W_{\mathrm{mot},S}
+    =
+    E_{\mathrm{Nis},S}
+    \cup
+    W_{\mathbb A^1,S}
+\]
+is a set of morphisms in the presentable category
+\(\operatorname{PSh}(S)\). The accessible localization theorem
+therefore supplies an accessible reflective localization
+\[
+    L_{\mathrm{mot},S}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \mathbf H(S)
+\]
+whose essential image is the full subcategory of
+\(W_{\mathrm{mot},S}\)-local objects. In particular,
+\(\mathbf H(S)\) is presentable, and its inclusion
+\[
+    \iota_S
+    \colon
+    \mathbf H(S)
+    \hookrightarrow
+    \operatorname{PSh}(S)
+\]
+is fully faithful and accessible.
+
+By
+\Ref{prop:nisnevich-local-objects},
+locality with respect to
+\[
+    E_{\mathrm{Nis},S}
+\]
+is equivalent to the conditions that \(F(\varnothing)\) be
+contractible and that every spectral Nisnevich distinguished square be
+carried to a Cartesian square.
+
+By
+\Ref{prop:affine-line-local-objects},
+locality with respect to
+\[
+    W_{\mathbb A^1,S}
+\]
+is equivalent to brave new affine-line invariance. Thus the
+\(W_{\mathrm{mot},S}\)-local objects are precisely the presheaves
+satisfying conditions (i)--(iii).
+
+Equivalently, the full subcategory of local objects is
+\[
+    \operatorname{Sh}_{\mathrm{Nis}}(\mathcal C_S)
+    \cap
+    \operatorname{PSh}(S)^{\mathbb A^1}.
+\]
+
+Finally, for an accessible localization of a presentable
+\(\infty\)-category generated by a set of morphisms, the class of
+morphisms inverted by the localization is the strongly saturated class
+generated by that set. Consequently, the motivic equivalences are
+precisely the strongly saturated class generated by
+\[
+    W_{\mathrm{mot},S}.
+\]
+
+See
+\cite{LurieHTT,KhanBraveNewMotivicI}.
+\end{proof}
+
+\begin{definition}[Brave new motivic space]
+\label{def:brave-new-motivic-space}
+An object of
+\[
+    \mathbf H(S)
+\]
+is called a \textbf{brave new motivic space over \(S\)}.
+\end{definition}
+
+\begin{proposition}[Two-stage motivic localization]
+\label{prop:two-stage-brave-new-motivic-localization}
+Let
+\[
+    L_{\mathbb A^1,S}
+    \colon
+    \operatorname{Spc}_{\mathrm{Nis}}(S)
+    \longrightarrow
+    \operatorname{Spc}_{\mathrm{Nis}}(S)^{\mathbb A^1}
+\]
+be the accessible localization at the images under
+\(L_{\mathrm{Nis},S}\) of the morphisms in
+\(W_{\mathbb A^1,S}\).  Then there are canonical equivalences
+\[
+    \mathbf H(S)
+    \simeq
+    \operatorname{Spc}_{\mathrm{Nis}}(S)^{\mathbb A^1}
+\]
+and
+\[
+    L_{\mathrm{mot},S}
+    \simeq
+    L_{\mathbb A^1,S}
+    L_{\mathrm{Nis},S}.
+\]
+\end{proposition}
+
+\begin{proof}
+A local object for the second localization is a Nisnevich-local object
+which is local with respect to the images of
+\(W_{\mathbb A^1,S}\).  By adjunction, this is equivalent to being local
+with respect to \(W_{\mathbb A^1,S}\) as an object of
+\(\operatorname{PSh}(S)\).  Hence the local objects for the composite
+are exactly the \(W_{\mathrm{mot},S}\)-local objects.  Reflective
+localizations with the same local objects are canonically equivalent.
+\end{proof}
+
+\begin{definition}[Motive of a smooth spectral scheme]
+\label{def:brave-new-smooth-motive}
+For
+\[
+    X
+    \in
+    \mathcal C_S,
+\]
+define its \textbf{unstable brave new motive} by
+\[
+    \mathrm M_S(X)
+    :=
+    L_{\mathrm{mot},S}h_S(X)
+    \in
+    \mathbf H(S).
+\]
+The resulting functor is denoted
+\[
+    \mathrm M_S
+    \colon
+    \mathcal C_S
+    \longrightarrow
+    \mathbf H(S).
+\]
+\end{definition}
+
+Since the spectral Nisnevich topology is subcanonical,
+\Ref{thm:spectral-nisnevich-subcanonical}
+shows that
+\[
+    L_{\mathrm{Nis},S}h_S(X)
+    \simeq
+    h_S(X).
+\]
+Thus \(\mathrm M_S(X)\) is obtained from the representable presheaf by
+imposing only the remaining \(\mathbb A^1\)-local equivalences inside
+the Nisnevich sheaf category.
+
+\begin{proposition}[Evaluation represented by smooth motives]
+\label{prop:motivic-evaluation-represented}
+For every \(X\in\mathcal C_S\) and every
+\(F\in\mathbf H(S)\), there is a natural equivalence
+\[
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        \mathrm M_S(X),
+        F
+    \bigr)
+    \simeq
+    F(X).
+\]
+\end{proposition}
+
+\begin{proof}
+The localization adjunction and Yoneda give
+\[
+\begin{aligned}
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        L_{\mathrm{mot},S}h_S(X),
+        F
+    \bigr)
+    &\simeq
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        h_S(X),
+        \iota_SF
+    \bigr)
+    \\
+    &\simeq
+    F(X).
+\end{aligned}
+\]
+\end{proof}
+
+\begin{theorem}[Universal property of brave new motivic spaces]
+\label{thm:brave-new-motivic-universal-property}
+Let \(\mathcal D\) be a presentable \(\infty\)-category.  Restriction
+along
+\[
+    \mathrm M_S
+    \colon
+    \mathcal C_S
+    \longrightarrow
+    \mathbf H(S)
+\]
+induces an equivalence between:
+\begin{enumerate}[label=(\roman*)]
+    \item colimit-preserving functors
+    \[
+        \Psi
+        \colon
+        \mathbf H(S)
+        \longrightarrow
+        \mathcal D;
+    \]
+
+    \item functors
+    \[
+        \Phi
+        \colon
+        \mathcal C_S
+        \longrightarrow
+        \mathcal D
+    \]
+    satisfying the following conditions:
+    \begin{enumerate}[label=(\alph*)]
+        \item \(\Phi(\varnothing)\) is initial in \(\mathcal D\);
+
+        \item for every spectral Nisnevich distinguished square
+        \[
+        \begin{tikzcd}[column sep=large, row sep=large]
+            W \arrow[r] \arrow[d]
+            &
+            V \arrow[d]
+            \\
+            U \arrow[r]
+            &
+            X,
+        \end{tikzcd}
+        \]
+        the induced square
+        \[
+        \begin{tikzcd}[column sep=large, row sep=large]
+            \Phi(W) \arrow[r] \arrow[d]
+            &
+            \Phi(V) \arrow[d]
+            \\
+            \Phi(U) \arrow[r]
+            &
+            \Phi(X)
+        \end{tikzcd}
+        \]
+        is cocartesian;
+
+        \item for every \(X\in\mathcal C_S\), the morphism
+        \[
+            \Phi(X\times_S\mathbb A^1_S)
+            \longrightarrow
+            \Phi(X)
+        \]
+        is an equivalence.
+    \end{enumerate}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By
+\Ref{prop:motivic-presheaf-free-cocompletion},
+a functor
+\[
+    \Phi
+    \colon
+    \mathcal C_S
+    \longrightarrow
+    \mathcal D
+\]
+extends uniquely to a colimit-preserving functor
+\[
+    \overline\Phi
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \mathcal D.
+\]
+The extension factors through the localization
+\[
+    L_{\mathrm{mot},S}
+\]
+if and only if it carries every morphism in
+\(W_{\mathrm{mot},S}\) to an equivalence.
+
+The image of
+\[
+    e_{\varnothing}
+    \colon
+    \varnothing_{\operatorname{PSh}(S)}
+    \longrightarrow
+    h_S(\varnothing)
+\]
+is
+\[
+    0_{\mathcal D}
+    \longrightarrow
+    \Phi(\varnothing),
+\]
+so it is invertible exactly when (a) holds.
+
+Since \(\overline\Phi\) preserves colimits, the image of a Nisnevich
+excision morphism is
+\[
+    \Phi(U)
+    \amalg_{\Phi(W)}
+    \Phi(V)
+    \longrightarrow
+    \Phi(X).
+\]
+It is invertible exactly when the displayed square in (b) is
+cocartesian.
+
+Finally, the images of the morphisms in
+\(W_{\mathbb A^1,S}\) are exactly the morphisms in (c).
+The localization universal property now proves the assertion.
+\end{proof}
+
+\begin{corollary}[Finite coproducts under the motivic Yoneda functor]
+\label{cor:motivic-yoneda-finite-coproducts}
+The functor
+\[
+    \mathrm M_S
+    \colon
+    \mathcal C_S
+    \longrightarrow
+    \mathbf H(S)
+\]
+preserves finite coproducts.
+\end{corollary}
+
+\begin{proof}
+The empty spectral scheme is carried to an initial object because
+\[
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        \mathrm M_S(\varnothing),
+        F
+    \bigr)
+    \simeq
+    F(\varnothing)
+    \simeq
+    *
+\]
+for every \(F\in\mathbf H(S)\).
+
+Let \(X,Y\in\mathcal C_S\).  The square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    \varnothing
+        \arrow[r]
+        \arrow[d]
+    &
+    Y
+        \arrow[d]
+    \\
+    X
+        \arrow[r]
+    &
+    X\amalg Y
+\end{tikzcd}
+\]
+is a spectral Nisnevich distinguished square: the two component
+inclusions are open immersions, and \(Y\) identifies with the closed
+complement of \(X\).  The universal property of
+\Ref{thm:brave-new-motivic-universal-property}
+therefore gives
+\[
+    \mathrm M_S(X)
+    \amalg
+    \mathrm M_S(Y)
+    \xrightarrow{\simeq}
+    \mathrm M_S(X\amalg Y).
+\]
+\end{proof}
+
+\begin{proposition}[Compact generation]
+\label{prop:brave-new-motivic-compact-generation}
+The \(\infty\)-category \(\mathbf H(S)\) is compactly generated by the
+set
+\[
+    \left\{
+        \mathrm M_S(X)
+    \right\}_{X\in\mathcal C_S}.
+\]
+In particular, every \(\mathrm M_S(X)\) is compact.
+\end{proposition}
+
+\begin{proof}
+Representable presheaves are compact in
+\(\operatorname{PSh}(S)\), since evaluation at any
+\(X\in\mathcal C_S\) preserves all colimits.
+
+The motivic-local conditions of
+\Ref{thm:brave-new-motivic-localization}
+are preserved under filtered colimits. Indeed, filtered colimits of
+spaces commute with finite limits, so the conditions
+\[
+    F(\varnothing)
+    \simeq
+    *
+\]
+and
+\[
+    F(X)
+    \xrightarrow{\simeq}
+    F(U)
+    \times_{F(W)}
+    F(V)
+\]
+for spectral Nisnevich distinguished squares are preserved under
+filtered colimits. Brave new affine-line invariance is also preserved
+under filtered colimits because it is an objectwise equivalence
+condition.
+
+Consequently, the inclusion
+\[
+    \iota_S
+    \colon
+    \mathbf H(S)
+    \hookrightarrow
+    \operatorname{PSh}(S)
+\]
+preserves filtered colimits.
+
+Let
+\[
+    \{F_\alpha\}_{\alpha\in I}
+\]
+be a filtered diagram in \(\mathbf H(S)\). Since its colimit is already
+motivic-local, its colimit in \(\mathbf H(S)\) is computed by its
+objectwise colimit in \(\operatorname{PSh}(S)\). Therefore
+\[
+\begin{aligned}
+    \operatorname{Map}_{\mathbf H(S)}
+    \left(
+        \mathrm M_S(X),
+        \operatorname*{colim}_{\alpha}F_\alpha
+    \right)
+    &\simeq
+    \left(
+        \operatorname*{colim}_{\alpha}F_\alpha
+    \right)(X)
+    \\
+    &\simeq
+    \operatorname*{colim}_{\alpha}F_\alpha(X)
+    \\
+    &\simeq
+    \operatorname*{colim}_{\alpha}
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        \mathrm M_S(X),
+        F_\alpha
+    \bigr).
+\end{aligned}
+\]
+Thus every \(\mathrm M_S(X)\) is compact.
+
+The family
+\[
+    \left\{
+        \mathrm M_S(X)
+    \right\}_{X\in\mathcal C_S}
+\]
+detects equivalences. Indeed, let
+\[
+    \varphi
+    \colon
+    F
+    \longrightarrow
+    G
+\]
+be a morphism in \(\mathbf H(S)\). By
+\Ref{prop:motivic-evaluation-represented},
+the induced morphism
+\[
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        \mathrm M_S(X),
+        F
+    \bigr)
+    \longrightarrow
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        \mathrm M_S(X),
+        G
+    \bigr)
+\]
+identifies with
+\[
+    F(X)
+    \longrightarrow
+    G(X).
+\]
+If this is an equivalence for every \(X\in\mathcal C_S\), then
+\(\varphi\) is an objectwise equivalence of presheaves and hence an
+equivalence in \(\mathbf H(S)\).
+
+The indexing category \(\mathcal C_S\) is essentially small, so after
+choosing a small equivalent category the displayed family is a set. A
+presentable \(\infty\)-category admitting a set of compact objects which
+detects equivalences is compactly generated by those objects.
+\end{proof}
+
+\section{Cartesian structure on brave new motivic spaces}
+\label{sec:brave-new-motivic-cartesian-structure}
+
+\subsection{Product stability of motivic equivalences}
+
+\begin{proposition}[Product stability of the generating morphisms]
+\label{prop:motivic-generators-product-stable}
+Let
+\[
+    w
+    \in
+    W_{\mathrm{mot},S}
+\]
+and let \(Y\in\mathcal C_S\). Then
+\[
+    w\times h_S(Y)
+\]
+is a motivic equivalence.
+\end{proposition}
+
+\begin{proof}
+Suppose first that
+\[
+    w
+    =
+    e_Q
+\]
+is associated with a chosen representative
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d]
+    \\
+    U
+        \arrow[r]
+    &
+    X
+\end{tikzcd}
+\]
+of a spectral Nisnevich distinguished square.
+
+Cartesian product with \(h_S(Y)\) preserves colimits, and the Yoneda
+embedding preserves finite products. Hence
+\[
+    e_Q\times h_S(Y)
+\]
+identifies with the excision morphism
+\[
+    h_S(U\times_SY)
+    \amalg_{h_S(W\times_SY)}
+    h_S(V\times_SY)
+    \longrightarrow
+    h_S(X\times_SY)
+\]
+associated with the base-changed square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W\times_SY
+        \arrow[r]
+        \arrow[d]
+    &
+    V\times_SY
+        \arrow[d]
+    \\
+    U\times_SY
+        \arrow[r]
+    &
+    X\times_SY.
+\end{tikzcd}
+\]
+This is again a spectral Nisnevich distinguished square by
+\Ref{prop:nisnevich-square-base-change}.
+
+Its excision morphism is equivalent in the arrow category of
+\(\operatorname{PSh}(S)\) to the excision morphism attached to the
+chosen representative of its equivalence class. The latter belongs to
+\(E_{\mathrm{Nis},S}\). Therefore
+\[
+    e_Q\times h_S(Y)
+\]
+is a motivic equivalence.
+
+For
+\[
+    w
+    =
+    e_{\varnothing},
+\]
+one has
+\[
+    \varnothing_{\operatorname{PSh}(S)}
+    \times
+    h_S(Y)
+    \simeq
+    \varnothing_{\operatorname{PSh}(S)}
+\]
+and
+\[
+    h_S(\varnothing)\times h_S(Y)
+    \simeq
+    h_S(\varnothing\times_SY)
+    \simeq
+    h_S(\varnothing).
+\]
+Thus
+\[
+    e_{\varnothing}\times h_S(Y)
+\]
+identifies with \(e_{\varnothing}\), and hence is a motivic
+equivalence.
+
+Finally, suppose that \(w\) is the affine-line projection associated
+with \(X\):
+\[
+    h_S(X\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(X).
+\]
+Its product with \(h_S(Y)\) identifies with
+\[
+    h_S
+    \bigl(
+        (X\times_SY)\times_S\mathbb A^1_S
+    \bigr)
+    \longrightarrow
+    h_S(X\times_SY),
+\]
+which belongs to \(W_{\mathbb A^1,S}\). It is therefore a motivic
+equivalence.
+\end{proof}
+
+\begin{theorem}[Cartesian monoidal motivic localization]
+\label{thm:cartesian-monoidal-motivic-localization}
+Motivic equivalences are stable under Cartesian product with arbitrary
+presheaves.  The localization
+\[
+    L_{\mathrm{mot},S}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \mathbf H(S)
+\]
+is a Cartesian symmetric monoidal localization.  In particular:
+\begin{enumerate}[label=(\roman*)]
+    \item the Cartesian product of motivic-local presheaves is
+    motivic-local;
+
+    \item \(L_{\mathrm{mot},S}\) preserves finite products;
+
+    \item \(\mathbf H(S)\) is Cartesian closed;
+
+    \item the Cartesian product on \(\mathbf H(S)\) preserves colimits
+    separately in each variable.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Fix a presheaf \(K\).  The class of morphisms \(w\) such that
+\[
+    w\times K
+\]
+is a motivic equivalence is strongly saturated: Cartesian product with
+\(K\) preserves colimits, composition, and retracts.  It therefore
+suffices to prove the assertion when \(w\) belongs to
+\(W_{\mathrm{mot},S}\).
+
+Write \(K\) as a colimit of representable presheaves.  Cartesian product
+in spaces preserves colimits separately, hence
+\[
+    w\times K
+\]
+is the corresponding colimit of the morphisms
+\[
+    w\times h_S(Y).
+\]
+Each of these is a motivic equivalence by
+\Ref{prop:motivic-generators-product-stable}.  The class of local
+equivalences is closed under colimits in the arrow category, since
+mapping a colimit of arrows into a local object gives a limit of
+equivalences.  Thus \(w\times K\) is a motivic equivalence.
+
+The terminal presheaf is \(h_S(S)\).  It is Nisnevich-local and
+\(\mathbb A^1\)-invariant, hence motivic-local.  If \(F\) and \(G\) are
+motivic-local, then for every motivic equivalence \(A\to B\),
+\[
+\begin{aligned}
+    \operatorname{Map}(B,F\times G)
+    &\simeq
+    \operatorname{Map}(B,F)
+    \times
+    \operatorname{Map}(B,G)
+    \\
+    &\xrightarrow{\simeq}
+    \operatorname{Map}(A,F)
+    \times
+    \operatorname{Map}(A,G)
+    \\
+    &\simeq
+    \operatorname{Map}(A,F\times G).
+\end{aligned}
+\]
+Thus \(F\times G\) is local.
+
+The morphism
+\[
+    F\times G
+    \longrightarrow
+    L_{\mathrm{mot},S}F
+    \times
+    L_{\mathrm{mot},S}G
+\]
+is a motivic equivalence by product stability, and its target is local.
+It therefore exhibits the target as the localization of \(F\times G\).
+This proves preservation of finite products.
+
+Let \(F\) be local and let \(K\) be any presheaf.  For every motivic
+equivalence \(A\to B\), there are natural equivalences
+\[
+\begin{aligned}
+    \operatorname{Map}
+    \bigl(
+        B,
+        \underline{\operatorname{Map}}_S(K,F)
+    \bigr)
+    &\simeq
+    \operatorname{Map}(B\times K,F)
+    \\
+    &\xrightarrow{\simeq}
+    \operatorname{Map}(A\times K,F)
+    \\
+    &\simeq
+    \operatorname{Map}
+    \bigl(
+        A,
+        \underline{\operatorname{Map}}_S(K,F)
+    \bigr).
+\end{aligned}
+\]
+Hence the presheaf internal mapping object is local.  It therefore
+restricts to an internal mapping object in \(\mathbf H(S)\), proving
+Cartesian closedness.  In a Cartesian closed presentable category,
+product with a fixed object is a left adjoint, so it preserves colimits.
+See \cite{LurieHA,KhanBraveNewMotivicI}.
+\end{proof}
+
+\begin{notation}[Cartesian product and internal maps]
+\label{not:motivic-cartesian-product}
+We denote the Cartesian product in \(\mathbf H(S)\) by
+\[
+    F\times_SG
+\]
+when the base needs to be displayed, and simply by \(F\times G\)
+otherwise.  Its unit is the terminal motivic space
+\[
+    \mathbf 1_S
+    :=
+    \mathrm M_S(S)
+    \simeq
+    h_S(S).
+\]
+The internal mapping object is denoted
+\[
+    \underline{\operatorname{Map}}_{\mathbf H(S)}(F,G).
+\]
+\end{notation}
+
+\begin{corollary}[Products of smooth motives]
+\label{cor:products-of-smooth-motives}
+For \(X,Y\in\mathcal C_S\), there is a canonical equivalence
+\[
+    \mathrm M_S(X)
+    \times_S
+    \mathrm M_S(Y)
+    \simeq
+    \mathrm M_S(X\times_SY).
+\]
+\end{corollary}
+
+\begin{proof}
+The Yoneda embedding preserves products, so
+\[
+    h_S(X)\times h_S(Y)
+    \simeq
+    h_S(X\times_SY).
+\]
+Apply the finite-product-preserving localization
+\(L_{\mathrm{mot},S}\).
+\end{proof}
+
+\begin{proposition}[Tensoring by spaces]
+\label{prop:motivic-tensored-over-spaces}
+The presentable category \(\mathbf H(S)\) is canonically tensored and
+cotensored over spaces.  For \(K\in\mathcal S\) and
+\(F,G\in\mathbf H(S)\), there are natural equivalences
+\[
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        K\otimes F,
+        G
+    \bigr)
+    \simeq
+    \operatorname{Map}_{\mathcal S}
+    \left(
+        K,
+        \operatorname{Map}_{\mathbf H(S)}(F,G)
+    \right).
+\]
+The tensor is compatible with Cartesian products:
+\[
+    K\otimes(F\times G)
+    \simeq
+    (K\otimes F)\times G
+\]
+after interpreting the left tensor through colimits in the first
+variable.
+\end{proposition}
+
+\begin{proof}
+Every presentable \(\infty\)-category is canonically tensored and
+cotensored over spaces.  The compatibility follows because Cartesian
+product in \(\mathbf H(S)\) preserves colimits separately.
+\end{proof}
+
+\section{Pointed brave new motivic spaces}
+\label{sec:pointed-brave-new-motivic-spaces}
+
+\subsection{Pointed objects}
+
+\begin{definition}[Pointed brave new motivic spaces]
+\label{def:pointed-brave-new-motivic-spaces}
+Define
+\[
+    \mathbf H_\bullet(S)
+    :=
+    \mathbf H(S)_{*/}
+\]
+to be the \(\infty\)-category of pointed objects of
+\(\mathbf H(S)\).  An object is a pair
+\[
+    (F,s),
+    \qquad
+    s
+    \colon
+    *
+    \longrightarrow
+    F.
+\]
+\end{definition}
+
+\begin{proposition}[Presentability and free pointing]
+\label{prop:pointed-motivic-presentability}
+The category \(\mathbf H_\bullet(S)\) is presentable.  The forgetful
+functor
+\[
+    U_S
+    \colon
+    \mathbf H_\bullet(S)
+    \longrightarrow
+    \mathbf H(S)
+\]
+admits a left adjoint
+\[
+    (-)_+
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H_\bullet(S),
+    \qquad
+    F
+    \longmapsto
+    F_+:=F\amalg *.
+\]
+The basepoint of \(F_+\) is the second coproduct inclusion.
+\end{proposition}
+
+\begin{proof}
+An undercategory of a presentable \(\infty\)-category is presentable.
+For a pointed object \((G,s)\), the universal property of the coproduct
+gives
+\[
+    \operatorname{Map}_{\mathbf H_\bullet(S)}
+    \bigl(
+        F_+,
+        (G,s)
+    \bigr)
+    \simeq
+    \operatorname{Map}_{\mathbf H(S)}(F,G).
+\]
+Thus \((-)_{+}\dashv U_S\).
+\end{proof}
+
+\begin{definition}[Pointed smooth motive]
+\label{def:pointed-smooth-motive}
+For \(X\in\mathcal C_S\), put
+\[
+    \mathrm M_{S,+}(X)
+    :=
+    \mathrm M_S(X)_+.
+\]
+\end{definition}
+
+\begin{proposition}[Generation of pointed motivic spaces]
+\label{prop:pointed-motivic-generation}
+The category \(\mathbf H_\bullet(S)\) is generated under colimits by the
+objects
+\[
+    \mathrm M_{S,+}(X),
+    \qquad
+    X\in\mathcal C_S.
+\]
+\end{proposition}
+
+\begin{proof}
+Consider the free-pointing adjunction
+\[
+    (-)_+
+    \colon
+    \mathbf H(S)
+    \rightleftarrows
+    \mathbf H_\bullet(S)
+    :
+    U_S.
+\]
+The forgetful functor \(U_S\) is monadic, with associated monad
+\[
+    T
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H(S),
+    \qquad
+    T(F)
+    =
+    F\amalg *.
+\]
+
+By the monadic bar construction, every pointed motivic space
+\[
+    G
+    \in
+    \mathbf H_\bullet(S)
+\]
+is the geometric realization of a simplicial object whose terms are
+free pointed objects. Explicitly, its terms have the form
+\[
+    \bigl(
+        T^nU_SG
+    \bigr)_+,
+    \qquad
+    n\geq0.
+\]
+Consequently, every object of \(\mathbf H_\bullet(S)\) belongs to the
+full subcategory generated under colimits by the free pointed objects
+\[
+    F_+,
+    \qquad
+    F\in\mathbf H(S).
+\]
+
+By
+\Ref{prop:brave-new-motivic-compact-generation},
+the category \(\mathbf H(S)\) is generated under colimits by the
+objects
+\[
+    \mathrm M_S(X),
+    \qquad
+    X\in\mathcal C_S.
+\]
+Since the free-pointing functor
+\[
+    (-)_+
+\]
+is a left adjoint, it preserves colimits. Therefore every free pointed
+object \(F_+\) is generated under colimits by
+\[
+    \mathrm M_S(X)_+
+    =
+    \mathrm M_{S,+}(X).
+\]
+It follows that the objects
+\[
+    \mathrm M_{S,+}(X),
+    \qquad
+    X\in\mathcal C_S,
+\]
+generate \(\mathbf H_\bullet(S)\) under colimits.
+\end{proof}
+
+\subsection{Smash products}
+
+\begin{construction}[Wedge and smash products]
+\label{con:pointed-motivic-smash-product}
+Let \(F,G\in\mathbf H_\bullet(S)\).  Their wedge is the coproduct in the
+pointed category:
+\[
+    F\vee G
+    :=
+    F\amalg_*G.
+\]
+Their smash product is the pushout
+\[
+    F\wedge_SG
+    :=
+    (F\times_SG)
+    \amalg_{F\vee G}
+    *.
+\]
+Equivalently,
+\[
+    F\wedge_SG
+    =
+    \frac{F\times_SG}{F\vee G}.
+\]
+\end{construction}
+
+\begin{theorem}[Presentable symmetric monoidal structure on pointed motives]
+\label{thm:pointed-motivic-smash-monoidal}
+The smash product equips
+\[
+    \mathbf H_\bullet(S)
+\]
+with a closed presentably symmetric monoidal structure.  Its tensor unit
+is
+\[
+    \mathbb S^0_S
+    :=
+    (\mathbf 1_S)_+
+    =
+    *\amalg *.
+\]
+The smash product preserves colimits separately in each variable, and
+there are natural equivalences
+\[
+    F_+\wedge_SG_+
+    \simeq
+    (F\times_SG)_+.
+\]
+In particular,
+\[
+    \mathrm M_{S,+}(X)
+    \wedge_S
+    \mathrm M_{S,+}(Y)
+    \simeq
+    \mathrm M_{S,+}(X\times_SY).
+\]
+\end{theorem}
+
+\begin{proof}
+The Cartesian product on \(\mathbf H(S)\) preserves colimits separately
+by
+\Ref{thm:cartesian-monoidal-motivic-localization}.
+The standard pointed-object construction therefore equips
+\(\mathbf H(S)_{*/}\) with its smash-product symmetric monoidal
+structure.  Closedness and separate preservation of colimits follow
+from presentability.  The identity
+\[
+    F_+\wedge G_+
+    \simeq
+    (F\times G)_+
+\]
+follows directly from the pushout defining the smash product.  Apply
+\Ref{cor:products-of-smooth-motives}
+for the final assertion.  See \cite{LurieHA}.
+\end{proof}
+
+\begin{notation}[Pointed internal maps]
+\label{not:pointed-motivic-internal-map}
+The internal mapping object for the smash product is denoted
+\[
+    \underline{\operatorname{Map}}_{\mathbf H_\bullet(S)}(F,G).
+\]
+Thus
+\[
+    \operatorname{Map}_{\mathbf H_\bullet(S)}
+    \bigl(
+        K\wedge_SF,
+        G
+    \bigr)
+    \simeq
+    \operatorname{Map}_{\mathbf H_\bullet(S)}
+    \bigl(
+        K,
+        \underline{\operatorname{Map}}_{\mathbf H_\bullet(S)}(F,G)
+    \bigr).
+\]
+\end{notation}
+
+\subsection{Cofibres, suspension, and loops}
+
+\begin{definition}[Motivic quotient]
+\label{def:motivic-quotient}
+Let
+\[
+    u
+    \colon
+    F
+    \longrightarrow
+    G
+\]
+be a morphism in \(\mathbf H(S)\).  Its pointed quotient is
+\[
+    G/F
+    :=
+    G
+    \amalg_F
+    *
+    \in
+    \mathbf H_\bullet(S).
+\]
+For a morphism
+\[
+    U
+    \longrightarrow
+    X
+\]
+in \(\mathcal C_S\), write
+\[
+    X/U
+    :=
+    \mathrm M_S(X)/
+    \mathrm M_S(U).
+\]
+\end{definition}
+
+\begin{definition}[Suspension and loop objects]
+\label{def:motivic-suspension-loop}
+For \(F\in\mathbf H_\bullet(S)\), define
+\[
+    \Sigma F
+    :=
+    *
+    \amalg_F
+    *,
+\]
+and define
+\[
+    \Omega F
+    :=
+    *
+    \times_F
+    *.
+\]
+\end{definition}
+
+\begin{proposition}[Suspension-loop adjunction]
+\label{prop:motivic-suspension-loop-adjunction}
+There is a natural adjunction
+\[
+    \Sigma
+    \colon
+    \mathbf H_\bullet(S)
+    \rightleftarrows
+    \mathbf H_\bullet(S)
+    :
+    \Omega.
+\]
+Equivalently,
+\[
+    \Sigma F
+    \simeq
+    S^1\otimes F
+\]
+for the canonical tensoring of
+\(\mathbf H_\bullet(S)\) over pointed spaces.
+\end{proposition}
+
+\begin{proof}
+The assertion is the suspension-loop adjunction in any pointed
+presentable \(\infty\)-category.  The pushout and pullback formulas are
+the colimit and limit descriptions of suspension and loops.
+\end{proof}
+
+\section{Functoriality in the spectral base}
+\label{sec:brave-new-motivic-base-functoriality}
+
+For the remainder of this section, let
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    S
+\]
+be a morphism of quasi-compact quasi-separated spectral schemes.  The
+geometric base-change functor of
+\Ref{prop:smooth-site-geometric-base-change}
+is
+\[
+    u_f
+    :=
+    f^*_{\mathrm{geom}}
+    \colon
+    \mathcal C_S
+    \longrightarrow
+    \mathcal C_T,
+    \qquad
+    X
+    \longmapsto
+    X_T:=X\times_ST.
+\]
+
+\subsection{Presheaf inverse and direct image}
+
+\begin{construction}[Presheaf inverse and direct image]
+\label{con:presheaf-base-change-adjunction}
+Define
+\[
+    f^*_{\operatorname{PSh}}
+    :=
+    \operatorname{Lan}_{u_f^{\mathrm{op}}}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \operatorname{PSh}(T)
+\]
+and
+\[
+    f_{*,\operatorname{PSh}}
+    :=
+    (-)\circ u_f^{\mathrm{op}}
+    \colon
+    \operatorname{PSh}(T)
+    \longrightarrow
+    \operatorname{PSh}(S).
+\]
+Then
+\[
+    f^*_{\operatorname{PSh}}
+    \dashv
+    f_{*,\operatorname{PSh}}.
+\]
+\end{construction}
+
+\begin{proposition}[Effect on representables and sections]
+\label{prop:presheaf-base-change-formulas}
+For every \(X\in\mathcal C_S\), there is a canonical equivalence
+\[
+    f^*_{\operatorname{PSh}}h_S(X)
+    \simeq
+    h_T(X_T).
+\]
+For every \(F\in\operatorname{PSh}(T)\) and
+\(X\in\mathcal C_S\),
+\[
+    \bigl(
+        f_{*,\operatorname{PSh}}F
+    \bigr)(X)
+    =
+    F(X_T).
+\]
+\end{proposition}
+
+\begin{proof}
+Left Kan extension along a functor carries a representable presheaf to
+the representable presheaf of its image.  The second formula is the
+definition of restriction along \(u_f^{\mathrm{op}}\).
+\end{proof}
+
+\subsection{Descent to motivic spaces}
+
+\begin{proposition}[Base change preserves motivic generators]
+\label{prop:base-change-preserves-motivic-generators}
+The functor
+\[
+    f^*_{\operatorname{PSh}}
+\]
+carries every morphism in \(W_{\mathrm{mot},S}\) to a motivic
+equivalence in \(\operatorname{PSh}(T)\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d]
+    \\
+    U
+        \arrow[r]
+    &
+    X
+\end{tikzcd}
+\]
+be a chosen representative \(Q\) of a spectral Nisnevich distinguished
+square over \(S\).
+
+Since
+\[
+    f^*_{\operatorname{PSh}}
+\]
+preserves colimits and sends representables to their base changes, the
+morphism
+\[
+    f^*_{\operatorname{PSh}}(e_Q)
+\]
+identifies with the excision morphism associated with the base-changed
+square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W_T
+        \arrow[r]
+        \arrow[d]
+    &
+    V_T
+        \arrow[d]
+    \\
+    U_T
+        \arrow[r]
+    &
+    X_T.
+\end{tikzcd}
+\]
+This square is spectral Nisnevich distinguished by
+\Ref{prop:nisnevich-square-base-change}.
+
+Its excision morphism is equivalent in the arrow category of
+\(\operatorname{PSh}(T)\) to the excision morphism associated with the
+chosen representative of its equivalence class. The latter belongs to
+\(E_{\mathrm{Nis},T}\). Hence
+\[
+    f^*_{\operatorname{PSh}}(e_Q)
+\]
+is a motivic equivalence.
+
+The initial presheaf is preserved by the left adjoint
+\(f^*_{\operatorname{PSh}}\), and
+\[
+    f^*_{\operatorname{PSh}}h_S(\varnothing)
+    \simeq
+    h_T(\varnothing).
+\]
+Therefore
+\[
+    f^*_{\operatorname{PSh}}(e_{\varnothing})
+\]
+identifies with \(e_{\varnothing}\) over \(T\).
+
+Finally, let
+\[
+    h_S(X\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(X)
+\]
+be an affine-line projection. Using the formula for inverse image on
+representables and the affine-space base-change equivalence, its image
+is
+\[
+\begin{aligned}
+    h_T
+    \bigl(
+        (X\times_S\mathbb A^1_S)\times_ST
+    \bigr)
+    &\longrightarrow
+    h_T(X_T)
+    \\
+    \simeq\quad
+    h_T
+    \bigl(
+        X_T\times_T\mathbb A^1_T
+    \bigr)
+    &\longrightarrow
+    h_T(X_T).
+\end{aligned}
+\]
+This belongs to \(W_{\mathbb A^1,T}\). Thus every morphism in
+\(W_{\mathrm{mot},S}\) is carried to a motivic equivalence over \(T\).
+\end{proof}
+
+\begin{proposition}[Direct image preserves motivic-local objects]
+\label{prop:direct-image-preserves-motivic-local}
+If
+\[
+    F
+    \in
+    \mathbf H(T),
+\]
+then
+\[
+    f_{*,\operatorname{PSh}}F
+\]
+is motivic-local over \(S\).
+\end{proposition}
+
+\begin{proof}
+Let \(Q\) be a spectral Nisnevich distinguished square in
+\(\mathcal C_S\).  Evaluating \(f_{*,\operatorname{PSh}}F\) on \(Q\)
+amounts to evaluating \(F\) on the base-changed square \(Q_T\), which is
+distinguished by
+\Ref{prop:nisnevich-square-base-change}.
+Thus Nisnevich excision is preserved.  The empty value remains
+contractible.
+
+For \(X\in\mathcal C_S\), one has
+\[
+\begin{aligned}
+    \bigl(
+        f_{*,\operatorname{PSh}}F
+    \bigr)
+    (X\times_S\mathbb A^1_S)
+    &=
+    F
+    \bigl(
+        (X\times_S\mathbb A^1_S)\times_ST
+    \bigr)
+    \\
+    &\simeq
+    F
+    \bigl(
+        X_T\times_T\mathbb A^1_T
+    \bigr)
+    \\
+    &\simeq
+    F(X_T)
+    \\
+    &=
+    \bigl(
+        f_{*,\operatorname{PSh}}F
+    \bigr)(X).
+\end{aligned}
+\]
+Hence direct image preserves affine-line invariance.
+\end{proof}
+
+\begin{theorem}[Inverse and direct image]
+\label{thm:motivic-inverse-direct-image}
+The presheaf adjunction descends to an adjunction
+\[
+    f^*
+    \colon
+    \mathbf H(S)
+    \rightleftarrows
+    \mathbf H(T)
+    :
+    f_*.
+\]
+The inverse-image functor is colimit-preserving and satisfies
+\[
+    f^*\mathrm M_S(X)
+    \simeq
+    \mathrm M_T(X_T)
+\]
+for every \(X\in\mathcal C_S\).
+
+The direct-image functor is given on sections by
+\[
+    (f_*F)(X)
+    \simeq
+    F(X_T)
+\]
+for every \(F\in\mathbf H(T)\) and \(X\in\mathcal C_S\).
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \mathcal V_f
+\]
+be the class of morphisms
+\[
+    u
+    \colon
+    F
+    \longrightarrow
+    G
+\]
+in \(\operatorname{PSh}(S)\) such that
+\[
+    f^*_{\operatorname{PSh}}(u)
+\]
+is a motivic equivalence in \(\operatorname{PSh}(T)\).
+
+The class of motivic equivalences in
+\(\operatorname{PSh}(T)\) is strongly saturated. Indeed, by
+\Ref{thm:brave-new-motivic-localization}, it is the class of
+morphisms inverted by the reflective localization
+\[
+    L_{\mathrm{mot},T}
+    \colon
+    \operatorname{PSh}(T)
+    \longrightarrow
+    \mathbf H(T).
+\]
+
+The functor
+\[
+    f^*_{\operatorname{PSh}}
+    \colon
+    \operatorname{PSh}(S)
+    \longrightarrow
+    \operatorname{PSh}(T)
+\]
+preserves colimits, compositions, and retracts. Consequently,
+\(\mathcal V_f\) is strongly saturated.
+
+By
+\Ref{prop:base-change-preserves-motivic-generators},
+the class \(\mathcal V_f\) contains every morphism in
+\[
+    W_{\mathrm{mot},S}.
+\]
+It therefore contains the strongly saturated class generated by
+\(W_{\mathrm{mot},S}\). By
+\Ref{thm:brave-new-motivic-localization}, this is precisely the class
+of motivic equivalences in \(\operatorname{PSh}(S)\).
+
+Thus
+\[
+    f^*_{\operatorname{PSh}}
+\]
+carries arbitrary motivic equivalences over \(S\) to motivic
+equivalences over \(T\). The universal property of motivic localization
+therefore supplies a unique colimit-preserving functor
+\[
+    f^*
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H(T)
+\]
+together with a canonical equivalence
+\[
+    f^*L_{\mathrm{mot},S}
+    \simeq
+    L_{\mathrm{mot},T}f^*_{\operatorname{PSh}}.
+\]
+
+For every \(X\in\mathcal C_S\), one has
+\[
+\begin{aligned}
+    f^*\mathrm M_S(X)
+    &=
+    f^*L_{\mathrm{mot},S}h_S(X)
+    \\
+    &\simeq
+    L_{\mathrm{mot},T}
+    f^*_{\operatorname{PSh}}h_S(X)
+    \\
+    &\simeq
+    L_{\mathrm{mot},T}h_T(X_T)
+    \\
+    &=
+    \mathrm M_T(X_T),
+\end{aligned}
+\]
+where the second equivalence uses
+\Ref{prop:presheaf-base-change-formulas}.
+
+By
+\Ref{prop:direct-image-preserves-motivic-local},
+the presheaf direct image restricts to a functor
+\[
+    f_*
+    \colon
+    \mathbf H(T)
+    \longrightarrow
+    \mathbf H(S),
+\]
+characterized by
+\[
+    \iota_Sf_*G
+    \simeq
+    f_{*,\operatorname{PSh}}\iota_TG
+\]
+for every \(G\in\mathbf H(T)\).
+
+Let
+\[
+    F
+    \in
+    \mathbf H(S),
+    \qquad
+    G
+    \in
+    \mathbf H(T).
+\]
+Using the localization adjunction, the presheaf adjunction, and the
+fact that
+\[
+    f_{*,\operatorname{PSh}}\iota_TG
+\]
+is motivic-local, we obtain natural equivalences
+\[
+\begin{aligned}
+    \operatorname{Map}_{\mathbf H(T)}
+    \bigl(
+        f^*F,
+        G
+    \bigr)
+    &\simeq
+    \operatorname{Map}_{\mathbf H(T)}
+    \bigl(
+        L_{\mathrm{mot},T}
+        f^*_{\operatorname{PSh}}\iota_SF,
+        G
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\operatorname{PSh}(T)}
+    \bigl(
+        f^*_{\operatorname{PSh}}\iota_SF,
+        \iota_TG
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        \iota_SF,
+        f_{*,\operatorname{PSh}}\iota_TG
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        \iota_SF,
+        \iota_Sf_*G
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        F,
+        f_*G
+    \bigr).
+\end{aligned}
+\]
+Thus
+\[
+    f^*
+    \dashv
+    f_*.
+\]
+
+Finally, for every \(F\in\mathbf H(T)\) and
+\(X\in\mathcal C_S\), the definition of presheaf direct image gives
+\[
+\begin{aligned}
+    (f_*F)(X)
+    &=
+    \bigl(
+        f_{*,\operatorname{PSh}}\iota_TF
+    \bigr)(X)
+    \\
+    &=
+    F(X_T).
+\end{aligned}
+\]
+This proves the section formula.
+\end{proof}
+
+\begin{proposition}[Coherent functoriality]
+\label{prop:motivic-coherent-base-functoriality}
+For composable morphisms of quasi-compact quasi-separated spectral
+schemes
+\[
+    R
+    \xrightarrow{g}
+    T
+    \xrightarrow{f}
+    S,
+\]
+there are canonical coherent equivalences
+\[
+    (f\circ g)^*
+    \simeq
+    g^*f^*
+\]
+and
+\[
+    (f\circ g)_*
+    \simeq
+    f_*g_*.
+\]
+For the identity morphism, the corresponding functors are canonically
+equivalent to the identity.
+\end{proposition}
+
+\begin{proof}
+The geometric base-change functors satisfy coherent composition by
+\Ref{prop:smooth-site-geometric-base-change}.  The left Kan extensions
+therefore satisfy the corresponding coherent equivalences.  Passing to
+motivic localization preserves them.  The direct-image equivalences are
+their right-adjoint mates, or follow directly from restriction of
+presheaves.
+\end{proof}
+
+\subsection{Monoidality of inverse image}
+
+\begin{theorem}[Symmetric monoidal inverse image]
+\label{thm:motivic-inverse-image-symmetric-monoidal}
+For every morphism
+\[
+    f
+    \colon
+    T
+    \longrightarrow
+    S
+\]
+of quasi-compact quasi-separated spectral schemes, the functor
+\[
+    f^*
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H(T)
+\]
+is strong symmetric monoidal for the Cartesian structures. Thus there
+are natural coherent equivalences
+\[
+    f^*(F\times_SG)
+    \simeq
+    f^*F\times_Tf^*G
+\]
+and
+\[
+    f^*(\mathbf 1_S)
+    \simeq
+    \mathbf 1_T.
+\]
+Consequently \(f_*\) is canonically lax symmetric monoidal.
+\end{theorem}
+
+\begin{proof}
+Since the Cartesian symmetric monoidal structure is determined by
+finite products, the projections
+\[
+    F\times_SG
+    \longrightarrow
+    F
+\]
+and
+\[
+    F\times_SG
+    \longrightarrow
+    G
+\]
+determine a canonical comparison morphism
+\[
+    \mu_{F,G}
+    \colon
+    f^*(F\times_SG)
+    \longrightarrow
+    f^*F\times_Tf^*G.
+\]
+
+The terminal object of \(\mathbf H(S)\) is
+\[
+    \mathbf 1_S
+    \simeq
+    \mathrm M_S(S).
+\]
+Therefore
+\[
+\begin{aligned}
+    f^*(\mathbf 1_S)
+    &\simeq
+    f^*\mathrm M_S(S)
+    \\
+    &\simeq
+    \mathrm M_T(S\times_ST)
+    \\
+    &\simeq
+    \mathrm M_T(T)
+    \\
+    &=
+    \mathbf 1_T.
+\end{aligned}
+\]
+Thus the canonical comparison
+\[
+    f^*(\mathbf 1_S)
+    \longrightarrow
+    \mathbf 1_T
+\]
+is an equivalence.
+
+Now let
+\[
+    X,Y
+    \in
+    \mathcal C_S.
+\]
+Using
+\Ref{cor:products-of-smooth-motives}
+and the formula for inverse image on smooth motives, we obtain
+\[
+\begin{aligned}
+    f^*
+    \bigl(
+        \mathrm M_S(X)\times_S\mathrm M_S(Y)
+    \bigr)
+    &\simeq
+    f^*\mathrm M_S(X\times_SY)
+    \\
+    &\simeq
+    \mathrm M_T
+    \bigl(
+        (X\times_SY)\times_ST
+    \bigr)
+    \\
+    &\simeq
+    \mathrm M_T(X_T\times_TY_T)
+    \\
+    &\simeq
+    \mathrm M_T(X_T)
+    \times_T
+    \mathrm M_T(Y_T)
+    \\
+    &\simeq
+    f^*\mathrm M_S(X)
+    \times_T
+    f^*\mathrm M_S(Y).
+\end{aligned}
+\]
+Under these identifications, the morphism
+\[
+    \mu_{\mathrm M_S(X),\mathrm M_S(Y)}
+\]
+is the canonical equivalence induced by the two projections. Hence it
+is an equivalence.
+
+Both bifunctors
+\[
+    (F,G)
+    \longmapsto
+    f^*(F\times_SG)
+\]
+and
+\[
+    (F,G)
+    \longmapsto
+    f^*F\times_Tf^*G
+\]
+preserve colimits separately in each variable: \(f^*\) preserves
+colimits, and Cartesian products in the motivic categories preserve
+colimits separately by
+\Ref{thm:cartesian-monoidal-motivic-localization}.
+
+The smooth motives generate \(\mathbf H(S)\) under colimits by
+\Ref{prop:brave-new-motivic-compact-generation}. Fixing one variable
+and extending from the smooth motives in the other, and then repeating
+in the second variable, shows that
+\[
+    \mu_{F,G}
+\]
+is an equivalence for all \(F,G\in\mathbf H(S)\).
+
+The Cartesian symmetric monoidal coherence maps are uniquely determined
+by the finite-product comparison maps. The equivalences above therefore
+equip \(f^*\) with a canonical coherent strong symmetric monoidal
+structure.
+
+A right adjoint to a strong symmetric monoidal functor is canonically
+lax symmetric monoidal. Hence \(f_*\) is canonically lax symmetric
+monoidal.
+\end{proof}
+
+\subsection{Pointed base change}
+
+\begin{proposition}[Base change on pointed motivic spaces]
+\label{prop:pointed-motivic-base-change}
+The functor \(f^*\) induces a strong symmetric monoidal functor
+\[
+    f^*_\bullet
+    \colon
+    \mathbf H_\bullet(S)
+    \longrightarrow
+    \mathbf H_\bullet(T)
+\]
+for the smash products.  It admits a right adjoint
+\[
+    f_{*,\bullet}.
+\]
+For every \(X\in\mathcal C_S\),
+\[
+    f^*_\bullet\mathrm M_{S,+}(X)
+    \simeq
+    \mathrm M_{T,+}(X_T).
+\]
+\end{proposition}
+
+\begin{proof}
+The functor \(f^*\) preserves colimits and the terminal object.  It
+therefore induces a colimit-preserving functor on pointed objects by
+applying \(f^*\) to the underlying object and basepoint.  Strong
+symmetric monoidality for smash products follows from strong Cartesian
+monoidality and the pushout formula defining the smash product.
+
+Since the pointed motivic categories are presentable, the adjoint
+functor theorem supplies a right adjoint.  Equivalently, the basepoint
+of \(f_{*,\bullet}(G)\) is the composite
+\[
+    *_S
+    \longrightarrow
+    f_*(*_T)
+    \longrightarrow
+    f_*U_T(G)
+\]
+induced by the adjunction unit and the given basepoint of \(G\).
+The formula on pointed smooth motives follows from
+\Ref{thm:motivic-inverse-direct-image}.
+\end{proof}
+
+\begin{proposition}[Coherent pointed base functoriality]
+\label{prop:pointed-motivic-coherent-base-functoriality}
+For composable morphisms of quasi-compact quasi-separated spectral
+schemes
+\[
+    R
+    \xrightarrow{g}
+    T
+    \xrightarrow{f}
+    S,
+\]
+there are canonical coherent equivalences
+\[
+    (f\circ g)^*_\bullet
+    \simeq
+    g^*_\bullet f^*_\bullet
+\]
+and
+\[
+    (f\circ g)_{*,\bullet}
+    \simeq
+    f_{*,\bullet}g_{*,\bullet}.
+\]
+For an identity morphism, the corresponding pointed inverse- and
+direct-image functors are canonically equivalent to the identity.
+\end{proposition}
+
+\begin{proof}
+The pointed inverse-image functor
+\[
+    f^*_\bullet
+    \colon
+    \mathbf H_\bullet(S)
+    \longrightarrow
+    \mathbf H_\bullet(T)
+\]
+is induced from the functor
+\[
+    f^*
+    \colon
+    \mathbf H(S)
+    \longrightarrow
+    \mathbf H(T)
+\]
+together with the canonical equivalence
+\[
+    f^*(*_S)
+    \simeq
+    *_T.
+\]
+The coherent composition equivalence
+\[
+    (f\circ g)^*
+    \simeq
+    g^*f^*
+\]
+of
+\Ref{prop:motivic-coherent-base-functoriality}
+therefore induces a coherent equivalence on pointed objects
+\[
+    (f\circ g)^*_\bullet
+    \simeq
+    g^*_\bullet f^*_\bullet.
+\]
+The identity equivalence is inherited in the same way.
+
+The direct-image equivalence is the right-adjoint mate of the
+inverse-image equivalence. Equivalently, both
+\[
+    (f\circ g)_{*,\bullet}
+    \qquad\text{and}\qquad
+    f_{*,\bullet}g_{*,\bullet}
+\]
+are right adjoint to the canonically equivalent functors
+\[
+    (f\circ g)^*_\bullet
+    \qquad\text{and}\qquad
+    g^*_\bullet f^*_\bullet.
+\]
+Uniqueness of right adjoints therefore supplies a canonical
+equivalence
+\[
+    (f\circ g)_{*,\bullet}
+    \simeq
+    f_{*,\bullet}g_{*,\bullet}.
+\]
+Compatibility with triple composition and identities follows from the
+coherence of the unpointed equivalences and the coherence of taking
+adjoint mates.
+\end{proof}
+
+\section{Smooth direct image}
+\label{sec:brave-new-motivic-smooth-direct-image}
+
+Let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation.  Thus
+\[
+    X
+    \in
+    \mathcal C_S.
+\]
+
+Since \(S\) is quasi-compact and quasi-separated and \(p\) is of finite
+presentation, the spectral scheme \(X\) is quasi-compact and
+quasi-separated. Consequently, the motivic categories
+\[
+    \mathbf H(X)
+    \qquad\text{and}\qquad
+    \mathbf H_\bullet(X)
+\]
+are defined under the standing conventions of this chapter.
+
+\subsection{The geometric adjunction on smooth sites}
+
+The geometric base-change functor is
+\[
+    p^*_{\mathrm{geom}}
+    \colon
+    \mathcal C_S
+    \longrightarrow
+    \mathcal C_X,
+    \qquad
+    Y
+    \longmapsto
+    Y\times_SX.
+\]
+The smooth-composition functor of
+\Ref{prop:smooth-composition-functor}
+is
+\[
+    p^{\mathrm{geom}}_\sharp
+    \colon
+    \mathcal C_X
+    \longrightarrow
+    \mathcal C_S,
+\]
+which sends \(Y\to X\) to its composite \(Y\to S\).
+
+\begin{proposition}[Geometric smooth adjunction]
+\label{prop:geometric-smooth-adjunction}
+There is a natural adjunction
+\[
+    p^{\mathrm{geom}}_\sharp
+    \dashv
+    p^*_{\mathrm{geom}}.
+\]
+\end{proposition}
+
+\begin{proof}
+For \(Y\to X\) smooth of finite presentation and
+\(Z\to S\) smooth of finite presentation, the universal property of the
+fibre product gives
+\[
+    \operatorname{Map}_S(Y,Z)
+    \simeq
+    \operatorname{Map}_X
+    \bigl(
+        Y,
+        Z\times_SX
+    \bigr).
+\]
+This is the required adjunction.
+\end{proof}
+
+\subsection{Smooth direct image on presheaves}
+
+\begin{construction}[Presheaf smooth direct image]
+\label{con:presheaf-smooth-direct-image}
+Define
+\[
+    p^{\operatorname{PSh}}_\sharp
+    :=
+    \operatorname{Lan}_{(p^{\mathrm{geom}}_\sharp)^{\mathrm{op}}}
+    \colon
+    \operatorname{PSh}(X)
+    \longrightarrow
+    \operatorname{PSh}(S).
+\]
+\end{construction}
+
+\begin{proposition}[Presheaf smooth adjunction]
+\label{prop:presheaf-smooth-adjunction}
+There is a natural adjunction
+\[
+    p^{\operatorname{PSh}}_\sharp
+    \dashv
+    p^*_{\operatorname{PSh}}.
+\]
+For every \(Y\in\mathcal C_X\),
+\[
+    p^{\operatorname{PSh}}_\sharp h_X(Y)
+    \simeq
+    h_S(Y),
+\]
+where on the right \(Y\) is regarded as a smooth spectral \(S\)-scheme
+by composition with \(p\).
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:geometric-smooth-adjunction},
+the opposite functor
+\[
+    (p^*_{\mathrm{geom}})^{\mathrm{op}}
+\]
+is left adjoint to
+\[
+    (p^{\mathrm{geom}}_\sharp)^{\mathrm{op}}.
+\]
+Left Kan extension along a left adjoint is restriction along its right
+adjoint.  Consequently
+\[
+    p^*_{\operatorname{PSh}}
+    =
+    \operatorname{Lan}_{(p^*_{\mathrm{geom}})^{\mathrm{op}}}
+\]
+is canonically equivalent to restriction along
+\((p^{\mathrm{geom}}_\sharp)^{\mathrm{op}}\).  Its left adjoint is
+therefore the displayed left Kan extension
+\(p^{\operatorname{PSh}}_\sharp\).
+
+The formula on representables is the usual effect of left Kan
+extension on representable presheaves.
+\end{proof}
+
+\begin{proposition}[Smooth inverse image preserves motivic-local objects]
+\label{prop:smooth-presheaf-inverse-image-preserves-local}
+Let
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+be smooth and of finite presentation. If
+\[
+    G
+    \in
+    \mathbf H(S),
+\]
+then
+\[
+    p^*_{\operatorname{PSh}}\iota_SG
+\]
+is motivic-local over \(X\).
+
+Consequently, there is a canonical equivalence
+\[
+    p^*_{\operatorname{PSh}}\iota_SG
+    \simeq
+    \iota_Xp^*G.
+\]
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:presheaf-smooth-adjunction},
+the functor
+\[
+    p^*_{\operatorname{PSh}}
+\]
+is canonically equivalent to restriction along
+\[
+    (p^{\mathrm{geom}}_\sharp)^{\mathrm{op}}.
+\]
+Thus, for every
+\[
+    Y
+    \in
+    \mathcal C_X,
+\]
+there is a natural equivalence
+\[
+    \bigl(
+        p^*_{\operatorname{PSh}}\iota_SG
+    \bigr)(Y)
+    \simeq
+    G(Y),
+\]
+where on the right \(Y\) is regarded as a smooth spectral \(S\)-scheme
+by composition with \(p\).
+
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d]
+    \\
+    U
+        \arrow[r]
+    &
+    Y
+\end{tikzcd}
+\]
+be a spectral Nisnevich distinguished square in \(\mathcal C_X\).
+Regarded by composition as a square in \(\mathcal C_S\), it remains a
+spectral Nisnevich distinguished square: its open immersion, étale
+morphism, complementary closed immersion, and equivalence over the
+closed complement are unchanged. Since \(G\) is Nisnevich-local, the
+square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    G(Y)
+        \arrow[r]
+        \arrow[d]
+    &
+    G(U)
+        \arrow[d]
+    \\
+    G(V)
+        \arrow[r]
+    &
+    G(W)
+\end{tikzcd}
+\]
+is Cartesian. Hence
+\[
+    p^*_{\operatorname{PSh}}\iota_SG
+\]
+satisfies Nisnevich excision. Its value at the empty spectral scheme is
+contractible because the empty spectral scheme is unchanged under
+composition with \(p\).
+
+Finally, for every \(Y\in\mathcal C_X\), the affine-space base-change
+equivalence gives
+\[
+    \mathbb A^1_X
+    \simeq
+    X\times_S\mathbb A^1_S
+\]
+and therefore
+\[
+    Y\times_X\mathbb A^1_X
+    \simeq
+    Y\times_S\mathbb A^1_S.
+\]
+It follows that
+\[
+\begin{aligned}
+    \bigl(
+        p^*_{\operatorname{PSh}}\iota_SG
+    \bigr)
+    (Y\times_X\mathbb A^1_X)
+    &\simeq
+    G(Y\times_S\mathbb A^1_S)
+    \\
+    &\simeq
+    G(Y)
+    \\
+    &\simeq
+    \bigl(
+        p^*_{\operatorname{PSh}}\iota_SG
+    \bigr)(Y).
+\end{aligned}
+\]
+Thus
+\[
+    p^*_{\operatorname{PSh}}\iota_SG
+\]
+is \(\mathbb A^1\)-invariant and hence motivic-local.
+
+By the definition of motivic inverse image,
+\[
+    p^*G
+    \simeq
+    L_{\mathrm{mot},X}
+    p^*_{\operatorname{PSh}}\iota_SG.
+\]
+Since the presheaf on the right is already motivic-local, the
+localization unit is an equivalence. Therefore
+\[
+    p^*_{\operatorname{PSh}}\iota_SG
+    \simeq
+    \iota_Xp^*G.
+\]
+\end{proof}
+
+\begin{proposition}[Smooth direct image preserves motivic generators]
+\label{prop:smooth-direct-image-preserves-generators}
+The functor
+\[
+    p^{\operatorname{PSh}}_\sharp
+\]
+carries every morphism in \(W_{\mathrm{mot},X}\) to a motivic
+equivalence over \(S\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    W
+        \arrow[r]
+        \arrow[d]
+    &
+    V
+        \arrow[d]
+    \\
+    U
+        \arrow[r]
+    &
+    Y
+\end{tikzcd}
+\]
+be a chosen representative of a spectral Nisnevich distinguished square
+in \(\mathcal C_X\).
+
+Regarded by composition with \(p\) as a square in \(\mathcal C_S\), it
+remains spectral Nisnevich distinguished: its open immersion, étale
+morphism, complementary closed immersion, and equivalence over the
+closed complement are unchanged.
+
+The functor
+\[
+    p^{\operatorname{PSh}}_\sharp
+\]
+preserves colimits and sends each representable \(h_X(Z)\) to the
+representable \(h_S(Z)\), where \(Z\) on the right is regarded as a
+smooth spectral \(S\)-scheme by composition with \(p\). Consequently,
+it carries the excision morphism of the displayed square over \(X\) to
+the excision morphism of the same square regarded over \(S\).
+
+This excision morphism is equivalent in the arrow category of
+\(\operatorname{PSh}(S)\) to the excision morphism associated with the
+chosen representative of its equivalence class. The latter belongs to
+\(E_{\mathrm{Nis},S}\). Hence the image is a motivic equivalence.
+
+The functor \(p^{\operatorname{PSh}}_\sharp\) preserves the initial
+presheaf and sends \(h_X(\varnothing)\) to \(h_S(\varnothing)\).
+Therefore it carries the empty excision morphism over \(X\) to the empty
+excision morphism over \(S\).
+
+Finally, let \(Y\in\mathcal C_X\). Base change of brave new affine
+space gives
+\[
+    \mathbb A^1_X
+    \simeq
+    X\times_S\mathbb A^1_S.
+\]
+Therefore
+\[
+\begin{aligned}
+    Y\times_X\mathbb A^1_X
+    &\simeq
+    Y\times_X
+    \bigl(
+        X\times_S\mathbb A^1_S
+    \bigr)
+    \\
+    &\simeq
+    Y\times_S\mathbb A^1_S.
+\end{aligned}
+\]
+The affine-line projection over \(X\),
+\[
+    h_X(Y\times_X\mathbb A^1_X)
+    \longrightarrow
+    h_X(Y),
+\]
+is consequently carried to
+\[
+    h_S(Y\times_S\mathbb A^1_S)
+    \longrightarrow
+    h_S(Y),
+\]
+which belongs to \(W_{\mathbb A^1,S}\). Thus
+\(p^{\operatorname{PSh}}_\sharp\) carries every morphism in
+\(W_{\mathrm{mot},X}\) to a motivic equivalence over \(S\).
+\end{proof}
+
+\begin{theorem}[Smooth direct image on motivic spaces]
+\label{thm:smooth-motivic-direct-image}
+The presheaf smooth direct image descends to a colimit-preserving
+functor
+\[
+    p_\sharp
+    \colon
+    \mathbf H(X)
+    \longrightarrow
+    \mathbf H(S)
+\]
+which is left adjoint to inverse image:
+\[
+    p_\sharp
+    \dashv
+    p^*.
+\]
+For every \(Y\in\mathcal C_X\),
+\[
+    p_\sharp\mathrm M_X(Y)
+    \simeq
+    \mathrm M_S(Y).
+\]
+\end{theorem}
+
+\begin{proof}
+By
+\Ref{prop:smooth-direct-image-preserves-generators},
+the colimit-preserving functor
+\[
+    p^{\operatorname{PSh}}_\sharp
+\]
+carries every morphism in \(W_{\mathrm{mot},X}\) to a motivic
+equivalence over \(S\).
+
+The class of morphisms carried by
+\(p^{\operatorname{PSh}}_\sharp\) to motivic equivalences is strongly
+saturated: the functor preserves colimits, compositions, and retracts,
+and the class of motivic equivalences is strongly saturated.
+Consequently,
+\[
+    p^{\operatorname{PSh}}_\sharp
+\]
+carries every motivic equivalence over \(X\) to a motivic equivalence
+over \(S\).
+
+It therefore descends uniquely to a colimit-preserving functor
+\[
+    p_\sharp
+    \colon
+    \mathbf H(X)
+    \longrightarrow
+    \mathbf H(S)
+\]
+characterized by a canonical equivalence
+\[
+    p_\sharp L_{\mathrm{mot},X}
+    \simeq
+    L_{\mathrm{mot},S}
+    p^{\operatorname{PSh}}_\sharp.
+\]
+
+Let
+\[
+    F
+    \in
+    \mathbf H(X),
+    \qquad
+    G
+    \in
+    \mathbf H(S).
+\]
+Using the localization adjunction, the presheaf smooth adjunction, and
+\Ref{prop:smooth-presheaf-inverse-image-preserves-local},
+we obtain natural equivalences
+\[
+\begin{aligned}
+    \operatorname{Map}_{\mathbf H(S)}
+    \bigl(
+        p_\sharp F,
+        G
+    \bigr)
+    &\simeq
+    \operatorname{Map}_{\operatorname{PSh}(S)}
+    \bigl(
+        p^{\operatorname{PSh}}_\sharp\iota_XF,
+        \iota_SG
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\operatorname{PSh}(X)}
+    \bigl(
+        \iota_XF,
+        p^*_{\operatorname{PSh}}\iota_SG
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\operatorname{PSh}(X)}
+    \bigl(
+        \iota_XF,
+        \iota_Xp^*G
+    \bigr)
+    \\
+    &\simeq
+    \operatorname{Map}_{\mathbf H(X)}
+    \bigl(
+        F,
+        p^*G
+    \bigr).
+\end{aligned}
+\]
+Thus
+\[
+    p_\sharp
+    \dashv
+    p^*.
+\]
+
+For \(Y\in\mathcal C_X\), the formula on representables from
+\Ref{prop:presheaf-smooth-adjunction}
+gives
+\[
+    p^{\operatorname{PSh}}_\sharp h_X(Y)
+    \simeq
+    h_S(Y),
+\]
+where \(Y\) on the right is regarded as a smooth spectral \(S\)-scheme
+by composition with \(p\). Hence
+\[
+\begin{aligned}
+    p_\sharp\mathrm M_X(Y)
+    &\simeq
+    p_\sharp L_{\mathrm{mot},X}h_X(Y)
+    \\
+    &\simeq
+    L_{\mathrm{mot},S}
+    p^{\operatorname{PSh}}_\sharp h_X(Y)
+    \\
+    &\simeq
+    L_{\mathrm{mot},S}h_S(Y)
+    \\
+    &=
+    \mathrm M_S(Y).
+\end{aligned}
+\]
+\end{proof}
+
+\begin{proposition}[Composition of smooth direct image]
+\label{prop:smooth-direct-image-composition}
+For smooth morphisms of finite presentation
+\[
+    Y
+    \xrightarrow{q}
+    X
+    \xrightarrow{p}
+    S,
+\]
+there is a canonical coherent equivalence
+\[
+    (p\circ q)_\sharp
+    \simeq
+    p_\sharp q_\sharp.
+\]
+The smooth direct image of an identity morphism is canonically the
+identity.
+\end{proposition}
+
+\begin{proof}
+At the geometric level, both functors are composition of smooth
+spectral morphisms.  Their left Kan extensions therefore agree
+canonically, with coherent associativity.  Passing to motivic
+localization preserves this equivalence.
+\end{proof}
+
+\subsection{Smooth base change}
+
+\begin{construction}[Smooth exchange transformation]
+\label{con:unstable-smooth-exchange-transformation}
+Consider a Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    X_T
+        \arrow[r, "g'"]
+        \arrow[d, "p'"']
+    &
+    X
+        \arrow[d, "p"]
+    \\
+    T
+        \arrow[r, "g"']
+    &
+    S
+\end{tikzcd}
+\]
+in which \(p\) is smooth and of finite presentation.
+
+Coherent functoriality of inverse image gives a canonical equivalence
+\[
+    (g')^*p^*
+    \xrightarrow{\simeq}
+    (p')^*g^*.
+\]
+Its left mate under the adjunctions
+\[
+    p_\sharp
+    \dashv
+    p^*
+    \qquad\text{and}\qquad
+    p'_\sharp
+    \dashv
+    (p')^*
+\]
+is the \textbf{smooth exchange transformation}
+\[
+    \operatorname{Ex}_{\sharp}^{*}
+    \colon
+    p'_\sharp(g')^*
+    \longrightarrow
+    g^*p_\sharp.
+\]
+
+Explicitly, for
+\[
+    F
+    \in
+    \mathbf H(X),
+\]
+the component
+\[
+    \operatorname{Ex}_{\sharp,F}^{*}
+    \colon
+    p'_\sharp(g')^*F
+    \longrightarrow
+    g^*p_\sharp F
+\]
+is adjoint to the composite
+\[
+\begin{aligned}
+    (g')^*F
+    &\xrightarrow{(g')^*(\eta_F)}
+    (g')^*p^*p_\sharp F
+    \\
+    &\xrightarrow{\simeq}
+    (p')^*g^*p_\sharp F,
+\end{aligned}
+\]
+where
+\[
+    \eta_F
+    \colon
+    F
+    \longrightarrow
+    p^*p_\sharp F
+\]
+is the unit of the adjunction
+\[
+    p_\sharp
+    \dashv
+    p^*.
+\]
+\end{construction}
+
+\begin{theorem}[Smooth base change]
+\label{thm:unstable-smooth-base-change}
+Let
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    X_T
+        \arrow[r, "g'"]
+        \arrow[d, "p'"']
+    &
+    X
+        \arrow[d, "p"]
+    \\
+    T
+        \arrow[r, "g"']
+    &
+    S
+\end{tikzcd}
+\]
+be a Cartesian square of quasi-compact quasi-separated spectral schemes,
+where \(p\) is smooth and of finite presentation. Then \(p'\) is smooth
+and of finite presentation, and the smooth exchange transformation of
+\Ref{con:unstable-smooth-exchange-transformation}
+\[
+    \operatorname{Ex}_{\sharp}^{*}
+    \colon
+    p'_\sharp(g')^*
+    \longrightarrow
+    g^*p_\sharp
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Smoothness and finite presentation of
+\[
+    p'
+    \colon
+    X_T
+    \longrightarrow
+    T
+\]
+follow from the stability of smooth morphisms of finite presentation
+under base change.
+
+Both functors
+\[
+    p'_\sharp(g')^*
+    \qquad\text{and}\qquad
+    g^*p_\sharp
+\]
+preserve colimits. The smooth motives
+\[
+    \mathrm M_X(Y),
+    \qquad
+    Y\in\mathcal C_X,
+\]
+generate \(\mathbf H(X)\) under colimits by
+\Ref{prop:brave-new-motivic-compact-generation}.
+It is therefore enough to prove that the exchange transformation is an
+equivalence on every smooth motive
+\[
+    \mathrm M_X(Y).
+\]
+
+For \(Y\in\mathcal C_X\), one has
+\[
+\begin{aligned}
+    p'_\sharp(g')^*\mathrm M_X(Y)
+    &\simeq
+    p'_\sharp
+    \mathrm M_{X_T}
+    \bigl(
+        Y\times_XX_T
+    \bigr)
+    \\
+    &\simeq
+    \mathrm M_T
+    \bigl(
+        Y\times_XX_T
+    \bigr).
+\end{aligned}
+\]
+Since
+\[
+    X_T
+    \simeq
+    X\times_ST,
+\]
+there is a canonical equivalence
+\[
+    Y\times_XX_T
+    \simeq
+    Y\times_ST.
+\]
+Consequently,
+\[
+    p'_\sharp(g')^*\mathrm M_X(Y)
+    \simeq
+    \mathrm M_T(Y\times_ST).
+\]
+
+On the other hand,
+\[
+\begin{aligned}
+    g^*p_\sharp\mathrm M_X(Y)
+    &\simeq
+    g^*\mathrm M_S(Y)
+    \\
+    &\simeq
+    \mathrm M_T(Y\times_ST).
+\end{aligned}
+\]
+
+We now identify the exchange component under these equivalences. By
+\Ref{con:unstable-smooth-exchange-transformation}, its component at
+\(\mathrm M_X(Y)\) is the mate of the composite
+\[
+\begin{aligned}
+    (g')^*\mathrm M_X(Y)
+    &\xrightarrow{(g')^*(\eta)}
+    (g')^*p^*p_\sharp\mathrm M_X(Y)
+    \\
+    &\xrightarrow{\simeq}
+    (p')^*g^*p_\sharp\mathrm M_X(Y),
+\end{aligned}
+\]
+where
+\[
+    \eta
+    \colon
+    \mathrm M_X(Y)
+    \longrightarrow
+    p^*p_\sharp\mathrm M_X(Y)
+\]
+is the unit of
+\[
+    p_\sharp
+    \dashv
+    p^*.
+\]
+
+Equivalently, the exchange component is the composite
+\[
+\begin{aligned}
+    p'_\sharp(g')^*\mathrm M_X(Y)
+    &\longrightarrow
+    p'_\sharp(p')^*g^*p_\sharp\mathrm M_X(Y)
+    \\
+    &\xrightarrow{\varepsilon}
+    g^*p_\sharp\mathrm M_X(Y),
+\end{aligned}
+\]
+where
+\[
+    \varepsilon
+    \colon
+    p'_\sharp(p')^*
+    \longrightarrow
+    \operatorname{id}_{\mathbf H(T)}
+\]
+is the counit of
+\[
+    p'_\sharp
+    \dashv
+    (p')^*.
+\]
+
+The unit
+\[
+    \mathrm M_X(Y)
+    \longrightarrow
+    p^*p_\sharp\mathrm M_X(Y)
+    \simeq
+    \mathrm M_X(Y\times_SX)
+\]
+is induced by the canonical \(X\)-morphism
+\[
+    Y
+    \longrightarrow
+    Y\times_SX
+\]
+whose components are the identity morphism of \(Y\) and the given
+morphism \(Y\to X\).
+
+After pullback along
+\[
+    g'
+    \colon
+    X_T
+    \longrightarrow
+    X,
+\]
+application of \(p'_\sharp\), and composition with the counit
+\[
+    p'_\sharp(p')^*
+    \longrightarrow
+    \operatorname{id},
+\]
+the resulting mate is induced by the canonical associativity
+equivalence
+\[
+    Y\times_XX_T
+    \xrightarrow{\simeq}
+    Y\times_ST.
+\]
+Thus, under the identifications above, the component
+\[
+    \operatorname{Ex}_{\sharp,\mathrm M_X(Y)}^{*}
+\]
+is the canonical equivalence
+\[
+    \mathrm M_T
+    \bigl(
+        Y\times_XX_T
+    \bigr)
+    \xrightarrow{\simeq}
+    \mathrm M_T(Y\times_ST).
+\]
+
+Thus the smooth exchange transformation is an equivalence on every
+generating smooth motive. Since both sides preserve colimits, it is an
+equivalence on every object of \(\mathbf H(X)\).
+\end{proof}
+
+\subsection{The smooth projection formula}
+
+\begin{construction}[Projection transformation]
+\label{con:unstable-smooth-projection-transformation}
+Let
+\[
+    F\in\mathbf H(X),
+    \qquad
+    G\in\mathbf H(S).
+\]
+The unit of the adjunction
+\[
+    \eta_F
+    \colon
+    F
+    \longrightarrow
+    p^*p_\sharp F
+\]
+and the strong Cartesian symmetric monoidal structure on \(p^*\)
+determine a morphism
+\[
+\begin{aligned}
+    F\times_Xp^*G
+    &\xrightarrow{\eta_F\times\id}
+    p^*p_\sharp F\times_Xp^*G
+    \\
+    &\xrightarrow{\simeq}
+    p^*
+    \bigl(
+        p_\sharp F\times_SG
+    \bigr).
+\end{aligned}
+\]
+Its adjoint under
+\[
+    p_\sharp
+    \dashv
+    p^*
+\]
+is the canonical projection transformation
+\[
+    p_\sharp
+    \bigl(
+        F\times_Xp^*G
+    \bigr)
+    \longrightarrow
+    p_\sharp F\times_SG.
+\]
+\end{construction}
+
+\begin{theorem}[Smooth projection formula]
+\label{thm:unstable-smooth-projection-formula}
+For every smooth morphism of finite presentation
+\[
+    p
+    \colon
+    X
+    \longrightarrow
+    S
+\]
+and all
+\[
+    F\in\mathbf H(X),
+    \qquad
+    G\in\mathbf H(S),
+\]
+the projection transformation is an equivalence:
+\[
+    p_\sharp
+    \bigl(
+        F\times_Xp^*G
+    \bigr)
+    \xrightarrow{\simeq}
+    p_\sharp F\times_SG.
+\]
+\end{theorem}
+
+\begin{proof}
+Both sides preserve colimits separately in \(F\) and \(G\):
+\(p_\sharp\) and \(p^*\) preserve colimits, and Cartesian products in
+the motivic categories preserve colimits separately.  It is therefore
+enough to take
+\[
+    F=\mathrm M_X(Y),
+    \qquad
+    G=\mathrm M_S(Z),
+\]
+with \(Y\in\mathcal C_X\) and \(Z\in\mathcal C_S\).
+
+Using
+\Ref{cor:products-of-smooth-motives},
+one obtains
+\[
+\begin{aligned}
+    \mathrm M_X(Y)
+    \times_X
+    p^*\mathrm M_S(Z)
+    &\simeq
+    \mathrm M_X
+    \bigl(
+        Y\times_X(Z\times_SX)
+    \bigr)
+    \\
+    &\simeq
+    \mathrm M_X(Y\times_SZ).
+\end{aligned}
+\]
+Applying \(p_\sharp\) gives
+\[
+    \mathrm M_S(Y\times_SZ).
+\]
+On the other hand,
+\[
+\begin{aligned}
+    p_\sharp\mathrm M_X(Y)
+    \times_S
+    \mathrm M_S(Z)
+    &\simeq
+    \mathrm M_S(Y)
+    \times_S
+    \mathrm M_S(Z)
+    \\
+    &\simeq
+    \mathrm M_S(Y\times_SZ).
+\end{aligned}
+\]
+The projection transformation identifies with the identity under these
+equivalences.  The result follows.
+\end{proof}
+
+\subsection{Smooth direct image on pointed motivic spaces}
+
+\begin{construction}[Pointed smooth direct image]
+\label{con:pointed-smooth-direct-image}
+Let
+\[
+    F
+    =
+    (*_X\to U_XF)
+    \in
+    \mathbf H_\bullet(X).
+\]
+Define
+\[
+    p_{\sharp,\bullet}F
+    :=
+    p_\sharp U_XF
+    \amalg_{p_\sharp(*_X)}
+    *_S.
+\]
+The map
+\[
+    p_\sharp(*_X)
+    \longrightarrow
+    p_\sharp U_XF
+\]
+is induced by the basepoint, and the map
+\[
+    p_\sharp(*_X)
+    \longrightarrow
+    *_S
+\]
+is the unique morphism to the terminal object.
+\end{construction}
+
+Since
+\[
+    *_X
+    =
+    \mathrm M_X(X),
+\]
+there is a canonical equivalence
+\[
+    p_\sharp(*_X)
+    \simeq
+    \mathrm M_S(X).
+\]
+Thus the construction may also be written
+\[
+    p_{\sharp,\bullet}F
+    \simeq
+    p_\sharp U_XF
+    \amalg_{\mathrm M_S(X)}
+    *_S.
+\]
+
+\begin{proposition}[Pointed smooth adjunction]
+\label{prop:pointed-smooth-adjunction}
+The functor
+\[
+    p_{\sharp,\bullet}
+    \colon
+    \mathbf H_\bullet(X)
+    \longrightarrow
+    \mathbf H_\bullet(S)
+\]
+is left adjoint to
+\[
+    p^*_\bullet
+    \colon
+    \mathbf H_\bullet(S)
+    \longrightarrow
+    \mathbf H_\bullet(X).
+\]
+For every \(Y\in\mathcal C_X\),
+\[
+    p_{\sharp,\bullet}\mathrm M_{X,+}(Y)
+    \simeq
+    \mathrm M_{S,+}(Y).
+\]
+\end{proposition}
+
+\begin{proof}
+The formula of
+\Ref{con:pointed-smooth-direct-image}
+is the standard left adjoint induced on pointed objects by an adjunction
+\[
+    p_\sharp
+    \dashv
+    p^*
+\]
+whose right adjoint preserves the terminal object.  Explicitly, a
+pointed morphism
+\[
+    p_\sharp U_XF
+    \amalg_{p_\sharp(*_X)}
+    *_S
+    \longrightarrow
+    G
+\]
+is equivalent to a morphism
+\[
+    p_\sharp U_XF
+    \longrightarrow
+    U_SG
+\]
+whose restriction along \(p_\sharp(*_X)\) is the adjoint of the
+basepoint of \(p^*_\bullet G\).  By the unpointed adjunction, this is
+equivalent to a pointed morphism
+\[
+    F
+    \longrightarrow
+    p^*_\bullet G.
+\]
+
+For a free pointed motive,
+\[
+    \mathrm M_{X,+}(Y)
+    =
+    \mathrm M_X(Y)\amalg *_X.
+\]
+Since \(p_\sharp\) preserves coproducts,
+\[
+    p_\sharp U_X
+    \bigl(
+        \mathrm M_{X,+}(Y)
+    \bigr)
+    \simeq
+    \mathrm M_S(Y)
+    \amalg
+    \mathrm M_S(X).
+\]
+Pushing out the second summand along
+\(\mathrm M_S(X)\to *_S\) gives
+\(\mathrm M_S(Y)\amalg *_S\), as required.
+\end{proof}
+
+\begin{proposition}[Composition of pointed smooth direct image]
+\label{prop:pointed-smooth-direct-image-composition}
+For smooth morphisms of finite presentation
+\[
+    Y
+    \xrightarrow{q}
+    X
+    \xrightarrow{p}
+    S,
+\]
+there is a canonical coherent equivalence
+\[
+    (p\circ q)_{\sharp,\bullet}
+    \simeq
+    p_{\sharp,\bullet}q_{\sharp,\bullet}.
+\]
+The pointed smooth direct image of an identity morphism is canonically
+equivalent to the identity.
+\end{proposition}
+
+\begin{proof}
+By
+\Ref{prop:pointed-smooth-adjunction},
+the functors
+\[
+    (p\circ q)_{\sharp,\bullet}
+\]
+and
+\[
+    p_{\sharp,\bullet}q_{\sharp,\bullet}
+\]
+are respectively left adjoint to
+\[
+    (p\circ q)^*_\bullet
+\]
+and
+\[
+    q^*_\bullet p^*_\bullet.
+\]
+By
+\Ref{prop:pointed-motivic-coherent-base-functoriality},
+there is a canonical coherent equivalence
+\[
+    (p\circ q)^*_\bullet
+    \simeq
+    q^*_\bullet p^*_\bullet.
+\]
+Uniqueness of left adjoints therefore supplies a canonical equivalence
+\[
+    (p\circ q)_{\sharp,\bullet}
+    \simeq
+    p_{\sharp,\bullet}q_{\sharp,\bullet}.
+\]
+
+The identity statement follows in the same way from the identity
+equivalence for pointed inverse image. Compatibility with triple
+composition and identities follows from the coherence of the
+inverse-image equivalences and the coherence of taking adjoint mates.
+\end{proof}
+
+\begin{construction}[Pointed smooth exchange transformation]
+\label{con:pointed-unstable-smooth-exchange-transformation}
+Consider a Cartesian square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+    X_T
+        \arrow[r, "g'"]
+        \arrow[d, "p'"']
+    &
+    X
+        \arrow[d, "p"]
+    \\
+    T
+        \arrow[r, "g"']
+    &
+    S
+\end{tikzcd}
+\]
+in which \(p\) is smooth and of finite presentation.
+
+Coherent functoriality of pointed inverse image gives a canonical
+equivalence
+\[
+    (g')^*_\bullet p^*_\bullet
+    \xrightarrow{\simeq}
+    (p')^*_\bullet g^*_\bullet.
+\]
+Its left mate under the pointed adjunctions
+\[
+    p_{\sharp,\bullet}
+    \dashv
+    p^*_\bullet
+    \qquad\text{and}\qquad
+    p'_{\sharp,\bullet}
+    \dashv
+    (p')^*_\bullet
+\]
+is the \textbf{pointed smooth exchange transformation}
+\[
+    \operatorname{Ex}_{\sharp,\bullet}^{*}
+    \colon
+    p'_{\sharp,\bullet}(g')^*_\bullet
+    \longrightarrow
+    g^*_\bullet p_{\sharp,\bullet}.
+\]
+
+Explicitly, for
+\[
+    F
+    \in
+    \mathbf H_\bullet(X),
+\]
+its component is adjoint to the composite
+\[
+\begin{aligned}
+    (g')^*_\bullet F
+    &\xrightarrow{(g')^*_\bullet(\eta_F)}
+    (g')^*_\bullet
+    p^*_\bullet
+    p_{\sharp,\bullet}F
+    \\
+    &\xrightarrow{\simeq}
+    (p')^*_\bullet
+    g^*_\bullet
+    p_{\sharp,\bullet}F,
+\end{aligned}
+\]
+where
+\[
+    \eta_F
+    \colon
+    F
+    \longrightarrow
+    p^*_\bullet p_{\sharp,\bullet}F
+\]
+is the unit of the pointed adjunction.
+\end{construction}
+
+\begin{theorem}[Pointed smooth base change]
+\label{thm:pointed-unstable-smooth-base-change}
+In the Cartesian square of
+\Ref{thm:unstable-smooth-base-change}, the pointed smooth exchange
+transformation of
+\Ref{con:pointed-unstable-smooth-exchange-transformation}
+\[
+    \operatorname{Ex}_{\sharp,\bullet}^{*}
+    \colon
+    p'_{\sharp,\bullet}(g')^*_\bullet
+    \longrightarrow
+    g^*_\bullet p_{\sharp,\bullet}
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Both functors
+\[
+    p'_{\sharp,\bullet}(g')^*_\bullet
+    \qquad\text{and}\qquad
+    g^*_\bullet p_{\sharp,\bullet}
+\]
+preserve colimits. By
+\Ref{prop:pointed-motivic-generation}, the free pointed smooth motives
+\[
+    \mathrm M_{X,+}(Y),
+    \qquad
+    Y\in\mathcal C_X,
+\]
+generate \(\mathbf H_\bullet(X)\) under colimits. It is therefore enough
+to evaluate the pointed exchange transformation on such a generator.
+
+For \(Y\in\mathcal C_X\), pointed inverse image and pointed smooth
+direct image give
+\[
+\begin{aligned}
+    p'_{\sharp,\bullet}(g')^*_\bullet
+    \mathrm M_{X,+}(Y)
+    &\simeq
+    p'_{\sharp,\bullet}
+    \mathrm M_{X_T,+}
+    \bigl(
+        Y\times_XX_T
+    \bigr)
+    \\
+    &\simeq
+    \mathrm M_{T,+}
+    \bigl(
+        Y\times_XX_T
+    \bigr)
+    \\
+    &\simeq
+    \mathrm M_{T,+}(Y\times_ST).
+\end{aligned}
+\]
+
+On the other hand,
+\[
+\begin{aligned}
+    g^*_\bullet p_{\sharp,\bullet}
+    \mathrm M_{X,+}(Y)
+    &\simeq
+    g^*_\bullet
+    \mathrm M_{S,+}(Y)
+    \\
+    &\simeq
+    \mathrm M_{T,+}(Y\times_ST).
+\end{aligned}
+\]
+
+Under these identifications, the component of
+\[
+    \operatorname{Ex}_{\sharp,\bullet}^{*}
+\]
+is the canonical equivalence induced by
+\[
+    Y\times_XX_T
+    \simeq
+    Y\times_ST.
+\]
+This follows directly from its mate construction in
+\Ref{con:pointed-unstable-smooth-exchange-transformation}; equivalently,
+it is the free-pointed form of the unpointed exchange equivalence of
+\Ref{thm:unstable-smooth-base-change}.
+
+Thus the pointed smooth exchange transformation is an equivalence on
+the generating free pointed smooth motives. Since both sides preserve
+colimits, it is an equivalence on every object of
+\(\mathbf H_\bullet(X)\).
+\end{proof}
+
+\begin{construction}[Pointed projection transformation]
+\label{con:pointed-unstable-smooth-projection-transformation}
+Let
+\[
+    F
+    \in
+    \mathbf H_\bullet(X),
+    \qquad
+    G
+    \in
+    \mathbf H_\bullet(S).
+\]
+The unit of the pointed adjunction
+\[
+    \eta_F
+    \colon
+    F
+    \longrightarrow
+    p^*_\bullet p_{\sharp,\bullet}F
+\]
+and the strong symmetric monoidal structure on \(p^*_\bullet\)
+determine a morphism
+\[
+\begin{aligned}
+    F\wedge_Xp^*_\bullet G
+    &\xrightarrow{\eta_F\wedge\id}
+    p^*_\bullet p_{\sharp,\bullet}F
+    \wedge_X
+    p^*_\bullet G
+    \\
+    &\xrightarrow{\simeq}
+    p^*_\bullet
+    \bigl(
+        p_{\sharp,\bullet}F
+        \wedge_S
+        G
+    \bigr).
+\end{aligned}
+\]
+Its adjoint under
+\[
+    p_{\sharp,\bullet}
+    \dashv
+    p^*_\bullet
+\]
+is the pointed projection transformation
+\[
+    p_{\sharp,\bullet}
+    \bigl(
+        F\wedge_Xp^*_\bullet G
+    \bigr)
+    \longrightarrow
+    p_{\sharp,\bullet}F
+    \wedge_S
+    G.
+\]
+\end{construction}
+
+\begin{theorem}[Pointed smooth projection formula]
+\label{thm:pointed-unstable-smooth-projection-formula}
+For
+\[
+    F\in\mathbf H_\bullet(X),
+    \qquad
+    G\in\mathbf H_\bullet(S),
+\]
+the pointed projection transformation is an equivalence:
+\[
+    p_{\sharp,\bullet}
+    \bigl(
+        F\wedge_Xp^*_\bullet G
+    \bigr)
+    \xrightarrow{\simeq}
+    p_{\sharp,\bullet}F
+    \wedge_S
+    G.
+\]
+\end{theorem}
+
+\begin{proof}
+Both sides preserve colimits separately in \(F\) and \(G\):
+the functors
+\[
+    p_{\sharp,\bullet}
+    \qquad\text{and}\qquad
+    p^*_\bullet
+\]
+preserve colimits, and the smash products preserve colimits separately
+in each variable.
+
+By
+\Ref{prop:pointed-motivic-generation},
+the free pointed smooth motives generate the pointed motivic categories
+under colimits. It is therefore enough to take
+\[
+    F
+    =
+    \mathrm M_{X,+}(Y),
+    \qquad
+    G
+    =
+    \mathrm M_{S,+}(Z),
+\]
+where
+\[
+    Y
+    \in
+    \mathcal C_X,
+    \qquad
+    Z
+    \in
+    \mathcal C_S.
+\]
+
+Using pointed base change and the smash-product formula for free pointed
+smooth motives, we obtain
+\[
+\begin{aligned}
+    \mathrm M_{X,+}(Y)
+    \wedge_X
+    p^*_\bullet\mathrm M_{S,+}(Z)
+    &\simeq
+    \mathrm M_{X,+}(Y)
+    \wedge_X
+    \mathrm M_{X,+}(Z\times_SX)
+    \\
+    &\simeq
+    \mathrm M_{X,+}
+    \bigl(
+        Y\times_X(Z\times_SX)
+    \bigr)
+    \\
+    &\simeq
+    \mathrm M_{X,+}(Y\times_SZ).
+\end{aligned}
+\]
+Applying \(p_{\sharp,\bullet}\) gives
+\[
+\begin{aligned}
+    p_{\sharp,\bullet}
+    \bigl(
+        \mathrm M_{X,+}(Y)
+        \wedge_X
+        p^*_\bullet\mathrm M_{S,+}(Z)
+    \bigr)
+    &\simeq
+    p_{\sharp,\bullet}
+    \mathrm M_{X,+}(Y\times_SZ)
+    \\
+    &\simeq
+    \mathrm M_{S,+}(Y\times_SZ).
+\end{aligned}
+\]
+
+On the other hand,
+\[
+\begin{aligned}
+    p_{\sharp,\bullet}\mathrm M_{X,+}(Y)
+    \wedge_S
+    \mathrm M_{S,+}(Z)
+    &\simeq
+    \mathrm M_{S,+}(Y)
+    \wedge_S
+    \mathrm M_{S,+}(Z)
+    \\
+    &\simeq
+    \mathrm M_{S,+}(Y\times_SZ).
+\end{aligned}
+\]
+Under these identifications, the pointed projection transformation of
+\Ref{con:pointed-unstable-smooth-projection-transformation}
+is the identity of
+\[
+    \mathrm M_{S,+}(Y\times_SZ).
+\]
+Hence it is an equivalence on the generating objects.
+
+Since both sides preserve colimits separately in \(F\) and \(G\), the
+pointed projection transformation is an equivalence for arbitrary
+\(F\) and \(G\).
+\end{proof}
+
+\section{The unstable brave new motivic package}
+\label{sec:unstable-brave-new-motivic-package}
+
+\begin{theorem}[Brave new motivic spaces]
+\label{thm:brave-new-motivic-spaces-package}
+For every quasi-compact quasi-separated spectral scheme \(S\), there is
+a compactly generated presentable \(\infty\)-category
+\[
+    \mathbf H(S)
+\]
+characterized as the full subcategory of
+\[
+    \operatorname{PSh}
+    \bigl(
+        \operatorname{Sm}^{\mathrm{fp}}_{/S}
+    \bigr)
+\]
+spanned by the presheaves which satisfy spectral Nisnevich descent and
+brave new affine-line invariance.
+
+The following structures and properties are canonically available.
+\begin{enumerate}[label=(\roman*)]
+    \item The localization
+    \[
+        L_{\mathrm{mot},S}
+        \colon
+        \operatorname{PSh}(S)
+        \longrightarrow
+        \mathbf H(S)
+    \]
+    is accessible and Cartesian symmetric monoidal.
+
+    \item The category \(\mathbf H(S)\) is Cartesian closed and is
+    compactly generated by the motives
+    \[
+        \mathrm M_S(X),
+        \qquad
+        X\in\operatorname{Sm}^{\mathrm{fp}}_{/S}.
+    \]
+
+    \item The pointed category
+    \[
+        \mathbf H_\bullet(S)
+    \]
+    is presentably symmetric monoidal under the smash product and is
+    generated under colimits by
+    \[
+        \mathrm M_{S,+}(X).
+    \]
+
+    \item Every morphism
+    \[
+        f
+        \colon
+        T
+        \longrightarrow
+        S
+    \]
+    of quasi-compact quasi-separated spectral schemes induces an
+    adjunction
+    \[
+        f^*
+        \colon
+        \mathbf H(S)
+        \rightleftarrows
+        \mathbf H(T)
+        :
+        f_*,
+    \]
+    where \(f^*\) is colimit-preserving and strong Cartesian symmetric
+    monoidal.
+
+    \item If
+    \[
+        p
+        \colon
+        X
+        \longrightarrow
+        S
+    \]
+    is smooth and of finite presentation, then there is an adjunction
+    \[
+        p_\sharp
+        \colon
+        \mathbf H(X)
+        \rightleftarrows
+        \mathbf H(S)
+        :
+        p^*.
+    \]
+
+    \item Smooth base change and the smooth projection formula hold:
+    for every Cartesian square
+    \[
+    \begin{tikzcd}[column sep=large, row sep=large]
+        X_T
+            \arrow[r, "g'"]
+            \arrow[d, "p'"']
+        &
+        X
+            \arrow[d, "p"]
+        \\
+        T
+            \arrow[r, "g"']
+        &
+        S
+    \end{tikzcd}
+    \]
+    with \(p\) smooth and of finite presentation, there are canonical
+    equivalences
+    \[
+        p'_\sharp(g')^*
+        \simeq
+        g^*p_\sharp,
+    \]
+    and, for \(F\in\mathbf H(X)\) and \(G\in\mathbf H(S)\),
+    \[
+        p_\sharp
+        \bigl(
+            F\times_Xp^*G
+        \bigr)
+        \simeq
+        p_\sharp F\times_SG.
+    \]
+
+    \item All preceding inverse-image, direct-image, smooth-direct-image,
+    base-change, and projection-formula constructions admit pointed
+    analogues, with Cartesian product replaced by smash product.
+\end{enumerate}
+
+The assignments
+\[
+    S
+    \longmapsto
+    \mathbf H(S)
+\]
+and
+\[
+    S
+    \longmapsto
+    \mathbf H_\bullet(S)
+\]
+are coherently functorial on quasi-compact quasi-separated spectral
+schemes.  Thus brave new motivic spaces form an unstable
+\[
+    (*,\sharp,\times)
+\]
+formalism, and pointed brave new motivic spaces form its smash-monoidal
+counterpart.
+\end{theorem}
+
+\begin{proof}
+Existence and characterization of \(\mathbf H(S)\) are
+\Ref{thm:brave-new-motivic-localization}.  Cartesian monoidality is
+\Ref{thm:cartesian-monoidal-motivic-localization}, and compact
+generation is
+\Ref{prop:brave-new-motivic-compact-generation}.  The pointed
+symmetric monoidal structure is
+\Ref{thm:pointed-motivic-smash-monoidal}.
+
+Inverse and direct image are
+\Ref{thm:motivic-inverse-direct-image}, with coherent functoriality from
+\Ref{prop:motivic-coherent-base-functoriality} and monoidality from
+\Ref{thm:motivic-inverse-image-symmetric-monoidal}.  Pointed inverse and
+direct image are
+\Ref{prop:pointed-motivic-base-change}, with coherent functoriality from
+\Ref{prop:pointed-motivic-coherent-base-functoriality}.
+
+Smooth direct image is
+\Ref{thm:smooth-motivic-direct-image}, with coherent composition from
+\Ref{prop:smooth-direct-image-composition}.  Its pointed analogue is
+\Ref{prop:pointed-smooth-adjunction}, with coherent composition from
+\Ref{prop:pointed-smooth-direct-image-composition}.
+
+Smooth base change and the projection formula are
+\Ref{thm:unstable-smooth-base-change} and
+\Ref{thm:unstable-smooth-projection-formula}.  Their pointed forms are
+\Ref{thm:pointed-unstable-smooth-base-change} and
+\Ref{thm:pointed-unstable-smooth-projection-formula}.
+
+These equivalences are defined from the coherent geometric
+base-change, composition, monoidal, and adjunction data by localization
+and passage to adjoint mates. They therefore satisfy the required
+composition and identity coherences.
+\end{proof}
+
+The constructions of the chapter may be summarized by
+\[
+    \operatorname{PSh}(S)
+    =
+    \operatorname{Fun}
+    \left(
+        \bigl(
+            \operatorname{Sm}^{\mathrm{fp}}_{/S}
+        \bigr)^{\mathrm{op}},
+        \mathcal S
+    \right),
+\]
+\[
+    \mathbf H(S)
+    =
+    \operatorname{PSh}(S)
+    \left[
+        E_{\mathrm{Nis},S}^{-1},
+        W_{\mathbb A^1,S}^{-1}
+    \right],
+\]
+and
+\[
+    \mathbf H_\bullet(S)
+    =
+    \mathbf H(S)_{*/}.
+\]
+For arbitrary morphisms one has
+\[
+    f^*
+    \dashv
+    f_*,
+\]
+while for smooth morphisms of finite presentation one has
+\[
+    p_\sharp
+    \dashv
+    p^*.
+\]
+These adjunctions satisfy smooth base change and the smooth projection
+formula, in both unpointed and pointed form.
+
+The next chapter applies the lifting and tubular-neighbourhood theorems
+of
+\Ref{sec:smooth-etale-lifting-neighbourhoods}
+to prove the Morel--Voevodsky localization theorem in spectral algebraic
+geometry.  It then develops closed recollement, homotopy purity, and
+derived nilpotent invariance.

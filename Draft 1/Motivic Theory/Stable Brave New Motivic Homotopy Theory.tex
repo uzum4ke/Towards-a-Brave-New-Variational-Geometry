@@ -1,0 +1,6695 @@
+\chapter{Stable Brave New Motivic Homotopy Theory}
+\label{chap:stable-brave-new-motivic}
+
+\section{Purpose and standing stabilization conventions}
+\label{sec:stable-purpose}
+
+This chapter stabilizes the pointed brave new motivic category of the
+preceding chapters.  For every quasi-compact quasi-separated spectral scheme
+\(S\), Chapter~4 constructed a presentably symmetric monoidal pointed
+motivic category
+\[
+    \HH_\bullet(S)
+\]
+under the smash product \(\wedge_S\), with tensor unit
+\(\mathbb S^0_S\), and Chapter~5 supplied the open--closed localization
+package, closed exchange, and homotopy purity.  In particular, for every
+smooth closed pair
+\[
+    Z\lhook\joinrel\longrightarrow X
+\]
+over \(S\), there is a canonical equivalence
+\[
+    X/(X\setminus Z)
+    \simeq
+    \Th_S(\mathbf N_{Z/X})
+\]
+in \(\HH_\bullet(S)\), where
+\[
+    \mathbf N_{Z/X}
+    =
+    \mathbb V_Z(N^*_{Z/X})
+\]
+is the geometric normal bundle.  Equivalently, under the coordinate-module
+convention for Thom spaces,
+\[
+    \Th_S(\mathbf N_{Z/X})
+    =
+    \Th_S(N^*_{Z/X}).
+\]
+
+The stabilization object is the Thom space of the trivial line bundle.  Write
+\[
+    T_S
+    :=
+    \Th_S(\mathcal O_S)
+    \in
+    \HH_\bullet(S).
+\]
+The stable brave new motivic category is the presentably symmetric monoidal periodization
+\[
+    \SH(S)
+    :=
+    \HH_\bullet(S)[T_S^{-1}].
+\]
+The principal purpose of the chapter is to construct this category together with its base
+functoriality, smooth direct image, stable localization, and Thom twists.  The final output is a stable
+$(\ast,\sharp,\otimes)$-formalism.
+
+All conventions of the preceding chapters remain in force.  In particular, all categories are
+$\infty$-categories, all coherence data are retained, and sheaves are not hypercompleted unless
+explicitly stated otherwise.  Unless a statement explicitly concerns a more general base, every base
+spectral scheme is assumed quasi-compact and quasi-separated.  Smooth morphisms are smooth in the
+differential sense of Chapter~3 and are always assumed of finite presentation when smooth direct
+image is invoked.
+
+\begin{convention}[Scope of the stable coefficient system]
+\label{conv:stable-coefficient-scope}
+Whenever an expression of the form
+\[
+    \HH_\bullet(X),
+    \qquad
+    \SH(X),
+    \qquad
+    \Pic(\SH(X)),
+\]
+or a base-change, direct-image, or Thom-twist functor between such categories
+occurs, the spectral scheme \(X\) is understood to be quasi-compact and
+quasi-separated.
+
+Statements involving only relative spectra, relative linear spaces,
+cotangent complexes, zero sections, or finite locally free modules may be
+stated for arbitrary spectral schemes.  In such statements, the
+quasi-compact quasi-separated condition is imposed only when the associated
+motivic coefficient category is invoked.
+\end{convention}
+
+\subsection{Pointed unstable input}
+
+For a smooth spectral $S$-scheme $X$ of finite presentation, write
+\[
+    \Mot_{S,+}(X)
+    \in
+    \HH_\bullet(S)
+\]
+for its pointed motivic space.  The category $\HH_\bullet(S)$ is generated under colimits by these
+objects.  For every morphism $f:T\to S$, there is a pointed adjunction
+\[
+    f^*:\HH_\bullet(S)
+    \rightleftarrows
+    \HH_\bullet(T):f_*,
+\]
+where $f^*$ is colimit-preserving and strong symmetric monoidal.  For every smooth morphism
+$p:X\to S$ of finite presentation, there is a pointed adjunction
+\[
+    p_\sharp:\HH_\bullet(X)
+    \rightleftarrows
+    \HH_\bullet(S):p^*.
+\]
+These adjunctions satisfy pointed smooth base change and the pointed smooth projection formula.
+
+For a complementary pair
+\[
+    Z\xrightarrow{i}S\xleftarrow{j}U,
+\]
+where $i$ is closed and $j$ is the quasi-compact open complement, Chapter~5 constructed
+\[
+    i^*:\HH_\bullet(S)
+    \rightleftarrows
+    \HH_\bullet(Z):i_*,
+\]
+\[
+    j_\sharp:\HH_\bullet(U)
+    \rightleftarrows
+    \HH_\bullet(S):j^*
+    \rightleftarrows
+    \HH_\bullet(U):j_*,
+\]
+and a right adjoint
+\[
+    i_*:\HH_\bullet(Z)
+    \rightleftarrows
+    \HH_\bullet(S):i^!.
+\]
+The pointed localization sequences, closed base change, the closed projection formula, and
+smooth--closed exchange will be stabilized below.
+
+\subsection{The chapter-level output}
+
+The constructions of the chapter culminate in the following data.
+
+\begin{enumerate}
+    \item A compactly generated stable presentably symmetric monoidal category $\SH(S)$.
+
+    \item A strong symmetric monoidal stabilization functor
+    \[
+        \Sigma_T^\infty:\HH_\bullet(S)\longrightarrow\SH(S)
+    \]
+    with right adjoint $\Omega_T^\infty$.
+
+    \item For every morphism $f:T\to S$, an adjunction
+    \[
+        f^*:\SH(S)\rightleftarrows\SH(T):f_*.
+    \]
+
+    \item For every smooth morphism $p:X\to S$ of finite presentation, an adjunction
+    \[
+        p_\sharp:\SH(X)\rightleftarrows\SH(S):p^*.
+    \]
+
+    \item For every virtual vector bundle $\xi\in K(S)$, a tensor-invertible Thom twist
+    \[
+        \Sigma^\xi:\SH(S)\xrightarrow{\simeq}\SH(S).
+    \]
+
+    \item Stable smooth base change, the smooth projection formula, stable localization,
+    closed base change, the closed projection formula, and smooth--closed exchange.
+
+    \item Stable homotopy purity.  For every smooth closed pair
+    \[
+        Z\lhook\joinrel\longrightarrow X
+    \]
+    over \(S\), with structural morphism \(z:Z\to S\), there is a canonical
+    equivalence
+    \[
+        \Sigma_{T,S}^\infty
+        \bigl(
+          X/(X\setminus Z)
+        \bigr)
+        \simeq
+        z_\sharp
+        \operatorname{th}_Z
+        \bigl(
+          N^*_{Z/X}
+        \bigr).
+    \]
+
+    \item Stable derived nilpotent invariance and comparison with ordinary stable motivic homotopy
+    theory over the classical truncation.
+\end{enumerate}
+
+\section{Thom spaces as a symmetric monoidal construction}
+\label{sec:stable-thom-spaces}
+
+\subsection{Relative linear spaces and zero sections}
+
+Fix a spectral scheme $X$ and a finite locally free quasi-coherent $\mathcal O_X$-module $E$.
+Recall the relative linear space
+\[
+    \mathbb V_X(E)
+    :=
+    \operatorname{Spec}_X
+    \operatorname{Sym}_{\mathcal O_X}(E).
+\]
+The augmentation
+\[
+    \operatorname{Sym}_{\mathcal O_X}(E)
+    \longrightarrow
+    \mathcal O_X
+\]
+induces the zero section
+\[
+    s_E:X\lhook\joinrel\longrightarrow\mathbb V_X(E).
+\]
+The structure morphism
+\[
+    \pi_E:\mathbb V_X(E)\longrightarrow X
+\]
+is smooth and of finite presentation.  The composite $\pi_Es_E$ is the identity of $X$.
+
+\begin{proposition}[Base change for relative linear spaces]
+\label{prop:linear-space-base-change}
+Let $f:Y\to X$ be a morphism of spectral schemes.  There is a canonical Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \mathbb V_Y(f^*E) \arrow[r] \arrow[d,"\pi_{f^*E}"']
+        & \mathbb V_X(E) \arrow[d,"\pi_E"] \\
+    Y \arrow[r,"f"'] & X,
+\end{tikzcd}
+\]
+and the upper horizontal morphism carries the zero section of $f^*E$ to the pullback of the zero
+section of $E$.
+\end{proposition}
+
+\begin{proof}
+Relative spectrum commutes with base change, and the relative symmetric algebra satisfies
+\[
+    f^*\operatorname{Sym}_{\mathcal O_X}(E)
+    \simeq
+    \operatorname{Sym}_{\mathcal O_Y}(f^*E).
+\]
+The asserted Cartesian square follows from the base-change theorem for relative spectra.  The
+augmentation of the pulled-back symmetric algebra is the pullback of the original augmentation, so
+the assertion about zero sections follows as well.
+\end{proof}
+
+\begin{proposition}[Conormal module of the zero section]
+\label{prop:zero-section-conormal}
+The zero section
+\[
+    s_E:X\lhook\joinrel\longrightarrow\mathbb V_X(E)
+\]
+is a quasi-smooth closed immersion.  Its conormal module is canonically
+equivalent to \(E\):
+\[
+    N^*_{X/\mathbb V_X(E)}
+    \simeq
+    E.
+\]
+Consequently, its normal module is canonically equivalent to \(E^\vee\):
+\[
+    N^{\mathrm{mod}}_{X/\mathbb V_X(E)}
+    \simeq
+    E^\vee.
+\]
+Under the convention
+\[
+    \mathbf N_{X/\mathbb V_X(E)}
+    :=
+    \mathbb V_X
+    \bigl(
+      (N^{\mathrm{mod}}_{X/\mathbb V_X(E)})^\vee
+    \bigr),
+\]
+there is a canonical equivalence of geometric normal bundles
+\[
+    \mathbf N_{X/\mathbb V_X(E)}
+    \simeq
+    \mathbb V_X(E).
+\]
+\end{proposition}
+
+\begin{proof}
+The assertion is local on \(X\).  Write
+\[
+    X=\operatorname{Spec}(A)
+\]
+and let \(M\) be the finite locally free \(A\)-module corresponding to
+\(E\).  Put
+\[
+    B:=\operatorname{Sym}_A(M).
+\]
+The zero section is represented by the augmentation
+\[
+    \varepsilon:B\longrightarrow A.
+\]
+
+We first verify that this morphism represents a closed immersion of finite
+presentation.  After a Zariski localization on \(X\), choose an equivalence
+\[
+    M\simeq A^{\oplus r}.
+\]
+Then
+\[
+    B\simeq
+    \operatorname{Sym}_A(A^{\oplus r}),
+\]
+and on degree-zero homotopy the augmentation is the ordinary polynomial
+augmentation
+\[
+    \pi_0(A)[t_1,\ldots,t_r]
+    \longrightarrow
+    \pi_0(A),
+    \qquad
+    t_a\longmapsto0.
+\]
+It is surjective, so
+\[
+    \operatorname{Spec}(A)
+    \longrightarrow
+    \operatorname{Spec}(B)
+\]
+is a closed immersion.
+
+The free-algebra calculation gives
+\[
+    L_{B/A}
+    \simeq
+    B\otimes_A M.
+\]
+Apply the transitivity triangle to the composite
+\[
+    A\longrightarrow B\longrightarrow A.
+\]
+Since the composite is the identity of \(A\), there is a cofibre sequence
+\[
+    A\otimes_B L_{B/A}
+    \longrightarrow
+    L_{A/A}
+    \longrightarrow
+    L_{A/B}.
+\]
+Using
+\[
+    L_{A/A}\simeq0,
+\]
+rotation gives
+\[
+    L_{A/B}
+    \simeq
+    \bigl(A\otimes_B L_{B/A}\bigr)[1].
+\]
+Therefore
+\[
+\begin{aligned}
+    L_{A/B}
+    &\simeq
+    \bigl(
+      A\otimes_B(B\otimes_A M)
+    \bigr)[1] \\
+    &\simeq
+    M[1].
+\end{aligned}
+\]
+In particular, \(L_{A/B}\) is perfect.  Moreover,
+\(\pi_0(A)\) is finitely presented as a \(\pi_0(B)\)-algebra, since locally
+it is the quotient
+\[
+    \pi_0(B)/(t_1,\ldots,t_r).
+\]
+The finite-presentation criterion detected by the cotangent complex therefore
+shows that
+\[
+    B\longrightarrow A
+\]
+is of finite presentation.
+
+Consequently, the zero section is a closed immersion of finite presentation.
+Its conormal module is
+\[
+\begin{aligned}
+    N^*_{X/\mathbb V_X(E)}
+    &=
+    L_{X/\mathbb V_X(E)}[-1] \\
+    &\simeq
+    E.
+\end{aligned}
+\]
+Since \(E\) is finite locally free, the zero section is quasi-smooth.
+
+The construction is natural under localization in \(A\), so the affine
+equivalences glue canonically.  Dualizing gives
+\[
+    N^{\mathrm{mod}}_{X/\mathbb V_X(E)}
+    \simeq
+    E^\vee.
+\]
+Finite-projective biduality then gives
+\[
+\begin{aligned}
+    \mathbf N_{X/\mathbb V_X(E)}
+    &=
+    \mathbb V_X
+    \bigl(
+      (N^{\mathrm{mod}}_{X/\mathbb V_X(E)})^\vee
+    \bigr) \\
+    &\simeq
+    \mathbb V_X(E).
+\end{aligned}
+\]
+\end{proof}
+
+\subsection{Intrinsic and relative Thom spaces}
+
+From this point onward in the Thom-space discussion, whenever an object is
+placed in \(\HH_\bullet(X)\), \(\SH(X)\), or
+\(\Pic(\SH(X))\), the spectral scheme \(X\) is assumed quasi-compact and
+quasi-separated.  The preceding statements concerning relative spectra,
+zero sections, and conormal modules remain valid without this hypothesis.
+
+\begin{definition}[Intrinsic Thom space]
+\label{def:intrinsic-thom}
+Let \(X\) be a quasi-compact quasi-separated spectral scheme, and let \(E\)
+be a finite locally free quasi-coherent \(\mathcal O_X\)-module.  The Thom
+space of \(E\) over \(X\) is the pointed motivic quotient
+\[
+    \Th_X(E)
+    :=
+    \mathbb V_X(E)/
+    \bigl(
+      \mathbb V_X(E)\setminus X
+    \bigr)
+    \in
+    \HH_\bullet(X),
+\]
+where \(X\) is embedded by the zero section.
+\end{definition}
+
+\begin{proposition}[Base change for Thom spaces]
+\label{prop:thom-base-change-unstable}
+Let $f:Y\to X$ be a morphism of quasi-compact quasi-separated spectral schemes.  For every finite
+locally free $E$ on $X$, there is a canonical equivalence
+\[
+    f^*\Th_X(E)
+    \simeq
+    \Th_Y(f^*E)
+\]
+in $\HH_\bullet(Y)$.  These equivalences are coherent in $f$ and natural under equivalences of
+vector bundles.
+\end{proposition}
+
+\begin{proof}
+Pointed inverse image preserves colimits.  Proposition~\ref{prop:linear-space-base-change}
+identifies the pullback of $\mathbb V_X(E)$ with $\mathbb V_Y(f^*E)$, and the pullback of the open
+complement of the zero section with the corresponding open complement over $Y$.  Applying $f^*$
+to the quotient defining $\Th_X(E)$ therefore gives the asserted equivalence.  Coherence follows
+from coherent base change for relative spectra and pointed inverse image.
+\end{proof}
+
+Let
+\[
+    p:X\longrightarrow S
+\]
+be smooth and of finite presentation, and let \(E\) be finite locally free on
+\(X\).  The structure morphism
+\[
+    \pi_E:\mathbb V_X(E)\longrightarrow X
+\]
+is smooth and of finite presentation, so the composite
+\[
+    \mathbb V_X(E)\longrightarrow S
+\]
+is smooth and of finite presentation.
+
+By Proposition~\ref{prop:zero-section-conormal}, the zero section
+\[
+    s_E:X\hookrightarrow\mathbb V_X(E)
+\]
+is a quasi-smooth closed immersion.  In particular, it is a closed immersion
+of finite presentation.  Its open complement
+\[
+    \mathbb V_X(E)\setminus X
+    \longrightarrow
+    \mathbb V_X(E)
+\]
+is therefore quasi-compact and open.  Since open immersions are smooth and
+smooth morphisms are stable under composition, the complement
+\[
+    \mathbb V_X(E)\setminus X
+\]
+is also a smooth spectral \(S\)-scheme of finite presentation.  Hence both
+terms in the following quotient define representable motivic spaces over
+\(S\).
+
+\begin{definition}[Relative Thom space]
+\label{def:relative-thom-motive}
+For \(p:X\to S\) smooth of finite presentation and \(E\) finite locally free
+on \(X\), define
+\[
+    \Th_S(E)
+    :=
+    \Mot_S\bigl(\mathbb V_X(E)\bigr)
+    /
+    \Mot_S\bigl(\mathbb V_X(E)\setminus X\bigr)
+    \in
+    \HH_\bullet(S).
+\]
+\end{definition}
+
+\begin{proposition}[Smooth direct image of intrinsic Thom spaces]
+\label{prop:relative-thom-p-sharp}
+Let $p:X\to S$ be smooth of finite presentation.  For every finite locally free module $E$ on $X$,
+there is a canonical equivalence
+\[
+    p_\sharp\Th_X(E)
+    \simeq
+    \Th_S(E).
+\]
+\end{proposition}
+
+\begin{proof}
+Smooth direct image carries the pointed motive of a smooth $X$-scheme to the pointed motive of the
+same spectral scheme viewed over $S$.  It preserves colimits.  Applying $p_\sharp$ to the quotient
+that defines $\Th_X(E)$ therefore produces the quotient of the two corresponding smooth motives
+over $S$.
+\end{proof}
+
+\subsection{Multiplicativity}
+
+\begin{proposition}[Whitney sum formula for Thom spaces]
+\label{prop:unstable-thom-whitney}
+For finite locally free modules $E$ and $F$ on $X$, there is a canonical equivalence
+\[
+    \Th_X(E\oplus F)
+    \simeq
+    \Th_X(E)\wedge_X\Th_X(F).
+\]
+The equivalence is associative, symmetric, and unital with respect to direct sum.
+\end{proposition}
+
+\begin{proof}
+There is a canonical equivalence of relative linear spaces
+\[
+    \mathbb V_X(E\oplus F)
+    \simeq
+    \mathbb V_X(E)\times_X\mathbb V_X(F).
+\]
+Under this equivalence, the complement of the joint zero section is the union
+\[
+\begin{aligned}
+    &\bigl(\mathbb V_X(E)\setminus X\bigr)
+        \times_X\mathbb V_X(F) \\
+    &\qquad\cup
+    \mathbb V_X(E)\times_X
+        \bigl(\mathbb V_X(F)\setminus X\bigr).
+\end{aligned}
+\]
+The smash product of the two pointed quotients is the quotient of
+$\mathbb V_X(E)\times_X\mathbb V_X(F)$ by precisely this union.  Hence the pushout formula for the
+smash product gives the asserted equivalence.
+
+The construction is induced by the canonical equivalence of symmetric algebras
+\[
+    \operatorname{Sym}(E\oplus F)
+    \simeq
+    \operatorname{Sym}(E)\otimes\operatorname{Sym}(F).
+\]
+Its associativity, symmetry, and unit coherences are therefore inherited from direct sum and the
+symmetric monoidal relative-spectrum construction.
+\end{proof}
+
+\begin{corollary}[The unstable Thom functor]
+\label{cor:unstable-thom-functor}
+The assignment $E\mapsto\Th_X(E)$ refines to a symmetric monoidal functor
+\[
+    \Th_X:
+    \bigl(\Vect(X)^\simeq,\oplus\bigr)
+    \longrightarrow
+    \bigl(\HH_\bullet(X),\wedge_X\bigr).
+\]
+It is natural under pullback in $X$.
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{prop:unstable-thom-whitney} supplies the binary monoidal comparison.  The zero
+bundle has relative linear space $X$ and empty zero-section complement, so its Thom space is
+$\mathbb S^0_X$.  The coherence assertions follow from the final paragraph of the proof of
+Proposition~\ref{prop:unstable-thom-whitney}.  Naturality is
+Proposition~\ref{prop:thom-base-change-unstable}.
+\end{proof}
+
+\begin{definition}[The motivic Thom sphere]
+\label{def:T-sphere}
+Define
+\[
+    T_X
+    :=
+    \Th_X(\mathcal O_X).
+\]
+Equivalently,
+\[
+    T_X
+    \simeq
+    \mathbb A^1_X/\bigl(\mathbb A^1_X\setminus0_X\bigr).
+\]
+\end{definition}
+
+\begin{corollary}[Trivial bundles]
+\label{cor:trivial-thom-power}
+For every integer $n\geq0$, there is a canonical equivalence
+\[
+    \Th_X(\mathcal O_X^{\oplus n})
+    \simeq
+    T_X^{\wedge n}.
+\]
+\end{corollary}
+
+\begin{proof}
+Iterate Proposition~\ref{prop:unstable-thom-whitney}.
+\end{proof}
+
+\section{The motivic circle decomposition of \texorpdfstring{$T$}{T}}
+\label{sec:T-circle-decomposition}
+
+\subsection{The punctured brave new affine line}
+
+Let
+\[
+    \Gm{}_X
+    :=
+    \mathbb A^1_X\setminus0_X.
+\]
+The unit section $1_X:X\to\Gm{}_X$ makes $\Gm{}_X$ a pointed motivic space.  Base change of the
+brave new affine line and of principal open complements gives
+\[
+    f^*\Gm{}_X
+    \simeq
+    \Gm{}_Y
+\]
+for every $f:Y\to X$.
+
+The brave new affine line is contractible in $\HH(X)$ by construction of the motivic localization:
+its structural projection induces an equivalence
+\[
+    \Mot_X(\mathbb A^1_X)
+    \simeq
+    \Mot_X(X).
+\]
+After adjoining disjoint basepoints, this becomes
+\[
+    \Mot_{X,+}(\mathbb A^1_X)
+    \simeq
+    \mathbb S^0_X.
+\]
+
+\begin{proposition}[Circle decomposition of the Thom sphere]
+\label{prop:T-circle-Gm}
+There is a canonical equivalence
+\[
+    T_X
+    \simeq
+    S^1\wedge\Gm{}_X
+\]
+in \(\HH_\bullet(X)\), where \(S^1\) denotes the simplicial suspension
+circle and \(\Gm{}_X\) is pointed by the unit section
+\[
+    1_X:X\longrightarrow\Gm{}_X.
+\]
+The equivalence is compatible with base change in \(X\).
+\end{proposition}
+
+\begin{proof}
+Point \(\mathbb A^1_X\) by the unit section
+\[
+    1_X:X\longrightarrow\mathbb A^1_X.
+\]
+The inclusion of the punctured affine line is then a morphism of pointed
+motivic spaces
+\[
+    (\Gm{}_X,1_X)
+    \longrightarrow
+    (\mathbb A^1_X,1_X).
+\]
+Its pointed cofiber is canonically the quotient
+\[
+    \mathbb A^1_X/
+    \bigl(\mathbb A^1_X\setminus0_X\bigr),
+\]
+because the basepoint \(1_X\) lies in
+\(\mathbb A^1_X\setminus0_X\).  Hence there is a canonical equivalence
+\[
+    T_X
+    \simeq
+    \operatorname{cofib}
+    \bigl(
+      (\Gm{}_X,1_X)
+      \longrightarrow
+      (\mathbb A^1_X,1_X)
+    \bigr).
+\]
+
+The structural projection
+\[
+    \pi:\mathbb A^1_X\longrightarrow X
+\]
+is inverted by motivic affine-line localization.  Since
+\[
+    \pi 1_X=\id_X,
+\]
+the unit section is an inverse equivalence to \(\pi\) in \(\HH(X)\).
+With the indicated basepoint, this gives an equivalence
+\[
+    (\mathbb A^1_X,1_X)
+    \simeq
+    0_X
+\]
+in \(\HH_\bullet(X)\), where \(0_X\) denotes the zero object.
+
+It follows that
+\[
+\begin{aligned}
+    T_X
+    &\simeq
+    \operatorname{cofib}
+    \bigl(
+      (\Gm{}_X,1_X)\longrightarrow0_X
+    \bigr) \\
+    &\simeq
+    \Sigma(\Gm{}_X,1_X) \\
+    &\simeq
+    S^1\wedge\Gm{}_X.
+\end{aligned}
+\]
+
+The zero section, unit section, punctured affine line, and affine-line
+contraction are all preserved by base change.  The resulting equivalence is
+therefore compatible with base change in \(X\).
+\end{proof}
+
+\begin{lemma}[Factors of an invertible tensor product]
+\label{lem:factors-invertible}
+Let $\mathcal C$ be a symmetric monoidal $\infty$-category.  If $A\otimes B$ is tensor-invertible,
+then both $A$ and $B$ are tensor-invertible.
+\end{lemma}
+
+\begin{proof}
+Let $C$ be an inverse of $A\otimes B$.  Then $B\otimes C$ is an inverse of $A$, since
+\[
+    A\otimes(B\otimes C)
+    \simeq
+    (A\otimes B)\otimes C
+    \simeq
+    \mathbf 1.
+\]
+Symmetry gives the corresponding equivalence in the opposite order.  The same argument, with
+$A$ and $B$ interchanged, gives an inverse of $B$.
+\end{proof}
+
+\begin{corollary}[Consequences of \(T\)-invertibility]
+\label{cor:T-inversion-circle}
+Let
+\[
+    F:
+    \HH_\bullet(X)
+    \longrightarrow
+    \mathcal D
+\]
+be a strong symmetric monoidal functor to a symmetric monoidal
+\(\infty\)-category \(\mathcal D\).  If \(F(T_X)\) is tensor-invertible,
+then both
+\[
+    F(S^1_X)
+    \qquad\text{and}\qquad
+    F(\Gm{}_X)
+\]
+are tensor-invertible in \(\mathcal D\).
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{prop:T-circle-Gm} gives
+\[
+    T_X
+    \simeq
+    S^1_X\wedge_X\Gm{}_X.
+\]
+Since \(F\) is strong symmetric monoidal,
+\[
+    F(T_X)
+    \simeq
+    F(S^1_X)\otimes F(\Gm{}_X).
+\]
+Apply Lemma~\ref{lem:factors-invertible}.
+\end{proof}
+
+\begin{definition}[Symmetric tensor object]
+\label{def:symmetric-tensor-object}
+Let $\mathcal C$ be a symmetric monoidal $\infty$-category.  An object $X\in\mathcal C$ is
+symmetric if the cyclic permutation
+\[
+    (123):X^{\otimes3}\longrightarrow X^{\otimes3}
+\]
+is homotopic to the identity.
+\end{definition}
+
+\begin{proposition}[Symmetry of the motivic Thom sphere]
+\label{prop:T-symmetric}
+For every quasi-compact quasi-separated spectral scheme \(X\), the object
+\[
+    T_X\in\HH_\bullet(X)
+\]
+is symmetric.
+\end{proposition}
+
+\begin{proof}
+The Whitney-sum equivalence identifies
+\[
+    T_X^{\wedge3}
+    \simeq
+    \Th_X(\mathcal O_X^{\oplus3}).
+\]
+Under this identification, the cyclic permutation of the three tensor
+factors is induced by the cyclic permutation matrix
+\[
+    P=
+    \begin{pmatrix}
+        0&1&0\\
+        0&0&1\\
+        1&0&0
+    \end{pmatrix}.
+\]
+
+For \(i\neq j\), let \(E_{ij}(a)\) denote the elementary matrix with
+off-diagonal entry \(a\) in position \((i,j)\).  There is an identity
+\[
+    P
+    =
+    E_{23}(1)E_{32}(-1)E_{23}(1)
+    E_{12}(1)E_{21}(-1)E_{12}(1).
+\]
+Let \(t\) be the coordinate on the brave new affine line and define
+\[
+    H(t)
+    :=
+    E_{23}(t)E_{32}(-t)E_{23}(t)
+    E_{12}(t)E_{21}(-t)E_{12}(t).
+\]
+Every elementary factor is invertible, with inverse obtained by replacing
+\(t\) by \(-t\).  Hence \(H(t)\) is an automorphism of the trivial
+rank-three bundle over
+\[
+    X\times\mathbb A^1.
+\]
+It satisfies
+\[
+    H(0)=I,
+    \qquad
+    H(1)=P.
+\]
+
+The corresponding automorphism of the relative linear space preserves the
+zero section and therefore also its open complement.  Passing to the pointed
+quotient gives an \(\mathbb A^1\)-homotopy between the identity of
+\[
+    \Th_X(\mathcal O_X^{\oplus3})
+\]
+and the cyclic permutation.  Affine-line localization identifies the two
+endpoint maps.  Therefore the cyclic permutation of \(T_X^{\wedge3}\) is
+homotopic to the identity.
+\end{proof}
+
+\section{Symmetric monoidal periodization}
+\label{sec:abstract-periodization}
+
+This section records the formal inversion results used throughout the chapter.  They are applied in
+presentably symmetric monoidal pointed categories, and all functors are required to preserve small
+colimits.  Write $\Pr^L_*$ for the symmetric monoidal $\infty$-category of presentable pointed
+$\infty$-categories and basepoint-preserving colimit-preserving functors.
+
+\subsection{Formal inversion of an object}
+
+\begin{lemma}[Free pointed presentably symmetric monoidal completion]
+\label{lem:free-pointed-monoidal-completion}
+Let
+\[
+    \mathcal A^\otimes
+\]
+be a small symmetric monoidal \(\infty\)-category.  Put
+\[
+    \mathcal P_*(\mathcal A)
+    :=
+    \Fun(\mathcal A^{\op},\mathcal S_*).
+\]
+Equip this category with pointed Day convolution.  Then
+\(\mathcal P_*(\mathcal A)\) is a presentably symmetric monoidal pointed
+\(\infty\)-category whose tensor product preserves small colimits separately
+in each variable.
+
+The pointed Yoneda functor
+\[
+    y_+:
+    \mathcal A
+    \longrightarrow
+    \mathcal P_*(\mathcal A),
+    \qquad
+    a\longmapsto
+    \Map_{\mathcal A}(-,a)_+,
+\]
+is strong symmetric monoidal.
+
+For every presentably symmetric monoidal pointed \(\infty\)-category
+\(\mathcal D\), restriction along \(y_+\) induces an equivalence
+\[
+    \Fun^{L,\otimes}
+    \bigl(
+      \mathcal P_*(\mathcal A),
+      \mathcal D
+    \bigr)
+    \xrightarrow{\simeq}
+    \Fun^\otimes(\mathcal A,\mathcal D).
+\]
+The equivalence is natural in both \(\mathcal A\) and \(\mathcal D\).
+\end{lemma}
+
+\begin{proof}
+There is a canonical equivalence
+\[
+    \Fun(\mathcal A^{\op},\mathcal S_*)
+    \simeq
+    \Fun(\mathcal A^{\op},\mathcal S)_*
+\]
+between pointed-space-valued presheaves and pointed objects in the ordinary
+presheaf category.
+
+The symmetric monoidal structure on \(\mathcal A\) and the smash product on
+\(\mathcal S_*\) determine the pointed Day-convolution product on
+\(\mathcal P_*(\mathcal A)\).  It is characterized by the following two
+properties:
+\begin{enumerate}
+    \item the pointed Yoneda functor \(y_+\) is strong symmetric monoidal;
+    \item the tensor product preserves small colimits separately in each
+    variable.
+\end{enumerate}
+Since colimits of pointed presheaves are computed objectwise and the smash
+product on pointed spaces preserves colimits separately, pointed Day
+convolution also preserves colimits separately.
+
+Let \(\mathcal D\) be a presentably symmetric monoidal pointed
+\(\infty\)-category.  Given a symmetric monoidal functor
+\[
+    F:
+    \mathcal A
+    \longrightarrow
+    \mathcal D,
+\]
+its left Kan extension along \(y_+\) exists and preserves small colimits:
+\[
+    \widetilde F:
+    \mathcal P_*(\mathcal A)
+    \longrightarrow
+    \mathcal D.
+\]
+The Day-convolution universal property equips \(\widetilde F\) with a
+canonical strong symmetric monoidal structure.  By construction,
+\[
+    \widetilde F y_+
+    \simeq
+    F.
+\]
+
+Conversely, every colimit-preserving strong symmetric monoidal functor
+\[
+    G:
+    \mathcal P_*(\mathcal A)
+    \longrightarrow
+    \mathcal D
+\]
+is determined by its restriction to pointed representables, because the
+objects \(y_+(a)\) generate \(\mathcal P_*(\mathcal A)\) under small
+colimits.  Its monoidal structure is likewise determined by the monoidal
+structure on those generators, since both tensor products preserve colimits
+separately.
+
+Thus left Kan extension and restriction are inverse equivalences:
+\[
+    \Fun^{L,\otimes}
+    \bigl(
+      \mathcal P_*(\mathcal A),
+      \mathcal D
+    \bigr)
+    \simeq
+    \Fun^\otimes(\mathcal A,\mathcal D).
+\]
+Naturality follows from the naturality of pointed Yoneda, Day convolution,
+and left Kan extension.
+\end{proof}
+
+\begin{theorem}[Presentable symmetric monoidal periodization]
+\label{thm:presentable-periodization}
+Let \(\mathcal C\) be a presentably symmetric monoidal pointed
+\(\infty\)-category and let \(X\in\mathcal C\).  There exist a presentably
+symmetric monoidal pointed \(\infty\)-category
+\[
+    \mathcal C[X^{-1}]
+\]
+and a colimit-preserving strong symmetric monoidal functor
+\[
+    \operatorname{per}_X:
+    \mathcal C
+    \longrightarrow
+    \mathcal C[X^{-1}]
+\]
+such that:
+\begin{enumerate}
+    \item the object
+    \[
+        \operatorname{per}_X(X)
+    \]
+    is tensor-invertible;
+
+    \item for every presentably symmetric monoidal pointed
+    \(\infty\)-category \(\mathcal D\), restriction along
+    \(\operatorname{per}_X\) induces an equivalence
+    \[
+    \begin{aligned}
+        \Fun^{L,\otimes}
+        \bigl(
+          \mathcal C[X^{-1}],
+          \mathcal D
+        \bigr)
+        \simeq
+        \bigl\{
+          F\in
+          \Fun^{L,\otimes}(\mathcal C,\mathcal D)
+          \mid
+          F(X)\text{ is tensor-invertible}
+        \bigr\};
+    \end{aligned}
+    \]
+
+    \item the pair
+    \[
+        \bigl(
+          \mathcal C[X^{-1}],
+          \operatorname{per}_X
+        \bigr)
+    \]
+    is unique up to a contractible space of equivalences compatible with
+    the functor from \(\mathcal C\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \mathbb F^\otimes
+\]
+be the free small symmetric monoidal \(\infty\)-category on one object
+\(x\).  Let
+\[
+    \mathbb F^\otimes[x^{-1}]
+\]
+be its symmetric monoidal localization obtained by adjoining an inverse to
+\(x\).  Thus, for every symmetric monoidal \(\infty\)-category
+\(\mathcal E\), restriction induces an equivalence
+\[
+\begin{aligned}
+    \Fun^\otimes
+    \bigl(
+      \mathbb F[x^{-1}],
+      \mathcal E
+    \bigr)
+    \simeq
+    \bigl\{
+      F\in\Fun^\otimes(\mathbb F,\mathcal E)
+      \mid
+      F(x)\text{ is tensor-invertible}
+    \bigr\}.
+\end{aligned}
+\]
+
+Put
+\[
+    \mathcal F
+    :=
+    \mathcal P_*(\mathbb F),
+    \qquad
+    \mathcal F^{\mathrm{inv}}
+    :=
+    \mathcal P_*
+    \bigl(
+      \mathbb F[x^{-1}]
+    \bigr).
+\]
+The localization
+\[
+    \mathbb F
+    \longrightarrow
+    \mathbb F[x^{-1}]
+\]
+induces a colimit-preserving strong symmetric monoidal functor
+\[
+    \lambda:
+    \mathcal F
+    \longrightarrow
+    \mathcal F^{\mathrm{inv}}.
+\]
+
+The chosen object \(X\in\mathcal C\) determines a symmetric monoidal
+functor
+\[
+    \mathbb F
+    \longrightarrow
+    \mathcal C,
+    \qquad
+    x\longmapsto X.
+\]
+By Lemma~\ref{lem:free-pointed-monoidal-completion}, this extends uniquely,
+up to a contractible space of choices, to a colimit-preserving strong
+symmetric monoidal functor
+\[
+    u_X:
+    \mathcal F
+    \longrightarrow
+    \mathcal C.
+\]
+
+Define
+\[
+    \mathcal C[X^{-1}]
+    :=
+    \mathcal C
+    \otimes_{\mathcal F}
+    \mathcal F^{\mathrm{inv}}
+\]
+in
+\[
+    \CAlg(\Pr^L_*).
+\]
+Let
+\[
+    \operatorname{per}_X:
+    \mathcal C
+    \longrightarrow
+    \mathcal C[X^{-1}]
+\]
+be the canonical morphism.
+
+The image of \(X\) in the relative tensor product is identified with the
+image of \(x\) from \(\mathcal F^{\mathrm{inv}}\).  Since \(x\) is
+tensor-invertible there,
+\[
+    \operatorname{per}_X(X)
+\]
+is tensor-invertible.
+
+Let \(\mathcal D\) be a presentably symmetric monoidal pointed
+\(\infty\)-category.  Mapping out of the relative tensor product gives a
+pullback of mapping spaces
+\[
+\begin{aligned}
+    \Fun^{L,\otimes}
+    \bigl(
+      \mathcal C[X^{-1}],
+      \mathcal D
+    \bigr)
+    \simeq
+    \Fun^{L,\otimes}(\mathcal C,\mathcal D)
+    \times_{\Fun^{L,\otimes}(\mathcal F,\mathcal D)}
+    \Fun^{L,\otimes}
+    \bigl(
+      \mathcal F^{\mathrm{inv}},
+      \mathcal D
+    \bigr).
+\end{aligned}
+\]
+
+By Lemma~\ref{lem:free-pointed-monoidal-completion}, a functor
+\[
+    \mathcal F\longrightarrow\mathcal D
+\]
+is determined by the image of \(x\).  The localization property of
+\(\mathbb F[x^{-1}]\) shows that such a functor extends across
+\(\lambda\) exactly when that image is tensor-invertible.  When an
+extension exists, its space of choices is contractible.
+
+Consequently, the preceding pullback is canonically equivalent to
+\[
+    \bigl\{
+      F\in
+      \Fun^{L,\otimes}(\mathcal C,\mathcal D)
+      \mid
+      F(X)\text{ is tensor-invertible}
+    \bigr\}.
+\]
+This proves the universal property.
+
+Finally, any two pairs satisfying this universal property represent the
+same functor on presentably symmetric monoidal pointed targets.  The
+\(\infty\)-categorical Yoneda lemma therefore gives a contractible space of
+equivalences between them, compatible with their functors from
+\(\mathcal C\).
+\end{proof}
+
+\begin{lemma}[Symmetric-object telescope comparison]
+\label{lem:symmetric-object-telescope-comparison}
+Let \(\mathcal C\) be a presentably symmetric monoidal pointed
+\(\infty\)-category, and let \(X\in\mathcal C\) be symmetric in the sense
+that the cyclic permutation
+\[
+    (123):
+    X^{\otimes3}
+    \longrightarrow
+    X^{\otimes3}
+\]
+is homotopic to the identity.
+
+Put
+\[
+    L_X
+    :=
+    \operatorname{per}_X(X)
+    \in
+    \Pic\bigl(\mathcal C[X^{-1}]\bigr).
+\]
+For \(n\geq0\), write \(L_X^{-n}\) for the negative tensor power in the
+Picard \(\infty\)-groupoid.  The space of choices involved in forming these
+inverse powers is contractible.
+
+Then there is a canonical equivalence in \(\Pr^L_*\)
+\[
+\begin{aligned}
+    \operatorname*{colim}
+    \left(
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \longrightarrow\cdots
+    \right)
+    \xrightarrow{\simeq}
+    \mathcal C[X^{-1}].
+\end{aligned}
+\]
+On the \(n\)-th stage, the comparison is canonically equivalent to
+\[
+    C
+    \longmapsto
+    L_X^{-n}
+    \otimes
+    \operatorname{per}_X(C).
+\]
+\end{lemma}
+
+\begin{proof}
+The formal inversion theorem for a symmetric object identifies the
+underlying presentable category of
+\[
+    \mathcal C[X^{-1}]
+\]
+with the stabilization of the \(\mathcal C\)-module \(\mathcal C\) under
+the action of \(X\).
+
+When the cyclic permutation on \(X^{\otimes3}\) is homotopic to the
+identity, the action of \(X\) on the sequential stabilization is an
+equivalence.  The stabilization is therefore computed by the telescope
+\[
+    \mathcal C
+    \xrightarrow{X\otimes-}
+    \mathcal C
+    \xrightarrow{X\otimes-}
+    \mathcal C
+    \longrightarrow\cdots.
+\]
+The universal property of formal inversion identifies this telescope with
+the underlying presentable category of
+\(\mathcal C[X^{-1}]\); see
+\cite[Proposition~2.19 and Corollary~2.22]
+{RobaloNoncommutativeMotivesI}.
+
+Under this equivalence, an object \(C\) placed in the \(n\)-th stage is
+transported to the periodized object
+\(\operatorname{per}_X(C)\), together with \(n\) inverse applications of
+the invertible action of \(X\).  Its image is therefore
+\[
+    L_X^{-n}
+    \otimes
+    \operatorname{per}_X(C).
+\]
+The uniqueness statement in the formal inversion theorem makes these
+stagewise identifications canonical through a contractible space of
+choices.
+\end{proof}
+
+\begin{theorem}[Symmetric telescope presentation]
+\label{thm:periodization-telescope}
+Let \(\mathcal C\) be a presentably symmetric monoidal pointed
+\(\infty\)-category, and let \(X\in\mathcal C\) be symmetric.  Define
+\[
+    \operatorname{Tel}_X(\mathcal C)
+    :=
+    \operatorname*{colim}
+    \left(
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \cdots
+    \right)
+\]
+in \(\Pr^L_*\).
+
+There is a canonical equivalence
+\[
+    \Phi_X:
+    \operatorname{Tel}_X(\mathcal C)
+    \xrightarrow{\simeq}
+    \mathcal C[X^{-1}]
+\]
+in \(\Pr^L_*\).  Equip
+\(\operatorname{Tel}_X(\mathcal C)\) with the presentably symmetric
+monoidal structure transported from \(\mathcal C[X^{-1}]\) across
+\(\Phi_X\).
+
+For this transported structure, the canonical functor
+\[
+    \iota_0:
+    \mathcal C
+    \longrightarrow
+    \operatorname{Tel}_X(\mathcal C)
+\]
+is colimit-preserving and strong symmetric monoidal, and
+\[
+    \iota_0(X)
+\]
+is tensor-invertible.
+
+If
+\[
+    \iota_n:
+    \mathcal C
+    \longrightarrow
+    \operatorname{Tel}_X(\mathcal C)
+\]
+is the canonical functor from the \(n\)-th stage, then there are canonical
+equivalences, relative to the transported monoidal structure,
+\[
+    \iota_m(C)\otimes\iota_n(D)
+    \simeq
+    \iota_{m+n}(C\otimes D).
+\]
+
+For every presentably symmetric monoidal pointed \(\infty\)-category
+\(\mathcal D\), restriction along \(\iota_0\) induces an equivalence
+\[
+\begin{aligned}
+    \Fun^{L,\otimes}
+    \bigl(
+      \operatorname{Tel}_X(\mathcal C),
+      \mathcal D
+    \bigr)
+    \simeq
+    \bigl\{
+      F\in
+      \Fun^{L,\otimes}(\mathcal C,\mathcal D)
+      \mid
+      F(X)\text{ is tensor-invertible}
+    \bigr\}.
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:symmetric-object-telescope-comparison} gives the canonical
+equivalence
+\[
+    \Phi_X:
+    \operatorname{Tel}_X(\mathcal C)
+    \xrightarrow{\simeq}
+    \mathcal C[X^{-1}]
+\]
+of presentable pointed \(\infty\)-categories.  Transport the presentably
+symmetric monoidal structure of \(\mathcal C[X^{-1}]\) across
+\(\Phi_X\).
+
+Under this equivalence,
+\[
+    \Phi_X\iota_0
+    \simeq
+    \operatorname{per}_X.
+\]
+Therefore \(\iota_0\) is colimit-preserving and strong symmetric monoidal,
+and \(\iota_0(X)\) is tensor-invertible.
+
+Put
+\[
+    L_X=\operatorname{per}_X(X).
+\]
+Lemma~\ref{lem:symmetric-object-telescope-comparison} identifies
+\[
+    \Phi_X\bigl(\iota_m(C)\bigr)
+    \simeq
+    L_X^{-m}\otimes\operatorname{per}_X(C)
+\]
+and
+\[
+    \Phi_X\bigl(\iota_n(D)\bigr)
+    \simeq
+    L_X^{-n}\otimes\operatorname{per}_X(D).
+\]
+Consequently,
+\[
+\begin{aligned}
+    \Phi_X
+    \bigl(
+      \iota_m(C)\otimes\iota_n(D)
+    \bigr)
+    &\simeq
+    L_X^{-(m+n)}
+    \otimes
+    \operatorname{per}_X(C\otimes D) \\
+    &\simeq
+    \Phi_X
+    \bigl(
+      \iota_{m+n}(C\otimes D)
+    \bigr).
+\end{aligned}
+\]
+Since \(\Phi_X\) is an equivalence, this gives the displayed stage formula.
+Its associativity, symmetry, unit, and higher coherence are inherited from
+the transported symmetric monoidal structure.
+
+Finally,
+\[
+\begin{aligned}
+    \Fun^{L,\otimes}
+    \bigl(
+      \operatorname{Tel}_X(\mathcal C),
+      \mathcal D
+    \bigr)
+    &\simeq
+    \Fun^{L,\otimes}
+    \bigl(
+      \mathcal C[X^{-1}],
+      \mathcal D
+    \bigr).
+\end{aligned}
+\]
+Apply Theorem~\ref{thm:presentable-periodization} to identify the right-hand
+side with the required space of functors.
+\end{proof}
+
+\subsection{Linear functors and periodization}
+
+\begin{definition}[Linear functor relative to two objects]
+\label{def:XY-linear}
+Let $(\mathcal C,X)$ and $(\mathcal D,Y)$ be presentably symmetric monoidal categories with chosen
+objects.  A colimit-preserving functor $L:\mathcal C\to\mathcal D$ is $(X,Y)$-linear if it is equipped
+with a coherent natural equivalence
+\[
+    L(X\otimes C)
+    \simeq
+    Y\otimes L(C).
+\]
+\end{definition}
+
+\begin{proposition}[Periodization of linear functors]
+\label{prop:linear-functor-periodization}
+Suppose that $X$ and $Y$ are symmetric, and let $L:\mathcal C\to\mathcal D$ be
+$(X,Y)$-linear.  Then there is a canonically induced
+colimit-preserving functor
+\[
+    L^{\mathrm{per}}:
+    \mathcal C[X^{-1}]
+    \longrightarrow
+    \mathcal D[Y^{-1}]
+\]
+and a canonical equivalence
+\[
+    L^{\mathrm{per}}\operatorname{per}_X
+    \simeq
+    \operatorname{per}_Y L.
+\]
+The construction is compatible with composition and with coherent natural transformations of
+linear functors.
+\end{proposition}
+
+\begin{proof}
+Using the sequential presentation of Theorem~\ref{thm:periodization-telescope}, the linearity
+equivalence gives a morphism between the two sequential diagrams defining the periodizations.
+Taking the colimit in $\Pr^L$ gives $L^{\mathrm{per}}$ and the displayed compatibility with the
+periodization functors.  Composition of linear functors and coherent natural transformations define
+the corresponding compositions and transformations of telescope diagrams, so they descend through
+the same colimit construction.
+\end{proof}
+
+\begin{proposition}[Periodization of multilinear transformations]
+\label{prop:multilinear-periodization}
+For \(1\leq a\leq r\), let
+\[
+    (\mathcal C_a,X_a)
+\]
+be presentably symmetric monoidal categories equipped with symmetric objects,
+and let
+\[
+    (\mathcal D,Y)
+\]
+be another such pair.
+
+Suppose
+\[
+    F,G:
+    \mathcal C_1\times\cdots\times\mathcal C_r
+    \longrightarrow
+    \mathcal D
+\]
+preserve small colimits separately in every variable.  Suppose further that,
+for every \(a\), they are equipped with coherent linearity equivalences
+\[
+\begin{aligned}
+    F(C_1,\ldots,X_a\otimes C_a,\ldots,C_r)
+    &\simeq
+    Y\otimes
+    F(C_1,\ldots,C_a,\ldots,C_r), \\
+    G(C_1,\ldots,X_a\otimes C_a,\ldots,C_r)
+    &\simeq
+    Y\otimes
+    G(C_1,\ldots,C_a,\ldots,C_r),
+\end{aligned}
+\]
+and that the linearity structures for distinct variables commute coherently.
+
+Then \(F\) and \(G\) induce separately colimit-preserving functors
+\[
+    F^{\mathrm{per}},G^{\mathrm{per}}:
+    \mathcal C_1[X_1^{-1}]
+    \times\cdots\times
+    \mathcal C_r[X_r^{-1}]
+    \longrightarrow
+    \mathcal D[Y^{-1}].
+\]
+
+Every natural transformation
+\[
+    \alpha:F\longrightarrow G
+\]
+compatible with the multilinearity structures induces a natural
+transformation
+\[
+    \alpha^{\mathrm{per}}:
+    F^{\mathrm{per}}
+    \longrightarrow
+    G^{\mathrm{per}}.
+\]
+If \(\alpha\) is an equivalence, then
+\(\alpha^{\mathrm{per}}\) is an equivalence.
+
+The construction is compatible with composition, and different orders of
+periodizing the source variables are canonically coherently equivalent.
+\end{proposition}
+
+\begin{proof}
+Write
+\[
+    \operatorname{per}_Y:
+    \mathcal D
+    \longrightarrow
+    \mathcal D[Y^{-1}]
+\]
+for the periodization functor.  The object
+\[
+    \operatorname{per}_Y(Y)
+\]
+is tensor-invertible.  Consequently, periodizing
+\(\mathcal D[Y^{-1}]\) once more at
+\(\operatorname{per}_Y(Y)\) gives a canonical equivalence
+\[
+    \mathcal D[Y^{-1}]
+    \bigl[
+      \operatorname{per}_Y(Y)^{-1}
+    \bigr]
+    \simeq
+    \mathcal D[Y^{-1}].
+\]
+
+We construct \(F^{\mathrm{per}}\) by successively periodizing the source
+variables.  Begin with the composite
+\[
+    F^{(0)}
+    :=
+    \operatorname{per}_Y F:
+    \mathcal C_1\times\cdots\times\mathcal C_r
+    \longrightarrow
+    \mathcal D[Y^{-1}].
+\]
+For fixed objects in the variables \(2,\ldots,r\), the functor
+\[
+    C_1
+    \longmapsto
+    F^{(0)}(C_1,C_2,\ldots,C_r)
+\]
+is
+\[
+    \bigl(
+      X_1,\operatorname{per}_Y(Y)
+    \bigr)\text{-linear}.
+\]
+Proposition~\ref{prop:linear-functor-periodization}, followed by the preceding
+idempotence equivalence, therefore gives a functor
+\[
+    F^{(1)}:
+    \mathcal C_1[X_1^{-1}]
+    \times
+    \mathcal C_2
+    \times\cdots\times
+    \mathcal C_r
+    \longrightarrow
+    \mathcal D[Y^{-1}].
+\]
+
+The construction in
+Proposition~\ref{prop:linear-functor-periodization} is functorial in all
+parameters and in coherent natural transformations.  Hence \(F^{(1)}\)
+preserves colimits separately in every variable.  Moreover, the commuting
+linearity data for \(F\) imply that, for every \(a\geq2\), the functor
+\(F^{(1)}\) remains
+\[
+    \bigl(
+      X_a,\operatorname{per}_Y(Y)
+    \bigr)\text{-linear}
+\]
+in the \(a\)-th variable.
+
+Periodizing the second variable gives
+\[
+    F^{(2)}:
+    \mathcal C_1[X_1^{-1}]
+    \times
+    \mathcal C_2[X_2^{-1}]
+    \times
+    \mathcal C_3
+    \times\cdots\times
+    \mathcal C_r
+    \longrightarrow
+    \mathcal D[Y^{-1}].
+\]
+Continuing inductively gives
+\[
+    F^{(r)}:
+    \mathcal C_1[X_1^{-1}]
+    \times\cdots\times
+    \mathcal C_r[X_r^{-1}]
+    \longrightarrow
+    \mathcal D[Y^{-1}].
+\]
+Define
+\[
+    F^{\mathrm{per}}
+    :=
+    F^{(r)}.
+\]
+The same construction gives \(G^{\mathrm{per}}\).
+
+Now let
+\[
+    \alpha:F\longrightarrow G
+\]
+be compatible with all multilinearity structures.  After composing with
+\(\operatorname{per}_Y\), Proposition~\ref{prop:linear-functor-periodization}
+periodizes \(\alpha\) in the first variable.  Compatibility with the remaining
+linearity structures allows the resulting transformation to be periodized in
+the second variable, and so on.  After \(r\) steps one obtains
+\[
+    \alpha^{\mathrm{per}}:
+    F^{\mathrm{per}}
+    \longrightarrow
+    G^{\mathrm{per}}.
+\]
+If \(\alpha\) is an equivalence, its inverse is compatible with the same
+multilinearity data.  Periodizing the inverse and the two inverse homotopies
+shows that \(\alpha^{\mathrm{per}}\) is an equivalence.
+
+It remains to compare different orders of periodization.  For any ordering
+of the variables, the resulting functor is characterized by the following
+properties:
+
+\begin{enumerate}
+    \item its restriction along the product of the periodization functors is
+    canonically equivalent to \(\operatorname{per}_YF\);
+
+    \item it is separately colimit-preserving;
+
+    \item it is compatible with the specified inverse actions of the
+    \(X_a\) through the invertible object \(\operatorname{per}_Y(Y)\).
+\end{enumerate}
+
+Repeated use of the universal property of single-variable periodization shows
+that the space of functors with these properties is contractible.  Therefore
+different orders of periodization are canonically equivalent.  The same
+contractible uniqueness gives the required higher coherence and compatibility
+with composition.
+\end{proof}
+
+\begin{proposition}[Descent of adjunctions]
+\label{prop:periodized-adjunction}
+Suppose that $X$ and $Y$ are symmetric and that
+\[
+    L:\mathcal C\rightleftarrows\mathcal D:R
+\]
+is an adjunction.  Suppose that both $L$ and $R$ preserve colimits, that $L$ is $(X,Y)$-linear, that
+$R$ is $(Y,X)$-linear, and that the two linearity equivalences are adjoint mates.  Then the
+periodizations form an adjunction
+\[
+    L^{\mathrm{per}}:
+    \mathcal C[X^{-1}]
+    \rightleftarrows
+    \mathcal D[Y^{-1}]:R^{\mathrm{per}}.
+\]
+If a square of such adjunctions and its Beck--Chevalley transformation are compatible with the
+chosen linearity data, then the square, the transformation, and its adjoint mate descend to the
+periodizations.  Equivalences descend to equivalences.
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{prop:linear-functor-periodization} separately constructs $L^{\mathrm{per}}$ and
+$R^{\mathrm{per}}$.  Compatibility of the linearity structures with adjunction makes the unit
+\[
+    \id_{\mathcal C}\longrightarrow RL
+\]
+and counit
+\[
+    LR\longrightarrow\id_{\mathcal D}
+\]
+coherent natural transformations of the corresponding telescope diagrams.  They therefore descend
+to transformations
+\[
+    \id\longrightarrow R^{\mathrm{per}}L^{\mathrm{per}},
+    \qquad
+    L^{\mathrm{per}}R^{\mathrm{per}}\longrightarrow\id.
+\]
+The triangle identities hold stagewise and their coherent homotopies descend through the colimits,
+so these transformations exhibit $L^{\mathrm{per}}\dashv R^{\mathrm{per}}$.
+
+A compatible square of adjunctions gives a square of telescope diagrams and a transformation between
+the two composites.  Periodization carries this data to the corresponding square and transformation.
+Since formation of adjoint mates is characterized by the units and counits, the descended mate is the
+mate of the descended transformation.  If the original transformation has a compatible inverse, the
+inverse descends as well.
+\end{proof}
+
+\subsection{Compact generation under periodization}
+
+\begin{lemma}[Compact closure of compact generators]
+\label{lem:compact-closure-generators}
+Let \(\mathcal C\) be a presentable \(\infty\)-category generated under small
+colimits by a small family \(\mathcal G\) of compact objects.  Then
+\(\mathcal C^\omega\) is the idempotent completion of the full subcategory
+generated by \(\mathcal G\) under finite colimits.
+\end{lemma}
+
+\begin{proof}
+Let
+\[
+    \mathcal D\subseteq\mathcal C
+\]
+be the full idempotent-complete subcategory generated by \(\mathcal G\) under
+finite colimits and retracts.  Finite colimits of compact objects are compact,
+and retracts of compact objects are compact, so
+\[
+    \mathcal D\subseteq\mathcal C^\omega.
+\]
+
+The inclusion
+\[
+    \mathcal D\hookrightarrow\mathcal C
+\]
+extends uniquely to a colimit-preserving functor
+\[
+    \Phi:
+    \operatorname{Ind}(\mathcal D)
+    \longrightarrow
+    \mathcal C.
+\]
+Since both categories are presentable, \(\Phi\) admits a right adjoint
+\[
+    \Psi:
+    \mathcal C
+    \longrightarrow
+    \operatorname{Ind}(\mathcal D).
+\]
+
+The functor \(\Phi\) carries every object of \(\mathcal D\) to a compact
+object of \(\mathcal C\).  It follows that \(\Psi\) preserves filtered
+colimits.  Indeed, for \(D\in\mathcal D\) and a filtered diagram
+\(\{C_\alpha\}\) in \(\mathcal C\),
+\[
+\begin{aligned}
+    \Map_{\operatorname{Ind}(\mathcal D)}
+    \bigl(
+      D,\Psi(\operatorname*{colim}_\alpha C_\alpha)
+    \bigr)
+    &\simeq
+    \Map_{\mathcal C}
+    \bigl(
+      \Phi(D),\operatorname*{colim}_\alpha C_\alpha
+    \bigr) \\
+    &\simeq
+    \operatorname*{colim}_\alpha
+    \Map_{\mathcal C}
+    \bigl(
+      \Phi(D),C_\alpha
+    \bigr) \\
+    &\simeq
+    \operatorname*{colim}_\alpha
+    \Map_{\operatorname{Ind}(\mathcal D)}
+    \bigl(
+      D,\Psi(C_\alpha)
+    \bigr).
+\end{aligned}
+\]
+The objects of \(\mathcal D\) detect equivalences in
+\(\operatorname{Ind}(\mathcal D)\), so \(\Psi\) preserves the filtered
+colimit.
+
+The unit
+\[
+    \eta:
+    \id_{\operatorname{Ind}(\mathcal D)}
+    \longrightarrow
+    \Psi\Phi
+\]
+is an equivalence on \(\mathcal D\), because the inclusion
+\(\mathcal D\hookrightarrow\mathcal C\) is fully faithful.  Both sides
+preserve filtered colimits, and every object of
+\(\operatorname{Ind}(\mathcal D)\) is a filtered colimit of objects of
+\(\mathcal D\).  Hence \(\eta\) is an equivalence everywhere.  Thus
+\(\Phi\) is fully faithful.
+
+Let
+\[
+    \epsilon_C:
+    \Phi\Psi(C)
+    \longrightarrow
+    C
+\]
+be the counit.  For every \(G\in\mathcal G\), adjunction and the unit
+equivalence give
+\[
+\begin{aligned}
+    \Map_{\mathcal C}
+    \bigl(
+      G,\Phi\Psi(C)
+    \bigr)
+    &\simeq
+    \Map_{\operatorname{Ind}(\mathcal D)}
+    \bigl(
+      G,\Psi(C)
+    \bigr) \\
+    &\simeq
+    \Map_{\mathcal C}(G,C).
+\end{aligned}
+\]
+Under this identification, the map induced by \(\epsilon_C\) is the identity.
+Since \(\mathcal G\) generates \(\mathcal C\), the counit \(\epsilon_C\) is an
+equivalence.  Therefore
+\[
+    \Phi:
+    \operatorname{Ind}(\mathcal D)
+    \xrightarrow{\simeq}
+    \mathcal C.
+\]
+
+The compact objects of \(\operatorname{Ind}(\mathcal D)\) are precisely the
+objects of the idempotent-complete category \(\mathcal D\).  Hence
+\[
+    \mathcal C^\omega
+    =
+    \mathcal D,
+\]
+as asserted.
+\end{proof}
+
+\begin{proposition}[Compact generators after inversion]
+\label{prop:compact-generation-periodization}
+Let \(\mathcal C\) be compactly generated by a small family
+\(\mathcal G\) of compact objects.  Suppose that \(X\) is symmetric and
+compact and that tensoring with \(X\) preserves compact objects.  Then
+\(\mathcal C[X^{-1}]\) is compactly generated by
+\[
+    X^{\otimes n}\otimes G,
+    \qquad
+    G\in\mathcal G,
+    \quad
+    n\in\mathbb Z,
+\]
+where the displayed objects mean
+\[
+    \operatorname{per}_X(X)^{\otimes n}
+    \otimes
+    \operatorname{per}_X(G)
+\]
+inside the periodized category.  Every object in this family is compact.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    \mathcal A:=\mathcal C^\omega.
+\]
+By Lemma~\ref{lem:compact-closure-generators}, \(\mathcal A\) is the
+idempotent completion of the finite-colimit closure of \(\mathcal G\), and
+there is an equivalence
+\[
+    \mathcal C
+    \simeq
+    \operatorname{Ind}(\mathcal A).
+\]
+
+The functor
+\[
+    X\otimes-:
+    \mathcal C
+    \longrightarrow
+    \mathcal C
+\]
+preserves compact objects by assumption.  It therefore restricts to a
+finite-colimit-preserving functor
+\[
+    X\otimes-:
+    \mathcal A
+    \longrightarrow
+    \mathcal A.
+\]
+Form the small telescope
+\[
+    \mathcal A_X
+    :=
+    \operatorname{Idem}
+    \operatorname*{colim}
+    \left(
+      \mathcal A
+      \xrightarrow{X\otimes-}
+      \mathcal A
+      \xrightarrow{X\otimes-}
+      \mathcal A
+      \longrightarrow\cdots
+    \right),
+\]
+where the colimit is taken among small \(\infty\)-categories with finite
+colimits and finite-colimit-preserving functors, and
+\(\operatorname{Idem}\) denotes idempotent completion.
+
+The Ind-completion equivalence between small idempotent-complete
+finite-colimit categories and compactly generated presentable categories with
+compact-preserving left adjoints identifies
+\[
+    \operatorname{Ind}(\mathcal A_X)
+\]
+with the telescope
+\[
+    \operatorname*{colim}
+    \left(
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \longrightarrow\cdots
+    \right)
+\]
+in \(\Pr^L\).  By
+Theorem~\ref{thm:periodization-telescope}, this telescope is canonically
+equivalent to
+\[
+    \mathcal C[X^{-1}].
+\]
+Consequently,
+\[
+    \mathcal C[X^{-1}]
+    \simeq
+    \operatorname{Ind}(\mathcal A_X),
+\]
+and its compact objects are precisely the objects of \(\mathcal A_X\).
+
+The images in \(\mathcal A_X\) of the objects of \(\mathcal A\) from all
+telescope stages generate \(\mathcal A_X\) under finite colimits and
+retracts.  Since \(\mathcal A\) is generated under finite colimits and
+retracts by \(\mathcal G\), it is enough to use the images of the objects
+\(G\in\mathcal G\) from all stages.
+
+Transporting the image of \(G\) from the \(m\)-th stage to the zeroth stage
+amounts to tensoring by
+\[
+    \operatorname{per}_X(X)^{-m}.
+\]
+Tensoring further by positive powers of the invertible object
+\(\operatorname{per}_X(X)\) gives the family
+\[
+    \operatorname{per}_X(X)^{\otimes n}
+    \otimes
+    \operatorname{per}_X(G),
+    \qquad
+    n\in\mathbb Z.
+\]
+These objects are compact because they belong to \(\mathcal A_X\), and they
+generate \(\mathcal C[X^{-1}]\) under small colimits.
+\end{proof}
+
+
+\subsection{Sequential \texorpdfstring{$\Omega_X$}{Omega-X}-spectra}
+
+Let \(\mathcal C\) be a presentable pointed symmetric monoidal
+\(\infty\)-category whose tensor product preserves small colimits separately
+in each variable.  For \(X\in\mathcal C\), tensoring with \(X\) admits a
+right adjoint
+\[
+    \Omega_X
+    :=
+    \underline{\operatorname{Hom}}(X,-):
+    \mathcal C
+    \longrightarrow
+    \mathcal C.
+\]
+
+\begin{definition}[Sequential \(\Omega_X\)-spectra]
+\label{def:X-prespectrum}
+Define the \(\infty\)-category of sequential \(\Omega_X\)-spectra by
+\[
+    \Sp_X^\Omega(\mathcal C)
+    :=
+    \lim
+    \left(
+      \cdots
+      \xrightarrow{\Omega_X}
+      \mathcal C
+      \xrightarrow{\Omega_X}
+      \mathcal C
+      \xrightarrow{\Omega_X}
+      \mathcal C
+    \right),
+\]
+where the limit is taken in \(\Pr^R\), equivalently in
+\(\Cat_\infty\).
+
+Thus an object of \(\Sp_X^\Omega(\mathcal C)\) consists of a sequence
+\[
+    E_0,E_1,E_2,\ldots
+\]
+together with equivalences
+\[
+    E_n
+    \xrightarrow{\simeq}
+    \underline{\operatorname{Hom}}
+    \bigl(
+      X,E_{n+1}
+    \bigr)
+\]
+for every \(n\geq0\), coherently compatible with iteration.
+
+For every \(n\geq0\), write
+\[
+    \operatorname{ev}_n:
+    \Sp_X^\Omega(\mathcal C)
+    \longrightarrow
+    \mathcal C
+\]
+for evaluation at the \(n\)-th term.
+\end{definition}
+
+\begin{proposition}[Spectrum model for periodization]
+\label{prop:spectrum-model-periodization}
+Let \(\mathcal C\) be a presentable pointed symmetric monoidal
+\(\infty\)-category whose tensor product preserves small colimits separately
+in each variable, and let \(X\in\mathcal C\) be symmetric.
+
+Then there is a canonical equivalence of presentable pointed
+\(\infty\)-categories
+\[
+    \mathcal C[X^{-1}]
+    \xrightarrow{\simeq}
+    \Sp_X^\Omega(\mathcal C).
+\]
+Transporting the symmetric monoidal structure of
+\(\mathcal C[X^{-1}]\) across this equivalence makes
+\(\Sp_X^\Omega(\mathcal C)\) presentably symmetric monoidal.
+
+Under this equivalence, the periodization functor
+\[
+    \operatorname{per}_X:
+    \mathcal C
+    \longrightarrow
+    \mathcal C[X^{-1}]
+\]
+identifies with the left adjoint
+\[
+    \Sigma_X^\infty:
+    \mathcal C
+    \longrightarrow
+    \Sp_X^\Omega(\mathcal C)
+\]
+of zeroth evaluation.  Thus there is an adjunction
+\[
+    \Sigma_X^\infty:
+    \mathcal C
+    \rightleftarrows
+    \Sp_X^\Omega(\mathcal C):
+    \operatorname{ev}_0.
+\]
+
+Let
+\[
+    F:
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be a colimit-preserving strong symmetric monoidal functor, and put
+\[
+    U:=F(X).
+\]
+Then \(F\) induces a colimit-preserving strong symmetric monoidal functor
+\[
+    F_{\mathrm{sp}}:
+    \Sp_X^\Omega(\mathcal C)
+    \longrightarrow
+    \Sp_U^\Omega(\mathcal D)
+\]
+with a canonical equivalence
+\[
+    F_{\mathrm{sp}}\Sigma_X^\infty
+    \simeq
+    \Sigma_U^\infty F.
+\]
+No preservation of internal Hom by \(F\) is required.
+
+No stability assertion is made for
+\(\mathcal C[X^{-1}]\) for a general symmetric object \(X\).
+\end{proposition}
+
+\begin{proof}
+Consider the telescope
+\[
+    \operatorname{Tel}_X(\mathcal C)
+    :=
+    \operatorname*{colim}
+    \left(
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \xrightarrow{X\otimes-}
+      \mathcal C
+      \longrightarrow\cdots
+    \right)
+\]
+in \(\Pr^L\).
+
+Passing to right adjoints identifies the opposite of this colimit diagram
+with the inverse diagram
+\[
+    \cdots
+    \xrightarrow{\Omega_X}
+    \mathcal C
+    \xrightarrow{\Omega_X}
+    \mathcal C
+    \xrightarrow{\Omega_X}
+    \mathcal C
+\]
+in \(\Pr^R\).  The equivalence
+\[
+    (\Pr^L)^{\op}
+    \simeq
+    \Pr^R
+\]
+therefore gives a canonical equivalence of presentable
+\(\infty\)-categories
+\[
+    \operatorname{Tel}_X(\mathcal C)
+    \xrightarrow{\simeq}
+    \Sp_X^\Omega(\mathcal C).
+\]
+Under this equivalence, the canonical functor from the zeroth stage
+\[
+    \iota_0:
+    \mathcal C
+    \longrightarrow
+    \operatorname{Tel}_X(\mathcal C)
+\]
+is left adjoint to
+\[
+    \operatorname{ev}_0:
+    \Sp_X^\Omega(\mathcal C)
+    \longrightarrow
+    \mathcal C.
+\]
+
+Since \(X\) is symmetric,
+Theorem~\ref{thm:periodization-telescope} gives a canonical equivalence
+\[
+    \operatorname{Tel}_X(\mathcal C)
+    \xrightarrow{\simeq}
+    \mathcal C[X^{-1}]
+\]
+under \(\mathcal C\).  Combining the two equivalences gives
+\[
+    \mathcal C[X^{-1}]
+    \xrightarrow{\simeq}
+    \Sp_X^\Omega(\mathcal C).
+\]
+Transport the presentably symmetric monoidal structure of
+\(\mathcal C[X^{-1}]\) across this equivalence.
+
+Under the combined equivalence, the canonical functor from the zeroth
+telescope stage identifies with
+\[
+    \operatorname{per}_X.
+\]
+It therefore identifies with the left adjoint of
+\(\operatorname{ev}_0\), which we denote by
+\[
+    \Sigma_X^\infty.
+\]
+
+Now let
+\[
+    F:
+    \mathcal C
+    \longrightarrow
+    \mathcal D
+\]
+be colimit-preserving and strong symmetric monoidal, and put
+\[
+    U=F(X).
+\]
+Strong monoidality supplies a coherent equivalence
+\[
+    F(X\otimes C)
+    \simeq
+    U\otimes F(C).
+\]
+Thus \(F\) is \((X,U)\)-linear.
+Proposition~\ref{prop:linear-functor-periodization} gives a
+colimit-preserving functor
+\[
+    F^{\mathrm{per}}:
+    \mathcal C[X^{-1}]
+    \longrightarrow
+    \mathcal D[U^{-1}]
+\]
+and a canonical equivalence
+\[
+    F^{\mathrm{per}}\operatorname{per}_X
+    \simeq
+    \operatorname{per}_U F.
+\]
+Because \(F\) is strong symmetric monoidal, the universal property of
+periodization makes \(F^{\mathrm{per}}\) strong symmetric monoidal.
+
+Transporting \(F^{\mathrm{per}}\) across the two spectrum-model
+equivalences gives
+\[
+    F_{\mathrm{sp}}:
+    \Sp_X^\Omega(\mathcal C)
+    \longrightarrow
+    \Sp_U^\Omega(\mathcal D)
+\]
+and
+\[
+    F_{\mathrm{sp}}\Sigma_X^\infty
+    \simeq
+    \Sigma_U^\infty F.
+\]
+This construction uses only the monoidal linearity of \(F\), not
+preservation of either internal Hom functor.
+
+Finally, formal inversion of an arbitrary symmetric object need not invert
+the simplicial suspension object.  Hence no general stability conclusion
+follows.
+\end{proof}
+
+\section{Stable brave new motivic spectra}
+\label{sec:definition-SH}
+
+\subsection{Definition and universal property}
+
+\begin{definition}[Stable brave new motivic category]
+\label{def:SH}
+For a quasi-compact quasi-separated spectral scheme $S$, define
+\[
+    \SH(S)
+    :=
+    \HH_\bullet(S)[T_S^{-1}].
+\]
+The periodization functor is denoted
+\[
+    \Sigma_T^\infty:
+    \HH_\bullet(S)
+    \longrightarrow
+    \SH(S).
+\]
+For an unpointed motivic space $F\in\HH(S)$, write
+\[
+    \Sigma_{T,+}^\infty F
+    :=
+    \Sigma_T^\infty(F_+).
+\]
+The motivic sphere spectrum is
+\[
+    \mathbf 1_S
+    :=
+    \Sigma_T^\infty\mathbb S^0_S.
+\]
+\end{definition}
+
+\begin{proposition}[Universal property of $\SH(S)$]
+\label{prop:SH-universal-property}
+Let $\mathcal D$ be a presentably symmetric monoidal pointed $\infty$-category.  Restriction along
+$\Sigma_T^\infty$ induces an equivalence
+\[
+\begin{aligned}
+    \Fun^{L,\otimes}\bigl(\SH(S),\mathcal D\bigr)
+    \simeq
+    \bigl\{F\in\Fun^{L,\otimes}(\HH_\bullet(S),\mathcal D)
+      \mid F(T_S)\text{ is invertible}\bigr\}.
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{proof}
+This is Theorem~\ref{thm:presentable-periodization} applied to
+$\mathcal C=\HH_\bullet(S)$ and $X=T_S$.
+\end{proof}
+
+\begin{lemma}[Generators after periodization]
+\label{lem:periodized-generators}
+The category \(\SH(S)\) is generated under small colimits by the objects
+\[
+    T_S^{\otimes n}
+    \otimes_S
+    \Sigma_{T,S,+}^\infty\Mot_S(X),
+    \qquad
+    X\in\Sm^{\mathrm{fp}}_{/S},
+    \quad
+    n\in\mathbb Z.
+\]
+Equivalently, it is generated under small colimits by the images in the
+periodization of the pointed smooth motives from every stage of the
+\(T_S\)-telescope.
+\end{lemma}
+
+\begin{proof}
+Chapter~4 shows that \(\HH_\bullet(S)\) is generated under small colimits by
+the pointed smooth motives
+\[
+    \Mot_{S,+}(X),
+    \qquad
+    X\in\Sm^{\mathrm{fp}}_{/S}.
+\]
+By Proposition~\ref{prop:T-symmetric} and
+Theorem~\ref{thm:periodization-telescope}, the underlying presentable category
+of \(\SH(S)\) is the colimit
+\[
+    \HH_\bullet(S)
+    \xrightarrow{T_S\wedge_S-}
+    \HH_\bullet(S)
+    \xrightarrow{T_S\wedge_S-}
+    \HH_\bullet(S)
+    \longrightarrow\cdots.
+\]
+The images of the generators from all stages generate this colimit.
+
+Transporting the image of a pointed smooth motive from the \(m\)-th stage to
+the zeroth stage amounts to tensoring its suspension spectrum by
+\(T_S^{-m}\).  Closure under tensoring by positive powers of \(T_S\) gives
+the displayed family indexed by all \(n\in\mathbb Z\).
+\end{proof}
+
+\begin{proposition}[Presentability and closed monoidality]
+\label{prop:SH-presentable-closed}
+The category $\SH(S)$ is presentable and symmetric monoidal.  Its tensor product
+\[
+    -\otimes_S-:\SH(S)\times\SH(S)\longrightarrow\SH(S)
+\]
+preserves small colimits separately in each variable and admits an internal Hom
+\[
+    \underline{\operatorname{Hom}}_S(-,-).
+\]
+The functor $\Sigma_T^\infty$ is colimit-preserving and strong symmetric monoidal.
+\end{proposition}
+
+\begin{proof}
+Presentability, the symmetric monoidal structure, and strong monoidality of the periodization functor
+are part of Theorem~\ref{thm:presentable-periodization}.  Separate preservation of colimits follows
+because $\SH(S)$ is a commutative algebra object of $\Pr^L$.  A colimit-preserving tensor functor in
+each variable on a presentable category admits a right adjoint in each variable, giving the internal
+Hom.
+\end{proof}
+
+\subsection{Stability}
+
+\begin{theorem}[Stability of brave new motivic spectra]
+\label{thm:SH-stable}
+The \(\infty\)-category \(\SH(S)\) is stable.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    S^1_S
+    :=
+    S^1\wedge\mathbb S^0_S
+    \in
+    \HH_\bullet(S)
+\]
+denote the simplicial suspension circle tensored with the pointed motivic
+unit.  By construction,
+\[
+    \Sigma_T^\infty(T_S)
+\]
+is tensor-invertible in \(\SH(S)\).
+
+Proposition~\ref{prop:T-circle-Gm} gives
+\[
+    T_S
+    \simeq
+    S^1_S\wedge_S\Gm{}_S
+\]
+in \(\HH_\bullet(S)\).  Since \(\Sigma_T^\infty\) is strong symmetric
+monoidal,
+\[
+    \Sigma_T^\infty(T_S)
+    \simeq
+    \Sigma_T^\infty(S^1_S)
+    \otimes_S
+    \Sigma_T^\infty(\Gm{}_S).
+\]
+Lemma~\ref{lem:factors-invertible} therefore implies that
+\[
+    \Sigma_T^\infty(S^1_S)
+\]
+is tensor-invertible.
+
+The ordinary suspension functor on the pointed presentable category
+\(\SH(S)\) is tensoring with the simplicial circle:
+\[
+    \Sigma E
+    \simeq
+    \Sigma_T^\infty(S^1_S)\otimes_SE.
+\]
+It is therefore an equivalence, with inverse
+\[
+    E
+    \longmapsto
+    \Sigma_T^\infty(S^1_S)^{-1}\otimes_SE.
+\]
+
+A pointed presentable \(\infty\)-category is stable if and only if its
+suspension functor is an equivalence.  The periodization
+\[
+    \SH(S)
+    =
+    \HH_\bullet(S)[T_S^{-1}]
+\]
+is pointed and presentable by
+Theorem~\ref{thm:presentable-periodization}.  Hence \(\SH(S)\) is stable.
+\end{proof}
+
+\begin{corollary}[Exactness]
+\label{cor:SH-exactness}
+In $\SH(S)$, finite limits and finite colimits agree.  Every cofiber sequence is canonically a fiber
+sequence, and conversely.
+\end{corollary}
+
+\begin{proof}
+This is the defining exactness property of a stable $\infty$-category.
+\end{proof}
+
+\begin{notation}[Mapping spectra]
+\label{not:mapping-spectra-SH}
+The mapping spectrum in $\SH(S)$ is denoted
+\[
+    \operatorname{map}_S(E,F).
+\]
+Thus
+\[
+    \Omega^\infty\operatorname{map}_S(E,F)
+    \simeq
+    \Map_{\SH(S)}(E,F).
+\]
+\end{notation}
+
+\subsection{The stable suspension and infinite-loop adjunction}
+
+\begin{proposition}[Stable suspension adjunction]
+\label{prop:SigmaOmegaT-adjunction}
+The functor $\Sigma_T^\infty$ admits a right adjoint
+\[
+    \Omega_T^\infty:
+    \SH(S)
+    \longrightarrow
+    \HH_\bullet(S).
+\]
+Thus there is an adjunction
+\[
+    \Sigma_T^\infty:
+    \HH_\bullet(S)
+    \rightleftarrows
+    \SH(S):\Omega_T^\infty.
+\]
+The right adjoint preserves limits.
+\end{proposition}
+
+\begin{proof}
+The functor $\Sigma_T^\infty$ preserves small colimits between presentable $\infty$-categories.
+The adjoint functor theorem supplies a right adjoint.  Every right adjoint preserves limits.
+\end{proof}
+
+\begin{proposition}[Spectrum-object description]
+\label{prop:SH-spectrum-object-description}
+There is a canonical equivalence of presentable pointed
+\(\infty\)-categories
+\[
+    \SH(S)
+    \xrightarrow{\simeq}
+    \Sp_{T_S}^\Omega
+    \bigl(
+      \HH_\bullet(S)
+    \bigr).
+\]
+Equivalently,
+\[
+    \SH(S)
+    \simeq
+    \lim
+    \left(
+      \cdots
+      \xrightarrow{\underline{\operatorname{Hom}}(T_S,-)}
+      \HH_\bullet(S)
+      \xrightarrow{\underline{\operatorname{Hom}}(T_S,-)}
+      \HH_\bullet(S)
+    \right).
+\]
+
+Under this presentation,
+\[
+    \Omega_T^\infty:
+    \SH(S)
+    \longrightarrow
+    \HH_\bullet(S)
+\]
+is identified with zeroth evaluation.
+\end{proposition}
+
+\begin{proof}
+The category \(\HH_\bullet(S)\) is presentable and pointed, and its smash
+product preserves small colimits separately in each variable.
+Proposition~\ref{prop:T-symmetric} shows that \(T_S\) is symmetric.
+Proposition~\ref{prop:spectrum-model-periodization} therefore gives a
+canonical equivalence
+\[
+\begin{aligned}
+    \SH(S)
+    &=
+    \HH_\bullet(S)[T_S^{-1}] \\
+    &\simeq
+    \Sp_{T_S}^\Omega
+    \bigl(
+      \HH_\bullet(S)
+    \bigr).
+\end{aligned}
+\]
+
+Under this equivalence, the periodization functor
+\[
+    \Sigma_T^\infty:
+    \HH_\bullet(S)
+    \longrightarrow
+    \SH(S)
+\]
+is the left adjoint of zeroth evaluation.  Its right adjoint is therefore
+identified with
+\[
+    \operatorname{ev}_0:
+    \Sp_{T_S}^\Omega
+    \bigl(
+      \HH_\bullet(S)
+    \bigr)
+    \longrightarrow
+    \HH_\bullet(S).
+\]
+By uniqueness of right adjoints, this right adjoint is
+\(\Omega_T^\infty\).
+\end{proof}
+
+\begin{remark}[Intrinsic suspension notation]
+\label{rem:intrinsic-suspension-notation}
+The fundamental stable suspension is the ordinary suspension $\Sigma$, equivalently tensoring with
+$S^1$.  The additional motivic periodicity is encoded intrinsically by Thom twists.  Bigraded
+notation will be introduced only after the virtual Thom construction, where its normalization is
+unambiguous.
+\end{remark}
+
+\section{Stable base functoriality}
+\label{sec:stable-base-functoriality}
+
+\subsection{Inverse image}
+
+Let $f:T\to S$ be a morphism of quasi-compact quasi-separated spectral schemes.  Pointed inverse
+image is strong symmetric monoidal and Proposition~\ref{prop:thom-base-change-unstable} gives
+\[
+    f^*T_S
+    \simeq
+    T_T.
+\]
+
+\begin{proposition}[Stable inverse image]
+\label{prop:stable-inverse-image}
+There is a unique colimit-preserving strong symmetric monoidal functor
+\[
+    f^*:\SH(S)\longrightarrow\SH(T)
+\]
+with a canonical equivalence
+\[
+    f^*\Sigma_{T,S}^\infty
+    \simeq
+    \Sigma_{T,T}^\infty f^*.
+\]
+For composable morphisms
+\[
+    U\xrightarrow{g}T\xrightarrow{f}S,
+\]
+there are coherent equivalences
+\[
+    (fg)^*
+    \simeq
+    g^*f^*,
+    \qquad
+    (\id_S)^*
+    \simeq
+    \id_{\SH(S)}.
+\]
+\end{proposition}
+
+\begin{proof}
+The pointed inverse-image functor carries $T_S$ to $T_T$.  The universal property of
+Proposition~\ref{prop:SH-universal-property} therefore gives the stable functor and its compatibility
+with stabilization.  The unstable composition and identity equivalences preserve the stabilization
+objects.  Their coherent descent through periodization gives the displayed equivalences.
+\end{proof}
+
+\begin{corollary}[The contravariant stable coefficient system]
+\label{cor:SH-star-functor}
+The assignments
+\[
+    S\longmapsto\SH(S),
+    \qquad
+    (f:T\to S)\longmapsto f^*
+\]
+define a functor
+\[
+    \SH^*:
+    \bigl(\operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}\bigr)^{\mathrm{op}}
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{prop:stable-inverse-image} supplies the objects, morphisms, and coherent
+composition data.  Theorem~\ref{thm:SH-stable} places the values in stable presentable categories,
+and stable inverse image is strong symmetric monoidal.
+\end{proof}
+
+\subsection{Direct image}
+
+\begin{definition}[Stable direct image]
+\label{def:stable-direct-image}
+Define
+\[
+    f_*:\SH(T)\longrightarrow\SH(S)
+\]
+to be the right adjoint of stable inverse image.  Thus
+\[
+    f^*:\SH(S)
+    \rightleftarrows
+    \SH(T):f_*.
+\]
+\end{definition}
+
+\begin{proposition}[Properties of stable direct image]
+\label{prop:stable-direct-image-properties}
+The functor $f_*$ preserves limits and is canonically lax symmetric monoidal.  For composable
+morphisms $U\xrightarrow{g}T\xrightarrow{f}S$, there is a coherent equivalence
+\[
+    (fg)_*
+    \simeq
+    f_*g_*.
+\]
+There is a natural projection morphism
+\[
+    f_*E\otimes_SF
+    \longrightarrow
+    f_*\bigl(E\otimes_Tf^*F\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Limit preservation is automatic for a right adjoint.  A right adjoint to a strong symmetric monoidal
+functor is canonically lax symmetric monoidal; the displayed projection morphism is adjoint to the
+composite
+\[
+\begin{aligned}
+    f^*(f_*E\otimes_SF)
+    &\simeq
+    f^*f_*E\otimes_Tf^*F \\
+    &\longrightarrow
+    E\otimes_Tf^*F.
+\end{aligned}
+\]
+The composition equivalence is the adjoint mate of the coherent equivalence
+$(fg)^*\simeq g^*f^*$.
+\end{proof}
+
+\begin{proposition}[Compatibility with unstable direct image]
+\label{prop:Omega-infty-direct-image}
+There is a canonical equivalence
+\[
+    \Omega_{T,S}^\infty f_*
+    \simeq
+    f_*\Omega_{T,T}^\infty,
+\]
+where the functor on the right is pointed unstable direct image.
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{prop:stable-inverse-image} gives a commutative square of left adjoints
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \HH_\bullet(S) \arrow[r,"f^*"] \arrow[d,"\Sigma_{T,S}^\infty"']
+        & \HH_\bullet(T) \arrow[d,"\Sigma_{T,T}^\infty"] \\
+    \SH(S) \arrow[r,"f^*"'] & \SH(T).
+\end{tikzcd}
+\]
+Taking right adjoints and using uniqueness of adjoint mates yields the asserted equivalence.
+\end{proof}
+
+\section{Stable smooth direct image}
+\label{sec:stable-smooth-direct-image}
+
+Let $p:X\to S$ be smooth and of finite presentation.
+
+\subsection{$T$-linearity}
+
+\begin{proposition}[$T$-linearity of pointed smooth direct image]
+\label{prop:p-sharp-T-linear}
+For every $F\in\HH_\bullet(X)$, there is a canonical equivalence
+\[
+    p_\sharp(T_X\wedge_XF)
+    \simeq
+    T_S\wedge_Sp_\sharp(F).
+\]
+These equivalences are coherent in $F$ and under composition of smooth morphisms.
+\end{proposition}
+
+\begin{proof}
+By base change for Thom spaces,
+\[
+    p^*T_S
+    \simeq
+    T_X.
+\]
+The pointed smooth projection formula from Chapter~4 gives
+\[
+\begin{aligned}
+    p_\sharp(T_X\wedge_XF)
+    &\simeq
+    p_\sharp(p^*T_S\wedge_XF) \\
+    &\simeq
+    T_S\wedge_Sp_\sharp(F).
+\end{aligned}
+\]
+Coherence follows from the coherence of pullback, the pointed projection formula, and composition
+of unstable smooth direct image.
+\end{proof}
+
+\subsection{Construction and adjunction}
+
+\begin{theorem}[Stable smooth direct image]
+\label{thm:stable-p-sharp}
+There is a canonically induced colimit-preserving functor
+\[
+    p_\sharp:\SH(X)\longrightarrow\SH(S)
+\]
+with a canonical equivalence
+\[
+    p_\sharp\Sigma_{T,X}^\infty
+    \simeq
+    \Sigma_{T,S}^\infty p_\sharp.
+\]
+It is left adjoint to stable inverse image:
+\[
+    p_\sharp:\SH(X)
+    \rightleftarrows
+    \SH(S):p^*.
+\]
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:p-sharp-T-linear} makes the unstable functor $p_\sharp$ $(T_X,T_S)$-linear.
+Strong symmetric monoidality of $p^*$ and the equivalence $p^*T_S\simeq T_X$ make $p^*$
+$(T_S,T_X)$-linear.  These two linearity equivalences are adjoint mates by the pointed smooth
+projection formula.  Both functors preserve colimits.  Propositions~\ref{prop:T-symmetric},
+\ref{prop:linear-functor-periodization}, and \ref{prop:periodized-adjunction} therefore supply the
+stable adjunction and its compatibility with stabilization.
+\end{proof}
+
+\begin{proposition}[Smooth direct image on suspension spectra]
+\label{prop:p-sharp-on-suspension-spectra}
+Let $q:Y\to X$ be smooth and of finite presentation.  Then
+\[
+    p_\sharp\Sigma_{T,X,+}^\infty\Mot_X(Y)
+    \simeq
+    \Sigma_{T,S,+}^\infty\Mot_S(Y),
+\]
+where $Y$ on the right is regarded as a smooth spectral $S$-scheme by composition.
+Equivalently,
+\[
+    p_\sharp\Sigma_{T,X,+}^\infty Y
+    \simeq
+    \Sigma_{T,S,+}^\infty Y.
+\]
+\end{proposition}
+
+\begin{proof}
+Before stabilization, smooth direct image carries $\Mot_{X,+}(Y)$ to $\Mot_{S,+}(Y)$.  Apply the
+compatibility of Theorem~\ref{thm:stable-p-sharp} with $\Sigma_T^\infty$.
+\end{proof}
+
+\begin{proposition}[Coherent composition of stable smooth direct image]
+\label{prop:stable-p-sharp-composition}
+For smooth morphisms of finite presentation
+\[
+    X\xrightarrow{p}Y\xrightarrow{q}S,
+\]
+there is a canonical coherent equivalence
+\[
+    (qp)_\sharp
+    \simeq
+    q_\sharp p_\sharp.
+\]
+The identity smooth morphism induces the identity functor.
+\end{proposition}
+
+\begin{proof}
+The corresponding equivalences hold for pointed unstable smooth direct image and are compatible
+with the $T$-linearity data.  Proposition~\ref{prop:linear-functor-periodization} descends them to the
+stable categories, retaining their coherence.
+\end{proof}
+
+\section{Stable smooth base change and projection}
+\label{sec:stable-smooth-exchange}
+
+\subsection{Smooth base change}
+
+Consider a Cartesian square of quasi-compact quasi-separated spectral schemes
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    X_T \arrow[r,"g'"] \arrow[d,"p'"']
+        & X \arrow[d,"p"] \\
+    T \arrow[r,"g"'] & S,
+\end{tikzcd}
+\]
+where $p$ is smooth and of finite presentation.  Then $p'$ is smooth and of finite presentation.
+
+\begin{theorem}[Stable smooth base change]
+\label{thm:stable-smooth-base-change}
+The canonical Beck--Chevalley transformation
+\[
+    p'_\sharp(g')^*
+    \longrightarrow
+    g^*p_\sharp
+\]
+is an equivalence of functors
+\[
+    \SH(X)\longrightarrow\SH(T).
+\]
+\end{theorem}
+
+\begin{proof}
+The pointed unstable Beck--Chevalley transformation is an equivalence by Chapter~4.  Both composites
+are $(T_X,T_T)$-linear: this follows from strong monoidality of inverse image and
+Proposition~\ref{prop:p-sharp-T-linear}.  The transformation and its inverse are compatible with the linearity data and therefore descend
+through periodization.  Their two composite homotopies descend as well, so the stable transformation
+is an equivalence.
+\end{proof}
+
+\subsection{The smooth projection formula}
+
+\begin{theorem}[Stable smooth projection formula]
+\label{thm:stable-smooth-projection}
+For \(E\in\SH(X)\) and \(F\in\SH(S)\), the canonical projection
+transformation
+\[
+    p_\sharp\bigl(E\otimes_Xp^*F\bigr)
+    \longrightarrow
+    p_\sharp(E)\otimes_SF
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+    \Phi_{E,F}:
+    p_\sharp\bigl(E\otimes_Xp^*F\bigr)
+    \longrightarrow
+    p_\sharp(E)\otimes_SF
+\]
+denote the projection transformation.
+
+By Lemma~\ref{lem:periodized-generators}, \(\SH(X)\) and \(\SH(S)\) are
+generated under colimits by objects of the forms
+\[
+    E=
+    T_X^{\otimes m}
+    \otimes_X
+    \Sigma_{T,X,+}^\infty\Mot_X(Y)
+\]
+and
+\[
+    F=
+    T_S^{\otimes n}
+    \otimes_S
+    \Sigma_{T,S,+}^\infty\Mot_S(Z),
+\]
+where
+\[
+    Y\in\Sm^{\mathrm{fp}}_{/X},
+    \qquad
+    Z\in\Sm^{\mathrm{fp}}_{/S},
+    \qquad
+    m,n\in\mathbb Z.
+\]
+
+Using the \(T\)-linearity of \(p_\sharp\), the equivalence
+\[
+    p^*T_S\simeq T_X,
+\]
+and strong symmetric monoidality of \(p^*\), the transformation
+\(\Phi_{E,F}\) reduces canonically to the case
+\[
+    m=n=0.
+\]
+In that case it is the stabilization of the pointed unstable projection
+transformation
+\[
+\begin{aligned}
+    p_\sharp\bigl(
+      \Mot_{X,+}(Y)
+      \wedge_X
+      p^*\Mot_{S,+}(Z)
+    \bigr)
+    \longrightarrow
+    p_\sharp\Mot_{X,+}(Y)
+    \wedge_S
+    \Mot_{S,+}(Z).
+\end{aligned}
+\]
+Both sides are canonically identified with
+\[
+    \Mot_{S,+}(Y\times_S Z),
+\]
+and under these identifications the transformation is the identity.
+Therefore \(\Phi_{E,F}\) is an equivalence on every pair of generators.
+
+Fix a generator \(E\).  Both functors
+\[
+    F\longmapsto
+    p_\sharp(E\otimes_Xp^*F)
+\]
+and
+\[
+    F\longmapsto
+    p_\sharp(E)\otimes_SF
+\]
+preserve small colimits.  Hence \(\Phi_{E,F}\) is an equivalence for every
+\(F\in\SH(S)\).
+
+Now fix arbitrary \(F\).  Both functors
+\[
+    E\longmapsto
+    p_\sharp(E\otimes_Xp^*F)
+\]
+and
+\[
+    E\longmapsto
+    p_\sharp(E)\otimes_SF
+\]
+preserve small colimits.  Since the transformation is an equivalence on the
+generators of \(\SH(X)\), it is an equivalence for every
+\(E\in\SH(X)\).
+\end{proof}
+
+\begin{corollary}[Projection formula for pullback twists]
+\label{cor:p-sharp-pullback-twist-preliminary}
+Let $L\in\Pic(\SH(S))$.  Then
+\[
+    p_\sharp\bigl(E\otimes_Xp^*L\bigr)
+    \simeq
+    p_\sharp(E)\otimes_SL.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:stable-smooth-projection} with $F=L$.
+\end{proof}
+
+\begin{remark}[Coherence]
+\label{rem:smooth-exchange-coherence}
+The smooth base-change and projection equivalences are induced from the coherent pointed unstable
+transformations by periodization.  They are therefore compatible with iterated Cartesian squares,
+composition of smooth morphisms, the monoidal constraints of inverse image, and adjoint mates.
+These coherences will be used without further notation in the proper and exceptional theories.
+\end{remark}
+
+\section{Stable localization and recollement}
+\label{sec:stable-localization}
+
+Fix a complementary closed--open pair
+\[
+    Z\xrightarrow{i}S\xleftarrow{j}U,
+\]
+where $i$ is a closed immersion and $j$ is its quasi-compact open complement.
+
+\subsection{Stabilization of the open and closed functors}
+
+Since $j$ is smooth and of finite presentation, stable smooth direct image supplies
+\[
+    j_\sharp:\SH(U)
+    \rightleftarrows
+    \SH(S):j^*.
+\]
+Stable inverse image also supplies
+\[
+    j^*:\SH(S)
+    \rightleftarrows
+    \SH(U):j_*.
+\]
+
+The pointed unstable closed direct image
+\[
+    i_*:\HH_\bullet(Z)\longrightarrow\HH_\bullet(S)
+\]
+preserves colimits by the exactness theorem of Chapter~5.  The pointed closed projection formula
+and $i^*T_S\simeq T_Z$ give
+\[
+\begin{aligned}
+    i_*(T_Z\wedge_ZF)
+    &\simeq
+    i_*\bigl(i^*T_S\wedge_ZF\bigr) \\
+    &\simeq
+    T_S\wedge_Si_*F.
+\end{aligned}
+\]
+Thus unstable closed direct image is $(T_Z,T_S)$-linear.
+
+\begin{proposition}[Stable closed direct image]
+\label{prop:stable-closed-direct-image}
+There is a colimit-preserving functor
+\[
+    i_*:\SH(Z)\longrightarrow\SH(S)
+\]
+compatible with stabilization.  It is right adjoint to \(i^*\) and admits a
+right adjoint \(i^!\):
+\[
+    i^*:\SH(S)
+    \rightleftarrows
+    \SH(Z):i_*
+    \rightleftarrows
+    \SH(S):i^!.
+\]
+Moreover, the functor \(i_*\) constructed by periodizing pointed unstable
+closed direct image agrees canonically with the stable direct image of
+Definition~\ref{def:stable-direct-image}.
+\end{proposition}
+
+\begin{proof}
+The pointed unstable closed direct image
+\[
+    i_*:
+    \HH_\bullet(Z)
+    \longrightarrow
+    \HH_\bullet(S)
+\]
+preserves all small colimits by the exactness theorem of Chapter~5.  The
+pointed closed projection formula and the equivalence
+\[
+    i^*T_S\simeq T_Z
+\]
+give
+\[
+\begin{aligned}
+    i_*(T_Z\wedge_ZF)
+    &\simeq
+    i_*\bigl(i^*T_S\wedge_ZF\bigr) \\
+    &\simeq
+    T_S\wedge_Si_*F.
+\end{aligned}
+\]
+Thus pointed unstable closed direct image is
+\((T_Z,T_S)\)-linear.  Proposition~\ref{prop:linear-functor-periodization}
+therefore gives a colimit-preserving functor
+\[
+    i_*:
+    \SH(Z)
+    \longrightarrow
+    \SH(S)
+\]
+compatible with stabilization.
+
+Strong symmetric monoidality of pointed inverse image and the equivalence
+\[
+    i^*T_S\simeq T_Z
+\]
+make pointed \(i^*\) \((T_S,T_Z)\)-linear.  Its linearity equivalence and
+that of pointed \(i_*\) are adjoint mates by the pointed closed projection
+formula.  Both pointed functors preserve colimits.  Proposition
+\ref{prop:periodized-adjunction} therefore gives an adjunction
+\[
+    i^*:
+    \SH(S)
+    \rightleftarrows
+    \SH(Z):i_*.
+\]
+
+The stable functor \(i_*\) preserves small colimits between presentable
+\(\infty\)-categories.  The adjoint functor theorem supplies a right adjoint
+\[
+    i^!:
+    \SH(S)
+    \longrightarrow
+    \SH(Z).
+\]
+
+Definition~\ref{def:stable-direct-image} defines the stable direct image of
+the morphism \(i\) as the right adjoint of stable inverse image
+\[
+    i^*:\SH(S)\longrightarrow\SH(Z).
+\]
+The periodized functor constructed above is also right adjoint to this same
+functor.  Uniqueness of right adjoints therefore gives a canonical
+equivalence between the two constructions.  This equivalence is compatible
+with their units, counits, and stabilization comparison maps.
+\end{proof}
+
+\subsection{The localization triangles}
+
+\begin{theorem}[Stable localization]
+\label{thm:stable-localization}
+For every \(E\in\SH(S)\), there is a natural exact triangle
+\[
+    j_\sharp j^*E
+    \longrightarrow
+    E
+    \longrightarrow
+    i_*i^*E.
+\]
+The first morphism is the counit of \(j_\sharp\dashv j^*\), and the second
+is the unit of \(i^*\dashv i_*\).
+\end{theorem}
+
+\begin{proof}
+For \(F\in\HH_\bullet(S)\), Chapter~5 gives a pointed cofiber sequence
+\[
+    j_\sharp j^*F
+    \longrightarrow
+    F
+    \longrightarrow
+    i_*i^*F.
+\]
+All three functors and both natural transformations are compatible with
+stabilization.  Applying \(\Sigma_T^\infty\) therefore gives an exact
+triangle
+\[
+    j_\sharp j^*\Sigma_T^\infty F
+    \longrightarrow
+    \Sigma_T^\infty F
+    \longrightarrow
+    i_*i^*\Sigma_T^\infty F.
+\]
+
+The localization transformation is \(T_S\)-linear.  Indeed,
+\[
+    j^*T_S\simeq T_U,
+    \qquad
+    i^*T_S\simeq T_Z,
+\]
+and the smooth and closed projection formulas give canonical equivalences
+\[
+\begin{aligned}
+    j_\sharp j^*
+    \bigl(
+      T_S\otimes_SE
+    \bigr)
+    &\simeq
+    T_S\otimes_Sj_\sharp j^*E, \\
+    i_*i^*
+    \bigl(
+      T_S\otimes_SE
+    \bigr)
+    &\simeq
+    T_S\otimes_Si_*i^*E.
+\end{aligned}
+\]
+These equivalences identify the localization triangle for
+\(T_S\otimes_SE\) with the tensor product by \(T_S\) of the localization
+triangle for \(E\).
+
+Since \(T_S\) is invertible in \(\SH(S)\), the same conclusion holds for
+every integral power \(T_S^{\otimes n}\), including \(n<0\).  Consequently,
+the asserted triangle is exact for every generator of the form
+\[
+    T_S^{\otimes n}
+    \otimes_S
+    \Sigma_{T,S}^\infty F,
+    \qquad
+    n\in\mathbb Z,
+    \quad
+    F\in\HH_\bullet(S).
+\]
+
+Let \(\mathcal L\subseteq\SH(S)\) be the full subcategory of objects \(E\)
+for which the canonical morphism
+\[
+    \operatorname{cofib}
+    \bigl(
+      j_\sharp j^*E\longrightarrow E
+    \bigr)
+    \longrightarrow
+    i_*i^*E
+\]
+is an equivalence.  The functors \(j_\sharp j^*\), \(\id\), and \(i_*i^*\)
+preserve small colimits.  Since their source and target categories are
+stable, they are exact.  It follows that \(\mathcal L\) is closed under small
+colimits, suspensions, and desuspensions.
+
+By Lemma~\ref{lem:periodized-generators}, the objects
+\[
+    T_S^{\otimes n}
+    \otimes_S
+    \Sigma_{T,S,+}^\infty\Mot_S(X),
+    \qquad
+    X\in\Sm^{\mathrm{fp}}_{/S},
+    \quad
+    n\in\mathbb Z,
+\]
+generate \(\SH(S)\) under small colimits.  They all belong to
+\(\mathcal L\) by the preceding argument.  Therefore
+\[
+    \mathcal L=\SH(S),
+\]
+which proves the theorem.
+\end{proof}
+
+\begin{lemma}[Full faithfulness of stable open extension]
+\label{lem:stable-j-sharp-fully-faithful}
+The unit
+\[
+    \id_{\SH(U)}
+    \longrightarrow
+    j^*j_\sharp
+\]
+is an equivalence.  Consequently,
+\[
+    j_\sharp:\SH(U)\longrightarrow\SH(S)
+\]
+is fully faithful.
+\end{lemma}
+
+\begin{proof}
+The corresponding pointed unstable unit
+\[
+    \id_{\HH_\bullet(U)}
+    \longrightarrow
+    j^*j_\sharp
+\]
+is an equivalence by the open-immersion formalism of Chapter~5.
+
+The functors \(j_\sharp\) and \(j^*\) are compatible with the chosen
+stabilization objects:
+\[
+    j^*T_S\simeq T_U,
+\]
+and the \(T\)-linearity of \(j_\sharp\) is the pointed smooth projection
+formula.  The unstable unit is compatible with these linearity data.
+Proposition~\ref{prop:periodized-adjunction} therefore carries it to an
+equivalence
+\[
+    \id_{\SH(U)}
+    \xrightarrow{\simeq}
+    j^*j_\sharp.
+\]
+A left adjoint is fully faithful precisely when its unit is an equivalence.
+\end{proof}
+
+\begin{proposition}[Full faithfulness of stable open direct image]
+\label{prop:stable-open-direct-image-fully-faithful}
+The counit
+\[
+    j^*j_*\longrightarrow\id_{\SH(U)}
+\]
+is an equivalence.  Consequently, $j_*$ is fully faithful.
+\end{proposition}
+
+\begin{proof}
+For $A,B\in\SH(U)$, the two open adjunctions and Lemma~\ref{lem:stable-j-sharp-fully-faithful} give natural
+equivalences
+\[
+\begin{aligned}
+    \Map_U(A,j^*j_*B)
+    &\simeq
+    \Map_S(j_\sharp A,j_*B) \\
+    &\simeq
+    \Map_U(j^*j_\sharp A,B) \\
+    &\simeq
+    \Map_U(A,B).
+\end{aligned}
+\]
+Under this composite, the map induced by the counit $j^*j_*B\to B$ is the identity of
+$\Map_U(A,B)$.  Yoneda therefore gives $j^*j_*B\simeq B$ naturally in $B$.
+\end{proof}
+
+\begin{theorem}[Stable co-localization]
+\label{thm:stable-colocalization}
+For every $E\in\SH(S)$, there is a natural exact triangle
+\[
+    i_*i^!E
+    \longrightarrow
+    E
+    \longrightarrow
+    j_*j^*E.
+\]
+The first morphism is the counit of $i_*\dashv i^!$ and the second is the unit of
+$j^*\dashv j_*$.
+\end{theorem}
+
+\begin{proof}
+The periodized counit
+\[
+    i^*i_*\longrightarrow\id_{\SH(Z)}
+\]
+is an equivalence, so $i_*$ is fully faithful.  The periodized open--closed orthogonality relation
+gives
+\[
+    j^*i_*\simeq0.
+\]
+For $A\in\SH(Z)$ and $B\in\SH(U)$, adjunction and this orthogonality give
+\[
+\begin{aligned}
+    \Map_Z(A,i^!j_*B)
+    &\simeq
+    \Map_S(i_*A,j_*B) \\
+    &\simeq
+    \Map_U(j^*i_*A,B) \\
+    &\simeq *.
+\end{aligned}
+\]
+Hence $i^!j_*\simeq0$.  Let $C(E)$ be the cofiber of $i_*i^!E\to E$.  Applying $i^!$ gives a
+cofiber sequence
+\[
+    i^!i_*i^!E
+    \longrightarrow
+    i^!E
+    \longrightarrow
+    i^!C(E).
+\]
+The first morphism is an equivalence by full faithfulness, hence $i^!C(E)\simeq0$.
+
+The unit map $E\to j_*j^*E$ annihilates $i_*i^!E$ by $j^*i_*\simeq0$, and therefore factors
+canonically through a morphism
+\[
+    C(E)\longrightarrow j_*j^*E.
+\]
+After applying $j^*$, this morphism becomes the identity of $j^*E$.  After applying $i^!$, both
+source and target vanish.  The pair $(i^!,j^*)$ is conservative: if $K$ is killed by both functors,
+then stable localization gives $K\simeq i_*i^*K$, while
+\[
+    \Map_S(i_*i^*K,K)
+    \simeq
+    \Map_Z(i^*K,i^!K)
+\]
+is contractible, forcing the identity of $K$ to be null and hence $K\simeq0$.  Thus
+$C(E)\to j_*j^*E$ is an equivalence, giving the asserted triangle.
+\end{proof}
+
+\subsection{The recollement package}
+
+\begin{proposition}[Stable recollement]
+\label{prop:stable-recollement}
+The following assertions hold.
+\begin{enumerate}
+    \item The functors $i_*$, $j_\sharp$, and $j_*$ are fully faithful.
+
+    \item There are canonical zero equivalences
+    \[
+        j^*i_*\simeq0,
+        \qquad
+        i^*j_\sharp\simeq0,
+        \qquad
+        i^!j_*\simeq0.
+    \]
+
+    \item An object $E\in\SH(S)$ lies in the essential image of $i_*$ if and only if
+    $j^*E\simeq0$.
+
+    \item The pair $(i^*,j^*)$ is conservative.
+\end{enumerate}
+Thus there is a recollement diagram
+\[
+    \SH(Z)
+    \mathop{\longrightarrow}^{i_*}
+    \mathop{\longleftarrow}_{i^*}
+    \mathop{\longleftarrow}_{i^!}
+    \SH(S)
+    \mathop{\longrightarrow}^{j^*}
+    \mathop{\longleftarrow}_{j_\sharp}
+    \mathop{\longleftarrow}_{j_*}
+    \SH(U).
+\]
+\end{proposition}
+
+\begin{proof}
+The unstable unit and counit equivalences proving full faithfulness of $i_*$ and $j_\sharp$ are
+compatible with stabilization, so their stable counterparts are equivalences on the generating
+$T$-shifts of suspension spectra and hence on all objects.  Full faithfulness of $j_*$ is
+Proposition~\ref{prop:stable-open-direct-image-fully-faithful}.
+
+The first two orthogonality equivalences descend directly from the pointed unstable theory.  The
+third was proved in Theorem~\ref{thm:stable-colocalization}.  If $j^*E\simeq0$, stable localization gives
+\[
+    E\simeq i_*i^*E,
+\]
+so $E$ lies in the image of $i_*$.  The converse follows from $j^*i_*\simeq0$.  Finally, if both
+$i^*E$ and $j^*E$ vanish, stable localization gives $E\simeq0$.
+\end{proof}
+
+\begin{corollary}[Support]
+\label{cor:stable-support}
+Let $\SH_Z(S)\subseteq\SH(S)$ be the full subcategory of objects $E$ with $j^*E\simeq0$.  Then
+closed direct image induces an equivalence
+\[
+    i_*:\SH(Z)\xrightarrow{\simeq}\SH_Z(S).
+\]
+\end{corollary}
+
+\begin{proof}
+This is Proposition~\ref{prop:stable-recollement}(1) and (3).
+\end{proof}
+
+\subsection{Closed exchange formulas}
+
+Consider a Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    Z_T \arrow[r,"g'"] \arrow[d,"i'"']
+        & Z \arrow[d,"i"] \\
+    T \arrow[r,"g"'] & S,
+\end{tikzcd}
+\]
+where $i$ is closed.
+
+\begin{theorem}[Stable closed base change]
+\label{thm:stable-closed-base-change}
+The canonical transformation
+\[
+    g^*i_*
+    \longrightarrow
+    i'_*(g')^*
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+The pointed unstable closed base-change transformation is an equivalence by Chapter~5.  The four
+functors in the square are compatible with the relevant Thom objects, and closed direct image is
+$T$-linear.  Periodization therefore carries the unstable equivalence to the displayed stable
+equivalence.
+\end{proof}
+
+\begin{theorem}[Stable closed projection formula]
+\label{thm:stable-closed-projection}
+For \(E\in\SH(Z)\) and \(F\in\SH(S)\), the canonical transformation
+\[
+    i_*E\otimes_SF
+    \longrightarrow
+    i_*\bigl(E\otimes_Zi^*F\bigr)
+\]
+is an equivalence.
+\end{theorem}
+
+\begin{proof}
+Consider the pointed unstable bifunctors
+\[
+\begin{aligned}
+    \Phi,\Psi:
+    \HH_\bullet(Z)\times\HH_\bullet(S)
+    &\longrightarrow
+    \HH_\bullet(S), \\
+    \Phi(E,F)
+    &:=
+    i_*E\wedge_SF, \\
+    \Psi(E,F)
+    &:=
+    i_*\bigl(E\wedge_Zi^*F\bigr).
+\end{aligned}
+\]
+Both bifunctors preserve small colimits separately in each variable.  For
+\(\Phi\), this follows from colimit preservation of pointed closed direct
+image and of the smash product.  For \(\Psi\), it follows additionally from
+colimit preservation of \(i^*\).
+
+The closed projection formula and the base-change equivalence
+\[
+    i^*T_S\simeq T_Z
+\]
+give coherent linearity equivalences in the first variable:
+\[
+\begin{aligned}
+    \Phi(T_Z\wedge_ZE,F)
+    &=
+    i_*(T_Z\wedge_ZE)\wedge_SF \\
+    &\simeq
+    (T_S\wedge_Si_*E)\wedge_SF \\
+    &\simeq
+    T_S\wedge_S\Phi(E,F),
+\end{aligned}
+\]
+and
+\[
+\begin{aligned}
+    \Psi(T_Z\wedge_ZE,F)
+    &=
+    i_*\bigl(
+      T_Z\wedge_ZE\wedge_Zi^*F
+    \bigr) \\
+    &\simeq
+    T_S\wedge_S
+    i_*\bigl(E\wedge_Zi^*F\bigr) \\
+    &\simeq
+    T_S\wedge_S\Psi(E,F).
+\end{aligned}
+\]
+
+They are likewise linear in the second variable:
+\[
+\begin{aligned}
+    \Phi(E,T_S\wedge_SF)
+    &\simeq
+    T_S\wedge_S\Phi(E,F),
+\end{aligned}
+\]
+while
+\[
+\begin{aligned}
+    \Psi(E,T_S\wedge_SF)
+    &=
+    i_*\bigl(
+      E\wedge_Zi^*(T_S\wedge_SF)
+    \bigr) \\
+    &\simeq
+    i_*\bigl(
+      E\wedge_ZT_Z\wedge_Zi^*F
+    \bigr) \\
+    &\simeq
+    T_S\wedge_S\Psi(E,F).
+\end{aligned}
+\]
+The associativity and symmetry constraints of the smash product and the
+coherence of the pointed closed projection formula give the required
+commutation coherence between the two linearity structures.
+
+Chapter~5 supplies a pointed unstable projection equivalence
+\[
+    \phi_{E,F}:
+    \Phi(E,F)
+    \xrightarrow{\simeq}
+    \Psi(E,F).
+\]
+Its construction from the closed projection transformation makes it
+compatible with the preceding multilinearity data.  Applying
+Proposition~\ref{prop:multilinear-periodization} gives an equivalence of
+periodized bifunctors
+\[
+    \Phi^{\mathrm{per}}
+    \xrightarrow{\simeq}
+    \Psi^{\mathrm{per}}.
+\]
+
+By construction of stable closed direct image, stable inverse image, and the
+stable tensor products, these periodized bifunctors are
+\[
+    \Phi^{\mathrm{per}}(E,F)
+    \simeq
+    i_*E\otimes_SF
+\]
+and
+\[
+    \Psi^{\mathrm{per}}(E,F)
+    \simeq
+    i_*\bigl(E\otimes_Zi^*F\bigr).
+\]
+The periodized transformation is therefore the stable closed projection
+transformation in the statement, and it is an equivalence.
+\end{proof}
+
+\begin{theorem}[Stable smooth--closed exchange]
+\label{thm:stable-smooth-closed-exchange}
+Let
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    Y \arrow[r,"k"] \arrow[d,"q"']
+        & X \arrow[d,"p"] \\
+    Z \arrow[r,"i"'] & S
+\end{tikzcd}
+\]
+be Cartesian, where $p$ is smooth of finite presentation and $i$ is closed.  Then there is a
+canonical equivalence
+\[
+    p_\sharp k_*
+    \simeq
+    i_*q_\sharp
+\]
+of functors $\SH(Y)\to\SH(S)$.
+\end{theorem}
+
+\begin{proof}
+The corresponding pointed unstable exchange equivalence was proved in Chapter~5.  The functors
+$p_\sharp$ and $q_\sharp$ are linear by the smooth projection formula, and $i_*$ and $k_*$ are
+linear by the closed projection formula.  Hence the unstable equivalence descends through
+periodization.
+\end{proof}
+
+\begin{proposition}[Internal-Hom exchange for a closed immersion]
+\label{prop:closed-internal-hom}
+For $F,G\in\SH(S)$, there is a canonical equivalence
+\[
+    i^!\underline{\operatorname{Hom}}_S(F,G)
+    \simeq
+    \underline{\operatorname{Hom}}_Z
+    \bigl(i^*F,i^!G\bigr).
+\]
+Equivalently, for $E\in\SH(Z)$ and $G\in\SH(S)$,
+\[
+    \underline{\operatorname{Hom}}_S(i_*E,G)
+    \simeq
+    i_*\underline{\operatorname{Hom}}_Z(E,i^!G).
+\]
+\end{proposition}
+
+\begin{proof}
+For $K\in\SH(Z)$, the closed projection formula and the two adjunctions give
+\[
+\begin{aligned}
+    \Map_Z\bigl(K,i^!\underline{\operatorname{Hom}}_S(F,G)\bigr)
+    &\simeq
+    \Map_S\bigl(i_*K,\underline{\operatorname{Hom}}_S(F,G)\bigr) \\
+    &\simeq
+    \Map_S(i_*K\otimes_SF,G) \\
+    &\simeq
+    \Map_S\bigl(i_*(K\otimes_Zi^*F),G\bigr) \\
+    &\simeq
+    \Map_Z(K\otimes_Zi^*F,i^!G) \\
+    &\simeq
+    \Map_Z\bigl(K,\underline{\operatorname{Hom}}_Z(i^*F,i^!G)\bigr).
+\end{aligned}
+\]
+Yoneda gives the first equivalence.  For the second, map an arbitrary $F\in\SH(S)$ into both sides
+and apply the first equivalence together with the closed projection formula.
+\end{proof}
+
+\section{Nisnevich descent for the stable coefficient system}
+\label{sec:stable-category-descent}
+
+The invertibility of a general Thom object will be proved locally.  We therefore record the
+category-level descent statement needed for gluing inverses.
+
+\subsection{Distinguished squares}
+
+Let
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    W \arrow[r,"k"] \arrow[d,"q"']
+        & V \arrow[d,"p"] \\
+    U \arrow[r,"j"'] & X
+\end{tikzcd}
+\]
+be a spectral Nisnevich distinguished square: $j$ is open, $p$ is \`etale, and $p$ induces an
+equivalence over the closed complement of $U$.
+
+\begin{definition}[The Nisnevich topology on spectral bases]
+\label{def:base-Nisnevich-topology}
+Let
+\[
+    \tau_{\mathrm{Nis}}^{\mathrm{base}}
+\]
+denote the Grothendieck topology on
+\[
+    \operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}
+\]
+generated by the empty covering family of the empty spectral scheme and by
+the two-member covering families
+\[
+    \{U\longrightarrow X,\;V\longrightarrow X\}
+\]
+arising from Cartesian squares
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    W \arrow[r,"k"] \arrow[d,"q"']
+        & V \arrow[d,"p"] \\
+    U \arrow[r,"j"']
+        & X
+\end{tikzcd}
+\]
+such that:
+\begin{enumerate}
+    \item \(j\) is a quasi-compact open immersion;
+    \item \(p\) is \'{e}tale and of finite presentation;
+    \item if \(Z\hookrightarrow X\) is the complementary closed immersion,
+    then the induced morphism
+    \[
+        V\times_X Z\longrightarrow Z
+    \]
+    is an equivalence.
+\end{enumerate}
+Such a square is called a Nisnevich distinguished square of spectral bases.
+\end{definition}
+
+\begin{lemma}[Pullbacks of presentable coefficient categories]
+\label{lem:presentable-category-pullback}
+Let
+\[
+    \mathcal A
+    \xrightarrow{F}
+    \mathcal C
+    \xleftarrow{G}
+    \mathcal B
+\]
+be colimit-preserving functors between presentable
+\(\infty\)-categories.  Let
+\[
+    \mathcal P
+    :=
+    \mathcal A
+    \times_{\mathcal C}
+    \mathcal B
+\]
+be the \(\infty\)-category whose objects are triples
+\[
+    (A,B,\alpha),
+    \qquad
+    \alpha:F(A)\xrightarrow{\simeq}G(B).
+\]
+
+Then \(\mathcal P\) is presentable, its colimits are computed componentwise,
+and it is the pullback of the displayed diagram in \(\Pr^L\).
+
+If the three categories are presentably symmetric monoidal and \(F\) and
+\(G\) are strong symmetric monoidal, then \(\mathcal P\) has the
+componentwise presentably symmetric monoidal structure and is the pullback in
+\(\CAlg(\Pr^L)\).  The same assertion holds in the stable and pointed
+subcategories.
+\end{lemma}
+
+\begin{proof}
+The category of triples is an accessible limit of accessible
+\(\infty\)-categories and accessible functors, and is therefore accessible.
+Because \(F\) and \(G\) preserve colimits, a colimit of a diagram of triples
+is computed by taking the colimits of its two components and the induced
+equivalence in \(\mathcal C\).  Thus \(\mathcal P\) admits all small
+colimits, and accessibility implies that it is presentable.
+
+For every presentable \(\infty\)-category \(\mathcal D\), a
+colimit-preserving functor
+\[
+    \mathcal D\longrightarrow\mathcal P
+\]
+is exactly a pair of colimit-preserving functors
+\[
+    \mathcal D\longrightarrow\mathcal A,
+    \qquad
+    \mathcal D\longrightarrow\mathcal B
+\]
+together with an equivalence between their composites to
+\(\mathcal C\).  Hence
+\[
+\begin{aligned}
+    \Fun^L(\mathcal D,\mathcal P)
+    \simeq
+    \Fun^L(\mathcal D,\mathcal A)
+    \times_{\Fun^L(\mathcal D,\mathcal C)}
+    \Fun^L(\mathcal D,\mathcal B).
+\end{aligned}
+\]
+This is the pullback universal property in \(\Pr^L\).
+
+When \(F\) and \(G\) are strong symmetric monoidal, define
+\[
+    (A,B,\alpha)\otimes(A',B',\alpha')
+    :=
+    \bigl(
+      A\otimes A',
+      B\otimes B',
+      \alpha\otimes\alpha'
+    \bigr).
+\]
+The tensor product preserves colimits separately because the componentwise
+tensor products do.  The same universal-property argument, now applied to
+strong symmetric monoidal functors, gives the pullback in
+\(\CAlg(\Pr^L)\).
+
+Pointedness and stability are detected componentwise, so the final assertion
+follows.
+\end{proof}
+
+\begin{proposition}[Stable Nisnevich excision of categories]
+\label{prop:SH-Nis-square}
+For every Nisnevich distinguished square of quasi-compact quasi-separated
+spectral schemes
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    W \arrow[r,"k"] \arrow[d,"q"']
+        & V \arrow[d,"p"] \\
+    U \arrow[r,"j"']
+        & X,
+\end{tikzcd}
+\]
+restriction induces an equivalence of presentably symmetric monoidal stable
+\(\infty\)-categories
+\[
+    \SH(X)
+    \xrightarrow{\simeq}
+    \SH(U)\times_{\SH(W)}\SH(V).
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    Z:=X\setminus U,
+    \qquad
+    Z_V:=V\setminus W,
+\]
+and write
+\[
+    i:Z\hookrightarrow X,
+    \qquad
+    i':Z_V\hookrightarrow V
+\]
+for the complementary closed immersions.  By the Nisnevich condition, the
+induced morphism
+\[
+    e:Z_V\xrightarrow{\simeq}Z
+\]
+is an equivalence.
+
+By Lemma~\ref{lem:presentable-category-pullback}, the pullback
+\[
+    \mathcal P
+    :=
+    \SH(U)\times_{\SH(W)}\SH(V)
+\]
+in \(\CAlg(\Pr^L_{\mathrm{st}})\) has underlying \(\infty\)-category the
+category of triples
+\[
+    (A,B,\alpha),
+    \qquad
+    \alpha:q^*A\xrightarrow{\simeq}k^*B.
+\]
+It is stable and presentably symmetric monoidal, with colimits and tensor
+products computed componentwise.
+
+Let
+\[
+    J^*:
+    \mathcal P
+    \longrightarrow
+    \SH(U)
+\]
+be the first projection.  It admits a left adjoint
+\[
+    J_\sharp:
+    \SH(U)
+    \longrightarrow
+    \mathcal P
+\]
+defined by
+\[
+    J_\sharp(A)
+    :=
+    \bigl(
+      A,
+      k_\sharp q^*A,
+      \eta_A
+    \bigr),
+\]
+where
+\[
+    \eta_A:
+    q^*A
+    \xrightarrow{\simeq}
+    k^*k_\sharp q^*A
+\]
+is the unit of
+\[
+    k_\sharp\dashv k^*.
+\]
+It is an equivalence because \(k_\sharp\) is fully faithful.
+
+The functor \(J^*\) also admits a right adjoint
+\[
+    J_*:
+    \SH(U)
+    \longrightarrow
+    \mathcal P
+\]
+defined by
+\[
+    J_*(A)
+    :=
+    \bigl(
+      A,
+      k_*q^*A,
+      \epsilon_A^{-1}
+    \bigr),
+\]
+where
+\[
+    \epsilon_A:
+    k^*k_*q^*A
+    \xrightarrow{\simeq}
+    q^*A
+\]
+is the counit of
+\[
+    k^*\dashv k_*.
+\]
+
+Define
+\[
+    I_*:
+    \SH(Z)
+    \longrightarrow
+    \mathcal P
+\]
+by
+\[
+    I_*(C)
+    :=
+    \bigl(
+      0,
+      i'_*e^*C,
+      0
+    \bigr).
+\]
+Since \(e\) is an equivalence, \(I_*\) has a left adjoint
+\[
+    I^*(A,B,\alpha)
+    :=
+    e_*i'^*B
+\]
+and a right adjoint
+\[
+    I^!(A,B,\alpha)
+    :=
+    e_*i'^!B.
+\]
+
+Let
+\[
+    P=(A,B,\alpha)\in\mathcal P.
+\]
+The stable localization triangle on \(V\),
+\[
+    k_\sharp k^*B
+    \longrightarrow
+    B
+    \longrightarrow
+    i'_*i'^*B,
+\]
+together with the gluing equivalence
+\[
+    \alpha:q^*A\xrightarrow{\simeq}k^*B,
+\]
+assembles with the triangle
+\[
+    A\xrightarrow{\id}A\longrightarrow0
+\]
+on \(U\) to a natural exact triangle in \(\mathcal P\):
+\[
+    J_\sharp J^*P
+    \longrightarrow
+    P
+    \longrightarrow
+    I_*I^*P.
+\]
+Thus \(\mathcal P\) is recollement-glued from \(\SH(U)\) and \(\SH(Z)\).
+
+Restriction defines a colimit-preserving strong symmetric monoidal functor
+\[
+    R:
+    \SH(X)
+    \longrightarrow
+    \mathcal P
+\]
+by
+\[
+    R(E)
+    :=
+    \bigl(
+      j^*E,
+      p^*E,
+      \beta_E
+    \bigr),
+\]
+where
+\[
+    \beta_E:
+    q^*j^*E
+    \xrightarrow{\simeq}
+    k^*p^*E
+\]
+is the canonical Cartesian base-change equivalence.
+
+By construction,
+\[
+    J^*R
+    \simeq
+    j^*.
+\]
+Stable smooth base change for the Cartesian square gives
+\[
+    Rj_\sharp
+    \simeq
+    J_\sharp.
+\]
+Indeed, the \(U\)-component is the unit equivalence
+\[
+    j^*j_\sharp\simeq\id,
+\]
+and the \(V\)-component is
+\[
+    p^*j_\sharp
+    \simeq
+    k_\sharp q^*.
+\]
+
+Stable closed base change gives
+\[
+    Ri_*
+    \simeq
+    I_*.
+\]
+It also gives
+\[
+\begin{aligned}
+    I^*R
+    &\simeq
+    e_*i'^*p^* \\
+    &\simeq
+    e_*e^*i^* \\
+    &\simeq
+    i^*.
+\end{aligned}
+\]
+
+Stable smooth--closed exchange for the Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    Z_V \arrow[r,"i'"] \arrow[d,"e"']
+        & V \arrow[d,"p"] \\
+    Z \arrow[r,"i"']
+        & X
+\end{tikzcd}
+\]
+gives
+\[
+    p_\sharp i'_*
+    \simeq
+    i_*e_\sharp.
+\]
+Taking right adjoints gives
+\[
+    i'^!p^*
+    \simeq
+    e^*i^!.
+\]
+Therefore
+\[
+\begin{aligned}
+    I^!R
+    &\simeq
+    e_*i'^!p^* \\
+    &\simeq
+    e_*e^*i^! \\
+    &\simeq
+    i^!.
+\end{aligned}
+\]
+
+We now prove that \(R\) is fully faithful.  Let
+\[
+    E,F\in\SH(X).
+\]
+Mapping the stable localization triangle
+\[
+    j_\sharp j^*E
+    \longrightarrow
+    E
+    \longrightarrow
+    i_*i^*E
+\]
+into \(F\) gives a fiber sequence of mapping spectra
+\[
+    \operatorname{map}_Z
+    \bigl(
+      i^*E,
+      i^!F
+    \bigr)
+    \longrightarrow
+    \operatorname{map}_X(E,F)
+    \longrightarrow
+    \operatorname{map}_U
+    \bigl(
+      j^*E,
+      j^*F
+    \bigr).
+\]
+
+The recollement triangle in \(\mathcal P\) gives a fiber sequence
+\[
+\begin{aligned}
+    \operatorname{map}_Z
+    \bigl(
+      I^*R(E),
+      I^!R(F)
+    \bigr)
+    \longrightarrow
+    \operatorname{map}_{\mathcal P}
+    \bigl(
+      R(E),
+      R(F)
+    \bigr)
+    \longrightarrow
+    \operatorname{map}_U
+    \bigl(
+      J^*R(E),
+      J^*R(F)
+    \bigr).
+\end{aligned}
+\]
+The preceding identifications identify the two outer terms.  Hence they
+identify the middle terms:
+\[
+    \operatorname{map}_X(E,F)
+    \xrightarrow{\simeq}
+    \operatorname{map}_{\mathcal P}
+    \bigl(
+      R(E),
+      R(F)
+    \bigr).
+\]
+Thus \(R\) is fully faithful.
+
+It remains to prove essential surjectivity.  Let \(P\in\mathcal P\).  Its
+recollement triangle is
+\[
+    J_\sharp J^*P
+    \longrightarrow
+    P
+    \longrightarrow
+    I_*I^*P.
+\]
+Equivalently, \(P\) is the cofiber of a connecting morphism
+\[
+    I_*I^*P[-1]
+    \longrightarrow
+    J_\sharp J^*P.
+\]
+Both endpoint objects lie in the essential image of \(R\):
+\[
+    J_\sharp J^*P
+    \simeq
+    Rj_\sharp J^*P
+\]
+and
+\[
+    I_*I^*P
+    \simeq
+    Ri_*I^*P.
+\]
+Since \(R\) is fully faithful, the connecting morphism lifts through a
+contractible space of choices to a morphism
+\[
+    i_*I^*P[-1]
+    \longrightarrow
+    j_\sharp J^*P
+\]
+in \(\SH(X)\).  Let \(E\) be its cofiber.  Exactness of \(R\) gives
+\[
+    R(E)\simeq P.
+\]
+Therefore \(R\) is essentially surjective.
+
+Hence
+\[
+    R:
+    \SH(X)
+    \xrightarrow{\simeq}
+    \SH(U)\times_{\SH(W)}\SH(V)
+\]
+is an equivalence.  It is strong symmetric monoidal because restriction is
+strong symmetric monoidal and the tensor product in the pullback is computed
+componentwise.
+\end{proof}
+
+
+\begin{lemma}[The Nisnevich cd-structure on spectral bases]
+\label{lem:base-Nis-cd-structure}
+The class of Nisnevich distinguished squares from
+Definition~\ref{def:base-Nisnevich-topology} defines a complete and regular
+cd-structure on
+\[
+    \operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}.
+\]
+The topology generated by this cd-structure and by the empty covering of the
+empty spectral scheme is
+\[
+    \tau_{\mathrm{Nis}}^{\mathrm{base}}.
+\]
+
+Consequently, a space-valued presheaf
+\[
+    F:
+    \bigl(
+      \operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}
+    \bigr)^{\op}
+    \longrightarrow
+    \mathcal S
+\]
+is a \(\tau_{\mathrm{Nis}}^{\mathrm{base}}\)-sheaf if and only if:
+\begin{enumerate}
+    \item \(F(\varnothing)\) is contractible;
+    \item \(F\) carries every Nisnevich distinguished square to a Cartesian
+    square of spaces.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Nisnevich distinguished squares are stable under arbitrary base change:
+open immersions, étale morphisms of finite presentation, complementary
+closed immersions, and the condition of being an equivalence over the closed
+complement are all stable under base change.
+
+Classical truncation preserves Cartesian squares, open immersions,
+complementary closed immersions, and étale morphisms.  By the classical
+characterization of spectral étale morphisms established in Chapter~3, a
+square of spectral bases is Nisnevich distinguished precisely when its
+classical truncation is a classical Nisnevich distinguished square.
+
+The completeness and regularity diagrams for the spectral cd-structure
+therefore truncate to the corresponding diagrams for the classical
+Nisnevich cd-structure.  Conversely, because the relevant open, étale, and
+closed-complement constructions are recovered from their classical
+truncations by spectral base change, the classical completeness and
+regularity diagrams lift canonically to spectral schemes.
+
+Thus the spectral distinguished squares form a complete and regular
+cd-structure and generate the topology of
+Definition~\ref{def:base-Nisnevich-topology}.  The final assertion is the
+standard sheaf criterion for a complete regular cd-structure; see
+\cite{VoevodskyCdStructures}.
+\end{proof}
+
+\begin{theorem}[Nisnevich descent of \(\SH\)]
+\label{thm:SH-Nis-descent}
+The contravariant functor
+\[
+    \SH^*:
+    \bigl(
+      \operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}
+    \bigr)^{\op}
+    \longrightarrow
+    \CAlg(\Pr^L_{\mathrm{st}})
+\]
+satisfies descent for
+\(\tau_{\mathrm{Nis}}^{\mathrm{base}}\).
+
+In particular, for every finite Nisnevich covering family
+\[
+    U=\coprod_\alpha U_\alpha
+    \longrightarrow
+    X
+\]
+with \v{C}ech nerve \(U^\bullet\), restriction induces an equivalence
+\[
+    \SH(X)
+    \xrightarrow{\simeq}
+    \lim_{[n]\in\Delta}
+    \SH(U^n)
+\]
+in \(\CAlg(\Pr^L_{\mathrm{st}})\).
+\end{theorem}
+
+\begin{proof}
+The empty spectral scheme is a strict initial object of
+\[
+    \operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}.
+\]
+Its smooth site contains only the empty spectral scheme, and the empty
+covering condition forces every motivic sheaf to take it to a contractible
+space.  Therefore
+\[
+    \HH_\bullet(\varnothing)\simeq *,
+    \qquad
+    \SH(\varnothing)\simeq *.
+\]
+
+Fix
+\[
+    \mathcal D
+    \in
+    \CAlg(\Pr^L_{\mathrm{st}})
+\]
+and define a space-valued presheaf
+\[
+    \mathcal F_{\mathcal D}(X)
+    :=
+    \Map_{\CAlg(\Pr^L_{\mathrm{st}})}
+    \bigl(
+      \mathcal D,
+      \SH(X)
+    \bigr).
+\]
+The preceding calculation gives
+\[
+    \mathcal F_{\mathcal D}(\varnothing)
+    \simeq
+    *.
+\]
+
+By Proposition~\ref{prop:SH-Nis-square}, the functor \(\SH^*\) carries every
+Nisnevich distinguished square to a pullback square in
+\(\CAlg(\Pr^L_{\mathrm{st}})\).  Since the representable functor
+\[
+    \Map_{\CAlg(\Pr^L_{\mathrm{st}})}
+    (\mathcal D,-)
+\]
+preserves limits, \(\mathcal F_{\mathcal D}\) carries every distinguished
+square to a Cartesian square of spaces.
+
+Lemma~\ref{lem:base-Nis-cd-structure} therefore implies that
+\[
+    \mathcal F_{\mathcal D}
+\]
+is a \(\tau_{\mathrm{Nis}}^{\mathrm{base}}\)-sheaf.
+
+This conclusion holds for every test object
+\[
+    \mathcal D
+    \in
+    \CAlg(\Pr^L_{\mathrm{st}}).
+\]
+The Yoneda embedding
+\[
+    \CAlg(\Pr^L_{\mathrm{st}})
+    \longrightarrow
+    \Fun
+    \bigl(
+      \CAlg(\Pr^L_{\mathrm{st}})^{\op},
+      \mathcal S
+    \bigr)
+\]
+is fully faithful and preserves limits.  Hence the coefficient-system-valued
+presheaf \(\SH^*\) itself satisfies
+\(\tau_{\mathrm{Nis}}^{\mathrm{base}}\)-descent.
+
+Applying the resulting descent equivalence to the covering family
+\[
+    U\longrightarrow X
+\]
+gives
+\[
+    \SH(X)
+    \xrightarrow{\simeq}
+    \lim_{[n]\in\Delta}
+    \SH(U^n).
+\]
+\end{proof}
+
+\subsection{Picard descent and local invertibility}
+
+\begin{proposition}[Picard descent]
+\label{prop:Pic-descent}
+The contravariant functor
+\[
+    \Pic\SH:
+    \bigl(
+      \operatorname{Sch}^{\mathrm{sp}}_{\mathrm{qcqs}}
+    \bigr)^{\op}
+    \longrightarrow
+    \CGrp(\mathcal S),
+    \qquad
+    X\longmapsto\Pic(\SH(X)),
+\]
+satisfies Nisnevich descent for
+\(\tau_{\mathrm{Nis}}^{\mathrm{base}}\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    \mathcal C
+    \simeq
+    \lim_\alpha\mathcal C_\alpha
+\]
+be a limit of symmetric monoidal \(\infty\)-categories.  An object of
+\(\mathcal C\) is a compatible family
+\[
+    \{C_\alpha\}_\alpha.
+\]
+Such an object is tensor-invertible if and only if every \(C_\alpha\) is
+tensor-invertible.  Indeed, compatible inverses in the components assemble
+to an inverse in the limit, and the space of inverse data for an invertible
+object is contractible.
+
+Consequently, formation of the Picard \(\infty\)-groupoid preserves limits:
+\[
+    \Pic(\mathcal C)
+    \simeq
+    \lim_\alpha\Pic(\mathcal C_\alpha).
+\]
+Apply this observation to the Nisnevich descent equivalences of
+Theorem~\ref{thm:SH-Nis-descent}.
+\end{proof}
+
+\begin{corollary}[Local criterion for invertibility]
+\label{cor:invertibility-local}
+Let $E\in\SH(X)$.  If there is a Nisnevich cover $\{U_\alpha\to X\}$ such that every restriction
+$E|_{U_\alpha}$ is tensor-invertible, then $E$ is tensor-invertible.
+\end{corollary}
+
+\begin{proof}
+The local inverses and their canonical compatibility equivalences define descent data in the Picard
+$\infty$-groupoid.  Proposition~\ref{prop:Pic-descent} descends this data to an inverse of $E$ on
+$X$.
+\end{proof}
+
+\section{Invertibility of Thom objects}
+\label{sec:thom-invertibility}
+
+\subsection{Stable Thom objects}
+
+\begin{definition}[Stable Thom object]
+\label{def:stable-thom-object}
+For a finite locally free module $E$ on $X$, define
+\[
+    \operatorname{th}_X(E)
+    :=
+    \Sigma_T^\infty\Th_X(E)
+    \in
+    \SH(X).
+\]
+\end{definition}
+
+\begin{remark}[The coordinate-module convention for Thom objects]
+\label{rem:thom-dual-convention}
+Under the standing convention
+\[
+    \mathbb V_X(E)
+    =
+    \operatorname{Spec}_X
+    \operatorname{Sym}_{\mathcal O_X}(E),
+\]
+a morphism
+\[
+    T\longrightarrow\mathbb V_X(E)
+\]
+over \(X\) corresponds to an \(\mathcal O_T\)-linear morphism
+\[
+    E|_T\longrightarrow\mathcal O_T,
+\]
+and hence to a section of \(E^\vee|_T\).  Thus
+\(\mathbb V_X(E)\) is the geometric vector bundle whose sheaf of sections is
+\(E^\vee\).
+
+Consequently,
+\[
+    \operatorname{th}_X(E)
+    =
+    \Sigma_T^\infty
+    \left(
+      \mathbb V_X(E)/
+      \bigl(\mathbb V_X(E)\setminus X\bigr)
+    \right)
+\]
+is the ordinary geometric Thom object of the vector bundle associated with
+\(E^\vee\).
+
+This convention agrees with the conormal convention of Chapter~5.  For a
+quasi-smooth closed immersion
+\[
+    i:Z\hookrightarrow X,
+\]
+the geometric normal bundle is
+\[
+    \mathbf N_{Z/X}
+    =
+    \mathbb V_Z(N^*_{Z/X}),
+\]
+so its Thom space is indexed by the conormal module \(N^*_{Z/X}\).
+Accordingly, all Thom twists in this chapter are indexed by the coordinate
+module appearing in \(\mathbb V_X(-)\).
+\end{remark}
+
+\begin{theorem}[Stable homotopy purity]
+\label{thm:stable-homotopy-purity}
+Let
+\[
+    i:Z\lhook\joinrel\longrightarrow X
+\]
+be a smooth closed pair over \(S\), and let
+\[
+    z:Z\longrightarrow S
+\]
+be the structural morphism.  There is a canonical equivalence
+\[
+    \Sigma_{T,S}^\infty
+    \bigl(
+      X/(X\setminus Z)
+    \bigr)
+    \simeq
+    z_\sharp
+    \operatorname{th}_Z
+    \bigl(
+      N^*_{Z/X}
+    \bigr)
+\]
+in \(\SH(S)\).
+
+Equivalently, using the relative Thom-space notation,
+\[
+    \Sigma_{T,S}^\infty
+    \Th_S
+    \bigl(
+      N^*_{Z/X}
+    \bigr)
+    \simeq
+    z_\sharp
+    \operatorname{th}_Z
+    \bigl(
+      N^*_{Z/X}
+    \bigr).
+\]
+
+The equivalence is natural under arbitrary base change in \(S\) and under
+\'{e}tale morphisms of smooth closed pairs.
+\end{theorem}
+
+\begin{proof}
+Chapter~5 gives the unstable homotopy-purity equivalence
+\[
+    X/(X\setminus Z)
+    \simeq
+    \Th_S
+    \bigl(
+      N^*_{Z/X}
+    \bigr)
+\]
+in \(\HH_\bullet(S)\).
+
+By Proposition~\ref{prop:relative-thom-p-sharp}, there is a canonical
+equivalence
+\[
+    z_\sharp
+    \Th_Z
+    \bigl(
+      N^*_{Z/X}
+    \bigr)
+    \simeq
+    \Th_S
+    \bigl(
+      N^*_{Z/X}
+    \bigr).
+\]
+Apply
+\[
+    \Sigma_{T,S}^\infty
+\]
+to the unstable purity equivalence.  Compatibility of stable smooth direct
+image with stabilization gives
+\[
+\begin{aligned}
+    \Sigma_{T,S}^\infty
+    z_\sharp
+    \Th_Z
+    \bigl(
+      N^*_{Z/X}
+    \bigr)
+    &\simeq
+    z_\sharp
+    \Sigma_{T,Z}^\infty
+    \Th_Z
+    \bigl(
+      N^*_{Z/X}
+    \bigr) \\
+    &=
+    z_\sharp
+    \operatorname{th}_Z
+    \bigl(
+      N^*_{Z/X}
+    \bigr).
+\end{aligned}
+\]
+Combining these equivalences proves the theorem.
+
+Naturality follows from the base-change naturality of unstable homotopy
+purity, base change for conormal modules and Thom spaces, and stable smooth
+base change.
+\end{proof}
+
+Strong symmetric monoidality of stabilization and
+Proposition~\ref{prop:unstable-thom-whitney} give
+\[
+    \operatorname{th}_X(E\oplus F)
+    \simeq
+    \operatorname{th}_X(E)\otimes_X\operatorname{th}_X(F).
+\]
+Moreover,
+\[
+    \operatorname{th}_X(\mathcal O_X^{\oplus n})
+    \simeq
+    T_X^{\otimes n},
+\]
+which is tensor-invertible by construction.
+
+\begin{theorem}[Thom invertibility]
+\label{thm:thom-invertibility}
+Let \(X\) be a quasi-compact quasi-separated spectral scheme.  For every
+finite locally free quasi-coherent \(\mathcal O_X\)-module \(E\), the stable
+Thom object
+\[
+    \operatorname{th}_X(E)
+\]
+is tensor-invertible in \(\SH(X)\).
+\end{theorem}
+
+\begin{proof}
+For every point \(x\in X\), finite local freeness of \(E\) gives an open
+neighbourhood on which \(E\) is trivial.  Affine opens form a basis for the
+topology of \(X\), so one may choose an affine open neighbourhood
+\[
+    U_x\longrightarrow X
+\]
+such that
+\[
+    E|_{U_x}
+    \simeq
+    \mathcal O_{U_x}^{\oplus r_x}
+\]
+for some integer \(r_x\geq0\).
+
+The opens \(U_x\) cover \(X\).  Since \(X\) is quasi-compact, there is a
+finite subcover
+\[
+    \{U_\alpha\longrightarrow X\}_{\alpha=1}^m.
+\]
+Each \(U_\alpha\) is affine and hence quasi-compact and quasi-separated, so
+all coefficient categories and pullback functors used below lie within the
+scope of Convention~\ref{conv:stable-coefficient-scope}.
+
+For every \(\alpha\), choose an equivalence
+\[
+    E|_{U_\alpha}
+    \simeq
+    \mathcal O_{U_\alpha}^{\oplus r_\alpha}.
+\]
+Base change for Thom spaces and the trivial-bundle calculation give
+\[
+\begin{aligned}
+    \operatorname{th}_X(E)|_{U_\alpha}
+    &\simeq
+    \operatorname{th}_{U_\alpha}
+    \bigl(
+      E|_{U_\alpha}
+    \bigr) \\
+    &\simeq
+    \operatorname{th}_{U_\alpha}
+    \bigl(
+      \mathcal O_{U_\alpha}^{\oplus r_\alpha}
+    \bigr) \\
+    &\simeq
+    T_{U_\alpha}^{\otimes r_\alpha}.
+\end{aligned}
+\]
+The last object is tensor-invertible because
+\(T_{U_\alpha}\) is tensor-invertible by the definition of
+\(\SH(U_\alpha)\).
+
+The finite Zariski covering family
+\[
+    \{U_\alpha\longrightarrow X\}_{\alpha=1}^m
+\]
+is, in particular, a Nisnevich covering family.  Hence
+\(\operatorname{th}_X(E)\) is Nisnevich-locally tensor-invertible.
+Corollary~\ref{cor:invertibility-local} therefore implies that
+\[
+    \operatorname{th}_X(E)
+\]
+is tensor-invertible in \(\SH(X)\).
+\end{proof}
+
+\begin{corollary}[The stable Thom functor]
+\label{cor:stable-thom-functor}
+The stable Thom construction refines to a symmetric monoidal functor
+\[
+    \operatorname{th}_X:
+    \bigl(\Vect(X)^\simeq,\oplus\bigr)
+    \longrightarrow
+    \Pic(\SH(X)).
+\]
+It is natural under pullback:
+\[
+    f^*\operatorname{th}_X(E)
+    \simeq
+    \operatorname{th}_Y(f^*E).
+\]
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{cor:unstable-thom-functor} and strong symmetric monoidality of stabilization give a
+symmetric monoidal functor to $\SH(X)$.  Theorem~\ref{thm:thom-invertibility} shows that its image
+lies in the Picard subgroupoid.  Pullback compatibility follows from
+Proposition~\ref{prop:thom-base-change-unstable}.
+\end{proof}
+
+\section{Vector-bundle and virtual Thom twists}
+\label{sec:virtual-thom-twists}
+
+\subsection{Vector-bundle suspension}
+
+\begin{definition}[Vector-bundle suspension]
+\label{def:vector-bundle-suspension}
+Let $E$ be finite locally free on $X$.  Define the Thom suspension autoequivalence
+\[
+    \Sigma^E:\SH(X)\longrightarrow\SH(X)
+\]
+by
+\[
+    \Sigma^E(M)
+    :=
+    M\otimes_X\operatorname{th}_X(E).
+\]
+Define $\Sigma^{-E}$ by tensoring with the inverse of $\operatorname{th}_X(E)$.
+\end{definition}
+
+\begin{proposition}[Calculus of vector-bundle suspensions]
+\label{prop:vector-bundle-suspension-calculus}
+For finite locally free modules $E$ and $F$ on $X$, there are coherent equivalences
+\[
+    \Sigma^{E\oplus F}
+    \simeq
+    \Sigma^E\Sigma^F,
+    \qquad
+    \Sigma^0
+    \simeq
+    \id_{\SH(X)},
+\]
+\[
+    \Sigma^E\Sigma^{-E}
+    \simeq
+    \id_{\SH(X)}
+    \simeq
+    \Sigma^{-E}\Sigma^E.
+\]
+For $f:Y\to X$, there is a coherent equivalence
+\[
+    f^*\Sigma^E
+    \simeq
+    \Sigma^{f^*E}f^*.
+\]
+\end{proposition}
+
+\begin{proof}
+The first two equivalences follow from symmetric monoidality of the stable Thom functor.  The next
+two are the defining inverse equivalences in the Picard groupoid.  For pullback, use strong symmetric
+monoidality of $f^*$ and the base-change equivalence
+\[
+    f^*\operatorname{th}_X(E)
+    \simeq
+    \operatorname{th}_Y(f^*E).
+\]
+All coherence is inherited from the symmetric monoidal Thom functor and coherent base
+functoriality.
+\end{proof}
+
+\subsection{Additivity for extensions}
+
+The extension from vector bundles to algebraic $K$-theory requires compatibility not only with direct
+sums but also with exact sequences.  This compatibility follows canonically from stable
+smooth--closed exchange.
+
+\begin{proposition}[The Thom transformation]
+\label{prop:thom-transformation}
+Let $E$ be finite locally free on $X$, with projection
+$\pi_E:\mathbb V_X(E)\to X$ and zero section
+$s_E:X\to\mathbb V_X(E)$.  There is a canonical equivalence
+\[
+    \operatorname{th}_X(E)
+    \simeq
+    \pi_{E\sharp}s_{E*}\mathbf 1_X.
+\]
+More generally, for every $M\in\SH(X)$ there is a canonical equivalence
+\[
+    \pi_{E\sharp}s_{E*}M
+    \simeq
+    \operatorname{th}_X(E)\otimes_XM.
+\]
+\end{proposition}
+
+\begin{proof}
+Let $j_E:\mathbb V_X(E)\setminus X\to\mathbb V_X(E)$ be the open complement of the zero section.
+Stable localization in $\SH(\mathbb V_X(E))$ gives an exact triangle
+\[
+    j_{E\sharp}\mathbf 1_{\mathbb V_X(E)\setminus X}
+    \longrightarrow
+    \mathbf 1_{\mathbb V_X(E)}
+    \longrightarrow
+    s_{E*}\mathbf 1_X.
+\]
+Applying $\pi_{E\sharp}$ identifies the cofiber of the first morphism with the stabilization of
+\[
+    \mathbb V_X(E)/\bigl(\mathbb V_X(E)\setminus X\bigr).
+\]
+This is $\operatorname{th}_X(E)$, proving the first equivalence.
+
+For $M\in\SH(X)$, the closed projection formula and $s_E^*\pi_E^*\simeq\id$ give
+\[
+    s_{E*}M
+    \simeq
+    s_{E*}\mathbf 1_X\otimes_{\mathbb V_X(E)}\pi_E^*M.
+\]
+The smooth projection formula then gives
+\[
+\begin{aligned}
+    \pi_{E\sharp}s_{E*}M
+    &\simeq
+    \pi_{E\sharp}\bigl(
+      s_{E*}\mathbf 1_X\otimes\pi_E^*M
+    \bigr) \\
+    &\simeq
+    \pi_{E\sharp}s_{E*}\mathbf 1_X\otimes_XM \\
+    &\simeq
+    \operatorname{th}_X(E)\otimes_XM.
+\end{aligned}
+\]
+\end{proof}
+
+
+\begin{definition}[Exact structure on finite locally free modules]
+\label{def:exact-structure-Vect}
+Let \(X\) be a quasi-compact quasi-separated spectral scheme.  The
+\(\infty\)-category
+\[
+    \Vect(X)
+\]
+is the full subcategory of \(\QCoh(X)\) spanned by finite locally free
+modules.
+
+A sequence
+\[
+    E'
+    \longrightarrow
+    E
+    \longrightarrow
+    E''
+\]
+in \(\Vect(X)\) is exact if it is a cofiber sequence in the stable
+\(\infty\)-category \(\QCoh(X)\).  Equivalently, Zariski-locally on \(X\),
+it is equivalent to a split sequence
+\[
+    E'
+    \longrightarrow
+    E'\oplus E''
+    \longrightarrow
+    E''.
+\]
+
+These exact sequences make \(\Vect(X)\) an exact \(\infty\)-category.
+Pullback along a morphism of spectral schemes is exact.
+\end{definition}
+
+\begin{proposition}[Thom additivity for exact sequences]
+\label{prop:thom-exact-additivity}
+For every exact sequence
+\[
+    0\longrightarrow E'
+    \longrightarrow E
+    \longrightarrow E''
+    \longrightarrow0
+\]
+of finite locally free modules on \(X\), there is a canonical equivalence
+\[
+    \operatorname{th}_X(E)
+    \simeq
+    \operatorname{th}_X(E')
+    \otimes_X
+    \operatorname{th}_X(E'').
+\]
+This equivalence is natural under morphisms of exact sequences and is
+compatible with direct sums of exact sequences.
+\end{proposition}
+
+\begin{proof}
+The inclusion
+\[
+    E'\longrightarrow E
+\]
+induces a morphism of relative linear spaces
+\[
+    r:
+    \mathbb V_X(E)
+    \longrightarrow
+    \mathbb V_X(E').
+\]
+We first verify that \(r\) is smooth and of finite presentation.  This is
+Zariski-local on \(X\).  On a Zariski open over which the exact sequence
+splits, there is an equivalence
+\[
+    E\simeq E'\oplus E'',
+\]
+under which \(r\) identifies with the projection
+\[
+    \mathbb V_X(E')
+    \times_X
+    \mathbb V_X(E'')
+    \longrightarrow
+    \mathbb V_X(E').
+\]
+This projection is the base change of
+\[
+    \mathbb V_X(E'')
+    \longrightarrow
+    X,
+\]
+which is smooth and of finite presentation.  Hence \(r\) is smooth and of
+finite presentation globally.
+
+Pulling \(r\) back along the zero section
+\[
+    s_{E'}:
+    X
+    \longrightarrow
+    \mathbb V_X(E')
+\]
+gives a Cartesian square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \mathbb V_X(E'') \arrow[r,"k"] \arrow[d,"\pi_{E''}"']
+        & \mathbb V_X(E) \arrow[d,"r"] \\
+    X \arrow[r,"s_{E'}"']
+        & \mathbb V_X(E').
+\end{tikzcd}
+\]
+Indeed, relative spectrum converts this square into the pushout equivalence
+\[
+    \operatorname{Sym}(E)
+    \otimes_{\operatorname{Sym}(E')}
+    \mathcal O_X
+    \simeq
+    \operatorname{Sym}(E'').
+\]
+The pushout of
+\[
+    E'\longrightarrow E\longleftarrow0
+\]
+in quasi-coherent modules is \(E''\), and the symmetric-algebra functor
+preserves colimits.
+
+The zero section of \(E\) factors as
+\[
+    s_E=ks_{E''},
+\]
+and the structure morphism factors as
+\[
+    \pi_E=\pi_{E'}r.
+\]
+Proposition~\ref{prop:thom-transformation} therefore gives
+\[
+\begin{aligned}
+    \operatorname{th}_X(E)
+    &\simeq
+    \pi_{E\sharp}s_{E*}\mathbf1_X \\
+    &\simeq
+    \pi_{E'\sharp}
+    r_\sharp
+    k_*
+    s_{E''*}\mathbf1_X.
+\end{aligned}
+\]
+Stable smooth--closed exchange for the displayed Cartesian square gives
+\[
+    r_\sharp k_*
+    \simeq
+    s_{E'*}\pi_{E''\sharp}.
+\]
+Consequently,
+\[
+\begin{aligned}
+    \operatorname{th}_X(E)
+    &\simeq
+    \pi_{E'\sharp}
+    s_{E'*}
+    \pi_{E''\sharp}
+    s_{E''*}\mathbf1_X \\
+    &\simeq
+    \pi_{E'\sharp}
+    s_{E'*}
+    \operatorname{th}_X(E'') \\
+    &\simeq
+    \operatorname{th}_X(E')
+    \otimes_X
+    \operatorname{th}_X(E'').
+\end{aligned}
+\]
+The final equivalence is Proposition~\ref{prop:thom-transformation} applied
+to the object \(\operatorname{th}_X(E'')\).
+
+A morphism of exact sequences induces a morphism between the corresponding
+Cartesian squares of relative linear spaces.  Naturality of relative
+spectrum, zero sections, smooth--closed exchange, and the smooth and closed
+projection transformations gives naturality of the additivity equivalence.
+
+For two exact sequences, the Cartesian square associated with their direct
+sum is the product of the two corresponding Cartesian squares.  Compatibility
+of smooth--closed exchange with products and the symmetric monoidal
+projection formulas identifies the additivity equivalence for the direct sum
+with the tensor product of the two additivity equivalences.
+\end{proof}
+
+\begin{proposition}[Coherent Thom additivity]
+\label{prop:coherent-thom-additivity}
+Let
+\[
+    S_\bullet\Vect(X)
+\]
+be the Waldhausen \(S\)-construction of the exact \(\infty\)-category
+\(\Vect(X)\) from
+Definition~\ref{def:exact-structure-Vect}.
+
+For every \(n\geq0\), define
+\[
+    \delta_n:
+    \bigl(
+      S_n\Vect(X)
+    \bigr)^\simeq
+    \longrightarrow
+    \Pic(\SH(X))^n
+\]
+by
+\[
+\begin{aligned}
+    \delta_n
+    \bigl(
+      0=E_0\to E_1\to\cdots\to E_n
+    \bigr)
+    :=
+    \bigl(
+      \operatorname{th}_X(E_1/E_0),
+      \ldots,
+      \operatorname{th}_X(E_n/E_{n-1})
+    \bigr).
+\end{aligned}
+\]
+
+The maps \(\delta_n\) assemble into a simplicial map of
+\(E_\infty\)-spaces
+\[
+    \delta_\bullet:
+    \bigl(
+      S_\bullet\Vect(X)
+    \bigr)^\simeq
+    \longrightarrow
+    B_\bullet\Pic(\SH(X)).
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    0=E_0\longrightarrow E_1\longrightarrow\cdots\longrightarrow E_n
+\]
+be an object of \(S_n\Vect(X)\).  For \(0\leq a<b\leq n\), put
+\[
+    Q_{a,b}:=E_b/E_a.
+\]
+For every triple
+\[
+    a<b<c,
+\]
+there is a canonical exact sequence
+\[
+    0
+    \longrightarrow
+    Q_{a,b}
+    \longrightarrow
+    Q_{a,c}
+    \longrightarrow
+    Q_{b,c}
+    \longrightarrow
+    0.
+\]
+Proposition~\ref{prop:thom-exact-additivity} gives a natural equivalence
+\[
+    \operatorname{th}_X(Q_{a,c})
+    \xrightarrow{\simeq}
+    \operatorname{th}_X(Q_{a,b})
+    \otimes_X
+    \operatorname{th}_X(Q_{b,c}).
+\]
+Let
+\[
+\begin{aligned}
+    \mu_{a,b,c}:
+    \operatorname{th}_X(Q_{a,b})
+    \otimes_X
+    \operatorname{th}_X(Q_{b,c})
+    \xrightarrow{\simeq}
+    \operatorname{th}_X(Q_{a,c})
+\end{aligned}
+\]
+denote its inverse.  This direction agrees with multiplication in the bar
+construction.
+
+For four indices
+\[
+    a<b<c<d,
+\]
+there are two composites
+\[
+\begin{aligned}
+    &
+    \operatorname{th}_X(Q_{a,b})
+    \otimes
+    \operatorname{th}_X(Q_{b,c})
+    \otimes
+    \operatorname{th}_X(Q_{c,d}) \\
+    &\hspace{4cm}
+    \longrightarrow
+    \operatorname{th}_X(Q_{a,d}),
+\end{aligned}
+\]
+obtained by first multiplying the first two factors or the last two factors.
+
+The additivity equivalence of
+Proposition~\ref{prop:thom-exact-additivity} is constructed from the
+Cartesian square of relative linear spaces associated with a short exact
+sequence, together with smooth--closed exchange and the smooth and closed
+projection formulas.  For the filtration
+\[
+    E_a\subseteq E_b\subseteq E_c\subseteq E_d,
+\]
+the two composites above arise from the two possible pastings of the same
+iterated Cartesian diagram.  The Beck--Chevalley pasting law identifies the
+two exchange transformations, and compatibility of the projection formulas
+with composition identifies the resulting tensor-product maps.  Thus the
+two composites agree through a canonical homotopy.
+
+More generally, for every subdivision
+\[
+    a=a_0<a_1<\cdots<a_r=b,
+\]
+the iterated multiplication
+\[
+\begin{aligned}
+    \bigotimes_{\nu=1}^r
+    \operatorname{th}_X
+    \bigl(
+      Q_{a_{\nu-1},a_\nu}
+    \bigr)
+    \longrightarrow
+    \operatorname{th}_X(Q_{a,b})
+\end{aligned}
+\]
+is obtained by pasting the same iterated diagram of relative linear spaces.
+Higher Beck--Chevalley pasting coherence identifies all parenthesizations
+and all refinements through a contractible space of choices.  These are
+exactly the associativity coherences required for a map into the bar
+construction.
+
+We now check the simplicial operators.
+
+An inner face map removes an intermediate term \(E_a\).  It replaces the
+two consecutive quotients
+\[
+    Q_{a-1,a},
+    \qquad
+    Q_{a,a+1}
+\]
+by
+\[
+    Q_{a-1,a+1}.
+\]
+The corresponding face map in
+\[
+    B_\bullet\Pic(\SH(X))
+\]
+multiplies the two consecutive entries.  Compatibility is supplied by
+\[
+    \mu_{a-1,a,a+1}.
+\]
+
+The first and last face maps discard the first or last quotient.  This
+agrees directly with the definition of \(\delta_n\).
+
+A degeneracy repeats one term of the filtration and therefore inserts the
+zero quotient.  Since
+\[
+    \operatorname{th}_X(0)
+    \simeq
+    \mathbf1_X,
+\]
+this agrees with insertion of the unit in the bar construction.
+
+The coherent compatibility for arbitrary subdivisions proves all simplicial
+identities, including their higher homotopies.  Therefore the maps
+\(\delta_n\) assemble into a simplicial map
+\[
+    \delta_\bullet:
+    \bigl(
+      S_\bullet\Vect(X)
+    \bigr)^\simeq
+    \longrightarrow
+    B_\bullet\Pic(\SH(X)).
+\]
+
+Finally, direct sum gives
+\[
+    \bigl(
+      S_\bullet\Vect(X)
+    \bigr)^\simeq
+\]
+a simplicial \(E_\infty\)-space.  The stable Thom functor is symmetric
+monoidal:
+\[
+    \operatorname{th}_X(E\oplus F)
+    \simeq
+    \operatorname{th}_X(E)
+    \otimes_X
+    \operatorname{th}_X(F).
+\]
+The direct-sum compatibility in
+Proposition~\ref{prop:thom-exact-additivity} shows that every
+\(\delta_n\) is a map of \(E_\infty\)-spaces.  Hence
+\(\delta_\bullet\) is a simplicial map of \(E_\infty\)-spaces.
+\end{proof}
+
+\subsection{The motivic $J$-homomorphism}
+
+\begin{definition}[Vector-bundle algebraic \(K\)-theory]
+\label{def:vector-bundle-K-theory}
+Let
+\[
+    \Vect(X)
+\]
+denote the exact \(\infty\)-category of finite locally free
+quasi-coherent \(\mathcal O_X\)-modules.  Define
+\[
+    K(X)
+    :=
+    K\bigl(\Vect(X)\bigr)
+\]
+to be its algebraic \(K\)-theory space, constructed by the Waldhausen
+\(S\)-construction.  Direct sum makes \(K(X)\) a grouplike
+\(E_\infty\)-space.
+
+Thus \(K(X)\) in this chapter means vector-bundle algebraic \(K\)-theory.
+No identification with the algebraic \(K\)-theory of all perfect complexes is
+used or asserted.
+\end{definition}
+
+\begin{theorem}[The motivic \(J\)-homomorphism]
+\label{thm:motivic-J}
+The stable Thom functor and coherent Thom additivity induce a natural map of
+grouplike \(E_\infty\)-spaces
+\[
+    J_X:
+    K(X)
+    \longrightarrow
+    \Pic(\SH(X)).
+\]
+For every finite locally free module \(E\),
+\[
+    J_X([E])
+    \simeq
+    \operatorname{th}_X(E).
+\]
+
+For every morphism \(f:Y\to X\), the square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    K(X) \arrow[r,"J_X"] \arrow[d,"f^*"']
+        & \Pic(\SH(X)) \arrow[d,"f^*"] \\
+    K(Y) \arrow[r,"J_Y"']
+        & \Pic(\SH(Y))
+\end{tikzcd}
+\]
+commutes through a canonical coherent homotopy.
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:coherent-thom-additivity} gives a simplicial map of
+\(E_\infty\)-spaces
+\[
+    \delta_\bullet:
+    \bigl(
+      S_\bullet\Vect(X)
+    \bigr)^\simeq
+    \longrightarrow
+    B_\bullet\Pic(\SH(X)).
+\]
+Geometric realization gives a map of \(E_\infty\)-spaces
+\[
+    \left|
+      \bigl(
+        S_\bullet\Vect(X)
+      \bigr)^\simeq
+    \right|
+    \longrightarrow
+    \left|
+      B_\bullet\Pic(\SH(X))
+    \right|.
+\]
+Looping gives
+\[
+\begin{aligned}
+    J_X:
+    K(X)
+    &=
+    \Omega
+    \left|
+      \bigl(
+        S_\bullet\Vect(X)
+      \bigr)^\simeq
+    \right| \\
+    &\longrightarrow
+    \Omega
+    \left|
+      B_\bullet\Pic(\SH(X))
+    \right| \\
+    &\simeq
+    \Pic(\SH(X)).
+\end{aligned}
+\]
+Because \(\delta_\bullet\) is a simplicial map of \(E_\infty\)-spaces,
+\(J_X\) is a map of grouplike \(E_\infty\)-spaces.
+
+The one-step filtration
+\[
+    0\longrightarrow E
+\]
+represents the class of \(E\) and is carried by \(\delta_1\) to
+\[
+    \operatorname{th}_X(E).
+\]
+Hence
+\[
+    J_X([E])
+    \simeq
+    \operatorname{th}_X(E).
+\]
+
+Let \(f:Y\to X\).  Pullback preserves finite locally free modules,
+cofiber sequences of finite locally free modules, quotients in
+filtrations, and direct sums.  Base change for Thom objects gives
+\[
+    f^*\operatorname{th}_X(E)
+    \simeq
+    \operatorname{th}_Y(f^*E).
+\]
+Naturality of smooth--closed exchange, zero sections, relative linear
+spaces, and the projection formulas shows that these equivalences commute
+with the multiplication maps
+\[
+    \mu_{a,b,c}
+\]
+used in the construction of \(\delta_\bullet\).
+
+Thus pullback commutes coherently with the complete simplicial
+\(E_\infty\)-map
+\[
+    \delta_\bullet.
+\]
+Geometric realization and looping produce the asserted coherent homotopy
+between
+\[
+    f^*J_X
+    \qquad\text{and}\qquad
+    J_Yf^*.
+\]
+\end{proof}
+
+\begin{definition}[Virtual Thom suspension]
+\label{def:virtual-thom-suspension}
+For $\xi\in K(X)$, write
+\[
+    \operatorname{th}_X(\xi)
+    :=
+    J_X(\xi)
+    \in
+    \Pic(\SH(X)).
+\]
+Define
+\[
+    \Sigma^\xi(M)
+    :=
+    M\otimes_X\operatorname{th}_X(\xi).
+\]
+Given a specified path
+\[
+    \gamma:\xi\simeq[E]-[F]
+\]
+in $K(X)$, applying $J_X$ to $\gamma$ induces an equivalence
+\[
+    \Sigma^\xi
+    \simeq
+    \Sigma^E\Sigma^{-F}.
+\]
+\end{definition}
+
+\begin{proposition}[Virtual-twist calculus]
+\label{prop:virtual-twist-calculus}
+For $\xi,\eta\in K(X)$, there are coherent equivalences
+\[
+    \Sigma^{\xi+\eta}
+    \simeq
+    \Sigma^\xi\Sigma^\eta,
+    \qquad
+    \Sigma^0\simeq\id,
+    \qquad
+    \Sigma^{-\xi}\simeq(\Sigma^\xi)^{-1}.
+\]
+For $f:Y\to X$,
+\[
+    f^*\Sigma^\xi
+    \simeq
+    \Sigma^{f^*\xi}f^*.
+\]
+The construction depends only on the point $\xi$ of the $K$-theory space and is compatible with
+homotopies in $K(X)$.
+\end{proposition}
+
+\begin{proof}
+These statements are the functorial consequences of the map of grouplike $E_\infty$-spaces
+$J_X$ and its pullback naturality.  A path in $K(X)$ is carried to the corresponding equivalence in
+the Picard $\infty$-groupoid, so the construction is compatible with all specified identifications of
+virtual classes.
+\end{proof}
+
+\begin{proposition}[Smooth projection with virtual twists]
+\label{prop:p-sharp-virtual-twist}
+Let $p:X\to S$ be smooth of finite presentation, let $E\in\SH(X)$, and let $\xi\in K(S)$.  Then
+there is a canonical equivalence
+\[
+    p_\sharp\bigl(\Sigma^{p^*\xi}E\bigr)
+    \simeq
+    \Sigma^\xi p_\sharp(E).
+\]
+\end{proposition}
+
+\begin{proof}
+By pullback compatibility,
+\[
+    \Sigma^{p^*\xi}E
+    \simeq
+    E\otimes_Xp^*\operatorname{th}_S(\xi).
+\]
+Apply the stable smooth projection formula.
+\end{proof}
+
+\begin{notation}[Bigraded suspension]
+\label{not:bigraded-suspension}
+For integers \(p,q\in\mathbb Z\), define
+\[
+    \Sigma^{p,q}
+    :=
+    \Sigma^{p-2q}
+    \Sigma^{q\mathcal O_S}.
+\]
+Thus
+\[
+    \Sigma^{2,1}
+    \simeq
+    \Sigma^{\mathcal O_S},
+\]
+and tensoring with \(T_S\) is the suspension
+\[
+    \Sigma^{2,1}.
+\]
+Virtual-bundle notation remains the intrinsic notation and will be used
+whenever a nontrivial bundle is involved.
+\end{notation}
+
+\section{Compact generation}
+\label{sec:SH-compact-generation}
+
+\subsection{Compactness of the stabilization object}
+
+
+
+\begin{proposition}[Compactness of \(T_S\)]
+\label{prop:T-compact}
+The object
+\[
+    T_S\in\HH_\bullet(S)
+\]
+is compact.  Tensoring with \(T_S\) preserves compact objects.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    U:\HH_\bullet(S)\longrightarrow\HH(S)
+\]
+be the forgetful functor.  Since \(\HH_\bullet(S)\) is the
+\(\infty\)-category of pointed objects in \(\HH(S)\), colimits are computed
+on underlying motivic spaces.  In particular, \(U\) preserves filtered
+colimits.
+
+For every smooth spectral \(S\)-scheme \(Y\) of finite presentation and every
+\(F\in\HH_\bullet(S)\), the free-pointing adjunction gives
+\[
+    \Map_{\HH_\bullet(S)}
+    \bigl(\Mot_{S,+}(Y),F\bigr)
+    \simeq
+    \Map_{\HH(S)}
+    \bigl(\Mot_S(Y),U(F)\bigr).
+\]
+The object \(\Mot_S(Y)\) is compact in \(\HH(S)\) by Chapter~4.  Since \(U\)
+preserves filtered colimits, it follows that
+\[
+    \Mot_{S,+}(Y)
+\]
+is compact in \(\HH_\bullet(S)\).
+
+The Thom sphere is the cofiber
+\[
+    T_S
+    \simeq
+    \operatorname{cofib}
+    \left(
+      \Mot_{S,+}(\Gm{}_S)
+      \longrightarrow
+      \Mot_{S,+}(\mathbb A^1_S)
+    \right).
+\]
+Both \(\Gm{}_S\) and \(\mathbb A^1_S\) are smooth over \(S\) and of finite
+presentation.  Their pointed motives are therefore compact.  Compact objects
+are closed under finite colimits, so \(T_S\) is compact.
+
+For every smooth \(S\)-scheme \(X\) of finite presentation, distributivity of
+the smash product over cofibers gives
+\[
+\begin{aligned}
+    T_S\wedge_S\Mot_{S,+}(X)
+    \simeq
+    \operatorname{cofib}
+    \bigl(
+      \Mot_{S,+}(X\times_S\Gm{}_S)
+      \longrightarrow
+      \Mot_{S,+}(X\times_S\mathbb A^1_S)
+    \bigr).
+\end{aligned}
+\]
+The two objects in this cofiber are pointed motives of smooth
+finite-presentation \(S\)-schemes and are therefore compact.  Hence
+\[
+    T_S\wedge_S\Mot_{S,+}(X)
+\]
+is compact.
+
+Chapter~4 shows that the pointed smooth motives generate
+\(\HH_\bullet(S)\) under colimits.  By
+Lemma~\ref{lem:compact-closure-generators}, every compact object is obtained
+from them by finite colimits and retracts.  The functor
+\[
+    T_S\wedge_S-:
+    \HH_\bullet(S)\longrightarrow\HH_\bullet(S)
+\]
+preserves finite colimits and retracts and sends each pointed smooth motive to
+a compact object.  It therefore preserves every compact object.
+\end{proof}
+
+\subsection{Stable generators}
+
+\begin{theorem}[Compact generation of stable motivic spectra]
+\label{thm:compact-generation-SH}
+The stable presentable category $\SH(S)$ is compactly generated by the objects
+\[
+    \Sigma^{n\mathcal O_S}
+    \Sigma_{T,+}^\infty\Mot_S(X),
+    \qquad
+    X\in\Sm^{\mathrm{fp}}_{/S},
+    \quad n\in\mathbb Z.
+\]
+Equivalently, writing $p:X\to S$ for the structural morphism, it is generated by
+\[
+    p_\sharp\Sigma^{n\mathcal O_X}\mathbf 1_X,
+    \qquad n\in\mathbb Z.
+\]
+Every object in the displayed families is compact.
+\end{theorem}
+
+\begin{proof}
+The category $\HH_\bullet(S)$ is compactly generated by the pointed smooth motives
+$\Mot_{S,+}(X)$.  Propositions~\ref{prop:T-symmetric} and \ref{prop:T-compact} verify the hypotheses of
+Proposition~\ref{prop:compact-generation-periodization}.  Thus $\SH(S)$ is compactly generated by
+positive and negative tensor powers of $T_S$ applied to the suspension spectra of the pointed smooth
+motives.  Since tensoring with $T_S$ is $\Sigma^{\mathcal O_S}$, this is the first displayed family.
+
+For $p:X\to S$, Proposition~\ref{prop:p-sharp-on-suspension-spectra} and
+Proposition~\ref{prop:p-sharp-virtual-twist} identify
+\[
+    p_\sharp\Sigma^{n\mathcal O_X}\mathbf 1_X
+    \simeq
+    \Sigma^{n\mathcal O_S}\Sigma_{T,+}^\infty\Mot_S(X).
+\]
+This gives the second family.
+\end{proof}
+
+\begin{corollary}[Compactness of twisted smooth motives]
+\label{cor:twisted-smooth-motives-compact}
+Let $p:X\to S$ be smooth of finite presentation and let $\xi\in K(X)$.  Then
+\[
+    p_\sharp\Sigma^\xi\mathbf 1_X
+\]
+is compact in $\SH(S)$.
+\end{corollary}
+
+\begin{proof}
+Tensoring with $\operatorname{th}_X(\xi)$ is an autoequivalence, so it preserves compact objects.
+The unit $\mathbf 1_X$ is compact by Theorem~\ref{thm:compact-generation-SH}, applied over $X$.
+The right adjoint $p^*$ preserves all colimits, in particular filtered colimits.  Therefore its left
+adjoint $p_\sharp$ preserves compact objects.  The result follows.
+\end{proof}
+
+\begin{corollary}[Compact sphere]
+\label{cor:compact-sphere}
+The motivic sphere spectrum $\mathbf 1_S$ is compact.
+\end{corollary}
+
+\begin{proof}
+Take $X=S$ and $n=0$ in Theorem~\ref{thm:compact-generation-SH}.
+\end{proof}
+
+\section{Stable derived nilpotent invariance and classical comparison}
+\label{sec:stable-classical-comparison}
+
+\subsection{Compatibility of unstable comparison with Thom spheres}
+
+Let $S_{\mathrm{cl}}$ be the classical truncation of $S$.  Chapter~5 constructed natural symmetric
+monoidal equivalences
+\[
+    \HH_\bullet(S)
+    \simeq
+    \HH_\bullet(S_{\mathrm{cl}})
+\]
+for the discrete spectral enhancement and
+\[
+    \HH_\bullet(S)
+    \simeq
+    \HH_{\mathrm{cl},\bullet}(S_{\mathrm{cl}})
+\]
+for the ordinary motivic category.
+
+\begin{proposition}[Compatibility with stabilization objects and Thom twists]
+\label{prop:comparison-preserves-T}
+Let
+\[
+    \iota_S:S_{\mathrm{cl}}\longrightarrow S
+\]
+be the canonical morphism, where \(S_{\mathrm{cl}}\) is regarded as a
+discrete spectral scheme.
+
+\begin{enumerate}
+    \item Under derived nilpotent invariance,
+    \[
+        \iota_S^*:
+        \HH_\bullet(S)
+        \xrightarrow{\simeq}
+        \HH_\bullet(S_{\mathrm{cl}}),
+    \]
+    there are canonical equivalences
+    \[
+        \iota_S^*T_S
+        \simeq
+        T_{S_{\mathrm{cl}}},
+    \]
+    and, for every finite locally free module \(E\) on \(S\),
+    \[
+        \iota_S^*\Th_S(E)
+        \simeq
+        \Th_{S_{\mathrm{cl}}}(\iota_S^*E).
+    \]
+
+    \item Under ordinary classical comparison,
+    \[
+        \Theta_S:
+        \HH_\bullet(S)
+        \xrightarrow{\simeq}
+        \HH_{\mathrm{cl},\bullet}(S_{\mathrm{cl}}),
+    \]
+    there are canonical equivalences
+    \[
+        \Theta_S(T_S)
+        \simeq
+        T^{\mathrm{cl}}_{S_{\mathrm{cl}}},
+    \]
+    and
+    \[
+        \Theta_S\Th_S(E)
+        \simeq
+        \Th^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+        \bigl(
+          \iota_S^*E
+        \bigr).
+    \]
+
+    \item After periodization, for every
+    \[
+        \xi\in K(S),
+    \]
+    there are canonical equivalences
+    \[
+        \iota_S^*
+        \operatorname{th}_S(\xi)
+        \simeq
+        \operatorname{th}_{S_{\mathrm{cl}}}
+        \bigl(
+          \iota_S^*\xi
+        \bigr)
+    \]
+    and
+    \[
+        \Theta_S^{\mathrm{st}}
+        \operatorname{th}_S(\xi)
+        \simeq
+        \operatorname{th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+        \bigl(
+          \iota_S^*\xi
+        \bigr).
+    \]
+    Consequently, for every \(M\in\SH(S)\),
+    \[
+        \iota_S^*
+        \bigl(
+          \Sigma^\xi M
+        \bigr)
+        \simeq
+        \Sigma^{\iota_S^*\xi}
+        \iota_S^*M
+    \]
+    and
+    \[
+        \Theta_S^{\mathrm{st}}
+        \bigl(
+          \Sigma^\xi M
+        \bigr)
+        \simeq
+        \Sigma^{\iota_S^*\xi}
+        \Theta_S^{\mathrm{st}}(M).
+    \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For derived nilpotent invariance, base change for relative linear spaces gives
+\[
+    \iota_S^*\mathbb V_S(E)
+    \simeq
+    \mathbb V_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr).
+\]
+This equivalence identifies the zero sections and therefore also their open
+complements:
+\[
+\begin{aligned}
+    \iota_S^*
+    \bigl(
+      \mathbb V_S(E)\setminus S
+    \bigr)
+    \simeq
+    \mathbb V_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr)
+    \setminus
+    S_{\mathrm{cl}}.
+\end{aligned}
+\]
+Since pointed inverse image preserves colimits, it preserves the defining
+quotient and gives
+\[
+    \iota_S^*\Th_S(E)
+    \simeq
+    \Th_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr).
+\]
+Taking \(E=\mathcal O_S\) gives
+\[
+    \iota_S^*T_S
+    \simeq
+    T_{S_{\mathrm{cl}}}.
+\]
+
+For ordinary classical comparison, classical truncation of relative spectra
+gives
+\[
+    \bigl(
+      \mathbb V_S(E)
+    \bigr)_{\mathrm{cl}}
+    \simeq
+    \mathbb V_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr).
+\]
+This equivalence identifies zero sections and their open complements.
+The comparison functor of Chapter~5 carries the motive of a smooth spectral
+scheme to the ordinary motive of its classical truncation and preserves
+pointed colimits.  It therefore carries the quotient defining
+\(\Th_S(E)\) to the ordinary Thom quotient:
+\[
+    \Theta_S\Th_S(E)
+    \simeq
+    \Th^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr).
+\]
+Taking \(E=\mathcal O_S\) gives
+\[
+    \Theta_S(T_S)
+    \simeq
+    T^{\mathrm{cl}}_{S_{\mathrm{cl}}}.
+\]
+
+Both comparison functors are strong symmetric monoidal and preserve the
+corresponding stabilization objects.  They therefore periodize to strong
+symmetric monoidal stable comparison functors.  For every actual finite
+locally free module \(E\), the preceding Thom-space equivalences give
+\[
+    \iota_S^*
+    \operatorname{th}_S(E)
+    \simeq
+    \operatorname{th}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr)
+\]
+and
+\[
+    \Theta_S^{\mathrm{st}}
+    \operatorname{th}_S(E)
+    \simeq
+    \operatorname{th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E
+    \bigr).
+\]
+
+Pullback of finite locally free modules is exact and defines a natural map
+\[
+    \iota_S^*:
+    K(S)
+    \longrightarrow
+    K(S_{\mathrm{cl}}).
+\]
+Naturality of the motivic \(J\)-homomorphism under pullback gives a
+coherently commutative square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    K(S) \arrow[r,"J_S"] \arrow[d,"\iota_S^*"']
+        & \Pic(\SH(S)) \arrow[d,"\iota_S^*"] \\
+    K(S_{\mathrm{cl}})
+        \arrow[r,"J_{S_{\mathrm{cl}}}"']
+        & \Pic(\SH(S_{\mathrm{cl}})).
+\end{tikzcd}
+\]
+Evaluating at \(\xi\in K(S)\) gives
+\[
+    \iota_S^*
+    \operatorname{th}_S(\xi)
+    \simeq
+    \operatorname{th}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*\xi
+    \bigr).
+\]
+
+It remains to prove the corresponding assertion for ordinary classical
+comparison.  Let
+\[
+    J^{\mathrm{cl}}_{S_{\mathrm{cl}}}:
+    K(S_{\mathrm{cl}})
+    \longrightarrow
+    \Pic
+    \bigl(
+      \SH_{\mathrm{cl}}(S_{\mathrm{cl}})
+    \bigr)
+\]
+be the ordinary motivic \(J\)-homomorphism obtained from the classical
+stable Thom construction.
+
+Recall that \(J_S\) is obtained by realizing and looping the simplicial
+\(E_\infty\)-map
+\[
+    \delta_\bullet:
+    \bigl(
+      S_\bullet\Vect(S)
+    \bigr)^\simeq
+    \longrightarrow
+    B_\bullet\Pic(\SH(S)).
+\]
+For a filtration
+\[
+    0=E_0\longrightarrow E_1\longrightarrow\cdots\longrightarrow E_n,
+\]
+its \(a\)-th entry is the Thom object
+\[
+    \operatorname{th}_S(E_a/E_{a-1}).
+\]
+
+Pullback to \(S_{\mathrm{cl}}\) carries this filtration to
+\[
+    0=\iota_S^*E_0
+    \longrightarrow
+    \iota_S^*E_1
+    \longrightarrow\cdots\longrightarrow
+    \iota_S^*E_n
+\]
+and identifies its successive quotients:
+\[
+    \iota_S^*
+    \bigl(
+      E_a/E_{a-1}
+    \bigr)
+    \simeq
+    \iota_S^*E_a/
+    \iota_S^*E_{a-1}.
+\]
+The actual-bundle Thom comparison therefore gives, levelwise,
+\[
+\begin{aligned}
+    \Theta_S^{\mathrm{st}}
+    \operatorname{th}_S
+    \bigl(
+      E_a/E_{a-1}
+    \bigr)
+    \simeq
+    \operatorname{th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*E_a/
+      \iota_S^*E_{a-1}
+    \bigr).
+\end{aligned}
+\]
+
+The multiplication maps in
+\(\delta_\bullet\) are the Thom-additivity equivalences associated with the
+exact sequences
+\[
+    0
+    \longrightarrow
+    E_b/E_a
+    \longrightarrow
+    E_c/E_a
+    \longrightarrow
+    E_c/E_b
+    \longrightarrow
+    0.
+\]
+They were constructed from the Cartesian diagrams of relative linear
+spaces, zero sections, stable smooth--closed exchange, and the smooth and
+closed projection formulas.
+
+Classical comparison carries these relative linear spaces, zero sections,
+and Cartesian diagrams to their ordinary classical counterparts.
+The unstable comparison transformations of Chapter~5 are compatible with
+smooth--closed exchange and the projection transformations, and their
+periodizations retain this compatibility.  Hence
+\(\Theta_S^{\mathrm{st}}\) carries every spectral Thom-additivity
+multiplication map to the corresponding ordinary Thom-additivity
+multiplication map.
+
+It follows that the actual-bundle Thom comparisons assemble into a
+homotopy-commutative square of simplicial \(E_\infty\)-spaces
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    \bigl(
+      S_\bullet\Vect(S)
+    \bigr)^\simeq
+        \arrow[r,"\delta_\bullet"]
+        \arrow[d,"\iota_S^*"']
+    &
+    B_\bullet\Pic(\SH(S))
+        \arrow[d,"\Theta_S^{\mathrm{st}}"]
+    \\
+    \bigl(
+      S_\bullet\Vect(S_{\mathrm{cl}})
+    \bigr)^\simeq
+        \arrow[r,"\delta_\bullet^{\mathrm{cl}}"']
+    &
+    B_\bullet
+    \Pic
+    \bigl(
+      \SH_{\mathrm{cl}}(S_{\mathrm{cl}})
+    \bigr).
+\end{tikzcd}
+\]
+Geometric realization and looping therefore give a coherently commutative
+square
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+    K(S) \arrow[r,"J_S"] \arrow[d,"\iota_S^*"']
+        & \Pic(\SH(S))
+            \arrow[d,"\Theta_S^{\mathrm{st}}"] \\
+    K(S_{\mathrm{cl}})
+        \arrow[r,"J^{\mathrm{cl}}_{S_{\mathrm{cl}}}"']
+        &
+    \Pic
+    \bigl(
+      \SH_{\mathrm{cl}}(S_{\mathrm{cl}})
+    \bigr).
+\end{tikzcd}
+\]
+Evaluating at \(\xi\in K(S)\) gives
+\[
+    \Theta_S^{\mathrm{st}}
+    \operatorname{th}_S(\xi)
+    \simeq
+    \operatorname{th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*\xi
+    \bigr).
+\]
+
+Finally, strong symmetric monoidality gives
+\[
+\begin{aligned}
+    \iota_S^*
+    \bigl(
+      M\otimes_S\operatorname{th}_S(\xi)
+    \bigr)
+    &\simeq
+    \iota_S^*M
+    \otimes_{S_{\mathrm{cl}}}
+    \operatorname{th}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*\xi
+    \bigr),
+\end{aligned}
+\]
+and
+\[
+\begin{aligned}
+    \Theta_S^{\mathrm{st}}
+    \bigl(
+      M\otimes_S\operatorname{th}_S(\xi)
+    \bigr)
+    &\simeq
+    \Theta_S^{\mathrm{st}}(M)
+    \otimes
+    \operatorname{th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*\xi
+    \bigr).
+\end{aligned}
+\]
+These are precisely the two asserted twist equivalences.
+\end{proof}
+
+\subsection{Stable nilpotent invariance}
+
+\begin{theorem}[Stable derived nilpotent invariance]
+\label{thm:stable-nil-invariance}
+The canonical morphism
+\[
+    \iota_S:
+    S_{\mathrm{cl}}
+    \longrightarrow
+    S,
+\]
+with \(S_{\mathrm{cl}}\) regarded as a discrete spectral scheme, induces a
+symmetric monoidal equivalence
+\[
+    \iota_S^*:
+    \SH(S)
+    \xrightarrow{\simeq}
+    \SH(S_{\mathrm{cl}}).
+\]
+
+For every
+\[
+    \xi\in K(S)
+\]
+and every \(M\in\SH(S)\), this equivalence satisfies
+\[
+    \iota_S^*
+    \bigl(
+      \Sigma^\xi M
+    \bigr)
+    \simeq
+    \Sigma^{\iota_S^*\xi}
+    \iota_S^*M.
+\]
+No equivalence
+\[
+    K(S)\simeq K(S_{\mathrm{cl}})
+\]
+is asserted.
+\end{theorem}
+
+\begin{proof}
+The pointed unstable inverse-image functor
+\[
+    \iota_S^*:
+    \HH_\bullet(S)
+    \longrightarrow
+    \HH_\bullet(S_{\mathrm{cl}})
+\]
+is a symmetric monoidal equivalence by derived nilpotent invariance in
+Chapter~5.  Proposition~\ref{prop:comparison-preserves-T} gives
+\[
+    \iota_S^*T_S
+    \simeq
+    T_{S_{\mathrm{cl}}}.
+\]
+Periodizing the unstable equivalence along the corresponding stabilization
+objects therefore gives a symmetric monoidal equivalence
+\[
+    \iota_S^*:
+    \SH(S)
+    \xrightarrow{\simeq}
+    \SH(S_{\mathrm{cl}}).
+\]
+
+The formula for virtual Thom twists is
+Proposition~\ref{prop:comparison-preserves-T}(3):
+\[
+    \iota_S^*
+    \operatorname{th}_S(\xi)
+    \simeq
+    \operatorname{th}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*\xi
+    \bigr).
+\]
+Tensoring this equivalence with \(\iota_S^*M\) gives
+\[
+    \iota_S^*
+    \bigl(
+      \Sigma^\xi M
+    \bigr)
+    \simeq
+    \Sigma^{\iota_S^*\xi}
+    \iota_S^*M.
+\]
+The construction uses only the pullback map
+\[
+    K(S)\longrightarrow K(S_{\mathrm{cl}}),
+\]
+so no \(K\)-theory equivalence is involved.
+\end{proof}
+
+\subsection{Ordinary stable motivic comparison}
+
+\begin{definition}[Ordinary stable motivic category]
+\label{def:ordinary-SH}
+For an ordinary quasi-compact quasi-separated scheme \(S_0\), define the
+\(T\)-periodic ordinary motivic category by
+\[
+    \SH_{\mathrm{cl}}(S_0)
+    :=
+    \HH_{\mathrm{cl},\bullet}(S_0)
+    \bigl[
+      (T^{\mathrm{cl}}_{S_0})^{-1}
+    \bigr],
+\]
+where
+\[
+    T^{\mathrm{cl}}_{S_0}
+    :=
+    \mathbb A^1_{S_0}/
+    \bigl(
+      \mathbb A^1_{S_0}\setminus0
+    \bigr).
+\]
+\end{definition}
+
+\begin{proposition}[Comparison with \(\mathbb P^1\)-stabilization]
+\label{prop:ordinary-T-P1-comparison}
+There is a canonical equivalence in
+\(\HH_{\mathrm{cl},\bullet}(S_0)\)
+\[
+    T^{\mathrm{cl}}_{S_0}
+    \simeq
+    \bigl(
+      \mathbb P^1_{S_0},
+      \infty
+    \bigr).
+\]
+Consequently,
+\[
+    \SH_{\mathrm{cl}}(S_0)
+    \simeq
+    \HH_{\mathrm{cl},\bullet}(S_0)
+    \bigl[
+      (\mathbb P^1_{S_0},\infty)^{-1}
+    \bigr].
+\]
+Thus Definition~\ref{def:ordinary-SH} agrees with the conventional
+\(\mathbb P^1\)-stable motivic homotopy category.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+    \mathbb A^1_0,
+    \qquad
+    \mathbb A^1_\infty
+\]
+be the two standard affine opens of
+\(\mathbb P^1_{S_0}\), with
+\[
+    \mathbb A^1_0\cap\mathbb A^1_\infty
+    =
+    (\Gm)_{S_0}.
+\]
+The point at infinity defines a section
+\[
+    \infty:
+    S_0\longrightarrow\mathbb A^1_\infty
+    \longrightarrow\mathbb P^1_{S_0}.
+\]
+
+In the pointed motivic category there is a natural cofiber sequence
+\[
+    \bigl(
+      \mathbb A^1_\infty,\infty
+    \bigr)
+    \longrightarrow
+    \bigl(
+      \mathbb P^1_{S_0},\infty
+    \bigr)
+    \longrightarrow
+    \mathbb P^1_{S_0}/\mathbb A^1_\infty.
+\]
+Affine-line invariance identifies
+\[
+    \bigl(
+      \mathbb A^1_\infty,\infty
+    \bigr)
+    \simeq
+    0_{S_0}.
+\]
+Consequently, the quotient morphism induces a canonical equivalence
+\[
+    \bigl(
+      \mathbb P^1_{S_0},\infty
+    \bigr)
+    \xrightarrow{\simeq}
+    \mathbb P^1_{S_0}/\mathbb A^1_\infty.
+\]
+
+Nisnevich excision for the standard affine cover identifies the latter
+quotient with the corresponding quotient on the other affine chart:
+\[
+\begin{aligned}
+    \mathbb P^1_{S_0}/\mathbb A^1_\infty
+    &\simeq
+    \mathbb A^1_0/
+    \bigl(
+      \mathbb A^1_0\cap\mathbb A^1_\infty
+    \bigr) \\
+    &\simeq
+    \mathbb A^1_{S_0}/(\Gm)_{S_0} \\
+    &=
+    T^{\mathrm{cl}}_{S_0}.
+\end{aligned}
+\]
+Combining the two equivalences gives
+\[
+    T^{\mathrm{cl}}_{S_0}
+    \simeq
+    \bigl(
+      \mathbb P^1_{S_0},\infty
+    \bigr).
+\]
+
+Periodization at canonically equivalent objects gives
+\[
+    \SH_{\mathrm{cl}}(S_0)
+    \simeq
+    \HH_{\mathrm{cl},\bullet}(S_0)
+    \bigl[
+      (\mathbb P^1_{S_0},\infty)^{-1}
+    \bigr].
+\]
+\end{proof}
+
+
+\begin{theorem}[Stable classical comparison]
+\label{thm:stable-classical-comparison}
+For every quasi-compact quasi-separated spectral scheme \(S\), there is a
+natural symmetric monoidal equivalence
+\[
+    \Theta_S^{\mathrm{st}}:
+    \SH(S)
+    \xrightarrow{\simeq}
+    \SH_{\mathrm{cl}}(S_{\mathrm{cl}}).
+\]
+
+The equivalence is compatible with:
+\begin{enumerate}
+    \item inverse image and tensor products;
+    \item smooth direct image;
+    \item arbitrary direct image;
+    \item stable localization and closed direct image;
+    \item exceptional inverse image for closed immersions;
+    \item closed base change and smooth--closed exchange;
+    \item stable homotopy purity.
+\end{enumerate}
+
+For every
+\[
+    \xi\in K(S)
+\]
+and every \(M\in\SH(S)\), there is a canonical equivalence
+\[
+    \Theta_S^{\mathrm{st}}
+    \bigl(
+      \Sigma^\xi M
+    \bigr)
+    \simeq
+    \Sigma^{\iota_S^*\xi}
+    \Theta_S^{\mathrm{st}}(M),
+\]
+where
+\[
+    \iota_S^*:
+    K(S)
+    \longrightarrow
+    K(S_{\mathrm{cl}})
+\]
+is pullback of finite locally free modules.
+\end{theorem}
+
+\begin{proof}
+The pointed classical-comparison equivalence from Chapter~5 is strong
+symmetric monoidal:
+\[
+    \Theta_S:
+    \HH_\bullet(S)
+    \xrightarrow{\simeq}
+    \HH_{\mathrm{cl},\bullet}(S_{\mathrm{cl}}).
+\]
+By Proposition~\ref{prop:comparison-preserves-T}, it carries the
+stabilization object to the classical stabilization object:
+\[
+    \Theta_S(T_S)
+    \simeq
+    T^{\mathrm{cl}}_{S_{\mathrm{cl}}}.
+\]
+The universal property of periodization therefore gives a natural strong
+symmetric monoidal equivalence
+\[
+    \Theta_S^{\mathrm{st}}:
+    \SH(S)
+    \xrightarrow{\simeq}
+    \SH_{\mathrm{cl}}(S_{\mathrm{cl}}).
+\]
+
+We first record the compatibilities obtained by periodization.  The unstable
+comparison is compatible with inverse image, pointed tensor products, smooth
+direct image, pointed localization, closed direct image, closed base change,
+smooth--closed exchange, and homotopy purity.  Each of these functors and
+natural transformations is compatible with the corresponding \(T\)-linearity
+data.  Proposition~\ref{prop:linear-functor-periodization} and
+Proposition~\ref{prop:multilinear-periodization} therefore carry the
+unstable comparison transformations to stable comparison transformations.
+Since the unstable transformations are equivalences, the stable
+transformations are equivalences.
+
+Thus \(\Theta_S^{\mathrm{st}}\) is compatible with:
+\[
+    f^*,
+    \qquad
+    p_\sharp,
+    \qquad
+    \otimes,
+    \qquad
+    i_*,
+\]
+as well as stable localization, closed base change, smooth--closed exchange,
+and stable homotopy purity.
+
+We next record the compatibilities obtained by adjunction.  Compatibility
+with arbitrary direct image follows by taking right adjoints of the
+comparison square for inverse image:
+\[
+    f^*\dashv f_*.
+\]
+Compatibility with exceptional inverse image for a closed immersion follows
+by taking right adjoints of the comparison square for closed direct image:
+\[
+    i_*\dashv i^!.
+\]
+Uniqueness of adjoint mates supplies the required coherence with units,
+counits, and composition.
+
+It remains to treat Thom twists.  Naturality of the motivic
+\(J\)-homomorphism and
+Proposition~\ref{prop:comparison-preserves-T} give
+\[
+    \Theta_S^{\mathrm{st}}
+    \operatorname{th}_S(\xi)
+    \simeq
+    \operatorname{th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*\xi
+    \bigr).
+\]
+Since \(\Theta_S^{\mathrm{st}}\) is strong symmetric monoidal,
+\[
+\begin{aligned}
+    \Theta_S^{\mathrm{st}}
+    \bigl(
+      \Sigma^\xi M
+    \bigr)
+    &=
+    \Theta_S^{\mathrm{st}}
+    \bigl(
+      M\otimes_S\operatorname{th}_S(\xi)
+    \bigr) \\
+    &\simeq
+    \Theta_S^{\mathrm{st}}(M)
+    \otimes
+    \operatorname{th}^{\mathrm{cl}}_{S_{\mathrm{cl}}}
+    \bigl(
+      \iota_S^*\xi
+    \bigr) \\
+    &=
+    \Sigma^{\iota_S^*\xi}
+    \Theta_S^{\mathrm{st}}(M).
+\end{aligned}
+\]
+This proves the twist formula and completes the comparison.
+\end{proof}
+
+\begin{corollary}[Stable comparison of coefficient systems]
+\label{cor:stable-coefficient-comparison}
+The equivalences $\Theta_S^{\mathrm{st}}$ assemble into an equivalence between the stable brave new
+motivic coefficient system and the ordinary stable motivic coefficient system over classical
+truncations.
+\end{corollary}
+
+\begin{proof}
+The coherence follows from the coherent unstable comparison and functoriality of symmetric
+monoidal periodization.
+\end{proof}
+
+\section{The stable brave new motivic package}
+\label{sec:stable-package}
+
+\begin{theorem}[Stable brave new motivic homotopy theory]
+\label{thm:stable-brave-new-package}
+For every quasi-compact quasi-separated spectral scheme $S$, there is a compactly generated stable
+presentably symmetric monoidal $\infty$-category
+\[
+    \SH(S)
+    =
+    \HH_\bullet(S)[T_S^{-1}].
+\]
+The following structures and properties are canonically available.
+
+\begin{enumerate}
+    \item There is an adjunction
+    \[
+        \Sigma_T^\infty:
+        \HH_\bullet(S)
+        \rightleftarrows
+        \SH(S):\Omega_T^\infty,
+    \]
+    whose left adjoint is colimit-preserving and strong symmetric monoidal.
+    Consequently, the right adjoint \(\Omega_T^\infty\) is canonically lax
+    symmetric monoidal.
+
+    \item Every morphism $f:T\to S$ induces an adjunction
+    \[
+        f^*:\SH(S)
+        \rightleftarrows
+        \SH(T):f_*,
+    \]
+    where $f^*$ preserves colimits and is strong symmetric monoidal.
+
+    \item Every smooth morphism $p:X\to S$ of finite presentation induces an adjunction
+    \[
+        p_\sharp:\SH(X)
+        \rightleftarrows
+        \SH(S):p^*.
+    \]
+
+    \item Stable smooth base change holds.  For every Cartesian square
+    \[
+    \begin{tikzcd}[column sep=large,row sep=large]
+        X_T \arrow[r,"g'"] \arrow[d,"p'"']
+            & X \arrow[d,"p"] \\
+        T \arrow[r,"g"'] & S
+    \end{tikzcd}
+    \]
+    with $p$ smooth of finite presentation, there is a canonical equivalence
+    \[
+        p'_\sharp(g')^*
+        \simeq
+        g^*p_\sharp.
+    \]
+
+    \item The stable smooth projection formula holds:
+    \[
+        p_\sharp(E\otimes_Xp^*F)
+        \simeq
+        p_\sharp(E)\otimes_SF.
+    \]
+
+    \item For every complementary closed--open pair
+    \[
+        Z\xrightarrow{i}S\xleftarrow{j}U,
+    \]
+    there are natural exact triangles
+    \[
+        j_\sharp j^*E
+        \longrightarrow
+        E
+        \longrightarrow
+        i_*i^*E
+    \]
+    and
+    \[
+        i_*i^!E
+        \longrightarrow
+        E
+        \longrightarrow
+        j_*j^*E.
+    \]
+
+    \item Closed base change, the closed projection formula, and smooth--closed exchange hold:
+    \[
+        g^*i_*
+        \simeq
+        i'_*(g')^*,
+    \]
+    \[
+        i_*E\otimes_SF
+        \simeq
+        i_*(E\otimes_Zi^*F),
+    \]
+    \[
+        p_\sharp k_*
+        \simeq
+        i_*q_\sharp.
+    \]
+
+    \item Stable homotopy purity holds.  For every smooth closed pair
+    \[
+        Z\lhook\joinrel\longrightarrow X
+    \]
+    over \(S\), with structural morphism \(z:Z\to S\), there is a canonical
+    equivalence
+    \[
+        \Sigma_{T,S}^\infty
+        \bigl(
+          X/(X\setminus Z)
+        \bigr)
+        \simeq
+        z_\sharp
+        \operatorname{th}_Z
+        \bigl(
+          N^*_{Z/X}
+        \bigr).
+    \]
+
+    \item Every finite locally free module \(E\) on \(S\) determines a
+    tensor-invertible Thom object
+    \[
+        \operatorname{th}_S(E)
+        \in
+        \Pic(\SH(S)).
+    \]
+    Vector-bundle algebraic \(K\)-theory acts by virtual Thom twists through a
+    natural motivic \(J\)-homomorphism
+    \[
+        J_S:
+        K(S)
+        \longrightarrow
+        \Pic(\SH(S)).
+    \]
+
+    \item The category $\SH(S)$ is compactly generated by
+    \[
+        \Sigma^{n\mathcal O_S}
+        \Sigma_{T,+}^\infty\Mot_S(X),
+        \qquad
+        X\in\Sm^{\mathrm{fp}}_{/S},
+        \quad n\in\mathbb Z.
+    \]
+
+    \item The theory is derived nilpotent invariant and admits ordinary stable
+    comparison:
+    \[
+        \SH(S)
+        \simeq
+        \SH(S_{\mathrm{cl}})
+        \simeq
+        \SH_{\mathrm{cl}}(S_{\mathrm{cl}}).
+    \]
+    For every \(\xi\in K(S)\), the comparison carries the virtual Thom twist
+    \(\Sigma^\xi\) to the twist indexed by its pullback
+    \[
+        \iota_S^*\xi
+        \in
+        K(S_{\mathrm{cl}}).
+    \]
+    No equivalence between \(K(S)\) and \(K(S_{\mathrm{cl}})\) is asserted.
+\end{enumerate}
+
+All inverse-image, direct-image, smooth-direct-image, exchange, projection, localization, and
+Thom-twist data satisfy coherent composition and identity laws.  Thus
+\[
+    S\longmapsto\SH(S)
+\]
+forms a stable $(\ast,\sharp,\otimes)$-formalism.
+\end{theorem}
+
+\begin{proof}
+Definition and presentable symmetric monoidality are
+Definition~\ref{def:SH} and Proposition~\ref{prop:SH-presentable-closed}.  Stability is
+Theorem~\ref{thm:SH-stable}.  The suspension adjunction is
+Proposition~\ref{prop:SigmaOmegaT-adjunction}.  Arbitrary inverse and direct image are
+Proposition~\ref{prop:stable-inverse-image} and Definition~\ref{def:stable-direct-image}, with
+coherent functoriality from Corollary~\ref{cor:SH-star-functor} and
+Proposition~\ref{prop:stable-direct-image-properties}.
+
+Stable smooth direct image is Theorem~\ref{thm:stable-p-sharp}, with composition from
+Proposition~\ref{prop:stable-p-sharp-composition}.  Smooth base change and the smooth projection
+formula are Theorems~\ref{thm:stable-smooth-base-change} and
+\ref{thm:stable-smooth-projection}.
+
+Stable localization, co-localization, and recollement are
+Theorems~\ref{thm:stable-localization}, \ref{thm:stable-colocalization}, and
+Proposition~\ref{prop:stable-recollement}.  Closed base change, the closed projection formula, and
+smooth--closed exchange are Theorems~\ref{thm:stable-closed-base-change},
+\ref{thm:stable-closed-projection}, and \ref{thm:stable-smooth-closed-exchange}.
+Stable homotopy purity is
+Theorem~\ref{thm:stable-homotopy-purity}.
+
+Thom invertibility is Theorem~\ref{thm:thom-invertibility}; virtual twists are constructed in
+Theorem~\ref{thm:motivic-J} and Definition~\ref{def:virtual-thom-suspension}.  Compact generation is
+Theorem~\ref{thm:compact-generation-SH}.  Stable nilpotent invariance and ordinary comparison are
+Theorems~\ref{thm:stable-nil-invariance} and \ref{thm:stable-classical-comparison}.
+
+Every construction is obtained from coherent unstable geometric data by symmetric monoidal
+periodization, adjunction, or passage to the Picard and $K$-theory spaces.  The required coherence
+therefore follows from the coherence of those operations.
+\end{proof}
+
+The chapter has constructed the stable motivic coefficient system, but no proper or exceptional
+functoriality has yet been asserted.  In particular, there is not yet a general exceptional direct image
+$f_!$, a general exceptional inverse image $f^!$, proper base change, or smooth proper
+ambidexterity.  The next chapter develops spectral projective geometry, stable purity
+transformations, smooth proper duality, proper excision, and compactification.  Those results supply
+the geometric input from which the exceptional operations will be constructed.

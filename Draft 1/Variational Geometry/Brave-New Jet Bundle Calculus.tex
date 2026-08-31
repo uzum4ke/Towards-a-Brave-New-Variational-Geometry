@@ -1,0 +1,3428 @@
+\providecommand{\XSp}{\mathcal{X}_{\mathrm{Sp}}}
+\providecommand{\dR}{\mathrm{dR}}
+\providecommand{\Jinf}{J^{\infty}}
+\providecommand{\Tinf}{T^{\infty}}
+\providecommand{\PDE}{\operatorname{PDE}}
+\providecommand{\Diff}{\operatorname{Diff}}
+\providecommand{\Coalg}{\operatorname{Coalg}}
+\providecommand{\coKl}{\operatorname{coKl}}
+\providecommand{\Map}{\operatorname{Map}}
+\providecommand{\Sol}{\operatorname{Sol}}
+\providecommand{\Eq}{\operatorname{Eq}}
+\providecommand{\id}{\operatorname{id}}
+\providecommand{\pr}{\operatorname{pr}}
+\providecommand{\fib}{\operatorname{fib}}
+\providecommand{\Dred}{D_{\mathrm{red}}}
+
+\chapter{Brave-New Jet Bundle Calculus}
+\label{chap:brave-new-jets}
+
+\section{Purpose, continuity, and scope}
+\label{sec:jets-purpose}
+
+Chapters 9 and 10 constructed the infinitesimal geometry needed for an intrinsic theory of jets.  For every morphism
+\[
+    x:X\longrightarrow S
+\]
+in the native big spectral Nisnevich $\infty$-topos $\XSp$, they supplied the relative de Rham object
+\[
+    X_{\dR/S}=S\times_{S_{\dR}}X_{\dR}
+\]
+and its unit
+\[
+    \eta_{X/S}:X\longrightarrow X_{\dR/S}.
+\]
+Chapter 10 then factored this unit in the effective-epimorphism--monomorphism factorization system
+\[
+\begin{tikzcd}[column sep=large]
+X \arrow[r, two heads, "\epsilon_{X/S}"]
+  & Q_{X/S} \arrow[r, hook, "\jmath_{X/S}"]
+  & X_{\dR/S},
+\end{tikzcd}
+\]
+constructed the infinitesimal relation nerve
+\[
+R_{X/S,n}
+ :=
+ \underbrace{X\times_{X_{\dR/S}}\cdots\times_{X_{\dR/S}}X}_{n+1\text{ factors}},
+\]
+and proved the canonical effective presentation
+\[
+    R_{X/S,\bullet}
+    \simeq
+    \check C_\bullet\bigl(X\xrightarrow{\epsilon_{X/S}}Q_{X/S}\bigr),
+    \qquad
+    |R_{X/S,\bullet}|\simeq Q_{X/S}.
+\]
+It also identified every $R_{X/S,n}$ with the intrinsic relative de Rham completion of the $(n+1)$-fold diagonal.  For represented smooth spectral morphisms, smooth effectivity gives
+\[
+    Q_{X/S}\simeq X_{\dR/S}.
+\]
+These constructions are the complete infinitesimal input used below.  No principal-parts algebra, represented formal-completion object, chosen infinitesimal coordinate object, independent crystalline jet presentation, or separate differential-cohesive structure is introduced.
+
+The purpose of the present chapter is to extract from this existing spectral infinitesimal geometry a brave-new infinite jet bundle calculus.  The organizing principle is the comonadic formulation of jet geometry due, in ordinary differential geometry, to Marvan \cite{Marvan1986}, and in synthetic differential geometry to Khavkine--Schreiber \cite{KhavkineSchreiber2017}.  The same formal mechanism has been used in derived differential geometry by Alfonsi--Young \cite{AlfonsiYoung2023}.  The geometric relation used here, however, is the square-zero-generated spectral de Rham relation of Chapters 9--10.
+
+There is one point at which the passage from an ordinary topos to the present space-valued $\infty$-topos changes the correct formulation.  In an ordinary topos a generalized PDE may be represented by a subobject of an infinite jet bundle.  In an $\infty$-topos, a monomorphism is $(-1)$-truncated and therefore records only proposition-valued incidence.  Homotopy equalizers and derived zero loci need not be monomorphisms.  Consequently a generalized brave-new PDE is defined below as a morphism
+\[
+    \mathcal E\longrightarrow \Jinf Y
+\]
+in the slice $\infty$-topos; the term \emph{embedded PDE} is reserved for the monomorphic special case.  This retains the derived and higher structure of equation objects rather than replacing them by image subobjects.
+
+The presentation-independent notion of formal integrability is even more economical.  The effective epimorphism
+\[
+    \epsilon:X\twoheadrightarrow Q_{X/S}
+\]
+already presents the infinitesimal quotient, so an intrinsic formally integrable PDE is defined below to be simply an object over $Q_{X/S}$.  Its formal-disk algebra structure, jet-coalgebra structure, Cartan transport, and all higher coherence data are then constructed by pullback and the dependent adjoint triple.  Thus those structures are outputs of effective infinitesimal descent rather than additional packaging data.
+
+A chosen ambient presentation
+\[
+    i:\mathcal E\longrightarrow\Jinf Y
+\]
+has a canonical Cartan prolongation and a canonical centre-value morphism.  Centre-completeness is the additional property that this centre map is an equivalence.  Every intrinsic jet coalgebra has a canonical \emph{tautological} centre-complete presentation given by its own coaction.  A different chosen external Cartan presentation on another bundle $Y$ need not be identified with that tautological presentation; its centre-completeness is characterized below by an explicit Cartesian-square criterion.  Embedded Cartan presentations are centre-complete.
+
+The chapter has five tasks.  First, it constructs relative formal disks, the formal-disk monad, and the brave-new jet comonad.  Second, it derives their adjunction and identifies both Eilenberg--Moore theories with effective infinitesimal descent over $Q_{X/S}$, including the mate relation between formal-disk actions and jet coactions.  Third, it constructs differential operators as morphisms between cofree jet coalgebras and derives infinite prolongation.  Fourth, it develops generalized PDE presentations, actual and formal solutions, Cartan prolongation, centre-completeness, and the universal prolongation adjunction.  Finally, it proves base-change, formal-\'{e}tale, Nisnevich, local translation, tubular, and reduced-classical comparison results.
+
+No variational construction is made in this chapter.  In particular, we do not define Lagrangians, local functionals, horizontal or vertical variational forms, Euler--Lagrange operators, variational bicomplexes or tricomplexes, or variational cohomology.  Those constructions begin in the next chapter.
+
+\begin{convention}[Ambient slices]
+Throughout the chapter, fix a morphism $x:X\to S$ in $\XSp$ and write
+\[
+    \mathcal C_X:=(\XSp)_{/X}.
+\]
+An object $p:E\to X$ of $\mathcal C_X$ is called an $X$-bundle.  The word ``bundle'' is used in this topos-theoretic sense; representability by a spectral scheme is not part of the definition.
+\end{convention}
+
+\begin{convention}[Dependent adjoints]
+For every morphism $f:A\to B$ in $\XSp$, we use the notation of Chapter 10 for the adjoint triple on slices
+\[
+    \Sigma_f\dashv f^*\dashv \Pi_f.
+\]
+The functor $\Sigma_f$ is composition with $f$, $f^*$ is pullback, and $\Pi_f$ is dependent product.  Beck--Chevalley transformations are the canonical mates supplied by the locally Cartesian closed $\infty$-topos structure.
+\end{convention}
+
+\begin{convention}[Universes]
+Retain the universe convention and enlargement fixed in Chapter 10.  In particular, Eilenberg--Moore, cofree-coalgebra, slice, and functor $\infty$-categories used below are formed in the same enlarged universe.
+\end{convention}
+
+\subsection{Chapter-level output}
+\label{subsec:jets-output-preview}
+
+The constructions below produce a canonical adjunction
+\[
+\begin{tikzcd}[column sep=huge]
+\mathcal C_X
+  \arrow[r, bend left=18, "\Tinf_{X/S}"]
+& \mathcal C_X
+  \arrow[l, bend left=18, "\Jinf_{X/S}"]
+\end{tikzcd}
+\qquad
+\Tinf_{X/S}\dashv \Jinf_{X/S},
+\]
+where $\Tinf_{X/S}$ is a monad and $\Jinf_{X/S}$ is a comonad.  Effective infinitesimal descent supplies canonical equivalences
+\[
+\boxed{
+    (\XSp)_{/Q_{X/S}}
+    \simeq
+    \operatorname{Alg}_{\Tinf_{X/S}}(\mathcal C_X)
+    \simeq
+    \Coalg_{\Jinf_{X/S}}(\mathcal C_X).
+}
+\]
+The intrinsic PDE $\infty$-topos is defined to be
+\[
+    \PDE^{\mathrm{fi}}_{X/S}:=(\XSp)_{/Q_{X/S}},
+\]
+and its algebra and coalgebra presentations are derived from this quotient description.  For represented smooth $X\to S$,
+\[
+    \PDE^{\mathrm{fi}}_{X/S}\simeq(\XSp)_{/X_{\dR/S}}.
+\]
+The $\infty$-category of differential operators is constructed as the full subcategory of jet coalgebras spanned by cofree coalgebras; its mapping spaces are
+\[
+    \Map_{\Diff_{X/S}}(E,F)\simeq\Map_X(\Jinf E,F),
+\]
+so it is canonically the co-Kleisli $\infty$-category of $\Jinf$.
+
+Every generalized ambient presentation $i:\mathcal E\to\Jinf Y$ has a canonical Cartan prolongation
+\[
+    \mathcal E^\infty
+    \simeq
+    \Jinf\mathcal E\times_{\Jinf\Jinf Y}\Jinf Y,
+\]
+and Cartan prolongation is the right adjoint to forgetting Cartan structure from presentations on $Y$.  Its counit is the centre-value map
+\[
+    \kappa_i:\mathcal E^\infty\to\mathcal E.
+\]
+For a jet coalgebra $\rho:E\to\Jinf E$, the tautological presentation $\rho$ is centre-complete.  For an arbitrary Cartan presentation, centre-completeness is equivalent to a Cartesian Cartan square, and is automatic in the embedded case.
+
+\section{The relative infinitesimal relation groupoid}
+\label{sec:jets-relation}
+
+Put
+\[
+    B:=X_{\dR/S},
+    \qquad
+    Q:=Q_{X/S},
+    \qquad
+    \eta:=\eta_{X/S},
+    \qquad
+    \epsilon:=\epsilon_{X/S}.
+\]
+The degree-one infinitesimal relation is
+\[
+    R:=R_{X/S}:=R_{X/S,1}=X\times_BX.
+\]
+We order its projections by
+\[
+    c:=\pr_1:R\longrightarrow X,
+    \qquad
+    e:=\pr_2:R\longrightarrow X.
+\]
+The letter $c$ indicates the centre of a formal disk and $e$ the evaluation point.
+
+\begin{proposition}[Effective relation presentation]
+\label{prop:jets-effective-relation}
+There are canonical equivalences
+\[
+    R\simeq X\times_QX
+\]
+and, for every $n\geq0$,
+\[
+    R_{X/S,n}
+    \simeq
+    \underbrace{X\times_Q\cdots\times_QX}_{n+1\text{ factors}}.
+\]
+Under these equivalences, $R_{X/S,\bullet}$ is the \v{C}ech nerve of the effective epimorphism
+\[
+    \epsilon:X\twoheadrightarrow Q,
+\]
+and therefore
+\[
+    |R_{X/S,\bullet}|\simeq Q.
+\]
+\end{proposition}
+
+\begin{proof}
+The factorization $\eta=\jmath\epsilon$ has $\jmath:Q\hookrightarrow B$ a monomorphism.  Hence
+\[
+    Q\xrightarrow{\sim}Q\times_BQ.
+\]
+Finite-limit pasting gives
+\[
+\begin{aligned}
+X\times_BX
+&\simeq
+X\times_Q(Q\times_BQ)\times_QX\\
+&\simeq
+X\times_QX.
+\end{aligned}
+\]
+The same calculation in every iterated degree identifies the two simplicial objects compatibly with deletion and repetition of factors.  The realization statement is the effectiveness of the \v{C}ech nerve of $\epsilon$, established in Chapter 10.
+\end{proof}
+
+\begin{remark}[No new infinitesimal shape]
+\label{rem:no-new-infinitesimal-object}
+Every construction below may be computed from $X\to Q$.  No further ``jet infinitesimal shape'' is introduced.  The modal target $X_{\dR/S}$ remains useful for comparison and smooth effectivity, while the effective quotient is the minimal target carrying the same kernel-pair geometry.
+\end{remark}
+
+\begin{proposition}[Groupoid structure]
+\label{prop:jets-relation-groupoid}
+The simplicial object $R_{X/S,\bullet}$ is the effective equivalence-relation groupoid of $X\to Q$.  In particular there are canonical unit, inversion, and composition maps
+\[
+    u:X\longrightarrow R,
+    \qquad
+    \iota:R\xrightarrow{\sim}R,
+\]
+\[
+    m:R\times_{e,X,c}R\longrightarrow R
+\]
+satisfying all groupoid identities with their canonical higher coherences.  The inversion satisfies
+\[
+    c\iota=e,
+    \qquad
+    e\iota=c.
+\]
+\end{proposition}
+
+\begin{proof}
+This is the groupoid structure of the \v{C}ech nerve of $X\to Q$.  The unit is the diagonal, inversion exchanges the two factors, and composition is induced by
+\[
+    X\times_QX\times_QX\longrightarrow X\times_QX,
+    \qquad
+    (x_0,x_1,x_2)\longmapsto(x_0,x_2).
+\]
+The higher coherences are the simplicial identities.
+\end{proof}
+
+\section{Relative formal disks}
+\label{sec:formal-disks}
+
+\begin{definition}[Relative formal disk]
+\label{def:relative-formal-disk}
+Let $a:T\to X$ be an object of $\mathcal C_X$.  The relative formal disk of $X/S$ centred along $a$ is
+\[
+    \mathbb D^\infty_{X/S,a}:=T\times_BX,
+\]
+where $T\to B$ is $\eta a$.  It is regarded as an object over $T$ by the first projection
+\[
+    d_a:\mathbb D^\infty_{X/S,a}\longrightarrow T
+\]
+and carries the evaluation morphism
+\[
+    \operatorname{ev}_a:\mathbb D^\infty_{X/S,a}\longrightarrow X
+\]
+by the second projection.
+\end{definition}
+
+\begin{proposition}[Formal disk from the effective quotient]
+\label{prop:formal-disk-effective-quotient}
+There are canonical equivalences
+\[
+    \boxed{
+    \mathbb D^\infty_{X/S,a}
+    \simeq
+    T\times_QX
+    \simeq
+    T\times_{X,c}R.
+    }
+\]
+Here $T\to Q$ is $\epsilon a$.  Under the second equivalence, $d_a$ is the pullback of $c$ and $\operatorname{ev}_a$ is induced by $e$.  In particular $d_a$ is an effective epimorphism.
+\end{proposition}
+
+\begin{proof}
+Because $\jmath:Q\hookrightarrow B$ is a monomorphism,
+\[
+    Q\times_BQ\simeq Q.
+\]
+Both maps $T\to B$ and $X\to B$ factor through $Q$, so
+\[
+\begin{aligned}
+T\times_BX
+&\simeq
+T\times_Q(Q\times_BQ)\times_QX\\
+&\simeq
+T\times_QX.
+\end{aligned}
+\]
+Using $R\simeq X\times_QX$ then gives
+\[
+    T\times_{X,c}R
+    \simeq
+    T\times_QX.
+\]
+The projection $d_a$ is the pullback of $\epsilon:X\twoheadrightarrow Q$ along $T\to Q$, hence is an effective epimorphism.
+\end{proof}
+
+\begin{theorem}[Formal disks as intrinsic graph completions]
+\label{thm:formal-disk-completion}
+Let $a:T\to X$ be a morphism over $S$, and let
+\[
+    \Gamma_a:T\longrightarrow T\times_SX
+\]
+be its graph.  Then there is a canonical equivalence
+\[
+    \mathbb D^\infty_{X/S,a}
+    \simeq
+    \widehat{(T\times_SX)}^{\,\dR}_{\,T/S},
+\]
+where the right-hand side is the intrinsic relative de Rham completion of $T\times_SX$ along $\Gamma_a$ constructed in Chapter 10.  For $a=\id_X$ this recovers
+\[
+    R_{X/S}
+    \simeq
+    \widehat{(X\times_SX)}^{\,\dR}_{\,X/S}.
+\]
+\end{theorem}
+
+\begin{proof}
+By definition of intrinsic relative de Rham completion,
+\[
+    \widehat{(T\times_SX)}^{\,\dR}_{\,T/S}
+    =
+    (T\times_SX)
+    \times_{(T\times_SX)_{\dR/S}}
+    T_{\dR/S}.
+\]
+The relative de Rham localization of Chapter 9 is left exact in the slice over $S$, so
+\[
+    (T\times_SX)_{\dR/S}
+    \simeq
+    T_{\dR/S}\times_SX_{\dR/S}.
+\]
+Under this identification the map from $T_{\dR/S}$ is $(\id,a_{\dR})$.  Naturality of the relative de Rham unit gives
+\[
+    a_{\dR}\eta_{T/S}\simeq\eta_{X/S}a.
+\]
+Finite-limit pasting therefore yields
+\[
+\begin{aligned}
+(T\times_SX)
+\times_{T_{\dR/S}\times_SX_{\dR/S}}
+T_{\dR/S}
+&\simeq
+T\times_{X_{\dR/S}}X\\
+&=
+\mathbb D^\infty_{X/S,a}.
+\end{aligned}
+\]
+The case $a=\id_X$ is the degree-one diagonal-completion theorem of Chapter 10.
+\end{proof}
+
+\begin{proposition}[Base change of formal disks]
+\label{prop:formal-disk-base-change}
+Let $g:S'\to S$, put $X':=X\times_SS'$, and for $a:T\to X$ put $T':=T\times_SS'$.  There is a canonical equivalence
+\[
+    \mathbb D^\infty_{X'/S',a'}
+    \simeq
+    \mathbb D^\infty_{X/S,a}\times_SS',
+\]
+compatible with evaluation, identities, iterated base change, and all higher pullback-pasting coherences.
+\end{proposition}
+
+\begin{proof}
+Chapter 10 gives
+\[
+    Q_{X'/S'}\simeq Q_{X/S}\times_SS'.
+\]
+Apply Proposition~\ref{prop:formal-disk-effective-quotient} and commute the defining fibre product with base change.
+\end{proof}
+
+\begin{remark}[Classical synthetic comparison]
+Formal disks defined through infinitesimal shape are the basic input in synthetic jet geometry; see Kock \cite{Kock1980} and Khavkine--Schreiber \cite{KhavkineSchreiber2017}.  Here the infinitesimal shape itself has already been constructed from structured spectral square-zero geometry, so no Kock--Lawvere infinitesimal object is imposed.
+\end{remark}
+
+\section{The formal-disk monad and brave-new jet comonad}
+\label{sec:formal-disk-monad}
+\label{sec:jet-bundle}
+
+\begin{definition}[Formal-disk and jet endofunctors]
+\label{def:formal-disk-jet-functors}
+Define
+\[
+    \Tinf_{X/S}:=\eta^*\Sigma_\eta,
+    \qquad
+    \Jinf_{X/S}:=\eta^*\Pi_\eta
+    :\mathcal C_X\longrightarrow\mathcal C_X.
+\]
+For $E\to X$, the object $\Jinf_{X/S}E\to X$ is its relative brave-new infinite jet bundle.
+\end{definition}
+
+\begin{proposition}[Relation-groupoid formulas]
+\label{prop:Tinf-relation-formula}
+\label{prop:jet-relation-formula}
+There are canonical equivalences
+\[
+    \boxed{
+    \Tinf_{X/S}\simeq\Sigma_ce^*,
+    \qquad
+    \Jinf_{X/S}\simeq\Pi_ce^*.
+    }
+\]
+Using inversion there is also a canonical equivalence
+\[
+    \Tinf_{X/S}\simeq\Sigma_ec^*.
+\]
+\end{proposition}
+
+\begin{proof}
+The square
+\[
+\begin{tikzcd}
+R=X\times_BX
+  \arrow[r,"e"]
+  \arrow[d,"c"']
+& X \arrow[d,"\eta"]
+\\
+X \arrow[r,"\eta"'] & B
+\end{tikzcd}
+\]
+is Cartesian.  Left and right Beck--Chevalley give
+\[
+    \eta^*\Sigma_\eta\simeq\Sigma_ce^*,
+    \qquad
+    \eta^*\Pi_\eta\simeq\Pi_ce^*.
+\]
+The inversion $\iota:R\simeq R$ satisfies $c\iota=e$ and $e\iota=c$, and transport along $\iota$ identifies $\Sigma_ce^*$ with $\Sigma_ec^*$.
+\end{proof}
+
+\begin{theorem}[Fibrewise interpretation of jets]
+\label{thm:jet-fibre-formula}
+Let $a:T\to X$.  For every $E\to X$ there is a canonical equivalence in $(\XSp)_{/T}$
+\[
+    a^*\Jinf_{X/S}E
+    \simeq
+    \Pi_{d_a}\operatorname{ev}_a^*E.
+\]
+Equivalently, a generalized fibre of $\Jinf_{X/S}E$ is the object of sections of $E$ over the intrinsic spectral formal disk centred at that generalized point.
+\end{theorem}
+
+\begin{proof}
+Pull the formula $\Jinf\simeq\Pi_ce^*$ back along $a:T\to X$.  Proposition~\ref{prop:formal-disk-effective-quotient} identifies the pullback of $c$ with $d_a$, and right Beck--Chevalley gives the displayed equivalence.
+\end{proof}
+
+\begin{proposition}[The formal-disk monad]
+\label{prop:formal-disk-monad}
+The endofunctor $\Tinf_{X/S}$ carries a canonical monad structure
+\[
+    (\Tinf_{X/S},\zeta,\nabla)
+\]
+induced by $\Sigma_\eta\dashv\eta^*$.  Under the relation-groupoid formula, the unit
+\[
+    \zeta_A:A\to\Tinf A
+\]
+is induced by $u:X\to R$, and the multiplication
+\[
+    \nabla_A:\Tinf\Tinf A\to\Tinf A
+\]
+is induced by
+\[
+    m:R\times_{e,X,c}R\to R.
+\]
+\end{proposition}
+
+\begin{proof}
+For an adjunction $L\dashv R$, the composite $RL$ is canonically a monad.  Apply this to $\Sigma_\eta\dashv\eta^*$.  Under the relation correspondence, the unit and multiplication are the degree-zero and degree-two groupoid structure maps.  The monad identities are the groupoid unit and associativity identities, with their simplicial higher coherences.
+\end{proof}
+
+\begin{theorem}[The jet comonad]
+\label{thm:jet-comonad}
+The endofunctor $\Jinf_{X/S}$ carries a canonical comonad structure
+\[
+    (\Jinf_{X/S},\varepsilon,\Delta)
+\]
+induced by $\eta^*\dashv\Pi_\eta$.  Thus
+\[
+    \varepsilon_E:\Jinf E\to E,
+    \qquad
+    \Delta_E:\Jinf E\to\Jinf\Jinf E
+\]
+satisfy
+\[
+    \varepsilon_{\Jinf E}\Delta_E\simeq\id_{\Jinf E},
+    \qquad
+    \Jinf(\varepsilon_E)\Delta_E\simeq\id_{\Jinf E},
+\]
+\[
+    \Delta_{\Jinf E}\Delta_E
+    \simeq
+    \Jinf(\Delta_E)\Delta_E
+\]
+with all higher coherences.
+\end{theorem}
+
+\begin{proof}
+For an adjunction $L\dashv R$, the composite $LR$ is canonically a comonad on the target of $L$.  Apply this to
+\[
+    \eta^*:(\XSp)_{/B}\rightleftarrows(\XSp)_{/X}:\Pi_\eta.
+\]
+The identities and higher coherences are those of the adjunction.
+\end{proof}
+
+\begin{proposition}[Limit preservation]
+\label{prop:jet-limit-preservation}
+The functor $\Jinf_{X/S}$ preserves all small limits.  In particular, it preserves pullbacks, homotopy equalizers, and monomorphisms.  Moreover, the forgetful functor
+\[
+    U:\Coalg_{\Jinf}(\mathcal C_X)\longrightarrow\mathcal C_X
+\]
+creates all small limits.
+\end{proposition}
+
+\begin{proof}
+The pullback functor $\eta^*$ preserves all limits and $\Pi_\eta$ is a right adjoint, so $\Jinf$ preserves all limits.
+
+Let $D:I\to\Coalg_{\Jinf}(\mathcal C_X)$ be a small diagram and put
+\[
+    L:=\lim_{i\in I}UD(i)
+\]
+in $\mathcal C_X$.  Since $\Jinf$ preserves the limit,
+\[
+    \Jinf L\simeq\lim_i\Jinf UD(i).
+\]
+The coactions of the $D(i)$ therefore assemble uniquely to $\rho_L:L\to\Jinf L$.  The coalgebra identities and the universal property of the limit may be checked after all projections to $D(i)$, so $(L,\rho_L)$ is the limit in $\Coalg_{\Jinf}(\mathcal C_X)$.
+\end{proof}
+
+\begin{remark}[Distinction from the Chapter 10 stable descent monad]
+Chapter 10 also uses
+\[
+    M_{X/S}=\Pi_\epsilon\epsilon^*
+\]
+for an infinitesimal descent monad on parameterized stable coefficients over the effective quotient.  It is distinct from the present unstable-slice monad
+\[
+    \Tinf_{X/S}=\epsilon^*\Sigma_\epsilon.
+\]
+The two constructions occur on different sides of the dependent adjoint triple and serve different purposes.
+\end{remark}
+
+\section{Effective-image invariance, adjunction, and effective descent}
+\label{sec:jet-effective-image}
+\label{sec:disk-jet-adjunction}
+\label{sec:jet-descent}
+
+\begin{theorem}[Effective-image invariance as monad and comonad]
+\label{thm:jet-effective-image}
+Let
+\[
+    X\xrightarrow{\epsilon}Q\xrightarrow{\jmath}B
+\]
+be the effective-image factorization of $\eta$.  There are canonical equivalences
+\[
+    \boxed{
+    \Tinf_{X/S}\simeq\epsilon^*\Sigma_\epsilon,
+    \qquad
+    \Jinf_{X/S}\simeq\epsilon^*\Pi_\epsilon
+    }
+\]
+which identify the monad and comonad structures.  Hence the complete formal-disk and jet calculus depends only on the effective quotient $X\to Q$.
+\end{theorem}
+
+\begin{proof}
+Because $\jmath:Q\to B$ is a monomorphism, its diagonal is an equivalence and therefore
+\[
+    \jmath^*\Sigma_\jmath\simeq\id_{(\XSp)_{/Q}}.
+\]
+There is also a canonical equivalence
+\[
+    \jmath^*\Pi_\jmath\simeq\id_{(\XSp)_{/Q}}.
+\]
+Indeed, for $A,E\in(\XSp)_{/Q}$,
+\[
+\begin{aligned}
+\Map_Q(A,\jmath^*\Pi_\jmath E)
+&\simeq
+\Map_B(\Sigma_\jmath A,\Pi_\jmath E)\\
+&\simeq
+\Map_Q(\jmath^*\Sigma_\jmath A,E)\\
+&\simeq
+\Map_Q(A,E).
+\end{aligned}
+\]
+Yoneda gives the second equivalence.  Since $\eta=\jmath\epsilon$,
+\[
+    \Sigma_\eta\simeq\Sigma_\jmath\Sigma_\epsilon,
+    \qquad
+    \Pi_\eta\simeq\Pi_\jmath\Pi_\epsilon,
+    \qquad
+    \eta^*=\epsilon^*\jmath^*.
+\]
+Substitution gives the displayed equivalences.  Since they come from equivalences of the composing adjunctions, they transport all monad/comonad structure maps and higher coherences.
+\end{proof}
+
+\begin{corollary}[Smooth relative de Rham presentation]
+\label{cor:jet-smooth-dR}
+If $X\to S$ is represented by a smooth spectral morphism, then
+\[
+    Q_{X/S}\simeq X_{\dR/S}
+\]
+and $\eta_{X/S}$ is an effective epimorphism.  Thus $\Tinf$ and $\Jinf$ are directly the monad and comonad attached to the effective smooth relative de Rham presentation.
+\end{corollary}
+
+\begin{theorem}[Formal-disk--jet adjunction]
+\label{thm:disk-jet-adjunction}
+There is a canonical adjunction
+\[
+    \boxed{\Tinf_{X/S}\dashv\Jinf_{X/S}.}
+\]
+More precisely, there is a natural chain of equivalences
+\[
+\boxed{
+\Map_X(\Tinf A,E)
+\simeq
+\Map_R(e^*A,c^*E)
+\simeq
+\Map_R(c^*A,e^*E)
+\simeq
+\Map_X(A,\Jinf E),
+}
+\]
+where the middle equivalence is transport along inversion $\iota:R\simeq R$.
+\end{theorem}
+
+\begin{proof}
+The first equivalence uses $\Tinf\simeq\Sigma_ce^*$ and $\Sigma_c\dashv c^*$.  Inversion identifies $e^*A$ with $\iota^*c^*A$ and $c^*E$ with $\iota^*e^*E$, giving the middle equivalence.  The last equivalence uses $c^*\dashv\Pi_c$ and $\Jinf\simeq\Pi_ce^*$.
+\end{proof}
+
+\begin{lemma}[Mate calculus for the disk--jet adjunction]
+\label{lem:disk-jet-mate}
+Let
+\[
+    s:\Tinf A\longrightarrow E
+\]
+and let
+\[
+    s^\sharp:A\longrightarrow\Jinf E
+\]
+be its adjunct.  Then
+\[
+    \boxed{\varepsilon_Es^\sharp\simeq s\zeta_A.}
+\]
+For every $f:E\to F$, the adjunct of $fs$ is $\Jinf(f)s^\sharp$.
+\end{lemma}
+
+\begin{proof}
+The assertion is the triangle identity for the composite adjunction
+\[
+    \Sigma_\epsilon\dashv\epsilon^*\dashv\Pi_\epsilon
+\]
+after applying $\epsilon^*$, equivalently the corresponding triangle identity for $\Tinf\dashv\Jinf$.  Naturality of mates gives the final assertion.
+\end{proof}
+
+\begin{proposition}[Formal-disk maps]
+\label{cor:jet-sections-formal-disks}
+For every $A,E\in\mathcal C_X$,
+\[
+    \Map_X(A,\Jinf E)
+    \simeq
+    \Map_X(\Tinf A,E).
+\]
+If $A=a:T\to X$ is a generalized point, then
+\[
+    \Tinf(a)
+    \simeq
+    \bigl(
+    \mathbb D^\infty_{X/S,a}
+    \xrightarrow{\operatorname{ev}_a}
+    X
+    \bigr),
+\]
+and hence
+\[
+    \Map_X(a,\Jinf E)
+    \simeq
+    \Map_X(\mathbb D^\infty_{X/S,a},E).
+\]
+\end{proposition}
+
+\begin{proof}
+The first equivalence is Theorem~\ref{thm:disk-jet-adjunction}.  The relation formula gives
+\[
+    \Tinf(a)=\Sigma_c(R\times_{e,X}T).
+\]
+Applying inversion to the $R$-factor identifies
+\[
+    R\times_{e,X}T
+    \simeq
+    T\times_{X,c}R
+    \simeq
+    \mathbb D^\infty_{X/S,a},
+\]
+and carries the structural map $c$ to the evaluation map $e$.
+\end{proof}
+
+\begin{theorem}[Relation transport and mate compatibility]
+\label{thm:relation-transport}
+Let $E\to X$.  The following data are canonically equivalent:
+\begin{enumerate}
+\item a $\Tinf$-algebra structure $s:\Tinf E\to E$;
+\item a $\Jinf$-coalgebra structure $\rho:E\to\Jinf E$;
+\item a coherent infinitesimal descent datum on $E$ along the effective relation groupoid $R_\bullet$, whose degree-one transport is an equivalence
+\[
+    \theta:c^*E\xrightarrow{\sim}e^*E.
+\]
+\end{enumerate}
+Under these equivalences $s$ and $\rho$ are mates under $\Tinf\dashv\Jinf$.  Their common degree-one transport satisfies
+\[
+    u^*\theta\simeq\id_E
+\]
+and, on
+\[
+    R_2=X\times_QX\times_QX,
+\]
+\[
+    \boxed{
+    p_{12}^*\theta\circ p_{01}^*\theta
+    \simeq
+    p_{02}^*\theta.
+    }
+\]
+The higher algebra, coalgebra, and descent coherences correspond to the higher \v{C}ech coherences.
+\end{theorem}
+
+\begin{proof}
+Using $\Tinf\simeq\Sigma_ce^*$, an action $s:\Tinf E\to E$ is adjoint to
+\[
+    \bar s:e^*E\longrightarrow c^*E.
+\]
+Transport along inversion defines
+\[
+    \theta_s:=\iota^*\bar s:c^*E\longrightarrow e^*E.
+\]
+Using $\Jinf\simeq\Pi_ce^*$, a coaction $\rho:E\to\Jinf E$ is adjoint directly to
+\[
+    \theta_\rho:c^*E\longrightarrow e^*E.
+\]
+By the mapping-space construction in Theorem~\ref{thm:disk-jet-adjunction}, $s$ and $\rho$ are mates exactly when $\theta_s=\theta_\rho$.
+
+The monad unit and comonad counit are both induced by the diagonal $u:X\to R$, so either unit law becomes
+\[
+    u^*\theta\simeq\id_E.
+\]
+The monad multiplication and comonad comultiplication are both induced by composition of relations.  Taking adjoint mates on
+\[
+    R_2=R\times_{e,X,c}R\simeq X\times_QX\times_QX
+\]
+identifies either associativity/coassociativity law with
+\[
+    p_{12}^*\theta\circ p_{01}^*\theta\simeq p_{02}^*\theta.
+\]
+Iterating the same correspondence identifies the higher Eilenberg--Moore coherences with the higher simplicial descent coherences.
+
+It remains to prove that $\theta$ is invertible.  Let
+\[
+    s_{010}:R\to R_2,
+    \qquad
+    (x_0,x_1)\longmapsto(x_0,x_1,x_0),
+\]
+\[
+    s_{101}:R\to R_2,
+    \qquad
+    (x_0,x_1)\longmapsto(x_1,x_0,x_1).
+\]
+Pulling the cocycle equivalence back along these two maps and using the diagonal unit identity gives
+\[
+    \iota^*\theta\circ\theta\simeq\id,
+    \qquad
+    \theta\circ\iota^*\theta\simeq\id.
+\]
+Hence $\iota^*\theta$ is a canonical inverse.
+\end{proof}
+
+\begin{theorem}[Effective infinitesimal descent]
+\label{thm:jet-em-effective-descent}
+\label{thm:jet-effective-descent}
+Pullback along $\epsilon:X\twoheadrightarrow Q$ induces canonical equivalences
+\[
+\boxed{
+    (\XSp)_{/Q}
+    \xrightarrow{\sim}
+    \operatorname{Alg}_{\Tinf}(\mathcal C_X),
+    \qquad
+    (\XSp)_{/Q}
+    \xrightarrow{\sim}
+    \Coalg_{\Jinf}(\mathcal C_X).
+}
+\]
+Both commute with the forgetful functors to $\mathcal C_X$, where the common underlying functor is $\epsilon^*$.  Under the induced equivalence
+\[
+    \operatorname{Alg}_{\Tinf}(\mathcal C_X)
+    \simeq
+    \Coalg_{\Jinf}(\mathcal C_X),
+\]
+algebra actions and coalgebra coactions are mates under $\Tinf\dashv\Jinf$.
+
+Explicitly, for $F\to Q$ and $E:=\epsilon^*F$, if
+\[
+    \beta:\Sigma_\epsilon\epsilon^*\to\id
+\]
+is the counit of $\Sigma_\epsilon\dashv\epsilon^*$ and
+\[
+    \nu:\id\to\Pi_\epsilon\epsilon^*
+\]
+is the unit of $\epsilon^*\dashv\Pi_\epsilon$, then the induced structures are
+\[
+    s_F:=\epsilon^*(\beta_F):\Tinf E\to E,
+\]
+\[
+    \rho_F:=\epsilon^*(\nu_F):E\to\Jinf E.
+\]
+\end{theorem}
+
+\begin{proof}
+Since $\epsilon$ is an effective epimorphism, effective descent in the $\infty$-topos gives
+\[
+    (\XSp)_{/Q}
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    (\XSp)_{/R_n}.
+\]
+An object of the totalization is an object $E\to X$ equipped with coherent transport along $R_\bullet$.  Theorem~\ref{thm:relation-transport} identifies this same totalization first with $\operatorname{Alg}_{\Tinf}(\mathcal C_X)$ and then with $\Coalg_{\Jinf}(\mathcal C_X)$, compatibly on objects and mapping spaces.  This proves the two equivalences and the mate statement simultaneously.
+
+For $F\to Q$, the standard descent transport on $\epsilon^*F$ is the canonical identification of its two pullbacks to $R=X\times_QX$.  Under the two dependent adjunctions, this transport is represented respectively by $\epsilon^*(\beta_F)$ and $\epsilon^*(\nu_F)$, giving the explicit formulas.
+\end{proof}
+
+\begin{definition}[Intrinsic formally integrable PDE]
+\label{def:pde-category}
+Define the $\infty$-category of intrinsic formally integrable brave-new PDEs by
+\[
+    \boxed{
+    \PDE^{\mathrm{fi}}_{X/S}:=(\XSp)_{/Q_{X/S}}.
+    }
+\]
+For $F\to Q$, its underlying $X$-bundle is $E:=\epsilon^*F$.  Its formal-solution action
+\[
+    s_F:\Tinf E\to E
+\]
+and intrinsic Cartan coaction
+\[
+    \rho_F:E\to\Jinf E
+\]
+are the canonically derived structures of Theorem~\ref{thm:jet-em-effective-descent}; they are not additional data.
+\end{definition}
+
+\begin{theorem}[Brave-new Marvan--Khavkine--Schreiber equivalence]
+\label{thm:pde-em-equivalence}
+There are canonical equivalences of $\infty$-categories
+\[
+\boxed{
+    \PDE^{\mathrm{fi}}_{X/S}
+    \simeq
+    \operatorname{Alg}_{\Tinf_{X/S}}(\mathcal C_X)
+    \simeq
+    \Coalg_{\Jinf_{X/S}}(\mathcal C_X).
+}
+\]
+Under these equivalences formal-solution actions and jet coactions are mates, and morphisms over $Q$ are exactly the corresponding algebra morphisms and jet-coalgebra morphisms.
+\end{theorem}
+
+\begin{proof}
+This is Theorem~\ref{thm:jet-em-effective-descent} after Definition~\ref{def:pde-category}.
+\end{proof}
+
+\begin{corollary}[Smooth de Rham form of the PDE topos]
+\label{cor:pde-topos-smooth}
+If $X\to S$ is represented and smooth, then
+\[
+    \boxed{
+    \PDE^{\mathrm{fi}}_{X/S}
+    \simeq
+    (\XSp)_{/X_{\dR/S}}.
+    }
+\]
+\end{corollary}
+
+\begin{proof}
+Chapter 10 proves $Q_{X/S}\simeq X_{\dR/S}$ by smooth effectivity.
+\end{proof}
+
+\begin{construction}[Canonical formal-disk coalgebra and cofree jet coalgebra]
+\label{con:formal-disk-coalgebra}
+For $A\in\mathcal C_X$, the object $\Sigma_\epsilon A\to Q$ determines by Definition~\ref{def:pde-category} a canonical jet coalgebra on its pullback
+\[
+    \epsilon^*\Sigma_\epsilon A=\Tinf A.
+\]
+Write
+\[
+    \chi_A
+    :=
+    \epsilon^*(\nu_{\Sigma_\epsilon A}):
+    \Tinf A\longrightarrow\Jinf\Tinf A
+\]
+and
+\[
+    \mathbf T(A):=(\Tinf A,\chi_A).
+\]
+Also write
+\[
+    K(E):=(\Jinf E,\Delta_E)
+\]
+for the cofree jet coalgebra on $E\in\mathcal C_X$.
+\end{construction}
+
+\begin{theorem}[Free disk coalgebras and cofree jet coalgebras]
+\label{thm:disk-coalgebra-adjunctions}
+Let
+\[
+    U:\Coalg_{\Jinf}(\mathcal C_X)\longrightarrow\mathcal C_X
+\]
+be the forgetful functor.  There are canonical adjunctions
+\[
+    \boxed{\mathbf T\dashv U\dashv K.}
+\]
+Thus
+\[
+    \Map_{\Coalg_{\Jinf}}(\mathbf T(A),C)
+    \simeq
+    \Map_X(A,UC),
+\]
+\[
+    \Map_{\Coalg_{\Jinf}}(C,K(E))
+    \simeq
+    \Map_X(UC,E).
+\]
+If
+\[
+    \alpha_A:A\to\Jinf\Tinf A
+\]
+is the unit of $\Tinf\dashv\Jinf$, then
+\[
+    \boxed{\alpha_A\simeq\chi_A\zeta_A.}
+\]
+\end{theorem}
+
+\begin{proof}
+Under Theorem~\ref{thm:jet-em-effective-descent}, $U$ is identified with
+\[
+    \epsilon^*:(\XSp)_{/Q}\to(\XSp)_{/X}.
+\]
+Its left and right adjoints are $\Sigma_\epsilon$ and $\Pi_\epsilon$.  Transporting these adjunctions through the descent equivalence gives $\mathbf T\dashv U\dashv K$.  The unit of the composite adjunction $\Tinf\dashv\Jinf$ is the composite
+\[
+    A\xrightarrow{\zeta_A}
+    \epsilon^*\Sigma_\epsilon A
+    \xrightarrow{\epsilon^*(\nu_{\Sigma_\epsilon A})}
+    \epsilon^*\Pi_\epsilon\epsilon^*\Sigma_\epsilon A,
+\]
+which is $\chi_A\zeta_A$.
+\end{proof}
+
+\begin{remark}[Representability]
+Nothing in the construction requires $\Jinf E$, $Q_{X/S}$, or the formal disk to be represented by spectral schemes.  The foundational jet calculus lives in the native big spectral Nisnevich $\infty$-topos.  Representability of particular jets is an additional geometric theorem, not part of the definition.
+\end{remark}
+
+\section{Arbitrary base change of the jet calculus}
+\label{sec:jet-base-change}
+
+\begin{theorem}[Base change of the jet calculus]
+\label{thm:jet-arbitrary-base-change}
+Let $g:S'\to S$, put
+\[
+    X':=X\times_SS',
+\]
+and let $g_X:X'\to X$ be the projection.  There are canonical equivalences
+\[
+    g_X^*\Tinf_{X/S}
+    \simeq
+    \Tinf_{X'/S'}g_X^*,
+\]
+\[
+    g_X^*\Jinf_{X/S}
+    \simeq
+    \Jinf_{X'/S'}g_X^*.
+\]
+They identify the monad and comonad structures, the adjunction $\Tinf\dashv\Jinf$, and the mate correspondence.  They satisfy identity, composition, horizontal and vertical pasting, and all higher base-change coherences.  The intrinsic PDE topoi satisfy
+\[
+    \PDE^{\mathrm{fi}}_{X'/S'}
+    \simeq
+    (\XSp)_{/Q_{X/S}\times_SS'}.
+\]
+\end{theorem}
+
+\begin{proof}
+Chapter 10 gives coherent equivalences
+\[
+    Q_{X'/S'}\simeq Q_{X/S}\times_SS',
+    \qquad
+    R_{X'/S',n}\simeq R_{X/S,n}\times_SS'
+\]
+compatible with all simplicial operators.  In degree one this gives a Cartesian comparison of the centre/evaluation correspondences.  Apply left and right Beck--Chevalley to
+\[
+    \Tinf\simeq\Sigma_ce^*,
+    \qquad
+    \Jinf\simeq\Pi_ce^*.
+\]
+The unit, multiplication, counit, and comultiplication are induced by the simplicial unit and composition maps, so the relation-nerve base-change equivalence identifies all structure maps.  The mapping-space construction of Theorem~\ref{thm:disk-jet-adjunction} is built from the same Beck--Chevalley and inversion data, which proves compatibility with adjunction and mates.  The final equivalence is Definition~\ref{def:pde-category} together with base change of $Q$.
+\end{proof}
+
+\begin{corollary}[Base change of generalized PDE prolongations]
+\label{cor:jet-pde-base-change}
+Let
+\[
+    i:\mathcal E\longrightarrow\Jinf_{X/S}Y
+\]
+be a generalized PDE presentation and let
+\[
+    i':\mathcal E':=g_X^*\mathcal E
+    \longrightarrow
+    \Jinf_{X'/S'}(g_X^*Y)
+\]
+be its pullback.  Then
+\[
+    g_X^*(\mathcal E^\infty)
+    \simeq
+    (\mathcal E')^\infty,
+    \qquad
+    g_X^*(\kappa_i)
+    \simeq
+    \kappa_{i'}.
+\]
+Consequently centre-completeness is preserved by arbitrary base change.  The canonical prolongation coalgebra and all universal formal-solution data commute with this base change.
+\end{corollary}
+
+\begin{proof}
+The prolongation is the finite pullback
+\[
+    \mathcal E^\infty
+    =
+    \Jinf\mathcal E\times_{\Jinf\Jinf Y}\Jinf Y.
+\]
+Pullback along $g_X$ preserves this limit, and Theorem~\ref{thm:jet-arbitrary-base-change} identifies every pulled-back jet term with the corresponding jet term over $X'/S'$.  The centre map is $\varepsilon_{\mathcal E}p_1$, so compatibility with the comonad counit gives the second equivalence.  The coalgebra and universal maps are constructed functorially from the same pullback and the comonad structure.
+\end{proof}
+
+\section{Jet prolongation, Cartan objects, and holonomicity}
+\label{sec:holonomic-sections}
+\label{sec:cartan-structure}
+
+\begin{proposition}[Terminal jet coalgebra]
+\label{prop:jet-terminal}
+The terminal object $X=\id_X$ of $\mathcal C_X$ is preserved by $\Jinf$.  Hence
+\[
+    \varepsilon_X:\Jinf X\xrightarrow{\sim}X
+\]
+is an equivalence.  Write
+\[
+    \rho_X:X\xrightarrow{\sim}\Jinf X
+\]
+for its canonical inverse.  Then $(X,\rho_X)$ is the terminal $\Jinf$-coalgebra.
+\end{proposition}
+
+\begin{proof}
+Both $\Pi_\eta$ and $\eta^*$ preserve terminal objects.  Thus $\Jinf X$ is terminal in $\mathcal C_X$, so the unique map $\varepsilon_X:\Jinf X\to X$ is an equivalence.  The comonad identities identify its inverse with the unique coalgebra structure on the terminal object.
+\end{proof}
+
+\begin{definition}[Infinite jet prolongation of a section]
+\label{def:section-jet-prolongation}
+For a section
+\[
+    \phi:X\longrightarrow E
+\]
+define
+\[
+    j^\infty\phi
+    :=
+    \Jinf(\phi)\rho_X:
+    X\longrightarrow\Jinf E.
+\]
+\end{definition}
+
+\begin{proposition}[Evaluation of a prolonged section]
+\label{prop:jet-evaluation-section}
+For every section $\phi:X\to E$,
+\[
+    \varepsilon_Ej^\infty\phi\simeq\phi.
+\]
+\end{proposition}
+
+\begin{proof}
+Naturality of the counit gives
+\[
+    \varepsilon_E\Jinf(\phi)
+    \simeq
+    \phi\varepsilon_X.
+\]
+Compose with $\rho_X$.
+\end{proof}
+
+\begin{definition}[Intrinsic Cartan object]
+\label{def:coalgebraic-cartan}
+An \emph{intrinsic Cartan object} over $X/S$ is an object
+\[
+    F\longrightarrow Q
+\]
+of $\PDE^{\mathrm{fi}}_{X/S}$.  Its underlying $X$-bundle is
+\[
+    E:=\epsilon^*F,
+\]
+and its Cartan coaction is the canonically derived morphism
+\[
+    \rho_F:=\epsilon^*(\nu_F):E\longrightarrow\Jinf E.
+\]
+When convenient we denote the resulting jet coalgebra by $(E,\rho_F)$.  A morphism of intrinsic Cartan objects is simply a morphism over $Q$; under Theorem~\ref{thm:pde-em-equivalence} it is exactly a jet-coalgebra morphism.
+\end{definition}
+
+\begin{remark}[Scope of the terminology]
+Marvan identifies the ordinary jet-coalgebra structure with preservation of the Cartan distribution \cite{Marvan1986}; Khavkine--Schreiber use this relation in their comparison with diffieties \cite{KhavkineSchreiber2017}.  Here ``Cartan'' denotes the infinitesimal descent structure constructed from $Q_{X/S}$.  No tangent distribution is inserted into the definition.
+\end{remark}
+
+\begin{definition}[Holonomic section]
+\label{def:holonomic-section}
+A section
+\[
+    \sigma:X\longrightarrow\Jinf E
+\]
+is \emph{holonomic} if it is a jet-coalgebra morphism
+\[
+    (X,\rho_X)\longrightarrow K(E)=(\Jinf E,\Delta_E).
+\]
+\end{definition}
+
+\begin{theorem}[Holonomic recognition]
+\label{thm:holonomic-recognition}
+There is a canonical equivalence
+\[
+\boxed{
+    \Map_{\Coalg_{\Jinf}}
+    \bigl((X,\rho_X),K(E)\bigr)
+    \simeq
+    \Map_X(X,E).
+}
+\]
+Under this equivalence $\phi:X\to E$ corresponds to
+\[
+    j^\infty\phi=\Jinf(\phi)\rho_X.
+\]
+Consequently $\sigma:X\to\Jinf E$ is holonomic if and only if, through a contractible space of choices,
+\[
+    \sigma\simeq j^\infty\phi
+\]
+for a section $\phi:X\to E$, necessarily
+\[
+    \phi\simeq\varepsilon_E\sigma.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply the cofree adjunction $U\dashv K$ of Theorem~\ref{thm:disk-coalgebra-adjunctions} to the terminal coalgebra $(X,\rho_X)$.
+\end{proof}
+
+\begin{definition}[Constructed Cartan presentation]
+\label{def:cartan-presentation}
+Let $F\to Q$ be an intrinsic Cartan object with underlying bundle $E=\epsilon^*F$, and let $Y\to X$ be an $X$-bundle.  A \emph{Cartan presentation on $Y$} is a morphism
+\[
+    y:E\longrightarrow Y
+\]
+in $\mathcal C_X$.  Its ambient jet presentation is the canonically constructed morphism
+\[
+    \boxed{
+    i_y:=\Jinf(y)\rho_F:E\longrightarrow\Jinf Y.
+    }
+\]
+The presentation is \emph{embedded} if $i_y$ is a monomorphism.
+\end{definition}
+
+\begin{theorem}[Cofree construction and recognition of Cartan presentations]
+\label{prop:cartan-cofree-factorization}
+Let $(E,\rho)$ be the jet coalgebra associated to an intrinsic Cartan object and let $Y\in\mathcal C_X$.  The cofree adjunction gives a canonical equivalence
+\[
+\boxed{
+    \Map_{\Coalg_{\Jinf}}
+    \bigl((E,\rho),K(Y)\bigr)
+    \simeq
+    \Map_X(E,Y).
+}
+\]
+For $y:E\to Y$, the corresponding coalgebra morphism has underlying map
+\[
+    i_y=\Jinf(y)\rho.
+\]
+Conversely, every coalgebra morphism
+\[
+    i:(E,\rho)\longrightarrow K(Y)
+\]
+is canonically of this form with
+\[
+    y_i:=\varepsilon_Yi,
+    \qquad
+    \boxed{i\simeq\Jinf(y_i)\rho.}
+\]
+Thus no independent Cartan-morphism coherence is required in a presentation: it is constructed from $y$.
+\end{theorem}
+
+\begin{proof}
+The mapping-space equivalence is the cofree adjunction.  The cofree morphism classified by $y$ has underlying map $\Jinf(y)\rho$.  Conversely,
+\[
+\begin{aligned}
+\Jinf(\varepsilon_Yi)\rho
+&=
+\Jinf(\varepsilon_Y)\Jinf(i)\rho\\
+&\simeq
+\Jinf(\varepsilon_Y)\Delta_Yi\\
+&\simeq i,
+\end{aligned}
+\]
+using the coalgebra-morphism identity and the comonad counit identity.
+\end{proof}
+
+\begin{corollary}[Holonomic sections are Cartan sections]
+A section of $\Jinf E$ is holonomic if and only if it is the constructed Cartan presentation of a section $X\to E$ from the terminal intrinsic Cartan object.
+\end{corollary}
+
+\section{Brave-new differential operators}
+\label{sec:differential-operators}
+\label{sec:operator-prolongation}
+
+\begin{definition}[Differential operator]
+\label{def:differential-operator}
+For $E,F\in\mathcal C_X$, a brave-new differential operator
+\[
+    D:E\rightsquigarrow F
+\]
+is a morphism
+\[
+    \widehat D:\Jinf E\longrightarrow F
+\]
+in $\mathcal C_X$.  Its action on a section $\phi:X\to E$ is
+\[
+    D(\phi):=\widehat D\,j^\infty\phi:X\longrightarrow F.
+\]
+\end{definition}
+
+\begin{construction}[The differential-operator $\infty$-category]
+\label{def:diff-cokleisli}
+Let
+\[
+    \Coalg_{\Jinf}(\mathcal C_X)^{\mathrm{cofr}}
+\]
+be the full $\infty$-subcategory of $\Coalg_{\Jinf}(\mathcal C_X)$ spanned by the cofree coalgebras
+\[
+    K(E)=(\Jinf E,\Delta_E).
+\]
+Define $\Diff_{X/S}$ to have the same objects as $\mathcal C_X$, with $E$ corresponding to $K(E)$, and mapping spaces
+\[
+    \Map_{\Diff_{X/S}}(E,F)
+    :=
+    \Map_{\Coalg_{\Jinf}}(K(E),K(F)).
+\]
+Thus $\Diff_{X/S}$ is constructed as a full $\infty$-subcategory of jet coalgebras; all composition and higher coherence are inherited from that $\infty$-category.
+\end{construction}
+
+\begin{proposition}[Co-Kleisli identification]
+\label{prop:diff-cokleisli-identification}
+There are canonical equivalences
+\[
+\boxed{
+    \Map_{\Diff_{X/S}}(E,F)
+    \simeq
+    \Map_X(\Jinf E,F).
+}
+\]
+Under these equivalences, the identity on $E$ is represented by
+\[
+    \varepsilon_E:\Jinf E\to E,
+\]
+and the composite of
+\[
+    \widehat D_1:\Jinf E_1\to E_2,
+    \qquad
+    \widehat D_2:\Jinf E_2\to E_3
+\]
+is represented by
+\[
+    \widehat D_2\,\Jinf(\widehat D_1)\Delta_{E_1}.
+\]
+Hence
+\[
+    \Diff_{X/S}\simeq\coKl(\Jinf_{X/S})
+\]
+canonically.
+\end{proposition}
+
+\begin{proof}
+The cofree adjunction gives
+\[
+    \Map_{\Coalg_{\Jinf}}(K(E),K(F))
+    \simeq
+    \Map_X(\Jinf E,F).
+\]
+The identity of $K(E)$ is classified by $\varepsilon_E$.  The cofree morphisms classified by $\widehat D_1$ and $\widehat D_2$ have underlying maps
+\[
+    \Jinf(\widehat D_1)\Delta_{E_1}:\Jinf E_1\to\Jinf E_2,
+    \qquad
+    \Jinf(\widehat D_2)\Delta_{E_2}:\Jinf E_2\to\Jinf E_3.
+\]
+Their composite is therefore
+\[
+    \Jinf(\widehat D_2)\Delta_{E_2}
+    \Jinf(\widehat D_1)\Delta_{E_1}.
+\]
+Its cofree classifying map is obtained by postcomposing with $\varepsilon_{E_3}$, and naturality of the counit together with
+$\varepsilon_{\Jinf E_2}\Delta_{E_2}\simeq\id$ gives
+\[
+    \varepsilon_{E_3}
+    \Jinf(\widehat D_2)\Delta_{E_2}
+    \Jinf(\widehat D_1)\Delta_{E_1}
+    \simeq
+    \widehat D_2\,\Jinf(\widehat D_1)\Delta_{E_1}.
+\]
+This is the usual co-Kleisli composition formula.  Since the source category was constructed as a full $\infty$-subcategory, all higher associativity and unit coherences are inherited.
+\end{proof}
+
+\begin{proposition}[Order-zero operators]
+\label{prop:order-zero-operators}
+Every morphism $f:E\to F$ in $\mathcal C_X$ defines an order-zero operator
+\[
+    \widehat f^{(0)}:=f\varepsilon_E:\Jinf E\to F.
+\]
+These assignments form an identity-on-objects functor
+\[
+    \operatorname{ord}_0:\mathcal C_X\longrightarrow\Diff_{X/S}.
+\]
+No full-faithfulness assertion is made in the unrestricted slice.
+\end{proposition}
+
+\begin{proof}
+This is the canonical functor from the underlying category to the co-Kleisli category of a comonad.  The explicit composition identity follows from naturality of $\varepsilon$ and the two counit identities.
+\end{proof}
+
+\begin{definition}[Infinite prolongation]
+\label{def:operator-prolongation}
+For a differential operator $\widehat D:\Jinf E\to F$, define
+\[
+    p^\infty\widehat D
+    :=
+    \Jinf(\widehat D)\Delta_E:
+    \Jinf E\longrightarrow\Jinf F.
+\]
+\end{definition}
+
+\begin{theorem}[Cofree realization of differential operators]
+\label{prop:prolongation-cartan}
+\label{thm:diff-cofree-embedding}
+The morphism $p^\infty\widehat D$ is the unique cofree jet-coalgebra morphism
+\[
+    K(E)\longrightarrow K(F)
+\]
+classified by $\widehat D$.  In particular
+\[
+    \varepsilon_Fp^\infty\widehat D\simeq\widehat D.
+\]
+Infinite prolongation identifies $\Diff_{X/S}$ fully faithfully with the full subcategory of cofree jet coalgebras.  For composable operators,
+\[
+    p^\infty(D_2\circ_{\mathrm{coKl}}D_1)
+    \simeq
+    p^\infty D_2\circ p^\infty D_1.
+\]
+\end{theorem}
+
+\begin{proof}
+By construction of $\Diff_{X/S}$ and the cofree adjunction, the coalgebra morphism classified by $\widehat D$ has underlying map $\Jinf(\widehat D)\Delta_E$.  The classifying-map identity is the counit equation.  Full faithfulness and composition are inherited from the full cofree subcategory.
+\end{proof}
+
+\section{Derived equation objects and generalized brave-new PDEs}
+\label{sec:equation-loci}
+\label{sec:generalized-pdes}
+
+\begin{construction}[Equation cut out by differential operators]
+\label{con:equation-locus}
+Let
+\[
+    \widehat D_0,\widehat D_1:\Jinf Y\rightrightarrows F
+\]
+be differential operators with common target.  Their derived equation object is the homotopy equalizer
+\[
+    \mathcal E(D_0,D_1):=\Eq(\widehat D_0,\widehat D_1)
+\]
+with its canonical morphism
+\[
+    i_{D_0,D_1}:\mathcal E(D_0,D_1)\longrightarrow\Jinf Y.
+\]
+Equivalently,
+\[
+\begin{tikzcd}
+\mathcal E(D_0,D_1)
+  \arrow[r]
+  \arrow[d]
+& F \arrow[d,"\operatorname{diag}_F"]
+\\
+\Jinf Y \arrow[r,"{(\widehat D_0,\widehat D_1)}"'] & F\times_XF
+\end{tikzcd}
+\]
+is Cartesian.
+\end{construction}
+
+\begin{construction}[Scalar zero locus]
+\label{con:scalar-equation}
+Let $A\to X$ be a pointed coefficient object with section $0:X\to A$, and let
+\[
+    f:\Jinf Y\longrightarrow A
+\]
+be a differential function.  Define
+\[
+    \mathcal Z(f):=\Jinf Y\times_A X.
+\]
+When $X$ is represented one may take $A=\mathbb A^1_X$ with the brave-new zero section constructed in Chapter 1.  No truncation of this homotopy fibre is imposed.
+\end{construction}
+
+\begin{definition}[Generalized and embedded brave-new PDE]
+\label{def:generalized-pde}
+A \emph{generalized brave-new PDE presentation} on an $X$-bundle $Y$ relative to $X/S$ is a morphism
+\[
+    i_{\mathcal E}:\mathcal E\longrightarrow\Jinf_{X/S}Y
+\]
+in $\mathcal C_X$.  The object $\mathcal E$ is its equation object.  The PDE is \emph{embedded} if $i_{\mathcal E}$ is a monomorphism.
+\end{definition}
+
+\begin{remark}[Why the generalized definition is not truncated]
+A monomorphism in an $\infty$-topos is $(-1)$-truncated.  Neither a homotopy equalizer nor a derived zero locus need be $(-1)$-truncated over its ambient jet bundle.  Likewise, a jet-coalgebra coaction has a counit retraction but need not be a monomorphism.  Definition~\ref{def:generalized-pde} retains the higher equation data that would be lost by replacing an equation object by its image subobject.  Later we prove that, despite possible non-monomorphy, every jet-coalgebra coaction is centre-complete as its own tautological ambient presentation.
+\end{remark}
+
+\begin{proposition}[Embedded predicates are internally classified]
+\label{prop:every-mono-equational}
+If
+\[
+    i:\mathcal E\hookrightarrow\Jinf Y
+\]
+is embedded, it is classified by a morphism
+\[
+    \chi_i:\Jinf Y\longrightarrow\Omega_X
+\]
+to the subobject classifier of $\mathcal C_X$.  Thus embedded PDEs are exactly proposition-valued differential predicates; general derived equation objects are not replaced by such predicates.
+\end{proposition}
+
+\begin{proof}
+This is the universal property of the subobject classifier in the slice $\infty$-topos $\mathcal C_X$.
+\end{proof}
+
+\begin{proposition}[Pullback and simultaneous systems]
+\label{prop:pde-pullback}
+\label{prop:pde-intersection}
+Let $f:Y\to Z$ be a morphism of $X$-bundles and let $\mathcal F\to\Jinf Z$ be a generalized PDE.  Its pullback along $f$ is
+\[
+    f^*_{\mathrm{PDE}}\mathcal F
+    :=
+    \Jinf Y\times_{\Jinf Z}\mathcal F
+    \longrightarrow\Jinf Y.
+\]
+Embedded PDEs remain embedded under this pullback.  More generally, any small family
+\[
+    \{\mathcal E_\alpha\to\Jinf Y\}_{\alpha\in A}
+\]
+has a simultaneous system given by its limit in $(\mathcal C_X)_{/\Jinf Y}$; for embedded PDEs this is the intersection of subobjects.
+\end{proposition}
+
+\begin{proof}
+Slices of an $\infty$-topos are complete, monomorphisms are stable under pullback, and limits of monomorphisms are monomorphisms.
+\end{proof}
+
+\section{Actual solutions and parameterized solution objects}
+\label{sec:pde-solutions}
+
+\begin{definition}[Solution and solution space]
+\label{def:pde-solution}
+\label{def:solution-space}
+Let
+\[
+    i:\mathcal E\longrightarrow\Jinf Y
+\]
+be a generalized PDE.  A solution consists of a section $\phi:X\to Y$, a morphism $a:X\to\mathcal E$, and a specified equivalence
+\[
+    ia\simeq j^\infty\phi.
+\]
+The solution space is therefore
+\[
+\boxed{
+\Sol_{X/S}(\mathcal E)
+:=
+\Map_X(X,Y)
+\times_{\Map_X(X,\Jinf Y)}
+\Map_X(X,\mathcal E),
+}
+\]
+where the first map is $\phi\mapsto j^\infty\phi$ and the second is induced by $i$.
+\end{definition}
+
+\begin{construction}[Coalgebra on a parameterized copy of $X$]
+\label{con:parameterized-terminal-coalgebra}
+Let $t:T\to S$ and put
+\[
+    X_T:=X\times_ST,
+    \qquad
+    Q_T:=Q\times_ST.
+\]
+As an object over $X$,
+\[
+    X_T\simeq\epsilon^*Q_T.
+\]
+Let
+\[
+    \upsilon_T:Q_T\longrightarrow\Pi_\epsilon\epsilon^*Q_T
+\]
+be the unit of $\epsilon^*\dashv\Pi_\epsilon$.  Define
+\[
+    \rho_T:=\epsilon^*(\upsilon_T):
+    X_T\longrightarrow\Jinf_{X/S}X_T.
+\]
+For a $T$-parameterized section $\phi:X_T\to Y$, define
+\[
+    j_T^\infty\phi:=\Jinf(\phi)\rho_T:
+    X_T\longrightarrow\Jinf Y.
+\]
+\end{construction}
+
+\begin{proposition}[Compatibility with base-changed jet prolongation]
+\label{prop:parameterized-jet-base-change}
+Let $g_X:X_T\to X$ be the projection, put $Y_T:=g_X^*Y$, and let
+\[
+    \widetilde\phi:X_T\longrightarrow Y_T
+\]
+be the section corresponding to $\phi:X_T\to Y$ over $X$.  There are canonical equivalences
+\[
+\begin{aligned}
+\Map_X(X_T,\Jinf_{X/S}Y)
+&\simeq
+\Map_{X_T}\bigl(X_T,g_X^*\Jinf_{X/S}Y\bigr)\\
+&\simeq
+\Map_{X_T}\bigl(X_T,\Jinf_{X_T/T}Y_T\bigr),
+\end{aligned}
+\]
+under which $j_T^\infty\phi$ corresponds to the ordinary prolongation
+\[
+    j^\infty\widetilde\phi
+    =
+    \Jinf_{X_T/T}(\widetilde\phi)\rho_{X_T}.
+\]
+\end{proposition}
+
+\begin{proof}
+Write $\epsilon_T:X_T\to Q_T$ for the base change of $\epsilon$.  Chapter 10 gives
+\[
+    Q_{X_T/T}\simeq Q_T.
+\]
+The mapping-space equivalences are adjunction along $g_X$ and Theorem~\ref{thm:jet-arbitrary-base-change}.  If
+\[
+    a:Q_T\longrightarrow\Pi_\epsilon Y
+\]
+is the adjunct of $\phi$, then the triangle identity gives
+\[
+    j_T^\infty\phi\simeq\epsilon^*a.
+\]
+For the Cartesian square
+\[
+\begin{tikzcd}
+X_T \arrow[r,"g_X"] \arrow[d,"\epsilon_T"']
+& X \arrow[d,"\epsilon"]
+\\
+Q_T \arrow[r,"g_Q"']
+& Q,
+\end{tikzcd}
+\]
+right Beck--Chevalley gives
+\[
+    g_Q^*\Pi_\epsilon Y\simeq\Pi_{\epsilon_T}Y_T.
+\]
+Under this equivalence, $g_Q^*a$ is the adjunct of $\widetilde\phi$, and the same triangle-identity calculation over $Q_T$ gives the asserted base-changed prolongation.
+\end{proof}
+
+\begin{theorem}[Parameterized solution object]
+\label{thm:parameterized-solutions}
+Write $q:Q\to S$ for the structural morphism, so $x=q\epsilon$, and let
+\[
+    \nu:\id\longrightarrow\Pi_\epsilon\epsilon^*
+\]
+be the unit.  Define
+\[
+    j^\infty_{/S}:\Pi_xY\longrightarrow\Pi_x\Jinf Y
+\]
+by
+\[
+\begin{aligned}
+\Pi_xY
+&\simeq
+\Pi_q\Pi_\epsilon Y\\
+&\xrightarrow{\Pi_q(\nu_{\Pi_\epsilon Y})}
+\Pi_q\Pi_\epsilon\epsilon^*\Pi_\epsilon Y\\
+&\simeq
+\Pi_x\Jinf Y.
+\end{aligned}
+\]
+Then the pullback
+\[
+\begin{tikzcd}[column sep=large]
+\underline{\Sol}_{X/S}(\mathcal E)
+  \arrow[r]
+  \arrow[d]
+& \Pi_x\mathcal E
+  \arrow[d,"\Pi_x(i)"]
+\\
+\Pi_xY
+  \arrow[r,"j^\infty_{/S}"']
+& \Pi_x\Jinf Y
+\end{tikzcd}
+\]
+represents parameterized solutions.  For every $T\to S$,
+\[
+    \Map_S\bigl(T,\underline{\Sol}_{X/S}(\mathcal E)\bigr)
+    \simeq
+    \Sol_{X_T/T}(\mathcal E_T),
+\]
+where $\mathcal E_T=g_X^*\mathcal E$.
+\end{theorem}
+
+\begin{proof}
+For every $Z\to X$,
+\[
+    \Map_S(T,\Pi_xZ)\simeq\Map_X(X_T,Z).
+\]
+The construction of $j^\infty_{/S}$ sends a $T$-point represented by $\phi:X_T\to Y$ to $j_T^\infty\phi$.  Proposition~\ref{prop:parameterized-jet-base-change} identifies this with the ordinary prolongation in the base-changed slice.  Taking $T$-points of the displayed pullback therefore gives exactly the defining homotopy pullback of the solution space over $X_T/T$.
+\end{proof}
+
+\section{Formal holonomicity and parameterized formal solutions}
+\label{sec:formal-solutions}
+
+\begin{definition}[Parameterized formally holonomic family]
+\label{def:formally-holonomic-family}
+Let $A,Y\in\mathcal C_X$.  An $A$-parameterized formally holonomic family in $Y$ is a morphism
+\[
+    t:\Tinf A\longrightarrow Y.
+\]
+Its ambient jet map is the canonically constructed morphism
+\[
+    \boxed{
+    \sigma_t:=\Jinf(t)\chi_A:
+    \Tinf A\longrightarrow\Jinf Y.
+    }
+\]
+\end{definition}
+
+\begin{theorem}[Constructed Cartan lift of a formally holonomic family]
+\label{thm:formal-holonomicity-coalgebraic}
+For every $t:\Tinf A\to Y$, the map $\sigma_t$ is the underlying map of the unique cofree jet-coalgebra morphism
+\[
+    \widetilde\sigma_t:\mathbf T(A)\longrightarrow K(Y)
+\]
+classified by $t$.  Consequently
+\[
+\boxed{
+    \Map_X(\Tinf A,Y)
+    \simeq
+    \Map_{\Coalg_{\Jinf}}\bigl(\mathbf T(A),K(Y)\bigr).
+}
+\]
+If
+\[
+    \sigma_t^\sharp:A\longrightarrow\Jinf\Jinf Y
+\]
+is the adjunct of $\sigma_t$ under $\Tinf\dashv\Jinf$, then the constructed coalgebra-morphism coherence induces
+\[
+    \boxed{
+    \sigma_t^\sharp
+    \simeq
+    \Delta_Y\sigma_t\zeta_A.
+    }
+\]
+Thus the full Cartan coherence is derived from $t$ rather than supplied as independent data.
+\end{theorem}
+
+\begin{proof}
+The cofree adjunction gives
+\[
+    \Map_{\Coalg_{\Jinf}}\bigl(\mathbf T(A),K(Y)\bigr)
+    \simeq
+    \Map_X(\Tinf A,Y).
+\]
+The cofree morphism classified by $t$ has underlying map $\Jinf(t)\chi_A$.  Since it is a coalgebra morphism,
+\[
+    \Jinf(\sigma_t)\chi_A\simeq\Delta_Y\sigma_t.
+\]
+Theorem~\ref{thm:disk-coalgebra-adjunctions} gives $\alpha_A\simeq\chi_A\zeta_A$ for the unit $\alpha$ of $\Tinf\dashv\Jinf$.  Hence
+\[
+\begin{aligned}
+\sigma_t^\sharp
+&=
+\Jinf(\sigma_t)\alpha_A\\
+&\simeq
+\Jinf(\sigma_t)\chi_A\zeta_A\\
+&\simeq
+\Delta_Y\sigma_t\zeta_A.
+\end{aligned}
+\]
+\end{proof}
+
+\begin{definition}[Parameterized formal solution]
+\label{def:parameterized-formal-solution}
+Let
+\[
+    i:\mathcal E\longrightarrow\Jinf Y
+\]
+be a generalized PDE.  An $A$-parameterized formal solution consists of morphisms
+\[
+    s:\Tinf A\longrightarrow\mathcal E,
+    \qquad
+    t:\Tinf A\longrightarrow Y,
+\]
+and a specified equivalence
+\[
+    q:is\simeq\Jinf(t)\chi_A
+\]
+in $\Map_X(\Tinf A,\Jinf Y)$.  Thus the space of $A$-parameterized formal solutions is
+\[
+\boxed{
+    \operatorname{FSol}_i(A)
+    :=
+    \Map_X(\Tinf A,\mathcal E)
+    \times_{\Map_X(\Tinf A,\Jinf Y)}
+    \Map_X(\Tinf A,Y),
+}
+\]
+where the two maps to the middle term are $s\mapsto is$ and
+\[
+    t\mapsto\Jinf(t)\chi_A.
+\]
+\end{definition}
+
+\begin{proposition}[Adjoint form of formal holonomicity]
+\label{prop:formal-solution-adjoint}
+Let $(s,t,q)$ be an $A$-parameterized formal solution and let
+\[
+    s^\sharp:A\longrightarrow\Jinf\mathcal E
+\]
+be the adjunct of $s$.  Then the constructed formal-holonomicity coherence induces a specified equivalence
+\[
+\boxed{
+    \Jinf(i)s^\sharp
+    \simeq
+    \Delta_Y\,is\zeta_A.
+}
+\]
+Moreover,
+\[
+    \varepsilon_{\mathcal E}s^\sharp\simeq s\zeta_A.
+\]
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:disk-jet-mate}, the adjunct of $is$ is $\Jinf(i)s^\sharp$.  The specified equivalence
+\[
+    q:is\simeq\sigma_t
+\]
+therefore gives
+\[
+    \Jinf(i)s^\sharp\simeq\sigma_t^\sharp.
+\]
+Apply Theorem~\ref{thm:formal-holonomicity-coalgebraic} and transport along $q$.  The final identity is Lemma~\ref{lem:disk-jet-mate}.
+\end{proof}
+
+\begin{remark}[Literal formal-disk interpretation]
+If $A=a:T\to X$ is a generalized point, Proposition~\ref{cor:jet-sections-formal-disks} identifies $\Tinf(a)$ with the intrinsic formal disk $\mathbb D^\infty_{X/S,a}$ regarded over $X$ by evaluation.  Hence an $a$-parameterized formal solution is literally a map from that intrinsic spectral formal disk to the equation object together with a map of the same disk to $Y$ whose induced ambient jet map agrees with the equation map.
+\end{remark}
+
+\section{Cartan prolongation and its universal property}
+\label{sec:pde-prolongation}
+
+\begin{construction}[Infinite prolongation as a coalgebraic pullback]
+\label{con:pde-prolongation}
+Let
+\[
+    i:\mathcal E\longrightarrow\Jinf Y
+\]
+be a generalized PDE.  The cofree functor gives
+\[
+    K(i):K(\mathcal E)\longrightarrow K(\Jinf Y)
+\]
+with underlying morphism $\Jinf(i)$.  There is also the cofree coalgebra morphism
+\[
+    \delta_Y:K(Y)\longrightarrow K(\Jinf Y)
+\]
+classified by $\id_{\Jinf Y}$; its underlying map is $\Delta_Y$.
+
+Define the \emph{Cartan prolongation} by the pullback
+\[
+\boxed{
+    \mathbf P(i)
+    :=
+    K(\mathcal E)
+    \times_{K(\Jinf Y)}
+    K(Y)
+}
+\]
+in $\Coalg_{\Jinf}(\mathcal C_X)$.  Since the forgetful functor creates limits, its underlying object is
+\[
+\boxed{
+    \mathcal E^\infty
+    :=
+    U\mathbf P(i)
+    \simeq
+    \Jinf\mathcal E
+    \times_{\Jinf\Jinf Y}
+    \Jinf Y.
+}
+\]
+Write
+\[
+    p_1:\mathcal E^\infty\to\Jinf\mathcal E,
+    \qquad
+    p_2:\mathcal E^\infty\to\Jinf Y.
+\]
+Thus
+\[
+    \Jinf(i)p_1\simeq\Delta_Yp_2.
+\]
+\end{construction}
+
+\begin{theorem}[Canonical coalgebra on the prolongation]
+\label{thm:prolongation-coalgebra}
+The object $\mathcal E^\infty$ carries the canonical jet-coalgebra structure
+\[
+    \rho_i^\infty:\mathcal E^\infty\longrightarrow\Jinf\mathcal E^\infty
+\]
+underlying $\mathbf P(i)$.  Both projections are coalgebra morphisms
+\[
+    p_1:(\mathcal E^\infty,\rho_i^\infty)\to K(\mathcal E),
+\]
+\[
+    p_2:(\mathcal E^\infty,\rho_i^\infty)\to K(Y),
+\]
+and therefore
+\[
+    \Jinf(p_1)\rho_i^\infty\simeq\Delta_{\mathcal E}p_1,
+    \qquad
+    \Jinf(p_2)\rho_i^\infty\simeq\Delta_Yp_2.
+\]
+All higher coalgebra coherence is inherited from the pullback in the Eilenberg--Moore $\infty$-category.
+\end{theorem}
+
+\begin{proof}
+This is the pullback construction in $\Coalg_{\Jinf}(\mathcal C_X)$ together with Proposition~\ref{prop:jet-limit-preservation}.
+\end{proof}
+
+\begin{construction}[Categories of generalized and Cartan presentations]
+\label{con:presentation-categories}
+Fix $Y\in\mathcal C_X$.  Put
+\[
+    \mathsf{Gen}_Y:=(\mathcal C_X)_{/\Jinf Y}
+\]
+and
+\[
+    \mathsf{Cart}_Y:=
+    \Coalg_{\Jinf}(\mathcal C_X)_{/K(Y)}.
+\]
+There is a forgetful functor
+\[
+    V_Y:\mathsf{Cart}_Y\longrightarrow\mathsf{Gen}_Y
+\]
+which sends a coalgebra morphism $C\to K(Y)$ to its underlying morphism $UC\to\Jinf Y$.  Construction~\ref{con:pde-prolongation} defines a functor
+\[
+    P_Y:\mathsf{Gen}_Y\longrightarrow\mathsf{Cart}_Y,
+    \qquad
+    i\longmapsto p_2:\mathbf P(i)\to K(Y).
+\]
+\end{construction}
+
+\begin{theorem}[Cartan prolongation adjunction]
+\label{thm:cartan-prolongation-adjunction}
+There is a canonical adjunction
+\[
+    \boxed{V_Y\dashv P_Y.}
+\]
+Equivalently, for every Cartan presentation
+\[
+    j:C\longrightarrow K(Y)
+\]
+and every generalized presentation
+\[
+    i:\mathcal E\longrightarrow\Jinf Y,
+\]
+there is a natural equivalence
+\[
+\boxed{
+    \Map_{\mathsf{Cart}_Y}\bigl(j,P_Y(i)\bigr)
+    \simeq
+    \Map_{\mathsf{Gen}_Y}\bigl(V_Yj,i\bigr).
+}
+\]
+\end{theorem}
+
+\begin{proof}
+Mapping into the pullback defining $\mathbf P(i)$ gives
+\[
+\begin{aligned}
+\Map_{\mathsf{Cart}_Y}(j,P_Y(i))
+\simeq{}
+&\Map_{\Coalg_{\Jinf}}(C,K(\mathcal E))\\
+&\times_{\Map_{\Coalg_{\Jinf}}(C,K(\Jinf Y))}
+\{\delta_Yj\}.
+\end{aligned}
+\]
+Apply the cofree adjunction to each mapping space.  This identifies the right side with
+\[
+    \Map_X(UC,\mathcal E)
+    \times_{\Map_X(UC,\Jinf Y)}
+    \{Uj\}.
+\]
+Indeed the map classified by $\delta_Yj$ is
+\[
+    \varepsilon_{\Jinf Y}\Delta_YUj\simeq Uj.
+\]
+The last homotopy fibre is precisely the mapping space from the object $V_Yj:UC\to\Jinf Y$ to $i$ in the slice $\mathsf{Gen}_Y$.  Naturality gives the adjunction.
+\end{proof}
+
+\begin{theorem}[Universal formal-solution object]
+\label{thm:universal-formal-solutions}
+For every $A\in\mathcal C_X$ there is a natural equivalence
+\[
+\boxed{
+    \Map_X(A,\mathcal E^\infty)
+    \simeq
+    \operatorname{FSol}_i(A).
+}
+\]
+Consequently $\id_{\mathcal E^\infty}$ determines canonical universal formal-solution data
+\[
+    s_i^\infty:\Tinf\mathcal E^\infty\to\mathcal E,
+    \qquad
+    t_i^\infty:\Tinf\mathcal E^\infty\to Y,
+\]
+\[
+    q_i^\infty:
+    is_i^\infty
+    \simeq
+    \Jinf(t_i^\infty)\chi_{\mathcal E^\infty}.
+\]
+The adjuncts of $s_i^\infty$ and $t_i^\infty$ are respectively $p_1$ and $p_2$.
+\end{theorem}
+
+\begin{proof}
+The adjunction $\mathbf T\dashv U$ and the pullback defining $\mathbf P(i)$ give
+\[
+\begin{aligned}
+\Map_X(A,\mathcal E^\infty)
+&\simeq
+\Map_{\Coalg_{\Jinf}}\bigl(\mathbf T(A),\mathbf P(i)\bigr)\\
+&\simeq
+\Map_{\Coalg_{\Jinf}}\bigl(\mathbf T(A),K(\mathcal E)\bigr)
+\times_{\Map_{\Coalg_{\Jinf}}(\mathbf T(A),K(\Jinf Y))}
+\Map_{\Coalg_{\Jinf}}\bigl(\mathbf T(A),K(Y)\bigr)\\
+&\simeq
+\Map_X(\Tinf A,\mathcal E)
+\times_{\Map_X(\Tinf A,\Jinf Y)}
+\Map_X(\Tinf A,Y).
+\end{aligned}
+\]
+Under the last equivalence the two maps to the middle term are
+\[
+    s\longmapsto is,
+    \qquad
+    t\longmapsto\Jinf(t)\chi_A,
+\]
+so the right side is Definition~\ref{def:parameterized-formal-solution}.  Taking $A=\mathcal E^\infty$ and the identity yields the universal maps.  Since the underlying adjunction of $\mathbf T\dashv U\dashv K$ is $\Tinf\dashv\Jinf$, their adjuncts are $p_1$ and $p_2$.
+\end{proof}
+
+\begin{proposition}[Centre-value morphism as adjunction counit]
+\label{prop:prolongation-inclusion}
+There is a canonical morphism
+\[
+    \kappa_i:\mathcal E^\infty\longrightarrow\mathcal E
+\]
+defined by
+\[
+    \boxed{\kappa_i:=\varepsilon_{\mathcal E}p_1.}
+\]
+It satisfies
+\[
+    \kappa_i\simeq s_i^\infty\zeta_{\mathcal E^\infty},
+    \qquad
+    i\kappa_i\simeq p_2.
+\]
+As a morphism in $\mathsf{Gen}_Y$, the map
+\[
+    \kappa_i:V_YP_Y(i)\longrightarrow i
+\]
+is exactly the counit of the adjunction $V_Y\dashv P_Y$.
+\end{proposition}
+
+\begin{proof}
+Since $p_1$ is the adjunct of $s_i^\infty$, Lemma~\ref{lem:disk-jet-mate} gives the first identity.  Naturality of $\varepsilon$ and the pullback relation give
+\[
+\begin{aligned}
+i\kappa_i
+&=i\varepsilon_{\mathcal E}p_1\\
+&\simeq\varepsilon_{\Jinf Y}\Jinf(i)p_1\\
+&\simeq\varepsilon_{\Jinf Y}\Delta_Yp_2\\
+&\simeq p_2.
+\end{aligned}
+\]
+The mapping-space proof of Theorem~\ref{thm:cartan-prolongation-adjunction} identifies this map with the counit.
+\end{proof}
+
+\begin{proposition}[Actual solutions induce formal solutions]
+\label{prop:actual-to-formal-solution}
+Let $(\phi,a,h)$ be an actual solution of $i:\mathcal E\to\Jinf Y$.  Then it canonically determines an $X$-parameterized formal solution, equivalently a canonical map
+\[
+    X\longrightarrow\mathcal E^\infty.
+\]
+\end{proposition}
+
+\begin{proof}
+The maps $a:X\to\mathcal E$ and $\phi:X\to Y$ determine cofree coalgebra morphisms
+\[
+    (X,\rho_X)\to K(\mathcal E),
+    \qquad
+    (X,\rho_X)\to K(Y).
+\]
+Under the cofree mapping-space equivalence, the two resulting maps to $K(\Jinf Y)$ are classified by $ia$ and $j^\infty\phi$.  The specified equivalence $h:ia\simeq j^\infty\phi$ therefore identifies these two points in the full coalgebra mapping space.  The pullback defining $\mathbf P(i)$ yields a coalgebra morphism
+\[
+    (X,\rho_X)\longrightarrow\mathbf P(i),
+\]
+hence an underlying map $X\to\mathcal E^\infty$.  Theorem~\ref{thm:universal-formal-solutions} identifies it with the required formal solution.
+\end{proof}
+
+\section{Centre-completeness of ambient presentations}
+\label{sec:formal-integrability}
+
+\begin{definition}[Centre-complete ambient presentation]
+\label{def:formal-integrability}
+A generalized PDE presentation
+\[
+    i:\mathcal E\longrightarrow\Jinf Y
+\]
+is \emph{centre-complete}, or \emph{formally integrable as an ambient presentation}, if the counit/centre morphism
+\[
+    \kappa_i:\mathcal E^\infty\longrightarrow\mathcal E
+\]
+is an equivalence.
+\end{definition}
+
+\begin{remark}[Meaning and scope]
+By Theorem~\ref{thm:universal-formal-solutions}, $\mathcal E^\infty$ represents formal solutions together with their centre.  Centre-completeness says that every equation point carries a coherently unique formal solution through it.  This is a property of a chosen ambient presentation.  It does not assert analytic existence of actual solutions.
+\end{remark}
+
+\begin{proposition}[Split centre map of a Cartan presentation]
+\label{prop:cartan-presentation-split-centre}
+Let
+\[
+    i:(E,\rho)\longrightarrow K(Y)
+\]
+be a jet-coalgebra morphism, regarded as a Cartan presentation.  There is a canonical coalgebra morphism
+\[
+    h_i:(E,\rho)\longrightarrow\mathbf P(i)
+\]
+with
+\[
+    p_1h_i\simeq\rho,
+    \qquad
+    p_2h_i\simeq i.
+\]
+It satisfies
+\[
+    \boxed{
+    \kappa_i h_i\simeq\id_E,
+    \qquad
+    i\kappa_i\simeq p_2.
+    }
+\]
+Thus the centre map of every Cartan presentation is canonically split epic.
+\end{proposition}
+
+\begin{proof}
+Consider the two coalgebra morphisms
+\[
+    K(i)\rho,
+    \qquad
+    \delta_Yi:
+    (E,\rho)\rightrightarrows K(\Jinf Y).
+\]
+Under the cofree mapping-space equivalence, the first is classified by
+\[
+    \varepsilon_{\Jinf Y}\Jinf(i)\rho
+    \simeq
+    i\varepsilon_E\rho
+    \simeq i,
+\]
+and the second by
+\[
+    \varepsilon_{\Jinf Y}\Delta_Yi\simeq i.
+\]
+Hence they are canonically equivalent in the full coalgebra mapping space.  The pullback universal property gives $h_i$ with the asserted projections.  Applying the counit gives
+\[
+    \kappa_i h_i
+    =
+    \varepsilon_Ep_1h_i
+    \simeq
+    \varepsilon_E\rho
+    \simeq
+    \id_E.
+\]
+The second identity is Proposition~\ref{prop:prolongation-inclusion}.
+\end{proof}
+
+\begin{theorem}[Cartesian criterion for centre-completeness]
+\label{thm:cartan-centre-cartesian}
+For a Cartan presentation
+\[
+    i:(E,\rho)\longrightarrow K(Y),
+\]
+the following are equivalent:
+\begin{enumerate}
+\item the ambient presentation $i:E\to\Jinf Y$ is centre-complete;
+\item the canonical comparison $h_i:E\to E^\infty$ is an equivalence;
+\item the Cartan square
+\[
+\begin{tikzcd}
+E \arrow[r,"\rho"] \arrow[d,"i"']
+& \Jinf E \arrow[d,"\Jinf(i)"]
+\\
+\Jinf Y \arrow[r,"\Delta_Y"']
+& \Jinf\Jinf Y
+\end{tikzcd}
+\]
+is Cartesian.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By definition $E^\infty$ is the pullback of $\Jinf(i)$ along $\Delta_Y$, and $h_i$ is precisely the comparison map from $E$ to that pullback.  Proposition~\ref{prop:cartan-presentation-split-centre} gives
+\[
+    \kappa_i h_i\simeq\id_E.
+\]
+Hence $\kappa_i$ is an equivalence if and only if $h_i$ is, and $h_i$ is an equivalence exactly when the displayed square is Cartesian.
+\end{proof}
+
+\begin{theorem}[Tautological centre-completeness]
+\label{thm:tautological-centre-completeness}
+Let
+\[
+    \rho:E\longrightarrow\Jinf E
+\]
+be any jet-coalgebra coaction.  Regard $\rho$ itself as a generalized PDE presentation on the bundle $Y=E$.  Then its centre-value morphism
+\[
+    \kappa_\rho:E^\infty_\rho\longrightarrow E
+\]
+is an equivalence.  Equivalently, every intrinsic formally integrable PDE has a canonical tautological centre-complete ambient presentation
+\[
+    \rho_E:E\longrightarrow\Jinf E.
+\]
+\end{theorem}
+
+\begin{proof}
+For the presentation $i=\rho$,
+\[
+    E^\infty_\rho
+    =
+    \Jinf E\times_{\Jinf\Jinf E}\Jinf E,
+\]
+where the two maps to $\Jinf\Jinf E$ are $\Jinf(\rho)$ and $\Delta_E$.  Let
+\[
+    p_1,p_2:E^\infty_\rho\rightrightarrows\Jinf E
+\]
+be the projections, so
+\[
+    \Jinf(\rho)p_1\simeq\Delta_Ep_2.
+\]
+The coalgebra identity $\Jinf(\rho)\rho\simeq\Delta_E\rho$ defines a canonical map
+\[
+    h:E\longrightarrow E^\infty_\rho
+\]
+with $p_1h\simeq\rho\simeq p_2h$.  The centre map is $\kappa_\rho=\varepsilon_Ep_1$, hence
+\[
+    \kappa_\rho h\simeq\varepsilon_E\rho\simeq\id_E.
+\]
+
+Apply $\Jinf(\varepsilon_E)$ to the pullback relation.  Using
+\[
+    \Jinf(\varepsilon_E)\Jinf(\rho)
+    =
+    \Jinf(\varepsilon_E\rho)
+    \simeq\id_{\Jinf E}
+\]
+and
+\[
+    \Jinf(\varepsilon_E)\Delta_E\simeq\id_{\Jinf E},
+\]
+we obtain
+\[
+    p_1\simeq p_2.
+\]
+Apply instead $\varepsilon_{\Jinf E}$.  Naturality of the counit and the other counit identity give
+\[
+    \rho\varepsilon_Ep_1\simeq p_2.
+\]
+Together with $p_1\simeq p_2$ this gives
+\[
+    \rho\varepsilon_Ep_1\simeq p_1.
+\]
+Therefore
+\[
+    p_1h\kappa_\rho
+    \simeq
+    \rho\varepsilon_Ep_1
+    \simeq p_1,
+\]
+and similarly
+\[
+    p_2h\kappa_\rho\simeq p_2.
+\]
+By the universal property of the pullback,
+\[
+    h\kappa_\rho\simeq\id_{E^\infty_\rho}.
+\]
+Thus $h$ and $\kappa_\rho$ are inverse equivalences.
+\end{proof}
+
+\begin{theorem}[Quotient-side criterion for centre-completeness]
+\label{thm:centre-complete-quotient-criterion}
+Let $F\to Q$ be an intrinsic Cartan object, put
+\[
+    E:=\epsilon^*F,
+    \qquad
+    G:=\Pi_\epsilon Y,
+    \qquad
+    \mathbb M:=\Pi_\epsilon\epsilon^*:(\XSp)_{/Q}\to(\XSp)_{/Q},
+\]
+and let $y:E\to Y$ be a Cartan presentation.  Let
+\[
+    \bar y:F\longrightarrow G
+\]
+be the adjunct of $y$ under $\epsilon^*\dashv\Pi_\epsilon$.  Under the descent equivalence, the Cartan prolongation of the ambient presentation $i_y=\Jinf(y)\rho_F$ corresponds to
+\[
+    \mathbb M F\times_{\mathbb M G}G.
+\]
+The canonical Cartan section
+\[
+    h_{i_y}:E\longrightarrow E^\infty
+\]
+of the centre map corresponds to the canonical map
+\[
+    F\longrightarrow\mathbb M F\times_{\mathbb M G}G
+\]
+induced by $\nu_F$ and $\bar y$.  Consequently the presentation is centre-complete if and only if
+\[
+\begin{tikzcd}
+F \arrow[r,"\nu_F"] \arrow[d,"\bar y"']
+& \mathbb M F \arrow[d,"\mathbb M(\bar y)"]
+\\
+G \arrow[r,"\nu_G"']
+& \mathbb M G
+\end{tikzcd}
+\]
+is Cartesian.
+\end{theorem}
+
+\begin{proof}
+Under Theorem~\ref{thm:jet-em-effective-descent}, the cofree coalgebra $K(E)$ corresponds to
+\[
+    \Pi_\epsilon E
+    =
+    \Pi_\epsilon\epsilon^*F
+    =
+    \mathbb M F,
+\]
+while $K(Y)$ corresponds to $G=\Pi_\epsilon Y$ and $K(\Jinf Y)$ corresponds to
+\[
+    \Pi_\epsilon\Jinf Y
+    =
+    \Pi_\epsilon\epsilon^*\Pi_\epsilon Y
+    =
+    \mathbb M G.
+\]
+The map $K(i_y)$ corresponds to $\mathbb M(\bar y)$, while $\delta_Y$ corresponds to the unit $\nu_G:G\to\mathbb M G$.  Since the descent equivalence preserves limits, the pullback $\mathbf P(i_y)$ corresponds to
+\[
+    \mathbb M F\times_{\mathbb M G}G.
+\]
+Naturality of the unit gives
+\[
+    \mathbb M(\bar y)\nu_F\simeq\nu_G\bar y,
+\]
+so $F$ maps canonically to this pullback.  Pulling this map back along the conservative functor $\epsilon^*$ gives $h_{i_y}$, equivalently the inverse comparison to the centre map when centre-completeness holds.  Therefore centre-completeness is equivalent to the displayed square being Cartesian.
+\end{proof}
+
+\begin{theorem}[Embedded Cartan presentations are centre-complete]
+\label{thm:embedded-cartan-integrability}
+Let
+\[
+    i:(E,\rho)\longrightarrow K(Y)
+\]
+be a Cartan presentation whose underlying map $i:E\to\Jinf Y$ is a monomorphism.  Then
+\[
+    \kappa_i:E^\infty\xrightarrow{\sim}E.
+\]
+\end{theorem}
+
+\begin{proof}
+Since $\Jinf$ preserves monomorphisms, $\Jinf(i)$ is a monomorphism.  Hence
+\[
+    p_2:E^\infty\to\Jinf Y
+\]
+is a monomorphism, being its pullback along $\Delta_Y$.  Proposition~\ref{prop:cartan-presentation-split-centre} gives a section $h_i$ of $\kappa_i$.  Then
+\[
+    p_2h_i\kappa_i
+    \simeq
+    i\kappa_i
+    \simeq
+    p_2.
+\]
+Monomorphy of $p_2$ gives $h_i\kappa_i\simeq\id$, while $\kappa_i h_i\simeq\id$ is already known.
+\end{proof}
+
+\begin{proposition}[Intrinsic structure of a centre-complete presentation]
+\label{thm:integrable-pde-coalgebra}
+Let
+\[
+    i:\mathcal E\longrightarrow\Jinf Y
+\]
+be centre-complete.  Transporting the canonical prolongation coalgebra across
+\[
+    \kappa_i:\mathcal E^\infty\xrightarrow{\sim}\mathcal E
+\]
+constructs a jet-coalgebra structure
+\[
+    \boxed{
+    \rho_{\mathcal E}:=p_1\kappa_i^{-1}:
+    \mathcal E\longrightarrow\Jinf\mathcal E.
+    }
+\]
+Its mate
+\[
+    s_{\mathcal E}:\Tinf\mathcal E\longrightarrow\mathcal E
+\]
+is the corresponding formal-disk algebra structure, and $i$ becomes a Cartan morphism
+\[
+    (\mathcal E,\rho_{\mathcal E})\longrightarrow K(Y).
+\]
+Consequently $\mathcal E$ descends canonically to an object of $\PDE^{\mathrm{fi}}_{X/S}$.
+\end{proposition}
+
+\begin{proof}
+Transport the coalgebra $(\mathcal E^\infty,\rho_i^\infty)$ across $\kappa_i$.  The transported coaction is
+\[
+    \Jinf(\kappa_i)\rho_i^\infty\kappa_i^{-1}.
+\]
+Using $\kappa_i=\varepsilon_{\mathcal E}p_1$ and the fact that $p_1$ is a coalgebra morphism,
+\[
+\begin{aligned}
+\Jinf(\kappa_i)\rho_i^\infty
+&\simeq
+\Jinf(\varepsilon_{\mathcal E})\Jinf(p_1)\rho_i^\infty\\
+&\simeq
+\Jinf(\varepsilon_{\mathcal E})\Delta_{\mathcal E}p_1\\
+&\simeq p_1.
+\end{aligned}
+\]
+Thus the transported coaction is $p_1\kappa_i^{-1}$.  Since $p_2$ is a coalgebra morphism and $p_2\simeq i\kappa_i$, transport makes $i$ a coalgebra morphism.  Theorem~\ref{thm:relation-transport} constructs the mate algebra action, and Theorem~\ref{thm:jet-em-effective-descent} descends the resulting coalgebra to a unique object over $Q$.
+\end{proof}
+
+\begin{corollary}[Cartan factorization of a centre-complete presentation]
+\label{cor:integrable-presentation-factorization}
+Let $i:\mathcal E\to\Jinf Y$ be centre-complete and put
+\[
+    y_i:=\varepsilon_Yi:\mathcal E\to Y.
+\]
+Then
+\[
+    \boxed{i\simeq\Jinf(y_i)\rho_{\mathcal E}.}
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{prop:cartan-cofree-factorization} to the constructed Cartan morphism of Proposition~\ref{thm:integrable-pde-coalgebra}.
+\end{proof}
+
+\begin{corollary}[Recognition for embedded ambient PDEs]
+\label{cor:embedded-pde-recognition}
+Let
+\[
+    i:E\hookrightarrow\Jinf Y
+\]
+be an embedded generalized PDE presentation.  Then the following are equivalent:
+\begin{enumerate}
+\item $i$ is centre-complete;
+\item $E$ admits the intrinsic descent structure of an object over $Q$ for which $i$ is the resulting Cartan presentation on $Y$;
+\item $E$ admits a jet-coalgebra structure $\rho:E\to\Jinf E$ for which $i:(E,\rho)\to K(Y)$ is a coalgebra morphism.
+\end{enumerate}
+When these conditions hold, the compatible coaction is canonically
+\[
+    \rho_{\mathrm{can}}=p_1\kappa_i^{-1},
+\]
+and any other compatible coaction is canonically equivalent to it.
+\end{corollary}
+
+\begin{proof}
+Centre-completeness constructs the intrinsic coalgebra by Proposition~\ref{thm:integrable-pde-coalgebra}, and effective descent identifies that coalgebra with an object over $Q$.  Conversely, a compatible intrinsic structure makes $i$ an embedded Cartan presentation, so Theorem~\ref{thm:embedded-cartan-integrability} gives centre-completeness.
+
+If $\rho$ is any compatible coaction, then
+\[
+\begin{aligned}
+\Jinf(i)\rho\kappa_i
+&\simeq
+\Delta_Yi\kappa_i\\
+&\simeq
+\Delta_Yp_2\\
+&\simeq
+\Jinf(i)p_1.
+\end{aligned}
+\]
+Since $i$ is monic and $\Jinf$ preserves monomorphisms, $\Jinf(i)$ is monic.  Hence
+\[
+    \rho\kappa_i\simeq p_1,
+\]
+so $\rho\simeq p_1\kappa_i^{-1}$.
+\end{proof}
+
+\begin{corollary}[Cartan prolongation is intrinsically formally integrable]
+\label{cor:cartan-prolongation-integrability}
+For every generalized PDE presentation
+\[
+    i:\mathcal E\longrightarrow\Jinf Y,
+\]
+the canonical prolongation coalgebra $(\mathcal E^\infty,\rho_i^\infty)$ descends to an intrinsic object of $\PDE^{\mathrm{fi}}_{X/S}$.  The map
+\[
+    p_2:(\mathcal E^\infty,\rho_i^\infty)\longrightarrow K(Y)
+\]
+is a Cartan presentation.  If $i$ is embedded, then $p_2$ is embedded and centre-complete.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:pde-em-equivalence} descends every jet coalgebra to an object over $Q$.  If $i$ is a monomorphism, then $\Jinf(i)$ is a monomorphism and $p_2$ is its pullback along $\Delta_Y$, hence is embedded.  Apply Theorem~\ref{thm:embedded-cartan-integrability}.
+\end{proof}
+
+\section{Intrinsic solutions, limits, and equation calculus}
+\label{sec:pde-finite-limits}
+
+\begin{corollary}[Solutions intrinsically]
+\label{cor:solutions-coalgebra-maps}
+Let $i:\mathcal E\to\Jinf Y$ be centre-complete.  Then
+\[
+\boxed{
+    \Sol_{X/S}(\mathcal E)
+    \simeq
+    \Map_{\Coalg_{\Jinf}}
+    \bigl((X,\rho_X),(\mathcal E,\rho_{\mathcal E})\bigr).
+}
+\]
+Equivalently, under $\PDE^{\mathrm{fi}}_{X/S}=(\XSp)_{/Q}$, actual solutions are morphisms from the terminal intrinsic Cartan object to the descended equation object.
+\end{corollary}
+
+\begin{proof}
+The Cartan prolongation is a pullback in jet coalgebras, so
+\[
+\begin{aligned}
+\Map_{\Coalg_{\Jinf}}
+\bigl((X,\rho_X),(\mathcal E^\infty,\rho_i^\infty)\bigr)
+&\simeq
+\Map_X(X,\mathcal E)
+\times_{\Map_X(X,\Jinf Y)}
+\Map_X(X,Y).
+\end{aligned}
+\]
+The map from $\Map_X(X,Y)$ is $\phi\mapsto\Jinf(\phi)\rho_X=j^\infty\phi$, so the right side is the solution space.  Since $i$ is centre-complete, Proposition~\ref{thm:integrable-pde-coalgebra} transports the prolongation coalgebra to $(\mathcal E,\rho_{\mathcal E})$.
+\end{proof}
+
+\begin{theorem}[The PDE $\infty$-topos and its limits and colimits]
+\label{thm:pde-topos}
+\label{thm:pde-finite-limits}
+The intrinsic category
+\[
+    \PDE^{\mathrm{fi}}_{X/S}=(\XSp)_{/Q}
+\]
+is an $\infty$-topos.  It admits all small limits and colimits.  Under either of the equivalent algebra or coalgebra presentations, limits and colimits are computed on the underlying objects of $\mathcal C_X$.
+\end{theorem}
+
+\begin{proof}
+A slice of an $\infty$-topos is an $\infty$-topos.  Under Theorem~\ref{thm:jet-em-effective-descent}, the underlying-object functor is
+\[
+    \epsilon^*:(\XSp)_{/Q}\to(\XSp)_{/X}.
+\]
+Since $\Sigma_\epsilon\dashv\epsilon^*\dashv\Pi_\epsilon$, this functor preserves all small limits and all small colimits.  Therefore the underlying object of every limit or colimit in the intrinsic PDE category is the corresponding limit or colimit in $\mathcal C_X$.
+\end{proof}
+
+\begin{corollary}[Products, fibre products, and simultaneous systems]
+Products, pullbacks, equalizers, arbitrary simultaneous systems, coproducts, and all other small colimits of intrinsic formally integrable PDEs are intrinsic formally integrable PDEs and are computed on their underlying $X$-bundles.
+\end{corollary}
+
+\begin{proposition}[Morphisms preserve universal formal solutions]
+\label{prop:universal-family-detects}
+Let $F\to Q$ and $G\to Q$ be intrinsic PDEs with underlying bundles $E=\epsilon^*F$ and $E'=\epsilon^*G$, and let $f:F\to G$ be a morphism over $Q$.  For the derived formal-disk actions,
+\[
+    \epsilon^*f\,s_F
+    \simeq
+    s_G\,\Tinf(\epsilon^*f)
+\]
+with the full algebra-morphism coherence.  Equivalently, for the derived coactions,
+\[
+    \Jinf(\epsilon^*f)\rho_F
+    \simeq
+    \rho_G\epsilon^*f
+\]
+with the full coalgebra-morphism coherence.  For every $a:A\to E$,
+\[
+    \epsilon^*f\,s_F\Tinf(a)
+    \simeq
+    s_G\Tinf(\epsilon^*f\,a).
+\]
+\end{proposition}
+
+\begin{proof}
+Under Theorem~\ref{thm:jet-em-effective-descent}, morphisms over $Q$ are precisely the corresponding algebra and coalgebra morphisms.  The displayed equations are their degree-one structure identities; the parameterized identity is obtained by precomposition with $\Tinf(a)$.
+\end{proof}
+
+\begin{corollary}[Prolonged homotopy equalizers]
+\label{cor:prolonged-equalizer}
+Let
+\[
+    \widehat D_0,\widehat D_1:\Jinf E\rightrightarrows F
+\]
+be differential operators and let
+\[
+    i_0:\mathcal E_0:=\Eq(\widehat D_0,\widehat D_1)
+    \longrightarrow\Jinf E
+\]
+be their derived equation presentation.  Then
+\[
+\boxed{
+    \mathcal E_0^\infty
+    \simeq
+    \Eq\bigl(p^\infty\widehat D_0,p^\infty\widehat D_1\bigr).
+}
+\]
+The right side is the underlying object of the equalizer in $\PDE^{\mathrm{fi}}_{X/S}$, equivalently in jet coalgebras, of the prolonged differential operators.
+\end{corollary}
+
+\begin{proof}
+Since $\Jinf$ preserves limits,
+\[
+    \Jinf\mathcal E_0
+    \simeq
+    \Eq\bigl(\Jinf(\widehat D_0),\Jinf(\widehat D_1)\bigr)
+\]
+over $\Jinf\Jinf E$.  Pull back this equalizer along $\Delta_E$:
+\[
+\begin{aligned}
+\mathcal E_0^\infty
+&=
+\Jinf\mathcal E_0\times_{\Jinf\Jinf E}\Jinf E\\
+&\simeq
+\Eq\bigl(
+\Jinf(\widehat D_0)\Delta_E,
+\Jinf(\widehat D_1)\Delta_E
+\bigr)\\
+&=
+\Eq\bigl(p^\infty\widehat D_0,p^\infty\widehat D_1\bigr).
+\end{aligned}
+\]
+Theorem~\ref{thm:pde-finite-limits} identifies the induced coalgebra with the equalizer coalgebra in the intrinsic PDE category.
+\end{proof}
+
+\section{Formal-\'{e}tale invariance and Nisnevich locality}
+\label{sec:jet-formal-etale}
+
+\begin{theorem}[Formal-\'{e}tale restriction of relation groupoids and jets]
+\label{thm:jet-formal-etale}
+Let
+\[
+    u:U\longrightarrow X
+\]
+be formally \'{e}tale relative to $X$ over $S$ in the sense of Chapter 10.  Then the naturality square
+\[
+\begin{tikzcd}
+U \arrow[r,"\eta_{U/S}"] \arrow[d,"u"']
+& U_{\dR/S} \arrow[d,"u_{\dR}"]
+\\
+X \arrow[r,"\eta_{X/S}"']
+& X_{\dR/S}
+\end{tikzcd}
+\]
+is Cartesian, and
+\[
+    Q_{U/S}
+    \simeq
+    Q_{X/S}\times_{X_{\dR/S}}U_{\dR/S},
+    \qquad
+    U\simeq X\times_{Q_{X/S}}Q_{U/S}.
+\]
+Put $Q_U:=Q_{U/S}$ and $Q_X:=Q_{X/S}$.  There is a canonical equivalence of simplicial objects
+\[
+\boxed{
+    R_{U/S,\bullet}
+    \simeq
+    Q_U\times_{Q_X}R_{X/S,\bullet}.
+}
+\]
+In each degree there is consequently an equivalence
+\[
+    R_{U/S,n}
+    \simeq
+    U\times_{X,\pr_0}R_{X/S,n}.
+\]
+The latter is a centred degreewise formula; the simplicial statement is the preceding base-change formula over $Q_U$.
+
+In degree one the centred formula gives a Cartesian square
+\[
+\begin{tikzcd}
+R_{U/S} \arrow[r,"\widetilde u"] \arrow[d,"c_U"']
+& R_{X/S} \arrow[d,"c_X"]
+\\
+U \arrow[r,"u"']
+& X
+\end{tikzcd}
+\]
+with
+\[
+    e_X\widetilde u\simeq ue_U.
+\]
+Hence there are canonical equivalences
+\[
+    u^*\Tinf_{X/S}
+    \simeq
+    \Tinf_{U/S}u^*,
+\]
+\[
+    u^*\Jinf_{X/S}
+    \simeq
+    \Jinf_{U/S}u^*,
+\]
+compatible with monad, comonad, adjunction, mate correspondence, and all higher coherence data.
+\end{theorem}
+
+\begin{proof}
+The Cartesianity of the relative de Rham-unit square and the two quotient formulas are Chapter 10 formal-\'{e}tale Cartesianity.  Since
+\[
+    U\simeq X\times_{Q_X}Q_U,
+\]
+we have, simplicially,
+\[
+\begin{aligned}
+R_{U/S,n}
+&=
+\underbrace{U\times_{Q_U}\cdots\times_{Q_U}U}_{n+1}\\
+&\simeq
+Q_U\times_{Q_X}
+\underbrace{X\times_{Q_X}\cdots\times_{Q_X}X}_{n+1}\\
+&=
+Q_U\times_{Q_X}R_{X/S,n}.
+\end{aligned}
+\]
+Because this is literal base change of the \v{C}ech nerve along $Q_U\to Q_X$, it is compatible with all simplicial operators.  Using
+\[
+    U\simeq Q_U\times_{Q_X}X
+\]
+and projecting to the zeroth factor gives the centred degreewise formula.
+
+In degree one this produces the displayed Cartesian square over the centre map and the compatibility of evaluation maps.  Left and right Beck--Chevalley applied to
+\[
+    \Tinf\simeq\Sigma_ce^*,
+    \qquad
+    \Jinf\simeq\Pi_ce^*
+\]
+give the two jet-calculus equivalences.  Compatibility with all structure maps follows from the simplicial base-change equivalence.
+\end{proof}
+
+\begin{corollary}[Spectral \'{e}tale invariance]
+\label{cor:jet-etale-invariance}
+If $u:U\to X$ is represented by a spectral \'{e}tale morphism, then all conclusions of Theorem~\ref{thm:jet-formal-etale} hold.
+\end{corollary}
+
+\begin{proof}
+Chapters 9--10 prove that spectral \'{e}tale morphisms are formally \'{e}tale for the square-zero-generated relative de Rham localization.
+\end{proof}
+
+\begin{theorem}[Effective formally \'{e}tale descent of the jet/PDE calculus]
+\label{thm:jet-formal-etale-descent}
+Let
+\[
+    u:U\twoheadrightarrow X
+\]
+be an effective epimorphism in $(\XSp)_{/S}$ which is formally \'{e}tale relative to $X$, and let $U_\bullet\to X$ be its \v{C}ech nerve.  Then:
+\begin{enumerate}
+\item $Q_{U/S}\to Q_{X/S}$ is an effective epimorphism and $Q_{U_\bullet/S}$ is its \v{C}ech nerve;
+\item every jet bundle $\Jinf_{X/S}E$ is recovered by effective descent from $\Jinf_{U_n/S}(E|_{U_n})$;
+\item generalized PDE presentations and their Cartan prolongations satisfy effective descent;
+\item the represented formal-solution functors $A\mapsto\operatorname{FSol}_i(A)$ satisfy effective descent;
+\item centre-completeness is local along $u$;
+\item there is a canonical equivalence
+\[
+    \PDE^{\mathrm{fi}}_{X/S}
+    \simeq
+    \operatorname*{Tot}_{[n]\in\Delta}
+    \PDE^{\mathrm{fi}}_{U_n/S}.
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The first assertion is the Chapter 10 formal-\'{e}tale effective-descent theorem for effective infinitesimal quotients.
+
+For the second, Theorem~\ref{thm:jet-formal-etale} identifies the restriction of $\Jinf_{X/S}E$ to each $U_n$ with $\Jinf_{U_n/S}(E|_{U_n})$.  Effective descent of slices along $u$ then recovers the original object.
+
+A generalized PDE is a morphism in a slice, and its prolongation is the finite pullback
+\[
+    \Jinf\mathcal E\times_{\Jinf\Jinf Y}\Jinf Y.
+\]
+Morphisms and finite limits satisfy the same descent, proving the third assertion.  By Theorem~\ref{thm:universal-formal-solutions},
+\[
+    \operatorname{FSol}_i(A)
+    \simeq
+    \Map_X(A,\mathcal E^\infty).
+\]
+Since $\mathcal E^\infty$ is recovered by descent, the represented formal-solution functor is recovered by the corresponding totalization.  This proves the fourth assertion without adding any separate descent datum on formal solutions.
+
+The centre map is constructed from the prolongation and the comonad counit, so it commutes with restriction.  Equivalences are detected after pullback by an effective epimorphism, proving locality of centre-completeness.
+
+Finally,
+\[
+\begin{aligned}
+\PDE^{\mathrm{fi}}_{X/S}
+&=(\XSp)_{/Q_{X/S}}\\
+&\simeq
+\operatorname*{Tot}_{[n]\in\Delta}(\XSp)_{/Q_{U_n/S}}\\
+&=
+\operatorname*{Tot}_{[n]\in\Delta}\PDE^{\mathrm{fi}}_{U_n/S}.
+\end{aligned}
+\]
+\end{proof}
+
+\begin{corollary}[Spectral Nisnevich locality]
+\label{cor:jet-nisnevich-locality}
+Let $X$ be represented by a spectral scheme and let
+\[
+    \{U_\alpha\to X\}_{\alpha\in A}
+\]
+be a finite spectral Nisnevich covering family.  Then jets, generalized equation presentations, actual and formal solutions, Cartan prolongations, centre-completeness, intrinsic PDEs, jet coalgebras, and the PDE $\infty$-topos are recovered from the \v{C}ech nerve of the cover.  Since the finite affine Nisnevich families of Chapter 9 form a basis, the theory satisfies spectral Nisnevich descent.
+\end{corollary}
+
+\begin{proof}
+Put $U:=\coprod_\alpha U_\alpha$.  Chapter 10 proves that $U\to X$ is an effective epimorphism and a represented spectral \'{e}tale morphism and that the corresponding effective quotients form the \v{C}ech nerve over $Q_{X/S}$.  Apply Corollary~\ref{cor:jet-etale-invariance} and Theorem~\ref{thm:jet-formal-etale-descent}.
+\end{proof}
+
+\section{Local translation and linear-completion models}
+\label{sec:jet-local-linear-models}
+
+The relation-groupoid description gives two complementary local models.  Additive group objects admit an exact formal-translation model of the entire relation nerve, while Chapter 10 supplies a coordinate-free tubular completion model for represented smooth morphisms.
+
+\begin{proposition}[Formal translation in degree one]
+\label{prop:jet-group-translation}
+Let $G\to S$ be a commutative group object in $(\XSp)_{/S}$, with zero section $0:S\to G$.  Define
+\[
+    D_G:=S\times_{G_{\dR/S}}G,
+\]
+where $S\to G_{\dR/S}$ is $\eta_G0$.  Then
+\[
+\boxed{
+    \Phi_G:
+    G\times_{G_{\dR/S}}G
+    \xrightarrow{\sim}
+    G\times_SD_G
+}
+\]
+is canonically given, in internal group notation, by
+\[
+    (g_0,g_1)\longmapsto(g_0,g_1-g_0),
+\]
+with inverse
+\[
+    (g,d)\longmapsto(g,g+d).
+\]
+Under this equivalence the centre projection is $\pr_G$ and evaluation is the formal translation action
+\[
+    \alpha_G:G\times_SD_G\longrightarrow G,
+    \qquad
+    (g,d)\longmapsto g+d.
+\]
+Hence
+\[
+    \Tinf_{G/S}\simeq\Sigma_{\pr_G}\alpha_G^*,
+    \qquad
+    \Jinf_{G/S}\simeq\Pi_{\pr_G}\alpha_G^*.
+\]
+\end{proposition}
+
+\begin{proof}
+Left exactness of relative de Rham localization preserves the commutative group structure, and $\eta_G$ is a group morphism.  Thus $D_G$ is the kernel of $\eta_G$.  On
+\[
+    G\times_{G_{\dR/S}}G
+\]
+the difference $g_1-g_0$ has trivial de Rham image, giving the map to $D_G$.  Conversely, if $d\in D_G$, then $\eta_G(g+d)=\eta_G(g)$, so $(g,g+d)$ lies in the relation.  The group identities give inverse coherent equivalences.  The jet formulas follow from Proposition~\ref{prop:Tinf-relation-formula}.
+\end{proof}
+
+\begin{theorem}[Formal-translation nerve]
+\label{thm:formal-translation-nerve}
+For every $n\geq0$ there is a canonical equivalence
+\[
+\boxed{
+    \Phi_{G,n}:R_{G/S,n}\xrightarrow{\sim}G\times_SD_G^n.
+}
+\]
+In internal group notation,
+\[
+    \Phi_{G,n}(g_0,\ldots,g_n)
+    =
+    (g_0,d_1,\ldots,d_n),
+    \qquad
+    d_j:=g_j-g_{j-1},
+\]
+with inverse
+\[
+    (g,d_1,\ldots,d_n)
+    \longmapsto
+    \bigl(g,g+d_1,g+d_1+d_2,\ldots,g+d_1+\cdots+d_n\bigr).
+\]
+These equivalences identify $R_{G/S,\bullet}$ with the action-groupoid nerve of the formal translation action $G\curvearrowleft D_G$.  Explicitly,
+\[
+\partial_0(g,d_1,\ldots,d_n)
+=
+(g+d_1,d_2,\ldots,d_n),
+\]
+\[
+\partial_i(g,d_1,\ldots,d_n)
+=
+(g,d_1,\ldots,d_i+d_{i+1},\ldots,d_n)
+\quad(0<i<n),
+\]
+\[
+\partial_n(g,d_1,\ldots,d_n)
+=
+(g,d_1,\ldots,d_{n-1}),
+\]
+and the degeneracies insert the zero element of $D_G$ in the corresponding position.  Hence the action unit, associativity, and all higher coherences are consequences of the simplicial identities.
+\end{theorem}
+
+\begin{proof}
+If $(g_0,\ldots,g_n)\in R_{G/S,n}$, all $g_j$ have the same image in $G_{\dR/S}$, so
+\[
+    \eta_G(d_j)=\eta_G(g_j)-\eta_G(g_{j-1})=0.
+\]
+Thus each $d_j$ factors through $D_G$.  The displayed inverse reconstructs $g_j$ by successive formal translations, and the group identities show that the two maps are inverse with canonical coherent homotopies.
+
+The face formulas follow by deleting one $g_i$: deleting $g_0$ changes the centre from $g_0$ to $g_1=g_0+d_1$; deleting an interior $g_i$ replaces the two consecutive differences by their sum; deleting $g_n$ drops $d_n$.  Repeating a vertex inserts a zero difference.  These formulas are precisely the nerve of the translation action.
+\end{proof}
+
+\begin{corollary}[Relative linear spaces]
+\label{cor:jet-relative-linear-space}
+Let $S$ be represented by a spectral scheme, let $P$ be a finite locally free $\mathcal O_S$-module, and put
+\[
+    V:=V_S(P)=\operatorname{Spec}_S\operatorname{Sym}_{\mathcal O_S}(P).
+\]
+Then $V\to S$ is smooth, $L_{V/S}\simeq p^*P$, and $V$ is canonically an additive commutative group object.  If
+\[
+    D_P:=S\times_{V_{\dR/S}}V,
+\]
+then
+\[
+    R_{V/S,n}\simeq V\times_SD_P^n,
+\]
+and the entire relation nerve is the formal-addition action groupoid.  In particular
+\[
+    \Tinf_{V/S}\simeq\Sigma_{\pr_V}\alpha_P^*,
+    \qquad
+    \Jinf_{V/S}\simeq\Pi_{\pr_V}\alpha_P^*.
+\]
+\end{corollary}
+
+\begin{proof}
+The smoothness and cotangent formula are the relative linear-space calculations of Chapters 9--10.  The relative symmetric algebra carries its canonical additive Hopf structure.  Apply Theorem~\ref{thm:formal-translation-nerve}.
+\end{proof}
+
+\begin{theorem}[Local affine formal-disk action for smooth morphisms]
+\label{thm:jet-local-linearization}
+Let $X\to S$ be represented by a smooth spectral morphism and let $x\in|X|$.  After shrinking $X$ and $S$ Zariski-locally around $x$ and its image, there are affine opens $U\subseteq X$, $V\subseteq S$, an integer $n\geq0$, and a spectral \'{e}tale morphism
+\[
+    q:U\longrightarrow\mathbb A^n_V.
+\]
+Put
+\[
+    D^n_V
+    :=
+    V\times_{(\mathbb A^n_V)_{\dR/V}}\mathbb A^n_V.
+\]
+Then for every $k\geq0$ there are canonical equivalences
+\[
+\boxed{
+    R_{U/V,k}
+    \simeq
+    U\times_V(D^n_V)^k,
+}
+\]
+with the convention $(D^n_V)^0=V$, and these equivalences identify the entire relation groupoid with the action-groupoid nerve of a canonical formal action
+\[
+    \alpha_q:U\times_VD^n_V\longrightarrow U.
+\]
+The action is characterized by
+\[
+    q\alpha_q
+    \simeq
+    +\,(q\times\id_{D^n_V}).
+\]
+For every $E\to U$,
+\[
+\boxed{
+    \Jinf_{U/V}E
+    \simeq
+    \Pi_{\pr_U}\alpha_q^*E,
+    \qquad
+    \Tinf_{U/V}E
+    \simeq
+    \Sigma_{\pr_U}\alpha_q^*E.
+}
+\]
+\end{theorem}
+
+\begin{proof}
+Chapter 9 supplies a local standard smooth chart $q:U\to\mathbb A^n_V$, which is spectral \'{e}tale and hence formally \'{e}tale.  Let $Q_U$ and $Q_A$ be the corresponding effective quotients.  Theorem~\ref{thm:jet-formal-etale} gives the simplicial equivalence
+\[
+    R_{U/V,\bullet}
+    \simeq
+    Q_U\times_{Q_A}R_{\mathbb A^n_V/V,\bullet}.
+\]
+By Theorem~\ref{thm:formal-translation-nerve},
+\[
+    R_{\mathbb A^n_V/V,k}
+    \simeq
+    \mathbb A^n_V\times_V(D^n_V)^k.
+\]
+Formal-\'{e}tale Cartesianity gives
+\[
+    U\simeq Q_U\times_{Q_A}\mathbb A^n_V.
+\]
+Therefore
+\[
+\begin{aligned}
+R_{U/V,k}
+&\simeq
+Q_U\times_{Q_A}
+\bigl(\mathbb A^n_V\times_V(D^n_V)^k\bigr)\\
+&\simeq
+U\times_V(D^n_V)^k.
+\end{aligned}
+\]
+Because the first equivalence is simplicial and the second uses the explicit translation nerve, these degreewise formulas carry the entire simplicial structure.  In degree one the evaluation face is the action $\alpha_q$, and the compatibility with $q$ is inherited from formal addition on affine space.  The jet formulas are the relation-correspondence formulas of Proposition~\ref{prop:Tinf-relation-formula}.
+\end{proof}
+
+\begin{corollary}[Coordinate-free local tubular completion model]
+\label{thm:jet-tubular-linear-model}
+In the situation of Theorem~\ref{thm:jet-local-linearization}, Chapter 10's local linear-completion theorem supplies, after the same Zariski shrinking and a single chosen smooth-affine tubular comparison in degree one, equivalences for every $k\geq1$
+\[
+\boxed{
+    R_{U/V,k}
+    \simeq
+    \widehat{V_U(L_{U/V}^{\oplus k})}^{\,\dR}_{\,U/V}.
+}
+\]
+The same degree-one tubular choice produces all degrees simultaneously by fibre product.  No independence of that tubular choice is asserted here.
+\end{corollary}
+
+\begin{proof}
+This is precisely the local linear completion model constructed in Chapter 10: the degree-one tubular comparison for the diagonal is iterated over $U$, giving the corresponding \'{e}tale tubular comparison for the $(k+1)$-fold diagonal, and formal-\'{e}tale invariance of intrinsic completions gives the displayed equivalence.
+\end{proof}
+
+\begin{remark}[First order is a comparison, not a collapse]
+For represented $X\to S$, Chapter 10 constructs the first structured square-zero neighbourhood
+\[
+    X\longrightarrow D^{(1)}_{X/S}\longrightarrow X\times_SX
+\]
+with coefficient $L_{X/S}$ and a canonical map
+\[
+    D^{(1)}_{X/S}\longrightarrow R_{X/S,1}.
+\]
+Restriction along this map gives the first-order linearization of normalized one-cochains to the stabilized cotangent coefficient.  Chapter 10 exhibits an affine-line class showing that this first-order linearization need not be an equivalence.  The local action and tubular models above therefore concern the full intrinsic formal relation and do not assert a spectral HKR collapse or an exterior/symmetric-cotangent description of the complete relation.
+\end{remark}
+
+\section{Reduced-classical comparison of jet comonads}
+\label{sec:jet-comparison}
+
+Chapter 9 constructed the reduced-classical left-exact localization $\Dred$ and a canonical comparison
+\[
+    L_{\dR}\longrightarrow\Dred.
+\]
+It also proved that, for an $L_{\dR}$-local object, comparison with $\Dred$ is an equivalence exactly when the object is Postnikov complete on affine tests and nilradical-continuous on affine tests.  We transport that comparison to jets without imposing its invertibility.
+
+\begin{definition}[Reduced-classical relative target and jet comonad]
+\label{def:reduced-jet}
+Put
+\[
+    X_{\mathrm{red}/S}:=
+    S\times_{\Dred S}\Dred X.
+\]
+The Chapter 9 comparison induces
+\[
+    \kappa_{X/S}:X_{\dR/S}\longrightarrow X_{\mathrm{red}/S}.
+\]
+Write
+\[
+    \eta^{\mathrm{red}}_{X/S}
+    :=
+    \kappa_{X/S}\eta_{X/S}:
+    X\longrightarrow X_{\mathrm{red}/S}.
+\]
+For every $n\geq0$ define
+\[
+    R^{\mathrm{red}}_{X/S,n}
+    :=
+    \underbrace{
+    X\times_{X_{\mathrm{red}/S}}\cdots
+    \times_{X_{\mathrm{red}/S}}X
+    }_{n+1\text{ factors}}.
+\]
+In degree one write $c_{\mathrm{red}},e_{\mathrm{red}}$ for the two projections and define
+\[
+    \Jinf_{\mathrm{red},X/S}
+    :=
+    (\eta^{\mathrm{red}}_{X/S})^*
+    \Pi_{\eta^{\mathrm{red}}_{X/S}}.
+\]
+Right Beck--Chevalley gives
+\[
+    \Jinf_{\mathrm{red},X/S}
+    \simeq
+    \Pi_{c_{\mathrm{red}}}e_{\mathrm{red}}^*.
+\]
+\end{definition}
+
+\begin{theorem}[Canonical reduced-classical comparison of jets]
+\label{thm:jet-reduced-comparison}
+The map $\kappa_{X/S}$ induces a simplicial map
+\[
+    r_\bullet:R_{X/S,\bullet}
+    \longrightarrow
+    R^{\mathrm{red}}_{X/S,\bullet}
+\]
+which is the identity in degree zero.  It induces a canonical natural transformation of comonads
+\[
+\boxed{
+    \operatorname{res}_{\kappa}:
+    \Jinf_{\mathrm{red},X/S}
+    \longrightarrow
+    \Jinf_{X/S}.
+}
+\]
+If $\kappa_{X/S}$ is an equivalence, then $\operatorname{res}_{\kappa}$ is an equivalence of comonads.
+\end{theorem}
+
+\begin{proof}
+The triangle
+\[
+    X\longrightarrow X_{\dR/S}
+    \xrightarrow{\kappa_{X/S}}
+    X_{\mathrm{red}/S}
+\]
+induces $r_n$ by applying the target map to every relation factor, compatibly with deletion and repetition.
+
+In degree one, $c_{\mathrm{red}}r=c$ and $e_{\mathrm{red}}r=e$.  For $E\to X$, the unit of $r^*\dashv\Pi_r$ gives
+\[
+    e_{\mathrm{red}}^*E
+    \longrightarrow
+    \Pi_r r^*e_{\mathrm{red}}^*E
+    \simeq
+    \Pi_r e^*E.
+\]
+Apply $\Pi_{c_{\mathrm{red}}}$ and use
+\[
+    \Pi_{c_{\mathrm{red}}}\Pi_r\simeq\Pi_c
+\]
+to obtain
+\[
+    \Pi_{c_{\mathrm{red}}}e_{\mathrm{red}}^*E
+    \longrightarrow
+    \Pi_ce^*E.
+\]
+This is $\operatorname{res}_{\kappa}$.  Since $r_\bullet$ respects the diagonal, relation composition, and all simplicial identities, the transformation preserves counit, comultiplication, and higher comonad coherences.  If $\kappa_{X/S}$ is an equivalence, every $r_n$ is an equivalence.
+\end{proof}
+
+\begin{corollary}[Constructed convergence criterion for jet comparison]
+\label{cor:jet-reduced-convergence}
+Suppose
+\[
+    L_{\dR}X\longrightarrow\Dred X,
+    \qquad
+    L_{\dR}S\longrightarrow\Dred S
+\]
+are equivalences.  Equivalently, the $L_{\dR}$-local objects $L_{\dR}X$ and $L_{\dR}S$ are Postnikov complete on affine tests and nilradical-continuous on affine tests.  Then
+\[
+    \kappa_{X/S}:X_{\dR/S}\xrightarrow{\sim}X_{\mathrm{red}/S}
+\]
+and hence
+\[
+    \Jinf_{\mathrm{red},X/S}
+    \xrightarrow{\sim}
+    \Jinf_{X/S}.
+\]
+\end{corollary}
+
+\begin{proof}
+Both relative targets are finite pullbacks formed from the corresponding absolute localizations.  If the absolute comparisons are equivalences, finite-limit pasting makes the relative comparison an equivalence.  Apply Theorem~\ref{thm:jet-reduced-comparison}.
+\end{proof}
+
+\begin{remark}[Discrete classical smooth input]
+If $X\to S$ is the Eilenberg--Mac Lane enhancement of a smooth morphism of ordinary schemes, the brave-new jet comonad admits the canonical reduced-classical comparison above.  It becomes the ordinary reduced de Rham-groupoid jet construction whenever the Chapter 9 convergence criterion holds.  No unconditional identification is asserted: the square-zero-generated intrinsic de Rham modality and the further reduced-classical localization remain distinct.
+\end{remark}
+
+\begin{remark}[Relation to $D$-geometry and synthetic smooth jets]
+The intrinsic equivalence
+\[
+    \PDE^{\mathrm{fi}}_{X/S}\simeq(\XSp)_{/Q_{X/S}}
+\]
+supplies the nonlinear infinitesimal-descent structure that, in derived algebraic geometry, is formally parallel to crystals over a de Rham prestack and, in Beilinson--Drinfeld's language, to nonlinear $D$-geometry \cite{GaitsgoryRozenblyum2011,BeilinsonDrinfeld2004}.  Khavkine--Schreiber recover ordinary infinite jets in a synthetic smooth model \cite{KhavkineSchreiber2017}; the projective-limit comparison issue in that setting is addressed in \cite{GiotopoulosKhavkineSatiSchreiber2026}.  The brave-new definition used here does not depend on presenting $\Jinf$ as an inverse limit of finite-order jet bundles.
+\end{remark}
+
+\section{On finite-order jets}
+\label{sec:no-finite-order-jets}
+
+\begin{remark}[Why no canonical $J^k$ is introduced]
+The present chapter constructs infinite jets directly from the full relative spectral de Rham relation.  It does not introduce a canonical tower
+\[
+    J^0E\leftarrow J^1E\leftarrow J^2E\leftarrow\cdots.
+\]
+Chapter 9 defines finite spectral infinitesimal thickenings as the equivalence-closed class generated from structured square-zero immersions by finite composition, but deliberately retains neither a chosen factorization nor a numerical length.  The established infinitesimal theory therefore does not yet supply an intrinsic invariant deserving the name ``order $k$''.
+
+This causes no defect in the formal PDE calculus: differential operators, prolongation, formal solutions, formal integrability, and effective descent are intrinsically infinite-jet constructions.  If a later finiteness theorem requires dependence on finitely much infinitesimal data, that dependence should be formulated through the already constructed finite-infinitesimal site or through an intrinsic compactness statement rather than by inserting an unconstructed order filtration.
+\end{remark}
+
+\section{The brave-new jet bundle package}
+\label{sec:jet-final-package}
+
+\begin{theorem}[Brave-new jet bundle calculus]
+\label{thm:brave-new-jet-package}
+Let $X\to S$ be a morphism in the native big spectral Nisnevich $\infty$-topos.  The constructions of this chapter canonically provide the following.
+\begin{enumerate}
+\item The effective infinitesimal relation groupoid
+\[
+    R_{X/S,\bullet}
+    \simeq
+    \check C_\bullet(X\to Q_{X/S}),
+    \qquad
+    |R_{X/S,\bullet}|\simeq Q_{X/S}.
+\]
+
+\item For every $a:T\to X$, the intrinsic formal disk
+\[
+    \mathbb D^\infty_{X/S,a}
+    =T\times_{X_{\dR/S}}X
+    \simeq T\times_{Q_{X/S}}X,
+\]
+identified with the intrinsic relative de Rham completion of $T\times_SX$ along the graph of $a$; its projection to $T$ is an effective epimorphism.
+
+\item The formal-disk monad and jet comonad
+\[
+    \Tinf=\eta^*\Sigma_\eta,
+    \qquad
+    \Jinf=\eta^*\Pi_\eta,
+\]
+with relation formulas
+\[
+    \Tinf\simeq\Sigma_ce^*\simeq\Sigma_ec^*,
+    \qquad
+    \Jinf\simeq\Pi_ce^*,
+\]
+and effective-image formulas
+\[
+    \Tinf\simeq\epsilon^*\Sigma_\epsilon,
+    \qquad
+    \Jinf\simeq\epsilon^*\Pi_\epsilon.
+\]
+
+\item The adjunction
+\[
+    \Tinf\dashv\Jinf
+\]
+constructed from the relation correspondence and inversion, together with
+\[
+    \varepsilon_Es^\sharp\simeq s\zeta_A.
+\]
+
+\item The common relation-transport description of $\Tinf$-algebras and $\Jinf$-coalgebras by coherent equivalences
+\[
+    \theta:c^*E\xrightarrow{\sim}e^*E
+\]
+satisfying the unit and \v{C}ech cocycle identities.  Under this description algebra actions and coalgebra coactions are mates.
+
+\item Effective infinitesimal descent
+\[
+\boxed{
+    (\XSp)_{/Q_{X/S}}
+    \simeq
+    \operatorname{Alg}_{\Tinf}(\mathcal C_X)
+    \simeq
+    \Coalg_{\Jinf}(\mathcal C_X).
+}
+\]
+The intrinsic PDE $\infty$-topos is defined by
+\[
+    \PDE^{\mathrm{fi}}_{X/S}:=(\XSp)_{/Q_{X/S}},
+\]
+so its formal-disk algebra and Cartan coaction are derived structures rather than supplied data.
+
+\item The canonical free-disk coalgebra
+\[
+    \mathbf T(A)=(\Tinf A,\chi_A),
+\]
+the cofree jet coalgebra
+\[
+    K(E)=(\Jinf E,\Delta_E),
+\]
+and the adjoint triple
+\[
+    \mathbf T\dashv U\dashv K,
+\]
+with
+\[
+    \alpha_A\simeq\chi_A\zeta_A.
+\]
+
+\item The fibrewise jet formula
+\[
+    a^*\Jinf E\simeq\Pi_{d_a}\operatorname{ev}_a^*E,
+\]
+the mapping-space description by maps from the intrinsic formal disk, and arbitrary base change of the entire package.
+
+\item The terminal jet coalgebra $(X,\rho_X)$, prolongation of sections
+\[
+    j^\infty\phi=\Jinf(\phi)\rho_X,
+\]
+and holonomic recognition
+\[
+    \Map_{\Coalg_{\Jinf}}
+    \bigl((X,\rho_X),K(E)\bigr)
+    \simeq
+    \Map_X(X,E).
+\]
+
+\item Intrinsic Cartan objects as objects over $Q$, with their coactions derived by effective descent.  A Cartan presentation on $Y$ is determined by an ordinary map $y:E\to Y$, with constructed ambient jet map
+\[
+    i_y=\Jinf(y)\rho_E.
+\]
+Every Cartan morphism to $K(Y)$ is uniquely of this form through the cofree adjunction.
+
+\item The differential-operator $\infty$-category as the full subcategory of jet coalgebras spanned by cofree objects, canonically equivalent to the co-Kleisli category, with
+\[
+    \Map_{\Diff_{X/S}}(E,F)\simeq\Map_X(\Jinf E,F).
+\]
+
+\item Infinite prolongation
+\[
+    p^\infty\widehat D
+    =
+    \Jinf(\widehat D)\Delta_E,
+\]
+which is the cofree coalgebra morphism classified by $\widehat D$ and is automatically compatible with differential-operator composition.
+
+\item Generalized brave-new PDE presentations
+\[
+    i:\mathcal E\to\Jinf Y
+\]
+in the space-valued slice, with embedded PDEs as the monomorphic special case and homotopy equalizers and homotopy zero loci as canonical derived equation presentations.
+
+\item Actual solution spaces and parameterized solution objects, including the relative prolongation morphism
+\[
+    j^\infty_{/S}:\Pi_xY\to\Pi_x\Jinf Y
+\]
+constructed from the unit of $\epsilon^*\dashv\Pi_\epsilon$ and compatible with arbitrary base change.
+
+\item Formal holonomicity without independent Cartan packaging: an $A$-parameterized formally holonomic family is a single map
+\[
+    t:\Tinf A\to Y,
+\]
+whose canonical ambient jet map is
+\[
+    \sigma_t=\Jinf(t)\chi_A.
+\]
+The unique cofree Cartan lift and its higher coherence are derived from $t$.
+
+\item The formal-solution space
+\[
+\operatorname{FSol}_i(A)
+=
+\Map_X(\Tinf A,\mathcal E)
+\times_{\Map_X(\Tinf A,\Jinf Y)}
+\Map_X(\Tinf A,Y),
+\]
+where the second map to the middle term is $t\mapsto\Jinf(t)\chi_A$.
+
+\item The Cartan prolongation
+\[
+    \mathbf P(i)
+    =
+    K(\mathcal E)\times_{K(\Jinf Y)}K(Y),
+\]
+with underlying object
+\[
+    \mathcal E^\infty
+    \simeq
+    \Jinf\mathcal E\times_{\Jinf\Jinf Y}\Jinf Y
+\]
+and canonical prolongation coalgebra.
+
+\item The prolongation adjunction
+\[
+    V_Y\dashv P_Y
+\]
+from Cartan presentations on $Y$ to generalized presentations on $Y$.  Its counit is the centre map
+\[
+    \kappa_i=\varepsilon_{\mathcal E}p_1:\mathcal E^\infty\to\mathcal E.
+\]
+
+\item The universal formal-solution equivalence
+\[
+    \Map_X(A,\mathcal E^\infty)
+    \simeq
+    \operatorname{FSol}_i(A),
+\]
+with universal maps
+\[
+    s_i^\infty:\Tinf\mathcal E^\infty\to\mathcal E,
+    \qquad
+    t_i^\infty:\Tinf\mathcal E^\infty\to Y
+\]
+and specified compatibility
+\[
+    is_i^\infty\simeq\Jinf(t_i^\infty)\chi_{\mathcal E^\infty}.
+\]
+
+\item Centre-completeness of a Cartan presentation is equivalent to Cartesianity of its Cartan square
+\[
+\begin{tikzcd}
+E \arrow[r,"\rho"] \arrow[d,"i"']
+& \Jinf E \arrow[d,"\Jinf(i)"]
+\\
+\Jinf Y \arrow[r,"\Delta_Y"']
+& \Jinf\Jinf Y.
+\end{tikzcd}
+\]
+Every Cartan presentation has a canonically split centre map.
+
+\item Every intrinsic jet coalgebra has the tautological centre-complete presentation
+\[
+    \rho_E:E\to\Jinf E.
+\]
+Thus no non-monomorphic exception is required for the tautological ambient presentation.
+
+\item For a general external Cartan presentation $y:E\to Y$ descending from $F\to Q$, centre-completeness is equivalently the Cartesianity of the quotient-side square
+\[
+\begin{tikzcd}
+F \arrow[r,"\nu_F"] \arrow[d,"\bar y"']
+& \Pi_\epsilon\epsilon^*F
+  \arrow[d,"\Pi_\epsilon\epsilon^*(\bar y)"]
+\\
+\Pi_\epsilon Y \arrow[r,"\nu_{\Pi_\epsilon Y}"']
+& \Pi_\epsilon\epsilon^*\Pi_\epsilon Y.
+\end{tikzcd}
+\]
+
+\item Every embedded Cartan presentation is centre-complete.  For an embedded generalized PDE, centre-completeness is equivalent to existence of a compatible intrinsic Cartan structure, and that structure is canonically
+\[
+    p_1\kappa_i^{-1}.
+\]
+
+\item Every generalized PDE has a canonical Cartan prolongation representing an intrinsic formally integrable PDE.  If the original presentation is embedded, the prolonged Cartan presentation is embedded and centre-complete.
+
+\item For a centre-complete ambient presentation,
+\[
+    \Sol_{X/S}(\mathcal E)
+    \simeq
+    \Map_{\Coalg_{\Jinf}}
+    \bigl((X,\rho_X),(\mathcal E,\rho_{\mathcal E})\bigr).
+\]
+
+\item All small limits and colimits of intrinsic PDEs, computed on underlying $X$-bundles, and in particular
+\[
+    \Eq(\widehat D_0,\widehat D_1)^\infty
+    \simeq
+    \Eq(p^\infty\widehat D_0,p^\infty\widehat D_1).
+\]
+
+\item Formal-\'{e}tale restriction with the corrected simplicial formula
+\[
+    R_{U/S,\bullet}
+    \simeq
+    Q_{U/S}\times_{Q_{X/S}}R_{X/S,\bullet},
+\]
+together with spectral \'{e}tale invariance, effective formally \'{e}tale descent, formal-solution descent, and spectral Nisnevich descent.
+
+\item The full formal-translation nerve for commutative group objects
+\[
+    R_{G/S,n}\simeq G\times_SD_G^n,
+\]
+with explicit face and degeneracy formulas, and its formal-\'{e}tale pullback to Zariski-local smooth charts
+\[
+    R_{U/V,k}\simeq U\times_V(D^n_V)^k.
+\]
+
+\item The separate coordinate-free local tubular-completion model inherited from Chapter 10,
+\[
+    R_{U/V,k}
+    \simeq
+    \widehat{V_U(L_{U/V}^{\oplus k})}^{\,\dR}_{\,U/V},
+\]
+with no independence-of-choice, spectral HKR, or first-order collapse assertion.
+
+\item The reduced-classical relative target and canonical comparison of comonads
+\[
+    \Jinf_{\mathrm{red},X/S}\longrightarrow\Jinf_{X/S},
+\]
+which is an equivalence whenever the intrinsic relative de Rham target agrees with the reduced-classical target; Chapter 9's Postnikov-completeness-on-affine-tests and nilradical-continuity-on-affine-tests criterion supplies a constructed sufficient and necessary criterion for the absolute modality comparisons used here.
+\end{enumerate}
+All identity, composition, adjunction, base-change, descent, Cartan, Eilenberg--Moore, and higher coherence data in this package are inherited from the relative de Rham localization, the effective quotient and its \v{C}ech groupoid, dependent adjunction and Beck--Chevalley, effective descent, cofree-coalgebra adjunction, and finite limits.  No additional differential-cohesive axiom, jet-admissibility condition, orientation, transfer datum, principal-parts presentation, or formal-completion axiom is introduced.
+\end{theorem}
+
+\begin{proof}
+Items (1)--(4) are Proposition~\ref{prop:jets-effective-relation}, Theorem~\ref{thm:formal-disk-completion}, Proposition~\ref{prop:Tinf-relation-formula}, Proposition~\ref{prop:formal-disk-monad}, Theorem~\ref{thm:jet-comonad}, Theorem~\ref{thm:jet-effective-image}, Theorem~\ref{thm:disk-jet-adjunction}, and Lemma~\ref{lem:disk-jet-mate}.  Items (5)--(7) are Theorems~\ref{thm:relation-transport} and \ref{thm:jet-em-effective-descent}, Definition~\ref{def:pde-category}, Construction~\ref{con:formal-disk-coalgebra}, and Theorem~\ref{thm:disk-coalgebra-adjunctions}.  Items (8)--(10) are Theorem~\ref{thm:jet-fibre-formula}, Theorem~\ref{thm:jet-arbitrary-base-change}, Proposition~\ref{prop:jet-terminal}, Theorem~\ref{thm:holonomic-recognition}, Definition~\ref{def:cartan-presentation}, and Theorem~\ref{prop:cartan-cofree-factorization}.
+
+Items (11)--(12) are Construction~\ref{def:diff-cokleisli}, Proposition~\ref{prop:diff-cokleisli-identification}, Definition~\ref{def:operator-prolongation}, and Theorem~\ref{thm:diff-cofree-embedding}.  Items (13)--(14) are Definition~\ref{def:generalized-pde}, Constructions~\ref{con:equation-locus} and \ref{con:scalar-equation}, Definition~\ref{def:pde-solution}, Construction~\ref{con:parameterized-terminal-coalgebra}, Proposition~\ref{prop:parameterized-jet-base-change}, and Theorem~\ref{thm:parameterized-solutions}.  Items (15)--(16) are Definition~\ref{def:formally-holonomic-family}, Theorem~\ref{thm:formal-holonomicity-coalgebraic}, and Definition~\ref{def:parameterized-formal-solution}.  Items (17)--(19) are Construction~\ref{con:pde-prolongation}, Theorem~\ref{thm:prolongation-coalgebra}, Theorem~\ref{thm:cartan-prolongation-adjunction}, Theorem~\ref{thm:universal-formal-solutions}, and Proposition~\ref{prop:prolongation-inclusion}.
+
+Items (20)--(24) are Proposition~\ref{prop:cartan-presentation-split-centre}, Theorem~\ref{thm:cartan-centre-cartesian}, Theorem~\ref{thm:tautological-centre-completeness}, Theorem~\ref{thm:centre-complete-quotient-criterion}, Theorem~\ref{thm:embedded-cartan-integrability}, Proposition~\ref{thm:integrable-pde-coalgebra}, Corollary~\ref{cor:embedded-pde-recognition}, and Corollary~\ref{cor:cartan-prolongation-integrability}.  Items (25)--(26) are Corollary~\ref{cor:solutions-coalgebra-maps}, Theorem~\ref{thm:pde-finite-limits}, and Corollary~\ref{cor:prolonged-equalizer}.  Item (27) is Theorem~\ref{thm:jet-formal-etale}, Corollary~\ref{cor:jet-etale-invariance}, Theorem~\ref{thm:jet-formal-etale-descent}, and Corollary~\ref{cor:jet-nisnevich-locality}.  Items (28)--(29) are Proposition~\ref{prop:jet-group-translation}, Theorem~\ref{thm:formal-translation-nerve}, Corollary~\ref{cor:jet-relative-linear-space}, Theorem~\ref{thm:jet-local-linearization}, and Corollary~\ref{thm:jet-tubular-linear-model}.  Item (30) is Theorem~\ref{thm:jet-reduced-comparison} and Corollary~\ref{cor:jet-reduced-convergence}.
+
+Every structure appearing in the statement has therefore been constructed from previously established geometric or categorical operations, and every coherence is inherited from those constructions rather than supplied independently.
+\end{proof}
+
+The chapter has therefore constructed the formal geometry of brave-new fields and differential equations in the native spectral Nisnevich $\infty$-topos.  It has not yet supplied a variational differential, an action functional, an Euler--Lagrange construction, or a cohomology theory on the PDE $\infty$-topos.  The next chapter begins with the Cartan geometry constructed here and develops the brave-new variational geometry carried by it.

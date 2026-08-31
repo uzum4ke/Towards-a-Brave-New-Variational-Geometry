@@ -1,0 +1,3378 @@
+\chapter{Higher Stinespring--Paschke Theory and the Relative GNS Construction}
+\label{chap:higher-stinespring-paschke-gns}
+
+\section{Aim and Derivational Policy}
+\label{sec:higher-stinespring-aim-policy}
+
+This chapter develops a higher algebraic analogue of the
+Stinespring--Paschke and GNS constructions inside the relative algebraic
+geometry and Hermitian Morita theory established in the preceding chapter.
+
+No independent ambient axiomatics are introduced here. The algebra objects,
+module categories, dualities, Hermitian structures, adjoints, relative tensor
+products, perfect objects, internal endomorphism objects, and unitary Morita
+correspondences used below are exactly those already constructed and proved in
+the preceding chapter.
+
+Every notion introduced in this chapter is of one of the following forms.
+
+\begin{enumerate}
+  \item It is a property of data already constructed in the preceding
+  chapter.
+
+  \item It is given by an explicit formula using previously constructed
+  operations.
+
+  \item It is characterized by a universal property whose existence is proved
+  on the stated domain.
+
+  \item It is an intrinsic restriction to the locus on which such a universal
+  object exists.
+\end{enumerate}
+
+In particular, this chapter does not postulate a positive cone, an order
+structure, a norm, a completion operation, a global dagger on the ambient
+category, an image factorization, a radical quotient, or an abstract
+``Stinespring category.''
+
+When a canonical construction does not exist for every coefficient morphism,
+the domain of the construction is defined intrinsically as the full locus on
+which the required universal object exists. This restriction is a property of
+the canonical realization category attached to the coefficient morphism. It
+is not additional structure imposed on the ambient relative geometry.
+
+All adjoints below are the local adjoints derived from Hermitian structures.
+All pairings are those induced by unitary Morita duality. All coherence maps
+are induced by previously constructed coherence or by universal properties,
+and their higher coherence identities are proved using the contractibility of
+the relevant mapping spaces.
+
+The resulting theory therefore has the following logical form:
+\[
+  \boxed{
+  \begin{gathered}
+    \text{relative Hermitian Morita geometry}
+    \\
+    \Longrightarrow
+    \\
+    \text{matrix Hermitian-square calculus}
+    \\
+    \Longrightarrow
+    \\
+    \text{completely square-positive coefficient morphisms}
+    \\
+    \Longrightarrow
+    \\
+    \text{canonical Gram pre-correspondences}
+    \\
+    \Longrightarrow
+    \\
+    \text{higher Stinespring realizations on the admissible locus}
+    \\
+    \Longrightarrow
+    \\
+    \text{relative GNS theory.}
+  \end{gathered}
+  }
+\]
+
+\begin{convention}[Suppressed coherent data]
+\label{conv:higher-stinespring-coherent-data}
+Equivalences, adjunctions, Hermitian structures, fixed-point structures,
+relative tensor products, and universal factorizations are understood with
+their required coherent higher homotopies.
+
+This convention suppresses notation only. It does not supply the existence of
+any structure. Every such structure used below is either inherited from the
+preceding chapter, explicitly constructed, or obtained from a stated universal
+property.
+\end{convention}
+
+\section{Inherited Relative Hermitian Morita Geometry}
+\label{sec:higher-stinespring-inherited-setting}
+
+Fix a presentably symmetric monoidal stable infinity-category
+\[
+  \mathcal V^\otimes
+  \in
+  \operatorname{CAlg}
+  \bigl(
+    \operatorname{Pr}^{\mathrm L}_{\mathrm{st}}
+  \bigr)
+\]
+and a commutative algebra object
+\[
+  R\in\operatorname{CAlg}(\mathcal V).
+\]
+
+Write
+\[
+  \mathcal W
+  :=
+  \operatorname{Mod}_R(\mathcal V).
+\]
+
+The category \(\mathcal W\) is again presentably symmetric monoidal, stable,
+and closed.
+
+Throughout the chapter,
+\[
+  B,\ C,\ D,\ldots
+\]
+denote Hermitian associative algebra objects of \(\mathcal W\). Thus each such
+algebra is equipped with a coherent equivalence
+\[
+  \sigma_B:
+  B
+  \xrightarrow{\simeq}
+  B^{\mathrm{op}}
+\]
+satisfying the previously established homotopy-fixed-point condition.
+
+After forgetting the multiplication and identifying the underlying
+\(R\)-module of \(B^{\mathrm{op}}\) with that of \(B\), we also write
+\[
+  \sigma_B:B\xrightarrow{\simeq}B
+\]
+for the induced coherent involution on the underlying \(R\)-module.
+
+It satisfies the anti-multiplicative identity
+\[
+  \sigma_B\mu_B
+  \simeq
+  \mu_B
+  \tau
+  (\sigma_B\otimes_R\sigma_B),
+\]
+where
+\[
+  \tau:B\otimes_RB\xrightarrow{\simeq}B\otimes_RB
+\]
+interchanges the two factors.
+
+For Hermitian algebras \(B\) and \(C\), let
+\[
+  \mathcal H_R(B,C)
+\]
+denote the infinity-category of unitary right-perfect
+\(B\)-\(C\)-bimodules constructed in the preceding chapter.
+
+Thus an object
+\[
+  M\in\mathcal H_R(B,C)
+\]
+is a right-perfect \(B\)-\(C\)-bimodule equipped with a selected unitary
+structure for the transported local duality.
+
+Every such object carries a canonical nondegenerate \(C\)-valued Hermitian
+pairing
+\[
+  \beta_M:
+  M^\dagger\otimes_BM
+  \longrightarrow
+  C.
+\]
+
+For morphisms between unitary objects, write
+\[
+  f^\dagger
+\]
+for the previously constructed local adjoint.
+
+Composition in the local Hermitian Morita theory is the relative tensor
+product
+\[
+  -\otimes_C-:
+  \mathcal H_R(B,C)
+  \times
+  \mathcal H_R(C,D)
+  \longrightarrow
+  \mathcal H_R(B,D).
+\]
+
+The compatibility of transported duality with Morita composition supplies
+canonical equivalences
+\[
+  (M\otimes_CN)^\dagger
+  \simeq
+  N^\dagger\otimes_CM^\dagger
+\]
+and identifies the adjoint of a tensor product of morphisms with the tensor
+product of their adjoints in reversed order.
+
+\begin{proposition}[Inherited operations]
+\label{prop:higher-stinespring-inherited-operations}
+Every operation used in the remainder of this chapter is obtained from the
+following previously constructed operations:
+\[
+  \oplus,
+  \qquad
+  \otimes_B,
+  \qquad
+  (-)^\dagger,
+  \qquad
+  \underline{\operatorname{Hom}}_B,
+  \qquad
+  \operatorname{End}_B(-),
+\]
+together with algebra multiplication, module actions, finite limits, finite
+colimits, and coherent equivalences already present in the relative
+Hermitian Morita theory.
+\end{proposition}
+
+\begin{proof}
+This is a dependency statement. Matrix objects are internal endomorphism
+objects of finite biproducts. Hermitian squares are composites
+\(T^\dagger T\). Coefficients are composites of a left action with an anchor
+and its local adjoint. Gram forms use only the algebra multiplications,
+involutions, the coefficient morphism, and the symmetry of \(\mathcal W\).
+Stinespring comparison maps are induced by initiality in realization
+infinity-categories. Composition uses relative tensor product. No additional
+operation occurs.
+\end{proof}
+
+\section{Matrix Objects and Hermitian-Square Presentations}
+\label{sec:higher-stinespring-matrix-squares}
+
+Let \(B\) be a Hermitian associative \(R\)-algebra.
+
+For \(n\geq0\), define
+\[
+  B^{\oplus n}
+\]
+using the finite biproduct in the category of right \(B\)-modules, with
+\[
+  B^{\oplus0}:=0.
+\]
+
+The regular right \(B\)-module carries its canonical unitary structure, and
+finite biproducts of unitary objects are unitary. Hence
+\[
+  B^{\oplus n}
+\]
+is a unitary perfect right \(B\)-module.
+
+\begin{definition}[Matrix endomorphism object]
+\label{def:higher-matrix-endomorphism-object}
+Define
+\[
+  \operatorname{Mat}_n(B)
+  :=
+  \operatorname{End}_B(B^{\oplus n}).
+\]
+
+Its multiplication is composition, and its Hermitian involution is the local
+adjoint
+\[
+  X\longmapsto X^\dagger.
+\]
+\end{definition}
+
+Let
+\[
+  \iota_j:B\to B^{\oplus n},
+  \qquad
+  \pi_i:B^{\oplus n}\to B
+\]
+be the biproduct injections and projections.
+
+For
+\[
+  X\in\operatorname{Mat}_n(B),
+\]
+write
+\[
+  X_{ij}
+  :=
+  \pi_iX\iota_j
+  \in B.
+\]
+
+The biproduct decomposition gives a canonical equivalence of underlying
+\(R\)-modules
+\[
+  \operatorname{Mat}_n(B)
+  \simeq
+  \bigoplus_{1\leq i,j\leq n}B.
+\]
+
+Under this equivalence,
+\[
+  X^\dagger
+  =
+  \bigl[\sigma_B(X_{ji})\bigr]_{i,j}.
+\]
+
+\begin{definition}[Hermitian-square presentation]
+\label{def:higher-hermitian-square-presentation}
+Let
+\[
+  X\in\operatorname{Mat}_n(B).
+\]
+
+A \textbf{Hermitian-square presentation} of \(X\) consists of:
+
+\begin{enumerate}
+  \item a unitary perfect right \(B\)-module
+  \[
+    P\in\mathcal H_R(R,B);
+  \]
+
+  \item a right \(B\)-linear morphism
+  \[
+    T:B^{\oplus n}\to P;
+  \]
+
+  \item a specified equivalence
+  \[
+    X\simeq T^\dagger T.
+  \]
+\end{enumerate}
+
+The endomorphism \(X\) is \textbf{Hermitian-square realizable} if the space of
+such presentations is nonempty.
+\end{definition}
+
+\begin{remark}[Witnessed positivity]
+\label{rem:higher-witnessed-positivity}
+Hermitian-square realizability is not an order relation and does not define a
+positive cone.
+
+The datum retained by the theory is the witness
+\[
+  T:B^{\oplus n}\to P
+\]
+and the factorization
+\[
+  X\simeq T^\dagger T.
+\]
+
+Allowing an arbitrary unitary perfect target \(P\) is essential. It ensures
+that coefficients arising from arbitrary unitary perfect Morita
+correspondences preserve square realizability without requiring the
+correspondence to be finite free.
+\end{remark}
+
+\begin{proposition}[Hermitian-square calculus]
+\label{prop:higher-hermitian-square-calculus}
+Let \(B\) be a Hermitian algebra.
+
+\begin{enumerate}
+  \item Every Hermitian-square realizable endomorphism is self-adjoint.
+
+  \item The zero endomorphism is Hermitian-square realizable.
+
+  \item Finite sums of Hermitian-square realizable endomorphisms are
+  Hermitian-square realizable.
+
+  \item If
+  \[
+    X\in\operatorname{Mat}_n(B)
+  \]
+  is Hermitian-square realizable and
+  \[
+    A:B^{\oplus m}\to B^{\oplus n},
+  \]
+  then
+  \[
+    A^\dagger XA
+    \in
+    \operatorname{Mat}_m(B)
+  \]
+  is Hermitian-square realizable.
+
+  \item If
+  \[
+    U:B^{\oplus n}\xrightarrow{\simeq}B^{\oplus n}
+  \]
+  is unitary and \(X\) is Hermitian-square realizable, then
+  \[
+    UXU^\dagger
+  \]
+  is Hermitian-square realizable.
+
+  \item Hermitian-square realizability is invariant under unitary equivalence
+  of the target of a presentation.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Suppose
+\[
+  X\simeq T^\dagger T.
+\]
+Then
+\[
+  X^\dagger
+  \simeq
+  (T^\dagger T)^\dagger
+  \simeq
+  T^\dagger T
+  \simeq
+  X.
+\]
+
+The zero endomorphism has the presentation
+\[
+  B^{\oplus n}\xrightarrow{0}0.
+\]
+
+If
+\[
+  X\simeq T^\dagger T,
+  \qquad
+  Y\simeq S^\dagger S,
+\]
+with
+\[
+  T:B^{\oplus n}\to P,
+  \qquad
+  S:B^{\oplus n}\to Q,
+\]
+then the biproduct morphism
+\[
+  \binom{T}{S}:
+  B^{\oplus n}
+  \longrightarrow
+  P\oplus Q
+\]
+satisfies
+\[
+  \binom{T}{S}^{\dagger}
+  \binom{T}{S}
+  \simeq
+  T^\dagger T+S^\dagger S
+  \simeq
+  X+Y.
+\]
+
+For compression,
+\[
+  A^\dagger XA
+  \simeq
+  A^\dagger T^\dagger TA
+  \simeq
+  (TA)^\dagger(TA).
+\]
+
+For unitary conjugation,
+\[
+  UXU^\dagger
+  \simeq
+  UT^\dagger TU^\dagger
+  \simeq
+  (TU^\dagger)^\dagger(TU^\dagger).
+\]
+
+Finally, if
+\[
+  V:P\xrightarrow{\simeq}Q
+\]
+is unitary, then
+\[
+  (VT)^\dagger(VT)
+  \simeq
+  T^\dagger V^\dagger VT
+  \simeq
+  T^\dagger T.
+\]
+\end{proof}
+
+\begin{proposition}[Gram form of a finite family]
+\label{prop:higher-gram-form-finite-family}
+Let \(P\) be a unitary perfect right \(B\)-module and let
+\[
+  t_i:B\to P,
+  \qquad
+  i=1,\ldots,n,
+\]
+be right \(B\)-linear morphisms.
+
+Then the matrix
+\[
+  G(t_1,\ldots,t_n)
+  :=
+  [t_i^\dagger t_j]_{i,j}
+  \in
+  \operatorname{Mat}_n(B)
+\]
+is Hermitian-square realizable.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+  T:B^{\oplus n}\to P
+\]
+be the unique morphism satisfying
+\[
+  T\iota_i=t_i.
+\]
+
+Then
+\[
+  \pi_iT^\dagger T\iota_j
+  \simeq
+  (T\iota_i)^\dagger(T\iota_j)
+  \simeq
+  t_i^\dagger t_j.
+\]
+
+Hence
+\[
+  T^\dagger T
+  \simeq
+  [t_i^\dagger t_j]_{i,j}.
+\]
+\end{proof}
+
+\section{Hermitian Coefficient Morphisms}
+\label{sec:higher-hermitian-coefficients}
+
+Let \(B\) and \(C\) be Hermitian associative \(R\)-algebras.
+
+The coherent involutions
+\[
+  \sigma_B:B\xrightarrow{\simeq}B,
+  \qquad
+  \sigma_C:C\xrightarrow{\simeq}C
+\]
+define an involution on the mapping space
+\[
+  \operatorname{Map}_{\operatorname{Mod}_R}(B,C)
+\]
+by
+\[
+  \Phi
+  \longmapsto
+  \Phi^\natural
+  :=
+  \sigma_C\Phi\sigma_B.
+\]
+
+\begin{definition}[Hermitian coefficient morphism]
+\label{def:higher-hermitian-coefficient}
+A \textbf{Hermitian coefficient morphism}
+\[
+  \Phi:B\to C
+\]
+is a homotopy-fixed point for the preceding involution.
+
+Equivalently, it is an \(R\)-linear morphism together with a coherent
+equivalence
+\[
+  \Phi\sigma_B
+  \simeq
+  \sigma_C\Phi
+\]
+satisfying the corresponding \(C_2\)-coherence.
+
+No multiplicativity or unitality is required.
+\end{definition}
+
+\begin{remark}[Hermitianity is coherent data]
+\label{rem:higher-hermitianity-coherent-data}
+In an ordinary category, one may express Hermitianity by the equality
+\[
+  \Phi(b^\dagger)=\Phi(b)^\dagger.
+\]
+
+In the present higher setting, equality on homotopy classes does not by itself
+supply the required fixed-point coherence. Hermitian coefficient morphisms
+are therefore defined in the homotopy-fixed-point mapping space.
+\end{remark}
+
+For \(n\geq0\), the direct-sum decomposition gives an entrywise amplification
+\[
+  \Phi_n:
+  \operatorname{Mat}_n(B)
+  \longrightarrow
+  \operatorname{Mat}_n(C),
+\]
+characterized by
+\[
+  \bigl(\Phi_n(X)\bigr)_{ij}
+  =
+  \Phi(X_{ij}).
+\]
+
+The Hermitian coherence of \(\Phi\) gives
+\[
+  \Phi_n(X^\dagger)
+  \simeq
+  \Phi_n(X)^\dagger.
+\]
+
+\begin{definition}[Completely square-positive coefficient]
+\label{def:higher-completely-square-positive}
+A Hermitian coefficient morphism
+\[
+  \Phi:B\to C
+\]
+is \textbf{completely square-positive} if, for every \(n\geq0\),
+\[
+  X\in\operatorname{Mat}_n(B)
+  \quad\text{Hermitian-square realizable}
+\]
+implies
+\[
+  \Phi_n(X)
+  \in
+  \operatorname{Mat}_n(C)
+  \quad\text{Hermitian-square realizable}.
+\]
+
+Write
+\[
+  \operatorname{CSP}_R(B,C)
+\]
+for the full subspace of the Hermitian coefficient mapping space spanned by
+the completely square-positive coefficient morphisms.
+\end{definition}
+
+\begin{proposition}[Closure properties]
+\label{prop:higher-csp-closure}
+Completely square-positive coefficient morphisms satisfy the following
+properties.
+
+\begin{enumerate}
+  \item The identity morphism
+  \[
+    \operatorname{id}_B:B\to B
+  \]
+  is completely square-positive.
+
+  \item If
+  \[
+    B\xrightarrow{\Phi}C\xrightarrow{\Psi}D
+  \]
+  are completely square-positive, then
+  \[
+    \Psi\Phi:B\to D
+  \]
+  is completely square-positive.
+
+  \item If
+  \[
+    \Phi,\Psi:B\to C
+  \]
+  are completely square-positive, then
+  \[
+    \Phi+\Psi:B\to C
+  \]
+  is completely square-positive.
+
+  \item Complete square positivity is invariant under equivalence of
+  Hermitian coefficient morphisms.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The identity preserves every square presentation.
+
+For composition, if
+\[
+  X\simeq T^\dagger T,
+\]
+then complete square positivity of \(\Phi\) gives a presentation
+\[
+  \Phi_n(X)\simeq S^\dagger S.
+\]
+Applying complete square positivity of \(\Psi\) gives a square presentation of
+\[
+  \Psi_n\Phi_n(X)
+  =
+  (\Psi\Phi)_n(X).
+\]
+
+For sums, choose presentations
+\[
+  \Phi_n(X)\simeq T^\dagger T,
+  \qquad
+  \Psi_n(X)\simeq S^\dagger S.
+\]
+Then
+\[
+  (\Phi+\Psi)_n(X)
+  \simeq
+  T^\dagger T+S^\dagger S
+\]
+is square realizable by
+\[
+  \binom{T}{S}.
+\]
+
+The final assertion follows because square realizability is a property
+invariant under equivalence.
+\end{proof}
+
+\begin{corollary}[Finite-family Gram consequence]
+\label{cor:higher-csp-finite-family-gram}
+Let
+\[
+  \Phi:B\to C
+\]
+be completely square-positive, and let
+\[
+  b_i:R\to B,
+  \qquad
+  i=1,\ldots,n,
+\]
+be generalized elements.
+
+Then the matrix
+\[
+  \bigl[
+    \Phi(\sigma_B(b_i)b_j)
+  \bigr]_{i,j}
+  \in
+  \operatorname{Mat}_n(C)
+\]
+is Hermitian-square realizable.
+\end{corollary}
+
+\begin{proof}
+The row morphism determined by the \(b_i\) gives
+\[
+  T:B^{\oplus n}\to B.
+\]
+Its square is
+\[
+  T^\dagger T
+  =
+  [\sigma_B(b_i)b_j]_{i,j}.
+\]
+Apply \(\Phi_n\).
+\end{proof}
+
+\begin{remark}[No converse without generation hypotheses]
+\label{rem:higher-no-gram-converse}
+The finite-family Gram condition of
+Corollary~\ref{cor:higher-csp-finite-family-gram} is a consequence of complete
+square positivity.
+
+No converse is asserted in the present generality. A converse would require
+a theorem reducing arbitrary perfect square presentations to tests by global
+elements or finite free targets. Such a reduction is not available from the
+standing relative Hermitian Morita data alone.
+\end{remark}
+
+\section{Anchored Unitary Perfect Correspondences}
+\label{sec:higher-anchored-correspondences}
+
+Let
+\[
+  M\in\mathcal H_R(B,C)
+\]
+be a unitary right-perfect \(B\)-\(C\)-bimodule.
+
+Its left action is represented by an algebra morphism
+\[
+  \lambda_M:
+  B
+  \longrightarrow
+  \operatorname{End}_C(M).
+\]
+
+\begin{definition}[Anchor]
+\label{def:higher-anchor}
+An \textbf{anchor} on \(M\) is a right \(C\)-linear morphism
+\[
+  \xi:C\to M.
+\]
+
+Equivalently, by the free-forgetful adjunction, it is a generalized element
+\[
+  \overline\xi:R\to M.
+\]
+\end{definition}
+
+Because \(C\) and \(M\) are unitary perfect right \(C\)-modules, the anchor has
+a local adjoint
+\[
+  \xi^\dagger:M\to C.
+\]
+
+\begin{definition}[Coefficient of an anchored correspondence]
+\label{def:higher-anchored-coefficient}
+The coefficient of an anchored unitary perfect correspondence
+\[
+  (M,\xi):B\to C
+\]
+is the \(R\)-linear morphism
+\[
+  \Phi_{M,\xi}:B\to C
+\]
+defined by
+\[
+  \Phi_{M,\xi}(b)
+  :=
+  \xi^\dagger\lambda_M(b)\xi.
+\]
+
+Equivalently,
+\[
+  \Phi_{M,\xi}(b)
+  =
+  \langle\xi,b\xi\rangle_C.
+\]
+\end{definition}
+
+\begin{proposition}[Hermitianity of anchored coefficients]
+\label{prop:higher-anchored-coefficient-hermitian}
+The coefficient
+\[
+  \Phi_{M,\xi}:B\to C
+\]
+is a Hermitian coefficient morphism.
+\end{proposition}
+
+\begin{proof}
+The left action is compatible with the Hermitian structures:
+\[
+  \lambda_M(\sigma_B(b))
+  \simeq
+  \lambda_M(b)^\dagger.
+\]
+
+Therefore
+\[
+\begin{aligned}
+  \Phi_{M,\xi}(\sigma_B(b))
+  &=
+  \xi^\dagger\lambda_M(\sigma_B(b))\xi
+  \\
+  &\simeq
+  \xi^\dagger\lambda_M(b)^\dagger\xi
+  \\
+  &\simeq
+  \sigma_C
+  \bigl(
+    \xi^\dagger\lambda_M(b)\xi
+  \bigr).
+\end{aligned}
+\]
+
+The coherence is inherited from the coherent Hermitian structures on \(B\),
+\(C\), and \(M\).
+\end{proof}
+
+\begin{theorem}[Anchored coefficients are completely square-positive]
+\label{thm:higher-anchored-coefficients-csp}
+Let
+\[
+  (M,\xi):B\to C
+\]
+be an anchored unitary right-perfect correspondence.
+
+Then
+\[
+  \Phi_{M,\xi}:B\to C
+\]
+is completely square-positive.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+  X\in\operatorname{Mat}_n(B)
+\]
+have a Hermitian-square presentation
+\[
+  X\simeq T^\dagger T
+\]
+with
+\[
+  T:B^{\oplus n}\to P
+\]
+and \(P\) a unitary perfect right \(B\)-module.
+
+Morita composition gives a unitary perfect right \(C\)-module
+\[
+  P\otimes_BM.
+\]
+
+The anchor determines
+\[
+  \xi^{\oplus n}:
+  C^{\oplus n}
+  \longrightarrow
+  M^{\oplus n}.
+\]
+
+Using the canonical equivalence
+\[
+  B^{\oplus n}\otimes_BM
+  \simeq
+  M^{\oplus n},
+\]
+define
+\[
+  \widetilde T:
+  C^{\oplus n}
+  \xrightarrow{\xi^{\oplus n}}
+  M^{\oplus n}
+  \xrightarrow{T\otimes_B\operatorname{id}_M}
+  P\otimes_BM.
+\]
+
+Compatibility of transported adjoints with Morita composition gives
+\[
+  (T\otimes_B\operatorname{id}_M)^\dagger
+  \simeq
+  T^\dagger\otimes_B\operatorname{id}_M.
+\]
+
+Hence
+\[
+\begin{aligned}
+  \widetilde T^\dagger\widetilde T
+  &\simeq
+  (\xi^\dagger)^{\oplus n}
+  (T^\dagger T\otimes_B\operatorname{id}_M)
+  \xi^{\oplus n}
+  \\
+  &\simeq
+  (\xi^\dagger)^{\oplus n}
+  (X\otimes_B\operatorname{id}_M)
+  \xi^{\oplus n}.
+\end{aligned}
+\]
+
+Under the matrix-entry identification, the \((i,j)\)-entry of the last
+endomorphism is
+\[
+  \xi^\dagger\lambda_M(X_{ij})\xi
+  =
+  \Phi_{M,\xi}(X_{ij}).
+\]
+
+Therefore
+\[
+  \widetilde T^\dagger\widetilde T
+  \simeq
+  (\Phi_{M,\xi})_n(X).
+\]
+
+Thus \((\Phi_{M,\xi})_n(X)\) is Hermitian-square realizable.
+\end{proof}
+
+\begin{definition}[Anchored isometry and anchored unitary]
+\label{def:higher-anchored-isometry}
+Let
+\[
+  (M,\xi),
+  \qquad
+  (N,\zeta)
+\]
+be anchored unitary perfect \(B\)-\(C\)-correspondences.
+
+An \textbf{anchored isometry}
+\[
+  U:(M,\xi)\to(N,\zeta)
+\]
+is a \(B\)-\(C\)-linear morphism
+\[
+  U:M\to N
+\]
+such that
+\[
+  U^\dagger U
+  \simeq
+  \operatorname{id}_M
+\]
+and
+\[
+  U\xi
+  \simeq
+  \zeta.
+\]
+
+It is an \textbf{anchored unitary} if \(U\) is an equivalence, equivalently if
+\[
+  U^\dagger
+  \simeq
+  U^{-1}.
+\]
+\end{definition}
+
+\begin{proposition}[Anchored isometries preserve coefficients]
+\label{prop:higher-anchored-isometries-preserve-coefficients}
+An anchored isometry
+\[
+  U:(M,\xi)\to(N,\zeta)
+\]
+induces a coherent equivalence
+\[
+  \Phi_{M,\xi}
+  \simeq
+  \Phi_{N,\zeta}.
+\]
+\end{proposition}
+
+\begin{proof}
+Since \(U\) is \(B\)-linear,
+\[
+  U\lambda_M(b)
+  \simeq
+  \lambda_N(b)U.
+\]
+
+Therefore
+\[
+\begin{aligned}
+  \Phi_{N,\zeta}(b)
+  &=
+  \zeta^\dagger\lambda_N(b)\zeta
+  \\
+  &\simeq
+  \xi^\dagger
+  U^\dagger
+  \lambda_N(b)
+  U
+  \xi
+  \\
+  &\simeq
+  \xi^\dagger
+  U^\dagger U
+  \lambda_M(b)
+  \xi
+  \\
+  &\simeq
+  \xi^\dagger\lambda_M(b)\xi
+  \\
+  &=
+  \Phi_{M,\xi}(b).
+\end{aligned}
+\]
+\end{proof}
+
+\section{The Canonical Free Orbit Bimodule}
+\label{sec:higher-free-orbit-bimodule}
+
+Let
+\[
+  \Phi:B\to C
+\]
+be a Hermitian coefficient morphism.
+
+\begin{definition}[Free orbit bimodule]
+\label{def:higher-free-orbit-bimodule}
+Define
+\[
+  F_\Phi
+  :=
+  B\otimes_RC.
+\]
+
+It is a \(B\)-\(C\)-bimodule using the regular left action of \(B\) on the
+first factor and the regular right action of \(C\) on the second factor.
+
+The \textbf{free anchor}
+\[
+  \xi_\Phi^0:C\to F_\Phi
+\]
+is the right \(C\)-linear morphism
+\[
+  C
+  \simeq
+  R\otimes_RC
+  \xrightarrow{\eta_B\otimes_R\operatorname{id}_C}
+  B\otimes_RC.
+\]
+\end{definition}
+
+No perfectness or nondegeneracy assertion is made about \(F_\Phi\).
+
+\subsection{The canonical Gram form}
+
+Let
+\[
+  \tau:
+  B\otimes_RC\otimes_RB\otimes_RC
+  \xrightarrow{\simeq}
+  C\otimes_RB\otimes_RB\otimes_RC
+\]
+be the symmetry permutation carrying
+\[
+  b\otimes c\otimes b'\otimes c'
+\]
+to
+\[
+  c\otimes b\otimes b'\otimes c'.
+\]
+
+\begin{definition}[Canonical Gram form]
+\label{def:higher-canonical-gram-form}
+The \textbf{canonical Gram form} associated to \(\Phi\) is the composite
+\[
+\begin{tikzcd}[column sep=small]
+  F_\Phi\otimes_RF_\Phi
+  \arrow[r,
+    "{\sigma_B\otimes\sigma_C\otimes
+    \operatorname{id}_B\otimes\operatorname{id}_C}"]
+  &
+  B\otimes_RC\otimes_RB\otimes_RC
+  \arrow[r,"\tau"]
+  &
+  C\otimes_RB\otimes_RB\otimes_RC
+  \arrow[r,
+    "{\operatorname{id}_C\otimes\mu_B\otimes\operatorname{id}_C}"]
+  &
+  C\otimes_RB\otimes_RC
+  \arrow[r,
+    "{\operatorname{id}_C\otimes\Phi\otimes\operatorname{id}_C}"]
+  &
+  C\otimes_RC\otimes_RC
+  \arrow[r,"\mu_C^{(3)}"]
+  &
+  C.
+\end{tikzcd}
+\]
+
+It is denoted
+\[
+  \Gamma_\Phi:
+  F_\Phi\otimes_RF_\Phi
+  \longrightarrow
+  C.
+\]
+\end{definition}
+
+In elementwise shorthand,
+\[
+  \Gamma_\Phi
+  (b\otimes c,b'\otimes c')
+  =
+  \sigma_C(c)
+  \Phi\bigl(\sigma_B(b)b'\bigr)
+  c'.
+\]
+
+\begin{proposition}[Properties of the Gram form]
+\label{prop:higher-gram-form-properties}
+The canonical Gram form satisfies the following identities.
+
+\begin{enumerate}
+  \item It is right \(C\)-linear in the second variable:
+  \[
+    \Gamma_\Phi(x,yc)
+    \simeq
+    \Gamma_\Phi(x,y)c.
+  \]
+
+  \item It is conjugate \(C\)-linear in the first variable:
+  \[
+    \Gamma_\Phi(xc,y)
+    \simeq
+    \sigma_C(c)\Gamma_\Phi(x,y).
+  \]
+
+  \item It is Hermitian:
+  \[
+    \Gamma_\Phi(y,x)
+    \simeq
+    \sigma_C\Gamma_\Phi(x,y).
+  \]
+
+  \item The left \(B\)-action is formally adjointable:
+  \[
+    \Gamma_\Phi(bx,y)
+    \simeq
+    \Gamma_\Phi(x,\sigma_B(b)y).
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The first two identities follow directly from associativity of \(\mu_C\) and
+anti-multiplicativity of \(\sigma_C\).
+
+For Hermitian symmetry, compute on pure tensors:
+\[
+\begin{aligned}
+  \sigma_C
+  \Gamma_\Phi
+  (b\otimes c,b'\otimes c')
+  &\simeq
+  \sigma_C
+  \left(
+    \sigma_C(c)
+    \Phi(\sigma_B(b)b')
+    c'
+  \right)
+  \\
+  &\simeq
+  \sigma_C(c')
+  \sigma_C\Phi(\sigma_B(b)b')
+  c
+  \\
+  &\simeq
+  \sigma_C(c')
+  \Phi\bigl(
+    \sigma_B(\sigma_B(b)b')
+  \bigr)
+  c
+  \\
+  &\simeq
+  \sigma_C(c')
+  \Phi(\sigma_B(b')b)
+  c
+  \\
+  &=
+  \Gamma_\Phi
+  (b'\otimes c',b\otimes c).
+\end{aligned}
+\]
+
+The fourth identity follows from
+\[
+  \sigma_B(bb_0)
+  \simeq
+  \sigma_B(b_0)\sigma_B(b).
+\]
+All identities are compatible with the higher coherences because they are
+composites of the coherent algebra and fixed-point data.
+\end{proof}
+
+\subsection{The free comparison}
+
+Let
+\[
+  (M,\xi):B\to C
+\]
+be an anchored unitary perfect correspondence.
+
+The left action and the anchor define a \(B\)-\(C\)-linear morphism
+\[
+  q_{M,\xi}:F_{\Phi_{M,\xi}}\to M
+\]
+by the composite
+\[
+\begin{tikzcd}[column sep=large]
+  B\otimes_RC
+  \arrow[r,
+    "{\operatorname{id}_B\otimes_R\xi}"]
+  &
+  B\otimes_RM
+  \arrow[r,"\lambda_M"]
+  &
+  M.
+\end{tikzcd}
+\]
+
+In elementwise shorthand,
+\[
+  q_{M,\xi}(b\otimes c)
+  =
+  b\xi c.
+\]
+
+\begin{proposition}[Free comparison preserves the Gram form]
+\label{prop:higher-free-comparison-preserves-gram}
+For every anchored unitary perfect correspondence \((M,\xi)\),
+\[
+  \beta_M
+  \bigl(
+    q_{M,\xi}(-),
+    q_{M,\xi}(-)
+  \bigr)
+  \simeq
+  \Gamma_{\Phi_{M,\xi}}.
+\]
+\end{proposition}
+
+\begin{proof}
+On pure tensors,
+\[
+\begin{aligned}
+  \left\langle
+    b\xi c,
+    b'\xi c'
+  \right\rangle_C
+  &\simeq
+  \sigma_C(c)
+  \left\langle
+    b\xi,
+    b'\xi
+  \right\rangle_C
+  c'
+  \\
+  &\simeq
+  \sigma_C(c)
+  \left\langle
+    \xi,
+    \sigma_B(b)b'\xi
+  \right\rangle_C
+  c'
+  \\
+  &=
+  \sigma_C(c)
+  \Phi_{M,\xi}
+  \bigl(
+    \sigma_B(b)b'
+  \bigr)
+  c'
+  \\
+  &=
+  \Gamma_{\Phi_{M,\xi}}
+  (b\otimes c,b'\otimes c').
+\end{aligned}
+\]
+
+The internal equality follows from the universal property of
+\(B\otimes_RC\).
+\end{proof}
+
+\section{Realization Infinity-Categories}
+\label{sec:higher-realization-categories}
+
+Let
+\[
+  \Phi:B\to C
+\]
+be a completely square-positive Hermitian coefficient morphism.
+
+\begin{definition}[Perfect Stinespring realization]
+\label{def:higher-perfect-stinespring-realization}
+A \textbf{perfect Stinespring realization} of \(\Phi\) consists of:
+
+\begin{enumerate}
+  \item a unitary right-perfect \(B\)-\(C\)-bimodule
+  \[
+    M\in\mathcal H_R(B,C);
+  \]
+
+  \item an anchor
+  \[
+    \xi:C\to M;
+  \]
+
+  \item a coherent equivalence of Hermitian coefficient morphisms
+  \[
+    \alpha:
+    \Phi_{M,\xi}
+    \xrightarrow{\simeq}
+    \Phi.
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Realization infinity-category]
+\label{def:higher-realization-category}
+Define
+\[
+  \operatorname{Real}_R(\Phi)
+\]
+to be the infinity-category whose objects are perfect Stinespring
+realizations
+\[
+  (M,\xi,\alpha)
+\]
+of \(\Phi\).
+
+A morphism
+\[
+  (M,\xi,\alpha)
+  \longrightarrow
+  (N,\zeta,\beta)
+\]
+is an anchored isometry
+\[
+  U:(M,\xi)\to(N,\zeta)
+\]
+whose induced coefficient equivalence is compatible with \(\alpha\) and
+\(\beta\).
+\end{definition}
+
+By Proposition~\ref{prop:higher-anchored-isometries-preserve-coefficients},
+the coefficient compatibility is a coherent condition on the already
+constructed anchored isometry.
+
+\subsection{Gram factorizations}
+
+\begin{definition}[Perfect Gram factorization]
+\label{def:higher-perfect-gram-factorization}
+A \textbf{perfect Gram factorization} of \(\Phi\) consists of:
+
+\begin{enumerate}
+  \item a unitary right-perfect \(B\)-\(C\)-bimodule \(M\);
+
+  \item a \(B\)-\(C\)-linear morphism
+  \[
+    q:F_\Phi\to M;
+  \]
+
+  \item a coherent equivalence
+  \[
+    \beta_M(q\otimes q)
+    \xrightarrow{\simeq}
+    \Gamma_\Phi.
+  \]
+\end{enumerate}
+
+Morphisms of perfect Gram factorizations are isometries commuting with the
+maps from \(F_\Phi\) and preserving the displayed equivalences.
+
+Write
+\[
+  \operatorname{GramFact}_R(\Phi)
+\]
+for the resulting infinity-category.
+\end{definition}
+
+\begin{proposition}[Realizations and Gram factorizations]
+\label{prop:higher-realizations-gram-factorizations}
+There is a canonical equivalence
+\[
+  \operatorname{Real}_R(\Phi)
+  \simeq
+  \operatorname{GramFact}_R(\Phi).
+\]
+\end{proposition}
+
+\begin{proof}
+Given a realization
+\[
+  (M,\xi,\alpha),
+\]
+the free comparison
+\[
+  q_{M,\xi}:F_\Phi\to M
+\]
+is obtained from the free comparison for \(\Phi_{M,\xi}\) by transport along
+\(\alpha\). Proposition~\ref{prop:higher-free-comparison-preserves-gram}
+shows that it preserves the Gram form.
+
+Conversely, let
+\[
+  (M,q,\varepsilon)
+\]
+be a perfect Gram factorization. Define the anchor
+\[
+  \xi:
+  C
+  \xrightarrow{\xi_\Phi^0}
+  F_\Phi
+  \xrightarrow{q}
+  M.
+\]
+
+For \(b\in B\),
+\[
+\begin{aligned}
+  \Phi_{M,\xi}(b)
+  &=
+  \langle\xi,b\xi\rangle_C
+  \\
+  &\simeq
+  \Gamma_\Phi
+  \bigl(
+    1_B\otimes1_C,
+    b\otimes1_C
+  \bigr)
+  \\
+  &=
+  \Phi(b).
+\end{aligned}
+\]
+
+Thus \((M,\xi)\) is a realization of \(\Phi\).
+
+The two constructions are inverse because a \(B\)-\(C\)-linear map out of
+\(F_\Phi=B\otimes_RC\) is determined by the image of the free anchor.
+Compatibility on morphisms follows from the same universal property.
+\end{proof}
+
+\section{The Intrinsic Admissible Locus}
+\label{sec:higher-stinespring-admissible-locus}
+
+The preceding constructions exist for every completely square-positive
+coefficient morphism. A distinguished minimal realization need not exist for
+every such morphism.
+
+\begin{definition}[Perfect Stinespring admissibility]
+\label{def:higher-stinespring-admissible}
+A completely square-positive Hermitian coefficient morphism
+\[
+  \Phi:B\to C
+\]
+is \textbf{perfectly Stinespring-admissible} if the infinity-category
+\[
+  \operatorname{Real}_R(\Phi)
+\]
+has an initial object.
+
+Equivalently, by
+Proposition~\ref{prop:higher-realizations-gram-factorizations},
+\(\Phi\) is admissible if
+\[
+  \operatorname{GramFact}_R(\Phi)
+\]
+has an initial object.
+\end{definition}
+
+\begin{remark}[Admissibility is a property]
+\label{rem:higher-admissibility-property}
+Admissibility is not additional structure on \(B\), \(C\), or the ambient
+relative geometry.
+
+It is the intrinsic property that the realization infinity-category
+canonically attached to \(\Phi\) possesses an initial object.
+\end{remark}
+
+\begin{remark}[No unrestricted existence claim]
+\label{rem:higher-no-unrestricted-stinespring}
+No claim is made that every completely square-positive coefficient morphism
+is admissible.
+
+Such a claim would require a general method for producing a nondegenerate
+perfect support from the possibly degenerate Gram form
+\[
+  \Gamma_\Phi
+\]
+on
+\[
+  F_\Phi=B\otimes_RC.
+\]
+
+A bare stable infinity-category does not supply a canonical image object or
+radical quotient with the required universal property.
+\end{remark}
+
+\begin{proposition}[Contractibility of minimal choices]
+\label{prop:higher-contractibility-minimal-choices}
+If \(\Phi\) is perfectly Stinespring-admissible, then the space of initial
+objects of
+\[
+  \operatorname{Real}_R(\Phi)
+\]
+is contractible.
+\end{proposition}
+
+\begin{proof}
+This is the standard contractibility of the space of initial objects in an
+infinity-category.
+\end{proof}
+
+\begin{definition}[Higher Stinespring correspondence]
+\label{def:higher-stinespring-correspondence}
+Let \(\Phi\) be perfectly Stinespring-admissible.
+
+Choose an initial object
+\[
+  (S_\Phi,\xi_\Phi,\alpha_\Phi)
+  \in
+  \operatorname{Real}_R(\Phi).
+\]
+
+The object
+\[
+  S_\Phi
+\]
+is the \textbf{higher Stinespring--Paschke correspondence} of \(\Phi\), and
+\[
+  \xi_\Phi:C\to S_\Phi
+\]
+is its \textbf{minimal anchor}.
+\end{definition}
+
+By Proposition~\ref{prop:higher-contractibility-minimal-choices}, this choice
+is canonical up to a contractible space of choices.
+
+\section{The Higher Stinespring Realization Theorem}
+\label{sec:higher-stinespring-realization}
+
+\begin{theorem}[Higher Stinespring--Paschke realization]
+\label{thm:higher-stinespring-realization}
+Let
+\[
+  \Phi:B\to C
+\]
+be a perfectly Stinespring-admissible completely square-positive Hermitian
+coefficient morphism.
+
+Then there exist:
+
+\begin{enumerate}
+  \item a unitary right-perfect \(B\)-\(C\)-bimodule
+  \[
+    S_\Phi;
+  \]
+
+  \item an anchor
+  \[
+    \xi_\Phi:C\to S_\Phi;
+  \]
+
+  \item a coherent coefficient equivalence
+  \[
+    \Phi(b)
+    \simeq
+    \langle\xi_\Phi,b\xi_\Phi\rangle_C.
+  \]
+\end{enumerate}
+
+Moreover, for every perfect realization
+\[
+  (M,\xi,\alpha)
+  \in
+  \operatorname{Real}_R(\Phi),
+\]
+the mapping space
+\[
+  \operatorname{Map}_{\operatorname{Real}_R(\Phi)}
+  \bigl(
+    (S_\Phi,\xi_\Phi),
+    (M,\xi)
+  \bigr)
+\]
+is contractible.
+\end{theorem}
+
+\begin{proof}
+The existence of \((S_\Phi,\xi_\Phi)\) is precisely the initial-object
+condition in
+Definition~\ref{def:higher-stinespring-admissible}.
+
+The coefficient identity is part of the realization datum. Equivalently, it
+follows from the Gram-factorization description:
+\[
+\begin{aligned}
+  \langle\xi_\Phi,b\xi_\Phi\rangle_C
+  &\simeq
+  \Gamma_\Phi
+  \bigl(
+    1_B\otimes1_C,
+    b\otimes1_C
+  \bigr)
+  \\
+  &=
+  \Phi(b).
+\end{aligned}
+\]
+
+The contractibility statement is the defining mapping-space property of an
+initial object.
+\end{proof}
+
+\begin{corollary}[Minimal unitary uniqueness]
+\label{cor:higher-minimal-unitary-uniqueness}
+Let
+\[
+  (M,\xi),
+  \qquad
+  (N,\zeta)
+\]
+be initial objects of
+\[
+  \operatorname{Real}_R(\Phi).
+\]
+
+Then the space of anchored unitary equivalences
+\[
+  (M,\xi)
+  \xrightarrow{\simeq}
+  (N,\zeta)
+\]
+is contractible.
+\end{corollary}
+
+\begin{proof}
+There are contractible spaces of maps in both directions. Their composites
+are endomorphisms of initial objects and therefore lie in contractible mapping
+spaces containing the identities. Hence the maps are mutually inverse
+equivalences.
+
+Since every morphism in the realization category is an isometry, an
+equivalence is unitary.
+\end{proof}
+
+\section{The Internal Stinespring Representation}
+\label{sec:higher-internal-stinespring-representation}
+
+Let
+\[
+  \Phi:B\to C
+\]
+be perfectly Stinespring-admissible.
+
+The left \(B\)-action on \(S_\Phi\) is represented by an algebra morphism
+\[
+  \pi_\Phi:
+  B
+  \longrightarrow
+  \operatorname{End}_C(S_\Phi).
+\]
+
+Set
+\[
+  V_\Phi:=\xi_\Phi:C\to S_\Phi.
+\]
+
+\begin{theorem}[Internal Stinespring formula]
+\label{thm:higher-internal-stinespring-formula}
+The triple
+\[
+  (S_\Phi,\pi_\Phi,V_\Phi)
+\]
+satisfies
+\[
+  \Phi(b)
+  \simeq
+  V_\Phi^\dagger
+  \pi_\Phi(b)
+  V_\Phi.
+\]
+
+The morphism
+\[
+  \pi_\Phi:
+  B\to\operatorname{End}_C(S_\Phi)
+\]
+is unital and multiplicative.
+\end{theorem}
+
+\begin{proof}
+The displayed formula is the coefficient recovery formula:
+\[
+  \Phi(b)
+  \simeq
+  \xi_\Phi^\dagger\lambda_{S_\Phi}(b)\xi_\Phi.
+\]
+
+The morphism \(\pi_\Phi\) represents the left \(B\)-module action. The
+associativity and unitality of that action imply the multiplicativity and
+unitality of \(\pi_\Phi\) by the representing property of
+\(\operatorname{End}_C(S_\Phi)\).
+\end{proof}
+
+\begin{proposition}[Hermitian compatibility of the representation]
+\label{prop:higher-stinespring-representation-hermitian}
+The Stinespring representation satisfies
+\[
+  \pi_\Phi(\sigma_B(b))
+  \simeq
+  \pi_\Phi(b)^\dagger.
+\]
+\end{proposition}
+
+\begin{proof}
+This is the compatibility of the left \(B\)-action with the unitary structure
+on the \(B\)-\(C\)-bimodule \(S_\Phi\).
+\end{proof}
+
+\begin{proposition}[Normalized coefficients and isometric anchors]
+\label{prop:higher-normalized-anchor-isometry}
+Suppose
+\[
+  \Phi(\eta_B)
+  \simeq
+  \eta_C.
+\]
+
+Then
+\[
+  V_\Phi^\dagger V_\Phi
+  \simeq
+  \operatorname{id}_C.
+\]
+
+Thus the minimal anchor is an isometry.
+\end{proposition}
+
+\begin{proof}
+Since \(\pi_\Phi\) is unital,
+\[
+\begin{aligned}
+  V_\Phi^\dagger V_\Phi
+  &\simeq
+  V_\Phi^\dagger
+  \pi_\Phi(\eta_B)
+  V_\Phi
+  \\
+  &\simeq
+  \Phi(\eta_B)
+  \\
+  &\simeq
+  \eta_C.
+\end{aligned}
+\]
+The unit \(\eta_C\) acts as the identity endomorphism of the regular right
+\(C\)-module.
+\end{proof}
+
+\section{Dilations, Minimality, and Support Projections}
+\label{sec:higher-dilations-minimality}
+
+Let \(\Phi\) be perfectly Stinespring-admissible.
+
+For every realization
+\[
+  (M,\xi,\alpha)
+  \in
+  \operatorname{Real}_R(\Phi),
+\]
+initiality gives a contractible space of anchored isometries
+\[
+  j_{M,\xi}:
+  S_\Phi\to M.
+\]
+
+\begin{definition}[Perfect Stinespring dilation]
+\label{def:higher-perfect-stinespring-dilation}
+A \textbf{perfect Stinespring dilation} of \(\Phi\) is an object of
+\[
+  \operatorname{Real}_R(\Phi).
+\]
+
+The canonical anchored isometry
+\[
+  j_{M,\xi}:S_\Phi\to M
+\]
+is its \textbf{minimal comparison}.
+\end{definition}
+
+\begin{definition}[Support projection]
+\label{def:higher-support-projection}
+The \textbf{support projection} of a perfect dilation \((M,\xi)\) is
+\[
+  p_{M,\xi}
+  :=
+  j_{M,\xi}j_{M,\xi}^\dagger
+  \in
+  \operatorname{End}_{B\text{-}C}(M).
+\]
+\end{definition}
+
+\begin{proposition}[Support projection calculus]
+\label{prop:higher-support-projection-calculus}
+The support projection satisfies
+\[
+  p_{M,\xi}^2
+  \simeq
+  p_{M,\xi},
+  \qquad
+  p_{M,\xi}^\dagger
+  \simeq
+  p_{M,\xi}.
+\]
+
+Moreover,
+\[
+  p_{M,\xi}\xi
+  \simeq
+  \xi.
+\]
+\end{proposition}
+
+\begin{proof}
+Because \(j_{M,\xi}\) is an isometry,
+\[
+  j_{M,\xi}^\dagger j_{M,\xi}
+  \simeq
+  \operatorname{id}_{S_\Phi}.
+\]
+
+Hence
+\[
+\begin{aligned}
+  p_{M,\xi}^2
+  &=
+  j_{M,\xi}j_{M,\xi}^\dagger
+  j_{M,\xi}j_{M,\xi}^\dagger
+  \\
+  &\simeq
+  j_{M,\xi}
+  \operatorname{id}_{S_\Phi}
+  j_{M,\xi}^\dagger
+  \\
+  &=
+  p_{M,\xi}.
+\end{aligned}
+\]
+
+Also,
+\[
+  p_{M,\xi}^\dagger
+  \simeq
+  (j_{M,\xi}j_{M,\xi}^\dagger)^\dagger
+  \simeq
+  j_{M,\xi}j_{M,\xi}^\dagger.
+\]
+
+Finally,
+\[
+\begin{aligned}
+  p_{M,\xi}\xi
+  &\simeq
+  j_{M,\xi}j_{M,\xi}^\dagger
+  j_{M,\xi}\xi_\Phi
+  \\
+  &\simeq
+  j_{M,\xi}\xi_\Phi
+  \\
+  &\simeq
+  \xi.
+\end{aligned}
+\]
+\end{proof}
+
+The preceding chapter proves that Hermitian idempotents split in the perfect
+Hermitian setting. Therefore the support projection determines a unitary
+retract of \(M\).
+
+\begin{proposition}[The minimal correspondence as a Hermitian retract]
+\label{prop:higher-minimal-as-hermitian-retract}
+The Hermitian idempotent
+\[
+  p_{M,\xi}
+\]
+splits, and its split image is canonically equivalent to
+\[
+  S_\Phi.
+\]
+\end{proposition}
+
+\begin{proof}
+The splitting is supplied by the Hermitian idempotent-completeness theorem.
+
+The maps
+\[
+  j_{M,\xi}:S_\Phi\to M,
+  \qquad
+  j_{M,\xi}^\dagger:M\to S_\Phi
+\]
+satisfy
+\[
+  j_{M,\xi}^\dagger j_{M,\xi}
+  \simeq
+  \operatorname{id}_{S_\Phi}
+\]
+and
+\[
+  j_{M,\xi}j_{M,\xi}^\dagger
+  =
+  p_{M,\xi}.
+\]
+
+Thus they already exhibit \(S_\Phi\) as a splitting of \(p_{M,\xi}\).
+\end{proof}
+
+\begin{definition}[Minimal realization]
+\label{def:higher-minimal-realization}
+A perfect realization
+\[
+  (M,\xi)
+  \in
+  \operatorname{Real}_R(\Phi)
+\]
+is \textbf{minimal} if its minimal comparison
+\[
+  j_{M,\xi}:S_\Phi\to M
+\]
+is an equivalence.
+\end{definition}
+
+\begin{proposition}[Equivalent minimality criteria]
+\label{prop:higher-equivalent-minimality-criteria}
+For a perfect realization \((M,\xi)\), the following are equivalent.
+
+\begin{enumerate}
+  \item \((M,\xi)\) is minimal.
+
+  \item The support projection satisfies
+  \[
+    p_{M,\xi}
+    \simeq
+    \operatorname{id}_M.
+  \]
+
+  \item \((M,\xi)\) is an initial object of
+  \[
+    \operatorname{Real}_R(\Phi).
+  \]
+
+  \item \((M,\xi)\) is anchored unitarily equivalent to
+  \[
+    (S_\Phi,\xi_\Phi).
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+An isometry is an equivalence precisely when its range projection is the
+identity. This proves the equivalence of the first two conditions.
+
+The initial objects of an infinity-category form a contractible space, proving
+the equivalence of the first, third, and fourth conditions.
+\end{proof}
+
+\section{Homotopies of Coefficients and Higher Naturality}
+\label{sec:higher-stinespring-homotopy-naturality}
+
+Let
+\[
+  \Phi,\Psi:B\to C
+\]
+be completely square-positive Hermitian coefficient morphisms.
+
+A coherent path
+\[
+  \eta:\Phi\xrightarrow{\simeq}\Psi
+\]
+induces an equivalence
+\[
+  \eta_*:
+  \operatorname{Real}_R(\Phi)
+  \xrightarrow{\simeq}
+  \operatorname{Real}_R(\Psi)
+\]
+by composing each coefficient identification with \(\eta\).
+
+\begin{proposition}[Invariance of admissibility]
+\label{prop:higher-admissibility-homotopy-invariant}
+If
+\[
+  \Phi\simeq\Psi
+\]
+and \(\Phi\) is perfectly Stinespring-admissible, then \(\Psi\) is perfectly
+Stinespring-admissible.
+\end{proposition}
+
+\begin{proof}
+Equivalent infinity-categories have initial objects simultaneously.
+\end{proof}
+
+\begin{theorem}[Higher naturality of minimal realizations]
+\label{thm:higher-stinespring-homotopy-naturality}
+Let
+\[
+  \eta:\Phi\xrightarrow{\simeq}\Psi
+\]
+be an equivalence between perfectly Stinespring-admissible coefficients.
+
+Then there is a canonical anchored unitary equivalence
+\[
+  S_\Phi
+  \xrightarrow{\simeq}
+  S_\Psi
+\]
+compatible with \(\eta\).
+
+The space of such equivalences is contractible.
+\end{theorem}
+
+\begin{proof}
+The equivalence
+\[
+  \eta_*:
+  \operatorname{Real}_R(\Phi)
+  \xrightarrow{\simeq}
+  \operatorname{Real}_R(\Psi)
+\]
+carries initial objects to initial objects. The result follows from the
+contractibility of the space of initial objects and of the mapping space
+between them.
+\end{proof}
+
+\begin{corollary}[Higher coherence]
+\label{cor:higher-stinespring-higher-coherence}
+Identity paths induce identity equivalences, concatenation of paths induces
+composition of Stinespring equivalences, and higher homotopies induce the
+corresponding higher homotopies between these equivalences.
+\end{corollary}
+
+\begin{proof}
+All choices lie in contractible spaces determined by initiality.
+\end{proof}
+
+\section{Composition of Anchored Realizations}
+\label{sec:higher-stinespring-composition}
+
+Let
+\[
+  (M,\xi):B\to C,
+  \qquad
+  (N,\zeta):C\to D
+\]
+be anchored unitary right-perfect correspondences.
+
+Let
+\[
+  \overline\xi:R\to M,
+  \qquad
+  \overline\zeta:R\to N
+\]
+be the underlying generalized elements.
+
+The symmetry and the quotient map to the relative tensor product define
+\[
+  R
+  \simeq
+  R\otimes_RR
+  \xrightarrow{\overline\xi\otimes_R\overline\zeta}
+  M\otimes_RN
+  \longrightarrow
+  M\otimes_CN.
+\]
+
+By the free right \(D\)-module adjunction, this generalized element determines
+a right \(D\)-linear anchor
+\[
+  \xi\boxtimes\zeta:
+  D\to M\otimes_CN.
+\]
+
+\begin{definition}[Tensor product of anchored correspondences]
+\label{def:higher-anchored-tensor-product}
+Define
+\[
+  (M,\xi)\boxtimes_C(N,\zeta)
+  :=
+  \bigl(
+    M\otimes_CN,
+    \xi\boxtimes\zeta
+  \bigr).
+\]
+\end{definition}
+
+\begin{proposition}[Coefficient composition]
+\label{prop:higher-coefficient-composition}
+The coefficient of the anchored tensor product is
+\[
+  \Phi_{(M,\xi)\boxtimes_C(N,\zeta)}
+  \simeq
+  \Phi_{N,\zeta}
+  \circ
+  \Phi_{M,\xi}.
+\]
+\end{proposition}
+
+\begin{proof}
+For \(b\in B\), the tensor-product pairing gives
+\[
+\begin{aligned}
+  \left\langle
+    \xi\boxtimes\zeta,
+    b(\xi\boxtimes\zeta)
+  \right\rangle_D
+  &\simeq
+  \left\langle
+    \zeta,
+    \left\langle
+      \xi,
+      b\xi
+    \right\rangle_C
+    \zeta
+  \right\rangle_D
+  \\
+  &=
+  \Phi_{N,\zeta}
+  \bigl(
+    \Phi_{M,\xi}(b)
+  \bigr).
+\end{aligned}
+\]
+\end{proof}
+
+\begin{corollary}[Tensoring realizations]
+\label{cor:higher-tensoring-realizations}
+Let
+\[
+  \Phi:B\to C,
+  \qquad
+  \Psi:C\to D
+\]
+be completely square-positive coefficients.
+
+If
+\[
+  (M,\xi)\in\operatorname{Real}_R(\Phi),
+  \qquad
+  (N,\zeta)\in\operatorname{Real}_R(\Psi),
+\]
+then
+\[
+  (M,\xi)\boxtimes_C(N,\zeta)
+\]
+is an object of
+\[
+  \operatorname{Real}_R(\Psi\Phi).
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:higher-coefficient-composition}.
+\end{proof}
+
+\section{The Canonical Colax Stinespring Comparison}
+\label{sec:higher-stinespring-colax-comparison}
+
+Let
+\[
+  B\xrightarrow{\Phi}C\xrightarrow{\Psi}D
+\]
+be perfectly Stinespring-admissible, and assume that the composite
+\[
+  \Psi\Phi:B\to D
+\]
+is also perfectly Stinespring-admissible.
+
+The anchored tensor product
+\[
+  (S_\Phi,\xi_\Phi)
+  \boxtimes_C
+  (S_\Psi,\xi_\Psi)
+\]
+is a realization of \(\Psi\Phi\).
+
+Initiality therefore gives a contractible space of anchored isometries
+\[
+  \chi_{\Phi,\Psi}:
+  S_{\Psi\Phi}
+  \longrightarrow
+  S_\Phi\otimes_CS_\Psi.
+\]
+
+\begin{theorem}[Canonical colax comparison]
+\label{thm:higher-stinespring-colax-comparison}
+The comparison
+\[
+  \chi_{\Phi,\Psi}:
+  S_{\Psi\Phi}
+  \longrightarrow
+  S_\Phi\otimes_CS_\Psi
+\]
+is an anchored isometry.
+
+Its support projection
+\[
+  p_{\Phi,\Psi}
+  :=
+  \chi_{\Phi,\Psi}
+  \chi_{\Phi,\Psi}^\dagger
+\]
+is a Hermitian idempotent on
+\[
+  S_\Phi\otimes_CS_\Psi.
+\]
+
+The split image of \(p_{\Phi,\Psi}\) is canonically equivalent to
+\[
+  S_{\Psi\Phi}.
+\]
+\end{theorem}
+
+\begin{proof}
+The comparison is the unique morphism from the initial object
+\[
+  S_{\Psi\Phi}
+\]
+to the tensor-product realization. Morphisms in the realization category are
+anchored isometries.
+
+The projection statement follows from
+Proposition~\ref{prop:higher-support-projection-calculus}, and its split image
+is identified by
+Proposition~\ref{prop:higher-minimal-as-hermitian-retract}.
+\end{proof}
+
+\begin{definition}[Perfect cyclic tensor support]
+\label{def:higher-perfect-cyclic-tensor-support}
+The \textbf{perfect cyclic tensor support} of
+\[
+  S_\Phi
+  \quad\text{and}\quad
+  S_\Psi
+\]
+is the Hermitian retract of
+\[
+  S_\Phi\otimes_CS_\Psi
+\]
+cut out by
+\[
+  p_{\Phi,\Psi}.
+\]
+
+It is denoted
+\[
+  S_\Phi
+  \boxtimes_C^{\mathrm{cyc}}
+  S_\Psi.
+\]
+\end{definition}
+
+\begin{corollary}[Minimal composite support]
+\label{cor:higher-minimal-composite-support}
+There is a canonical anchored unitary equivalence
+\[
+  S_{\Psi\Phi}
+  \xrightarrow{\simeq}
+  S_\Phi
+  \boxtimes_C^{\mathrm{cyc}}
+  S_\Psi.
+\]
+\end{corollary}
+
+\begin{proof}
+Both objects split the same Hermitian idempotent
+\[
+  p_{\Phi,\Psi}.
+\]
+Splittings of an idempotent form a contractible space.
+\end{proof}
+
+\subsection{Associativity coherence}
+
+Let
+\[
+  B\xrightarrow{\Phi}C
+  \xrightarrow{\Psi}D
+  \xrightarrow{\Theta}E
+\]
+be a composable string such that
+\[
+  \Phi,\Psi,\Theta,
+  \Psi\Phi,
+  \Theta\Psi,
+  \Theta\Psi\Phi
+\]
+are perfectly Stinespring-admissible.
+
+There are two composites
+\[
+  S_{\Theta\Psi\Phi}
+  \longrightarrow
+  S_\Phi\otimes_CS_\Psi\otimes_DS_\Theta
+\]
+obtained by applying the comparisons in the two parenthesizations.
+
+\begin{proposition}[Associativity coherence]
+\label{prop:higher-stinespring-associativity-coherence}
+The two composites
+\[
+  S_{\Theta\Psi\Phi}
+  \longrightarrow
+  S_\Phi\otimes_CS_\Psi\otimes_DS_\Theta
+\]
+are canonically homotopic.
+
+For four composable admissible coefficient morphisms, the resulting
+associativity homotopies satisfy the pentagon coherence.
+\end{proposition}
+
+\begin{proof}
+The iterated tensor product is a realization of
+\[
+  \Theta\Psi\Phi.
+\]
+
+Both composites are morphisms from the initial object
+\[
+  S_{\Theta\Psi\Phi}
+\]
+to the same realization. The corresponding mapping space is contractible, so
+the two maps are canonically homotopic.
+
+For four morphisms, both paths around the pentagon lie in the same
+contractible mapping space from the initial realization to the fourfold tensor
+product realization. Hence they agree coherently.
+\end{proof}
+
+\section{Admissible Strings and the Partial Higher Composition Law}
+\label{sec:higher-admissible-strings}
+
+Admissibility is not asserted to be closed under arbitrary composition.
+Accordingly, the natural global domain is initially semisimplicial rather than
+simplicial.
+
+\begin{definition}[Admissible string]
+\label{def:higher-admissible-string}
+For \(n\geq1\), an \textbf{admissible string of length \(n\)} is a sequence
+\[
+  B_0
+  \xrightarrow{\Phi_1}
+  B_1
+  \xrightarrow{\Phi_2}
+  \cdots
+  \xrightarrow{\Phi_n}
+  B_n
+\]
+of completely square-positive Hermitian coefficient morphisms such that every
+nonempty contiguous composite
+\[
+  \Phi_j\Phi_{j-1}\cdots\Phi_i
+\]
+is perfectly Stinespring-admissible.
+\end{definition}
+
+Let
+\[
+  \operatorname{Adm}_n
+\]
+denote the space of admissible strings of length \(n\).
+
+Composition of adjacent morphisms defines the face maps
+\[
+  d_i:
+  \operatorname{Adm}_n
+  \longrightarrow
+  \operatorname{Adm}_{n-1}.
+\]
+
+\begin{proposition}[Admissible semisimplicial domain]
+\label{prop:higher-admissible-semisimplicial-domain}
+The spaces
+\[
+  \operatorname{Adm}_n,
+  \qquad
+  n\geq1,
+\]
+with the face maps \(d_i\), form a semisimplicial space.
+
+The higher Stinespring correspondences and the comparison maps
+\[
+  \chi
+\]
+define a coherently associative colax system over this semisimplicial domain.
+\end{proposition}
+
+\begin{proof}
+A face map replaces two adjacent coefficient morphisms by their composite.
+Every contiguous composite in the resulting shorter string is a contiguous
+composite in the original string, hence remains admissible.
+
+The semisimplicial identities follow from associativity of composition of
+coefficient morphisms. The coherent colax identities are supplied by
+Proposition~\ref{prop:higher-stinespring-associativity-coherence}.
+\end{proof}
+
+\begin{remark}[Why degeneracies are not automatic]
+\label{rem:higher-degeneracies-not-automatic}
+The regular \(B\)-\(B\)-bimodule \(B\), anchored at the unit, is always a
+perfect realization of
+\[
+  \operatorname{id}_B.
+\]
+
+However, the present Hermitian theory does not imply that this realization is
+initial among all perfect realizations of \(\operatorname{id}_B\). Therefore
+perfect Stinespring-admissibility of identity coefficients is not asserted
+without proof.
+
+Consequently, degeneracy maps are not inserted into
+\[
+  \operatorname{Adm}_\bullet
+\]
+by convention.
+\end{remark}
+
+\section{Exact Composition and the Pseudofunctorial Locus}
+\label{sec:higher-exact-composition}
+
+\begin{definition}[Stinespring-exact pair]
+\label{def:higher-stinespring-exact-pair}
+A composable pair of perfectly Stinespring-admissible coefficient morphisms
+\[
+  B\xrightarrow{\Phi}C\xrightarrow{\Psi}D
+\]
+with admissible composite is \textbf{Stinespring-exact} if
+\[
+  \chi_{\Phi,\Psi}:
+  S_{\Psi\Phi}
+  \longrightarrow
+  S_\Phi\otimes_CS_\Psi
+\]
+is an equivalence.
+\end{definition}
+
+\begin{proposition}[Equivalent exactness criteria]
+\label{prop:higher-exactness-criteria}
+The following are equivalent.
+
+\begin{enumerate}
+  \item The pair \((\Phi,\Psi)\) is Stinespring-exact.
+
+  \item The tensor-product realization
+  \[
+    (S_\Phi,\xi_\Phi)
+    \boxtimes_C
+    (S_\Psi,\xi_\Psi)
+  \]
+  is minimal.
+
+  \item The support projection
+  \[
+    p_{\Phi,\Psi}
+  \]
+  is the identity.
+
+  \item The perfect cyclic tensor support equals the full tensor product:
+  \[
+    S_\Phi
+    \boxtimes_C^{\mathrm{cyc}}
+    S_\Psi
+    \simeq
+    S_\Phi\otimes_CS_\Psi.
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+This is
+Proposition~\ref{prop:higher-equivalent-minimality-criteria} applied to the
+tensor-product realization of \(\Psi\Phi\).
+\end{proof}
+
+\begin{theorem}[Pseudofunctoriality on an exact unital locus]
+\label{thm:higher-stinespring-pseudofunctorial-locus}
+Let \(\mathscr C\) be a collection of Hermitian algebras and completely
+square-positive coefficient morphisms satisfying the following intrinsic
+properties.
+
+\begin{enumerate}
+  \item Every morphism in \(\mathscr C\) is perfectly
+  Stinespring-admissible.
+
+  \item Every identity coefficient in \(\mathscr C\) is perfectly
+  Stinespring-admissible, and its regular realization is minimal.
+
+  \item The collection is closed under composition.
+
+  \item Every composable pair in \(\mathscr C\) is Stinespring-exact.
+\end{enumerate}
+
+Then
+\[
+  B\longmapsto B,
+  \qquad
+  \Phi\longmapsto(S_\Phi,\xi_\Phi)
+\]
+extends to a pseudofunctor from \(\mathscr C\) to the unitary perfect Morita
+theory.
+
+Its compositor is the inverse of
+\[
+  \chi_{\Phi,\Psi},
+\]
+and its unit constraints are the canonical equivalences between the regular
+bimodules and the minimal realizations of the identity coefficients.
+\end{theorem}
+
+\begin{proof}
+Exactness makes every comparison
+\[
+  \chi_{\Phi,\Psi}
+\]
+invertible.
+
+The associativity coherence follows from
+Proposition~\ref{prop:higher-stinespring-associativity-coherence}. The unit
+coherences follow from the assumed minimality of the regular identity
+realizations and the contractibility of maps out of initial objects.
+
+The pentagon and triangle identities hold because all relevant composites are
+maps between the same minimal realizations and belong to contractible mapping
+spaces.
+\end{proof}
+
+\begin{remark}[The theorem is conditional, not axiomatic]
+\label{rem:higher-pseudofunctor-conditional}
+Theorem~\ref{thm:higher-stinespring-pseudofunctorial-locus} does not impose its
+four conditions on the ambient relative geometry.
+
+It states that any intrinsically identified locus on which those properties
+have been proved carries the corresponding pseudofunctorial Stinespring
+theory.
+\end{remark}
+
+\section{Relative GNS Theory}
+\label{sec:higher-relative-gns}
+
+The unit algebra for the relative theory is
+\[
+  R.
+\]
+
+No additional scalar-action axiom is required: every object under
+consideration is already an \(R\)-module.
+
+\begin{definition}[Relative Hermitian state]
+\label{def:higher-relative-hermitian-state}
+A \textbf{relative Hermitian state} on a Hermitian algebra \(B\) is a
+completely square-positive Hermitian coefficient morphism
+\[
+  \varphi:B\to R.
+\]
+
+It is \textbf{GNS-admissible} if it is perfectly
+Stinespring-admissible.
+\end{definition}
+
+For a relative state,
+\[
+  F_\varphi
+  =
+  B\otimes_RR
+  \simeq
+  B.
+\]
+
+Under this identification, the canonical Gram form is
+\[
+  \Gamma_\varphi:
+  B\otimes_RB\to R
+\]
+with
+\[
+  \Gamma_\varphi(b,b')
+  =
+  \varphi(\sigma_B(b)b').
+\]
+
+\begin{definition}[Higher GNS object]
+\label{def:higher-gns-object}
+Let
+\[
+  \varphi:B\to R
+\]
+be GNS-admissible.
+
+Define
+\[
+  H_\varphi
+  :=
+  S_\varphi.
+\]
+
+The minimal anchor is denoted
+\[
+  \Omega_\varphi:
+  R\to H_\varphi,
+\]
+and the left action is denoted
+\[
+  \pi_\varphi:
+  B
+  \longrightarrow
+  \operatorname{End}_R(H_\varphi).
+\]
+\end{definition}
+
+\begin{theorem}[Relative higher GNS theorem]
+\label{thm:higher-relative-gns}
+Let
+\[
+  \varphi:B\to R
+\]
+be a GNS-admissible relative Hermitian state.
+
+Then:
+
+\begin{enumerate}
+  \item \(H_\varphi\) is a Hermitian perfect \(R\)-module;
+
+  \item
+  \[
+    \pi_\varphi:
+    B\to\operatorname{End}_R(H_\varphi)
+  \]
+  is a unital Hermitian algebra representation;
+
+  \item
+  \[
+    \Omega_\varphi:R\to H_\varphi
+  \]
+  satisfies
+  \[
+    \varphi(b)
+    \simeq
+    \Omega_\varphi^\dagger
+    \pi_\varphi(b)
+    \Omega_\varphi;
+  \]
+
+  \item the pointed representation
+  \[
+    (H_\varphi,\pi_\varphi,\Omega_\varphi)
+  \]
+  is initial among perfect Hermitian pointed representations realizing
+  \(\varphi\);
+
+  \item its space of minimal pointed unitary equivalences is contractible.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+This is
+Theorem~\ref{thm:higher-stinespring-realization} and
+Theorem~\ref{thm:higher-internal-stinespring-formula} with target algebra
+\(R\).
+\end{proof}
+
+\begin{corollary}[Normalized states]
+\label{cor:higher-normalized-gns-vector}
+If
+\[
+  \varphi(\eta_B)
+  \simeq
+  \eta_R,
+\]
+then
+\[
+  \Omega_\varphi^\dagger\Omega_\varphi
+  \simeq
+  \operatorname{id}_R.
+\]
+
+Thus the GNS vector is an isometry.
+\end{corollary}
+
+\begin{proof}
+Apply
+Proposition~\ref{prop:higher-normalized-anchor-isometry}.
+\end{proof}
+
+\section{Change of Base}
+\label{sec:higher-stinespring-base-change}
+
+Let
+\[
+  f:R\to R'
+\]
+be a morphism of commutative algebra objects.
+
+Extension of scalars gives a strong symmetric monoidal functor
+\[
+  f^*
+  :=
+  -\otimes_RR':
+  \operatorname{Mod}_R(\mathcal V)
+  \longrightarrow
+  \operatorname{Mod}_{R'}(\mathcal V).
+\]
+
+For an \(R\)-algebra \(B\), write
+\[
+  B_{R'}
+  :=
+  B\otimes_RR'.
+\]
+
+For an \(R\)-linear coefficient morphism
+\[
+  \Phi:B\to C,
+\]
+write
+\[
+  \Phi_{R'}:
+  B_{R'}
+  \to
+  C_{R'}
+\]
+for its extension of scalars.
+
+\begin{proposition}[Base change of the free orbit and Gram form]
+\label{prop:higher-base-change-free-gram}
+There are canonical equivalences
+\[
+  F_{\Phi_{R'}}
+  \simeq
+  F_\Phi\otimes_RR'
+\]
+and
+\[
+  \Gamma_{\Phi_{R'}}
+  \simeq
+  \Gamma_\Phi\otimes_RR'.
+\]
+\end{proposition}
+
+\begin{proof}
+Using strong symmetric monoidality,
+\[
+\begin{aligned}
+  F_{\Phi_{R'}}
+  &=
+  B_{R'}\otimes_{R'}C_{R'}
+  \\
+  &\simeq
+  (B\otimes_RR')
+  \otimes_{R'}
+  (C\otimes_RR')
+  \\
+  &\simeq
+  (B\otimes_RC)\otimes_RR'
+  \\
+  &=
+  F_\Phi\otimes_RR'.
+\end{aligned}
+\]
+
+The Gram form is a composite of algebra multiplications, involutions,
+symmetry maps, and \(\Phi\). A strong symmetric monoidal functor preserves
+this composite.
+\end{proof}
+
+\begin{proposition}[Base change of realized coefficients]
+\label{prop:higher-base-change-realized-coefficients}
+Let
+\[
+  (M,\xi)
+\]
+be an anchored unitary perfect realization of
+\[
+  \Phi:B\to C.
+\]
+
+Then
+\[
+  (M_{R'},\xi_{R'})
+\]
+is an anchored unitary perfect realization of
+\[
+  \Phi_{R'}:
+  B_{R'}\to C_{R'}.
+\]
+
+In particular, \(\Phi_{R'}\) is completely square-positive.
+\end{proposition}
+
+\begin{proof}
+Strong symmetric monoidality preserves dualizable objects, unitary
+structures, local adjoints, module actions, and the coefficient formula.
+
+Thus
+\[
+\begin{aligned}
+  \Phi_{M_{R'},\xi_{R'}}
+  &\simeq
+  \Phi_{M,\xi}\otimes_RR'
+  \\
+  &\simeq
+  \Phi\otimes_RR'
+  \\
+  &=
+  \Phi_{R'}.
+\end{aligned}
+\]
+
+Complete square positivity follows from
+Theorem~\ref{thm:higher-anchored-coefficients-csp}.
+\end{proof}
+
+Now assume that \(\Phi\) is perfectly Stinespring-admissible. Then
+\[
+  S_\Phi\otimes_RR'
+\]
+is a realization of \(\Phi_{R'}\).
+
+If \(\Phi_{R'}\) is also perfectly Stinespring-admissible, initiality gives an
+anchored isometry
+\[
+  \kappa_{\Phi,f}:
+  S_{\Phi_{R'}}
+  \longrightarrow
+  S_\Phi\otimes_RR'.
+\]
+
+\begin{definition}[Stinespring-exact base change]
+\label{def:higher-stinespring-exact-base-change}
+Base change along
+\[
+  f:R\to R'
+\]
+is \textbf{Stinespring-exact for \(\Phi\)} if
+\[
+  \kappa_{\Phi,f}
+\]
+is an equivalence.
+\end{definition}
+
+\begin{proposition}[Base-change support projection]
+\label{prop:higher-base-change-support-projection}
+When both \(\Phi\) and \(\Phi_{R'}\) are admissible, the morphism
+\[
+  \kappa_{\Phi,f}
+\]
+defines a Hermitian support projection
+\[
+  p_{\Phi,f}
+  :=
+  \kappa_{\Phi,f}
+  \kappa_{\Phi,f}^\dagger
+\]
+on
+\[
+  S_\Phi\otimes_RR'.
+\]
+
+Its split image is canonically equivalent to
+\[
+  S_{\Phi_{R'}}.
+\]
+\end{proposition}
+
+\begin{proof}
+Apply the support-projection construction to the base-changed realization.
+\end{proof}
+
+\begin{remark}[No universal exactness claim]
+\label{rem:higher-no-universal-base-change-exactness}
+The raw orbit bimodule and Gram form commute with base change
+unconditionally.
+
+Minimal perfect supports need not commute with base change without a separate
+proof. Therefore the comparison
+\[
+  \kappa_{\Phi,f}
+\]
+is constructed canonically, while its invertibility is isolated as the
+intrinsic Stinespring-exactness property.
+\end{remark}
+
+\section{Recovery and Comparison Results}
+\label{sec:higher-stinespring-recovery}
+
+\subsection{Coefficients already presented by correspondences}
+
+\begin{proposition}[Represented coefficients]
+\label{prop:higher-represented-coefficients}
+Every anchored unitary perfect correspondence
+\[
+  (M,\xi):B\to C
+\]
+determines:
+
+\begin{enumerate}
+  \item a completely square-positive coefficient
+  \[
+    \Phi_{M,\xi}:B\to C;
+  \]
+
+  \item an object
+  \[
+    (M,\xi)
+    \in
+    \operatorname{Real}_R(\Phi_{M,\xi});
+  \]
+
+  \item a Gram factorization
+  \[
+    F_{\Phi_{M,\xi}}
+    \xrightarrow{q_{M,\xi}}
+    M.
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The first statement is
+Theorem~\ref{thm:higher-anchored-coefficients-csp}. The second is the
+definition of the realization category. The third is
+Proposition~\ref{prop:higher-free-comparison-preserves-gram}.
+\end{proof}
+
+\begin{remark}
+\label{rem:higher-represented-not-automatically-admissible}
+A represented coefficient need not be perfectly Stinespring-admissible.
+
+Representation supplies an object of the realization infinity-category.
+Admissibility additionally requires that this infinity-category have an
+initial object.
+\end{remark}
+
+\subsection{The identity realization}
+
+For every Hermitian algebra \(B\), the regular \(B\)-\(B\)-bimodule \(B\)
+with anchor
+\[
+  \operatorname{id}_B:B\to B
+\]
+has coefficient
+\[
+  \operatorname{id}_B.
+\]
+
+\begin{proposition}[Regular realization of the identity]
+\label{prop:higher-regular-identity-realization}
+There is a canonical object
+\[
+  (B,\operatorname{id}_B)
+  \in
+  \operatorname{Real}_R(\operatorname{id}_B).
+\]
+\end{proposition}
+
+\begin{proof}
+The coefficient is
+\[
+\begin{aligned}
+  \Phi_{B,\operatorname{id}_B}(b)
+  &=
+  \operatorname{id}_B^\dagger
+  \lambda_B(b)
+  \operatorname{id}_B
+  \\
+  &\simeq
+  b.
+\end{aligned}
+\]
+\end{proof}
+
+\begin{remark}
+\label{rem:higher-identity-minimality-boundary}
+The regular identity realization exists without qualification.
+
+Its minimality is a separate theorem and is not inferred solely from
+nondegeneracy of the Hermitian pairing. In indefinite Hermitian settings,
+vanishing self-pairing does not force a vector to vanish. Thus the usual
+analytic multiplicative-domain argument cannot be imported without proof.
+\end{remark}
+
+\subsection{Comparison with an ordinary separated quotient}
+
+Suppose the theory is specialized to an ordinary additive Hermitian setting
+in which the canonical Gram module admits a radical
+\[
+  \operatorname{Rad}(F_\Phi)
+\]
+and a separated quotient
+\[
+  \operatorname{Sep}(F_\Phi)
+  :=
+  F_\Phi/\operatorname{Rad}(F_\Phi).
+\]
+
+\begin{proposition}[Recovery from a universal separated quotient]
+\label{prop:higher-recovery-separated-quotient}
+Assume:
+
+\begin{enumerate}
+  \item \(\operatorname{Sep}(F_\Phi)\) is unitary and right-perfect;
+
+  \item every perfect Gram factorization
+  \[
+    q:F_\Phi\to M
+  \]
+  kills
+  \[
+    \operatorname{Rad}(F_\Phi);
+  \]
+
+  \item the induced map
+  \[
+    \operatorname{Sep}(F_\Phi)\to M
+  \]
+  is an isometry.
+\end{enumerate}
+
+Then \(\Phi\) is perfectly Stinespring-admissible and
+\[
+  S_\Phi
+  \simeq
+  \operatorname{Sep}(F_\Phi).
+\]
+\end{proposition}
+
+\begin{proof}
+The quotient map
+\[
+  F_\Phi\to\operatorname{Sep}(F_\Phi)
+\]
+is a perfect Gram factorization.
+
+By the second assumption, every other perfect Gram factorization factors
+through it. By the third assumption, the factorization is a morphism in
+\[
+  \operatorname{GramFact}_R(\Phi).
+\]
+
+The factorization is unique because the quotient map is an epimorphism in the
+ordinary additive category. Hence the separated quotient is initial.
+\end{proof}
+
+\begin{remark}
+\label{rem:higher-recovery-assumptions-not-ambient}
+The three assumptions in
+Proposition~\ref{prop:higher-recovery-separated-quotient} are hypotheses of a
+comparison theorem for a particular ordinary specialization. They are not
+standing assumptions of the higher theory.
+\end{remark}
+
+\section{Boundary of the Theory}
+\label{sec:higher-stinespring-boundary}
+
+The constructions and theorems above do not assert any of the following.
+
+\begin{enumerate}
+  \item They do not assert that every completely square-positive coefficient
+  morphism is perfectly Stinespring-admissible.
+
+  \item They do not assert that every canonical Gram form admits a radical
+  quotient internal to the chosen stable infinity-category.
+
+  \item They do not assert that every realization contains a minimal
+  realization unless the coefficient is admissible.
+
+  \item They do not assert that identity coefficients are always admissible.
+
+  \item They do not assert that admissible coefficients are closed under
+  arbitrary composition.
+
+  \item They do not assert that the tensor product of two minimal
+  realizations is minimal.
+
+  \item They do not assert that every colax comparison
+  \[
+    \chi_{\Phi,\Psi}
+  \]
+  is an equivalence.
+
+  \item They do not assert that minimal Stinespring supports commute with
+  every base change.
+
+  \item They do not introduce an analytic norm completion.
+
+  \item They do not introduce a positive cone or an order relation.
+
+  \item They do not introduce a global dagger on the entire ambient
+  infinity-category.
+
+  \item They do not prove a Radon--Nikodym theorem or a dominance theorem.
+\end{enumerate}
+
+These are not omitted assumptions. They are statements whose proofs would
+require additional constructions not supplied by the standing relative
+Hermitian Morita geometry.
+
+\section{Logical Derivation Audit}
+\label{sec:higher-stinespring-derivation-audit}
+
+The constructions of the chapter have the following dependency structure:
+\[
+\begin{array}{c|c}
+\text{object or statement}
+&
+\text{source of construction}
+\\
+\hline
+\operatorname{Mat}_n(B)
+&
+\operatorname{End}_B(B^{\oplus n})
+\\
+X=T^\dagger T
+&
+\text{local Hermitian adjoint}
+\\
+\text{complete square positivity}
+&
+\text{preservation property for square presentations}
+\\
+\Phi_{M,\xi}
+&
+\xi^\dagger\lambda_M(-)\xi
+\\
+F_\Phi
+&
+B\otimes_RC
+\\
+\Gamma_\Phi
+&
+\mu_B,\mu_C,\sigma_B,\sigma_C,\Phi
+\\
+\operatorname{Real}_R(\Phi)
+&
+\text{anchored unitary perfect correspondences}
+\\
+\operatorname{GramFact}_R(\Phi)
+&
+\text{explicit Gram-preserving factorizations}
+\\
+\text{admissibility}
+&
+\text{existence of an initial realization}
+\\
+S_\Phi
+&
+\text{initial object of }\operatorname{Real}_R(\Phi)
+\\
+\pi_\Phi
+&
+\text{internal endomorphism representing property}
+\\
+j_{M,\xi}
+&
+\text{initiality}
+\\
+p_{M,\xi}
+&
+j_{M,\xi}j_{M,\xi}^\dagger
+\\
+\chi_{\Phi,\Psi}
+&
+\text{initiality applied to a tensor-product realization}
+\\
+\text{associativity coherence}
+&
+\text{contractibility of initial mapping spaces}
+\\
+H_\varphi
+&
+\text{target-}R\text{ specialization}
+\\
+\kappa_{\Phi,f}
+&
+\text{initiality after extension of scalars}
+\end{array}
+\]
+
+\begin{theorem}[Statements established in the chapter]
+\label{thm:higher-stinespring-logical-summary}
+The chapter establishes the following.
+
+\begin{enumerate}
+  \item Hermitian-square realizability is defined and its matrix calculus is
+  proved.
+
+  \item Completely square-positive Hermitian coefficient morphisms are
+  defined without a positive cone or order relation.
+
+  \item Identity, composition, finite sums, and homotopy invariance of
+  complete square positivity are proved.
+
+  \item Every anchored unitary right-perfect correspondence defines a
+  completely square-positive coefficient.
+
+  \item Every Hermitian coefficient morphism has a canonical free orbit
+  bimodule and canonical Gram form.
+
+  \item Perfect realizations are equivalent to perfect Gram factorizations.
+
+  \item The perfectly Stinespring-admissible locus is defined intrinsically by
+  the existence of an initial realization.
+
+  \item Every admissible coefficient has a higher Stinespring--Paschke
+  correspondence, unique up to a contractible space of anchored unitary
+  equivalences.
+
+  \item Every admissible coefficient has an internal Stinespring
+  representation
+  \[
+    \Phi(b)
+    \simeq
+    V_\Phi^\dagger\pi_\Phi(b)V_\Phi.
+  \]
+
+  \item Every perfect realization contains the minimal correspondence as the
+  split image of a canonical Hermitian support projection.
+
+  \item Composable admissible coefficients with admissible composite have a
+  canonical colax Stinespring comparison.
+
+  \item The comparison maps satisfy coherent associativity.
+
+  \item Their split images define perfect cyclic tensor supports.
+
+  \item On an intrinsically identified exact unital locus, the Stinespring
+  assignment is pseudofunctorial.
+
+  \item The target-\(R\) specialization gives the relative higher GNS
+  construction.
+
+  \item Extension of scalars preserves realized coefficients and produces a
+  canonical comparison between minimal supports whenever the base-changed
+  coefficient is admissible.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Each statement has been proved in the corresponding preceding section.
+\end{proof}
+
+\section{Interpretive Summary}
+\label{sec:higher-stinespring-interpretive-summary}
+
+The formal analogy with classical Stinespring--Paschke and GNS theory is:
+\[
+\begin{array}{c|c}
+\text{classical or algebraic expression}
+&
+\text{relative higher expression}
+\\
+\hline
+X=T^*T
+&
+X\simeq T^\dagger T
+\\
+\text{matrix positivity}
+&
+\text{Hermitian-square realizability}
+\\
+\text{complete positivity}
+&
+\text{complete square positivity}
+\\
+\text{cyclic correspondence}
+&
+\text{initial perfect anchored realization}
+\\
+\text{null-space quotient}
+&
+\text{intrinsic admissible-support universal property}
+\\
+\text{minimal Stinespring module}
+&
+S_\Phi
+\\
+\text{Stinespring representation}
+&
+\Phi=V_\Phi^\dagger\pi_\Phi(-)V_\Phi
+\\
+\text{cyclic subspace}
+&
+\text{split image of a Hermitian support projection}
+\\
+\text{composition of dilations}
+&
+\text{unitary Morita tensor product}
+\\
+\text{minimal composite}
+&
+\text{perfect cyclic tensor support}
+\\
+\text{GNS construction}
+&
+H_\varphi=S_\varphi
+\end{array}
+\]
+
+The essential progression is therefore
+\[
+  \boxed{
+  \begin{gathered}
+    \text{witnessed Hermitian-square realizability}
+    \\
+    \Longrightarrow
+    \\
+    \text{completely square-positive coefficient morphisms}
+    \\
+    \Longrightarrow
+    \\
+    \text{canonical Gram pre-correspondences}
+    \\
+    \Longrightarrow
+    \\
+    \text{initial perfect realizations on the admissible locus}
+    \\
+    \Longrightarrow
+    \\
+    \text{higher Stinespring representations}
+    \\
+    \Longrightarrow
+    \\
+    \text{support projections, composition comparisons, and relative GNS.}
+  \end{gathered}
+  }
+\]
